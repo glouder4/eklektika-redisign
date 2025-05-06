@@ -43,6 +43,7 @@
 .header__icon--dice{
     position: relative;
     left: 10px;
+    top: 1px;
 }
 
 .header__icon--menu {
@@ -317,7 +318,8 @@
     display: inline-block;
 }
 .header__icon-title,
-.header__social-links{
+.header__social-links,
+.header__brand-description{
     display: none;
 }
 @media(max-width: 374px){
@@ -402,5 +404,24 @@
     }
     .header__top{
         justify-content: flex-start;
+    }
+}
+@media (min-width: 768px) {
+    .header__search {
+        width: 600px;
+    }
+    .header__brand-description{
+        display: flex;
+        flex-direction: column;
+        margin-left: 15px;
+        gap: 3px;
+    }
+    .header__brand-description>span{
+        font-family: Manrope;
+        font-weight: 500;
+        font-size: 10px;
+        line-height: 100%;
+        letter-spacing: 0.29px;
+        color: #FFFFFF;
     }
 }
