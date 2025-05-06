@@ -182,3 +182,136 @@
     color: #7B4FA3;
     height: 45px;
 }
+
+.mobile-menu {
+    position: fixed;
+    top: 99px; left: 0; right: 0; bottom: 0;
+    background: #7B4FA3;
+    z-index: 1000;
+    transform: translateX(100%);
+    transition: transform 0.3s;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+.mobile-menu.open {
+    transform: translateX(0);
+}
+.mobile-menu__content {
+    padding: 24px 23px 0px 20px;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+
+    margin-bottom: 45px;
+}
+.mobile-menu__main, .mobile-menu__sub {
+    list-style: none;
+    padding: 0;
+    margin: 9px 0 0px 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+.mobile-menu__sub{
+    margin-top: 48px;
+    gap: 20px;
+}
+.mobile-menu__main li {
+    color: #fff;
+    padding: 0;
+    /*border-bottom: 1px solid rgba(255,255,255,0.08);*/
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    font-family: Manrope, sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0;
+    vertical-align: middle;
+    text-transform: uppercase;
+}
+.mobile-menu__arrow {
+    font-size: 18px;
+    position: relative;
+    top: -2px;
+    right: -1px;
+}
+.mobile-menu__sub li {
+    color: #fff;
+    padding: 0;
+    height: 16px;
+
+    display: flex;
+    justify-content: space-between;
+
+    font-family: Manrope;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 100%;
+    letter-spacing: 0.39px;
+}
+.mobile-menu__call-btn {
+    width: 100%;
+    background: #F85A9A;
+    color: #fff;
+    border: none;
+    border-radius: 0;
+    padding: 14px 0;
+    margin: 66px 0 0px 0;
+    cursor: pointer;
+    box-sizing: border-box;
+    position: relative;
+    top: -3px;
+    height: 45px;
+
+    font-family: Manrope, sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 100%;
+    letter-spacing: 0;
+}
+.mobile-menu__footer {
+    margin-top: auto;
+    display: flex;
+    flex-direction: row;
+    gap: 34px;
+    margin-top: 30px;
+}
+.mobile-menu__support {
+    color: #ffffff7d;
+
+    font-family: Manrope;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 100%;
+    letter-spacing: 0.39px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+.mobile-menu__support a {
+    color: #fff;
+    text-decoration: none;
+
+    font-family: Manrope;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0;
+}
+.mobile-menu__socials {
+    display: flex;
+    gap: 21px;
+    align-items: flex-end;
+}
+.icon-tg, .icon-wa {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: inline-block;
+}
