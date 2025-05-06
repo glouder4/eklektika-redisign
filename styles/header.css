@@ -48,6 +48,35 @@
     background: #F85A9A;
     width: 33px;
     height: 33px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    transition: background 0.3s;
+}
+.header__icon--menu span {
+    display: block;
+    width: 15px;
+    height: 2px;
+    background: #fff;
+    margin: 1px 0;
+    border-radius: 2px;
+    transition: 0.3s;
+}
+.header__icon--menu.active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+    top: -3px;
+    position: relative;
+}
+.header__icon--menu.active span:nth-child(2) {
+    opacity: 0;
+}
+.header__icon--menu.active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+    top: 3px;
+    position: relative;
 }
 
 .header__icon--heart {

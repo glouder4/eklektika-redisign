@@ -38,12 +38,10 @@
                         <path d="M17.2424 16.307C16.7252 14.6942 15.7092 13.2873 14.3409 12.2891C12.9726 11.2909 11.3226 10.7531 9.62891 10.7531C7.93521 10.7531 6.28525 11.2909 4.91692 12.2891C3.54859 13.2873 2.53259 14.6942 2.01538 16.307H17.2424Z" stroke="white" stroke-width="1.08595" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </div>
-                <div class="header__icon header__icon--menu">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="10" viewBox="0 0 15 10" fill="none">
-                        <path d="M1 1H14" stroke="white" stroke-width="1.29525" stroke-linecap="round"/>
-                        <path d="M1.00024 5H14.0003" stroke="white" stroke-width="1.29525" stroke-linecap="round"/>
-                        <path d="M1.00024 9H14.0003" stroke="white" stroke-width="1.29525" stroke-linecap="round"/>
-                    </svg>
+                <div class="header__icon header__icon--menu" id="menuIcon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </div>
             </div>
         </div>
@@ -60,5 +58,10 @@
             </div>
         </div>
     </header>
+    <script>
+    document.getElementById('menuIcon').onclick = function() {
+        this.classList.toggle('active');
+    }
+    </script>
 </body>
 </html>
