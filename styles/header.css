@@ -315,3 +315,21 @@
     border-radius: 50%;
     display: inline-block;
 }
+@media(max-width: 374px){
+    .header__search-row{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    header__search{
+        width: 170px;
+    }
+    .header__search-input{
+        width: 107px;
+        padding-left: 7px;
+    }
+}
+@media(min-width: 576px){
+    .header__search{
+        width: 407px;
+    }
+}
