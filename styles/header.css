@@ -315,6 +315,9 @@
     border-radius: 50%;
     display: inline-block;
 }
+.header__icon-title{
+    display: none;
+}
 @media(max-width: 374px){
     .header__search-row{
         padding-left: 10px;
@@ -331,5 +334,38 @@
 @media(min-width: 576px){
     .header__search{
         width: 407px;
+    }
+    .header__icon{
+        display: flex;
+        flex-direction: column;
+        gap: 0px;
+    }
+    .header__icons{
+        gap: 30px;
+    }
+    .header__icon-title{
+        display: block;
+
+        display: block;
+        font-family: Manrope;
+        font-weight: 400;
+        font-size: 7px;
+        line-height: 100%;
+        letter-spacing: 0;
+        text-align: center;
+
+        position: relative;
+        top: 5px;
+
+        color: #FFFFFF;
+    }
+    .header__icon--heart .header__icon-title{
+        top: 4px;
+    }
+    .header__icon--bag  .header__icon-title{
+        top: 5px;
+    }
+    .header__icon--user  .header__icon-title{
+        top: 6px;
     }
 }
