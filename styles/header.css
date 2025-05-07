@@ -319,7 +319,9 @@
 }
 .header__icon-title,
 .header__social-links,
-.header__brand-description{
+.header__brand-description,
+.header__callback-btn,
+.header__navigation{
     display: none;
 }
 @media(max-width: 374px){
@@ -423,5 +425,147 @@
         line-height: 100%;
         letter-spacing: 0.29px;
         color: #FFFFFF;
+    }
+}
+@media (min-width: 991px) {
+    .header__icons{
+        margin-left: unset;
+    }
+    .header__social-links{
+        margin-right: 29px;
+        margin-left: auto;
+    }
+    .header__callback-btn{
+        display: block;
+        outline: none;
+        border: 0;
+        cursor: pointer;
+        font-family: Manrope;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 100%;
+        letter-spacing: 0;
+        color: #EF4A85;
+        padding: 0;
+        background: unset;
+        margin-left: 25px;
+    }
+}
+@media (min-width: 1200px) {
+    #menuIcon.header__icon--menu{
+        display: none;
+    }
+    .header__top{
+        height: 85px;
+    }
+    .header__icons{
+        gap: 28px;
+    }
+    .header__icon--dice{
+        width: 55px;
+    }
+    .header__icon--heart{
+        width: 74px;
+    }
+    .header__icon--bag{
+        width: 56px;
+    }
+    .header__icon--user{
+        width: 60px;
+    }
+    .header__icon>svg{
+        transform: scale(1.5);
+    }
+    .header__icon-title{
+        font-size: 14px;
+    }
+    .header__badge{
+        top: -17px;
+        right: 9px;
+        width: 23px;
+        height: 23px;
+        font-size: 14px;
+    }
+    .header__social-link{
+        width: 22px;
+        height: 22px;
+    }
+    .header__social-links-phone{
+        font-size: 16px;
+        position: relative;
+        top: 3px;
+    }
+    .header__social-links{
+        gap: 39px;
+    }
+    .header__brand-description>span{
+        font-size: 14px;
+    }
+    .header__logo{
+        width: 162px;
+        height: 54px;
+    }
+    .header__brand-description{
+        margin-left: 52px;
+    }
+    .header__icon-title,
+    .header__icon--heart .header__icon-title{
+        top: 8px;
+    }
+    .header__icon--bag .header__icon-title{
+        top: 9px;
+    }
+    .header__icon--user .header__icon-title{
+        top: 9px;
+    }
+    .header__social-links-icons{
+        gap: 20px;
+    }
+
+    .header__catalog-btn{
+        width: 191px;
+        height: 55px;
+        font-size: 16px;
+        padding-right: 23px;
+        justify-content: center;
+    }
+    .header__catalog-btn>.header__icon{
+        width: 24px;
+        height: 24px;
+    }
+    .header__search {
+        width: 330px;
+    }
+    .header__navigation{
+        display: block;
+    }
+    .header__navigation-list{
+        list-style: none;
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+        padding: 0;
+        margin: 0;
+    }
+    .header__navigation-list--item-link{
+        font-family: Manrope;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 100%;
+        letter-spacing: 0;
+        color: #858585;
+        list-style: none;
+        text-decoration: unset;
+    }
+    .header__search-row{
+        justify-content: space-between;
+    }
+}
+@media (min-width: 1300px) {
+    .header__search {
+        width: 430px;
+    }
+    .header__brand-description {
+        margin-left: 52px;
     }
 }

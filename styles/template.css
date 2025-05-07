@@ -20,3 +20,18 @@ body{
         max-width: 768px;
     }
 }
+@media (min-width: 991px) {
+    .container {
+        max-width: 991px;
+    }
+}
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1200px;
+    }
+}
+@media (min-width: 1300px) {
+    .container {
+        max-width: 1300px;
+    }
+}

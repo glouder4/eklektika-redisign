@@ -76,25 +76,47 @@
         </div>
         <div class="container">
             <div class="header__search-row">
-            <button class="header__catalog-btn">
-                <span class="header__icon header__icon--menu">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
-                        <path d="M1.5 1.5H13.5M1.5 7.5H10.5M1.5 13.5H13.5" stroke="white" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
-                    </svg>
-                </span>
-                Каталог
-            </button>
-            <div class="header__search">
-                <input type="text" class="header__search-input" placeholder="Поиск">
-                <button class="header__search-btn">
-                    <span class="header__icon header__icon--search">
+                <button class="header__catalog-btn">
+                    <span class="header__icon header__icon--menu">
                         <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M11.2428 10.4946L15 14.2302L14.2255 15L10.4601 11.2572C9.18861 12.2994 7.56132 12.8132 5.91785 12.6915C4.27437 12.5697 2.74168 11.8218 1.63963 10.6038C0.53758 9.38584 -0.0486902 7.79187 0.00316912 6.15456C0.0550284 4.51724 0.74101 2.96308 1.91796 1.81641C3.09491 0.66974 4.67189 0.0191525 6.31982 0.000416158C7.96774 -0.0183202 9.55928 0.596242 10.7623 1.71585C11.9653 2.83546 12.6869 4.37362 12.7764 6.00933C12.866 7.64504 12.3165 9.25192 11.2428 10.4946ZM11.6903 6.35423C11.6903 4.95782 11.1322 3.6186 10.1388 2.63119C9.14545 1.64378 7.79814 1.08906 6.39329 1.08906C4.98843 1.08906 3.64112 1.64378 2.64774 2.63119C1.65436 3.6186 1.09628 4.95782 1.09628 6.35423C1.09628 7.75064 1.65436 9.08985 2.64774 10.0773C3.64112 11.0647 4.98843 11.6194 6.39329 11.6194C7.79814 11.6194 9.14545 11.0647 10.1388 10.0773C11.1322 9.08985 11.6903 7.75064 11.6903 6.35423Z" fill="#744A9E"/>
+                            <path d="M1.5 1.5H13.5M1.5 7.5H10.5M1.5 13.5H13.5" stroke="white" stroke-width="2" stroke-linecap="square" stroke-linejoin="round"/>
                         </svg>
                     </span>
+                    Каталог
+                </button>
+                <div class="header__search">
+                    <input type="text" class="header__search-input" placeholder="Поиск">
+                    <button class="header__search-btn">
+                        <span class="header__icon header__icon--search">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M11.2428 10.4946L15 14.2302L14.2255 15L10.4601 11.2572C9.18861 12.2994 7.56132 12.8132 5.91785 12.6915C4.27437 12.5697 2.74168 11.8218 1.63963 10.6038C0.53758 9.38584 -0.0486902 7.79187 0.00316912 6.15456C0.0550284 4.51724 0.74101 2.96308 1.91796 1.81641C3.09491 0.66974 4.67189 0.0191525 6.31982 0.000416158C7.96774 -0.0183202 9.55928 0.596242 10.7623 1.71585C11.9653 2.83546 12.6869 4.37362 12.7764 6.00933C12.866 7.64504 12.3165 9.25192 11.2428 10.4946ZM11.6903 6.35423C11.6903 4.95782 11.1322 3.6186 10.1388 2.63119C9.14545 1.64378 7.79814 1.08906 6.39329 1.08906C4.98843 1.08906 3.64112 1.64378 2.64774 2.63119C1.65436 3.6186 1.09628 4.95782 1.09628 6.35423C1.09628 7.75064 1.65436 9.08985 2.64774 10.0773C3.64112 11.0647 4.98843 11.6194 6.39329 11.6194C7.79814 11.6194 9.14545 11.0647 10.1388 10.0773C11.1322 9.08985 11.6903 7.75064 11.6903 6.35423Z" fill="#744A9E"/>
+                            </svg>
+                        </span>
+                    </button>
+                </div>
+                <div class="header__navigation">
+                    <ul class="header__navigation-list">
+                        <li class="header__navigation-list--item">
+                            <a class="header__navigation-list--item-link" href="#">О компании</a>
+                        </li>
+                        <li class="header__navigation-list--item">
+                            <a class="header__navigation-list--item-link" href="#">Услуги</a>
+                        </li>
+                        <li class="header__navigation-list--item">
+                            <a class="header__navigation-list--item-link" href="#">Купить</a>
+                        </li>
+                        <li class="header__navigation-list--item">
+                            <a class="header__navigation-list--item-link" href="#">Стать дилером</a>
+                        </li>
+                        <li class="header__navigation-list--item">
+                            <a class="header__navigation-list--item-link" href="#">Контакты</a>
+                        </li>
+                    </ul>
+                </div>
+                <button href="#" class="header__callback-btn">
+                    Заказать звонок
                 </button>
             </div>
-        </div>
         </div>
     </header>
     <nav class="mobile-menu" id="mobileMenu">
