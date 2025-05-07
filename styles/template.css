@@ -35,3 +35,13 @@ body{
         max-width: 1300px;
     }
 }
+@media (min-width: 1520px) {
+    .container {
+        max-width: 1480px;
+    }
+}
+@media (min-width: 1920px) {
+    .container {
+        max-width: 1520px;
+    }
+}

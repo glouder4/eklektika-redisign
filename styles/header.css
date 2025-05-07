@@ -569,3 +569,73 @@
         margin-left: 52px;
     }
 }
+@media (min-width: 1520px) {
+    .header__top {
+        height: 100px;
+        padding: 0;
+    }
+    .header__brand-description {
+        margin-left: 40px;
+    }
+    .header__social-links {
+        margin-right: 55px;
+        margin-left: auto;
+    }
+    .header__icons {
+        gap: 38px;
+    }
+    .header__icon--user{
+        top: -5px;
+        left: -1px;
+    }
+    .header__icon--user .header__icon-title {
+        top: 17px;
+    }
+    .header__icon>svg{
+        transform: scale(2);
+    }
+    .header__catalog-btn>.header__icon>svg{
+        transform: scale(1);
+    }
+    .header__icon--bag {
+        width: 36px;
+        top: -4px;
+        left: -2px;
+    }
+    .header__icon--heart{
+        left: 1px;
+        top: -3px;
+    }
+    .header__icon--bag .header__icon-title {
+        top: 16px;
+    }
+    .header__icon--heart .header__icon-title{
+        top: 14px;
+    }
+    .header__icon--dice{
+        left: 8px;
+        top: -5px;
+    }
+    .header__icon--dice .header__icon-title{
+        top: 15px;
+    }
+    .header__search-row{
+        padding-left: 0;
+        padding-right: 0;
+        justify-content: flex-start;
+    }
+    .header__callback-btn{
+        font-size: 16px;
+        margin-left: auto;
+    }
+    .header__navigation{
+        margin-left: 40px;
+    }
+    .header__navigation-list{
+        gap: 41px;
+    }
+    .header__search{
+        width: 418px;
+        height: 55px;
+    }
+}
