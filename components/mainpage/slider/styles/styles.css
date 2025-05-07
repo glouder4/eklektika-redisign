@@ -1,0 +1,112 @@
+.fullscreen-slider{
+    height: 440px;
+}
+.fullscreen-slider .owl-stage-outer{
+    height: 407px;
+}
+.fullscreen-slider .owl-stage-outer .owl-stage,
+.fullscreen-slider .owl-stage-outer .owl-stage .owl-item,
+.fullscreen-slider--slide,
+.fullscreen-slider--slide_mobile-slide{
+    height: 100%;
+}
+.fullscreen-slider--slide_desktop-slide{
+    display: none;
+}
+.fullscreen-slider .owl-dots .owl-dot>span{
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #DBDBDB;
+
+    transition: all 0.3s ease;
+}
+.fullscreen-slider .owl-dots .owl-dot.active>span{
+    background-color: #000000;
+}
+.fullscreen-slider--slide_mobile-slide img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.fullscreen-slider--slide{
+    position: relative;
+}
+.fullscreen-slider--slide-data{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+.fullscreen-slider--slide-data--title{
+    text-align: center;
+    font-family: Manrope;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 100%;
+    letter-spacing: 0;
+    color: #222222;
+    position: relative;
+    top: 31px;
+}
+.fullscreen-slider--slide-data--description{
+    position: relative;
+    top: 47px;
+}
+.fullscreen-slider--slide-data--description>p{
+    font-family: Manrope;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0.29px;
+    color: #222222;
+    margin: 0;
+    text-align: center;
+}
+.fullscreen-slider--slide-data--action{
+    position: relative;
+    top: 295px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.fullscreen-slider--slide-data--action_btn{
+    width: 125px;
+    height: 45px;
+    background: #EF4A85;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: Manrope;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 100%;
+    letter-spacing: 0;
+    color: #fff;
+    text-decoration: unset;
+}
+.fullscreen-slider .owl-dots{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+    top: 23px;
+    position: relative;
+}
+.fullscreen-slider .owl-nav{
+    position: absolute;
+    top: 164px;
+    width: calc(100% - 25px);
+    left: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.fullscreen-slider .owl-nav button.owl-prev,
+.fullscreen-slider .owl-nav button.owl-next{
+    color: white;
+    font-size: 45px;
+}
