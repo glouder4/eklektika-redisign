@@ -134,6 +134,9 @@
     }
 }
 @media(min-width: 1520px){
+    .categories-slider--container-title{
+        margin-top: 112px;
+    }
     .categories-slider--item{
         width: 285px;
     }

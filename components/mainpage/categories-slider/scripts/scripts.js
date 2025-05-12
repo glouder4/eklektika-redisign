@@ -17,7 +17,7 @@ $('#categoriesSlider').owlCarousel({
         },
         1520:{
             items:5,
-            margin: 23,
+            margin: 15,
         }
     }
 })

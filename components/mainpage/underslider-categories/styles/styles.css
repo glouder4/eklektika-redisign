@@ -200,4 +200,8 @@
         top: 41px;
         width: 171px;
     }
+
+    .underslider-categories--category-item{
+        flex: unset;
+    }
 }
