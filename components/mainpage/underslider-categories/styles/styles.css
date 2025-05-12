@@ -94,6 +94,18 @@
         display: flex;
         flex-direction: row;
     }
+    .underslider-categories--category-item--data{
+        align-items: flex-start;
+    }
+    .underslider-categories--category-item--data_title{
+        top: 30px;
+        position: relative;
+    }
+    .underslider-categories--category-item--data_title>span{
+        width: 132px;
+        display: block;
+        box-sizing: border-box;
+    }
     .underslider-categories--category-item,
     .category-item-full_size{
         height: 315px;
