@@ -9,6 +9,8 @@
 
     <link rel="stylesheet" href="./styles/template.css">
     <link rel="stylesheet" href="./styles/header.css">
+    <link rel="stylesheet" href="./components/mainpage/slider/styles/owl.carousel.min.css">
+    <link rel="stylesheet" href="./components/mainpage/slider/styles/styles.css">
 </head>
 <body>
     <header class="header">
@@ -176,13 +178,41 @@
     </nav>
 
     <main>
+        <div class="fullscreen-slider owl-carousel owl-theme" id="fullscreenSlider">
+            <div class="fullscreen-slider--slide">
+                <div class="fullscreen-slider--slide_mobile-slide">
+                    <img src="./components/mainpage/slider/assets/mobile-slide1.png" alt="Название слайда 1">
+                </div>
+                <div class="fullscreen-slider--slide_desktop-slide">
+                    <img src="./components/mainpage/slider/assets/desktop-slide1.png" alt="Название слайда 1">
+                </div>
 
+                <div class="fullscreen-slider--slide-data">
+                    <div class="fullscreen-slider--slide-data--title">
+                        <span>Дом, милый дом</span>
+                    </div>
+                    <div class="fullscreen-slider--slide-data--description">
+                        <p>Аксессуары и элементы декора</p>
+                    </div>
+
+                    <div class="fullscreen-slider--slide-data--action">
+                        <a href="#" class="fullscreen-slider--slide-data--action_btn">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+            <div class="fullscreen-slider--slide">
+
+            </div>
+        </div>
     </main>
 
     <footer>
 
     </footer>
 
+    <script src="scripts/jquery.min.js"></script>
     <script src="scripts/header.js"></script>
+    <script src="./components/mainpage/slider/scripts/owl.carousel.min.js"></script>
+    <script src="./components/mainpage/slider/scripts/scripts.js"></script>
 </body>
 </html>
