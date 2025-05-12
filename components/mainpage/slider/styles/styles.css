@@ -156,7 +156,7 @@
     }
 }
 @media(min-width: 1520px){
-    .fullscreen-slider .owl-nav button.owl-prev, .fullscreen-slider .owl-nav button.owl-next, .fullscreen-slider .owl-stage-outer{
+    .fullscreen-slider,.fullscreen-slider .owl-nav button.owl-prev, .fullscreen-slider .owl-nav button.owl-next, .fullscreen-slider .owl-stage-outer{
         height: 793px;
     }
     .fullscreen-slider--slide-data--title{

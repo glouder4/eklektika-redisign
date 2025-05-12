@@ -10,6 +10,7 @@
 }
 .underslider-categories--category-item{
     width: 335px;
+    max-width: 100%;
     height: 120px;
 
     position: relative;
@@ -57,6 +58,7 @@
 .category-item-full_size--data_actions{
     top: 70px;
     left: 30px;
+    width: fit-content;
     position: relative;
 }
 .category-item-full_size--data_actions-link{
@@ -125,6 +127,15 @@
         width: 435px;
         background-position: center top;
         background-size: 100% 100%;
+    }
+}
+@media(min-width: 1200px){
+    .underslider-categories--category-item{
+        flex: 1;
+        height: 425px;
+    }
+    .category-item-full_size{
+        flex: 3;
     }
 }
 @media(min-width: 1520px){
