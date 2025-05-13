@@ -745,9 +745,11 @@
         top: 17px;
     }
     .header__icon>svg{
-        -webkit-transform: scale(2);
-        -ms-transform: scale(2);
-        transform: scale(2);
+        -webkit-transform: scale(1.5);
+        -ms-transform: scale(1.5);
+        transform: scale(1.5);
+
+        max-width: 19px;
     }
     .header__catalog-btn>.header__icon>svg{
         -webkit-transform: scale(1);
