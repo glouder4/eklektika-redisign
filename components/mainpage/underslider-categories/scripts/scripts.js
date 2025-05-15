@@ -16,3 +16,4 @@ document.addEventListener('DOMContentLoaded', updateBackgroundImages);
 
 // Обновление при изменении размера окна
 window.addEventListener('resize', updateBackgroundImages);
+
