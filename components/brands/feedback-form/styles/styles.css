@@ -3,6 +3,8 @@
     padding-top: 337px;
     padding-left: 20px;
     padding-right: 20px;
+
+    position: relative;
 }
 .feedback__form--background__elements{
     position: absolute;
@@ -126,11 +128,36 @@
 
     outline: none;
     border: 0;
+
+    transition: all 0.3s ease;
+}
+.feedback__form--form--action_item--send_form:hover{
+    cursor: pointer;
+    background-color: #D6306B;
+}
+.feedback__form--form--item>input:focus,
+.feedback__form--form--item>textarea:focus{
+    border-bottom: 1px solid #EF4A85;
 }
 @media(min-width: 576px){
     .feedback__form{
         height: 555px;
         padding-top: 435px;
+    }
+}
+@media(min-width: 576px) and (max-width: 768px){
+    .feedback__form--background__element,
+    .feedback__form--background__elements{
+        height: 508px;
+    }
+}
+@media(min-width: 768px){
+    .feedback__form{
+        padding-top: 45px;
+    }
+    .feedback__form--background__element{
+        width: 500px;
+        margin-left: auto;
     }
 }
 @media(min-width: 991px){
@@ -155,6 +182,11 @@
     }
     .feedback__form--background__element>img{
         object-fit: cover;
+    }
+    @media (min-width: 768px) {
+        .feedback__form--background__element {
+            width: 100%;
+        }
     }
 }
 @media(min-width: 1200px){
@@ -236,10 +268,6 @@
     .feedback__form--form--item.textarea{
         height: 72px;
     }
-    .feedback__form--form--item>input:focus,
-    .feedback__form--form--item>textarea:focus{
-        border-bottom: 1px solid #EF4A85;
-    }
 
     .feedback__form--form--item:nth-child(4){
         position: relative;
@@ -259,5 +287,10 @@
         font-size: 16px;
         line-height: 100%;
         letter-spacing: 0;
+    }
+}
+@media(min-width: 1920px){
+    .feedback__form--background__element.desktop{
+        right: calc((100% - 1520px) / 2 - 200px);
     }
 }

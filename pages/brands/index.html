@@ -9,6 +9,10 @@
 
     <link rel="stylesheet" href="../../styles/template.css">
     <link rel="stylesheet" href="../../styles/header.css">
+    <link rel="stylesheet" href="../../components/breadcrumbs/styles/styles.css">
+
+    <link rel="stylesheet" href="../../components/brands/feedback-form/styles/styles.css">
+    <link rel="stylesheet" href="../../components/brands/brands-list/styles/styles.css">
 
     <link rel="stylesheet" href="../../styles/footer.css">
 </head>
@@ -17,7 +21,9 @@
         <div style="background: #7B4FA3;">
             <div class="container">
                 <div class="header__top">
-                    <img src="../../assets/logo.svg" alt="yoliba logo" class="header__logo">
+                    <a href="/" rel="nofollow" class="header__logo--link">
+                        <img src="../../assets/logo.svg" alt="yoliba logo" class="header__logo">
+                    </a>
                     <div class="header__brand-description">
                         <span>Подарки для всех</span>
                         <span>Легко найти, приятно подарить</span>
@@ -176,9 +182,98 @@
             </div>
         </div>
     </nav>
-
+    <div class="container">
+        <div id="breadcrumbs" class="breadcrumbs">
+            <ul class="breadcrumbs__list">
+                <li class="breadcrumbs__list--item">
+                    <a href="#" class="breadcrumbs__list--item_link">Главная страница</a>
+                </li>
+                <li class="breadcrumbs__list--item--separator">
+                    <span>/</span>
+                </li>
+                <li class="breadcrumbs__list--item current-item">
+                    <a href="#" class="breadcrumbs__list--item_link">Бренды</a>
+                </li>
+            </ul>
+        </div>
+    </div>
     <main>
+        <div class="container">
+            <div class="page__title-wrapper">
+                <h1 class="page__title-wrapper-title">
+                    Бренды
+                </h1>
+            </div>
+        </div>
+        <div class="container">
+            <div class="brands__list">
+                <div class="brands__list--item">
+                    <img src="../../components/brands/brands-list/assets/logo-1.png" alt= "Логотип 1" draggable="false">
+                    <img src="../../components/brands/brands-list/assets/logo-1.png" class="hover" alt= "Логотип 1" draggable="false">
+                </div>
+                <div class="brands__list--item">
+                    <img src="../../components/brands/brands-list/assets/logo-2.png" alt= "Логотип 1" draggable="false">
+                    <img src="../../components/brands/brands-list/assets/logo-2.png" class="hover" alt= "Логотип 1" draggable="false">
+                </div>
+                <div class="brands__list--item">
+                    <img src="../../components/brands/brands-list/assets/logo-3.png" alt= "Логотип 1" draggable="false">
+                    <img src="../../components/brands/brands-list/assets/logo-3.png" class="hover" alt= "Логотип 1" draggable="false">
+                </div>
+                <div class="brands__list--item">
+                    <img src="../../components/brands/brands-list/assets/logo-4.png" alt= "Логотип 1" draggable="false">
+                    <img src="../../components/brands/brands-list/assets/logo-4.png" class="hover" alt= "Логотип 1" draggable="false">
+                </div>
+                <div class="brands__list--item">
+                    <img src="../../components/brands/brands-list/assets/logo-5.png" alt= "Логотип 1" draggable="false">
+                    <img src="../../components/brands/brands-list/assets/logo-5.png" class="hover" alt= "Логотип 1" draggable="false">
+                </div>
+                <div class="brands__list--item">
+                    <img src="../../components/brands/brands-list/assets/logo-6.png" alt= "Логотип 1" draggable="false">
+                    <img src="../../components/brands/brands-list/assets/logo-6.png" class="hover" alt= "Логотип 1" draggable="false">
+                </div>
+                <div class="brands__list--item">
+                    <img src="../../components/brands/brands-list/assets/logo-7.png" alt= "Логотип 1" draggable="false">
+                    <img src="../../components/brands/brands-list/assets/logo-7.png" class="hover" alt= "Логотип 1" draggable="false">
+                </div>
+            </div>
+        </div>
+        <div style="background-color: #F5AAC1; position: relative;">
+            <div class="feedback__form--background__elements">
+                <div class="feedback__form--background__element">
+                    <img src="../../components/brands/feedback-form/assets/bg-el.png" alt="">
+                </div>
+                <div class="feedback__form--background__element desktop">
+                    <img src="../../components/brands/feedback-form/assets/bg-el-desktop.png" alt="">
+                </div>
+            </div>
+            <div class="container">
+                <div class="feedback__form">
+                    <div class="feedback__form--form_wrapper">
+                        <div class="feedback__form--form_title">
+                            <span>Оставьте заявку и&nbsp;с&nbsp;вами свяжутся в&nbsp;течении пары минут</span>
+                        </div>
+                        <div class="feedback__form--form">
+                            <div class="feedback__form--form--item">
+                                <input class="feedback__form--form--item_name" type="text" placeholder="Имя" />
+                            </div>
+                            <div class="feedback__form--form--item">
+                                <input class="feedback__form--form--item_email" type="text" placeholder="E-mail" />
+                            </div>
+                            <div class="feedback__form--form--item">
+                                <input class="feedback__form--form--item_tel" type="text" placeholder="Телефон" />
+                            </div>
+                            <div class="feedback__form--form--item textarea">
+                                <textarea class="feedback__form--form--item_message" placeholder="Ваше сообщение"></textarea>
+                            </div>
 
+                            <div class="feedback__form--form--action_item">
+                                <button id="feedback__form-SendForm" class="feedback__form--form--action_item--send_form">Оставить заявку</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer class="footer__main">

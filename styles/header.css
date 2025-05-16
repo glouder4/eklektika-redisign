@@ -33,6 +33,9 @@
     position: relative;
     top: 2px;
 }
+.header__logo--link{
+    height: 27.80425453186035px;
+}
 
 .header__icons {
     display: -webkit-box;
@@ -60,6 +63,17 @@
     background: transparent;
     position: relative;
     text-decoration: unset;
+}
+
+.header__social-link svg path,
+.header__icon-title{
+    transition: all 0.3s ease;
+}
+.header__icon:hover .header__icon-title{
+    color: #EF4A85;
+}
+.header__social-link:hover svg path{
+    fill: #EF4A85;
 }
 .header__icon--dice{
     position: relative;
@@ -201,6 +215,11 @@
     font-size: 12px;
     line-height: 100%;
     letter-spacing: 0;
+
+    transition: all 0.3s ease;
+}
+.header__catalog-btn:hover{
+    background-color: #D6306B;
 }
 
 .header__search {
@@ -213,7 +232,7 @@
     background: #fff;
     border: 2px solid #744A9E;
 
-    width: 206px;
+    width: 198px;
     height: 45px;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -444,6 +463,14 @@
 .header__navigation{
     display: none;
 }
+.header__callback-btn{
+    transition: all 0.3s ease;
+
+    box-sizing: border-box;
+}
+.header__callback-btn:hover{
+    text-decoration: underline;
+}
 @media(max-width: 374px){
     .header__search-row{
         padding-left: 10px;
@@ -455,6 +482,11 @@
     .header__search-input{
         width: 107px;
         padding-left: 7px;
+    }
+}
+@media(min-width: 375px){
+    .header__search{
+        width: 206px;
     }
 }
 @media(min-width: 576px){
@@ -649,6 +681,9 @@
         width: 162px;
         height: 54px;
     }
+    .header__logo--link{
+        height: 54px;
+    }
     .header__brand-description{
         margin-left: 52px;
     }
@@ -678,6 +713,8 @@
     .header__catalog-btn>.header__icon{
         width: 24px;
         height: 24px;
+
+        background: unset;
     }
     .header__search {
         width: 330px;

@@ -24,7 +24,9 @@
         <div style="background: #7B4FA3;">
             <div class="container">
                 <div class="header__top">
-                    <img src="assets/logo.svg" alt="yoliba logo" class="header__logo">
+                    <a href="/" rel="nofollow" class="header__logo--link">
+                        <img src="assets/logo.svg" alt="yoliba logo" class="header__logo">
+                    </a>
                     <div class="header__brand-description">
                         <span>Подарки для всех</span>
                         <span>Легко найти, приятно подарить</span>
@@ -246,12 +248,17 @@
             </div>
         </div>
         <div class="container">
+            <style>
+                .transition-style-alternative-1:nth-child(1)::before{
+                    content: "Новинки";
+                }
+            </style>
             <div class="categories-slider--container-title">
                 <span class="title">Категории товаров</span>
             </div>
             <div class="categories-slider owl-carousel owl-theme" id="categoriesSlider">
                 <div class="categories-slider--item">
-                    <a href="#" class="categories-slider--item_category" style="background-image: url('./components/mainpage/categories-slider/assets/category-bg.png')">
+                    <a href="#" class="categories-slider--item_category  transition-style-alternative-1" style="background-image: url('./components/mainpage/categories-slider/assets/category-bg.png')">
                         <div class="categories-slider--item_category-image">
                             <img src="./components/mainpage/categories-slider/assets/category-1.png" alt="Новинки">
                         </div>
@@ -259,8 +266,9 @@
                             <span>Новинки</span>
                         </div>
                     </a>
-                    <a href="#" class="categories-slider--item_category" style="background-image: url('./components/mainpage/categories-slider/assets/category-bg.png')">
+                    <a href="#" class="categories-slider--item_category  transition-style-alternative-2" style="background-image: url('./components/mainpage/categories-slider/assets/category-bg.png')">
                         <div class="categories-slider--item_category-image">
+                            <img src="./components/mainpage/categories-slider/assets/category-2-alt.png" class="alternative" alt="Yoliba">
                             <img src="./components/mainpage/categories-slider/assets/category-2.png" alt="Yoliba">
                         </div>
                         <div class="categories-slider--item_category-title">
@@ -561,25 +569,32 @@
 
                 <div class="brands-scrollable-block--list">
                     <div class="brands-scrollable-block--item">
-                        <img src="./components/mainpage/brands/assets/logo-1.png" alt="">
+                        <img src="./components/mainpage/brands/assets/logo-1.png" draggable="false" alt="">
+                        <img src="./components/mainpage/brands/assets/logo-1.png" class="hover" draggable="false" alt="">
                     </div>
                     <div class="brands-scrollable-block--item">
-                        <img src="./components/mainpage/brands/assets/logo-2.png" alt="">
+                        <img src="./components/mainpage/brands/assets/logo-2.png" draggable="false" alt="">
+                        <img src="./components/mainpage/brands/assets/logo-2.png" class="hover" draggable="false" alt="">
                     </div>
                     <div class="brands-scrollable-block--item">
-                        <img src="./components/mainpage/brands/assets/logo-3.png" alt="">
+                        <img src="./components/mainpage/brands/assets/logo-3.png" draggable="false" alt="">
+                        <img src="./components/mainpage/brands/assets/logo-3.png" class="hover" draggable="false" alt="">
                     </div>
                     <div class="brands-scrollable-block--item">
-                        <img src="./components/mainpage/brands/assets/logo-4.png" alt="">
+                        <img src="./components/mainpage/brands/assets/logo-4.png" draggable="false" alt="">
+                        <img src="./components/mainpage/brands/assets/logo-4.png" class="hover" draggable="false" alt="">
                     </div>
                     <div class="brands-scrollable-block--item">
-                        <img src="./components/mainpage/brands/assets/logo-5.png" alt="">
+                        <img src="./components/mainpage/brands/assets/logo-5.png" draggable="false" alt="">
+                        <img src="./components/mainpage/brands/assets/logo-5.png" class="hover" draggable="false" alt="">
                     </div>
                     <div class="brands-scrollable-block--item">
-                        <img src="./components/mainpage/brands/assets/logo-6.png" alt="">
+                        <img src="./components/mainpage/brands/assets/logo-6.png" draggable="false" alt="">
+                        <img src="./components/mainpage/brands/assets/logo-6.png" class="hover" draggable="false" alt="">
                     </div>
                     <div class="brands-scrollable-block--item">
-                        <img src="./components/mainpage/brands/assets/logo-7.png" alt="">
+                        <img src="./components/mainpage/brands/assets/logo-7.png" draggable="false" alt="">
+                        <img src="./components/mainpage/brands/assets/logo-7.png" class="hover" draggable="false" alt="">
                     </div>
                 </div>
             </div>
@@ -845,5 +860,6 @@
     <script src="./components/mainpage/slider/scripts/scripts.js"></script>
     <script src="./components/mainpage/underslider-categories/scripts/scripts.js"></script>
     <script src="./components/mainpage/categories-slider/scripts/scripts.js"></script>
+    <script src="./components/mainpage/brands/scripts/script.js"></script>
 </body>
 </html>

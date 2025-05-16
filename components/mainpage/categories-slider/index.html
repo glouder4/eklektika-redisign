@@ -14,12 +14,17 @@
 <body>
 
     <div class="container">
+        <style>
+            .transition-style-alternative-1:nth-child(1)::before{
+                content: "Новинки";
+            }
+        </style>
         <div class="categories-slider--container-title">
             <span class="title">Категории товаров</span>
         </div>
         <div class="categories-slider owl-carousel owl-theme" id="categoriesSlider">
             <div class="categories-slider--item">
-                <a href="#" class="categories-slider--item_category" style="background-image: url('./assets/category-bg.png')">
+                <a href="#" class="categories-slider--item_category transition-style-alternative-1" style="background-image: url('./assets/category-bg.png')">
                     <div class="categories-slider--item_category-image">
                         <img src="./assets/category-1.png" alt="Новинки">
                     </div>
@@ -27,8 +32,9 @@
                         <span>Новинки</span>
                     </div>
                 </a>
-                <a href="#" class="categories-slider--item_category" style="background-image: url('./assets/category-bg.png')">
+                <a href="#" class="categories-slider--item_category transition-style-alternative-2" style="background-image: url('./assets/category-bg.png')">
                     <div class="categories-slider--item_category-image">
+                        <img src="./assets/category-2-alt.png" class="alternative" alt="Yoliba">
                         <img src="./assets/category-2.png" alt="Yoliba">
                     </div>
                     <div class="categories-slider--item_category-title">

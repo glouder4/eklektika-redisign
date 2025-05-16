@@ -71,6 +71,12 @@
     background-color: #fff;
     border-radius: 50%;
 }
+.category-item-full_size--data_actions-link{
+    transition: all 0.3s ease;
+}
+.category-item-full_size:hover .category-item-full_size--data_actions-link{
+    background-color: #E0E0E0;
+}
 
 .underslider-categories--category-item--data{
     position: relative;

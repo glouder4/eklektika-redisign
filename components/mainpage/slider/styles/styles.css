@@ -78,7 +78,7 @@
 .fullscreen-slider--slide-data--action_btn{
     width: 125px;
     height: 45px;
-    background: #EF4A85;
+    background: #744A9E;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -90,6 +90,11 @@
     letter-spacing: 0;
     color: #fff;
     text-decoration: unset;
+
+    transition: all 0.3s ease;
+}
+.fullscreen-slider--slide-data--action_btn:hover{
+    background-color: #5F2E90;
 }
 .fullscreen-slider .owl-dots{
     display: flex;

@@ -8,6 +8,10 @@
 body{
     margin: 0;
 }
+main{
+    position: relative;
+    z-index: 0;
+}
 .container{
     max-width: 100%;
 }
