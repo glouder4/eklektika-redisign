@@ -80,6 +80,7 @@
 @media(min-width: 1520px){
     .discounts--item{
         max-width: 362px;
+        width: calc(25% - 18px);
         height: 357px;
     }
     .discounts{
