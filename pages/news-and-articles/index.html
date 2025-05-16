@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 
+    <link rel="stylesheet" href="../../styles/jquery.fancybox.css">
     <link rel="stylesheet" href="../../styles/template.css">
     <link rel="stylesheet" href="../../styles/header.css">
     <link rel="stylesheet" href="../../components/breadcrumbs/styles/styles.css">
@@ -274,6 +275,10 @@
                     </div>
                 </a>
             </article>
+
+            <div class="news-and-articles--action">
+                <a data-fancybox href="#news-action-popup" rel="nofollow" class="news-and-articles--action_open-popup">Показать еще</a>
+            </div>
         </div>
     </div>
 
@@ -318,6 +323,17 @@
         </div>
     </div>
 </main>
+<div style="display: none;" id="news-action-popup">
+    <div class="news-action-popup-block">
+        <div class="news-action-popup-image">
+            <img src="../../components/news-and-articles/assets/okak.png" alt="">
+        </div>
+        <div class="news-action-popup-data">
+            <h2>Если вы это видите</h2>
+            <p>То мы забыли предоставить информацию разбраточику, но скоро всё исправим!</p>
+        </div>
+    </div>
+</div>
 
 <footer class="footer__main">
     <div class="footer__main-content--wrapper">
@@ -552,7 +568,8 @@
     </div>
 </footer>
 
-<script src="scripts/jquery.min.js"></script>
-<script src="scripts/header.js"></script>
+<script src="../../scripts/jquery.min.js"></script>
+<script src="../../scripts/jquery.fancybox.min.js"></script>
+<script src="../../scripts/header.js"></script>
 </body>
 </html>
