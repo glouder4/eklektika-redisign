@@ -210,7 +210,7 @@
     }
     .feedback__form--background__element>img {
         object-fit: contain;
-        object-position: right;
+        object-position: top right;
     }
     .feedback__form--form_wrapper{
         left: -20px;
