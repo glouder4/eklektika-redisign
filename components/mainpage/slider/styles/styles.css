@@ -120,17 +120,42 @@
     height: 407px;
     width: 40px;
 
+    position: relative;
+
     transition: all 0.3s ease;
 }
-.fullscreen-slider .owl-nav button.owl-prev{
-    background: linear-gradient(270deg, rgba(0, 0, 0, 0) 0%, #0000005e 100%);
+/* Общее затемнение через псевдоэлемент */
+.fullscreen-slider .owl-nav button.owl-prev::before,
+.fullscreen-slider .owl-nav button.owl-next::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1;
 }
-.fullscreen-slider .owl-nav button.owl-next{
-    background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, #0000005e 100%);
+
+/* Градиент слева направо */
+.fullscreen-slider .owl-nav button.owl-next::before {
+    background: linear-gradient(90deg, rgba(0,0,0,0) 0%, #0000005e 100%);
 }
-.fullscreen-slider .owl-nav button.owl-prev.disabled,
-.fullscreen-slider .owl-nav button.owl-next.disabled{
-    background: unset;
+
+/* Градиент справа налево */
+.fullscreen-slider .owl-nav button.owl-prev::before {
+    background: linear-gradient(270deg, rgba(0,0,0,0) 0%, #0000005e 100%);
+}
+
+/* Наведение — показываем тень */
+.fullscreen-slider .owl-nav button.owl-prev:hover::before,
+.fullscreen-slider .owl-nav button.owl-next:hover::before {
+    opacity: 1;
+}
+
+
+.fullscreen-slider .owl-nav button.owl-prev.disabled:hover::before,
+.fullscreen-slider .owl-nav button.owl-next.disabled:hover::before{
+    opacity: 0;
 }
 .fullscreen-slider .owl-nav button.owl-prev.disabled>span,
 .fullscreen-slider .owl-nav button.owl-next.disabled>span{
