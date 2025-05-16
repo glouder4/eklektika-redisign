@@ -1,0 +1,269 @@
+.how_to_request{
+    display: flex;
+    flex-direction: column;
+
+    padding-left: 20px;
+    padding-right: 20px;
+
+    gap: 20px;
+}
+.how_to_request--item{
+    display: flex;
+    flex-direction: column;
+
+    position: relative;
+
+    height: 235px;
+    gap: 20px;
+
+    align-items: center;
+    box-sizing: border-box;
+}
+.how_to_request--item.additional{
+    height: 270px;
+}
+.how_to_request--item::before{
+    content: "";
+
+    position: absolute;
+    z-index: 0;
+    font-family: Manrope;
+    font-weight: 600;
+    font-size: 128px;
+    line-height: 125%;
+    letter-spacing: 0;
+    text-align: center;
+
+    top: -25px;
+
+    opacity: 0.3;
+}
+.how_to_request--item:nth-child(1)::before{
+    color: #FBB040;
+}
+.how_to_request--item:nth-child(2)::before{
+    color: #FF85B0;
+}
+.how_to_request--item:nth-child(3)::before{
+    color: #A680D4;
+}
+.how_to_request--item:nth-child(4)::before{
+    color: #4BD783;
+}
+.how_to_request--item:nth-child(5)::before{
+    color: #57B0EA;
+}
+.how_to_request--item:nth-child(6)::before{
+    color: #FF5A36;
+}
+.how_to_request--item:nth-child(4) .how_to_request--item_description-wrapper>a{
+    color: #4BD783;
+}
+.how_to_request--item:nth-child(5) .how_to_request--item_description-wrapper>a{
+    color: #57B0EA;
+}
+.how_to_request--item_image-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 44px;
+    position: relative;
+    z-index: 1;
+}
+.how_to_request--item_image-wrapper>img{
+    width: 100%;
+    height: 100%;
+}
+.how_to_request--item_title-wrapper{
+    text-align: center;
+}
+.how_to_request--item_title-wrapper>span{
+    font-family: Manrope;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 125%;
+    letter-spacing: 0;
+    text-align: center;
+    color: #222222;
+}
+.how_to_request--item_description-wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.how_to_request--item_description-wrapper>p{
+    font-family: Manrope;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    letter-spacing: 0.29px;
+    text-align: center;
+    color: #222222;
+
+    margin: 0;
+}
+
+.how_to_request--item_description--link{
+    color: inherit;
+    font-family: Manrope;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 150%;
+    letter-spacing: 0.29px;
+    text-align: center;
+    text-decoration: unset;
+
+    text-align: center;
+    width: 100%;
+    display: block;
+}
+.how_to_request--item_description--link:hover{
+    text-decoration: underline;
+}
+@media(min-width: 768px){
+    .how_to_request{
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .how_to_request--item{
+        width: calc(50% - 10px);
+    }
+}
+@media(min-width: 991px){
+    .how_to_request--item{
+        width: calc(33% - 11px);
+    }
+}
+@media(min-width: 1520px){
+    .how_to_request--item::before{
+        font-size: 160.07px;
+    }
+    .how_to_request--item_image-wrapper{
+        width: 80px;
+        height: 80px;
+    }
+    .how_to_request--item_title-wrapper>span{
+        font-size: 28px;
+    }
+    .how_to_request--item_description-wrapper>p{
+        font-size: 16px;
+    }
+    .how_to_request{
+        row-gap: 112px;
+        margin-top: 62px;
+        margin-bottom: 146px;
+    }
+}
+@media(min-width: 1920px){
+    .how_to_request--item:nth-child(1)::before{
+        left: 113px;
+    }
+    .how_to_request--item:nth-child(1) .how_to_request--item_image-wrapper{
+        left: -42px;
+        top: 31px;
+    }
+    .how_to_request--item:nth-child(2) .how_to_request--item_image-wrapper{
+        left: 5px;
+        top: 31px;
+    }
+    .how_to_request--item:nth-child(3)::before{
+        left: 179px;
+    }
+    .how_to_request--item:nth-child(3) .how_to_request--item_image-wrapper{
+        left: 48px;
+        top: 30px;
+    }
+    .how_to_request--item:nth-child(4)::before{
+        left: 95px;
+    }
+    .how_to_request--item_title-wrapper{
+        margin-top: 40px;
+    }
+    .how_to_request--item:nth-child(4) .how_to_request--item_image-wrapper{
+        left: -41px;
+        top: 30px;
+    }
+    .how_to_request--item:nth-child(1) .how_to_request--item_title-wrapper{
+        left: -43px;
+        top: 12px;
+        position: relative;
+    }
+    .how_to_request--item:nth-child(1) .how_to_request--item_description-wrapper{
+        width: 332px;
+        left: -40px;
+        position: relative;
+        top: 11px;
+    }
+    .how_to_request--item:nth-child(2) .how_to_request--item_title-wrapper{
+        top: 11px;
+        left: 4px;
+        position: relative;
+    }
+    .how_to_request--item:nth-child(2) .how_to_request--item_description-wrapper{
+        width: 370px;
+        position: relative;
+        top: 11px;
+        left: 4px;
+    }
+    .how_to_request--item:nth-child(3) .how_to_request--item_title-wrapper{
+        left: 48px;
+        top: 10px;
+        position: relative;
+    }
+    .how_to_request--item:nth-child(3) .how_to_request--item_description-wrapper{
+        width: 342px;
+        position: relative;
+        top: 10px;
+        left: 46px;
+    }
+    .how_to_request--item:nth-child(4) .how_to_request--item_title-wrapper{
+        position: relative;
+        left: -42px;
+        top: 7px;
+    }
+    .how_to_request--item:nth-child(4) .how_to_request--item_description-wrapper{
+        width: 299px;
+        position: relative;
+        left: -42px;
+        top: 7px;
+    }
+    .how_to_request--item:nth-child(5) .how_to_request--item_image-wrapper{
+        position: relative;
+        top: 30px;
+        left: 5px;
+    }
+    .how_to_request--item:nth-child(5) .how_to_request--item_title-wrapper{
+        position: relative;
+        top: 8px;
+        left: 4px;
+    }
+    .how_to_request--item:nth-child(5) .how_to_request--item_description-wrapper{
+        width: 370px;
+        position: relative;
+        top: 8px;
+        left: 4px;
+    }
+    .how_to_request--item:nth-child(6)::before{
+        left: 177px;
+        top: -27px;
+    }
+    .how_to_request--item:nth-child(6) .how_to_request--item_image-wrapper{
+        position: relative;
+        left: 48px;
+        top: 30px;
+    }
+    .how_to_request--item:nth-child(6) .how_to_request--item_title-wrapper{
+        position: relative;
+        left: 47px;
+        top: 10px;
+    }
+    .how_to_request--item:nth-child(6) .how_to_request--item_description-wrapper{
+        width: 320px;
+        left: 47px;
+        top: 8px;
+        position: relative;
+    }
+    .how_to_request--item.additional {
+        height: 325px;
+    }
+}
