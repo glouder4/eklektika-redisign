@@ -1,0 +1,118 @@
+.intec-template .custom-main-page .intec-template-layout-page-wrapper,
+.intec-template .custom-main-page.intec-template-layout-page {
+	position: unset; /*Это чтобы всплывающие окошки на главной в блоке с услугами работали*/
+	overflow: hidden;
+}
+.marquee-block {
+	margin-top: 40px;
+	margin-bottom: 0px;
+}
+
+.marquee-block .marquee-wrapper {
+	height: 60px;
+}
+
+.marquee-block .marquee-elem {
+	font-weight: 900;
+	font-size: 46px;
+	line-height: 60%;
+	color: white;
+	text-shadow: 1px 0 1px #C8C8C8, 0 1px 1px #C8C8C8, -1px 0 1px #C8C8C8, 0 -1px 1px #C8C8C8;
+	transition: 350ms;
+	text-transform: uppercase;
+}
+.marquee-block .marquee-elem:hover {
+	color: #DB0032;
+	text-shadow: 1px 0 1px #DB0032, 0 1px 1px #DB0032, -1px 0 1px #DB0032, 0 -1px 1px #DB0032;
+	text-decoration: none;
+}
+
+.marquee-block .marquee-delimeter {
+	margin: 0 25px;
+	font-size: 0;
+	line-height: 0;
+}
+.marquee-block .marquee-delimeter .mobile {
+	display: none;
+}
+.marquee-block .marquee-delimeter svg {
+	margin-bottom: -6px;
+}
+
+@media (max-width: 768px) {
+	.marquee-block .marquee-elem {
+		font-weight: 900;
+		font-size: 36.5254px;
+		line-height: 112.9%;
+		letter-spacing: 0.08em;
+	}
+	.marquee-block {
+margin-top: 84px;
+margin-bottom: 57px;
+}
+.marquee-block .marquee-wrapper {
+	height: 41px;
+	margin-bottom: 21px;
+}
+.marquee-block .marquee-delimeter .mobile {
+	display: initial;
+}
+.marquee-block .marquee-delimeter .desktop {
+	display: none;
+}
+	.marquee-block .marquee-delimeter svg {
+		margin-bottom: -4px;
+	}
+	.marquee-block .marquee-delimeter {
+		margin: 0 11px;
+	}
+}
+
+#sections-main-block {
+	margin: 86px 0;
+}
+#products-main-block {
+	margin-top: 86px;
+	padding-bottom: 86px;
+	overflow: hidden;
+	position: relative
+}
+#news-main-block {
+	margin-top: 83px;
+	margin-bottom: 8px;
+}
+#form-main-block {
+	margin-bottom: 93px;
+}
+#services-main-block {
+	margin-top: 50px;
+	margin-bottom: 50px
+}
+#brands-main-block {
+	margin-top: 83px;
+	margin-bottom: 83px;
+}
+@media (max-width: 768px) {
+	#sections-main-block {
+		margin: 119px 0 100px 0;
+	}
+	#products-main-block {
+		margin-top: 100px;
+    	padding-bottom: 100px;
+	}
+	#services-main-block {
+		margin-top: 0;
+		margin-bottom: 0
+	}
+	#news-main-block {
+		margin-top: 116px;
+		margin-bottom: 96px;
+	}
+	#brands-main-block {
+		margin-top: 96px;
+		margin-bottom: 100px;
+	}
+	#form-main-block {
+		margin-bottom: 100px;
+	}
+}

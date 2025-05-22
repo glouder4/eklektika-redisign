@@ -1,0 +1,181 @@
+.widget.c-services.c-services-template-23 .widget-property-title .widget-item-property {
+  color: #fff;
+  padding: 12px 16px;
+  white-space: nowrap;
+}
+.widget.c-services.c-services-template-23 .widget-item {
+  border-bottom: 1px solid #cccccc;
+  padding: 18px 18px 34px 0;
+  margin-top: 40px;
+  transition: 400ms;
+}
+.widget.c-services.c-services-template-23 .widget-item-align-center {
+  text-align: center;
+}
+.widget.c-services.c-services-template-23 .widget-item-name {
+  position: sticky;
+  left: 0;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 120%;
+  color: #1A1A18;
+  text-decoration: none !important;
+  z-index: 1;
+  -webkit-transition-property: color;
+  -moz-transition-property: color;
+  -ms-transition-property: color;
+  -o-transition-property: color;
+  transition-property: color;
+  -webkit-transition-duration: 0.4s;
+  -moz-transition-duration: 0.4s;
+  -ms-transition-duration: 0.4s;
+  -o-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+letter-spacing: 0.905063px;
+}
+.widget.c-services.c-services-template-23 .widget-item-button-wrap {
+  margin-top: 24px;
+}
+.widget.c-services.c-services-template-23 .widget-item-button {
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-width: 1px;
+  color: #FFFFFF;
+  -webkit-transition-property: all;
+  -moz-transition-property: all;
+  -ms-transition-property: all;
+  -o-transition-property: all;
+  transition-property: all;
+  -webkit-transition-duration: 0.4s;
+  -moz-transition-duration: 0.4s;
+  -ms-transition-duration: 0.4s;
+  -o-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+}
+.widget.c-services.c-services-template-23 .widget-item-button-clear {
+  color: #808080;
+  border-color: #E8E8E8;
+}
+.widget.c-services.c-services-template-23 .widget-item-button-clear:hover {
+  color: #fff;
+}
+@media all and (max-width: 768px) {
+  .widget.c-services.c-services-template-23 .widget-item-information {
+    margin-left: 0;
+  }
+}
+@media all and (max-width: 600px) {
+  .widget.c-services.c-services-template-23 .widget-item-button {
+    display: block;
+  }
+  .widget.c-services.c-services-template-23 .widget-item-number {
+    display: none;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
+
+.widget.c-services.c-services-template-23 .widget-item-svg {
+fill: black;
+stroke: black;
+font-size: 0;
+line-height: 0;
+transition: 400ms;
+}
+
+.widget.c-services.c-services-template-23 .widget-item-a:hover {
+ color: #DB0032;
+text-decoration: none;
+transition: 400ms;
+}
+
+.widget.c-services.c-services-template-23 .widget-item-a:hover .widget-item-name {
+ color: #DB0032;
+}
+.widget.c-services.c-services-template-23 .widget-item-a:hover .widget-item {
+border-color: #DB0032;
+}
+.widget.c-services.c-services-template-23 .widget-item-a:hover .widget-item-svg {
+ fill: #DB0032;
+stroke: #DB0032;
+}
+.widget.c-services.c-services-template-23 .widget-header .widget-content {
+margin-top: 58px;
+}
+.widget.c-services.c-services-template-23 .widget-header .widget-title {
+font-weight: 600;
+font-size: 36px;
+line-height: 120%;
+letter-spacing: 0.905063px;
+color: #1A1A18;
+}
+.widget.c-services.c-services-template-23 .widget-item-popup {
+box-shadow: 0px 24px 80px rgba(20, 18, 18, 0.03), 0px 15.5556px 46.8519px rgba(20, 18, 18, 0.0227778), 0px 9.24444px 25.4815px rgba(20, 18, 18, 0.0182222), 0px 4.8px 13px rgba(20, 18, 18, 0.015), 0px 1.95556px 6.51852px rgba(20, 18, 18, 0.0117778), 0px 0.444444px 3.14815px rgba(20, 18, 18, 0.00722222);
+border-radius: 0px 0px 4px 4px;
+background: #FFFFFF;
+position:absolute;
+z-index: 999; 
+  pointer-events: none;
+
+width: 404px;
+display: none;
+overflow: hidden;
+transform: translateY(30px) translateX(-10px);
+color: #1A1A18;
+}
+.widget.c-services.c-services-template-23 .widget-item-popup-image {
+width: 100%;
+padding-bottom: 62%;
+border-radius: 4px 4px 0 0;
+}
+.widget.c-services.c-services-template-23 .widget-item-popup-content {
+padding: 30px;
+}
+
+.widget.c-services.c-services-template-23 .widget-item-popup .widget-item-price {
+font-size: 20px;
+line-height: 120%;
+margin-bottom: 12px;
+letter-spacing: 0.759607px;
+}
+
+.widget.c-services.c-services-template-23 .widget-item-popup .widget-item-price .bold {
+font-size: 28px;
+line-height: 34px;
+font-weight: 600;
+}
+
+.widget.c-services.c-services-template-23 .widget-item-popup .widget-item-description-wrap {
+font-size: 18px;
+line-height: 143%;
+letter-spacing: 0.4px;
+}
+
+@media (max-width: 768px) {
+.widget.c-services.c-services-template-23 .widget-header .widget-title {
+font-weight: 600;
+font-size: 28px;
+line-height: 105%;
+}
+.widget.c-services.c-services-template-23 .widget-item-name {
+font-weight: 400;
+font-size: 13px;
+line-height: 120%;
+padding-right: 30px
+}
+.widget.c-services.c-services-template-23 .widget-item-svg svg {
+width: 16px;
+height: 16px;
+}
+.widget.c-services.c-services-template-23 .widget-item {
+padding-bottom: 20px;
+margin-top: 18px;
+}
+.widget.c-services.c-services-template-23 .widget-header + .widget-content {
+margin-top: 20px;
+}
+}

@@ -1,0 +1,58 @@
+.ns-bitrix.c-catalog-section-list.c-catalog-section-list-catalog-tile-7 {
+  padding-top: 1px;
+}
+.ns-bitrix.c-catalog-section-list.c-catalog-section-list-catalog-tile-7 .catalog-section-list-item {
+  -webkit-transition-duration: 350ms;
+  -moz-transition-duration: 350ms;
+  -ms-transition-duration: 350ms;
+  -o-transition-duration: 350ms;
+  transition-duration: 350ms;
+  -webkit-transition-property: box-shadow;
+  -moz-transition-property: box-shadow;
+  -ms-transition-property: box-shadow;
+  -o-transition-property: box-shadow;
+  transition-property: box-shadow;
+}
+
+.ns-bitrix.c-catalog-section-list.c-catalog-section-list-catalog-tile-7 .catalog-section-list-item-wrapper {
+  font-size: 0;
+}
+.ns-bitrix.c-catalog-section-list.c-catalog-section-list-catalog-tile-7 .catalog-section-list-item-picture {
+  display: block;
+  width: 48px;
+  height: 48px;
+  margin-right: 24px;
+}
+.ns-bitrix.c-catalog-section-list.c-catalog-section-list-catalog-tile-7 .catalog-section-list-item-name {
+  display: inline-block;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  color: #404040;
+  text-decoration: none;
+  -webkit-transition-duration: 350ms;
+  -moz-transition-duration: 350ms;
+  -ms-transition-duration: 350ms;
+  -o-transition-duration: 350ms;
+  transition-duration: 350ms;
+  -webkit-transition-property: color;
+  -moz-transition-property: color;
+  -ms-transition-property: color;
+  -o-transition-property: color;
+  transition-property: color;
+}
+.ns-bitrix.c-catalog-section-list.c-catalog-section-list-catalog-tile-7 .catalog-section-list-item-count {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 14px;
+  color: #B0B0B0;
+  margin-top: 8px;
+}
+.ns-bitrix.c-catalog-section-list.c-catalog-section-list-catalog-tile-7 .catalog-section-list-items {
+gap: 24px;
+}
+
+
+/*# sourceMappingURL=style.css.map */

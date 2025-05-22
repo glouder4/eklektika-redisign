@@ -1,0 +1,816 @@
+Array
+(
+    [NEW_VALUES] => 
+    [ID] => 134
+    [SITE_ID] => s1
+    [DATE_INSERT] => 1730288121
+    [STATUS_ID] => UD
+    [STATUS_NAME] => Заказ в обработке
+    [PERSON_TYPE_ID] => 2
+    [PERSON_TYPE_NAME] => Юридическое лицо
+    [USER_ID] => 1
+    [USER_GROUPS_ID] => Array
+        (
+            [0] => 1
+            [1] => 3
+            [2] => 4
+            [3] => 11
+            [4] => 12
+        )
+
+    [RESPONSIBLE_ID] => 7
+    [PRICE] => 129019.15
+    [DISCOUNT_PRICE] => 0
+    [DELIVERY_PRICE] => 500
+    [CURRENCY] => RUB
+    [IS_PAID] => 
+    [ID_ALLOW_DELIVERY] => 
+    [IS_SHIPPED] => 
+    [IS_CANCELED] => 
+    [REASON_CANCELED] => 
+    [ACCOUNT_NUMBER] => 134
+    [DATE_UPDATE] => 1730369696
+    [COMMENTS] => 
+    [USER_DESCRIPTION] => 
+    [PROPERTIES] => Array
+        (
+            [34] => Array
+                (
+                    [ID] => 34
+                    [PERSON_TYPE_ID] => 2
+                    [NAME] => Сумма оплаты
+                    [TYPE] => STRING
+                    [REQUIRED] => N
+                    [DEFAULT_VALUE] => 0
+                    [SORT] => 0
+                    [USER_PROPS] => N
+                    [IS_LOCATION] => N
+                    [PROPS_GROUP_ID] => 3
+                    [DESCRIPTION] => 
+                    [IS_EMAIL] => N
+                    [IS_PROFILE_NAME] => N
+                    [IS_PAYER] => N
+                    [IS_LOCATION4TAX] => N
+                    [IS_FILTERED] => N
+                    [CODE] => SUMM_PAYMENT
+                    [IS_ZIP] => N
+                    [IS_PHONE] => N
+                    [IS_ADDRESS] => N
+                    [IS_ADDRESS_FROM] => N
+                    [IS_ADDRESS_TO] => N
+                    [ACTIVE] => Y
+                    [UTIL] => Y
+                    [INPUT_FIELD_LOCATION] => 0
+                    [MULTIPLE] => N
+                    [ENTITY_TYPE] => ORDER
+                    [MINLENGTH] => 
+                    [MAXLENGTH] => 
+                    [PATTERN] => 
+                    [MULTILINE] => N
+                    [SIZE] => 
+                    [RELATION] => Array
+                        (
+                        )
+
+                    [VALUE] => Array
+                        (
+                            [0] => 
+                        )
+
+                )
+
+            [30] => Array
+                (
+                    [ID] => 30
+                    [PERSON_TYPE_ID] => 2
+                    [NAME] => Взять в работу
+                    [TYPE] => Y/N
+                    [REQUIRED] => N
+                    [DEFAULT_VALUE] => N
+                    [SORT] => 0
+                    [USER_PROPS] => N
+                    [IS_LOCATION] => N
+                    [PROPS_GROUP_ID] => 3
+                    [DESCRIPTION] => 
+                    [IS_EMAIL] => N
+                    [IS_PROFILE_NAME] => N
+                    [IS_PAYER] => N
+                    [IS_LOCATION4TAX] => N
+                    [IS_FILTERED] => N
+                    [CODE] => IN_WORK
+                    [IS_ZIP] => N
+                    [IS_PHONE] => N
+                    [IS_ADDRESS] => N
+                    [IS_ADDRESS_FROM] => N
+                    [IS_ADDRESS_TO] => N
+                    [ACTIVE] => Y
+                    [UTIL] => Y
+                    [INPUT_FIELD_LOCATION] => 0
+                    [MULTIPLE] => N
+                    [ENTITY_TYPE] => ORDER
+                    [RELATION] => Array
+                        (
+                        )
+
+                    [VALUE] => Array
+                        (
+                            [0] => N
+                        )
+
+                )
+
+            [28] => Array
+                (
+                    [ID] => 28
+                    [PERSON_TYPE_ID] => 2
+                    [NAME] => Запрос на резерв принят
+                    [TYPE] => Y/N
+                    [REQUIRED] => N
+                    [DEFAULT_VALUE] => N
+                    [SORT] => 0
+                    [USER_PROPS] => N
+                    [IS_LOCATION] => N
+                    [PROPS_GROUP_ID] => 4
+                    [DESCRIPTION] => 
+                    [IS_EMAIL] => N
+                    [IS_PROFILE_NAME] => N
+                    [IS_PAYER] => N
+                    [IS_LOCATION4TAX] => N
+                    [IS_FILTERED] => N
+                    [CODE] => RESERVE_SUCCESS
+                    [IS_ZIP] => N
+                    [IS_PHONE] => N
+                    [IS_ADDRESS] => N
+                    [IS_ADDRESS_FROM] => N
+                    [IS_ADDRESS_TO] => N
+                    [ACTIVE] => Y
+                    [UTIL] => Y
+                    [INPUT_FIELD_LOCATION] => 0
+                    [MULTIPLE] => N
+                    [ENTITY_TYPE] => ORDER
+                    [RELATION] => Array
+                        (
+                        )
+
+                    [VALUE] => Array
+                        (
+                            [0] => N
+                        )
+
+                )
+
+            [26] => Array
+                (
+                    [ID] => 26
+                    [PERSON_TYPE_ID] => 2
+                    [NAME] => Запрос на резерв
+                    [TYPE] => Y/N
+                    [REQUIRED] => N
+                    [DEFAULT_VALUE] => N
+                    [SORT] => 0
+                    [USER_PROPS] => N
+                    [IS_LOCATION] => N
+                    [PROPS_GROUP_ID] => 3
+                    [DESCRIPTION] => 
+                    [IS_EMAIL] => N
+                    [IS_PROFILE_NAME] => N
+                    [IS_PAYER] => N
+                    [IS_LOCATION4TAX] => N
+                    [IS_FILTERED] => N
+                    [CODE] => REQUEST_TO_RESERVE
+                    [IS_ZIP] => N
+                    [IS_PHONE] => N
+                    [IS_ADDRESS] => N
+                    [IS_ADDRESS_FROM] => N
+                    [IS_ADDRESS_TO] => N
+                    [ACTIVE] => Y
+                    [UTIL] => Y
+                    [INPUT_FIELD_LOCATION] => 0
+                    [MULTIPLE] => N
+                    [ENTITY_TYPE] => ORDER
+                    [RELATION] => Array
+                        (
+                        )
+
+                    [VALUE] => Array
+                        (
+                            [0] => N
+                        )
+
+                )
+
+            [23] => Array
+                (
+                    [ID] => 23
+                    [PERSON_TYPE_ID] => 2
+                    [NAME] => Срок действия резерва
+                    [TYPE] => DATE
+                    [REQUIRED] => N
+                    [DEFAULT_VALUE] => 
+                    [SORT] => 0
+                    [USER_PROPS] => N
+                    [IS_LOCATION] => N
+                    [PROPS_GROUP_ID] => 4
+                    [DESCRIPTION] => 
+                    [IS_EMAIL] => N
+                    [IS_PROFILE_NAME] => N
+                    [IS_PAYER] => N
+                    [IS_LOCATION4TAX] => N
+                    [IS_FILTERED] => N
+                    [CODE] => END_DATE_RESERVE
+                    [IS_ZIP] => N
+                    [IS_PHONE] => N
+                    [IS_ADDRESS] => N
+                    [IS_ADDRESS_FROM] => N
+                    [IS_ADDRESS_TO] => N
+                    [ACTIVE] => Y
+                    [UTIL] => Y
+                    [INPUT_FIELD_LOCATION] => 0
+                    [MULTIPLE] => N
+                    [ENTITY_TYPE] => ORDER
+                    [TIME] => Y
+                    [RELATION] => Array
+                        (
+                        )
+
+                    [VALUE] => Array
+                        (
+                            [0] => 
+                        )
+
+                )
+
+            [22] => Array
+                (
+                    [ID] => 22
+                    [PERSON_TYPE_ID] => 2
+                    [NAME] => Рекламный агент (не передается в Б24)
+                    [TYPE] => Y/N
+                    [REQUIRED] => N
+                    [DEFAULT_VALUE] => N
+                    [SORT] => 0
+                    [USER_PROPS] => Y
+                    [IS_LOCATION] => N
+                    [PROPS_GROUP_ID] => 4
+                    [DESCRIPTION] => 
+                    [IS_EMAIL] => N
+                    [IS_PROFILE_NAME] => N
+                    [IS_PAYER] => N
+                    [IS_LOCATION4TAX] => N
+                    [IS_FILTERED] => N
+                    [CODE] => ADVERSTERING_AGENT
+                    [IS_ZIP] => N
+                    [IS_PHONE] => N
+                    [IS_ADDRESS] => N
+                    [IS_ADDRESS_FROM] => N
+                    [IS_ADDRESS_TO] => N
+                    [ACTIVE] => Y
+                    [UTIL] => Y
+                    [INPUT_FIELD_LOCATION] => 0
+                    [MULTIPLE] => N
+                    [ENTITY_TYPE] => ORDER
+                    [RELATION] => Array
+                        (
+                        )
+
+                    [VALUE] => Array
+                        (
+                            [0] => N
+                        )
+
+                )
+
+            [21] => Array
+                (
+                    [ID] => 21
+                    [PERSON_TYPE_ID] => 2
+                    [NAME] => Комментарий
+                    [TYPE] => STRING
+                    [REQUIRED] => N
+                    [DEFAULT_VALUE] => 
+                    [SORT] => 100
+                    [USER_PROPS] => N
+                    [IS_LOCATION] => N
+                    [PROPS_GROUP_ID] => 4
+                    [DESCRIPTION] => 
+                    [IS_EMAIL] => N
+                    [IS_PROFILE_NAME] => N
+                    [IS_PAYER] => N
+                    [IS_LOCATION4TAX] => N
+                    [IS_FILTERED] => N
+                    [CODE] => COMMENT
+                    [IS_ZIP] => N
+                    [IS_PHONE] => N
+                    [IS_ADDRESS] => N
+                    [IS_ADDRESS_FROM] => N
+                    [IS_ADDRESS_TO] => N
+                    [ACTIVE] => Y
+                    [UTIL] => N
+                    [INPUT_FIELD_LOCATION] => 0
+                    [MULTIPLE] => N
+                    [ENTITY_TYPE] => ORDER
+                    [MINLENGTH] => 
+                    [MAXLENGTH] => 
+                    [PATTERN] => 
+                    [MULTILINE] => Y
+                    [COLS] => 
+                    [ROWS] => 
+                    [RELATION] => Array
+                        (
+                        )
+
+                    [VALUE] => Array
+                        (
+                            [0] => 
+                        )
+
+                )
+
+            [8] => Array
+                (
+                    [ID] => 8
+                    [PERSON_TYPE_ID] => 2
+                    [NAME] => Название компании
+                    [TYPE] => STRING
+                    [REQUIRED] => Y
+                    [DEFAULT_VALUE] => 
+                    [SORT] => 200
+                    [USER_PROPS] => Y
+                    [IS_LOCATION] => N
+                    [PROPS_GROUP_ID] => 3
+                    [DESCRIPTION] => 
+                    [IS_EMAIL] => N
+                    [IS_PROFILE_NAME] => Y
+                    [IS_PAYER] => N
+                    [IS_LOCATION4TAX] => N
+                    [IS_FILTERED] => Y
+                    [CODE] => COMPANY
+                    [IS_ZIP] => N
+                    [IS_PHONE] => N
+                    [IS_ADDRESS] => N
+                    [IS_ADDRESS_FROM] => N
+                    [IS_ADDRESS_TO] => N
+                    [ACTIVE] => Y
+                    [UTIL] => N
+                    [INPUT_FIELD_LOCATION] => 0
+                    [MULTIPLE] => N
+                    [ENTITY_TYPE] => ORDER
+                    [SIZE] => 40
+                    [RELATION] => Array
+                        (
+                        )
+
+                    [VALUE] => Array
+                        (
+                            [0] => OnBeforeDealUpdate1
+                        )
+
+                )
+
+            [9] => Array
+                (
+                    [ID] => 9
+                    [PERSON_TYPE_ID] => 2
+                    [NAME] => Юридический адрес
+                    [TYPE] => STRING
+                    [REQUIRED] => N
+                    [DEFAULT_VALUE] => 
+                    [SORT] => 210
+                    [USER_PROPS] => Y
+                    [IS_LOCATION] => N
+                    [PROPS_GROUP_ID] => 3
+                    [DESCRIPTION] => 
+                    [IS_EMAIL] => N
+                    [IS_PROFILE_NAME] => N
+                    [IS_PAYER] => N
+                    [IS_LOCATION4TAX] => N
+                    [IS_FILTERED] => N
+                    [CODE] => COMPANY_ADR
+                    [IS_ZIP] => N
+                    [IS_PHONE] => N
+                    [IS_ADDRESS] => Y
+                    [IS_ADDRESS_FROM] => N
+                    [IS_ADDRESS_TO] => N
+                    [ACTIVE] => Y
+                    [UTIL] => N
+                    [INPUT_FIELD_LOCATION] => 0
+                    [MULTIPLE] => N
+                    [ENTITY_TYPE] => ORDER
+                    [MULTILINE] => Y
+                    [COLS] => 40
+                    [RELATION] => Array
+                        (
+                        )
+
+                    [VALUE] => Array
+                        (
+                            [0] => 
+                        )
+
+                )
+
+            [10] => Array
+                (
+                    [ID] => 10
+                    [PERSON_TYPE_ID] => 2
+                    [NAME] => ИНН
+                    [TYPE] => STRING
+                    [REQUIRED] => N
+                    [DEFAULT_VALUE] => 
+                    [SORT] => 220
+                    [USER_PROPS] => Y
+                    [IS_LOCATION] => N
+                    [PROPS_GROUP_ID] => 3
+                    [DESCRIPTION] => 
+                    [IS_EMAIL] => N
+                    [IS_PROFILE_NAME] => N
+                    [IS_PAYER] => N
+                    [IS_LOCATION4TAX] => N
+                    [IS_FILTERED] => N
+                    [CODE] => INN
+                    [IS_ZIP] => N
+                    [IS_PHONE] => N
+                    [IS_ADDRESS] => N
+                    [IS_ADDRESS_FROM] => N
+                    [IS_ADDRESS_TO] => N
+                    [ACTIVE] => Y
+                    [UTIL] => N
+                    [INPUT_FIELD_LOCATION] => 0
+                    [MULTIPLE] => N
+                    [ENTITY_TYPE] => ORDER
+                    [RELATION] => Array
+                        (
+                        )
+
+                    [VALUE] => Array
+                        (
+                            [0] => 
+                        )
+
+                )
+
+            [11] => Array
+                (
+                    [ID] => 11
+                    [PERSON_TYPE_ID] => 2
+                    [NAME] => КПП
+                    [TYPE] => STRING
+                    [REQUIRED] => N
+                    [DEFAULT_VALUE] => 
+                    [SORT] => 230
+                    [USER_PROPS] => Y
+                    [IS_LOCATION] => N
+                    [PROPS_GROUP_ID] => 3
+                    [DESCRIPTION] => 
+                    [IS_EMAIL] => N
+                    [IS_PROFILE_NAME] => N
+                    [IS_PAYER] => N
+                    [IS_LOCATION4TAX] => N
+                    [IS_FILTERED] => N
+                    [CODE] => KPP
+                    [IS_ZIP] => N
+                    [IS_PHONE] => N
+                    [IS_ADDRESS] => N
+                    [IS_ADDRESS_FROM] => N
+                    [IS_ADDRESS_TO] => N
+                    [ACTIVE] => Y
+                    [UTIL] => N
+                    [INPUT_FIELD_LOCATION] => 0
+                    [MULTIPLE] => N
+                    [ENTITY_TYPE] => ORDER
+                    [RELATION] => Array
+                        (
+                        )
+
+                    [VALUE] => Array
+                        (
+                            [0] => 
+                        )
+
+                )
+
+            [12] => Array
+                (
+                    [ID] => 12
+                    [PERSON_TYPE_ID] => 2
+                    [NAME] => Контактное лицо
+                    [TYPE] => STRING
+                    [REQUIRED] => Y
+                    [DEFAULT_VALUE] => 
+                    [SORT] => 240
+                    [USER_PROPS] => Y
+                    [IS_LOCATION] => N
+                    [PROPS_GROUP_ID] => 4
+                    [DESCRIPTION] => 
+                    [IS_EMAIL] => N
+                    [IS_PROFILE_NAME] => N
+                    [IS_PAYER] => Y
+                    [IS_LOCATION4TAX] => N
+                    [IS_FILTERED] => N
+                    [CODE] => CONTACT_PERSON
+                    [IS_ZIP] => N
+                    [IS_PHONE] => N
+                    [IS_ADDRESS] => N
+                    [IS_ADDRESS_FROM] => N
+                    [IS_ADDRESS_TO] => N
+                    [ACTIVE] => Y
+                    [UTIL] => N
+                    [INPUT_FIELD_LOCATION] => 0
+                    [MULTIPLE] => N
+                    [ENTITY_TYPE] => ORDER
+                    [RELATION] => Array
+                        (
+                        )
+
+                    [VALUE] => Array
+                        (
+                            [0] => Админ Админ
+                        )
+
+                )
+
+            [13] => Array
+                (
+                    [ID] => 13
+                    [PERSON_TYPE_ID] => 2
+                    [NAME] => E-Mail
+                    [TYPE] => STRING
+                    [REQUIRED] => Y
+                    [DEFAULT_VALUE] => 
+                    [SORT] => 250
+                    [USER_PROPS] => Y
+                    [IS_LOCATION] => N
+                    [PROPS_GROUP_ID] => 4
+                    [DESCRIPTION] => 
+                    [IS_EMAIL] => Y
+                    [IS_PROFILE_NAME] => N
+                    [IS_PAYER] => N
+                    [IS_LOCATION4TAX] => N
+                    [IS_FILTERED] => N
+                    [CODE] => EMAIL
+                    [IS_ZIP] => N
+                    [IS_PHONE] => N
+                    [IS_ADDRESS] => N
+                    [IS_ADDRESS_FROM] => N
+                    [IS_ADDRESS_TO] => N
+                    [ACTIVE] => Y
+                    [UTIL] => N
+                    [INPUT_FIELD_LOCATION] => 0
+                    [MULTIPLE] => N
+                    [ENTITY_TYPE] => ORDER
+                    [SIZE] => 40
+                    [RELATION] => Array
+                        (
+                        )
+
+                    [VALUE] => Array
+                        (
+                            [0] => admin@admin.ru
+                        )
+
+                )
+
+            [14] => Array
+                (
+                    [ID] => 14
+                    [PERSON_TYPE_ID] => 2
+                    [NAME] => Телефон
+                    [TYPE] => STRING
+                    [REQUIRED] => N
+                    [DEFAULT_VALUE] => 
+                    [SORT] => 260
+                    [USER_PROPS] => Y
+                    [IS_LOCATION] => N
+                    [PROPS_GROUP_ID] => 4
+                    [DESCRIPTION] => 
+                    [IS_EMAIL] => N
+                    [IS_PROFILE_NAME] => N
+                    [IS_PAYER] => N
+                    [IS_LOCATION4TAX] => N
+                    [IS_FILTERED] => N
+                    [CODE] => PHONE
+                    [IS_ZIP] => N
+                    [IS_PHONE] => Y
+                    [IS_ADDRESS] => N
+                    [IS_ADDRESS_FROM] => N
+                    [IS_ADDRESS_TO] => N
+                    [ACTIVE] => Y
+                    [UTIL] => N
+                    [INPUT_FIELD_LOCATION] => 0
+                    [MULTIPLE] => N
+                    [ENTITY_TYPE] => ORDER
+                    [RELATION] => Array
+                        (
+                        )
+
+                    [VALUE] => Array
+                        (
+                            [0] => 79120000000
+                        )
+
+                )
+
+            [15] => Array
+                (
+                    [ID] => 15
+                    [PERSON_TYPE_ID] => 2
+                    [NAME] => Факс
+                    [TYPE] => STRING
+                    [REQUIRED] => N
+                    [DEFAULT_VALUE] => 
+                    [SORT] => 270
+                    [USER_PROPS] => Y
+                    [IS_LOCATION] => N
+                    [PROPS_GROUP_ID] => 4
+                    [DESCRIPTION] => 
+                    [IS_EMAIL] => N
+                    [IS_PROFILE_NAME] => N
+                    [IS_PAYER] => N
+                    [IS_LOCATION4TAX] => N
+                    [IS_FILTERED] => N
+                    [CODE] => FAX
+                    [IS_ZIP] => N
+                    [IS_PHONE] => N
+                    [IS_ADDRESS] => N
+                    [IS_ADDRESS_FROM] => N
+                    [IS_ADDRESS_TO] => N
+                    [ACTIVE] => Y
+                    [UTIL] => N
+                    [INPUT_FIELD_LOCATION] => 0
+                    [MULTIPLE] => N
+                    [ENTITY_TYPE] => ORDER
+                    [RELATION] => Array
+                        (
+                        )
+
+                    [VALUE] => Array
+                        (
+                            [0] => 
+                        )
+
+                )
+
+            [19] => Array
+                (
+                    [ID] => 19
+                    [PERSON_TYPE_ID] => 2
+                    [NAME] => Адрес доставки
+                    [TYPE] => STRING
+                    [REQUIRED] => Y
+                    [DEFAULT_VALUE] => 
+                    [SORT] => 300
+                    [USER_PROPS] => Y
+                    [IS_LOCATION] => N
+                    [PROPS_GROUP_ID] => 4
+                    [DESCRIPTION] => 
+                    [IS_EMAIL] => N
+                    [IS_PROFILE_NAME] => N
+                    [IS_PAYER] => N
+                    [IS_LOCATION4TAX] => N
+                    [IS_FILTERED] => N
+                    [CODE] => ADDRESS
+                    [IS_ZIP] => N
+                    [IS_PHONE] => N
+                    [IS_ADDRESS] => Y
+                    [IS_ADDRESS_FROM] => N
+                    [IS_ADDRESS_TO] => N
+                    [ACTIVE] => Y
+                    [UTIL] => N
+                    [INPUT_FIELD_LOCATION] => 0
+                    [MULTIPLE] => N
+                    [ENTITY_TYPE] => ORDER
+                    [MULTILINE] => Y
+                    [COLS] => 30
+                    [ROWS] => 10
+                    [RELATION] => Array
+                        (
+                        )
+
+                    [VALUE] => Array
+                        (
+                            [0] => могу после 18-30, сейчас сдадия ремонта, у нас есть примерный дизайн проект,хотелось бы его преобразовать под вашу мебель
+                        )
+
+                )
+
+        )
+
+    [PROP_GROUPS] => Array
+        (
+            [3] => Array
+                (
+                    [ID] => 3
+                    [PERSON_TYPE_ID] => 2
+                    [NAME] => Данные компании
+                    [CODE] => 
+                    [SORT] => 300
+                )
+
+            [4] => Array
+                (
+                    [ID] => 4
+                    [PERSON_TYPE_ID] => 2
+                    [NAME] => Контактная информация
+                    [CODE] => 
+                    [SORT] => 400
+                )
+
+        )
+
+    [DELIVERY_TYPE_ID] => 1
+    [DELIVERY_TYPE] => Доставка курьером
+    [DELIVERY_STATUS] => DN
+    [DELIVERY_STATUS_NAME] => Ожидает обработки
+    [DELIVERY_ALLOW] => N
+    [DELIVERY_DEDUCTED] => N
+    [TRACKING_NUMBER] => 
+    [DELIVERY_PRICE_CALCULATE] => 500
+    [STORE_ID] => 0
+    [DELIVERY_COMPANY_NAME] => 
+    [PAY_TYPE] => Предоплата наличными
+    [PAY_TYPE_ID] => 10
+    [PAY_ID] => 120
+    [PAYMENT_NUM] => 
+    [PAYMENT_DATE] => 
+    [PAYMENT_SUM] => 129019.15
+    [PAYMENT_FACT] => 0
+    [PAYMENT_LEFT] => 129019.15
+    [COUPONS] => Array
+        (
+        )
+
+    [PRODUCTS] => Array
+        (
+            [0] => Array
+                (
+                    [PRODUCT_ID] => 57922
+                    [PRODUCT_NAME] => Кепка «Baseball», синяя (хлопок; обхват головы 58 см)
+                    [PRICE] => 650.0000
+                    [DISCOUNT_SUM] => 8
+                    [QUANTITY] => 100.0000
+                    [MEASURE_NAME] => шт
+                    [MEASURE_CODE] => 796
+                    [VAT_RATE] => 20
+                    [VAT_INCLUDED] => Y
+                    [PROPS] => Array
+                        (
+                        )
+
+                )
+
+            [1] => Array
+                (
+                    [PRODUCT_ID] => 72328
+                    [PRODUCT_NAME] => Флешка Memo c покрытием SOFT TOUCH (Красный)
+                    [PRICE] => 459.0000
+                    [DISCOUNT_SUM] => -32.13
+                    [QUANTITY] => 100.0000
+                    [MEASURE_NAME] => шт
+                    [MEASURE_CODE] => 796
+                    [VAT_RATE] => 20
+                    [VAT_INCLUDED] => Y
+                    [PROPS] => Array
+                        (
+                        )
+
+                )
+
+            [2] => Array
+                (
+                    [PRODUCT_ID] => 68561
+                    [PRODUCT_NAME] => Сумка "Handy 135" (Молочно-белый)
+                    [PRICE] => 677.0000
+                    [DISCOUNT_SUM] => 0
+                    [QUANTITY] => 15.0000
+                    [MEASURE_NAME] => шт
+                    [MEASURE_CODE] => 796
+                    [VAT_RATE] => 20
+                    [VAT_INCLUDED] => Y
+                    [PROPS] => Array
+                        (
+                            [CATALOG.XML_ID] => 130d488b-1efa-455b-835b-023c5cea001f#
+                            [PRODUCT.XML_ID] => 79ed307d-094f-11ed-80c1-5065f361991b#79ed307e-094f-11ed-80c1-5065f361991b
+                        )
+
+                )
+
+            [3] => Array
+                (
+                    [PRODUCT_ID] => 78448
+                    [PRODUCT_NAME] => 
+                    [PRICE] => 2488.0500
+                    [DISCOUNT_SUM] => 0
+                    [QUANTITY] => 3.0000
+                    [MEASURE_NAME] => 
+                    [MEASURE_CODE] => 
+                    [VAT_RATE] => 0
+                    [VAT_INCLUDED] => Y
+                    [PROPS] => Array
+                        (
+                        )
+
+                )
+
+        )
+
+)

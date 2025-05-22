@@ -1,0 +1,21 @@
+Array
+(
+    [0] => 
+    [1] => 
+    [2] => Array
+        (
+            [ID] => 21845
+            [IBLOCK_ID] => 43
+            [PROPERTY_TAMPOPECHAT_VALUE] => Да
+            [PROPERTY_TAMPOPECHAT_VALUE_ID] => 5072425
+            [PROPERTY_SHELKOGRAFIYA_VALUE] => Да
+            [PROPERTY_SHELKOGRAFIYA_VALUE_ID] => 5072426
+            [PROPERTY_FLEKSOGRAFIYA_VALUE] => 
+            [PROPERTY_FLEKSOGRAFIYA_VALUE_ID] => 
+            [PROPERTY_LAZERNAYA_GRAVIROVKA_VALUE] => 
+            [PROPERTY_LAZERNAYA_GRAVIROVKA_VALUE_ID] => 
+            [PROPERTY_UF_PECHAT_VALUE] => Да
+            [PROPERTY_UF_PECHAT_VALUE_ID] => 5072427
+        )
+
+)

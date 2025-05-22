@@ -1,0 +1,12 @@
+<?
+$PERM["agent_news"]["2"]="D";
+$PERM["agent_news"]["7"]="R";
+$PERM["bitrix"]["6"]="R";
+$PERM["/"]["6"]="W";
+$PERM["/"]["*"]="R";
+$PERM["personal"]["9"]="W";
+$PERM["catalog"]["9"]="W";
+$PERM["news"]["9"]="W";
+$PERM["about"]["9"]="W";
+$PERM["index.php"]["9"]="W";
+?>

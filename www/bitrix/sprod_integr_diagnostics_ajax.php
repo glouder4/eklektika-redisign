@@ -1,0 +1,1 @@
+<? require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/sproduction.integration/diagnostics/ajax.php");?>

@@ -1,0 +1,50 @@
+2024-07-16 13:08:40Array
+(
+    [0] => 83
+    [1] => 84
+)
+
+2024-07-16 13:08:4028
+2024-07-16 13:08:42Array
+(
+    [0] => 83
+    [1] => 84
+)
+
+2024-07-16 13:08:4228
+2024-07-18 07:52:35Array
+(
+)
+
+2024-07-18 07:52:59Array
+(
+    [event] => ONUSERUPDATE
+    [data] => Array
+        (
+            [FIELDS] => Array
+                (
+                    [0] => Array
+                        (
+                            [PERSONAL_MAILBOX] => test@post.ru
+                            [PERSONAL_PHONE] => +711111111112222
+                            [CHECKWORD] => 
+                            [ID] => 3020
+                            [RESULT] => 1
+                        )
+
+                )
+
+        )
+
+    [ts] => 1721278378
+    [auth] => Array
+        (
+            [domain] => testb24.yoliba.ru
+            [client_endpoint] => https://testb24.yoliba.ru/rest/
+            [server_endpoint] => https://oauth.bitrix.info/rest/
+            [member_id] => 5ea29b45c15fb0d4d9e4114f6c233c1c
+            [application_token] => qgq5d7gsiytqu27yclcq82a2nyg488ru
+        )
+
+)
+

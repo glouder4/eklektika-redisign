@@ -1,0 +1,236 @@
+Array
+(
+    [name] => cc3bedfa095411ed80c15065f361991b_f049e6c04eed11ed80ce000c2963c147.jpg
+    [size] => 26794
+    [tmp_name] => /home/bitrix/ext_www/test.yoliba.ru/upload/1c_catalog/import_files/cc/cc3bedfa095411ed80c15065f361991b_f049e6c04eed11ed80ce000c2963c147.jpg
+    [type] => application/octet-stream
+    [external_id] => b21c728f143bf3a701911d88051feb03
+    [description] => 
+    [MODULE_ID] => iblock
+)
+Array
+(
+    [name] => cc3bedfa095411ed80c15065f361991b_f049e6c04eed11ed80ce000c2963c147.jpg
+    [size] => 26794
+    [tmp_name] => /home/bitrix/ext_www/test.yoliba.ru/upload/1c_catalog/import_files/cc/cc3bedfa095411ed80c15065f361991b_f049e6c04eed11ed80ce000c2963c147.jpg
+    [type] => application/octet-stream
+    [external_id] => b21c728f143bf3a701911d88051feb03
+    [description] => 
+    [MODULE_ID] => iblock
+)
+Array
+(
+    [name] => cc3bedfa095411ed80c15065f361991b_f049e7064eed11ed80ce000c2963c147.jpg
+    [size] => 16262
+    [tmp_name] => /home/bitrix/ext_www/test.yoliba.ru/upload/1c_catalog/import_files/cc/cc3bedfa095411ed80c15065f361991b_f049e7064eed11ed80ce000c2963c147.jpg
+    [type] => application/octet-stream
+    [external_id] => 0f2b6daece351c0e7ea14a5c9b6bcfff
+)
+Array
+(
+    [name] => cc3bedfa095411ed80c15065f361991b_f049e74c4eed11ed80ce000c2963c147.jpg
+    [size] => 31414
+    [tmp_name] => /home/bitrix/ext_www/test.yoliba.ru/upload/1c_catalog/import_files/cc/cc3bedfa095411ed80c15065f361991b_f049e74c4eed11ed80ce000c2963c147.jpg
+    [type] => application/octet-stream
+    [external_id] => 3945afac6363942c930c525589ada573
+)
+Array
+(
+    [name] => cc3bedfa095411ed80c15065f361991b_f049e7924eed11ed80ce000c2963c147.jpg
+    [size] => 32846
+    [tmp_name] => /home/bitrix/ext_www/test.yoliba.ru/upload/1c_catalog/import_files/cc/cc3bedfa095411ed80c15065f361991b_f049e7924eed11ed80ce000c2963c147.jpg
+    [type] => application/octet-stream
+    [external_id] => 9962594156a596c9a636d35963127907
+)
+Array
+(
+    [name] => cc3bedfc095411ed80c15065f361991b_f049e81e4eed11ed80ce000c2963c147.jpg
+    [size] => 15217
+    [tmp_name] => /home/bitrix/ext_www/test.yoliba.ru/upload/1c_catalog/import_files/cc/cc3bedfc095411ed80c15065f361991b_f049e81e4eed11ed80ce000c2963c147.jpg
+    [type] => application/octet-stream
+    [external_id] => f2daae987cedff82c48e855b6664f744
+    [description] => 
+    [MODULE_ID] => iblock
+)
+Array
+(
+    [name] => cc3bedfc095411ed80c15065f361991b_f049e81e4eed11ed80ce000c2963c147.jpg
+    [size] => 15217
+    [tmp_name] => /home/bitrix/ext_www/test.yoliba.ru/upload/1c_catalog/import_files/cc/cc3bedfc095411ed80c15065f361991b_f049e81e4eed11ed80ce000c2963c147.jpg
+    [type] => application/octet-stream
+    [external_id] => f2daae987cedff82c48e855b6664f744
+    [description] => 
+    [MODULE_ID] => iblock
+)
+Array
+(
+    [name] => cc3bedfc095411ed80c15065f361991b_f049e7d84eed11ed80ce000c2963c147.jpg
+    [size] => 26280
+    [tmp_name] => /home/bitrix/ext_www/test.yoliba.ru/upload/1c_catalog/import_files/cc/cc3bedfc095411ed80c15065f361991b_f049e7d84eed11ed80ce000c2963c147.jpg
+    [type] => application/octet-stream
+    [external_id] => 2605fb211aa32f74c4b0903fce058f25
+)
+Array
+(
+    [name] => cc3bedfc095411ed80c15065f361991b_f049e8644eed11ed80ce000c2963c147.jpg
+    [size] => 31357
+    [tmp_name] => /home/bitrix/ext_www/test.yoliba.ru/upload/1c_catalog/import_files/cc/cc3bedfc095411ed80c15065f361991b_f049e8644eed11ed80ce000c2963c147.jpg
+    [type] => application/octet-stream
+    [external_id] => 7cc3f460ac3150140fbf4af92a67a7d9
+)
+Array
+(
+    [name] => cc3bedfc095411ed80c15065f361991b_f049e8aa4eed11ed80ce000c2963c147.jpg
+    [size] => 33057
+    [tmp_name] => /home/bitrix/ext_www/test.yoliba.ru/upload/1c_catalog/import_files/cc/cc3bedfc095411ed80c15065f361991b_f049e8aa4eed11ed80ce000c2963c147.jpg
+    [type] => application/octet-stream
+    [external_id] => 45a1076a2cda3a08552a8de1388d1981
+)
+Array
+(
+    [name] => cc3bedfe095411ed80c15065f361991b_f049e8f04eed11ed80ce000c2963c147.jpg
+    [size] => 26803
+    [tmp_name] => /home/bitrix/ext_www/test.yoliba.ru/upload/1c_catalog/import_files/cc/cc3bedfe095411ed80c15065f361991b_f049e8f04eed11ed80ce000c2963c147.jpg
+    [type] => application/octet-stream
+    [external_id] => 5be92cf2c7d98636353eade2a0c325ee
+    [description] => 
+    [MODULE_ID] => iblock
+)
+Array
+(
+    [name] => cc3bedfe095411ed80c15065f361991b_f049e8f04eed11ed80ce000c2963c147.jpg
+    [size] => 26803
+    [tmp_name] => /home/bitrix/ext_www/test.yoliba.ru/upload/1c_catalog/import_files/cc/cc3bedfe095411ed80c15065f361991b_f049e8f04eed11ed80ce000c2963c147.jpg
+    [type] => application/octet-stream
+    [external_id] => 5be92cf2c7d98636353eade2a0c325ee
+    [description] => 
+    [MODULE_ID] => iblock
+)
+Array
+(
+    [name] => cc3bedfe095411ed80c15065f361991b_f645a5564eed11ed80ce000c2963c147.jpg
+    [size] => 33176
+    [tmp_name] => /home/bitrix/ext_www/test.yoliba.ru/upload/1c_catalog/import_files/cc/cc3bedfe095411ed80c15065f361991b_f645a5564eed11ed80ce000c2963c147.jpg
+    [type] => application/octet-stream
+    [external_id] => 60096e23016c747abdddc43f3445907f
+)
+Array
+(
+    [name] => cc3bedfe095411ed80c15065f361991b_f645a5104eed11ed80ce000c2963c147.jpg
+    [size] => 31401
+    [tmp_name] => /home/bitrix/ext_www/test.yoliba.ru/upload/1c_catalog/import_files/cc/cc3bedfe095411ed80c15065f361991b_f645a5104eed11ed80ce000c2963c147.jpg
+    [type] => application/octet-stream
+    [external_id] => 1623427f0a2e99c5c6eea52335c344fc
+)
+Array
+(
+    [name] => cc3bedfe095411ed80c15065f361991b_f049e9364eed11ed80ce000c2963c147.jpg
+    [size] => 15541
+    [tmp_name] => /home/bitrix/ext_www/test.yoliba.ru/upload/1c_catalog/import_files/cc/cc3bedfe095411ed80c15065f361991b_f049e9364eed11ed80ce000c2963c147.jpg
+    [type] => application/octet-stream
+    [external_id] => 8e7249c0d2f8921cea94fb264de1be9a
+)
+Array
+(
+    [name] => cc3bee04095411ed80c15065f361991b_f645a5e24eed11ed80ce000c2963c147.jpg
+    [size] => 16223
+    [tmp_name] => /home/bitrix/ext_www/test.yoliba.ru/upload/1c_catalog/import_files/cc/cc3bee04095411ed80c15065f361991b_f645a5e24eed11ed80ce000c2963c147.jpg
+    [type] => application/octet-stream
+    [external_id] => 13dd8b91592a903a87d68ac2453ddaa6
+)
+Array
+(
+    [name] => cc3bedfa095411ed80c15065f361991b_f049e6c04eed11ed80ce000c2963c147.jpg
+    [size] => 26794
+    [tmp_name] => /home/bitrix/ext_www/test.yoliba.ru/upload/1c_catalog/import_files/cc/cc3bedfa095411ed80c15065f361991b_f049e6c04eed11ed80ce000c2963c147.jpg
+    [type] => application/octet-stream
+    [external_id] => b21c728f143bf3a701911d88051feb03
+    [description] => 
+    [MODULE_ID] => iblock
+)
+Array
+(
+    [name] => cc3bedfa095411ed80c15065f361991b_f049e6c04eed11ed80ce000c2963c147.jpg
+    [size] => 26794
+    [tmp_name] => /home/bitrix/ext_www/test.yoliba.ru/upload/1c_catalog/import_files/cc/cc3bedfa095411ed80c15065f361991b_f049e6c04eed11ed80ce000c2963c147.jpg
+    [type] => application/octet-stream
+    [external_id] => b21c728f143bf3a701911d88051feb03
+    [description] => 
+    [MODULE_ID] => iblock
+)
+Array
+(
+    [name] => cc3bedfa095411ed80c15065f361991b_f049e7064eed11ed80ce000c2963c147.jpg
+    [size] => 16262
+    [tmp_name] => /home/bitrix/ext_www/test.yoliba.ru/upload/1c_catalog/import_files/cc/cc3bedfa095411ed80c15065f361991b_f049e7064eed11ed80ce000c2963c147.jpg
+    [type] => application/octet-stream
+    [external_id] => 0f2b6daece351c0e7ea14a5c9b6bcfff
+)
+Array
+(
+    [name] => cc3bedfa095411ed80c15065f361991b_f049e74c4eed11ed80ce000c2963c147.jpg
+    [size] => 31414
+    [tmp_name] => /home/bitrix/ext_www/test.yoliba.ru/upload/1c_catalog/import_files/cc/cc3bedfa095411ed80c15065f361991b_f049e74c4eed11ed80ce000c2963c147.jpg
+    [type] => application/octet-stream
+    [external_id] => 3945afac6363942c930c525589ada573
+)
+Array
+(
+    [name] => cc3bedfa095411ed80c15065f361991b_f049e7924eed11ed80ce000c2963c147.jpg
+    [size] => 32846
+    [tmp_name] => /home/bitrix/ext_www/test.yoliba.ru/upload/1c_catalog/import_files/cc/cc3bedfa095411ed80c15065f361991b_f049e7924eed11ed80ce000c2963c147.jpg
+    [type] => application/octet-stream
+    [external_id] => 9962594156a596c9a636d35963127907
+)
+Array
+(
+    [name] => cc3bedfc095411ed80c15065f361991b_f049e81e4eed11ed80ce000c2963c147.jpg
+    [size] => 15217
+    [tmp_name] => /home/bitrix/ext_www/test.yoliba.ru/upload/1c_catalog/import_files/cc/cc3bedfc095411ed80c15065f361991b_f049e81e4eed11ed80ce000c2963c147.jpg
+    [type] => application/octet-stream
+    [external_id] => f2daae987cedff82c48e855b6664f744
+    [description] => 
+    [MODULE_ID] => iblock
+)
+Array
+(
+    [name] => cc3bedfc095411ed80c15065f361991b_f049e81e4eed11ed80ce000c2963c147.jpg
+    [size] => 15217
+    [tmp_name] => /home/bitrix/ext_www/test.yoliba.ru/upload/1c_catalog/import_files/cc/cc3bedfc095411ed80c15065f361991b_f049e81e4eed11ed80ce000c2963c147.jpg
+    [type] => application/octet-stream
+    [external_id] => f2daae987cedff82c48e855b6664f744
+    [description] => 
+    [MODULE_ID] => iblock
+)
+Array
+(
+    [name] => cc3bedfc095411ed80c15065f361991b_f049e7d84eed11ed80ce000c2963c147.jpg
+    [size] => 26280
+    [tmp_name] => /home/bitrix/ext_www/test.yoliba.ru/upload/1c_catalog/import_files/cc/cc3bedfc095411ed80c15065f361991b_f049e7d84eed11ed80ce000c2963c147.jpg
+    [type] => application/octet-stream
+    [external_id] => 2605fb211aa32f74c4b0903fce058f25
+)
+Array
+(
+    [name] => cc3bedfc095411ed80c15065f361991b_f049e8644eed11ed80ce000c2963c147.jpg
+    [size] => 31357
+    [tmp_name] => /home/bitrix/ext_www/test.yoliba.ru/upload/1c_catalog/import_files/cc/cc3bedfc095411ed80c15065f361991b_f049e8644eed11ed80ce000c2963c147.jpg
+    [type] => application/octet-stream
+    [external_id] => 7cc3f460ac3150140fbf4af92a67a7d9
+)
+Array
+(
+    [name] => cc3bedfc095411ed80c15065f361991b_f049e8aa4eed11ed80ce000c2963c147.jpg
+    [size] => 33057
+    [tmp_name] => /home/bitrix/ext_www/test.yoliba.ru/upload/1c_catalog/import_files/cc/cc3bedfc095411ed80c15065f361991b_f049e8aa4eed11ed80ce000c2963c147.jpg
+    [type] => application/octet-stream
+    [external_id] => 45a1076a2cda3a08552a8de1388d1981
+)
+Array
+(
+    [name] => cc3bee04095411ed80c15065f361991b_f645a5e24eed11ed80ce000c2963c147.jpg
+    [size] => 16223
+    [tmp_name] => /home/bitrix/ext_www/test.yoliba.ru/upload/1c_catalog/import_files/cc/cc3bee04095411ed80c15065f361991b_f645a5e24eed11ed80ce000c2963c147.jpg
+    [type] => application/octet-stream
+    [external_id] => 13dd8b91592a903a87d68ac2453ddaa6
+)

@@ -1,0 +1,126 @@
+.kp-offers__item {
+	padding: 15px;
+    border: 1px solid #f2f2f2;
+	margin-bottom: 15px;
+	align-items: center;
+}
+.kp-offers__item-title {
+	display: flex;
+	align-items: center;
+}
+.kp-offers__item-name {
+	font-weight: bold;
+    margin-right: 20px;
+}
+.kp-products {
+	margin-top: 15px;
+}
+.kp-offers__body {
+	padding: 15px;
+    border: 1px solid #f2f2f2;
+	margin-bottom: 15px;
+}
+body .kp-offers .kp-offers__button {
+	display: inline-block;
+	margin-right: 10px;
+	display: inline-flex;
+    align-items: center;
+    font: inherit;
+    border: 1px solid #ccc;
+    background: #fff;
+    padding: 8px 10px;
+    font-size: 13px;
+    cursor: pointer;
+    color: #605b5b;
+    transition: all 0.4s;
+    border-radius: 6px;
+    line-height: 1.2;
+}
+body .kp-offers .intec-ui.intec-ui-control-input {
+	border: 1px solid #ccc;
+}
+.kp-offers__buttons {
+	display: flex;
+	align-items: center;
+}
+.kp-offers__inputs input[type="text"],
+.kp-offers__inputs textarea {
+	width: 100%;
+	margin-bottom: 10px;
+	resize: none;
+}
+.kp-offers__inputs textarea {
+	height: 150px;
+}
+
+.kp-offers__image {
+	max-width: 220px;
+	max-height: 191px;
+	display: block;
+	margin: auto;
+	margin-bottom: 10px;
+}
+.kp-offers__td-image {
+	max-width: 250px;
+}
+.kp-offers__contacts {
+	margin-top: 25px;
+	margin-bottom: 25px;
+}
+.kp-offers__contacts label {
+	display: block;
+	margin-bottom: 15px;
+}
+.kp-offers__drawing-price {
+	width: 50px;
+}
+.kp-offers__drawing-name {
+	width: 160px;
+}
+.kp-products table td {
+	vertical-align: top;
+}
+.kp-products .kp-offers__drawing table td {
+	vertical-align: middle;
+}
+body .kp-productstable.intec-ui-markup-table, 
+body .kp-products table[data-ui-markup="table"] {
+	font-size: 14px;
+}
+.kp-offers__products-table {
+	width: 100%;
+	border: 1px solid #f7f7f7;
+	padding: 0;
+	border-collapse: collapse;
+}
+.kp-offers__products-table .kp-offers__products-td {
+	border: 1px solid #dee5eb;
+	padding: 10px;
+}
+.kp-offers__products-table .kp-offers__products-thead {
+	text-align:left;
+}
+.kp-offers__products-table .kp-offers__products-th {
+	background:  #dee5eb;
+	padding: 10px;
+}
+.kp-offers__td-image-label input {
+	display:none;
+}
+.kp-offers__td-image-label span {
+	margin-bottom: 15px;
+}
+.kp-offers__contacts input,
+.kp-offers__contacts textarea {
+	width: 100%;
+}
+.kp-offers__products-td--drawing {
+	width: 150px;
+}
+.kp-offers__excel-label input {
+	display:none;
+}
+.kp-offers__logo {
+	max-width: 100px;
+    max-height: 100px;
+}

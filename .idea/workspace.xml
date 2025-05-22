@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a53d02d7-d404-452c-a903-dd81636134fa" name="Changes" comment="" />
+    <list default="true" id="a53d02d7-d404-452c-a903-dd81636134fa" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -25,20 +28,22 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "true",
-    "last_opened_file_path": "C:/Git_projects/avtoshina",
+    "last_opened_file_path": "C:/Git_projects/eklektika-redisign",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Git_projects\eklektika-redisign" />
+      <recent name="C:\Git_projects\eklektika-redisign\www" />
       <recent name="C:\Git_projects\eklektika-redisign\components\news-and-articles\assets" />
       <recent name="C:\Git_projects\eklektika-redisign\components\promotions-and-discounts\discounts" />
       <recent name="C:\Git_projects\eklektika-redisign\components\brands\brands-list\assets" />
-      <recent name="C:\Git_projects\eklektika-redisign\components\mainpage\underslider-categories\assets" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Git_projects\eklektika-redisign\components\contacts\map" />
@@ -68,6 +73,11 @@
       <workItem from="1747374307811" duration="1989000" />
       <workItem from="1747378313619" duration="25968000" />
       <workItem from="1747473983346" duration="81000" />
+      <workItem from="1747735528967" duration="2028000" />
+      <workItem from="1747742367306" duration="4000" />
+      <workItem from="1747751042073" duration="153000" />
+      <workItem from="1747758959445" duration="14000" />
+      <workItem from="1747913274831" duration="759000" />
     </task>
     <servers />
   </component>

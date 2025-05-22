@@ -1,0 +1,621 @@
+Bitrix\Sale\Order Object
+(
+    [fields:protected] => Bitrix\Sale\Internals\Fields Object
+        (
+            [values:protected] => Array
+                (
+                    [ID] => 148
+                    [LID] => s1
+                    [ACCOUNT_NUMBER] => 148
+                    [TRACKING_NUMBER] => 
+                    [PAY_SYSTEM_ID] => 10
+                    [DELIVERY_ID] => 1
+                    [DATE_INSERT] => Bitrix\Main\Type\DateTime Object
+                        (
+                            [value:protected] => DateTime Object
+                                (
+                                    [date] => 2025-04-28 10:06:17.000000
+                                    [timezone_type] => 3
+                                    [timezone] => Europe/Moscow
+                                )
+
+                            [userTimeEnabled:protected] => 1
+                        )
+
+                    [DATE_UPDATE] => Bitrix\Main\Type\DateTime Object
+                        (
+                            [value:protected] => DateTime Object
+                                (
+                                    [date] => 2025-04-28 10:19:12.000000
+                                    [timezone_type] => 3
+                                    [timezone] => Europe/Moscow
+                                )
+
+                            [userTimeEnabled:protected] => 1
+                        )
+
+                    [PERSON_TYPE_ID] => 1
+                    [USER_ID] => 103
+                    [PAYED] => N
+                    [IS_SYNC_B24] => N
+                    [DATE_PAYED] => 
+                    [EMP_PAYED_ID] => 
+                    [DEDUCTED] => N
+                    [DATE_DEDUCTED] => 
+                    [EMP_DEDUCTED_ID] => 
+                    [REASON_UNDO_DEDUCTED] => 
+                    [STATUS_ID] => N
+                    [DATE_STATUS] => Bitrix\Main\Type\DateTime Object
+                        (
+                            [value:protected] => DateTime Object
+                                (
+                                    [date] => 2025-04-28 10:06:15.000000
+                                    [timezone_type] => 3
+                                    [timezone] => Europe/Moscow
+                                )
+
+                            [userTimeEnabled:protected] => 1
+                        )
+
+                    [EMP_STATUS_ID] => 103
+                    [MARKED] => N
+                    [DATE_MARKED] => 
+                    [EMP_MARKED_ID] => 
+                    [REASON_MARKED] => 
+                    [PRICE_DELIVERY] => 500
+                    [ALLOW_DELIVERY] => N
+                    [DATE_ALLOW_DELIVERY] => 
+                    [EMP_ALLOW_DELIVERY_ID] => 
+                    [RESERVED] => N
+                    [PRICE] => 26303.2
+                    [CURRENCY] => RUB
+                    [DISCOUNT_VALUE] => 0
+                    [TAX_VALUE] => 4300.49
+                    [SUM_PAID] => 0
+                    [USER_DESCRIPTION] => 
+                    [PAY_VOUCHER_NUM] => 
+                    [PAY_VOUCHER_DATE] => 
+                    [ADDITIONAL_INFO] => 
+                    [COMMENTS] => 
+                    [COMPANY_ID] => 0
+                    [CREATED_BY] => 103
+                    [RESPONSIBLE_ID] => 7
+                    [STAT_GID] => BITRIX_SM.MTAwNzAuNzgyMS5SVS4uLnMx
+                    [DATE_PAY_BEFORE] => 
+                    [DATE_BILL] => 
+                    [IS_RECURRING] => N
+                    [RECURRING_ID] => 
+                    [LOCKED_BY] => 103
+                    [DATE_LOCK] => Bitrix\Main\Type\DateTime Object
+                        (
+                            [value:protected] => DateTime Object
+                                (
+                                    [date] => 2025-04-28 10:33:05.000000
+                                    [timezone_type] => 3
+                                    [timezone] => Europe/Moscow
+                                )
+
+                            [userTimeEnabled:protected] => 1
+                        )
+
+                    [RECOUNT_FLAG] => Y
+                    [AFFILIATE_ID] => 
+                    [DELIVERY_DOC_NUM] => 
+                    [DELIVERY_DOC_DATE] => 
+                    [UPDATED_1C] => N
+                    [ORDER_TOPIC] => 
+                    [XML_ID] => bx_680f28e7d4626
+                    [ID_1C] => 
+                    [VERSION_1C] => 
+                    [VERSION] => 2
+                    [EXTERNAL_ORDER] => N
+                    [STORE_ID] => 
+                    [CANCELED] => N
+                    [EMP_CANCELED_ID] => 
+                    [DATE_CANCELED] => 
+                    [REASON_CANCELED] => 
+                    [BX_USER_ID] => 
+                    [SEARCH_CONTENT] => 
+                    [RUNNING] => N
+                )
+
+            [changedValues:protected] => Array
+                (
+                )
+
+            [originalValues:Bitrix\Sale\Internals\Fields:private] => Array
+                (
+                )
+
+            [customFields:Bitrix\Sale\Internals\Fields:private] => Array
+                (
+                )
+
+            [isClone:protected] => 
+        )
+
+    [eventName:protected] => 
+    [calculatedFields:protected] => Bitrix\Sale\Internals\Fields Object
+        (
+            [values:protected] => Array
+                (
+                )
+
+            [changedValues:protected] => Array
+                (
+                )
+
+            [originalValues:Bitrix\Sale\Internals\Fields:private] => Array
+                (
+                )
+
+            [customFields:Bitrix\Sale\Internals\Fields:private] => Array
+                (
+                )
+
+            [isClone:protected] => 
+        )
+
+    [basketCollection:protected] => Bitrix\Sale\Basket Object
+        (
+            [collection:protected] => Array
+                (
+                    [0] => Bitrix\Sale\BasketItem Object
+                        (
+                            [fields:protected] => Bitrix\Sale\Internals\Fields Object
+                                (
+                                    [values:protected] => Array
+                                        (
+                                            [ID] => 2562
+                                            [LID] => s1
+                                            [MODULE] => catalog
+                                            [PRODUCT_ID] => 57984
+                                            [QUANTITY] => 3.0000
+                                            [WEIGHT] => 32.00
+                                            [DELAY] => N
+                                            [CAN_BUY] => Y
+                                            [PRICE] => 36
+                                            [CUSTOM_PRICE] => N
+                                            [BASE_PRICE] => 40
+                                            [PRODUCT_PRICE_ID] => 11875
+                                            [PRICE_TYPE_ID] => 2
+                                            [CURRENCY] => RUB
+                                            [BARCODE_MULTI] => N
+                                            [RESERVED] => N
+                                            [RESERVE_QUANTITY] => 
+                                            [NAME] => Папка-конверт А4 (Красный)
+                                            [CATALOG_XML_ID] => 4ee13222-c329-4bfa-b3b0-7f125cbbce56#
+                                            [VAT_RATE] => 0.2
+                                            [NOTES] => Оптовая цена
+                                            [DISCOUNT_PRICE] => 4
+                                            [PRODUCT_PROVIDER_CLASS] => \Bitrix\Catalog\Product\CatalogProvider
+                                            [CALLBACK_FUNC] => 
+                                            [ORDER_CALLBACK_FUNC] => 
+                                            [PAY_CALLBACK_FUNC] => 
+                                            [CANCEL_CALLBACK_FUNC] => 
+                                            [DIMENSIONS] => a:3:{s:5:"WIDTH";N;s:6:"HEIGHT";N;s:6:"LENGTH";N;}
+                                            [TYPE] => 
+                                            [SET_PARENT_ID] => 
+                                            [DETAIL_PAGE_URL] => /catalog/papki_oblozhki_tetradi/papka_konvert_a4/
+                                            [FUSER_ID] => 645466
+                                            [MEASURE_CODE] => 796
+                                            [MEASURE_NAME] => шт
+                                            [ORDER_ID] => 148
+                                            [DATE_INSERT] => Bitrix\Main\Type\DateTime Object
+                                                (
+                                                    [value:protected] => DateTime Object
+                                                        (
+                                                            [date] => 2025-04-28 10:05:35.000000
+                                                            [timezone_type] => 3
+                                                            [timezone] => Europe/Moscow
+                                                        )
+
+                                                    [userTimeEnabled:protected] => 1
+                                                )
+
+                                            [DATE_UPDATE] => Bitrix\Main\Type\DateTime Object
+                                                (
+                                                    [value:protected] => DateTime Object
+                                                        (
+                                                            [date] => 2025-04-28 10:19:12.000000
+                                                            [timezone_type] => 3
+                                                            [timezone] => Europe/Moscow
+                                                        )
+
+                                                    [userTimeEnabled:protected] => 1
+                                                )
+
+                                            [PRODUCT_XML_ID] => 075e7feb-094b-11ed-80c1-5065f361991b#bdb53f91-094b-11ed-80c1-5065f361991b
+                                            [SUBSCRIBE] => N
+                                            [RECOMMENDATION] => 
+                                            [VAT_INCLUDED] => Y
+                                            [SORT] => 100
+                                            [DATE_REFRESH] => 
+                                            [DISCOUNT_NAME] => [1] 111
+                                            [DISCOUNT_VALUE] => 10%
+                                            [DISCOUNT_COUPON] => 
+                                            [XML_ID] => bx_680f28bebcb55
+                                            [MARKING_CODE_GROUP] => 
+                                        )
+
+                                    [changedValues:protected] => Array
+                                        (
+                                        )
+
+                                    [originalValues:Bitrix\Sale\Internals\Fields:private] => Array
+                                        (
+                                        )
+
+                                    [customFields:Bitrix\Sale\Internals\Fields:private] => Array
+                                        (
+                                        )
+
+                                    [isClone:protected] => 
+                                )
+
+                            [eventName:protected] => 
+                            [collection:protected] => Bitrix\Sale\Basket Object
+ *RECURSION*
+                            [internalIndex:protected] => 0
+                            [isClone:protected] => 
+                            [propertyCollection:protected] => 
+                            [calculatedFields:protected] => Bitrix\Sale\Internals\Fields Object
+                                (
+                                    [values:protected] => Array
+                                        (
+                                        )
+
+                                    [changedValues:protected] => Array
+                                        (
+                                        )
+
+                                    [originalValues:Bitrix\Sale\Internals\Fields:private] => Array
+                                        (
+                                        )
+
+                                    [customFields:Bitrix\Sale\Internals\Fields:private] => Array
+                                        (
+                                        )
+
+                                    [isClone:protected] => 
+                                )
+
+                            [provider:protected] => \Bitrix\Catalog\Product\CatalogProvider
+                            [internalId:protected] => 2562
+                            [bundleCollection:Bitrix\Sale\BasketItem:private] => 
+                            [reserveQuantityCollection:protected] => Bitrix\Sale\ReserveQuantityCollection Object
+                                (
+                                    [collection:protected] => Array
+                                        (
+                                        )
+
+                                    [index:Bitrix\Sale\Internals\EntityCollection:private] => 0
+                                    [isClone:protected] => 
+                                    [anyItemDeleted:protected] => 1
+                                    [anyItemAdded:protected] => 
+                                    [basketItem:protected] => Bitrix\Sale\BasketItem Object
+ *RECURSION*
+                                )
+
+                        )
+
+                    [1] => Bitrix\Sale\BasketItem Object
+                        (
+                            [fields:protected] => Bitrix\Sale\Internals\Fields Object
+                                (
+                                    [values:protected] => Array
+                                        (
+                                            [ID] => 2564
+                                            [LID] => s1
+                                            [MODULE] => catalog
+                                            [PRODUCT_ID] => 60315
+                                            [QUANTITY] => 3.0000
+                                            [WEIGHT] => 0.00
+                                            [DELAY] => N
+                                            [CAN_BUY] => Y
+                                            [PRICE] => 800
+                                            [CUSTOM_PRICE] => Y
+                                            [BASE_PRICE] => 791
+                                            [PRODUCT_PRICE_ID] => 86969
+                                            [PRICE_TYPE_ID] => 2
+                                            [CURRENCY] => RUB
+                                            [BARCODE_MULTI] => N
+                                            [RESERVED] => N
+                                            [RESERVE_QUANTITY] => 
+                                            [NAME] => Бейсболка 2018 FIFA World Cup Russia™ (Бежевый; красный)
+                                            [CATALOG_XML_ID] => 4ee13222-c329-4bfa-b3b0-7f125cbbce56#
+                                            [VAT_RATE] => 0.2
+                                            [NOTES] => Оптовая цена
+                                            [DISCOUNT_PRICE] => 0
+                                            [PRODUCT_PROVIDER_CLASS] => \Bitrix\Catalog\Product\CatalogProvider
+                                            [CALLBACK_FUNC] => 
+                                            [ORDER_CALLBACK_FUNC] => 
+                                            [PAY_CALLBACK_FUNC] => 
+                                            [CANCEL_CALLBACK_FUNC] => 
+                                            [DIMENSIONS] => a:3:{s:5:"WIDTH";N;s:6:"HEIGHT";N;s:6:"LENGTH";N;}
+                                            [TYPE] => 
+                                            [SET_PARENT_ID] => 
+                                            [DETAIL_PAGE_URL] => /catalog/odezhda_dlya_sporta/beysbolka_2018_fifa_world_cup_russia_bezhevyy_krasnyy/
+                                            [FUSER_ID] => 645466
+                                            [MEASURE_CODE] => 796
+                                            [MEASURE_NAME] => шт
+                                            [ORDER_ID] => 148
+                                            [DATE_INSERT] => Bitrix\Main\Type\DateTime Object
+                                                (
+                                                    [value:protected] => DateTime Object
+                                                        (
+                                                            [date] => 2025-04-28 10:19:12.000000
+                                                            [timezone_type] => 3
+                                                            [timezone] => Europe/Moscow
+                                                        )
+
+                                                    [userTimeEnabled:protected] => 1
+                                                )
+
+                                            [DATE_UPDATE] => Bitrix\Main\Type\DateTime Object
+                                                (
+                                                    [value:protected] => DateTime Object
+                                                        (
+                                                            [date] => 2025-04-28 10:19:12.000000
+                                                            [timezone_type] => 3
+                                                            [timezone] => Europe/Moscow
+                                                        )
+
+                                                    [userTimeEnabled:protected] => 1
+                                                )
+
+                                            [PRODUCT_XML_ID] => 9e4eb616-094e-11ed-80c1-5065f361991b#9e4eb617-094e-11ed-80c1-5065f361991b
+                                            [SUBSCRIBE] => N
+                                            [RECOMMENDATION] => 
+                                            [VAT_INCLUDED] => Y
+                                            [SORT] => 100
+                                            [DATE_REFRESH] => 
+                                            [DISCOUNT_NAME] => 
+                                            [DISCOUNT_VALUE] => 
+                                            [DISCOUNT_COUPON] => 
+                                            [XML_ID] => bx_680f2bef69688
+                                            [MARKING_CODE_GROUP] => 
+                                        )
+
+                                    [changedValues:protected] => Array
+                                        (
+                                        )
+
+                                    [originalValues:Bitrix\Sale\Internals\Fields:private] => Array
+                                        (
+                                        )
+
+                                    [customFields:Bitrix\Sale\Internals\Fields:private] => Array
+                                        (
+                                            [PRICE] => 1
+                                        )
+
+                                    [isClone:protected] => 
+                                )
+
+                            [eventName:protected] => 
+                            [collection:protected] => Bitrix\Sale\Basket Object
+ *RECURSION*
+                            [internalIndex:protected] => 1
+                            [isClone:protected] => 
+                            [propertyCollection:protected] => 
+                            [calculatedFields:protected] => Bitrix\Sale\Internals\Fields Object
+                                (
+                                    [values:protected] => Array
+                                        (
+                                        )
+
+                                    [changedValues:protected] => Array
+                                        (
+                                        )
+
+                                    [originalValues:Bitrix\Sale\Internals\Fields:private] => Array
+                                        (
+                                        )
+
+                                    [customFields:Bitrix\Sale\Internals\Fields:private] => Array
+                                        (
+                                        )
+
+                                    [isClone:protected] => 
+                                )
+
+                            [provider:protected] => \Bitrix\Catalog\Product\CatalogProvider
+                            [internalId:protected] => 2564
+                            [bundleCollection:Bitrix\Sale\BasketItem:private] => 
+                            [reserveQuantityCollection:protected] => Bitrix\Sale\ReserveQuantityCollection Object
+                                (
+                                    [collection:protected] => Array
+                                        (
+                                        )
+
+                                    [index:Bitrix\Sale\Internals\EntityCollection:private] => 0
+                                    [isClone:protected] => 
+                                    [anyItemDeleted:protected] => 1
+                                    [anyItemAdded:protected] => 
+                                    [basketItem:protected] => Bitrix\Sale\BasketItem Object
+ *RECURSION*
+                                )
+
+                        )
+
+                    [2] => Bitrix\Sale\BasketItem Object
+                        (
+                            [fields:protected] => Bitrix\Sale\Internals\Fields Object
+                                (
+                                    [values:protected] => Array
+                                        (
+                                            [ID] => 2563
+                                            [LID] => s1
+                                            [MODULE] => catalog
+                                            [PRODUCT_ID] => 57574
+                                            [QUANTITY] => 10.0000
+                                            [WEIGHT] => 1806.00
+                                            [DELAY] => N
+                                            [CAN_BUY] => Y
+                                            [PRICE] => 2329.52
+                                            [CUSTOM_PRICE] => N
+                                            [BASE_PRICE] => 2329.52
+                                            [PRODUCT_PRICE_ID] => 10385
+                                            [PRICE_TYPE_ID] => 2
+                                            [CURRENCY] => RUB
+                                            [BARCODE_MULTI] => N
+                                            [RESERVED] => N
+                                            [RESERVE_QUANTITY] => 
+                                            [NAME] => Деревянная игра в кости, XL "Dice" (натуральный)
+                                            [CATALOG_XML_ID] => 4ee13222-c329-4bfa-b3b0-7f125cbbce56#
+                                            [VAT_RATE] => 0.2
+                                            [NOTES] => Оптовая цена
+                                            [DISCOUNT_PRICE] => 0
+                                            [PRODUCT_PROVIDER_CLASS] => \Bitrix\Catalog\Product\CatalogProvider
+                                            [CALLBACK_FUNC] => 
+                                            [ORDER_CALLBACK_FUNC] => 
+                                            [PAY_CALLBACK_FUNC] => 
+                                            [CANCEL_CALLBACK_FUNC] => 
+                                            [DIMENSIONS] => a:3:{s:5:"WIDTH";N;s:6:"HEIGHT";N;s:6:"LENGTH";N;}
+                                            [TYPE] => 
+                                            [SET_PARENT_ID] => 
+                                            [DETAIL_PAGE_URL] => /catalog/igry_nastolnye/derevyannaya_igra_v_kosti_xl_dice/
+                                            [FUSER_ID] => 645466
+                                            [MEASURE_CODE] => 796
+                                            [MEASURE_NAME] => шт
+                                            [ORDER_ID] => 148
+                                            [DATE_INSERT] => Bitrix\Main\Type\DateTime Object
+                                                (
+                                                    [value:protected] => DateTime Object
+                                                        (
+                                                            [date] => 2025-04-28 10:05:37.000000
+                                                            [timezone_type] => 3
+                                                            [timezone] => Europe/Moscow
+                                                        )
+
+                                                    [userTimeEnabled:protected] => 1
+                                                )
+
+                                            [DATE_UPDATE] => Bitrix\Main\Type\DateTime Object
+                                                (
+                                                    [value:protected] => DateTime Object
+                                                        (
+                                                            [date] => 2025-04-28 10:19:12.000000
+                                                            [timezone_type] => 3
+                                                            [timezone] => Europe/Moscow
+                                                        )
+
+                                                    [userTimeEnabled:protected] => 1
+                                                )
+
+                                            [PRODUCT_XML_ID] => 3ddecb94-094a-11ed-80c1-5065f361991b#3ddecb95-094a-11ed-80c1-5065f361991b
+                                            [SUBSCRIBE] => N
+                                            [RECOMMENDATION] => 
+                                            [VAT_INCLUDED] => Y
+                                            [SORT] => 200
+                                            [DATE_REFRESH] => 
+                                            [DISCOUNT_NAME] => 
+                                            [DISCOUNT_VALUE] => 
+                                            [DISCOUNT_COUPON] => 
+                                            [XML_ID] => bx_680f28c198855
+                                            [MARKING_CODE_GROUP] => 
+                                        )
+
+                                    [changedValues:protected] => Array
+                                        (
+                                        )
+
+                                    [originalValues:Bitrix\Sale\Internals\Fields:private] => Array
+                                        (
+                                        )
+
+                                    [customFields:Bitrix\Sale\Internals\Fields:private] => Array
+                                        (
+                                        )
+
+                                    [isClone:protected] => 
+                                )
+
+                            [eventName:protected] => 
+                            [collection:protected] => Bitrix\Sale\Basket Object
+ *RECURSION*
+                            [internalIndex:protected] => 2
+                            [isClone:protected] => 
+                            [propertyCollection:protected] => 
+                            [calculatedFields:protected] => Bitrix\Sale\Internals\Fields Object
+                                (
+                                    [values:protected] => Array
+                                        (
+                                        )
+
+                                    [changedValues:protected] => Array
+                                        (
+                                        )
+
+                                    [originalValues:Bitrix\Sale\Internals\Fields:private] => Array
+                                        (
+                                        )
+
+                                    [customFields:Bitrix\Sale\Internals\Fields:private] => Array
+                                        (
+                                        )
+
+                                    [isClone:protected] => 
+                                )
+
+                            [provider:protected] => \Bitrix\Catalog\Product\CatalogProvider
+                            [internalId:protected] => 2563
+                            [bundleCollection:Bitrix\Sale\BasketItem:private] => 
+                            [reserveQuantityCollection:protected] => Bitrix\Sale\ReserveQuantityCollection Object
+                                (
+                                    [collection:protected] => Array
+                                        (
+                                        )
+
+                                    [index:Bitrix\Sale\Internals\EntityCollection:private] => 0
+                                    [isClone:protected] => 
+                                    [anyItemDeleted:protected] => 1
+                                    [anyItemAdded:protected] => 
+                                    [basketItem:protected] => Bitrix\Sale\BasketItem Object
+ *RECURSION*
+                                )
+
+                        )
+
+                )
+
+            [index:Bitrix\Sale\Internals\EntityCollection:private] => 2
+            [isClone:protected] => 
+            [anyItemDeleted:protected] => 
+            [anyItemAdded:protected] => 
+            [siteId:protected] => s1
+            [fUserId:protected] => 645466
+            [order:protected] => Bitrix\Sale\Order Object
+ *RECURSION*
+            [basketItemIndexMap:protected] => Array
+                (
+                    [2562] => 0
+                    [2564] => 1
+                    [2563] => 2
+                )
+
+            [maxItemSort:protected] => 
+            [isLoadForFUserId:Bitrix\Sale\BasketBase:private] => 
+            [isSaveExecuting:protected] => 
+        )
+
+    [propertyCollection:protected] => 
+    [discount:protected] => 
+    [tax:protected] => 
+    [internalId:protected] => 1
+    [isNew:protected] => 
+    [isSaveExecuting:protected] => 1
+    [isClone:protected] => 
+    [isOnlyMathAction:protected] => 
+    [isMeaningfulField:protected] => 
+    [isStartField:protected] => 
+    [calculateType:protected] => C
+    [shipmentCollection:protected] => 
+    [paymentCollection:protected] => 
+    [tradeBindingCollection:protected] => 
+    [printedChecks:protected] => Array
+        (
+        )
+
+)

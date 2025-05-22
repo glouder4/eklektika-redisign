@@ -1,0 +1,18 @@
+.saved-baskets-item {
+    border: 1px solid #e1dfe5;    
+    -webkit-transition: 0.4s;
+    -moz-transition: 0.4s;
+    -ms-transition: 0.4s;
+    -o-transition: 0.4s;
+    transition: 0.4s;
+    margin-bottom: 15px;
+    border-radius: 4px;
+	padding: 18px;
+	height: 100%;
+}
+
+.saved-baskets-item:hover {
+    -webkit-box-shadow: 0 8px 32px rgba(27, 30, 37, 0.08);
+    -moz-box-shadow: 0 8px 32px rgba(27, 30, 37, 0.08);
+    box-shadow: 0 8px 32px rgba(27, 30, 37, 0.08);
+}
