@@ -5,92 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a53d02d7-d404-452c-a903-dd81636134fa" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/menu/onlineservice.horizontal.1.custom/.parameters.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/menu/onlineservice.horizontal.1.custom/lang/ru/.parameters.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/menu/onlineservice.horizontal.1.custom/parts/banner.section.items.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/menu/onlineservice.horizontal.1.custom/parts/banner.section.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/menu/onlineservice.horizontal.1.custom/parts/default.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/menu/onlineservice.horizontal.1.custom/parts/section.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/menu/onlineservice.horizontal.1.custom/result_modifier.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/menu/onlineservice.horizontal.1.custom/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/menu/onlineservice.horizontal.1.custom/template.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1.custom/.parameters.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1.custom/ajax.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1.custom/lang/ru/.parameters.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1.custom/lang/ru/ajax.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1.custom/lang/ru/template.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1.custom/modifiers/base/elements.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1.custom/modifiers/base/prices.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1.custom/modifiers/elements.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1.custom/modifiers/lite/elements.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1.custom/modifiers/lite/prices.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1.custom/parameters/catalog/base.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1.custom/parameters/catalog/lite.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1.custom/parameters/products.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1.custom/parts/products.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1.custom/result_modifier.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1.custom/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1.custom/style.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1.custom/style.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1.custom/template.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1/.parameters.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1/ajax.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1/lang/ru/.parameters.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1/lang/ru/ajax.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1/lang/ru/template.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1/modifiers/base/elements.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1/modifiers/base/prices.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1/modifiers/elements.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1/modifiers/lite/elements.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1/modifiers/lite/prices.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1/parameters/catalog/base.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1/parameters/catalog/lite.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1/parameters/products.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1/parts/products.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1/result_modifier.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1/style.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1/style.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1/template.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.header/template.1.custom/bitrix/system.auth.form/onlineservice-panel/lang/ru/template.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.header/template.1.custom/bitrix/system.auth.form/onlineservice-panel/parts/script.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.header/template.1.custom/bitrix/system.auth.form/onlineservice-panel/result_modifier.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.header/template.1.custom/bitrix/system.auth.form/onlineservice-panel/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.header/template.1.custom/bitrix/system.auth.form/onlineservice-panel/style.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.header/template.1.custom/bitrix/system.auth.form/onlineservice-panel/style.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.header/template.1.custom/bitrix/system.auth.form/onlineservice-panel/template.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.header/template.1.custom/parts/auth/onlineservice-panel.1.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.header/template.1.custom/parts/onlineservice-basket.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/sale.basket.small/onlineservice-icons.1.custom/.parameters.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/sale.basket.small/onlineservice-icons.1.custom/lang/ru/.parameters.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/sale.basket.small/onlineservice-icons.1.custom/lang/ru/template.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/sale.basket.small/onlineservice-icons.1.custom/parameters/base.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/sale.basket.small/onlineservice-icons.1.custom/parameters/lite.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/sale.basket.small/onlineservice-icons.1.custom/parts/content.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/sale.basket.small/onlineservice-icons.1.custom/parts/content/products.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/sale.basket.small/onlineservice-icons.1.custom/parts/script.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/sale.basket.small/onlineservice-icons.1.custom/parts/settings.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/sale.basket.small/onlineservice-icons.1.custom/result_modifier.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/sale.basket.small/onlineservice-icons.1.custom/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/sale.basket.small/onlineservice-icons.1.custom/style.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/sale.basket.small/onlineservice-icons.1.custom/style.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/sale.basket.small/onlineservice-icons.1.custom/template.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/onlineservice_addons/assets/logo.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/onlineservice_addons/footer.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/onlineservice_addons/header.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/onlineservice_addons/scripts/header.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/onlineservice_addons/scripts/jquery.fancybox.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/onlineservice_addons/scripts/jquery.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/onlineservice_addons/scripts/template.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/onlineservice_addons/styles/footer.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/onlineservice_addons/styles/header.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/onlineservice_addons/styles/jquery.fancybox.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/onlineservice_addons/styles/template.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.footer/template.1.custom/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.footer/template.1.custom/template.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.header/template.1.custom/templates/desktop/template.1/view.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.header/template.1.custom/templates/desktop/template.1/view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.header/template.1.custom/templates/mobile/template.1/view.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.header/template.1.custom/templates/mobile/template.1/view.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/footer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/header.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/onlineservice_addons/styles/header.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/onlineservice_addons/styles/header.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,7 +81,7 @@
       <workItem from="1747751042073" duration="153000" />
       <workItem from="1747758959445" duration="14000" />
       <workItem from="1747913274831" duration="13017000" />
-      <workItem from="1747989858558" duration="8091000" />
+      <workItem from="1747989858558" duration="10448000" />
     </task>
     <servers />
   </component>

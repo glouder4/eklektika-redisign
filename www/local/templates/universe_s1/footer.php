@@ -14,10 +14,7 @@ if (empty($template))
     return;
 
 ?>
-        <?php include($directory.'/onlineservice_addons/footer.php'); ?>
-<div style="display: none!important;">
         <?php include($directory.'/parts/'.$part.'/footer.php'); ?>
-</div>
 
         <?php if (FileHelper::isFile($directory.'/parts/custom/body.end.php')) include($directory.'/parts/custom/body.end.php') ?>
 		<script>

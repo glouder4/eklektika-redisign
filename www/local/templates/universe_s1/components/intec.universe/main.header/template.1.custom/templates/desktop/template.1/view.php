@@ -293,19 +293,19 @@ if ($arResult['CONTACTS']['SHOW']) {
             <div class="header__navigation">
                 <ul class="header__navigation-list">
                     <li class="header__navigation-list--item">
-                        <a class="header__navigation-list--item-link" href="#">О компании</a>
+                        <a class="header__navigation-list--item-link" href="/company/">О компании</a>
                     </li>
                     <li class="header__navigation-list--item">
-                        <a class="header__navigation-list--item-link" href="#">Услуги</a>
+                        <a class="header__navigation-list--item-link" href="/services/">Услуги</a>
                     </li>
                     <li class="header__navigation-list--item">
                         <a class="header__navigation-list--item-link" href="#">Купить</a>
                     </li>
                     <li class="header__navigation-list--item">
-                        <a class="header__navigation-list--item-link" href="#">Стать дилером</a>
+                        <a class="header__navigation-list--item-link" href="/informacziya-dlya-dilerov/">Стать дилером</a>
                     </li>
                     <li class="header__navigation-list--item">
-                        <a class="header__navigation-list--item-link" href="#">Контакты</a>
+                        <a class="header__navigation-list--item-link" href="/contacts/">Контакты</a>
                     </li>
                 </ul>
             </div>
@@ -320,7 +320,7 @@ if ($arResult['CONTACTS']['SHOW']) {
     <div class="container">
         <div class="mobile-menu__content">
             <ul class="mobile-menu__main">
-                <li>О компании</li>
+                <li><a href="/company/">О компании</a></li>
                 <li>Услуги
                     <span class="mobile-menu__arrow">
                         <svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12" fill="none">
@@ -328,9 +328,9 @@ if ($arResult['CONTACTS']['SHOW']) {
                         </svg>
                     </span>
                 </li>
-                <li>Купить</li>
-                <li>Стать дилером</li>
-                <li>Контакты</li>
+                <li><a href="#">Купить</a></li>
+                <li><a href="/informacziya-dlya-dilerov/">Стать дилером</a></li>
+                <li><a href="/contacts/">Контакты</a></li>
             </ul>
             <ul class="mobile-menu__sub">
                 <li>Виды нанесения
@@ -340,16 +340,16 @@ if ($arResult['CONTACTS']['SHOW']) {
                         </svg>
                     </span>
                 </li>
-                <li>Программа привилегий и бонусов для дилеров</li>
-                <li>Гибкая система оплаты</li>
-                <li>Разработка дизайна сувенирной продукции</li>
-                <li>Товар на складе в Москве</li>
-                <li>Доставка</li>
-                <li>Новости</li>
-                <li>Бренды</li>
-                <li>Новинки</li>
-                <li>Акции и Скидки</li>
-                <li>Как проехать</li>
+                <li><a href="#">Программа привилегий и бонусов для дилеров</a></li>
+                <li><a href="#">Гибкая система оплаты</a></li>
+                <li><a href="#">Разработка дизайна сувенирной продукции</a></li>
+                <li><a href="#">Товар на складе в Москве</a></li>
+                <li><a href="/dostavka/">Доставка</a></li>
+                <li><a href="/company/news/">Новости</a></li>
+                <li><a href="/help/brands/">Бренды</a></li>
+                <li><a href="#">Новинки</a></li>
+                <li><a href="/shares/">Акции и Скидки</a></li>
+                <li><a href="#">Как проехать</a></li>
             </ul>
             <button class="mobile-menu__call-btn" data-action="forms.call.open">Заказать звонок</button>
             <div class="mobile-menu__footer">
