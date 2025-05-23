@@ -100,4 +100,6 @@ $part = Constructor::isLite() ? 'lite' : 'base';
                 )
             ); ?>
         <? } ?>
+        <?php include($directory.'/onlineservice_addons/header.php'); ?>
+
         <?php include($directory.'/parts/'.$part.'/header.php'); ?>

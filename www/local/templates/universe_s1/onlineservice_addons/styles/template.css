@@ -1,0 +1,74 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: last 4 version
+*/
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+body{
+    margin: 0;
+}
+body.scrollLock{
+    overflow-y: hidden;
+}
+main{
+    position: relative;
+    z-index: 0;
+}
+.container{
+    max-width: 100%;
+}
+body .c-header.c-header-template-1 .widget-view.widget-view-fixed,
+body .c-header.c-header-template-1 .widget-view.widget-view-desktop{
+    display:block!important;
+}
+body>.intec-template .intec-template-layout-header-wrapper{
+    margin: 0;
+}
+@media(min-width: 375px){
+    .container{
+        max-width: 375px;
+        margin: auto;
+    }
+    #mobileMenu>.container{
+        width: 339px;
+    }
+}
+@media(min-width: 576px){
+    .container{
+        max-width: 576px;
+    }
+    #mobileMenu>.container{
+        width: 535px;
+    }
+}
+@media (min-width: 768px) {
+    .container {
+        max-width: 768px;
+    }
+}
+@media (min-width: 991px) {
+    .container {
+        max-width: 991px;
+    }
+}
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1200px;
+    }
+}
+@media (min-width: 1300px) {
+    .container {
+        max-width: 1300px;
+    }
+}
+@media (min-width: 1520px) {
+    .container {
+        max-width: 1480px;
+    }
+}
+@media (min-width: 1920px) {
+    .container {
+        max-width: 1520px;
+    }
+}
