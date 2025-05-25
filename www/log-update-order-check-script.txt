@@ -1,0 +1,268 @@
+Array
+(
+    [result] => Array
+        (
+            [0] => Array
+                (
+                    [ID] => 3063
+                    [OWNER_ID] => 12002
+                    [OWNER_TYPE] => D
+                    [PRODUCT_ID] => 7808
+                    [PRODUCT_NAME] => Набор "Фитнес" (Красный)
+                    [ORIGINAL_PRODUCT_NAME] => Набор "Фитнес" (Красный)
+                    [PRODUCT_DESCRIPTION] => 
+                    [PRICE] => 15
+                    [PRICE_EXCLUSIVE] => 15
+                    [PRICE_NETTO] => 15
+                    [PRICE_BRUTTO] => 15
+                    [PRICE_ACCOUNT] => 15.00
+                    [QUANTITY] => 105
+                    [DISCOUNT_TYPE_ID] => 2
+                    [DISCOUNT_RATE] => 0
+                    [DISCOUNT_SUM] => 0
+                    [TAX_RATE] => 20
+                    [TAX_INCLUDED] => Y
+                    [CUSTOMIZED] => Y
+                    [MEASURE_CODE] => 796
+                    [MEASURE_NAME] => шт
+                    [SORT] => 10
+                    [XML_ID] => 
+                    [TYPE] => 1
+                    [UF_NEED_ADJUSTMENT] => 
+                    [UF_CRM_PR_TEST] => 
+                    [UF_CRM_PR_ADJUSTMENT] => 
+                    [UF_APPLICATION_PARENT_PRODUCT_ROW_ID] => 
+                    [UF_APPLICATION_PRICE] => 
+                    [UF_SMART_PROCESS_ID] => 
+                    [RESERVE_ID] => 
+                    [RESERVE_QUANTITY] => 0
+                    [PROPERTY_ARTIKUL_BITRIKS] => 6240090
+                    [PROPERTY_ARTIKUL_NOMENKLATURY_DLYA_BITRIKS24] => 
+                    [PROPERTY_ARTIKUL_POSTAVSHCHIKA] => 853201
+                    [PROPERTY_VIRTUAL_INSTOCK] => 
+                    [PROPERTY_REAL_INSTOCK] => 
+                    [PARENT_PRODUCT_ID] => 7764
+                    [PARENT_PRODUCT_NAME] => Набор "Фитнес"
+                )
+
+            [1] => Array
+                (
+                    [ID] => 3064
+                    [OWNER_ID] => 12002
+                    [OWNER_TYPE] => D
+                    [PRODUCT_ID] => 7811
+                    [PRODUCT_NAME] => Набор для фитнеса "Cross" (Голубой)
+                    [ORIGINAL_PRODUCT_NAME] => Набор для фитнеса "Cross" (Голубой)
+                    [PRODUCT_DESCRIPTION] => 
+                    [PRICE] => 102
+                    [PRICE_EXCLUSIVE] => 102
+                    [PRICE_NETTO] => 102
+                    [PRICE_BRUTTO] => 102
+                    [PRICE_ACCOUNT] => 102.00
+                    [QUANTITY] => 100
+                    [DISCOUNT_TYPE_ID] => 2
+                    [DISCOUNT_RATE] => 0
+                    [DISCOUNT_SUM] => 0
+                    [TAX_RATE] => 20
+                    [TAX_INCLUDED] => Y
+                    [CUSTOMIZED] => Y
+                    [MEASURE_CODE] => 796
+                    [MEASURE_NAME] => шт
+                    [SORT] => 20
+                    [XML_ID] => 
+                    [TYPE] => 1
+                    [UF_NEED_ADJUSTMENT] => 
+                    [UF_CRM_PR_TEST] => 
+                    [UF_CRM_PR_ADJUSTMENT] => 
+                    [UF_APPLICATION_PARENT_PRODUCT_ROW_ID] => 
+                    [UF_APPLICATION_PRICE] => 
+                    [UF_SMART_PROCESS_ID] => 
+                    [RESERVE_ID] => 
+                    [RESERVE_QUANTITY] => 0
+                    [PROPERTY_ARTIKUL_BITRIKS] => 6360005
+                    [PROPERTY_ARTIKUL_NOMENKLATURY_DLYA_BITRIKS24] => 
+                    [PROPERTY_ARTIKUL_POSTAVSHCHIKA] => 833412
+                    [PROPERTY_VIRTUAL_INSTOCK] => 
+                    [PROPERTY_REAL_INSTOCK] => 
+                    [PARENT_PRODUCT_ID] => 7765
+                    [PARENT_PRODUCT_NAME] => Набор для фитнеса "Cross"
+                )
+
+            [2] => Array
+                (
+                    [ID] => 3069
+                    [OWNER_ID] => 12002
+                    [OWNER_TYPE] => D
+                    [PRODUCT_ID] => 7788
+                    [PRODUCT_NAME] => Вышивка
+                    [ORIGINAL_PRODUCT_NAME] => Вышивка
+                    [PRODUCT_DESCRIPTION] => 
+                    [PRICE] => 0
+                    [PRICE_EXCLUSIVE] => 0
+                    [PRICE_NETTO] => 0
+                    [PRICE_BRUTTO] => 0
+                    [PRICE_ACCOUNT] => 0.00
+                    [QUANTITY] => 1
+                    [DISCOUNT_TYPE_ID] => 2
+                    [DISCOUNT_RATE] => 0
+                    [DISCOUNT_SUM] => 0
+                    [TAX_RATE] => 0
+                    [TAX_INCLUDED] => N
+                    [CUSTOMIZED] => Y
+                    [MEASURE_CODE] => 796
+                    [MEASURE_NAME] => шт
+                    [SORT] => 30
+                    [XML_ID] => 
+                    [TYPE] => 1
+                    [UF_NEED_ADJUSTMENT] => 0
+                    [UF_CRM_PR_TEST] => 
+                    [UF_CRM_PR_ADJUSTMENT] => 0
+                    [UF_APPLICATION_PARENT_PRODUCT_ROW_ID] => 3064
+                    [UF_APPLICATION_PRICE] => 0|RUB
+                    [UF_SMART_PROCESS_ID] => 
+                    [RESERVE_ID] => 
+                    [RESERVE_QUANTITY] => 0
+                    [PROPERTY_ARTIKUL_BITRIKS] => 
+                    [PROPERTY_ARTIKUL_NOMENKLATURY_DLYA_BITRIKS24] => 
+                    [PROPERTY_ARTIKUL_POSTAVSHCHIKA] => 
+                    [PROPERTY_VIRTUAL_INSTOCK] => 
+                    [PROPERTY_REAL_INSTOCK] => 
+                    [PARENT_PRODUCT_ID] => 
+                    [PARENT_PRODUCT_NAME] => 
+                )
+
+            [3] => Array
+                (
+                    [ID] => 3070
+                    [OWNER_ID] => 12002
+                    [OWNER_TYPE] => D
+                    [PRODUCT_ID] => 7785
+                    [PRODUCT_NAME] => Тампопечать
+                    [ORIGINAL_PRODUCT_NAME] => Тампопечать
+                    [PRODUCT_DESCRIPTION] => 
+                    [PRICE] => 100
+                    [PRICE_EXCLUSIVE] => 83.33
+                    [PRICE_NETTO] => 83.33
+                    [PRICE_BRUTTO] => 100
+                    [PRICE_ACCOUNT] => 100.00
+                    [QUANTITY] => 1
+                    [DISCOUNT_TYPE_ID] => 2
+                    [DISCOUNT_RATE] => 0
+                    [DISCOUNT_SUM] => 0
+                    [TAX_RATE] => 20
+                    [TAX_INCLUDED] => N
+                    [CUSTOMIZED] => Y
+                    [MEASURE_CODE] => 796
+                    [MEASURE_NAME] => шт
+                    [SORT] => 40
+                    [XML_ID] => 
+                    [TYPE] => 1
+                    [UF_NEED_ADJUSTMENT] => 0
+                    [UF_CRM_PR_TEST] => 
+                    [UF_CRM_PR_ADJUSTMENT] => 0
+                    [UF_APPLICATION_PARENT_PRODUCT_ROW_ID] => 3064
+                    [UF_APPLICATION_PRICE] => 400|RUB
+                    [UF_SMART_PROCESS_ID] => 
+                    [RESERVE_ID] => 
+                    [RESERVE_QUANTITY] => 0
+                    [PROPERTY_ARTIKUL_BITRIKS] => 
+                    [PROPERTY_ARTIKUL_NOMENKLATURY_DLYA_BITRIKS24] => 
+                    [PROPERTY_ARTIKUL_POSTAVSHCHIKA] => 
+                    [PROPERTY_VIRTUAL_INSTOCK] => 
+                    [PROPERTY_REAL_INSTOCK] => 
+                    [PARENT_PRODUCT_ID] => 
+                    [PARENT_PRODUCT_NAME] => 
+                )
+
+            [4] => Array
+                (
+                    [ID] => 3065
+                    [OWNER_ID] => 12002
+                    [OWNER_TYPE] => D
+                    [PRODUCT_ID] => 7816
+                    [PRODUCT_NAME] => Набор для бега «Sprint», синий (Синий)
+                    [ORIGINAL_PRODUCT_NAME] => Набор для бега «Sprint», синий (Синий)
+                    [PRODUCT_DESCRIPTION] => 
+                    [PRICE] => 590
+                    [PRICE_EXCLUSIVE] => 590
+                    [PRICE_NETTO] => 590
+                    [PRICE_BRUTTO] => 590
+                    [PRICE_ACCOUNT] => 590.00
+                    [QUANTITY] => 6
+                    [DISCOUNT_TYPE_ID] => 2
+                    [DISCOUNT_RATE] => 0
+                    [DISCOUNT_SUM] => 0
+                    [TAX_RATE] => 20
+                    [TAX_INCLUDED] => Y
+                    [CUSTOMIZED] => Y
+                    [MEASURE_CODE] => 796
+                    [MEASURE_NAME] => шт
+                    [SORT] => 50
+                    [XML_ID] => 
+                    [TYPE] => 1
+                    [UF_NEED_ADJUSTMENT] => 
+                    [UF_CRM_PR_TEST] => 
+                    [UF_CRM_PR_ADJUSTMENT] => 
+                    [UF_APPLICATION_PARENT_PRODUCT_ROW_ID] => 
+                    [UF_APPLICATION_PRICE] => 
+                    [UF_SMART_PROCESS_ID] => 
+                    [RESERVE_ID] => 
+                    [RESERVE_QUANTITY] => 0
+                    [PROPERTY_ARTIKUL_BITRIKS] => 6360029
+                    [PROPERTY_ARTIKUL_NOMENKLATURY_DLYA_BITRIKS24] => 
+                    [PROPERTY_ARTIKUL_POSTAVSHCHIKA] => 500102.02
+                    [PROPERTY_VIRTUAL_INSTOCK] => 
+                    [PROPERTY_REAL_INSTOCK] => 
+                    [PARENT_PRODUCT_ID] => 7766
+                    [PARENT_PRODUCT_NAME] => Набор для бега «Sprint», синий
+                )
+
+            [5] => Array
+                (
+                    [ID] => 3066
+                    [OWNER_ID] => 12002
+                    [OWNER_TYPE] => D
+                    [PRODUCT_ID] => 0
+                    [PRODUCT_NAME] => Доставка: Доставка курьером
+                    [ORIGINAL_PRODUCT_NAME] => 
+                    [PRODUCT_DESCRIPTION] => 
+                    [PRICE] => 500
+                    [PRICE_EXCLUSIVE] => 500
+                    [PRICE_NETTO] => 500
+                    [PRICE_BRUTTO] => 500
+                    [PRICE_ACCOUNT] => 500.00
+                    [QUANTITY] => 1
+                    [DISCOUNT_TYPE_ID] => 2
+                    [DISCOUNT_RATE] => 0
+                    [DISCOUNT_SUM] => 0
+                    [TAX_RATE] => 0
+                    [TAX_INCLUDED] => N
+                    [CUSTOMIZED] => Y
+                    [MEASURE_CODE] => 796
+                    [MEASURE_NAME] => шт
+                    [SORT] => 60
+                    [XML_ID] => 
+                    [TYPE] => 1
+                    [UF_NEED_ADJUSTMENT] => 
+                    [UF_CRM_PR_TEST] => 
+                    [UF_CRM_PR_ADJUSTMENT] => 
+                    [UF_APPLICATION_PARENT_PRODUCT_ROW_ID] => 
+                    [UF_APPLICATION_PRICE] => 
+                    [UF_SMART_PROCESS_ID] => 
+                    [RESERVE_ID] => 
+                    [RESERVE_QUANTITY] => 0
+                )
+
+        )
+
+    [time] => Array
+        (
+            [start] => 1692099228.7292
+            [finish] => 1692099228.8849
+            [duration] => 0.15572285652161
+            [processing] => 0.085505962371826
+            [date_start] => 2023-08-15T14:33:48+03:00
+            [date_finish] => 2023-08-15T14:33:48+03:00
+        )
+
+)

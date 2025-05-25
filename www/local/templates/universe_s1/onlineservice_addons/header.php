@@ -18,4 +18,7 @@ if ($APPLICATION->GetCurPage(false) === '/'):
     Asset::getInstance()->addJs("/local/templates/universe_s1/onlineservice_addons/components/mainpage/slider/scripts/scripts.js",true);
 
 endif;
+if ($APPLICATION->GetCurPage(false) === '/help/brands/'):
+
+endif;
 ?>

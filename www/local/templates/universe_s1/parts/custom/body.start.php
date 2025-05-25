@@ -1,7 +1,7 @@
 <?php
 $customPages = [
     '/', // главная
-    '/catalog/', // каталог
+    '/help/brands/', // каталог
     '/about/' // о компании
 ];
 
@@ -366,8 +366,8 @@ if (in_array($APPLICATION->GetCurPage(), $customPages)) {
             case '/':
                 include($_SERVER['DOCUMENT_ROOT'].'/local/templates/onlineservice-custom-template/mainpage.php');
                 break;
-            case '/catalog/':
-                // Контент для каталога
+            case '/help/brands/':
+                include($_SERVER['DOCUMENT_ROOT'].'/local/templates/onlineservice-custom-template/brands.php');
                 break;
             case '/about/':
                 // Контент для страницы о компании
