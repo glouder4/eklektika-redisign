@@ -1,0 +1,207 @@
+.brands__list{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-left: 0px;
+    padding-right: 0px;
+    row-gap: 15px;
+    margin-bottom: 108px;
+    margin-top: 64px;
+    left: 9px;
+    position: relative;
+}
+.brands__list--item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 50%;
+    position: relative;
+}
+.brands__list--item img{
+    max-width: 100%;
+
+    transition: all 0.3s ease;
+}
+.brands__list--item img.hover{
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+}
+.brands__list--item:hover{
+    cursor: pointer;
+}
+.brands__list--item:hover img{
+    opacity: 0;
+}
+.brands__list--item:hover img.hover{
+    opacity: 1;
+}
+.brands__list--item:nth-child(1){
+    left: -16px;
+    top: -6px;
+}
+.brands__list--item:nth-child(1)>img{
+    width: 100.83230590820312px;
+    height: 33.45147705078125px;
+}
+.brands__list--item:nth-child(2){
+    left: 0px;
+    top: -8px;
+}
+.brands__list--item:nth-child(2)>img{
+    width: 154px;
+    height: 79.19499969482422px;
+}
+.brands__list--item:nth-child(3){
+    left: -19px;
+    top: -1px;
+}
+.brands__list--item:nth-child(3)>img{
+    width: 138.5846710205078px;
+    height: 35.36298751831055px;
+}
+.brands__list--item:nth-child(4){
+    left: 3px;
+    top: 1px;
+}
+.brands__list--item:nth-child(4)>img{
+    width: 128.186279296875px;
+    height: 48.22245788574219px;
+}
+.brands__list--item:nth-child(5){
+    left: -17px;
+    top: 22px;
+}
+.brands__list--item:nth-child(5)>img{
+    width: 162.04080200195312px;
+    height: 73.09727478027344px;
+}
+.brands__list--item:nth-child(6){
+    left: 3px;
+    top: 22px;
+}
+.brands__list--item:nth-child(6)>img{
+    width: 153.16180419921875px;
+    height: 70.45442962646484px;
+}
+.brands__list--item:nth-child(7){
+    left: -21px;
+    top: 29px;
+}
+.brands__list--item:nth-child(7)>img{
+    width: 169px;
+    height: 79.19499969482422px;
+}
+@media(min-width: 576px){
+    .brands__list--item{
+        width: 33%;
+
+        left: 0!important;
+        top: 0!important;
+    }
+}
+@media(min-width: 768px){
+    .brands__list--item{
+        width: 25%;
+    }
+}
+@media(min-width: 991px){
+    .brands__list--item{
+        width: 20%;
+    }
+}
+@media(min-width: 1200px){
+    .brands__list--item:nth-child(1)>img {
+        width: 135px;
+        height: 45.451477px;
+    }
+    .brands__list--item:nth-child(2)>img {
+        width: 185px;
+        height: 90.195px;
+    }
+    .brands__list--item:nth-child(3)>img {
+        width: 175px;
+        height: 48.362988px;
+    }
+    .brands__list--item:nth-child(4)>img {
+        width: 160px;
+        height: 69px;
+    }
+    .brands__list--item:nth-child(5)>img {
+        width: 215px;
+        height: 90.097275px;
+    }
+    .brands__list--item:nth-child(6)>img {
+        width: 185px;
+        height: 80.45443px;
+    }
+    .brands__list--item:nth-child(7)>img {
+        width: 218px;
+        height: 95.195px;
+    }
+}
+@media(min-width: 1520px){
+    .brands__list{
+        padding: 0;
+        margin-bottom: 156px;
+    }
+
+    .brands__list--item:nth-child(1) {
+        left: -66px !important;
+        top: -14px !important;
+    }
+    .brands__list--item:nth-child(1)>img {
+        width: 173.15731811523438px;
+        height: 57.445556640625px;
+    }
+    .brands__list--item:nth-child(2) {
+        left: -21px !important;
+        top: -19px !important;
+    }
+    .brands__list--item:nth-child(2)>img {
+        width: 298px;
+        height: 136px;
+    }
+    .brands__list--item:nth-child(3) {
+        left: 2px !important;
+        top: -25px !important;
+    }
+    .brands__list--item:nth-child(3)>img {
+        width: 237.98870849609375px;
+        height: 60.728153228759766px;
+    }
+    .brands__list--item:nth-child(4) {
+        left: 28px !important;
+        top: -21px !important;
+    }
+    .brands__list--item:nth-child(4)>img {
+        width: 220.1317596435547px;
+        height: 82.81147003173828px;
+    }
+    .brands__list--item:nth-child(5) {
+        left: 34px !important;
+        top: -18px !important;
+    }
+    .brands__list--item:nth-child(5)>img {
+        width: 278.2694396972656px;
+        height: 125.52849578857422px;
+    }
+    .brands__list--item:nth-child(6) {
+        left: -25px !important;
+        top: -8px !important;
+    }
+    .brands__list--item:nth-child(6)>img {
+        width: 263px;
+        height: 121px;
+    }
+    .brands__list--item:nth-child(7) {
+        left: -32px !important;
+        top: 1px !important;
+    }
+    .brands__list--item:nth-child(7)>img {
+        width: 297px;
+        height: 136px;
+    }
+}

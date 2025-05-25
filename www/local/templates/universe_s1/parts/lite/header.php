@@ -132,9 +132,11 @@ use intec\template\Properties;
             }
 
             $path = Path::from('@root'.SITE_DIR.'include/layout/'.$zone->getCode().'.php');
-
+            //echo $path; die();
             if (FileHelper::isFile($path->value))
                 include($path->value);
+
+
 
             if ($zone->getCode() === 'header') {
                 if ($page['blocks']['breadcrumb']['show']) {

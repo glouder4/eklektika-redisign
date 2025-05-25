@@ -1,0 +1,112 @@
+.brands-scrollable-block{
+    padding-bottom: 50px;
+}
+.brands-scrollable-block--title{
+    display: block;
+    width: 100%;
+    font-family: Manrope;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 100%;
+    letter-spacing: 0;
+    text-align: center;
+
+    margin-top: 40px;
+}
+.brands-scrollable-block--list{
+    display: -webkit-box;
+
+    margin-top: 45px;
+
+    overflow-x: scroll;
+    padding: 0;
+}
+.brands-scrollable-block--item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 20px;
+    max-height: 95px;
+    width: 85px;
+
+    position: relative;
+}
+.brands-scrollable-block--item>img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: all 0.3s ease;
+}
+.brands-scrollable-block--item>img.hover{
+    opacity: 0;
+    position: absolute;
+}
+
+.brands-scrollable-block--item:hover>img{
+    opacity: 0;
+}
+.brands-scrollable-block--item:hover>img.hover{
+    opacity: 1;
+}
+
+
+.brands-scrollable-block--list::-webkit-scrollbar{
+    height: 0;
+}
+@media(min-width: 576px){
+    .brands-scrollable-block--item{
+        width: 110px;
+    }
+}
+@media(min-width: 991px){
+    .brands-scrollable-block--item{
+        margin: auto;
+    }
+}
+@media(min-width: 1520px){
+    .brands-scrollable-block--title{
+        font-size: 48px;
+        margin-top: 80px;
+    }
+    .brands-scrollable-block--item {
+        width: 200px;
+    }
+    .brands-scrollable-block--list{
+        margin-top: 55px;
+    }
+    .brands-scrollable-block--item:nth-child(1){
+        margin-left: 0;
+    }
+    .brands-scrollable-block--item:nth-child(1)>img{
+        width: 121.65612030029297px;
+        height: 40.3598518371582px;
+    }
+    .brands-scrollable-block--item:nth-child(2)>img{
+        width: 208.1039276123047px;
+        height: 95.7278060913086px;
+    }
+    .brands-scrollable-block--item:nth-child(3)>img{
+        width: 167.205078125px;
+        height: 42.6661262512207px;
+    }
+    .brands-scrollable-block--item:nth-child(4)>img{
+        width: 154.65924072265625px;
+        height: 58.18133544921875px;
+    }
+    .brands-scrollable-block--item:nth-child(5)>img{
+        width: 195.50537109375px;
+        height: 88.19327545166016px;
+    }
+    .brands-scrollable-block--item:nth-child(6)>img{
+        width: 200.01942443847656px;
+        height: 92.0089340209961px;
+    }
+    .brands-scrollable-block--item:nth-child(7)>img{
+        width: 208.3922119140625px;
+        height: 95.86041259765625px;
+    }
+
+    .brands-scrollable-block--title{
+        margin-top: 145px;
+    }
+}

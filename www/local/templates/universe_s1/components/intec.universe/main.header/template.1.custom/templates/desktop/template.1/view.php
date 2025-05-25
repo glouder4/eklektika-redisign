@@ -91,6 +91,7 @@ if ($arResult['CONTACTS']['SHOW']) {
 }
 
 ?>
+
 <header class="header">
     <div style="background: #7B4FA3;">
         <div class="container">

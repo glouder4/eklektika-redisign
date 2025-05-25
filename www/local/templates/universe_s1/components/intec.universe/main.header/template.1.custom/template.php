@@ -357,15 +357,6 @@ $this->setFrameMode(true);
                 });
             </script>
         <?php } ?>
-        <?php if (!empty($arTemplates['BANNER'])) { ?>
-            <div class="widget-banner">
-                <?php $arData['type'] = 'BANNER' ?>
-                <?= $arTemplates['BANNER']->render(
-                    $arParams,
-                    $arResult,
-                    $arData
-                ) ?>
-            </div>
-        <?php } ?>
+
     </div>
 <?= Html::endTag('div') ?>

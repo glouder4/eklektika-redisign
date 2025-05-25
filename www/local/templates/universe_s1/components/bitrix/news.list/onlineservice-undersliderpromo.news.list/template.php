@@ -1,0 +1,98 @@
+<?php if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
+
+use Bitrix\Main\Loader;
+use intec\core\bitrix\Component;
+use intec\core\helpers\Html;
+
+/**
+ * @var array $arResult
+ */
+
+$this->setFrameMode(true);
+
+if (empty($arResult['ITEMS']))
+    return;
+
+if (!Loader::includeModule('intec.core'))
+    return;
+
+$sTemplateId = Html::getUniqueId(null, Component::getUniqueId($this));
+
+$arVisual = $arResult['VISUAL'];
+
+?>
+
+<div class="container">
+    <div class="underslider-categories">
+        <?php foreach ($arResult['ITEMS'] as $key => $arItem) {
+
+            $sId = $sTemplateId.'_'.$arItem['ID'];
+            $sAreaId = $this->GetEditAreaId($sId);
+
+            $sPicture = $arItem['PREVIEW_PICTURE'];
+
+            if (empty($sPicture))
+                $sPicture = $arItem['DETAIL_PICTURE'];
+
+            if (!empty($sPicture)) {
+                $sPicture = CFile::ResizeImageGet($sPicture, [
+                    'width' => 350,
+                    'height' => 350
+                ], BX_RESIZE_IMAGE_PROPORTIONAL_ALT);
+
+                if (!empty($sPicture['src']))
+                    $sPicture = $sPicture['src'];
+            }
+
+            if (empty($sPicture))
+                $sPicture = SITE_TEMPLATE_PATH.'/images/picture.missing.png';
+
+            ?>
+
+            <a href="<?=!$arItem['DATA']['HIDE_LINK'] ? $arItem['DETAIL_PAGE_URL'] : '#';?>" id="<?= $sAreaId ?>" class="underslider-categories--category-item <?=($key == 0) ? "category-item-full_size" : null;?>" data-mobile_background="<?=$sPicture;?>" data-desktop_background="<?=$sPicture;?>" style="background-image: url('<?=$sPicture;?>')">
+                <?php
+                    $this->AddEditAction($sId, $arItem['EDIT_LINK']);
+                    $this->AddDeleteAction($sId, $arItem['DELETE_LINK']);
+                ?>
+                <div class="category-item-full_size--data">
+                    <div class="category-item-full_size--data_title"><span><?=$arItem['NAME'];?></span></div>
+                    <?php if($key == 0): ?>
+                        <div class="category-item-full_size--data_description">
+                            <?= $arItem['DATA']['PREVIEW'] ?>
+                        </div>
+                        <div class="category-item-full_size--data_actions">
+                            <div class="category-item-full_size--data_actions-link">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="6" height="10" viewBox="0 0 6 10" fill="none">
+                                    <path d="M1.25464 9L4.6001 5L1.25464 1" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </a>
+        <?php } ?>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        function updateBackgroundImages() {
+            const categoryItems = document.querySelectorAll('.underslider-categories--category-item');
+            const isMobile = window.innerWidth < 768;
+
+            categoryItems.forEach(item => {
+                const backgroundImage = isMobile
+                    ? item.getAttribute('data-mobile_background')
+                    : item.getAttribute('data-desktop_background');
+
+                item.style.backgroundImage = `url('${backgroundImage}')`;
+            });
+        }
+
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', updateBackgroundImages);
+
+        // Обновление при изменении размера окна
+        window.addEventListener('resize', updateBackgroundImages);
+    })
+</script>

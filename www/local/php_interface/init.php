@@ -13,6 +13,23 @@ CModule::IncludeModule("intec.eklectika");
 define('IBLOCK_ID_1C', 45);
 define('URL_B24', 'https://testb24.yoliba.ru/');
 
+function pre($o) {
+
+    $bt = debug_backtrace();
+    $bt = $bt[0];
+    $dRoot = $_SERVER["DOCUMENT_ROOT"];
+    $dRoot = str_replace("/", "\\", $dRoot);
+    $bt["file"] = str_replace($dRoot, "", $bt["file"]);
+    $dRoot = str_replace("\\", "/", $dRoot);
+    $bt["file"] = str_replace($dRoot, "", $bt["file"]);
+    ?>
+    <div style='font-size:9pt; color:#000; background:#fff; border:1px dashed #000;text-align: left!important;'>
+        <div style='padding:3px 5px; background:#99CCFF; font-weight:bold;'>File: <?= $bt["file"] ?> [<?= $bt["line"] ?>]</div>
+        <pre style='padding:5px;'><? print_r($o) ?></pre>
+    </div>
+    <?
+}
+
 /**
 * отправить запрос к Б24
 */

@@ -1,0 +1,124 @@
+.feedback-banner{
+    height: 688px;
+    background-color: #FCC233;
+}
+.feedback-banner-data{
+    padding-top: 60px;
+    padding-left: 20px;
+    position: relative;
+    z-index: 1;
+}
+.feedback-banner-data--title{
+    width: 315px;
+    position: relative;
+    top: 0px;
+}
+.feedback-banner-data--title>span{
+    font-family: Manrope;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 36px;
+    letter-spacing: 0;
+    color: #222222;
+}
+.feedback-banner-data--action-btn{
+    background-color: #EF4A85;
+    width: 192px;
+    height: 55px;
+    padding-top: 18px;
+    padding-right: 40px;
+    padding-bottom: 18px;
+    padding-left: 40px;
+
+    border: 0px;
+    outline: none;
+    margin-top: 36px;
+
+    font-family: Manrope;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0;
+    color: #FFFFFF;
+}
+.feedback-banner-data--action-btn:hover{
+    cursor: pointer;
+}
+.feedback-banner--bg-elements{
+    position: absolute;
+    width: 100%;
+    height: 688px;
+    z-index: 0;
+    left: 0;
+}
+.feedback-banner--bg-elements--item{
+    position: absolute;
+    bottom: 0;
+    width: 375px;
+    height: 455px;
+    right: 0;
+
+    display: none;
+}
+.feedback-banner--bg-elements--item.mobile{
+    display: block;
+}
+@media(min-width: 576px){
+    .feedback-banner-data--title{
+        width: 335px;
+    }
+}
+@media(min-width: 768px){
+    .feedback-banner,
+    .feedback-banner--bg-elements{
+        height: 455px;
+    }
+}
+@media(min-width: 768px){
+    .feedback-banner-data{
+        padding-top: 125px;
+    }
+    .feedback-banner-data--title{
+        width: 396px;
+    }
+    .feedback-banner-data--title>span{
+        font-size: 36px;
+    }
+    .feedback-banner--bg-elements--item{
+        display: block;
+        width: 700px;
+    }
+    .feedback-banner--bg-elements--item.mobile{
+        display: none;
+    }
+}
+@media(min-width: 1520px){
+    .feedback-banner--bg-elements--item,
+    .feedback-banner, .feedback-banner--bg-elements{
+        height: 655px;
+    }
+    .feedback-banner--bg-elements--item {
+        width: 1077px;
+    }
+    .feedback-banner-data{
+        padding-left: 0;
+        padding-top: 219px;
+    }
+    .feedback-banner-data--title>span{
+        font-size: 48px;
+        line-height: 62px;
+    }
+    .feedback-banner-data--title{
+        width: 755px;
+    }
+    .feedback-banner-data--action-btn{
+        width: 224px;
+        height: 55px;
+        font-size: 16px;
+        margin-top: 42px;
+    }
+
+    .feedback-banner{
+        margin-top: 18px;
+    }
+}

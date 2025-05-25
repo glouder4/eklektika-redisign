@@ -1,0 +1,296 @@
+.feedback__form{
+    height: 520px;
+    padding-top: 337px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    position: relative;
+}
+.feedback__form--background__elements{
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.feedback__form--form_wrapper{
+    z-index: 1;
+    position: relative;
+}
+.feedback__form--background__element{
+    position: relative;
+    top: 0;
+    right: 0px;
+    left: auto;
+    width: 100%;
+}
+.feedback__form--background__element.desktop{
+    display: none;
+}
+.feedback__form--background__element>img{
+    width: 100%;
+    height: 100%;
+}
+.feedback__form--form_title{
+    position: relative;
+    top: 4px;
+    width: 301px;
+}
+.feedback__form--form_title>span{
+    font-family: Manrope;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 36px;
+    letter-spacing: 0;
+    color: #222222;
+}
+.feedback__form--form{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 23px;
+    margin-top: 29px;
+    position: relative;
+    left: -1px;
+}
+.feedback__form--form--item{
+    height: 31px;
+    width: 100%;
+    padding-bottom: 6px;
+}
+.feedback__form--form--item>input{
+    outline: none;
+    border: 0;
+    background-color:  unset;
+    width: 100%;
+    height: 100%;
+
+    border-bottom: 1px solid #D696AA;
+
+    transition: all 0.4s ease;
+
+    font-family: Manrope;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0;
+}
+.feedback__form--form--item>input::placeholder{
+    font-family: Manrope;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0;
+
+}
+.feedback__form--form--item.textarea{
+    height: 89px;
+}
+.feedback__form--form--item>textarea{
+    outline: none;
+    border: 0;
+    background-color:  unset;
+    width: 100%;
+    height: 100%;
+
+    border-bottom: 1px solid #D696AA;
+    transition: all 0.4s ease;
+
+    font-family: Manrope;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0;
+}
+.feedback__form--form--item>textarea::placeholder{
+    font-family: Manrope;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0;
+
+}
+.feedback__form--form--action_item{
+    margin-top: 7px;
+}
+.feedback__form--form--action_item--send_form{
+    width: 192px;
+    height: 55px;
+    background-color: #EF4A85;
+
+    font-family: Manrope;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0;
+    color: #FFFFFF;
+
+    outline: none;
+    border: 0;
+
+    transition: all 0.3s ease;
+}
+.feedback__form--form--action_item--send_form:hover{
+    cursor: pointer;
+    background-color: #D6306B;
+}
+.feedback__form--form--item>input:focus,
+.feedback__form--form--item>textarea:focus{
+    border-bottom: 1px solid #EF4A85;
+}
+@media(min-width: 576px){
+    .feedback__form{
+        height: 555px;
+        padding-top: 435px;
+    }
+}
+@media(min-width: 576px) and (max-width: 768px){
+    .feedback__form--background__element,
+    .feedback__form--background__elements{
+        height: 508px;
+    }
+}
+@media(min-width: 768px){
+    .feedback__form{
+        padding-top: 45px;
+    }
+    .feedback__form--background__element{
+        width: 500px;
+        margin-left: auto;
+    }
+}
+@media(min-width: 991px){
+    .feedback__form--background__element{
+        display: none;
+    }
+    .feedback__form--background__element.desktop{
+        display: block;
+    }
+
+    .feedback__form{
+        height: 580px;
+        padding-top: 43px;
+        width: 481px;
+        box-sizing: border-box;
+    }
+    .feedback__form--background__elements{
+        height: 580px;
+    }
+    .feedback__form--background__element{
+        height: 100%;
+    }
+    .feedback__form--background__element>img{
+        object-fit: cover;
+    }
+    @media (min-width: 768px) {
+        .feedback__form--background__element {
+            width: 100%;
+        }
+    }
+}
+@media(min-width: 1200px){
+    .feedback__form--form_title{
+        width: 445px;
+    }
+}
+@media(min-width: 1400px){
+    .feedback__form--background__element>img {
+        object-fit: fill;
+    }
+}
+@media(min-width: 1520px){
+    .feedback__form,
+    .feedback__form--background__elements{
+        height: 687px;
+    }
+    .feedback__form{
+        padding-top: 111px;
+        width: 767px;
+    }
+    .feedback__form--background__element>img {
+        object-fit: contain;
+        object-position: top right;
+    }
+    .feedback__form--form_wrapper{
+        left: -20px;
+    }
+    .feedback__form--form_title>span{
+        font-size: 48px;
+        line-height: 61px;
+    }
+    .feedback__form--form_title {
+        width: 767px;
+        top: -4px;
+    }
+    .feedback__form--form{
+        margin-top: 38px;
+        max-width: 525px;
+        flex-wrap: wrap;
+        flex-direction: row;
+    }
+    .feedback__form--form--item{
+        top: 4px;
+        position: relative;
+    }
+    .feedback__form--form--item:nth-child(2){
+        width: 240px;
+    }
+    .feedback__form--form--item:nth-child(3){
+        width: 240px;
+        left: 17px;
+        position: relative;
+    }
+    .feedback__form--form{
+        gap: 35px;
+    }
+    .feedback__form--form--item>input,
+    .feedback__form--form--item>textarea{
+        font-family: Manrope;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 100%;
+        letter-spacing: 0;
+
+        box-sizing: border-box;
+
+        padding-bottom: 6px;
+    }
+    .feedback__form--form--item>input::placeholder,
+    .feedback__form--form--item>textarea::placeholder{
+        font-family: Manrope;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 100%;
+        letter-spacing: 0;
+    }
+
+    .feedback__form--form--item.textarea{
+        height: 72px;
+    }
+
+    .feedback__form--form--item:nth-child(4){
+        position: relative;
+        top: 7px;
+        padding-bottom: 0;
+    }
+    .feedback__form--form--action_item--send_form{
+        width: 224px;
+        height: 55px;
+        padding-top: 15px;
+        padding-right: 40px;
+        padding-bottom: 15px;
+        padding-left: 40px;
+
+        font-family: Manrope;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 100%;
+        letter-spacing: 0;
+    }
+}
+@media(min-width: 1920px){
+    .feedback__form--background__element.desktop{
+        right: calc((100% - 1520px) / 2 - 200px);
+    }
+}
