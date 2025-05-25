@@ -6,41 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a53d02d7-d404-452c-a903-dd81636134fa" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.footer/template.1.custom/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.footer/template.1.custom/template.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.header/template.1.custom/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.header/template.1.custom/template.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.header/template.1.custom/templates/desktop/template.1/view.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.header/template.1.custom/templates/desktop/template.1/view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.slider/old-template.1.custom/.parameters.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.slider/old-template.1.custom/lang/ru/.parameters.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.slider/old-template.1.custom/lang/ru/template.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.slider/old-template.1.custom/modifiers/products.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.slider/old-template.1.custom/parameters/base.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.slider/old-template.1.custom/parameters/lite.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.slider/old-template.1.custom/parameters/product.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.slider/old-template.1.custom/parts/additional.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.slider/old-template.1.custom/parts/additional/view.1.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.slider/old-template.1.custom/parts/additional/view.2.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.slider/old-template.1.custom/parts/additional/view.3.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.slider/old-template.1.custom/parts/buttons/view.1.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.slider/old-template.1.custom/parts/buttons/view.2.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.slider/old-template.1.custom/parts/buttons/view.3.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.slider/old-template.1.custom/parts/buttons/view.4.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.slider/old-template.1.custom/parts/navigation.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.slider/old-template.1.custom/parts/picture.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.slider/old-template.1.custom/parts/product.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.slider/old-template.1.custom/parts/script.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.slider/old-template.1.custom/parts/special.buttons.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.slider/old-template.1.custom/parts/text.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.slider/old-template.1.custom/parts/video.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.slider/old-template.1.custom/result_modifier.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.slider/old-template.1.custom/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.slider/old-template.1.custom/style.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.slider/old-template.1.custom/style.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.slider/old-template.1.custom/svg/navigation.arrow.left.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.slider/old-template.1.custom/svg/navigation.arrow.right.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.slider/old-template.1.custom/template.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.slider/template.1.custom/parts/buttons/onlineserice-view.1.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.slider/template.1.custom/parts/text.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.slider/template.1.custom/parts/text.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.slider/template.1.custom/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.slider/template.1.custom/template.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,19 +23,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "true",
-    "last_opened_file_path": "C:/Git_projects/eklektika-redisign/www/local/templates/universe_s1/components/bitrix/form.result.new/onlineservice-feedback-form-type-1",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Git_projects/eklektika-redisign/www/local/templates/universe_s1/components/bitrix/form.result.new/onlineservice-feedback-form-type-1&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Git_projects\eklektika-redisign\www\local\templates\universe_s1\components\bitrix\form.result.new\onlineservice-feedback-form-type-1" />
@@ -115,6 +80,7 @@
       <workItem from="1747989858558" duration="18514000" />
       <workItem from="1748067715554" duration="15926000" />
       <workItem from="1748168975879" duration="5586000" />
+      <workItem from="1748175758384" duration="1264000" />
     </task>
     <servers />
   </component>
