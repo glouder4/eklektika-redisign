@@ -29,7 +29,9 @@ $arData = [
 ];
 
 ?>
-
+<?php
+if( isset($_GET['test']) ){
+    ?>
     <footer class="footer__main">
         <div class="footer__main-brand_info">
             <div class="footer__main-brand_info-logo">
@@ -260,8 +262,11 @@ $arData = [
             </div>
         </div>
     </footer>
-
-<?php /*= Html::beginTag('div', [
+    <?php
+}
+else{
+    ?>
+<?= Html::beginTag('div', [
     'id' => $sTemplateId,
     'class' => [
         'widget',
@@ -272,30 +277,33 @@ $arData = [
     'data' => [
         'theme' => $arResult['THEME']
     ]
-]) */?><!--
+]) ?>
     <div class="widget-content">
         <div style="display: none;">
             <span class="url">
-                <span class="value-title" title="<?php /*= $sSiteUrl */?>"></span>
+                <span class="value-title" title="<?= $sSiteUrl ?>"></span>
             </span>
             <span class="fn org">
-                <?php /*= $arResult['COMPANY_NAME'] */?>
+                <?= $arResult['COMPANY_NAME'] ?>
             </span>
-            <img class="photo" src="<?php /*= $sSiteUrl.'include/logotype.png' */?>" alt="<?php /*= $arResult['COMPANY_NAME'] */?>" />
+            <img class="photo" src="<?= $sSiteUrl.'include/logotype.png' ?>" alt="<?= $arResult['COMPANY_NAME'] ?>" />
         </div>
-        <?php /*if ($arParams['PRODUCTS_VIEWED_SHOW'] === 'Y') { */?>
+        <?php if ($arParams['PRODUCTS_VIEWED_SHOW'] === 'Y') { ?>
             <div class="widget-part">
-                <?php /*include(__DIR__.'/parts/products.viewed.php') */?>
+                <?php include(__DIR__.'/parts/products.viewed.php') ?>
             </div>
-        <?php /*} */?>
+        <?php } ?>
         <div class="widget-view">
-            <?php /*if (!empty($oTemplate)) { */?>
-                <?php /*= $oTemplate->render(
+            <?php if (!empty($oTemplate)) { ?>
+                <?= $oTemplate->render(
                     $arParams,
                     $arResult,
                     $arData
-                ) */?>
-            <?php /*} */?>
+                ) ?>
+            <?php } ?>
         </div>
     </div>
---><?php /*= Html::endTag('div') */?>
+<?= Html::endTag('div');
+
+        }
+?>
