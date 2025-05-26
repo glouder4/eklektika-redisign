@@ -18,4 +18,18 @@ if ($APPLICATION->GetCurPage(false) === '/'):
     Asset::getInstance()->addJs("/local/templates/universe_s1/onlineservice_addons/components/mainpage/slider/scripts/scripts.js",true);
 
 endif;
+if ($APPLICATION->GetCurPage(false) === '/help/brands/'):
+
+endif;
+
+if ($APPLICATION->GetCurPage(false) === '/help/how-to-request/'):
+    Asset::getInstance()->addCss("/local/templates/onlineservice-custom-template/components/how-to-request/styles/styles.css");
+endif;
+if ($APPLICATION->GetCurPage(false) === '/company/contacts/'):
+    Asset::getInstance()->addCss("/local/templates/onlineservice-custom-template/components/contacts/map/styles/styles.css");
+    Asset::getInstance()->addCss("/local/templates/onlineservice-custom-template/components/contacts/accordion/styles/styles.css");
+    Asset::getInstance()->addCss("/local/templates/onlineservice-custom-template/components/contacts/requisites/styles/styles.css");
+
+    Asset::getInstance()->addJs("/local/templates/onlineservice-custom-template/components/contacts/accordion/scripts/script.js",true);
+endif;
 ?>

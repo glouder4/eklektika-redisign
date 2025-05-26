@@ -1,8 +1,11 @@
 <?php
 $customPages = [
     '/', // главная
-    '/catalog/', // каталог
-    '/about/' // о компании
+    '/help/brands/', // каталог
+    '/shares/', // о компании
+    '/company/news/', // Новости
+    '/help/how-to-request/', // Как заказать
+    '/company/contacts/' // Контакты
 ];
 
 if (in_array($APPLICATION->GetCurPage(), $customPages)) {
@@ -366,11 +369,20 @@ if (in_array($APPLICATION->GetCurPage(), $customPages)) {
             case '/':
                 include($_SERVER['DOCUMENT_ROOT'].'/local/templates/onlineservice-custom-template/mainpage.php');
                 break;
-            case '/catalog/':
-                // Контент для каталога
+            case '/help/brands/':
+                include($_SERVER['DOCUMENT_ROOT'].'/local/templates/onlineservice-custom-template/brands.php');
                 break;
-            case '/about/':
-                // Контент для страницы о компании
+            case '/shares/':
+                include($_SERVER['DOCUMENT_ROOT'].'/local/templates/onlineservice-custom-template/promotions-and-discounts.php');
+                break;
+            case '/company/news/':
+                include($_SERVER['DOCUMENT_ROOT'].'/local/templates/onlineservice-custom-template/news-and-articles.php');
+                break;
+            case '/help/how-to-request/':
+                include($_SERVER['DOCUMENT_ROOT'].'/local/templates/onlineservice-custom-template/how-to-request.php');
+                break;
+            case '/company/contacts/':
+                include($_SERVER['DOCUMENT_ROOT'].'/local/templates/onlineservice-custom-template/contacts.php');
                 break;
         }
 
