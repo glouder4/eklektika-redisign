@@ -29,9 +29,9 @@ $sTemplateId = Html::getUniqueId(null, Component::getUniqueId($this));
             </div>
             <div class="feedback-banner-data">
                 <div class="feedback-banner-data--title">
-                        <span>
-                            Оставьте заявку и&nbsp;с&nbsp;вами свяжутся в&nbsp;течении пары минут
-                        </span>
+                    <span>
+                        Оставьте заявку и&nbsp;с&nbsp;вами свяжутся в&nbsp;течении пары минут
+                    </span>
                 </div>
                 <button class="feedback-banner-data--action-btn" data-action="onlineservice-action.forms.call.open">
                     Оставить заявку

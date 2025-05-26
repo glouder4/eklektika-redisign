@@ -35,30 +35,66 @@ $sTemplateId = Html::getUniqueId(null, Component::getUniqueId($this));
                 <div class="feedback__form--form_title">
                     <span>Оставьте заявку и&nbsp;с&nbsp;вами свяжутся в&nbsp;течении пары минут</span>
                 </div>
-                <div class="feedback__form--form">
+                <form class="feedback__form--form" id="feedback__form--form">
+                    <?=bitrix_sessid_post()?>
+                    <input type="hidden" name="webform_id" value="<?=$arParams['WEB_FORM_ID'];?>">
                     <div class="feedback__form--form--item">
-                        <input class="feedback__form--form--item_name" type="text" placeholder="Имя" />
+                        <input class="feedback__form--form--item_name" name="fio" type="text" placeholder="Имя" />
                     </div>
                     <div class="feedback__form--form--item">
-                        <input class="feedback__form--form--item_email" type="text" placeholder="E-mail" />
+                        <input class="feedback__form--form--item_email" name="email" type="text" placeholder="E-mail" />
                     </div>
                     <div class="feedback__form--form--item">
-                        <input class="feedback__form--form--item_tel" type="text" placeholder="Телефон" />
+                        <input class="feedback__form--form--item_tel" name="phone" type="text" placeholder="Телефон" />
                     </div>
                     <div class="feedback__form--form--item textarea">
-                        <textarea class="feedback__form--form--item_message" placeholder="Ваше сообщение"></textarea>
+                        <textarea class="feedback__form--form--item_message" name="message" placeholder="Ваше сообщение"></textarea>
                     </div>
 
                     <div class="feedback__form--form--action_item">
-                        <button id="feedback__form-SendForm" class="feedback__form--form--action_item--send_form">Оставить заявку</button>
+                        <button type="submit" id="feedback__form-SendForm" class="feedback__form--form--action_item--send_form">Оставить заявку</button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById('feedback__form--form').onsubmit = function (e) {
+            e.preventDefault();
 
+            let form = this;
+            let requiredFields = ['fio', 'phone','webform_id'];
+            let valid = true;
+            requiredFields.forEach(function (name) {
+                let el = form.elements[name];
+                if (!el || !el.value.trim()) {
+                    el.style.borderColor = 'red';
+                    valid = false;
+                } else {
+                    el.style.borderColor = '';
+                }
+            });
+            if (!valid) return;
+
+            let formData = new FormData(form);
+            formData.append('sessid', BX.message && BX.message('bitrix_sessid') ? BX.message('bitrix_sessid') : (form.sessid ? form.sessid.value : ''));
+            formData.append('submit', 'Y');
+
+            fetch('/local/templates/onlineservice-custom-template/ajax/feedback__form--form.php', {
+                method: 'POST',
+                body: formData
+            })
+                .then(r => r.json())
+                .then(data => {
+                    if (data.success) {
+                        form.reset();
+                    } else {
+                        alert(data.error || 'Ошибка отправки');
+                    }
+                })
+                .catch(() => alert('Ошибка соединения'));
+        };
     })
 </script>

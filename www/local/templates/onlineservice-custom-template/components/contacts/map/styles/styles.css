@@ -105,6 +105,15 @@
     color: #FFFFFF;
 
     text-decoration: unset;
+
+    border: 0;
+    outline:none;
+}
+.contacts--map_data--item--action:hover{
+    text-decoration: unset;
+    color: #FFFFFF;
+
+    cursor: pointer;
 }
 .contacts--map_data--item--action:nth-child(1){
     background-color: #EF4A85;
