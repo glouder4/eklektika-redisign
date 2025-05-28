@@ -236,10 +236,10 @@
     top: 4px;
     position: relative;
   }
-  .feedback__form--form--item:nth-child(2){
+  .feedback__form--form--item:nth-child(4){
     width: 240px;
   }
-  .feedback__form--form--item:nth-child(3){
+  .feedback__form--form--item:nth-child(5){
     width: 240px;
     left: 17px;
     position: relative;
@@ -272,7 +272,7 @@
     height: 72px;
   }
 
-  .feedback__form--form--item:nth-child(4){
+  .feedback__form--form--item:nth-child(6){
     position: relative;
     top: 7px;
     padding-bottom: 0;

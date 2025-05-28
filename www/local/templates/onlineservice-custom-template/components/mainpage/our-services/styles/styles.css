@@ -166,3 +166,23 @@
         margin-top: 185px;
     }
 }
+@media(min-width: 1920px){
+    .our-services--list-item:nth-child(1){
+        position: relative;
+        left: -62px;
+    }
+    .our-services--list-item:nth-child(3){
+        position: relative;
+        left: 62px;
+    }
+    .our-services--list-item:nth-child(4){
+        position: relative;
+        top: 25px;
+        left: -21px;
+    }
+    .our-services--list-item:nth-child(5){
+        position: relative;
+        top: 25px;
+        left: 53px;
+    }
+}

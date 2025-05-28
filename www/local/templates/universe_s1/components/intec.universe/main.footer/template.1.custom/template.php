@@ -262,6 +262,18 @@ if( isset($_GET['test']) ){
             </div>
         </div>
     </footer>
+
+    <div style="display: none;" id="promotions-action-popup">
+        <div class="promotions-action-popup-block">
+            <div class="promotions-action-popup-image">
+                <img src="/local/templates/onlineservice-custom-template/components/promotions-and-discounts/promotions/assets/okak.png" alt="">
+            </div>
+            <div class="promotions-action-popup-data">
+                <h2>Если вы это видите</h2>
+                <p>То мы забыли предоставить информацию разработчику, но скоро всё исправим!</p>
+            </div>
+        </div>
+    </div>
     <?php
 }
 else{

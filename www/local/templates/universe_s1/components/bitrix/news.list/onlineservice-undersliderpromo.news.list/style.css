@@ -183,16 +183,23 @@
     height: 515px;
   }
   .category-item-full_size--data_title{
-    top: 50px;
-    left: 50px;
+    top: 37px;
+    left: 41px;
     width: 187px;
   }
   .category-item-full_size--data_title>span{
     font-family: Manrope;
     font-weight: 600;
-    font-size: 36px;
+    font-size: 28px;
     line-height: 125%;
     letter-spacing: 0;
+  }
+  .underslider-categories--category-item:nth-child(1) .category-item-full_size--data_title > span{
+    font-size: 36px;
+  }
+  .underslider-categories--category-item:nth-child(1) .category-item-full_size--data_title{
+    top: 50px;
+    left: 50px;
   }
   .category-item-full_size--data_description{
     top: 75px;
@@ -206,7 +213,7 @@
     letter-spacing: 0.29px;
   }
   .category-item-full_size--data_actions {
-    top: 272px;
+    top: 323px;
     left: 48px;
     position: relative;
   }

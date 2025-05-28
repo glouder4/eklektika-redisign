@@ -123,6 +123,10 @@
 
 	text-decoration: unset;
 }
+.promotions-action_open-popup:hover{
+	color: #FFFFFF;
+	text-decoration: none;
+}
 .promotions-action-popup{
 	width: 95%;
 	max-width: 1520px;

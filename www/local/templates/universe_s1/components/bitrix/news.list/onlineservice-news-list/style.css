@@ -109,6 +109,10 @@
 
 	text-decoration: unset;
 }
+.news-and-articles--action_open-popup:hover{
+	color: #FFFFFF;
+	text-decoration: none;
+}
 @media(min-width: 576px){
 	.news-and-articles--list{
 		flex-direction: row;

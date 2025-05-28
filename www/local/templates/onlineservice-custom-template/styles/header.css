@@ -857,6 +857,7 @@
 
         max-width: 19px;
     }
+    .header__search-btn>.header__icon>svg,
     .header__catalog-btn>.header__icon>svg{
         -webkit-transform: scale(1);
         -ms-transform: scale(1);

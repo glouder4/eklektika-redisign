@@ -48,12 +48,18 @@ $this->setFrameMode(true);
                 />
             </div>
             <div class="promotion--item_title">
-                <span><?=$arItem["NAME"];?></span>
+                <span><?=html_entity_decode($arItem["NAME"]);?></span>
             </div>
         </div>
         <div class="promotion--item--action">
             <div class="promotion--item--action_link">
-                <span>13 марта - 5 апреля</span>
+                <?php
+                    if( isset($arItem['PROPERTIES']) && isset($arItem['PROPERTIES']['PERIOD_AKCII']) && !empty($arItem['PROPERTIES']['PERIOD_AKCII']['~VALUE']) ){
+                ?>
+                  <span><?=$arItem['PROPERTIES']['PERIOD_AKCII']['~VALUE'];?></span>
+                <?php
+                    }
+                ?>
                 <div class="promotion--item--action_link--arrow">
                     <svg xmlns="http://www.w3.org/2000/svg" width="6" height="10" viewBox="0 0 6 10" fill="none">
                         <path d="M1.25415 9L4.59961 5L1.25415 1" stroke="#222222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

@@ -27,6 +27,7 @@
 .categories-slider--item_category-image>img{
     width: auto !important;
     max-width: 74px;
+    max-height: 51px;
     height: auto;
 }
 .categories-slider--item_category-image>img.alternative{
@@ -79,6 +80,7 @@
 }
 .categories-slider--item_category:hover::before{
     opacity: 0;
+    text-align: center;
 }
 .categories-slider--item_category:hover .categories-slider--item_category-image{
     display: none;
@@ -139,6 +141,7 @@
     position: absolute;
     top: 114px;
     left: 30px;
+
 }
 .categories-slider--item_category-title>span{
     font-family: Manrope;
@@ -148,12 +151,13 @@
     letter-spacing: 0.29px;
     color: #222222;
 
-    white-space: nowrap;
+    /*white-space: nowrap;*/
     overflow: hidden;
     text-overflow: ellipsis;
     display: block;
     width: 100%;
     max-width: 215px;
+    max-height: 54px;
 
     transition: all 0.4s ease;
 }

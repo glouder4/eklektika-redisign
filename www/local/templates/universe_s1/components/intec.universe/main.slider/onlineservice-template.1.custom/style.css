@@ -95,6 +95,8 @@
 }
 .fullscreen-slider--slide-data--action_btn:hover{
   background-color: #5F2E90;
+  text-decoration: unset;
+  color: #fff;
 }
 .fullscreen-slider .owl-dots{
   display: flex;

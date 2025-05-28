@@ -25,6 +25,7 @@ $arVisual = $arResult['VISUAL'];
 <div class="container">
     <div class="underslider-categories">
         <?php foreach ($arResult['ITEMS'] as $key => $arItem) {
+            $mobileBanner = CFile::GetPath($arItem['PROPERTIES']['MOBILE_BANNER']['VALUE']);
 
             $sId = $sTemplateId.'_'.$arItem['ID'];
             $sAreaId = $this->GetEditAreaId($sId);
@@ -37,7 +38,7 @@ $arVisual = $arResult['VISUAL'];
             if (!empty($sPicture)) {
                 $sPicture = CFile::ResizeImageGet($sPicture, [
                     'width' => 350,
-                    'height' => 350
+                    'height' => 900
                 ], BX_RESIZE_IMAGE_PROPORTIONAL_ALT);
 
                 if (!empty($sPicture['src']))
@@ -47,15 +48,18 @@ $arVisual = $arResult['VISUAL'];
             if (empty($sPicture))
                 $sPicture = SITE_TEMPLATE_PATH.'/images/picture.missing.png';
 
+            if( empty($mobileBanner) )
+                $mobileBanner = $sPicture;
+
             ?>
 
-            <a href="<?=!$arItem['DATA']['HIDE_LINK'] ? $arItem['DETAIL_PAGE_URL'] : '#';?>" id="<?= $sAreaId ?>" class="underslider-categories--category-item <?=($key == 0) ? "category-item-full_size" : null;?>" data-mobile_background="<?=$sPicture;?>" data-desktop_background="<?=$sPicture;?>" style="background-image: url('<?=$sPicture;?>')">
+            <a href="<?=!$arItem['DATA']['HIDE_LINK'] ? $arItem['DETAIL_PAGE_URL'] : '#';?>" id="<?= $sAreaId ?>" class="underslider-categories--category-item <?=($key == 0) ? "category-item-full_size" : null;?>" data-mobile_background="<?=$mobileBanner;?>" data-desktop_background="<?=$sPicture;?>" style="background-image: url('<?=$sPicture;?>')">
                 <?php
                     $this->AddEditAction($sId, $arItem['EDIT_LINK']);
                     $this->AddDeleteAction($sId, $arItem['DELETE_LINK']);
                 ?>
                 <div class="category-item-full_size--data">
-                    <div class="category-item-full_size--data_title"><span><?=$arItem['NAME'];?></span></div>
+                    <div class="category-item-full_size--data_title"><span><?=html_entity_decode($arItem['NAME']);?></span></div>
                     <?php if($key == 0): ?>
                         <div class="category-item-full_size--data_description">
                             <?= $arItem['DATA']['PREVIEW'] ?>
