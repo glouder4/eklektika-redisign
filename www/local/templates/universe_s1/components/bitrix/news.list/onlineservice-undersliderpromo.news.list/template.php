@@ -53,25 +53,23 @@ $arVisual = $arResult['VISUAL'];
 
             ?>
 
-            <a href="<?=!$arItem['DATA']['HIDE_LINK'] ? $arItem['DETAIL_PAGE_URL'] : '#';?>" id="<?= $sAreaId ?>" class="underslider-categories--category-item <?=($key == 0) ? "category-item-full_size" : null;?>" data-mobile_background="<?=$mobileBanner;?>" data-desktop_background="<?=$sPicture;?>" style="background-image: url('<?=$sPicture;?>')">
+            <a href="<?=!$arItem['DATA']['HIDE_LINK'] ? $arItem['DETAIL_PAGE_URL'] : '#';?>" id="<?= $sAreaId ?>" class="underslider-categories--category-item <?=($key == 0) ? "category-item-full_size" : null;?>" data-mobile_background="<?=$mobileBanner;?>" data-desktop_background="<?=$sPicture;?>" style="background-image: url('<?=($key == 0) ? $sPicture : $sPicture;?>')">
                 <?php
                     $this->AddEditAction($sId, $arItem['EDIT_LINK']);
                     $this->AddDeleteAction($sId, $arItem['DELETE_LINK']);
                 ?>
                 <div class="category-item-full_size--data">
                     <div class="category-item-full_size--data_title"><span><?=html_entity_decode($arItem['NAME']);?></span></div>
-                    <?php if($key == 0): ?>
-                        <div class="category-item-full_size--data_description">
-                            <p><?= html_entity_decode($arItem['PREVIEW_TEXT']); ?></p>
+                    <div class="category-item-full_size--data_description">
+                        <p><?= html_entity_decode($arItem['PREVIEW_TEXT']); ?></p>
+                    </div>
+                    <div class="category-item-full_size--data_actions">
+                        <div class="category-item-full_size--data_actions-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="6" height="10" viewBox="0 0 6 10" fill="none">
+                                <path d="M1.25464 9L4.6001 5L1.25464 1" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
                         </div>
-                        <div class="category-item-full_size--data_actions">
-                            <div class="category-item-full_size--data_actions-link">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="6" height="10" viewBox="0 0 6 10" fill="none">
-                                    <path d="M1.25464 9L4.6001 5L1.25464 1" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </div>
-                        </div>
-                    <?php endif; ?>
+                    </div>
                 </div>
             </a>
         <?php } ?>
@@ -83,13 +81,26 @@ $arVisual = $arResult['VISUAL'];
         function updateBackgroundImages() {
             const categoryItems = document.querySelectorAll('.underslider-categories--category-item');
             const isMobile = window.innerWidth < 768;
+            const firstItem = categoryItems[0];
 
             categoryItems.forEach(item => {
-                const backgroundImage = isMobile
-                    ? item.getAttribute('data-mobile_background')
-                    : item.getAttribute('data-desktop_background');
-
-                item.style.backgroundImage = `url('${backgroundImage}')`;
+                if (item === firstItem) {
+                    if( isMobile ) {
+                        item.style.backgroundImage = `url('${item.getAttribute('data-mobile_background')}')`;
+                    }
+                    else{
+                        item.style.backgroundImage = `url('${item.getAttribute('data-desktop_background')}')`;
+                    }
+                } else {
+                    let backgroundImage = null;
+                    if( isMobile ){
+                        backgroundImage = item.getAttribute('data-desktop_background');
+                    }
+                    else{
+                        backgroundImage = item.getAttribute('data-mobile_background');
+                    }
+                    item.style.backgroundImage = `url('${backgroundImage}')`;
+                }
             });
         }
 
@@ -105,13 +116,52 @@ $arVisual = $arResult['VISUAL'];
 
         categoryItems.forEach(item => {
             item.addEventListener('mouseenter', () => {
-                firstItem.classList.remove('category-item-full_size');
+                // Убираем класс у всех элементов
+                categoryItems.forEach(el => el.classList.remove('category-item-full_size'));
+                // Добавляем класс наведенному элементу
                 item.classList.add('category-item-full_size');
+                
+                // Меняем фон: наведенный элемент получает десктопную версию, остальные - мобильную
+                categoryItems.forEach(el => {
+                    if( window.innerWidth < 768 ){
+                        if (el === item) {
+                            el.style.backgroundImage = `url('${el.getAttribute('data-mobile_background')}')`;
+                        } else {
+                            el.style.backgroundImage = `url('${el.getAttribute('data-desktop_background')}')`;
+                        }
+                    }
+                    else{
+                        if (el === item) {
+                            el.style.backgroundImage = `url('${el.getAttribute('data-desktop_background')}')`;
+                        } else {
+                            el.style.backgroundImage = `url('${el.getAttribute('data-mobile_background')}')`;
+                        }
+                    }
+                });
             });
 
             item.addEventListener('mouseleave', () => {
-                item.classList.remove('category-item-full_size');
+                // Возвращаем класс первому элементу
+                categoryItems.forEach(el => el.classList.remove('category-item-full_size'));
                 firstItem.classList.add('category-item-full_size');
+                
+                // Возвращаем фоны: первый элемент получает десктопную версию, остальные - мобильную
+                categoryItems.forEach(el => {
+                    if( window.innerWidth < 768 ){
+                        if (el === firstItem) {
+                            el.style.backgroundImage = `url('${el.getAttribute('data-mobile_background')}')`;
+                        } else {
+                            el.style.backgroundImage = `url('${el.getAttribute('data-desktop_background')}')`;
+                        }
+                    }
+                    else{
+                        if (el === firstItem) {
+                            el.style.backgroundImage = `url('${el.getAttribute('data-desktop_background')}')`;
+                        } else {
+                            el.style.backgroundImage = `url('${el.getAttribute('data-mobile_background')}')`;
+                        }
+                    }
+                });
             });
         });
     });
