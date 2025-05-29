@@ -93,6 +93,6 @@ $arVisual = $arResult['VISUAL'];
     <?php } ?>
 
     <div class="news-and-articles--action">
-        <a data-fancybox href="#news-action-popup" rel="nofollow" class="news-and-articles--action_open-popup">Показать еще</a>
+        <a data-fancybox href="#promotions-action-popup" rel="nofollow" class="news-and-articles--action_open-popup">Показать еще</a>
     </div>
 </div>

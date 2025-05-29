@@ -515,6 +515,14 @@
     text-overflow: ellipsis; /* Добавляет "..." если текст обрезается */
     width: 100%;           /* Или фиксированная ширина, например 200px */
 }
+@media(max-width: 768px){
+    .ns-bitrix.c-menu.c-menu-horizontal-1 .menu-item.menu-item-section .menu-submenu{
+        display: none!important;
+    }
+}
+.ns-bitrix.c-menu.c-menu-horizontal-1 .menu-item.menu-item-section{
+    background: unset!important;
+}
 @media(max-width: 374px){
     .header__search-row{
         padding-left: 10px;

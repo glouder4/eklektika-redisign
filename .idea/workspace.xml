@@ -6,28 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="a53d02d7-d404-452c-a903-dd81636134fa" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/brands.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/brands.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/components/mainpage/categories-slider/styles/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/components/mainpage/categories-slider/styles/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/components/mainpage/our-services/styles/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/components/mainpage/our-services/styles/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/mainpage.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/mainpage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/news-and-articles.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/news-and-articles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/promotions-and-discounts.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/promotions-and-discounts.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/styles/header.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/styles/header.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/form.result.new/onlineservice-feedback-form-type-2/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/form.result.new/onlineservice-feedback-form-type-2/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/news.list/onlineservice-brands-news.list/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/news.list/onlineservice-brands-news.list/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/news.list/onlineservice-brands-news.list/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/news.list/onlineservice-brands-news.list/template.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/news.list/onlineservice-brands__list/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/news.list/onlineservice-brands__list/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/news.list/onlineservice-brands__list/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/news.list/onlineservice-brands__list/template.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/news.list/onlineservice-discounts/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/news.list/onlineservice-discounts/template.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/styles/template.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/styles/template.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/news.list/onlineservice-news-list/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/news.list/onlineservice-news-list/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/news.list/onlineservice-news-list/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/news.list/onlineservice-news-list/template.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/news.list/onlineservice-promotions/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/news.list/onlineservice-promotions/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/news.list/onlineservice-promotions/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/news.list/onlineservice-promotions/template.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/news.list/onlineservice-undersliderpromo.news.list/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/news.list/onlineservice-undersliderpromo.news.list/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/news.list/onlineservice-undersliderpromo.news.list/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/news.list/onlineservice-undersliderpromo.news.list/template.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.footer/template.1.custom/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.footer/template.1.custom/template.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.slider/onlineservice-template.1.custom/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.slider/onlineservice-template.1.custom/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/onlineservice_addons/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/onlineservice_addons/header.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/onlineservice_addons/styles/header.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/onlineservice_addons/styles/header.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/onlineservice_addons/styles/template.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/onlineservice_addons/styles/template.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +99,8 @@
       <workItem from="1748241273010" duration="3722000" />
       <workItem from="1748258608780" duration="6135000" />
       <workItem from="1748348167102" duration="1282000" />
-      <workItem from="1748422946197" duration="10128000" />
+      <workItem from="1748422946197" duration="13983000" />
+      <workItem from="1748501831214" duration="362000" />
     </task>
     <servers />
   </component>

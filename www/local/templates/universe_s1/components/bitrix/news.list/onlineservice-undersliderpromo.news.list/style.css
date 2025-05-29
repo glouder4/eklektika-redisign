@@ -185,7 +185,7 @@
   .category-item-full_size--data_title{
     top: 37px;
     left: 41px;
-    width: 187px;
+    width: 165px;
   }
   .category-item-full_size--data_title>span{
     font-family: Manrope;
@@ -213,7 +213,7 @@
     letter-spacing: 0.29px;
   }
   .category-item-full_size--data_actions {
-    top: 323px;
+    top: 272px;
     left: 48px;
     position: relative;
   }

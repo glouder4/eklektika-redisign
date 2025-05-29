@@ -14,12 +14,17 @@
     display: block;
 }
 .categories-slider{
-    height: 719px;
+    height: 614px;
 
     width: 336px;
     max-width: 100%;
     margin: auto;
     margin-top: 44px;
+}
+@media(min-width: 576px){
+    .categories-slider{
+        height: 714px;
+    }
 }
 .categories-slider--item_category-image{
 

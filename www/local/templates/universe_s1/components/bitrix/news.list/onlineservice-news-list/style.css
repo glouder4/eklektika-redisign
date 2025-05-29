@@ -109,7 +109,8 @@
 
 	text-decoration: unset;
 }
-.news-and-articles--action_open-popup:hover{
+.news-and-articles--action_open-popup:hover,
+.news-and-articles--action_open-popup:active{
 	color: #FFFFFF;
 	text-decoration: none;
 }

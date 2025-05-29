@@ -25,6 +25,23 @@ body .c-header.c-header-template-1 .widget-view.widget-view-desktop{
 body>.intec-template .intec-template-layout-header-wrapper{
     margin: 0;
 }
+.owl-theme .owl-nav [class*='owl-']:hover{
+    background: unset!important;
+}
+
+a:hover,
+a:focus,
+a:active,
+[data-ui-markup="a"]:hover,
+[data-ui-markup="a"]:focus,
+[data-ui-markup="a"]:active,
+.intec-ui-markup-a:hover,
+.intec-ui-markup-a:focus,
+.intec-ui-markup-a:active{
+    color: #fff!important;
+    text-decoration: unset;
+}
+
 @media(min-width: 375px){
     .container{
         max-width: 375px;

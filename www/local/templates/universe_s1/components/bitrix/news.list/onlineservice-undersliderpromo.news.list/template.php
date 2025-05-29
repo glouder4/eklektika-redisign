@@ -62,7 +62,7 @@ $arVisual = $arResult['VISUAL'];
                     <div class="category-item-full_size--data_title"><span><?=html_entity_decode($arItem['NAME']);?></span></div>
                     <?php if($key == 0): ?>
                         <div class="category-item-full_size--data_description">
-                            <?= $arItem['DATA']['PREVIEW'] ?>
+                            <p><?= html_entity_decode($arItem['PREVIEW_TEXT']); ?></p>
                         </div>
                         <div class="category-item-full_size--data_actions">
                             <div class="category-item-full_size--data_actions-link">
@@ -94,9 +94,25 @@ $arVisual = $arResult['VISUAL'];
         }
 
         // Инициализация при загрузке страницы
-        document.addEventListener('DOMContentLoaded', updateBackgroundImages);
+        updateBackgroundImages();
 
         // Обновление при изменении размера окна
         window.addEventListener('resize', updateBackgroundImages);
-    })
+
+        // Обработка наведения мыши
+        const categoryItems = document.querySelectorAll('.underslider-categories--category-item');
+        const firstItem = categoryItems[0];
+
+        categoryItems.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                firstItem.classList.remove('category-item-full_size');
+                item.classList.add('category-item-full_size');
+            });
+
+            item.addEventListener('mouseleave', () => {
+                item.classList.remove('category-item-full_size');
+                firstItem.classList.add('category-item-full_size');
+            });
+        });
+    });
 </script>
