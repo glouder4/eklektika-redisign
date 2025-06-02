@@ -9,7 +9,7 @@ $customPages = [
 ];
 
 if (in_array($APPLICATION->GetCurPage(), $customPages)) {
-    if( isset($_GET['test']) ){
+
         // Перехватываем отображение страницы
         echo "<div id='panel'>".$APPLICATION->ShowPanel()."</div>";
         $APPLICATION->IncludeComponent(
@@ -389,7 +389,7 @@ if (in_array($APPLICATION->GetCurPage(), $customPages)) {
         $footerPath = $_SERVER['DOCUMENT_ROOT'].'/local/templates/universe_s1/footer.php';
         require_once($footerPath);
         die();
-    }
+
 }
 ?>
 

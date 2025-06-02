@@ -33,7 +33,9 @@ a:hover, a:focus, a:active, [data-ui-markup="a"]:hover, [data-ui-markup="a"]:foc
     color: #fff;
     text-decoration: unset;
 }
-
+.c-header-template-1 .widget-view-mobile{
+    display: none!important;
+}
 @media(min-width: 375px){
     .container{
         max-width: 375px;
