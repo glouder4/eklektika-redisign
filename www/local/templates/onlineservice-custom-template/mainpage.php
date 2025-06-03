@@ -394,7 +394,7 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
                     <p>Широкий выбор технологий нанесения изображений и&nbsp;логотипов на&nbsp;сувенирную продукцию. Мы&nbsp;подбираем оптимальный метод в&nbsp;зависимости от&nbsp;материала, тиража и&nbsp;желаемого эффекта.</p>
                 </div>
                 <div class="our-services--list-item--action">
-                    <a href="#" class="our-services--list-item--action_btn">Подробнее</a>
+                    <a href="/nanesenie/" class="our-services--list-item--action_btn">Подробнее</a>
                 </div>
             </div>
             <div class="our-services--list-item">
@@ -448,7 +448,7 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
                     <p>Скидки WELCOM и&nbsp;система скидок для&nbsp;постоянных клиентов. Программа привилегий и&nbsp;бонусов для&nbsp;дилеров.</p>
                 </div>
                 <div class="our-services--list-item--action">
-                    <a href="#" class="our-services--list-item--action_btn">Подробнее</a>
+                    <a href="/shares/" class="our-services--list-item--action_btn">Подробнее</a>
                 </div>
             </div>
         </div>

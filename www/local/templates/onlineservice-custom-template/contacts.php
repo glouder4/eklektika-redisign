@@ -1,3 +1,6 @@
+<?php
+$APPLICATION->SetTitle("Контакты");
+?>
 <div class="container">
     <?$APPLICATION->IncludeComponent(
         "bitrix:breadcrumb",

@@ -29,12 +29,22 @@ body>.intec-template .intec-template-layout-header-wrapper{
     background: unset!important;
 }
 
-a:hover, a:focus, a:active, [data-ui-markup="a"]:hover, [data-ui-markup="a"]:focus, [data-ui-markup="a"]:active, .intec-ui-markup-a:hover, .intec-ui-markup-a:focus, .intec-ui-markup-a:active{
-    color: #fff;
+a:hover,
+a:focus,
+a:active, [data-ui-markup="a"]:hover, [data-ui-markup="a"]:focus, [data-ui-markup="a"]:active, .intec-ui-markup-a:hover, .intec-ui-markup-a:focus, .intec-ui-markup-a:active{
+    color: #fff!important;
     text-decoration: unset;
 }
 .c-header-template-1 .widget-view-mobile{
     display: none!important;
+}
+.ns-bitrix.c-menu.c-menu-horizontal-1 .menu-item:hover{
+    background-color: unset!important;
+}
+@media(max-width: 768px){
+    .ns-bitrix.c-menu.c-menu-horizontal-1 .menu-item.menu-item-section .menu-submenu{
+        display: none!important;
+    }
 }
 @media(min-width: 375px){
     .container{

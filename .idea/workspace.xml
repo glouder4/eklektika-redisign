@@ -6,14 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="a53d02d7-d404-452c-a903-dd81636134fa" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/components/news-and-articles/styles/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/components/news-and-articles/styles/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/contacts.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/contacts.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/styles/template.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/styles/template.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.footer/template.1.custom/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.footer/template.1.custom/template.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.header/template.1.custom/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.header/template.1.custom/template.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.header/template.1.custom/bitrix/system.auth.form/onlineservice-panel/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.header/template.1.custom/bitrix/system.auth.form/onlineservice-panel/template.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.header/template.1.custom/templates/desktop/template.1/view.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.header/template.1.custom/templates/desktop/template.1/view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.header/template.1.custom/templates/mobile/template.1/view.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.header/template.1.custom/templates/mobile/template.1/view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/onlineservice_addons/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/onlineservice_addons/header.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/onlineservice_addons/styles/template.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/onlineservice_addons/styles/template.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/parts/custom/body.start.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/parts/custom/body.start.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +34,11 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.highlight.mappings&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.highlight.symlinks&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.show.date&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.show.permissions&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.show.size&quot;: &quot;false&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Git_projects/eklektika-redisign/www/local/templates/universe_s1/components/bitrix/news.list&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -98,6 +102,8 @@
       <workItem from="1748422946197" duration="13983000" />
       <workItem from="1748501831214" duration="5410000" />
       <workItem from="1748845883997" duration="1965000" />
+      <workItem from="1748875704386" duration="1334000" />
+      <workItem from="1748958789775" duration="4012000" />
     </task>
     <servers />
   </component>
