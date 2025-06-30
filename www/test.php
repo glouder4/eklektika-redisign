@@ -32,6 +32,6 @@ $companyId = Company::add([
 // ]);
 // Company::addProfile(67, 79074);
 
-
+phpinfo();
 ?>
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

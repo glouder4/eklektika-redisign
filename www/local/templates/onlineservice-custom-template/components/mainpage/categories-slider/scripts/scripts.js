@@ -12,13 +12,19 @@ document.addEventListener("DOMContentLoaded", function() {
             576: {
                 items: 3
             },
+            768: {
+                items: 4
+            },
+            991: {
+                items: 5
+            },
             1200: {
                 items: 5,
-                margin: 10,
+                margin: 10
             },
             1520: {
                 items: 5,
-                margin: 15,
+                margin: 15
             }
         }
     })

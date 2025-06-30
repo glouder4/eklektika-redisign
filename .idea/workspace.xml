@@ -5,14 +5,42 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a53d02d7-d404-452c-a903-dd81636134fa" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/www/design-studiya/index.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/catalog.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/company.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/components/catalog/styles/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/components/company/styles/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/components/design-studiya/styles/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/components/dostavka/styles/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/components/loyalty-program/styles/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/components/oplata/styles/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/components/our-production/styles/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/components/services/styles/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/components/vidy-naneseniy/styles/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/design-studiya.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/dostavka.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/loyalty-program.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/oplata.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/our-production.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/services.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/vidy-naneseniy.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/components/news-and-articles/styles/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/components/news-and-articles/styles/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/contacts.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/contacts.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/styles/template.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/styles/template.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apache2.conf" beforeDir="false" afterPath="$PROJECT_DIR$/apache2.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/components/breadcrumbs/styles/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/components/breadcrumbs/styles/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/components/mainpage/categories-slider/scripts/scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/components/mainpage/categories-slider/scripts/scripts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/components/mainpage/categories-slider/styles/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/components/mainpage/categories-slider/styles/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/how-to-request.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/how-to-request.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.footer/template.1.custom/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.footer/template.1.custom/template.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.header/template.1.custom/bitrix/system.auth.form/onlineservice-panel/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.header/template.1.custom/bitrix/system.auth.form/onlineservice-panel/template.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.header/template.1.custom/templates/desktop/template.1/view.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.header/template.1.custom/templates/desktop/template.1/view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/onlineservice_addons/styles/template.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/onlineservice_addons/styles/template.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.slider/onlineservice-template.1.custom/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.slider/onlineservice-template.1.custom/template.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/css/custom.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/css/custom.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/onlineservice_addons/components/breadcrumbs/styles/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/onlineservice_addons/components/breadcrumbs/styles/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/onlineservice_addons/components/mainpage/slider/scripts/scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/onlineservice_addons/components/mainpage/slider/scripts/scripts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/onlineservice_addons/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/onlineservice_addons/header.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/parts/custom/body.start.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/parts/custom/body.start.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/services/.section.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/services/.section.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/services/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/services/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/test.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/test.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +67,7 @@
     &quot;WebServerToolWindowPanel.toolwindow.show.date&quot;: &quot;false&quot;,
     &quot;WebServerToolWindowPanel.toolwindow.show.permissions&quot;: &quot;false&quot;,
     &quot;WebServerToolWindowPanel.toolwindow.show.size&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Git_projects/eklektika-redisign/www/local/templates/universe_s1/components/bitrix/news.list&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Git_projects/35media&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -57,11 +85,11 @@
       <recent name="C:\Git_projects\eklektika-redisign\www\local\templates\universe_s1\components\bitrix\form.result.new\onlineservice-feedback-form-type-1" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Git_projects\eklektika-redisign\www" />
       <recent name="C:\Git_projects\eklektika-redisign\www\local\templates\onlineservice-custom-template" />
       <recent name="C:\Git_projects\eklektika-redisign\www\local\templates\onlineservice-custom-template\components\brands\brands-list" />
       <recent name="C:\Git_projects\eklektika-redisign\components\contacts\map" />
       <recent name="C:\Git_projects\eklektika-redisign\components\promotions-and-discounts\promotions" />
-      <recent name="C:\Git_projects\eklektika-redisign\components\mainpage\slider\assets" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -103,7 +131,25 @@
       <workItem from="1748501831214" duration="5410000" />
       <workItem from="1748845883997" duration="1965000" />
       <workItem from="1748875704386" duration="1334000" />
-      <workItem from="1748958789775" duration="4012000" />
+      <workItem from="1748958789775" duration="4891000" />
+      <workItem from="1749631429775" duration="800000" />
+      <workItem from="1750161698950" duration="7484000" />
+      <workItem from="1750315744226" duration="9038000" />
+      <workItem from="1750411285785" duration="588000" />
+      <workItem from="1750414613390" duration="4177000" />
+      <workItem from="1750444816199" duration="15000" />
+      <workItem from="1750596962216" duration="2416000" />
+      <workItem from="1750612202219" duration="2926000" />
+      <workItem from="1750677631150" duration="57000" />
+      <workItem from="1750677691811" duration="1300000" />
+      <workItem from="1750696710031" duration="8908000" />
+      <workItem from="1750762126874" duration="1190000" />
+      <workItem from="1750830623880" duration="2000" />
+      <workItem from="1750831603723" duration="5048000" />
+      <workItem from="1750838429725" duration="4000" />
+      <workItem from="1750922289158" duration="10418000" />
+      <workItem from="1751020013673" duration="7995000" />
+      <workItem from="1751275716714" duration="3708000" />
     </task>
     <servers />
   </component>

@@ -64,8 +64,17 @@
     }
     .page__title-wrapper{
         padding-left: 0;
+        position: relative;
+        top: 6px;
     }
     .page__title-wrapper-title{
         font-size: 48px;
+    }
+}
+@media(min-width: 1920px){
+    .breadcrumbs{
+        position: relative;
+        top: 10px;
+        left: 2px;
     }
 }

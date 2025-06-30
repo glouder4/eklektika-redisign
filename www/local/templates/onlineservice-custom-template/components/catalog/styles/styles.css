@@ -1,0 +1,126 @@
+.content-description{
+    margin-top: 35px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.catalog-section-content{
+    margin-top: 35px;
+    margin-bottom: 64px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.content-description>p{
+    font-family: Manrope;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 135%;
+    letter-spacing: 0;
+    color: #222222;
+}
+.catalog-section-content .cards-list{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+.cards-list-item{
+    border: 4px solid #744A9E;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 35px;
+    padding-top: 29px;
+
+    width: 100%;
+}
+.cards-list-item .cards-list-item--title .title{
+    font-family: Manrope;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 135%;
+    letter-spacing: 0;
+    text-align: center;
+    color: #222222;
+
+    margin: 0;
+}
+.cards-list-item--description{
+    margin-top: 35px;
+    height: 65px;
+}
+.cards-list-item--description p{
+    font-family: Manrope;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 135%;
+    letter-spacing: 0;
+    text-align: center;
+    color: #222222;
+    margin: 0;
+}
+.cards-list-item--action{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.cards-list-item--action_btn{
+    background-color: #744A9E;
+    font-family: Manrope;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0;
+    color: #FFFFFF;
+    width: auto;
+    height: 55px;
+    padding-left: 40px;
+    padding-right: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+@media(min-width: 576px){
+    .content-description{
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    .catalog-section-content{
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}
+@media(min-width: 991px){
+    .catalog-section-content .cards-list{
+        flex-direction: row;
+    }
+    .cards-list-item{
+        max-width: 491px;
+    }
+}
+@media(min-width: 1520px){
+    .content-description{
+        margin-top: 64px;
+    }
+    .catalog-section-content{
+        margin-top: 54px;
+        margin-bottom: 139px;
+    }
+    .content-description>p{
+        font-size: 20px;
+        line-height: 135%;
+    }
+    .cards-list-item .cards-list-item--title .title{
+        font-size: 20px;
+    }
+    .cards-list-item--description p{
+        font-size: 16px;
+    }
+    .cards-list-item--action_btn{
+        font-size: 16px;
+    }
+    .cards-list-item{
+        width: 491px;
+    }
+}

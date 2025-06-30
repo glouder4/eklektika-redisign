@@ -1,8 +1,8 @@
 <?php require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetPageProperty("keywords", "Нанесение");
-$APPLICATION->SetPageProperty("description", "Нанесение");
+$APPLICATION->SetPageProperty("keywords", "Услуги");
+$APPLICATION->SetPageProperty("description", "Услуги");
 
-$APPLICATION->SetTitle("Нанесение");
+$APPLICATION->SetTitle("Услуги");
 
 ?>
 <?php $APPLICATION->IncludeComponent(

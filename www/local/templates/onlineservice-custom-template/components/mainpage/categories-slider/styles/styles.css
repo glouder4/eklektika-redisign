@@ -191,6 +191,16 @@
         width: 509px;
     }
 }
+@media (min-width: 768px) {
+    .categories-slider{
+        width: 722px;
+    }
+}
+@media (min-width: 991px) {
+    .categories-slider {
+        width: 928px;
+    }
+}
 @media(min-width: 1200px){
     .categories-slider--container-title>.title{
         font-size: 48px;
@@ -203,7 +213,12 @@
         height: 188px;
     }
     .categories-slider{
-        width: 1200px;
+        width: 1161px;
+    }
+}
+@media(min-width: 1330px){
+    .categories-slider{
+        width: 1255px;
     }
 }
 @media(min-width: 1520px){

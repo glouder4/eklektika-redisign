@@ -5,7 +5,16 @@ $customPages = [
     '/shares/', // о компании
     '/company/news/', // Новости
     '/help/how-to-request/', // Как заказать
-    '/company/contacts/' // Контакты
+    '/company/contacts/', // Контакты
+    '/catalog/', //Купить
+    '/dostavka/', // Способы доставки
+    '/design-studiya/', // Дизайн студия
+    '/our-production/', // Наше производство, служба качества
+    '/loyalty-program/', //Программа лояльности
+    '/services/', // Услуги
+    '/oplata/', // Способы оплаты
+    '/company/', //О компании
+    '/vidy-naneseniy/', //Виды нанесений
 ];
 
 if (in_array($APPLICATION->GetCurPage(), $customPages)) {
@@ -383,6 +392,33 @@ if (in_array($APPLICATION->GetCurPage(), $customPages)) {
                 break;
             case '/company/contacts/':
                 include($_SERVER['DOCUMENT_ROOT'].'/local/templates/onlineservice-custom-template/contacts.php');
+                break;
+            case '/catalog/':
+                include($_SERVER['DOCUMENT_ROOT'].'/local/templates/onlineservice-custom-template/catalog.php');
+                break;
+            case '/dostavka/':
+                include($_SERVER['DOCUMENT_ROOT'].'/local/templates/onlineservice-custom-template/dostavka.php');
+                break;
+            case '/design-studiya/':
+                include($_SERVER['DOCUMENT_ROOT'].'/local/templates/onlineservice-custom-template/design-studiya.php');
+                break;
+            case '/our-production/':
+                include($_SERVER['DOCUMENT_ROOT'].'/local/templates/onlineservice-custom-template/our-production.php');
+                break;
+            case '/loyalty-program/':
+                include($_SERVER['DOCUMENT_ROOT'].'/local/templates/onlineservice-custom-template/loyalty-program.php');
+                break;
+            case '/services/':
+                include($_SERVER['DOCUMENT_ROOT'].'/local/templates/onlineservice-custom-template/services.php');
+                break;
+            case '/oplata/':
+                include($_SERVER['DOCUMENT_ROOT'].'/local/templates/onlineservice-custom-template/oplata.php');
+                break;
+            case '/company/':
+                include($_SERVER['DOCUMENT_ROOT'].'/local/templates/onlineservice-custom-template/company.php');
+                break;
+            case '/vidy-naneseniy/':
+                include($_SERVER['DOCUMENT_ROOT'].'/local/templates/onlineservice-custom-template/vidy-naneseniy.php');
                 break;
         }
 

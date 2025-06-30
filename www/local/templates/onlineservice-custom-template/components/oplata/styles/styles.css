@@ -1,0 +1,206 @@
+.services--list{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    gap: 50px;
+
+    margin-top: 50px;
+
+    padding-left: 20px;
+    padding-right: 20px;
+
+    margin-bottom: 75px;
+}
+.service--item{
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+}
+.service--item--title>.title{
+    font-family: Manrope;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 125%;
+    letter-spacing: 0;
+    text-align: center;
+    color: #222222;
+
+    display: block;
+}
+.service--item--description{
+    margin-top: 20px;
+}
+.service--item--description>p{
+    font-family: Manrope;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: 0.29px;
+    text-align: center;
+    color: #222222;
+}
+.service--item--action{
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.service--item--action>.btn{
+    font-family: Manrope;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: 0.29px;
+    text-align: center;
+
+    color: #744A9E;
+}
+.service--item--action>.btn:hover,
+.service--item--action>.btn:focus,
+.service--item--action>.btn:active{
+    color: #744A9E!important;
+}
+
+.oplata-description--title>.title{
+    font-family: Manrope;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 125%;
+    letter-spacing: 0;
+    color: #222222;
+}
+.oplata-description--text>.text{
+    font-family: Manrope;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: 0.29px;
+    color: #222222;
+}
+.oplata-description--section{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    padding-left: 20px;
+    padding-right: 20px;
+
+    margin-bottom: 35px;
+}
+
+.oplata-modal-body{
+
+}
+.oplata-modal-title>.title{
+    font-family: Manrope;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 125%;
+    letter-spacing: 0;
+}
+.oplata-modal-description{
+    margin-top: 30px;
+}
+.oplata-modal-description>p.description{
+    font-family: Manrope;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 150%;
+    letter-spacing: 0.29px;
+}
+#oplata-modal{
+    max-width: 1520px;
+}
+@media(min-width: 768px){
+    .services--list{
+        justify-content: center;
+    }
+    .service--item{
+        width: 46%;
+    }
+}
+@media(min-width: 1200px){
+    .service--item{
+        width: 30%;
+    }
+}
+@media(min-width: 1920px){
+    .services--list{
+        padding: 0;
+        row-gap: 50px;
+        margin-top: 66px;
+        margin-bottom: 31px;
+
+        column-gap: 0;
+    }
+    .service--item--title>.title{
+        font-size: 28px;
+    }
+    .service--item--description>p{
+        font-size: 16px;
+    }
+    .service--item--action>.btn{
+        font-size: 16px;
+    }
+
+    .service--item{
+        position: relative;
+        box-sizing: border-box;
+        width: 33%;
+    }
+    .service--item--title{
+        margin-top: 35px;
+    }
+    .service--item:nth-child(1){
+        left: -40px;
+        top: 0px;
+    }
+    .service--item:nth-child(1) .service--item--description{
+        width: 332px;
+    }
+    .service--item:nth-child(2){
+        left: 22px;
+        top: 0px;
+    }
+    .service--item:nth-child(2) .service--item--description{
+        width: 370px;
+    }
+    .service--item:nth-child(3){
+        left: 38px;
+        top: 27px;
+    }
+    .service--item:nth-child(3) .service--item--description{
+        width: 342px;
+    }
+    .service--item:nth-child(4){
+        left: -23px;
+    }
+    .service--item:nth-child(4) .service--item--description{
+        width: 346px;
+    }
+    .service--item:nth-child(5){
+        left: 57px;
+    }
+    .service--item:nth-child(5) .service--item--description{
+        width: 307px;
+    }
+    .service--item--action {
+        margin-top: 10px;
+    }
+
+    .oplata-description--section{
+        padding: 0;
+        margin-bottom: 119px;
+    }
+
+    .oplata-description--title>.title{
+        font-size: 28px;
+    }
+    .oplata-description--text>.text{
+        font-size: 20px;
+    }
+}

@@ -39,7 +39,6 @@ services:
       && a2enmod filter
       && a2enmod deflate
       && a2enmod status
-      && a2enmod autoindex
       && a2enmod negotiation
       && a2enmod authz_core
       && a2enmod authz_host

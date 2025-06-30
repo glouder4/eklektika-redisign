@@ -61,8 +61,8 @@ die();*/
         ?>
         <div class="fullscreen-slider--slide">
             <?php
-                $sPictureMobile = $arData['MOBILE']['PICTURE']['USE'] ? $arData['MOBILE']['PICTURE']['VALUE']['SRC'] : $sPicture;
-                //$mainPicture = $arData['PICTURE']['VALUE']['SRC'];
+            $sPictureMobile = $arData['MOBILE']['PICTURE']['USE'] ? $arData['MOBILE']['PICTURE']['VALUE']['SRC'] : $sPicture;
+            //$mainPicture = $arData['PICTURE']['VALUE']['SRC'];
             ?>
             <div class="fullscreen-slider--slide_mobile-slide">
                 <img src="<?=$sPictureMobile;?>" alt="Название слайда 1">
@@ -131,6 +131,7 @@ die();*/
             autoplay: <?=$arParams['SLIDER_AUTO_USE'] == "Y";?>,
             autoplayTimeout: <?=$arParams['SLIDER_AUTO_TIME'];?>,
             autoplayHoverPause: <?=$arParams['SLIDER_AUTO_HOVER'] == "Y";?>,
+            animateOut: 'fadeOut'
         });
     })
 </script>
