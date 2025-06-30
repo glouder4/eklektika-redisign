@@ -778,6 +778,7 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
         "bitrix:form.result.new",
         "onlineservice-feedback-form-type-2",
         Array(
+            "IMAGE" => 2,
             "CACHE_TIME" => "3600",
             "CACHE_TYPE" => "A",
             "CHAIN_ITEM_LINK" => "",

@@ -1,0 +1,10 @@
+@media (min-width: 1920px) {
+    .alert-card {
+        padding: 50px;
+        padding-left: 65px;
+        padding-right: 65px;
+        padding-top: 65px;
+        height: 269px;
+        gap: 18px;
+    }
+}

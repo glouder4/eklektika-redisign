@@ -817,7 +817,7 @@
         text-decoration: unset;
     }
     .header__navigation-list--item-link:hover{
-        color: #858585;
+        color: #858585!important;
         list-style: none;
         text-decoration: unset;
     }

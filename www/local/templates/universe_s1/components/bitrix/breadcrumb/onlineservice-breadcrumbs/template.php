@@ -1,6 +1,7 @@
 <?php if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
 
 include(__DIR__.'/result_modifier.php');
+include(__DIR__.'/result.php');
 
 use Bitrix\Main\Loader;
 use Bitrix\Main\Localization\Loc;

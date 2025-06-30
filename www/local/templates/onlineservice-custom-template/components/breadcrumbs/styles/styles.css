@@ -25,6 +25,16 @@
 .breadcrumbs__list--item.current-item .breadcrumbs__list--item_link{
     color: #989898;
 }
+.breadcrumbs__list--item_link:hover,
+.breadcrumbs__list--item_link:active,
+.breadcrumbs__list--item_link:focus{
+    color: #222222!important;
+}
+.breadcrumbs__list--item.current-item .breadcrumbs__list--item_link:hover,
+.breadcrumbs__list--item.current-item .breadcrumbs__list--item_link:active,
+.breadcrumbs__list--item.current-item .breadcrumbs__list--item_link:focus{
+    color: #989898!important;
+}
 .breadcrumbs__list--item--separator span{
     font-family: Manrope;
     font-weight: 400;

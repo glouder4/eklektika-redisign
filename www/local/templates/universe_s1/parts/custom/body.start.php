@@ -1,4 +1,6 @@
 <?php
+use Bitrix\Main\Context;
+
 $customPages = [
     '/', // главная
     '/help/brands/', // каталог
@@ -15,6 +17,14 @@ $customPages = [
     '/oplata/', // Способы оплаты
     '/company/', //О компании
     '/vidy-naneseniy/', //Виды нанесений
+    '/services/s_dtf_pechat/',
+    '/services/s_tampopechat/',
+    '/services/s_lazernaya-gravirovka/',
+    '/services/s_polnocvetnaya-uf-pechat/',
+    '/services/s_tisnenie/',
+    '/services/s_sublimacionnaya_pechat/',
+    '/services/s_shelkografiya/',
+    '/services/e_nanesenie-logotipov-na-ezhednevniki/'
 ];
 
 if (in_array($APPLICATION->GetCurPage(), $customPages)) {
@@ -373,7 +383,7 @@ if (in_array($APPLICATION->GetCurPage(), $customPages)) {
             false
         );
 
-        // Здесь будет ваш кастомный контент
+        // Кастомные страницы
         switch($APPLICATION->GetCurPage()) {
             case '/':
                 include($_SERVER['DOCUMENT_ROOT'].'/local/templates/onlineservice-custom-template/mainpage.php');
@@ -421,6 +431,35 @@ if (in_array($APPLICATION->GetCurPage(), $customPages)) {
                 include($_SERVER['DOCUMENT_ROOT'].'/local/templates/onlineservice-custom-template/vidy-naneseniy.php');
                 break;
         }
+
+        /* Услуги */
+        switch($APPLICATION->GetCurPage()) {
+            case '/services/s_dtf_pechat/':
+                include($_SERVER['DOCUMENT_ROOT'] . '/local/templates/onlineservice-custom-template/services/s_dtf_pechat.php');
+                break;
+            case '/services/s_tampopechat/':
+                include($_SERVER['DOCUMENT_ROOT'] . '/local/templates/onlineservice-custom-template/services/s_tampopechat.php');
+                break;
+            case '/services/s_lazernaya-gravirovka/':
+                include($_SERVER['DOCUMENT_ROOT'] . '/local/templates/onlineservice-custom-template/services/s_lazernaya-gravirovka.php');
+                break;
+            case '/services/s_polnocvetnaya-uf-pechat/':
+                include($_SERVER['DOCUMENT_ROOT'] . '/local/templates/onlineservice-custom-template/services/s_polnocvetnaya-uf-pechat.php');
+                break;
+            case '/services/s_tisnenie/':
+                include($_SERVER['DOCUMENT_ROOT'] . '/local/templates/onlineservice-custom-template/services/s_tisnenie.php');
+                break;
+            case '/services/s_sublimacionnaya_pechat/':
+                include($_SERVER['DOCUMENT_ROOT'] . '/local/templates/onlineservice-custom-template/services/s_sublimacionnaya_pechat.php');
+                break;
+            case '/services/s_shelkografiya/':
+                include($_SERVER['DOCUMENT_ROOT'] . '/local/templates/onlineservice-custom-template/services/s_shelkografiya.php');
+                break;
+            case '/services/e_nanesenie-logotipov-na-ezhednevniki/':
+                include($_SERVER['DOCUMENT_ROOT'] . '/local/templates/onlineservice-custom-template/services/e_nanesenie-logotipov-na-ezhednevniki.php');
+                break;
+        }
+
 
         $footerPath = $_SERVER['DOCUMENT_ROOT'].'/local/templates/universe_s1/footer.php';
         require_once($footerPath);
