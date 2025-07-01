@@ -25,6 +25,7 @@
 .news-and-articles--item_image>img{
     width: 100%;
     height: 100%;
+    object-fit: cover;
 }
 .news-and-articles--item_data-date>span{
     font-family: Manrope;

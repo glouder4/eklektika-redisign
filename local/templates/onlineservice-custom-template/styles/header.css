@@ -279,7 +279,7 @@
 
 .mobile-menu {
     position: fixed;
-    top: 103px; left: 0; right: 0; bottom: 0;
+    top: 63px; left: 0; right: 0; bottom: 0;
     background: #7B4FA3;
     z-index: 1000;
     -webkit-transform: translateX(100%);
@@ -381,7 +381,8 @@
     top: -2px;
     right: -1px;
 }
-.mobile-menu__sub li {
+.mobile-menu__sub li,
+.mobile-menu__sub li a{
     color: #fff;
     padding: 0;
     height: 16px;
@@ -809,7 +810,7 @@
         text-decoration: unset;
     }
     .header__navigation-list--item-link:hover{
-        color: #858585;
+        color: #858585!important;
         list-style: none;
         text-decoration: unset;
     }
@@ -857,6 +858,7 @@
 
         max-width: 19px;
     }
+    .header__search-btn>.header__icon>svg,
     .header__catalog-btn>.header__icon>svg{
         -webkit-transform: scale(1);
         -ms-transform: scale(1);

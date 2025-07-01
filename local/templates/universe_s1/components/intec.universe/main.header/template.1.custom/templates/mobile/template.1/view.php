@@ -19,9 +19,7 @@ $sTemplateId = $arData['id'];
 $sTemplateType = $arData['type'];
 
 ?>
-<?php
-if( !isset($_GET['test']) ){
-?>
+
 <?= Html::beginTag('div', [
     'class' => Html::cssClassFromArray([
         'widget-view-mobile-1' => [
@@ -98,6 +96,3 @@ if( !isset($_GET['test']) ){
 </div>
 <?php //$APPLICATION->ShowViewContent('template-header-mobile-after') ?>
 <?= Html::endTag('div') ?>
-    <?php
-}
- ?>

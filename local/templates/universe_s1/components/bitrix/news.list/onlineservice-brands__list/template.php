@@ -13,19 +13,22 @@
 $this->setFrameMode(true);
 ?>
 <div class="brands__list">
-<?if($arParams["DISPLAY_TOP_PAGER"]):?>
-	<?=$arResult["NAV_STRING"]?><br />
-<?endif;?>
+
 <?foreach($arResult["ITEMS"] as $arItem):?>
 	<?
 	$this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));
 	$this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM')));
+
+    $picture = $arItem["PREVIEW_PICTURE"]["SRC"];
+    $hoverPicture = $arItem["DETAIL_PICTURE"]["SRC"];
+    if( empty($hoverPicture) )
+        $hoverPicture = $picture;
 	?>
     <div class="brands__list--item">
         <img
                 class="preview_picture"
                 border="0"
-                src="<?=$arItem["PREVIEW_PICTURE"]["SRC"]?>"
+                src="<?=$picture?>"
                 alt="<?=$arItem["PREVIEW_PICTURE"]["ALT"]?>"
                 title="<?=$arItem["PREVIEW_PICTURE"]["TITLE"]?>"
                 draggable="false"
@@ -33,7 +36,7 @@ $this->setFrameMode(true);
         <img
                 class="hover"
                 border="0"
-                src="<?=$arItem["PREVIEW_PICTURE"]["SRC"]?>"
+                src="<?=$hoverPicture?>"
                 alt="<?=$arItem["PREVIEW_PICTURE"]["ALT"]?>"
                 title="<?=$arItem["PREVIEW_PICTURE"]["TITLE"]?>"
                 draggable="false"

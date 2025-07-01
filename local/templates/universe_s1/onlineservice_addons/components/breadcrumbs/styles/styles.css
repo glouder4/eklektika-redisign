@@ -69,3 +69,13 @@
         font-size: 48px;
     }
 }
+@media(min-width: 1920px){
+    .page__title-wrapper{
+        position: relative;
+        top: 6px;
+    }
+    #breadcrumbs{
+        posiiton: relative;
+        top: 10px;
+    }
+}

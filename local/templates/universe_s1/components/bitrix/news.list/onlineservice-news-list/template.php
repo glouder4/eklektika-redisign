@@ -28,7 +28,6 @@ $arVisual = $arResult['VISUAL'];
 
 <div class="news-and-articles--list">
     <?php foreach ($arResult['ITEMS'] as $arItem) {
-
         $sId = $sTemplateId.'_'.$arItem['ID'];
         $sAreaId = $this->GetEditAreaId($sId);
         $this->AddEditAction($sId, $arItem['EDIT_LINK']);
@@ -73,9 +72,9 @@ $arVisual = $arResult['VISUAL'];
                     <img src="<?=$sPicture;?>" alt="<?echo $arItem["NAME"]?>">
                 </div>
                 <div class="news-and-articles--item_data">
-                    <?if($arParams["DISPLAY_DATE"]!="N" && $arItem["DISPLAY_ACTIVE_FROM"]):?>
+                    <?if($arItem["ACTIVE_FROM"]):?>
                         <div class="news-and-articles--item_data-date">
-                            <span><?echo $arItem["DISPLAY_ACTIVE_FROM"]?></span>
+                            <span><?echo $arItem["ACTIVE_FROM"]?></span>
                         </div>
                     <?endif?>
                     <div class="news-and-articles--item_data-title_wrapper">
@@ -94,6 +93,6 @@ $arVisual = $arResult['VISUAL'];
     <?php } ?>
 
     <div class="news-and-articles--action">
-        <a data-fancybox href="#news-action-popup" rel="nofollow" class="news-and-articles--action_open-popup">Показать еще</a>
+        <a data-fancybox href="#promotions-action-popup" rel="nofollow" class="news-and-articles--action_open-popup">Показать еще</a>
     </div>
 </div>

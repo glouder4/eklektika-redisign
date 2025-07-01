@@ -1,3 +1,6 @@
+<?php
+$APPLICATION->SetTitle("Бренды");
+?>
 <div class="container">
     <?$APPLICATION->IncludeComponent(
         "bitrix:breadcrumb",
@@ -38,7 +41,7 @@
                 "DISPLAY_PICTURE" => "Y",
                 "DISPLAY_PREVIEW_TEXT" => "N",
                 "DISPLAY_TOP_PAGER" => "N",
-                "FIELD_CODE" => array("", ""),
+                "FIELD_CODE" => array("DETAIL_PICTURE"),
                 "FILTER_NAME" => "",
                 "HIDE_LINK_WHEN_NO_DETAIL" => "N",
                 "IBLOCK_ID" => "39",
@@ -65,9 +68,9 @@
                 "SET_STATUS_404" => "N",
                 "SET_TITLE" => "N",
                 "SHOW_404" => "N",
-                "SORT_BY1" => "ID",
+                "SORT_BY1" => "SORT",
                 "SORT_BY2" => "SORT",
-                "SORT_ORDER1" => "DESC",
+                "SORT_ORDER1" => "ASC",
                 "SORT_ORDER2" => "ASC",
                 "STRICT_SECTION_CHECK" => "N"
             )

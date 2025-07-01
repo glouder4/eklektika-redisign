@@ -88,77 +88,77 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
     );?>
 
     <?$APPLICATION->IncludeComponent(
-	"bitrix:news.list",
-	"onlineservice-undersliderpromo.news.list",
-	array(
-		"ACTIVE_DATE_FORMAT" => "d.m.Y",
-		"ADD_SECTIONS_CHAIN" => "N",
-		"AJAX_MODE" => "N",
-		"AJAX_OPTION_ADDITIONAL" => "",
-		"AJAX_OPTION_HISTORY" => "N",
-		"AJAX_OPTION_JUMP" => "N",
-		"AJAX_OPTION_STYLE" => "Y",
-		"CACHE_FILTER" => "N",
-		"CACHE_GROUPS" => "Y",
-		"CACHE_TIME" => "36000000",
-		"CACHE_TYPE" => "A",
-		"CHECK_DATES" => "Y",
-		"DETAIL_URL" => "",
-		"DISPLAY_BOTTOM_PAGER" => "Y",
-		"DISPLAY_DATE" => "N",
-		"DISPLAY_NAME" => "Y",
-		"DISPLAY_PICTURE" => "Y",
-		"DISPLAY_PREVIEW_TEXT" => "Y",
-		"DISPLAY_TOP_PAGER" => "N",
-		"FIELD_CODE" => array(
-			0 => "",
-			1 => "",
-		),
-		"FILTER_NAME" => "",
-		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
-		"IBLOCK_ID" => "22",
-		"IBLOCK_TYPE" => "content",
-		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
-		"INCLUDE_SUBSECTIONS" => "N",
-		"MESSAGE_404" => "",
-		"NEWS_COUNT" => "4",
-		"PAGER_BASE_LINK_ENABLE" => "N",
-		"PAGER_DESC_NUMBERING" => "N",
-		"PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
-		"PAGER_SHOW_ALL" => "N",
-		"PAGER_SHOW_ALWAYS" => "N",
-		"PAGER_TEMPLATE" => ".default",
-		"PAGER_TITLE" => "Новости",
-		"PARENT_SECTION" => "",
-		"PARENT_SECTION_CODE" => "",
-		"PREVIEW_TRUNCATE_LEN" => "",
-		"PROPERTY_CODE" => array(
-			0 => "",
-			1 => "",
-		),
-		"SET_BROWSER_TITLE" => "N",
-		"SET_LAST_MODIFIED" => "N",
-		"SET_META_DESCRIPTION" => "N",
-		"SET_META_KEYWORDS" => "N",
-		"SET_STATUS_404" => "N",
-		"SET_TITLE" => "N",
-		"SHOW_404" => "N",
-		"SORT_BY1" => "ID",
-		"SORT_BY2" => "SORT",
-		"SORT_ORDER1" => "DESC",
-		"SORT_ORDER2" => "ASC",
-		"STRICT_SECTION_CHECK" => "N",
-		"COMPONENT_TEMPLATE" => "onlineservice-undersliderpromo.news.list",
-		"LAZYLOAD_USE" => "N",
-		"PROPERTY_TAGS" => "",
-		"LINK_BLANK" => "N",
-		"DELIMITER_SHOW" => "N",
-		"IMAGE_SHOW" => "N",
-		"PREVIEW_SHOW" => "N",
-		"DATE_SHOW" => "N"
-	),
-	false
-);?>
+        "bitrix:news.list",
+        "onlineservice-undersliderpromo.news.list",
+        array(
+            "ACTIVE_DATE_FORMAT" => "d.m.Y",
+            "ADD_SECTIONS_CHAIN" => "N",
+            "AJAX_MODE" => "N",
+            "AJAX_OPTION_ADDITIONAL" => "",
+            "AJAX_OPTION_HISTORY" => "N",
+            "AJAX_OPTION_JUMP" => "N",
+            "AJAX_OPTION_STYLE" => "Y",
+            "CACHE_FILTER" => "N",
+            "CACHE_GROUPS" => "Y",
+            "CACHE_TIME" => "36000000",
+            "CACHE_TYPE" => "A",
+            "CHECK_DATES" => "Y",
+            "DETAIL_URL" => "",
+            "DISPLAY_BOTTOM_PAGER" => "Y",
+            "DISPLAY_DATE" => "N",
+            "DISPLAY_NAME" => "Y",
+            "DISPLAY_PICTURE" => "Y",
+            "DISPLAY_PREVIEW_TEXT" => "Y",
+            "DISPLAY_TOP_PAGER" => "N",
+            "FIELD_CODE" => array(
+                0 => "",
+                1 => "",
+            ),
+            "FILTER_NAME" => "",
+            "HIDE_LINK_WHEN_NO_DETAIL" => "N",
+            "IBLOCK_ID" => "22",
+            "IBLOCK_TYPE" => "content",
+            "INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+            "INCLUDE_SUBSECTIONS" => "N",
+            "MESSAGE_404" => "",
+            "NEWS_COUNT" => "4",
+            "PAGER_BASE_LINK_ENABLE" => "N",
+            "PAGER_DESC_NUMBERING" => "N",
+            "PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
+            "PAGER_SHOW_ALL" => "N",
+            "PAGER_SHOW_ALWAYS" => "N",
+            "PAGER_TEMPLATE" => ".default",
+            "PAGER_TITLE" => "Новости",
+            "PARENT_SECTION" => "",
+            "PARENT_SECTION_CODE" => "",
+            "PREVIEW_TRUNCATE_LEN" => "",
+            "PROPERTY_CODE" => array(
+                0 => "MOBILE_BANNER",
+                1 => "",
+            ),
+            "SET_BROWSER_TITLE" => "N",
+            "SET_LAST_MODIFIED" => "N",
+            "SET_META_DESCRIPTION" => "N",
+            "SET_META_KEYWORDS" => "N",
+            "SET_STATUS_404" => "N",
+            "SET_TITLE" => "N",
+            "SHOW_404" => "N",
+            "SORT_BY1" => "SORT",
+            "SORT_BY2" => "ID",
+            "SORT_ORDER1" => "ASC",
+            "SORT_ORDER2" => "ASC",
+            "STRICT_SECTION_CHECK" => "N",
+            "COMPONENT_TEMPLATE" => "onlineservice-undersliderpromo.news.list",
+            "LAZYLOAD_USE" => "N",
+            "PROPERTY_TAGS" => "",
+            "LINK_BLANK" => "N",
+            "DELIMITER_SHOW" => "N",
+            "IMAGE_SHOW" => "N",
+            "PREVIEW_SHOW" => "N",
+            "DATE_SHOW" => "N"
+        ),
+        false
+    );?>
 
     <div class="container">
         <div class="categories-slider--container-title">
@@ -169,14 +169,17 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
                 $arFilter = array(
                     'IBLOCK_ID' => 43,
                     'ACTIVE' => 'Y',
-                    'GLOBAL_ACTIVE' => 'Y'
+                    'GLOBAL_ACTIVE' => 'Y',
+                    'SECTION_ID' => 0
                 );
                 $arSelect = array(
                     'ID',
                     'NAME',
                     'PICTURE',
                     'DETAIL_PICTURE',
-                    'SECTION_PAGE_URL'
+                    'SECTION_PAGE_URL',
+                    'UF_SVG',
+                    'UF_HOVER_TEMPLATE'
                 );
                 $rsSections = CIBlockSection::GetList(
                     array('SORT' => 'ASC'),
@@ -188,26 +191,27 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
                 $keyCounter = 1;
                 $columnCounter = 0;
                 while ($arSection = $rsSections->GetNext()) {
+                    $sectionSvg = ( !empty($arSection['UF_SVG']) ) ? CFile::GetPath($arSection['UF_SVG']) : null;
+
+                    // Получаем URL изображения раздела
+                    $sectionImage = CFile::GetPath($arSection['PICTURE']);
+                    if (empty($sectionImage)) {
+                        $sectionImage = CFile::GetPath($arSection['DETAIL_PICTURE']);
+                    }
+                    
                     if ($counter % 3 == 0) {
                         if ($counter > 0) echo '</div>';
                         echo '<div class="categories-slider--item">';
                         $columnCounter++;
                     }
-                    $sPicture = $arSection['PICTURE'];
-                    if (empty($sPicture))
-                        $sPicture = $arSection['DETAIL_PICTURE'];
-                    if (!empty($sPicture)) {
-                        $sPicture = CFile::ResizeImageGet($sPicture, [
-                            'width' => 350,
-                            'height' => 350
-                        ], BX_RESIZE_IMAGE_PROPORTIONAL_ALT);
-                        if (!empty($sPicture['src']))
-                            $sPicture = $sPicture['src'];
-                    }
+
                     $isEmptyPicture = false;
-                    if (empty($sPicture)){
+                    if (empty($sectionImage)){
                         $isEmptyPicture = true;
-                        $sPicture = SITE_TEMPLATE_PATH.'/images/picture.missing.png';
+                        $sectionImage = SITE_TEMPLATE_PATH.'/images/picture.missing.png';
+                    }
+                    if( empty($sectionSvg) ){
+                        $isEmptyPicture = true;
                     }
                     ?>
                     <?php
@@ -230,16 +234,34 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
                                     }
                                 <?php }
                             ?>
+                        <?php
+                            if( strlen($arSection['NAME'])/2 > 18 ){ ?>
+                                #categoriesSlider .owl-item:nth-child(<?=$columnCounter;?>) .categories-slider--item_category:nth-of-type(<?=$keyCounter;?>) .categories-slider--item_category-title{
+                                    top: 109px!important;
+                                }
+                        <?php }
+                        ?>
                         </style>
                     <?php
                         }
+
+                        $additional_class = null;
+                        if($isEmptyPicture || $arSection == 7 || empty($sectionSvg)){
+                            $additional_class = "transition-style-alternative-1";
+                        }
+                        if(!$isEmptyPicture && $arSection == 8){
+                            $additional_class = "transition-style-alternative-2";
+                        }
+
+                        if(empty($sectionSvg))
+                            $sectionSvg = $sectionImage;
                     ?>
                     <a href="<?= $arSection['SECTION_PAGE_URL'] ?>"
-                       class="categories-slider--item_category <?=($isEmptyPicture) ? "transition-style-alternative-1" : null;?>"
-                       style="background-image: url('<?= $sPicture ?>')"
+                       class="categories-slider--item_category <?=$additional_class;?>"
+                       style="background-image: url('<?= $sectionImage ?>')"
                     >
                         <div class="categories-slider--item_category-image">
-                            <img src="<?= $sPicture ?>" alt="<?= $arSection['NAME'] ?>">
+                            <img src="<?= $sectionSvg ?>" alt="<?= $arSection['NAME'] ?>">
                         </div>
                         <div class="categories-slider--item_category-title">
                             <span><?= $arSection['NAME'] ?></span>
@@ -372,7 +394,7 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
                     <p>Широкий выбор технологий нанесения изображений и&nbsp;логотипов на&nbsp;сувенирную продукцию. Мы&nbsp;подбираем оптимальный метод в&nbsp;зависимости от&nbsp;материала, тиража и&nbsp;желаемого эффекта.</p>
                 </div>
                 <div class="our-services--list-item--action">
-                    <a href="#" class="our-services--list-item--action_btn">Подробнее</a>
+                    <a href="/nanesenie/" class="our-services--list-item--action_btn">Подробнее</a>
                 </div>
             </div>
             <div class="our-services--list-item">
@@ -388,7 +410,7 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
                     <p>Обеспечиваем удобство и&nbsp;своевременность получения заказов. У&nbsp;нас&nbsp;возможен самовывоз, доставка нашим транспортом и&nbsp;транспортными компаниями партнёров на&nbsp;ваш&nbsp;выбор.</p>
                 </div>
                 <div class="our-services--list-item--action">
-                    <a href="#" class="our-services--list-item--action_btn">Подробнее</a>
+                    <a href="/dostavka/" class="our-services--list-item--action_btn">Подробнее</a>
                 </div>
             </div>
             <div class="our-services--list-item">
@@ -426,7 +448,7 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
                     <p>Скидки WELCOM и&nbsp;система скидок для&nbsp;постоянных клиентов. Программа привилегий и&nbsp;бонусов для&nbsp;дилеров.</p>
                 </div>
                 <div class="our-services--list-item--action">
-                    <a href="#" class="our-services--list-item--action_btn">Подробнее</a>
+                    <a href="/shares/" class="our-services--list-item--action_btn">Подробнее</a>
                 </div>
             </div>
         </div>
@@ -456,7 +478,7 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
             "DISPLAY_PICTURE" => "Y",
             "DISPLAY_PREVIEW_TEXT" => "Y",
             "DISPLAY_TOP_PAGER" => "N",
-            "FIELD_CODE" => array("", ""),
+            "FIELD_CODE" => array("DETAIL_PICTURE"),
             "FILTER_NAME" => "",
             "HIDE_LINK_WHEN_NO_DETAIL" => "N",
             "IBLOCK_ID" => "39",
@@ -483,9 +505,9 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
             "SET_STATUS_404" => "N",
             "SET_TITLE" => "N",
             "SHOW_404" => "N",
-            "SORT_BY1" => "ID",
+            "SORT_BY1" => "SORT",
             "SORT_BY2" => "SORT",
-            "SORT_ORDER1" => "DESC",
+            "SORT_ORDER1" => "ASC",
             "SORT_ORDER2" => "ASC",
             "STRICT_SECTION_CHECK" => "N"
         )

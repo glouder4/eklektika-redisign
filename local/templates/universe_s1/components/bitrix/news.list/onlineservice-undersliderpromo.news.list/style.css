@@ -16,6 +16,10 @@
   position: relative;
 
   text-decoration: unset;
+
+  transition: height 0.4s ease, flex 0.4s ease, width 0.4s ease;
+
+  background-repeat: no-repeat;
 }
 .underslider-categories--category-item::before{
   content: '';
@@ -33,6 +37,7 @@
 }
 .category-item-full_size{
   height: 485px;
+  background-size: cover;
 }
 .category-item-full_size--data{
   position: relative;
@@ -72,6 +77,14 @@
   color: #FFFFFF;
 
   margin: 0;
+}
+.underslider-categories--category-item .category-item-full_size--data>.category-item-full_size--data_description,
+.underslider-categories--category-item .category-item-full_size--data>.category-item-full_size--data_actions{
+  opacity: 0;
+}
+.category-item-full_size  .category-item-full_size--data>.category-item-full_size--data_description,
+.category-item-full_size .category-item-full_size--data>.category-item-full_size--data_actions{
+  opacity: 1;
 }
 .category-item-full_size--data_actions{
   top: 70px;
@@ -123,6 +136,12 @@
   color: #fff;
 }
 @media(min-width: 768px){
+  .underslider-categories--category-item{
+    flex: 1;
+  }
+  .category-item-full_size{
+    flex: 3;
+  }
   .underslider-categories{
     display: flex;
     flex-direction: row;
@@ -145,7 +164,7 @@
   }
   .category-item-full_size{
     background-position: center bottom;
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
     background-color: #ef4a85;
   }
@@ -153,6 +172,7 @@
 @media(min-width: 991px){
   .underslider-categories--category-item{
     width: 175px;
+    background-size: cover;
   }
   .category-item-full_size{
     width: 435px;
@@ -162,11 +182,7 @@
 }
 @media(min-width: 1200px){
   .underslider-categories--category-item{
-    flex: 1;
     height: 425px;
-  }
-  .category-item-full_size{
-    flex: 3;
   }
 }
 @media(min-width: 1520px){
@@ -183,16 +199,23 @@
     height: 515px;
   }
   .category-item-full_size--data_title{
-    top: 50px;
-    left: 50px;
-    width: 187px;
+    top: 37px;
+    left: 41px;
+    width: 165px;
   }
   .category-item-full_size--data_title>span{
     font-family: Manrope;
     font-weight: 600;
-    font-size: 36px;
+    font-size: 28px;
     line-height: 125%;
     letter-spacing: 0;
+  }
+  .underslider-categories--category-item:nth-child(1) .category-item-full_size--data_title > span{
+    font-size: 36px;
+  }
+  .underslider-categories--category-item:nth-child(1) .category-item-full_size--data_title{
+    top: 50px;
+    left: 50px;
   }
   .category-item-full_size--data_description{
     top: 75px;

@@ -50,11 +50,18 @@ $this->setFrameMode(true);
         <div class="discounts--item_title">
             <span><?php
                 $name = $arItem["NAME"];
-                if (mb_strlen($name) > 32) {
-                    $name = mb_substr($name, 0, 32) . '...';
+                if (mb_strlen($name) > 36) {
+                    $name = mb_substr($name, 0, 36) . '...';
                 }
-                echo $name;
+                echo html_entity_decode($name);
             ?></span>
+            <?php
+                if( isset($arItem['PROPERTIES']) && isset($arItem['PROPERTIES']['UNDER_TITLE']) && !empty($arItem['PROPERTIES']['UNDER_TITLE']['~VALUE']) ){
+                    ?>
+                        <p><?=$arItem['PROPERTIES']['UNDER_TITLE']['~VALUE'];?></p>
+                    <?php
+                }
+            ?>
         </div>
     </a>
 <?php endforeach;?>

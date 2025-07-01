@@ -29,9 +29,7 @@ $arData = [
 ];
 
 ?>
-<?php
-if( isset($_GET['test']) ){
-    ?>
+
     <footer class="footer__main">
         <div class="footer__main-brand_info">
             <div class="footer__main-brand_info-logo">
@@ -55,13 +53,13 @@ if( isset($_GET['test']) ){
                 </svg>
             </div>
             <div class="footer__main-brand_info-links">
-                <a href="#" class="footer__main-brand_info-links-link">
+                <a href="tel:+7 (495) 129-53-72" class="footer__main-brand_info-links-link">
                     <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
                         <path d="M14.1339 13.8834L14.6157 13.4048L13.4969 12.2808L13.0173 12.7593L14.1339 13.8834ZM16.2309 13.2041L18.2497 14.3017L19.0051 12.9093L16.9873 11.8128L16.2309 13.2041ZM18.6374 16.4821L17.1373 17.9748L18.254 19.0978L19.7541 17.6062L18.6374 16.4821ZM16.2225 18.4545C14.6907 18.5981 10.7291 18.4703 6.43797 14.2045L5.32029 15.3275C10.0023 19.9831 14.4593 20.2113 16.3704 20.0327L16.2225 18.4545ZM6.43797 14.2045C2.34859 10.1373 1.67037 6.7177 1.58586 5.23344L0.00335245 5.32323C0.108994 7.19097 0.948843 10.9814 5.32029 15.3275L6.43797 14.2045ZM7.89054 7.67587L8.19373 7.37373L7.07816 6.25077L6.77497 6.55184L7.89054 7.67587ZM8.43459 3.53367L7.10351 1.75467L5.83476 2.70544L7.16584 4.48339L8.43459 3.53367ZM2.62326 1.36696L0.964689 3.01497L2.08238 4.13899L3.73989 2.49099L2.62326 1.36696ZM7.33275 7.11386C6.77285 6.55184 6.77285 6.55184 6.77285 6.55396H6.77074L6.76757 6.55818C6.71737 6.6088 6.67242 6.66437 6.63341 6.72404C6.57636 6.80855 6.51403 6.91948 6.46121 7.05998C6.33262 7.42267 6.30058 7.81258 6.36825 8.1914C6.50981 9.1052 7.13943 10.3127 8.75152 11.9163L9.8692 10.7923C8.35959 9.29218 8.00041 8.37944 7.93385 7.94842C7.90216 7.74348 7.93491 7.64206 7.94442 7.61882C7.95076 7.60474 7.95076 7.60262 7.94442 7.61248C7.935 7.62706 7.9244 7.64084 7.91272 7.65368L7.90216 7.66425L7.8916 7.67376L7.33275 7.11386ZM8.75152 11.9163C10.3647 13.52 11.5785 14.1453 12.4933 14.2848C12.9613 14.3566 13.3385 14.2996 13.6248 14.1929C13.7851 14.1342 13.935 14.05 14.0684 13.9436L14.1213 13.896L14.1287 13.8897L14.1318 13.8865L14.1329 13.8844C14.1329 13.8844 14.1339 13.8834 13.5751 13.3213C13.0152 12.7593 13.0184 12.7583 13.0184 12.7583L13.0205 12.7562L13.0226 12.7541L13.0289 12.7488L13.0395 12.7382L13.0796 12.7065C13.0895 12.7002 13.087 12.7009 13.0723 12.7086C13.0458 12.7181 12.9423 12.7509 12.7342 12.7192C12.2968 12.6516 11.3778 12.2924 9.8692 10.7923L8.75152 11.9163ZM7.10351 1.75361C6.02597 0.316888 3.90892 0.0887023 2.62326 1.36696L3.73989 2.49099C4.3019 1.93215 5.29916 1.99025 5.83476 2.70544L7.10351 1.75361ZM1.58692 5.2345C1.56579 4.86898 1.73376 4.48655 2.08238 4.14005L0.963633 3.01603C0.396339 3.58015 -0.0505247 4.3788 0.00335245 5.32323L1.58692 5.2345ZM17.1373 17.9748C16.8479 18.2643 16.5352 18.427 16.2235 18.4555L16.3704 20.0327C17.1468 19.9599 17.7817 19.569 18.255 19.0989L17.1373 17.9748ZM8.19373 7.37373C9.2343 6.3395 9.31142 4.70523 8.43565 3.53472L7.1669 4.48444C7.59263 5.05385 7.52925 5.80073 7.0771 6.25182L8.19373 7.37373ZM18.2508 14.3028C19.1139 14.7718 19.248 15.8768 18.6385 16.4832L19.7562 17.6062C21.1718 16.198 20.7355 13.8496 19.0061 12.9104L18.2508 14.3028ZM14.6157 13.4059C15.0213 13.0023 15.6742 12.903 16.232 13.2051L16.9884 11.8138C15.8432 11.1906 14.4234 11.3628 13.498 12.2818L14.6157 13.4059Z" fill="#EF4A85"/>
                     </svg>
                     +7 (495) 129-53-72
                 </a>
-                <a href="#" class="footer__main-brand_info-links-link">
+                <a href="mailto:team@eklektika.ru" class="footer__main-brand_info-links-link">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17" fill="none">
                         <path d="M2.38472 16.0167C1.85864 16.0167 1.40843 15.8296 1.03411 15.4553C0.659796 15.081 0.472317 14.6304 0.47168 14.1037V2.62545C0.47168 2.09936 0.659158 1.64916 1.03411 1.27484C1.40907 0.900518 1.85927 0.71304 2.38472 0.712402H17.6891C18.2152 0.712402 18.6657 0.89988 19.0406 1.27484C19.4156 1.64979 19.6028 2.1 19.6021 2.62545V14.1037C19.6021 14.6298 19.415 15.0803 19.0406 15.4553C18.6663 15.8302 18.2158 16.0174 17.6891 16.0167H2.38472ZM10.0369 9.3211L2.38472 4.53849V14.1037H17.6891V4.53849L10.0369 9.3211ZM10.0369 7.40805L17.6891 2.62545H2.38472L10.0369 7.40805ZM2.38472 4.53849V2.62545V14.1037V4.53849Z" fill="#EF4A85"/>
                     </svg>
@@ -96,7 +94,7 @@ if( isset($_GET['test']) ){
                 </div>
                 <ul class="footer__main-categories__columns-column--list">
                     <li class="footer__main-categories__columns-column--list_item">
-                        <a href="#" class="footer__main-categories__columns-column--list_item_link">
+                        <a href="/nanesenie/" class="footer__main-categories__columns-column--list_item_link">
                             Виды печати на сувениры
                         </a>
                     </li>
@@ -106,42 +104,42 @@ if( isset($_GET['test']) ){
                         </a>
                     </li>
                     <li class="footer__main-categories__columns-column--list_item">
-                        <a href="#" class="footer__main-categories__columns-column--list_item_link">
+                        <a href="/services/s_tampopechat/" class="footer__main-categories__columns-column--list_item_link">
                             Тампонная печать до 4 цветов
                         </a>
                     </li>
                     <li class="footer__main-categories__columns-column--list_item">
-                        <a href="#" class="footer__main-categories__columns-column--list_item_link">
+                        <a href="/services/s_lazernaya-gravirovka/" class="footer__main-categories__columns-column--list_item_link">
                             Лазерная гравировка
                         </a>
                     </li>
                     <li class="footer__main-categories__columns-column--list_item">
-                        <a href="#" class="footer__main-categories__columns-column--list_item_link">
+                        <a href="/services/s_polnocvetnaya-uf-pechat/" class="footer__main-categories__columns-column--list_item_link">
                             Полноцветная УФ-печать
                         </a>
                     </li>
                     <li class="footer__main-categories__columns-column--list_item">
-                        <a href="#" class="footer__main-categories__columns-column--list_item_link">
+                        <a href="/services/s_tisnenie/" class="footer__main-categories__columns-column--list_item_link">
                             Тиснение логотипов
                         </a>
                     </li>
                     <li class="footer__main-categories__columns-column--list_item">
-                        <a href="#" class="footer__main-categories__columns-column--list_item_link">
+                        <a href="/services/s_sublimacionnaya_pechat/" class="footer__main-categories__columns-column--list_item_link">
                             Сублимационная печать
                         </a>
                     </li>
                     <li class="footer__main-categories__columns-column--list_item">
-                        <a href="#" class="footer__main-categories__columns-column--list_item_link">
+                        <a href="/shelkografiya/" class="footer__main-categories__columns-column--list_item_link">
                             Шелкография на ткани
                         </a>
                     </li>
                     <li class="footer__main-categories__columns-column--list_item">
-                        <a href="#" class="footer__main-categories__columns-column--list_item_link">
+                        <a href="/services/e_nanesenie-logotipov-na-ezhednevniki/" class="footer__main-categories__columns-column--list_item_link">
                             Нанесение логотипов на ежедневники
                         </a>
                     </li>
                     <li class="footer__main-categories__columns-column--list_item">
-                        <a href="#" class="footer__main-categories__columns-column--list_item_link">
+                        <a href="/services/e_pechat-na-futbolkax-optom/" class="footer__main-categories__columns-column--list_item_link">
                             Печать на текстиле оптом
                         </a>
                     </li>
@@ -158,12 +156,12 @@ if( isset($_GET['test']) ){
                 </div>
                 <ul class="footer__main-categories__columns-column--list">
                     <li class="footer__main-categories__columns-column--list_item">
-                        <a href="#" class="footer__main-categories__columns-column--list_item_link">
+                        <a href="/informacziya-dlya-dilerov/" class="footer__main-categories__columns-column--list_item_link">
                             Программа привилегий и бонусов для дилеров
                         </a>
                     </li>
                     <li class="footer__main-categories__columns-column--list_item">
-                        <a href="#" class="footer__main-categories__columns-column--list_item_link">
+                        <a href="/oplata/" class="footer__main-categories__columns-column--list_item_link">
                             Гибкая система оплаты
                         </a>
                     </li>
@@ -178,7 +176,7 @@ if( isset($_GET['test']) ){
                         </a>
                     </li>
                     <li class="footer__main-categories__columns-column--list_item">
-                        <a href="#" class="footer__main-categories__columns-column--list_item_link">
+                        <a href="/dostavka/" class="footer__main-categories__columns-column--list_item_link">
                             Доставка
                         </a>
                     </li>
@@ -190,40 +188,40 @@ if( isset($_GET['test']) ){
                 </div>
                 <ul class="footer__main-categories__columns-column--list">
                     <li class="footer__main-categories__columns-column--list_item">
-                        <a href="#" class="footer__main-categories__columns-column--list_item_link">
+                        <a href="/company/" class="footer__main-categories__columns-column--list_item_link">
                             О компании
                         </a>
                     </li>
                     <li class="footer__main-categories__columns-column--list_item">
-                        <a href="#" class="footer__main-categories__columns-column--list_item_link">
+                        <a href="/company/news/" class="footer__main-categories__columns-column--list_item_link">
                             Новости
                         </a>
                     </li>
-                    <li class="footer__main-categories__columns-column--list_item">
+                    <!-- <li class="footer__main-categories__columns-column--list_item">
                         <a href="#" class="footer__main-categories__columns-column--list_item_link">
                             Бренды
                         </a>
-                    </li>
+                    </li> -->
                     <li class="footer__main-categories__columns-column--list_item">
                         <a href="#" class="footer__main-categories__columns-column--list_item_link">
                             Новинки
                         </a>
                     </li>
                     <li class="footer__main-categories__columns-column--list_item">
-                        <a href="#" class="footer__main-categories__columns-column--list_item_link">
+                        <a href="/shares/" class="footer__main-categories__columns-column--list_item_link">
                             Акции и Скидки
                         </a>
                     </li>
                     <li class="footer__main-categories__columns-column--list_item">
-                        <a href="#" class="footer__main-categories__columns-column--list_item_link">
+                        <a href="/company/contacts/" class="footer__main-categories__columns-column--list_item_link">
                             Контакты
                         </a>
                     </li>
-                    <li class="footer__main-categories__columns-column--list_item">
+                    <!-- <li class="footer__main-categories__columns-column--list_item">
                         <a href="#" class="footer__main-categories__columns-column--list_item_link">
-                            Как проехать
+                            Как заказать
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </div>
@@ -262,48 +260,109 @@ if( isset($_GET['test']) ){
             </div>
         </div>
     </footer>
-    <?php
-}
-else{
-    ?>
-<?= Html::beginTag('div', [
-    'id' => $sTemplateId,
-    'class' => [
-        'widget',
-        'c-footer',
-        'c-footer-template-1',
-        'vcard'
-    ],
-    'data' => [
-        'theme' => $arResult['THEME']
-    ]
-]) ?>
-    <div class="widget-content">
-        <div style="display: none;">
-            <span class="url">
-                <span class="value-title" title="<?= $sSiteUrl ?>"></span>
-            </span>
-            <span class="fn org">
-                <?= $arResult['COMPANY_NAME'] ?>
-            </span>
-            <img class="photo" src="<?= $sSiteUrl.'include/logotype.png' ?>" alt="<?= $arResult['COMPANY_NAME'] ?>" />
-        </div>
-        <?php if ($arParams['PRODUCTS_VIEWED_SHOW'] === 'Y') { ?>
-            <div class="widget-part">
-                <?php include(__DIR__.'/parts/products.viewed.php') ?>
+
+    <div style="display: none;" id="promotions-action-popup">
+        <div class="promotions-action-popup-block">
+            <div class="promotions-action-popup-image">
+                <img src="/local/templates/onlineservice-custom-template/components/promotions-and-discounts/promotions/assets/okak.png" alt="">
             </div>
-        <?php } ?>
-        <div class="widget-view">
-            <?php if (!empty($oTemplate)) { ?>
-                <?= $oTemplate->render(
-                    $arParams,
-                    $arResult,
-                    $arData
-                ) ?>
-            <?php } ?>
+            <div class="promotions-action-popup-data">
+                <h2>Если вы это видите</h2>
+                <p>То мы забыли предоставить информацию разработчику, но скоро всё исправим!</p>
+            </div>
         </div>
     </div>
-<?= Html::endTag('div');
+    <div style="display: none;" id="news-action-popup">
+        <div class="promotions-action-popup-block">
+            <div class="promotions-action-popup-image">
+                <img src="/local/templates/onlineservice-custom-template/components/promotions-and-discounts/promotions/assets/okak.png" alt="">
+            </div>
+            <div class="promotions-action-popup-data">
+                <h2>Если вы это видите</h2>
+                <p>То мы забыли предоставить информацию разработчику, но скоро всё исправим!</p>
+            </div>
+        </div>
+    </div>
 
-        }
+
+<?php
+    if ($APPLICATION->GetCurPage(false) === '/dostavka/'):
+?>
+        <div style="display: none;" id="dostavka-modal-1">
+            <div class="dostavka-modal-body">
+                <div class="dostavka-modal-title">
+                    <div class="title">Самовывоз собственным транспортом</div>
+                </div>
+                <div class="dostavka-modal-description">
+                    <p class="description">
+                        При доставке заказов на условиях самовывоза – доставка осуществляется силами и за счет средств клиента. Услуги по сборке и погрузке товара при таком способе доставки осуществляет Компания "Эклектика" бесплатно.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div style="display: none;" id="dostavka-modal-2">
+            <div class="dostavka-modal-body">
+                <div class="dostavka-modal-title">
+                    <div class="title">Транспортом компании Эклектика</div>
+                </div>
+                <div class="dostavka-modal-description">
+                    <p class="description">
+                        При доставке заказов на условиях самовывоза – доставка осуществляется силами и за счет средств клиента. Услуги по сборке и погрузке товара при таком способе доставки осуществляет Компания "Эклектика" бесплатно.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div style="display: none;" id="dostavka-modal-3">
+            <div class="dostavka-modal-body">
+                <div class="dostavka-modal-title">
+                    <div class="title">Транспортом компаний-партнеров </div>
+                </div>
+                <div class="dostavka-modal-description">
+                    <p class="description">
+                        При доставке заказов на условиях самовывоза – доставка осуществляется силами и за счет средств клиента. Услуги по сборке и погрузке товара при таком способе доставки осуществляет Компания "Эклектика" бесплатно.
+                    </p>
+                </div>
+            </div>
+        </div>
+<?php
+    endif;
+?>
+
+<?php
+if ($APPLICATION->GetCurPage(false) === '/oplata/'):
+?>
+    <div style="display: none;" id="oplata-modal">
+        <div class="oplata-modal-body">
+            <div class="oplata-modal-title">
+                <div class="title">Оплата по банковским картам через сервис Юкасса</div>
+            </div>
+            <div class="oplata-modal-description">
+                <p class="description">
+                    Что&nbsp;нужно знать:<br/>
+                    номер вашей кредитной карты;<br/>
+                    cрок окончания действия вашей кредитной карты, месяц/год;<br/>
+                    CVC-код&nbsp;(3&nbsp;последние цифры на&nbsp;полосе для&nbsp;подписи на&nbsp;обороте карты).<br/><br/>
+
+                    Если&nbsp;на&nbsp;вашей карте код&nbsp;CVC-отсутствует, то, возможно, карта не&nbsp;пригодна для&nbsp;CNP транзакций (т.е. таких транзакций, при&nbsp;которых сама карта не&nbsp;присутствует, а&nbsp;используются её&nbsp;реквизиты), и&nbsp;вам&nbsp;следует обратиться в&nbsp;банк для&nbsp;получения подробной информации.<br/><br/>
+
+                    Если&nbsp;Банк-Эмитент вашей пластиковой карты поддерживает технологию безопасного проведения интернет-платежей Verified By Visa или&nbsp;Mastercard SecureCode, будьте готовы указать специальный пароль, необходимый для&nbsp;успешной оплаты. Способы и&nbsp;возможность получения пароля для&nbsp;совершения интернет-платежа вы&nbsp;можете уточнить в&nbsp;банке, выпустившем Вашу карту.<br/><br/>
+
+                    При&nbsp;выборе формы оплаты с&nbsp;помощью банковской карты проведение платежа по&nbsp;заказу производится непосредственно после&nbsp;подтверждения его&nbsp;менеджером.<br/><br/>
+
+                    После&nbsp;подтверждения заказа менеджером, на&nbsp;указанную вами&nbsp;эл. почту, придёт сообщение-счёт ЮКассы. В&nbsp;нем&nbsp;необходимо нажать на&nbsp;жёлтую кнопку «Заплатить», при&nbsp;этом система переведёт вас&nbsp;непосредственно на&nbsp;страницу оплаты ЮКассы, где&nbsp;вам&nbsp;будет предложено ввести данные пластиковой карты, либо&nbsp;выбрать другой способ электронной оплаты. После&nbsp;совершения оплаты вы&nbsp;можете вернуться в&nbsp;наш&nbsp;магазин кликом по&nbsp;ссылке «Вернуться в&nbsp;магазин».<br/>
+                    До&nbsp;получения успешного подтверждения платежа ваш&nbsp;заказ будет находиться в&nbsp;режиме ожидания, после&nbsp;пяти дней ожидания получения оплаты заказ будет автоматически аннулирован. После&nbsp;успешного подтверждения платежа ваш&nbsp;заказ будет переведён в&nbsp;режим доставки по&nbsp;указанному адресу. В&nbsp;случае отказа в&nbsp;авторизации карты вы&nbsp;сможете повторить процедуру оплаты.
+                </p>
+            </div>
+            <div class="oplata-modal-title">
+                <div class="title">Отмена заказа</div>
+            </div>
+            <div class="oplata-modal-description">
+                <p class="description">
+                    При удалении товаров из оплаченного заказа или при аннулировании заказа целиком, Вы можете заказать другой товар на такую же сумму, либо полностью вернуть всю сумму на карту с помощью Вашего менеджера.
+                </p>
+            </div>
+        </div>
+    </div>
+<?php
+endif;
 ?>

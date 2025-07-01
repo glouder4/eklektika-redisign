@@ -33,6 +33,7 @@ $tagsRender = include(__DIR__.'/parts/tags.php');
 
         <div class="brands-scrollable-block--list">
             <?php foreach ($arResult['ITEMS'] as $arItem) {
+                //pre($arItem);die();
 
                 $sId = $sTemplateId.'_'.$arItem['ID'];
                 $sAreaId = $this->GetEditAreaId($sId);
