@@ -5,26 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a53d02d7-d404-452c-a903-dd81636134fa" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/services/e_nanesenie-logotipov-na-ezhednevniki.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/services/s_dtf_pechat.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/services/s_lazernaya-gravirovka.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/services/s_polnocvetnaya-uf-pechat.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/services/s_shelkografiya.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/services/s_sublimacionnaya_pechat.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/services/s_tampopechat.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/services/s_tisnenie.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/services/styles/dtf_styles.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/services/styles/s_tampopechat.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/services/styles/styles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/components/breadcrumbs/styles/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/components/breadcrumbs/styles/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/vidy-naneseniy.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/vidy-naneseniy.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/breadcrumb/onlineservice-breadcrumbs/.parameters.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/breadcrumb/onlineservice-breadcrumbs/.parameters.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/breadcrumb/onlineservice-breadcrumbs/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/breadcrumb/onlineservice-breadcrumbs/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/breadcrumb/onlineservice-breadcrumbs/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/breadcrumb/onlineservice-breadcrumbs/template.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/onlineservice_addons/styles/header.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/onlineservice_addons/styles/header.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/parts/custom/body.start.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/parts/custom/body.start.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/www/test.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/test.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,7 +115,8 @@
       <workItem from="1750922289158" duration="10418000" />
       <workItem from="1751020013673" duration="7995000" />
       <workItem from="1751275716714" duration="5703000" />
-      <workItem from="1751287304734" duration="7064000" />
+      <workItem from="1751287304734" duration="7661000" />
+      <workItem from="1751365929063" duration="374000" />
     </task>
     <servers />
   </component>
