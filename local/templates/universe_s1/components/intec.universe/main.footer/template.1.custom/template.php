@@ -99,7 +99,7 @@ $arData = [
                         </a>
                     </li>
                     <li class="footer__main-categories__columns-column--list_item">
-                        <a href="#" class="footer__main-categories__columns-column--list_item_link">
+                        <a href="/services/s_dtf_pechat/" class="footer__main-categories__columns-column--list_item_link">
                             DTF печать
                         </a>
                     </li>
@@ -129,7 +129,7 @@ $arData = [
                         </a>
                     </li>
                     <li class="footer__main-categories__columns-column--list_item">
-                        <a href="/shelkografiya/" class="footer__main-categories__columns-column--list_item_link">
+                        <a href="/services/s_shelkografiya/" class="footer__main-categories__columns-column--list_item_link">
                             Шелкография на ткани
                         </a>
                     </li>
