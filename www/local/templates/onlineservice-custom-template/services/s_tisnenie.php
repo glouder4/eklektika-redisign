@@ -2,6 +2,10 @@
 $APPLICATION->SetTitle("Тиснение");
 
 $asset->addCss("/local/templates/onlineservice-custom-template/services/styles/styles.css");
+
+$SECTION_IBLOCK_ID = 16;
+$SECTION_ID = 43;
+$VIEW_TEMPLATE = "GREEN";
 ?>
 <div class="container">
     <?$APPLICATION->IncludeComponent(
@@ -23,7 +27,13 @@ $asset->addCss("/local/templates/onlineservice-custom-template/services/styles/s
         <div class="alert-section">
             <div class="alert-card">
                 <div class="alert-card--description">
-                    <p>Тиснение по сравнению со многими другими методами брендирования промопродукции и персонализации подарков является достаточно трудоёмкой и затратной технологией. Вместе с тем, изготовленный один раз штамп может использоваться на протяжении многих лет, существенно удешевляя изготовление каждого экземпляра продукции по мере роста тиража. Кроме того, применение тиснения для нанесения логотипов и надписей на подарки премиум-класса, ещё больше повышает их ценность, а удельный вес данных затрат в общей себестоимости подобной промопродукции невелик.</p>
+                    <?$APPLICATION->IncludeComponent("bitrix:main.include","",Array(
+                            "AREA_FILE_SHOW" => "file",
+                            "PATH" => "/local/templates/onlineservice-custom-template/services/include/index_s_tisnenie.php",
+                            "AREA_FILE_SUFFIX" => "",
+                            "EDIT_TEMPLATE" => ""
+                        )
+                    );?>
                 </div>
             </div>
         </div>
@@ -40,104 +50,66 @@ $asset->addCss("/local/templates/onlineservice-custom-template/services/styles/s
                 <h3 class="title">Примеры нанесения методом тиснения на разных материалах и разных видах сувенирной продукции </h3>
             </div>
 
-            <div class="products-card-section-list">
-                <a href="#" class="products-card-section--list_item">
-                    <div class="products-card-section--list_item--image--wrapper">
-                        <div class="products-card-section--list_item--image">
-                            <img src="/local/templates/onlineservice-custom-template/services/assets/blue/product1.png" alt="Дизайн студия" class="image">
-                        </div>
-                        <div class="products-card-section--list_item--image-action">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
-                                <circle cx="25" cy="25" r="25" fill="white"/>
-                                <path d="M22.8182 30.1166L27 25.0583L22.8182 20" stroke="#222222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="products-card-section--list_item--name">
-                        <span class="name">DTF печать</span>
-                    </div>
-                </a>
-                <a href="#" class="products-card-section--list_item">
-                    <div class="products-card-section--list_item--image--wrapper">
-                        <div class="products-card-section--list_item--image">
-                            <img src="/local/templates/onlineservice-custom-template/services/assets/blue/product2.png" alt="Дизайн студия" class="image">
-                        </div>
-                        <div class="products-card-section--list_item--image-action">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
-                                <circle cx="25" cy="25" r="25" fill="white"/>
-                                <path d="M22.8182 30.1166L27 25.0583L22.8182 20" stroke="#222222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="products-card-section--list_item--name">
-                        <span class="name">Тампопечать</span>
-                    </div>
-                </a>
-                <a href="#" class="products-card-section--list_item">
-                    <div class="products-card-section--list_item--image--wrapper">
-                        <div class="products-card-section--list_item--image">
-                            <img src="/local/templates/onlineservice-custom-template/services/assets/blue/product3.png" alt="Лазерная гравировка" class="image">
-                        </div>
-                        <div class="products-card-section--list_item--image-action">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
-                                <circle cx="25" cy="25" r="25" fill="white"/>
-                                <path d="M22.8182 30.1166L27 25.0583L22.8182 20" stroke="#222222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="products-card-section--list_item--name">
-                        <span class="name">Лазерная гравировка</span>
-                    </div>
-                </a>
-                <a href="#" class="products-card-section--list_item">
-                    <div class="products-card-section--list_item--image--wrapper">
-                        <div class="products-card-section--list_item--image">
-                            <img src="/local/templates/onlineservice-custom-template/services/assets/blue/product4.png" alt="УФ печать" class="image">
-                        </div>
-                        <div class="products-card-section--list_item--image-action">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
-                                <circle cx="25" cy="25" r="25" fill="white"/>
-                                <path d="M22.8182 30.1166L27 25.0583L22.8182 20" stroke="#222222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="products-card-section--list_item--name">
-                        <span class="name">УФ печать</span>
-                    </div>
-                </a>
-                <a href="#" class="products-card-section--list_item">
-                    <div class="products-card-section--list_item--image--wrapper">
-                        <div class="products-card-section--list_item--image">
-                            <img src="/local/templates/onlineservice-custom-template/services/assets/blue/product5.png" alt="Тиснение" class="image">
-                        </div>
-                        <div class="products-card-section--list_item--image-action">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
-                                <circle cx="25" cy="25" r="25" fill="white"/>
-                                <path d="M22.8182 30.1166L27 25.0583L22.8182 20" stroke="#222222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="products-card-section--list_item--name">
-                        <span class="name">Тиснение</span>
-                    </div>
-                </a>
-                <a href="#" class="products-card-section--list_item">
-                    <div class="products-card-section--list_item--image--wrapper">
-                        <div class="products-card-section--list_item--image">
-                            <img src="/local/templates/onlineservice-custom-template/services/assets/blue/product6.png" alt="Сублимационная печать" class="image">
-                        </div>
-                        <div class="products-card-section--list_item--image-action">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
-                                <circle cx="25" cy="25" r="25" fill="white"/>
-                                <path d="M22.8182 30.1166L27 25.0583L22.8182 20" stroke="#222222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="products-card-section--list_item--name">
-                        <span class="name">Сублимационная печать</span>
-                    </div>
-                </a>
-            </div>
+            <?php
+            $APPLICATION->IncludeComponent(
+                "bitrix:news.list",
+                "eklektika_services_list",
+                Array(
+                    "VIEW_TEMPLATE" => $VIEW_TEMPLATE,
+                    "ACTIVE_DATE_FORMAT" => "d.m.Y",
+                    "ADD_SECTIONS_CHAIN" => "N",
+                    "AJAX_MODE" => "N",
+                    "AJAX_OPTION_ADDITIONAL" => "",
+                    "AJAX_OPTION_HISTORY" => "N",
+                    "AJAX_OPTION_JUMP" => "N",
+                    "AJAX_OPTION_STYLE" => "Y",
+                    "CACHE_FILTER" => "N",
+                    "CACHE_GROUPS" => "Y",
+                    "CACHE_TIME" => "36000000",
+                    "CACHE_TYPE" => "A",
+                    "CHECK_DATES" => "Y",
+                    "DETAIL_URL" => "",
+                    "DISPLAY_BOTTOM_PAGER" => "Y",
+                    "DISPLAY_DATE" => "Y",
+                    "DISPLAY_NAME" => "Y",
+                    "DISPLAY_PICTURE" => "Y",
+                    "DISPLAY_PREVIEW_TEXT" => "Y",
+                    "DISPLAY_TOP_PAGER" => "N",
+                    "FIELD_CODE" => array("", ""),
+                    "FILTER_NAME" => "",
+                    "HIDE_LINK_WHEN_NO_DETAIL" => "N",
+                    "IBLOCK_ID" => $SECTION_IBLOCK_ID,
+                    "IBLOCK_TYPE" => "",
+                    "INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+                    "INCLUDE_SUBSECTIONS" => "Y",
+                    "MESSAGE_404" => "",
+                    "NEWS_COUNT" => "6",
+                    "PAGER_BASE_LINK_ENABLE" => "N",
+                    "PAGER_DESC_NUMBERING" => "N",
+                    "PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
+                    "PAGER_SHOW_ALL" => "N",
+                    "PAGER_SHOW_ALWAYS" => "N",
+                    "PAGER_TEMPLATE" => ".default",
+                    "PAGER_TITLE" => "Новости",
+                    "PARENT_SECTION" => $SECTION_ID,
+                    "PARENT_SECTION_CODE" => "",
+                    "PREVIEW_TRUNCATE_LEN" => "",
+                    "PROPERTY_CODE" => array("", ""),
+                    "SET_BROWSER_TITLE" => "N",
+                    "SET_LAST_MODIFIED" => "N",
+                    "SET_META_DESCRIPTION" => "N",
+                    "SET_META_KEYWORDS" => "N",
+                    "SET_STATUS_404" => "N",
+                    "SET_TITLE" => "N",
+                    "SHOW_404" => "N",
+                    "SORT_BY1" => "ACTIVE_FROM",
+                    "SORT_BY2" => "SORT",
+                    "SORT_ORDER1" => "DESC",
+                    "SORT_ORDER2" => "ASC",
+                    "STRICT_SECTION_CHECK" => "N"
+                )
+            );
+            ?>
         </div>
     </section>
 
@@ -146,136 +118,70 @@ $asset->addCss("/local/templates/onlineservice-custom-template/services/styles/s
             <div class="service-description--title">
                 <h4 class="title">Преимущества метода нанесения</h4>
             </div>
-            <div class="service-description-list_items">
-                <div class="service-description-list--item">
-                    <div class="service-description-list--item_icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="33" viewBox="0 0 32 33" fill="none">
-                            <path d="M10.9062 12.6891L16.2845 16.7706C16.6177 17.0234 17.0331 17.1395 17.4473 17.0955C17.8615 17.0515 18.244 16.8508 18.5181 16.5335L29.065 4.33887" stroke="#4BD783" stroke-width="2" stroke-linecap="round"/>
-                            <path d="M30.7143 16.0301C30.7143 19.1706 29.742 22.2323 27.9338 24.7851C26.1256 27.3379 23.5724 29.2536 20.6328 30.263C17.6931 31.2725 14.5148 31.3251 11.5441 30.4134C8.57345 29.5017 5.95968 27.6715 4.06994 25.1799C2.18019 22.6883 1.10939 19.6604 1.00794 16.5215C0.906487 13.3827 1.77947 10.2905 3.50429 7.67931C5.22911 5.06813 7.71911 3.06911 10.6246 1.96304C13.53 0.856956 16.705 0.699377 19.7035 1.51243" stroke="#4BD783" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <div class="service-description-list--item--data">
-                        <div class="service-description-list--item_title">
-                            <span>Элитарность и изящность</span>
-                        </div>
-                        <div class="service-description-list--item_description">
-                            <p>Целый ряд маркетинговых исследований свидетельствуют о том, что в сознании массового потребителя товары и упаковки, в дизайне которых присутствует тиснение, вызывают ассоциации элитарности продукта. Придание надписи, логотипу или изображению рельефа увеличивало продажи при сохранении неизменными прочих элементов дизайна. На подсознательном уровне рельефное изображение в буквальном смысле притягивает, вызывает желание взять предмет в руки, прикоснуться к нему, провести рукой по поверхности.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="service-description-list--item">
-                    <div class="service-description-list--item_icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="33" viewBox="0 0 32 33" fill="none">
-                            <path d="M10.9062 12.6891L16.2845 16.7706C16.6177 17.0234 17.0331 17.1395 17.4473 17.0955C17.8615 17.0515 18.244 16.8508 18.5181 16.5335L29.065 4.33887" stroke="#4BD783" stroke-width="2" stroke-linecap="round"/>
-                            <path d="M30.7143 16.0301C30.7143 19.1706 29.742 22.2323 27.9338 24.7851C26.1256 27.3379 23.5724 29.2536 20.6328 30.263C17.6931 31.2725 14.5148 31.3251 11.5441 30.4134C8.57345 29.5017 5.95968 27.6715 4.06994 25.1799C2.18019 22.6883 1.10939 19.6604 1.00794 16.5215C0.906487 13.3827 1.77947 10.2905 3.50429 7.67931C5.22911 5.06813 7.71911 3.06911 10.6246 1.96304C13.53 0.856956 16.705 0.699377 19.7035 1.51243" stroke="#4BD783" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <div class="service-description-list--item--data">
-                        <div class="service-description-list--item_title">
-                            <span>Долговечность</span>
-                        </div>
-                        <div class="service-description-list--item_description">
-                            <p>При тиснении изменяется текстура самого материала, отпечатанное изображение становится его неотъемлемой частью, его невозможно стереть.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="service-description-list--item">
-                    <div class="service-description-list--item_icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="33" viewBox="0 0 32 33" fill="none">
-                            <path d="M10.9062 12.6891L16.2845 16.7706C16.6177 17.0234 17.0331 17.1395 17.4473 17.0955C17.8615 17.0515 18.244 16.8508 18.5181 16.5335L29.065 4.33887" stroke="#4BD783" stroke-width="2" stroke-linecap="round"/>
-                            <path d="M30.7143 16.0301C30.7143 19.1706 29.742 22.2323 27.9338 24.7851C26.1256 27.3379 23.5724 29.2536 20.6328 30.263C17.6931 31.2725 14.5148 31.3251 11.5441 30.4134C8.57345 29.5017 5.95968 27.6715 4.06994 25.1799C2.18019 22.6883 1.10939 19.6604 1.00794 16.5215C0.906487 13.3827 1.77947 10.2905 3.50429 7.67931C5.22911 5.06813 7.71911 3.06911 10.6246 1.96304C13.53 0.856956 16.705 0.699377 19.7035 1.51243" stroke="#4BD783" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <div class="service-description-list--item--data">
-                        <div class="service-description-list--item_title">
-                            <span>Большие тиражи</span>
-                        </div>
-                        <div class="service-description-list--item_description">
-                            <p>Изготавливаемые из металла (как правило, медь, цинк или латунь) штампы могут произвести до 150 тыс. оттисков.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="service-description-list--item">
-                    <div class="service-description-list--item_icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="33" viewBox="0 0 32 33" fill="none">
-                            <path d="M10.9062 12.6891L16.2845 16.7706C16.6177 17.0234 17.0331 17.1395 17.4473 17.0955C17.8615 17.0515 18.244 16.8508 18.5181 16.5335L29.065 4.33887" stroke="#4BD783" stroke-width="2" stroke-linecap="round"/>
-                            <path d="M30.7143 16.0301C30.7143 19.1706 29.742 22.2323 27.9338 24.7851C26.1256 27.3379 23.5724 29.2536 20.6328 30.263C17.6931 31.2725 14.5148 31.3251 11.5441 30.4134C8.57345 29.5017 5.95968 27.6715 4.06994 25.1799C2.18019 22.6883 1.10939 19.6604 1.00794 16.5215C0.906487 13.3827 1.77947 10.2905 3.50429 7.67931C5.22911 5.06813 7.71911 3.06911 10.6246 1.96304C13.53 0.856956 16.705 0.699377 19.7035 1.51243" stroke="#4BD783" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <div class="service-description-list--item--data">
-                        <div class="service-description-list--item_title">
-                            <span>Большая площадь нанесения</span>
-                        </div>
-                        <div class="service-description-list--item_description">
-                            <p>В используемых при УФ-печати однокомпонентных чернилах отсутствуют растворители и испаряющиеся вещества, поэтому краски не смешиваются и рисунок получается чётким, ярким с разрешением до 1080 × 1440 dpi.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="service-description-list--item">
-                    <div class="service-description-list--item_icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="33" viewBox="0 0 32 33" fill="none">
-                            <path d="M10.9062 12.6891L16.2845 16.7706C16.6177 17.0234 17.0331 17.1395 17.4473 17.0955C17.8615 17.0515 18.244 16.8508 18.5181 16.5335L29.065 4.33887" stroke="#4BD783" stroke-width="2" stroke-linecap="round"/>
-                            <path d="M30.7143 16.0301C30.7143 19.1706 29.742 22.2323 27.9338 24.7851C26.1256 27.3379 23.5724 29.2536 20.6328 30.263C17.6931 31.2725 14.5148 31.3251 11.5441 30.4134C8.57345 29.5017 5.95968 27.6715 4.06994 25.1799C2.18019 22.6883 1.10939 19.6604 1.00794 16.5215C0.906487 13.3827 1.77947 10.2905 3.50429 7.67931C5.22911 5.06813 7.71911 3.06911 10.6246 1.96304C13.53 0.856956 16.705 0.699377 19.7035 1.51243" stroke="#4BD783" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <div class="service-description-list--item--data">
-                        <div class="service-description-list--item_title">
-                            <span>Неограниченный выбор материалов под нанесение</span>
-                        </div>
-                        <div class="service-description-list--item_description">
-                            <p>Эффект моментального отверждения исключает впитывание части краски в материал, поэтому изображение получается одинаково ярким и чётким на любых поверхностях: бумаге, пластике, дереве, коже, стекле и металле.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="service-description-list--item">
-                    <div class="service-description-list--item_icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="33" viewBox="0 0 32 33" fill="none">
-                            <path d="M10.9062 12.6891L16.2845 16.7706C16.6177 17.0234 17.0331 17.1395 17.4473 17.0955C17.8615 17.0515 18.244 16.8508 18.5181 16.5335L29.065 4.33887" stroke="#4BD783" stroke-width="2" stroke-linecap="round"/>
-                            <path d="M30.7143 16.0301C30.7143 19.1706 29.742 22.2323 27.9338 24.7851C26.1256 27.3379 23.5724 29.2536 20.6328 30.263C17.6931 31.2725 14.5148 31.3251 11.5441 30.4134C8.57345 29.5017 5.95968 27.6715 4.06994 25.1799C2.18019 22.6883 1.10939 19.6604 1.00794 16.5215C0.906487 13.3827 1.77947 10.2905 3.50429 7.67931C5.22911 5.06813 7.71911 3.06911 10.6246 1.96304C13.53 0.856956 16.705 0.699377 19.7035 1.51243" stroke="#4BD783" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <div class="service-description-list--item--data">
-                        <div class="service-description-list--item_title">
-                            <span>Печать на прозрачных поверхностях</span>
-                        </div>
-                        <div class="service-description-list--item_description">
-                            <p>Для тиснения можно изготовить достаточно большие по площади клише и наносить изображения общей площадью около 50 см².</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="service-description-list--item">
-                    <div class="service-description-list--item_icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="33" viewBox="0 0 32 33" fill="none">
-                            <path d="M10.9062 12.6891L16.2845 16.7706C16.6177 17.0234 17.0331 17.1395 17.4473 17.0955C17.8615 17.0515 18.244 16.8508 18.5181 16.5335L29.065 4.33887" stroke="#4BD783" stroke-width="2" stroke-linecap="round"/>
-                            <path d="M30.7143 16.0301C30.7143 19.1706 29.742 22.2323 27.9338 24.7851C26.1256 27.3379 23.5724 29.2536 20.6328 30.263C17.6931 31.2725 14.5148 31.3251 11.5441 30.4134C8.57345 29.5017 5.95968 27.6715 4.06994 25.1799C2.18019 22.6883 1.10939 19.6604 1.00794 16.5215C0.906487 13.3827 1.77947 10.2905 3.50429 7.67931C5.22911 5.06813 7.71911 3.06911 10.6246 1.96304C13.53 0.856956 16.705 0.699377 19.7035 1.51243" stroke="#4BD783" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <div class="service-description-list--item--data">
-                        <div class="service-description-list--item_title">
-                            <span>Большой выбор сувениров:</span>
-                        </div>
-                        <div class="service-description-list--item_description">
-                            <div class="ul-list">
-                                <ul>
-                                    <li>визитницы;</li>
-                                    <li>пластиковые карты;</li>
-                                    <li>флешки;</li>
-                                    <li>ручки;</li>
-                                    <li>магниты;</li>
-                                    <li>ежедневники</li>
-                                </ul>
-                                <ul>
-                                    <li>чехлы для телефонов и планшетов;</li>
-                                    <li>брелки;</li>
-                                    <li>подарочные коробки;</li>
-                                    <li>награды;</li>
-                                    <li>любые предметы из пластика, металла, стекла или дерева.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php
+            // Выводим элементы преимуществ через компонент
+            if (!empty($advantagesIds)) {
+                $APPLICATION->IncludeComponent(
+                    "bitrix:news.list",
+                    "eklektika_advantages_list",
+                    Array(
+                        "VIEW_TEMPLATE" => $VIEW_TEMPLATE,
+                        "IBLOCK_ID" => $ADVANTAGES_IBLOCK_ID,
+                        "FILTER_NAME" => "advantagesFilter",
+                        "NEWS_COUNT" => "20",
+                        "SORT_BY1" => "SORT",
+                        "SORT_ORDER1" => "ASC",
+                        "SORT_BY2" => "ACTIVE_FROM",
+                        "SORT_ORDER2" => "DESC",
+                        "FIELD_CODE" => array("ID", "NAME", "PREVIEW_TEXT", "PREVIEW_PICTURE", "DETAIL_PICTURE"),
+                        "PROPERTY_CODE" => array(),
+                        "CHECK_DATES" => "Y",
+                        "DETAIL_URL" => "",
+                        "AJAX_MODE" => "N",
+                        "AJAX_OPTION_JUMP" => "N",
+                        "AJAX_OPTION_STYLE" => "Y",
+                        "AJAX_OPTION_HISTORY" => "N",
+                        "CACHE_TYPE" => "A",
+                        "CACHE_TIME" => "36000000",
+                        "CACHE_FILTER" => "N",
+                        "CACHE_GROUPS" => "Y",
+                        "PREVIEW_TRUNCATE_LEN" => "",
+                        "ACTIVE_DATE_FORMAT" => "d.m.Y",
+                        "SET_TITLE" => "N",
+                        "SET_BROWSER_TITLE" => "N",
+                        "SET_META_KEYWORDS" => "N",
+                        "SET_META_DESCRIPTION" => "N",
+                        "SET_STATUS_404" => "N",
+                        "INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+                        "ADD_SECTIONS_CHAIN" => "N",
+                        "HIDE_LINK_WHEN_NO_DETAIL" => "N",
+                        "PARENT_SECTION" => "",
+                        "PARENT_SECTION_CODE" => "",
+                        "INCLUDE_SUBSECTIONS" => "Y",
+                        "DISPLAY_TOP_PAGER" => "N",
+                        "DISPLAY_BOTTOM_PAGER" => "N",
+                        "PAGER_TEMPLATE" => ".default",
+                        "PAGER_SHOW_ALWAYS" => "N",
+                        "PAGER_DESC_NUMBERING" => "N",
+                        "PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
+                        "PAGER_SHOW_ALL" => "N",
+                        "PAGER_BASE_LINK_ENABLE" => "N",
+                        "SHOW_404" => "N",
+                        "MESSAGE_404" => "",
+                        "STRICT_SECTION_CHECK" => "N"
+                    )
+                );
+            }
+            else{
+                ?>
+                <style>
+                    .service-description-list{
+                        display: none;
+                    }
+                </style>
+                <?php
+            }
+            ?>
         </div>
     </section>
 

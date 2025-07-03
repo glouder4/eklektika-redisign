@@ -5,7 +5,45 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a53d02d7-d404-452c-a903-dd81636134fa" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/services/include/index_dtf.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/services/include/index_e_nanesenie-logotipov-na-ezhednevniki.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/services/include/index_s_lazernaya-gravirovka.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/services/include/index_s_polnocvetnaya-uf-pechat.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/services/include/index_s_shelkografiya.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/services/include/index_s_sublimacionnaya_pechat.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/services/include/index_s_tampopechat.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/services/include/index_s_tisnenie.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/news.list/eklektika_advantages_list/.parameters.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/news.list/eklektika_advantages_list/lang/de/.parameters.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/news.list/eklektika_advantages_list/lang/en/.parameters.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/news.list/eklektika_advantages_list/lang/en/template.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/news.list/eklektika_advantages_list/lang/ru/.parameters.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/news.list/eklektika_advantages_list/lang/ru/template.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/news.list/eklektika_advantages_list/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/news.list/eklektika_advantages_list/template.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/news.list/eklektika_services_list/.parameters.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/news.list/eklektika_services_list/lang/de/.parameters.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/news.list/eklektika_services_list/lang/en/.parameters.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/news.list/eklektika_services_list/lang/en/template.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/news.list/eklektika_services_list/lang/ru/.parameters.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/news.list/eklektika_services_list/lang/ru/template.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/news.list/eklektika_services_list/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/news.list/eklektika_services_list/template.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/services/e_nanesenie-logotipov-na-ezhednevniki.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/services/e_nanesenie-logotipov-na-ezhednevniki.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/services/s_dtf_pechat.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/services/s_dtf_pechat.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/services/s_lazernaya-gravirovka.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/services/s_lazernaya-gravirovka.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/services/s_polnocvetnaya-uf-pechat.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/services/s_polnocvetnaya-uf-pechat.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/services/s_shelkografiya.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/services/s_shelkografiya.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/services/s_sublimacionnaya_pechat.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/services/s_sublimacionnaya_pechat.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/services/s_tampopechat.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/services/s_tampopechat.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/services/s_tisnenie.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/services/s_tisnenie.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/services/styles/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/onlineservice-custom-template/services/styles/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/breadcrumb/onlineservice-breadcrumbs/.parameters.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/breadcrumb/onlineservice-breadcrumbs/.parameters.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/breadcrumb/onlineservice-breadcrumbs/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/breadcrumb/onlineservice-breadcrumbs/template.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/catalog/services.1/element.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/bitrix/catalog/services.1/element.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.footer/template.1.custom/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/components/intec.universe/main.footer/template.1.custom/template.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/local/templates/universe_s1/onlineservice_addons/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/www/local/templates/universe_s1/onlineservice_addons/footer.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,7 +70,7 @@
     &quot;WebServerToolWindowPanel.toolwindow.show.date&quot;: &quot;false&quot;,
     &quot;WebServerToolWindowPanel.toolwindow.show.permissions&quot;: &quot;false&quot;,
     &quot;WebServerToolWindowPanel.toolwindow.show.size&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Git_projects/35media&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Git_projects/eklektika-redisign/www/local/templates/universe_s1/components/bitrix/news.list&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -117,6 +155,10 @@
       <workItem from="1751275716714" duration="5703000" />
       <workItem from="1751287304734" duration="7661000" />
       <workItem from="1751365929063" duration="374000" />
+      <workItem from="1751387842372" duration="610000" />
+      <workItem from="1751449620535" duration="39000" />
+      <workItem from="1751451196067" duration="10773000" />
+      <workItem from="1751548716992" duration="112000" />
     </task>
     <servers />
   </component>

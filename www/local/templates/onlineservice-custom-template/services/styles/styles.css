@@ -13,6 +13,9 @@
 
     gap: 20px;
 
+    height: 175px;
+    margin-top: 35px;
+
     padding: 25px;
 }
 .alert-card--title>span{

@@ -70,42 +70,42 @@
                     </a>
                 </li>
                 <li class="footer__main-categories__columns-column--list_item">
-                    <a href="#" class="footer__main-categories__columns-column--list_item_link">
+                    <a href="/services/s_dtf_pechat/" class="footer__main-categories__columns-column--list_item_link">
                         DTF печать
                     </a>
                 </li>
                 <li class="footer__main-categories__columns-column--list_item">
-                    <a href="#" class="footer__main-categories__columns-column--list_item_link">
+                    <a href="/services/s_tampopechat/" class="footer__main-categories__columns-column--list_item_link">
                         Тампонная печать до 4 цветов
                     </a>
                 </li>
                 <li class="footer__main-categories__columns-column--list_item">
-                    <a href="#" class="footer__main-categories__columns-column--list_item_link">
+                    <a href="/services/s_lazernaya-gravirovka/" class="footer__main-categories__columns-column--list_item_link">
                         Лазерная гравировка
                     </a>
                 </li>
                 <li class="footer__main-categories__columns-column--list_item">
-                    <a href="#" class="footer__main-categories__columns-column--list_item_link">
+                    <a href="/services/s_polnocvetnaya-uf-pechat/" class="footer__main-categories__columns-column--list_item_link">
                         Полноцветная УФ-печать
                     </a>
                 </li>
                 <li class="footer__main-categories__columns-column--list_item">
-                    <a href="#" class="footer__main-categories__columns-column--list_item_link">
+                    <a href="/services/s_tisnenie/" class="footer__main-categories__columns-column--list_item_link">
                         Тиснение логотипов
                     </a>
                 </li>
                 <li class="footer__main-categories__columns-column--list_item">
-                    <a href="#" class="footer__main-categories__columns-column--list_item_link">
+                    <a href="/services/s_sublimacionnaya_pechat/" class="footer__main-categories__columns-column--list_item_link">
                         Сублимационная печать
                     </a>
                 </li>
                 <li class="footer__main-categories__columns-column--list_item">
-                    <a href="#" class="footer__main-categories__columns-column--list_item_link">
+                    <a href="/services/s_shelkografiya/" class="footer__main-categories__columns-column--list_item_link">
                         Шелкография на ткани
                     </a>
                 </li>
                 <li class="footer__main-categories__columns-column--list_item">
-                    <a href="#" class="footer__main-categories__columns-column--list_item_link">
+                    <a href="/services/e_nanesenie-logotipov-na-ezhednevniki/" class="footer__main-categories__columns-column--list_item_link">
                         Нанесение логотипов на ежедневники
                     </a>
                 </li>
@@ -127,12 +127,12 @@
             </div>
             <ul class="footer__main-categories__columns-column--list">
                 <li class="footer__main-categories__columns-column--list_item">
-                    <a href="#" class="footer__main-categories__columns-column--list_item_link">
+                    <a href="/informacziya-dlya-dilerov/" class="footer__main-categories__columns-column--list_item_link">
                         Программа привилегий и бонусов для дилеров
                     </a>
                 </li>
                 <li class="footer__main-categories__columns-column--list_item">
-                    <a href="#" class="footer__main-categories__columns-column--list_item_link">
+                    <a href="/oplata/" class="footer__main-categories__columns-column--list_item_link">
                         Гибкая система оплаты
                     </a>
                 </li>
@@ -147,7 +147,7 @@
                     </a>
                 </li>
                 <li class="footer__main-categories__columns-column--list_item">
-                    <a href="#" class="footer__main-categories__columns-column--list_item_link">
+                    <a href="/dostavka/" class="footer__main-categories__columns-column--list_item_link">
                         Доставка
                     </a>
                 </li>
@@ -159,32 +159,32 @@
             </div>
             <ul class="footer__main-categories__columns-column--list">
                 <li class="footer__main-categories__columns-column--list_item">
-                    <a href="#" class="footer__main-categories__columns-column--list_item_link">
+                    <a href="/company/" class="footer__main-categories__columns-column--list_item_link">
                         О компании
                     </a>
                 </li>
                 <li class="footer__main-categories__columns-column--list_item">
-                    <a href="#" class="footer__main-categories__columns-column--list_item_link">
+                    <a href="/company/news/" class="footer__main-categories__columns-column--list_item_link">
                         Новости
                     </a>
                 </li>
-                <li class="footer__main-categories__columns-column--list_item">
+                <!--<li class="footer__main-categories__columns-column--list_item">
                     <a href="#" class="footer__main-categories__columns-column--list_item_link">
                         Бренды
                     </a>
-                </li>
-                <li class="footer__main-categories__columns-column--list_item">
+                </li>-->
+                <!--<li class="footer__main-categories__columns-column--list_item">
                     <a href="#" class="footer__main-categories__columns-column--list_item_link">
                         Новинки
                     </a>
-                </li>
+                </li>-->
                 <li class="footer__main-categories__columns-column--list_item">
-                    <a href="#" class="footer__main-categories__columns-column--list_item_link">
+                    <a href="/shares/" class="footer__main-categories__columns-column--list_item_link">
                         Акции и Скидки
                     </a>
                 </li>
                 <li class="footer__main-categories__columns-column--list_item">
-                    <a href="#" class="footer__main-categories__columns-column--list_item_link">
+                    <a href="/company/contacts/" class="footer__main-categories__columns-column--list_item_link">
                         Контакты
                     </a>
                 </li>

@@ -3,7 +3,6 @@
 
 use Bitrix\Main\Loader;
 use intec\core\helpers\ArrayHelper;
-
 /**
  * @var array $arParams
  * @var array $arResult

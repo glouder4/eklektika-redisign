@@ -2,24 +2,78 @@
 $APPLICATION->SetTitle("Печать на ежедневниках");
 
 $asset->addCss("/local/templates/onlineservice-custom-template/services/styles/styles.css");
+
+$SECTION_IBLOCK_ID = 16;
+$ADVANTAGES_IBLOCK_ID = 56;
+$SECTION_ID = 571;
+$VIEW_TEMPLATE = "PINK";
+
+//UF_ADVANTAGES_LIST
+// Получаем значения UF_ADVANTAGES_LIST раздела
+$advantagesList = array();
+if (CModule::IncludeModule("iblock")) {
+    // Альтернативный способ получения пользовательских полей раздела
+    $rsSection = CIBlockSection::GetByID($SECTION_ID);
+    if ($arSection = $rsSection->GetNext()) {
+        // Получаем пользовательские поля раздела
+        $userFields = $USER_FIELD_MANAGER->GetUserFields("IBLOCK_".$SECTION_IBLOCK_ID."_SECTION", $SECTION_ID, LANGUAGE_ID);
+
+        if (!empty($userFields['UF_ADVANTAGES_LIST']['VALUE'])) {
+            $advantagesIds = $userFields['UF_ADVANTAGES_LIST']['VALUE'];
+
+            // Получаем элементы из привязки
+            $rsElements = CIBlockElement::GetList(
+                array("SORT" => "ASC"),
+                array(
+                    "ID" => $advantagesIds,
+                    "ACTIVE" => "Y"
+                ),
+                false,
+                false,
+                array("ID", "NAME", "PREVIEW_TEXT", "PREVIEW_PICTURE", "DETAIL_PICTURE","EDIT_LINK","DELETE_LINK")
+            );
+
+            while ($arElement = $rsElements->GetNext()) {
+                $advantagesList[] = array(
+                    "ID" => $arElement["ID"],
+                    "IBLOCK_ID" => $SECTION_IBLOCK_ID,
+                    "NAME" => $arElement["NAME"],
+                    "PREVIEW_TEXT" => $arElement["PREVIEW_TEXT"],
+                    "PREVIEW_PICTURE" => $arElement["PREVIEW_PICTURE"],
+                    "DETAIL_PICTURE" => $arElement["DETAIL_PICTURE"],
+                    "EDIT_LINK" => $arElement["EDIT_LINK"],
+                    "DELETE_LINK" => $arElement["DELETE_LINK"]
+                );
+            }
+        }
+    }
+}
+
+// Получаем ID элементов из массива преимуществ
+$advantagesIds = array();
+foreach ($advantagesList as $advantage) {
+    $advantagesIds[] = $advantage['ID'];
+}
+
+// Создаем фильтр для передачи ID элементов
+$advantagesFilter = array(
+    "ID" => $advantagesIds,
+    "ACTIVE" => "Y"
+);
+
 ?>
 <div class="container">
     <?$APPLICATION->IncludeComponent(
         "bitrix:breadcrumb",
         "onlineservice-breadcrumbs",
-        Array(
+        Array(),
+        false,
+        array(
             "HIDE_ICONS" => "Y",
             "ITEM_0" => "Главная",
             "ITEM_0_LINK" => "/",
-            "ITEM_1" => "Услуги",
-            "ITEM_1_LINK" => "/services/",
-            "ITEM_2" => "Печать на ежедневниках",
-            "ITEM_2_LINK" => "/nanesenie-logotipov-na-ezhednevniki/",
-            "DYNAMIC_TITLES" => "Y"
-        ),
-        false,
-        array(
-            "HIDE_ICONS" => "Y"
+            "ITEM_1" => "Печать на ежедневниках", // Здесь меняем название
+            "ITEM_1_LINK" => "/services/"
         )
     );?>
 </div>
@@ -35,7 +89,13 @@ $asset->addCss("/local/templates/onlineservice-custom-template/services/styles/s
         <div class="alert-section">
             <div class="alert-card">
                 <div class="alert-card--description">
-                    <p>Печать на ежедневниках доступна несколькими способами: методом тампо печати, лазерной гравировки, УФ-печати, тиснением логотипа, методом шелкографии. В зависимости от ваших задач и выбранного ежедневника мы подберем для вас оптимальный вариант.</p>
+                    <?$APPLICATION->IncludeComponent("bitrix:main.include","",Array(
+                            "AREA_FILE_SHOW" => "file",
+                            "PATH" => "/local/templates/onlineservice-custom-template/services/include/index_dtf.php",
+                            "AREA_FILE_SUFFIX" => "",
+                            "EDIT_TEMPLATE" => ""
+                        )
+                    );?>
                 </div>
             </div>
         </div>
@@ -52,104 +112,66 @@ $asset->addCss("/local/templates/onlineservice-custom-template/services/styles/s
                 <h3 class="title">Примеры печати на ежедневниках разными видами нанесения</h3>
             </div>
 
-            <div class="products-card-section-list">
-                <a href="#" class="products-card-section--list_item">
-                    <div class="products-card-section--list_item--image--wrapper">
-                        <div class="products-card-section--list_item--image">
-                            <img src="/local/templates/onlineservice-custom-template/services/assets/blue/product1.png" alt="Дизайн студия" class="image">
-                        </div>
-                        <div class="products-card-section--list_item--image-action">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
-                                <circle cx="25" cy="25" r="25" fill="white"/>
-                                <path d="M22.8182 30.1166L27 25.0583L22.8182 20" stroke="#222222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="products-card-section--list_item--name">
-                        <span class="name">DTF печать</span>
-                    </div>
-                </a>
-                <a href="#" class="products-card-section--list_item">
-                    <div class="products-card-section--list_item--image--wrapper">
-                        <div class="products-card-section--list_item--image">
-                            <img src="/local/templates/onlineservice-custom-template/services/assets/blue/product2.png" alt="Дизайн студия" class="image">
-                        </div>
-                        <div class="products-card-section--list_item--image-action">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
-                                <circle cx="25" cy="25" r="25" fill="white"/>
-                                <path d="M22.8182 30.1166L27 25.0583L22.8182 20" stroke="#222222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="products-card-section--list_item--name">
-                        <span class="name">Тампопечать</span>
-                    </div>
-                </a>
-                <a href="#" class="products-card-section--list_item">
-                    <div class="products-card-section--list_item--image--wrapper">
-                        <div class="products-card-section--list_item--image">
-                            <img src="/local/templates/onlineservice-custom-template/services/assets/blue/product3.png" alt="Лазерная гравировка" class="image">
-                        </div>
-                        <div class="products-card-section--list_item--image-action">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
-                                <circle cx="25" cy="25" r="25" fill="white"/>
-                                <path d="M22.8182 30.1166L27 25.0583L22.8182 20" stroke="#222222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="products-card-section--list_item--name">
-                        <span class="name">Лазерная гравировка</span>
-                    </div>
-                </a>
-                <a href="#" class="products-card-section--list_item">
-                    <div class="products-card-section--list_item--image--wrapper">
-                        <div class="products-card-section--list_item--image">
-                            <img src="/local/templates/onlineservice-custom-template/services/assets/blue/product4.png" alt="УФ печать" class="image">
-                        </div>
-                        <div class="products-card-section--list_item--image-action">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
-                                <circle cx="25" cy="25" r="25" fill="white"/>
-                                <path d="M22.8182 30.1166L27 25.0583L22.8182 20" stroke="#222222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="products-card-section--list_item--name">
-                        <span class="name">УФ печать</span>
-                    </div>
-                </a>
-                <a href="#" class="products-card-section--list_item">
-                    <div class="products-card-section--list_item--image--wrapper">
-                        <div class="products-card-section--list_item--image">
-                            <img src="/local/templates/onlineservice-custom-template/services/assets/blue/product5.png" alt="Тиснение" class="image">
-                        </div>
-                        <div class="products-card-section--list_item--image-action">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
-                                <circle cx="25" cy="25" r="25" fill="white"/>
-                                <path d="M22.8182 30.1166L27 25.0583L22.8182 20" stroke="#222222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="products-card-section--list_item--name">
-                        <span class="name">Тиснение</span>
-                    </div>
-                </a>
-                <a href="#" class="products-card-section--list_item">
-                    <div class="products-card-section--list_item--image--wrapper">
-                        <div class="products-card-section--list_item--image">
-                            <img src="/local/templates/onlineservice-custom-template/services/assets/blue/product6.png" alt="Сублимационная печать" class="image">
-                        </div>
-                        <div class="products-card-section--list_item--image-action">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
-                                <circle cx="25" cy="25" r="25" fill="white"/>
-                                <path d="M22.8182 30.1166L27 25.0583L22.8182 20" stroke="#222222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="products-card-section--list_item--name">
-                        <span class="name">Сублимационная печать</span>
-                    </div>
-                </a>
-            </div>
+            <?php
+            $APPLICATION->IncludeComponent(
+                "bitrix:news.list",
+                "eklektika_services_list",
+                Array(
+                    "VIEW_TEMPLATE" => $VIEW_TEMPLATE,
+                    "ACTIVE_DATE_FORMAT" => "d.m.Y",
+                    "ADD_SECTIONS_CHAIN" => "N",
+                    "AJAX_MODE" => "N",
+                    "AJAX_OPTION_ADDITIONAL" => "",
+                    "AJAX_OPTION_HISTORY" => "N",
+                    "AJAX_OPTION_JUMP" => "N",
+                    "AJAX_OPTION_STYLE" => "Y",
+                    "CACHE_FILTER" => "N",
+                    "CACHE_GROUPS" => "Y",
+                    "CACHE_TIME" => "36000000",
+                    "CACHE_TYPE" => "A",
+                    "CHECK_DATES" => "Y",
+                    "DETAIL_URL" => "",
+                    "DISPLAY_BOTTOM_PAGER" => "Y",
+                    "DISPLAY_DATE" => "Y",
+                    "DISPLAY_NAME" => "Y",
+                    "DISPLAY_PICTURE" => "Y",
+                    "DISPLAY_PREVIEW_TEXT" => "Y",
+                    "DISPLAY_TOP_PAGER" => "N",
+                    "FIELD_CODE" => array("", ""),
+                    "FILTER_NAME" => "",
+                    "HIDE_LINK_WHEN_NO_DETAIL" => "N",
+                    "IBLOCK_ID" => $SECTION_IBLOCK_ID,
+                    "IBLOCK_TYPE" => "",
+                    "INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+                    "INCLUDE_SUBSECTIONS" => "Y",
+                    "MESSAGE_404" => "",
+                    "NEWS_COUNT" => "6",
+                    "PAGER_BASE_LINK_ENABLE" => "N",
+                    "PAGER_DESC_NUMBERING" => "N",
+                    "PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
+                    "PAGER_SHOW_ALL" => "N",
+                    "PAGER_SHOW_ALWAYS" => "N",
+                    "PAGER_TEMPLATE" => ".default",
+                    "PAGER_TITLE" => "Новости",
+                    "PARENT_SECTION" => $SECTION_ID,
+                    "PARENT_SECTION_CODE" => "",
+                    "PREVIEW_TRUNCATE_LEN" => "",
+                    "PROPERTY_CODE" => array("", ""),
+                    "SET_BROWSER_TITLE" => "N",
+                    "SET_LAST_MODIFIED" => "N",
+                    "SET_META_DESCRIPTION" => "N",
+                    "SET_META_KEYWORDS" => "N",
+                    "SET_STATUS_404" => "N",
+                    "SET_TITLE" => "N",
+                    "SHOW_404" => "N",
+                    "SORT_BY1" => "ACTIVE_FROM",
+                    "SORT_BY2" => "SORT",
+                    "SORT_ORDER1" => "DESC",
+                    "SORT_ORDER2" => "ASC",
+                    "STRICT_SECTION_CHECK" => "N"
+                )
+            );
+            ?>
         </div>
     </section>
 
