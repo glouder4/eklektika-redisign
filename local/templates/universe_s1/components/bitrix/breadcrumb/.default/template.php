@@ -162,6 +162,7 @@ $sReturns =
         'id' => $sTemplateId,
         'class' => [
             'ns-bitrix',
+            'container',
             'c-breadcrumb' => [
                 '',
                 'default'

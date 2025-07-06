@@ -155,7 +155,7 @@ use intec\template\Properties;
 
                 if ($page['blocks']['title']['show']) {
                     echo Html::beginTag('div', [
-                        'class' => 'intec-template-title'
+                        'class' => 'intec-template-title container'
                     ]);
 
                     $APPLICATION->IncludeComponent('bitrix:main.include', '.default', [

@@ -37,9 +37,6 @@ if ($APPLICATION->GetCurPage(false) === '/company/contacts/'):
 
     Asset::getInstance()->addJs("/local/templates/onlineservice-custom-template/components/contacts/accordion/scripts/script.js",true);
 endif;
-if ($APPLICATION->GetCurPage(false) === '/catalog/'):
-    Asset::getInstance()->addCss("/local/templates/onlineservice-custom-template/components/catalog/styles/styles.css");
-endif;
 if ($APPLICATION->GetCurPage(false) === '/dostavka/'):
     Asset::getInstance()->addCss("/local/templates/onlineservice-custom-template/components/dostavka/styles/styles.css");
 endif;
@@ -49,9 +46,6 @@ endif;
 if ($APPLICATION->GetCurPage(false) === '/our-production/'):
     Asset::getInstance()->addCss("/local/templates/onlineservice-custom-template/components/our-production/styles/styles.css");
 endif;
-if ($APPLICATION->GetCurPage(false) === '/loyalty-program/'):
-    Asset::getInstance()->addCss("/local/templates/onlineservice-custom-template/components/loyalty-program/styles/styles.css");
-endif;
 if ($APPLICATION->GetCurPage(false) === '/services/'):
     Asset::getInstance()->addCss("/local/templates/onlineservice-custom-template/components/services/styles/styles.css");
 endif;
@@ -60,9 +54,6 @@ if ($APPLICATION->GetCurPage(false) === '/oplata/'):
 endif;
 if ($APPLICATION->GetCurPage(false) === '/company/'):
     Asset::getInstance()->addCss("/local/templates/onlineservice-custom-template/components/company/styles/styles.css");
-endif;
-if ($APPLICATION->GetCurPage(false) === '/vidy-naneseniy/'):
-    Asset::getInstance()->addCss("/local/templates/onlineservice-custom-template/components/vidy-naneseniy/styles/styles.css");
 endif;
 
 ?>

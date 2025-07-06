@@ -290,7 +290,7 @@ $APPLICATION->SetTitle("О компании");
                         </p>
                     </div>
                     <div class="service--item--action">
-                        <a href="#" class="btn">
+                        <a href="/design-studiya/" class="btn">
                             Подробнее
                         </a>
                     </div>
@@ -315,7 +315,7 @@ $APPLICATION->SetTitle("О компании");
                         </p>
                     </div>
                     <div class="service--item--action">
-                        <a href="#" class="btn">
+                        <a href="/vidy-naneseniy/" class="btn">
                             Подробнее
                         </a>
                     </div>
@@ -339,7 +339,7 @@ $APPLICATION->SetTitle("О компании");
                         </p>
                     </div>
                     <div class="service--item--action">
-                        <a href="#" class="btn">
+                        <a href="/dostavka/" class="btn">
                             Подробнее
                         </a>
                     </div>
@@ -393,7 +393,7 @@ $APPLICATION->SetTitle("О компании");
                         </p>
                     </div>
                     <div class="service--item--action">
-                        <a href="#" class="btn">
+                        <a href="/informacziya-dlya-dilerov/" class="btn">
                             Подробнее
                         </a>
                     </div>

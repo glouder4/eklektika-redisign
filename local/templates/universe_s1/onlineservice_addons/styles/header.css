@@ -261,7 +261,16 @@
     height: 45px;
     width: 134px;
 }
-
+.header__navigation-list--item-link:hover,
+.header__navigation-list--item-link:focus,
+.header__navigation-list--item-link:active{
+    color: #858585!important;
+    list-style: none;
+    text-decoration: unset;
+}
+.intec-template .intec-template-layout-header{
+    max-width: 100%;
+}
 .header__search-btn {
     background: transparent;
     border: none;
@@ -813,11 +822,6 @@
         line-height: 100%;
         letter-spacing: 0;
         color: #858585;
-        list-style: none;
-        text-decoration: unset;
-    }
-    .header__navigation-list--item-link:hover{
-        color: #858585!important;
         list-style: none;
         text-decoration: unset;
     }

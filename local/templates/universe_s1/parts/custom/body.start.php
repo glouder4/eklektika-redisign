@@ -13,10 +13,12 @@ $customPages = [
     '/design-studiya/', // Дизайн студия
     '/our-production/', // Наше производство, служба качества
     '/loyalty-program/', //Программа лояльности
+    '/informacziya-dlya-dilerov/', //Программа лояльности +1
     '/services/', // Услуги
     '/oplata/', // Способы оплаты
     '/company/', //О компании
     '/vidy-naneseniy/', //Виды нанесений
+    '/nanesenie/', //Виды нанесений
     '/services/s_dtf_pechat/',
     '/services/s_tampopechat/',
     '/services/s_lazernaya-gravirovka/',
@@ -418,6 +420,9 @@ if (in_array($APPLICATION->GetCurPage(), $customPages)) {
             case '/loyalty-program/':
                 include($_SERVER['DOCUMENT_ROOT'].'/local/templates/onlineservice-custom-template/loyalty-program.php');
                 break;
+            case '/informacziya-dlya-dilerov/':
+                include($_SERVER['DOCUMENT_ROOT'].'/local/templates/onlineservice-custom-template/loyalty-program.php');
+                break;
             case '/services/':
                 include($_SERVER['DOCUMENT_ROOT'].'/local/templates/onlineservice-custom-template/services.php');
                 break;
@@ -428,6 +433,9 @@ if (in_array($APPLICATION->GetCurPage(), $customPages)) {
                 include($_SERVER['DOCUMENT_ROOT'].'/local/templates/onlineservice-custom-template/company.php');
                 break;
             case '/vidy-naneseniy/':
+                include($_SERVER['DOCUMENT_ROOT'].'/local/templates/onlineservice-custom-template/vidy-naneseniy.php');
+                break;
+            case '/nanesenie/':
                 include($_SERVER['DOCUMENT_ROOT'].'/local/templates/onlineservice-custom-template/vidy-naneseniy.php');
                 break;
         }

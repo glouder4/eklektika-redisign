@@ -80,3 +80,16 @@ $arVisual = [
         ]
     ]
 ];
+
+// Мутация наименования раздела
+if (!empty($arResult) && !empty($GLOBALS["OS_BREADCRUMBS"])) {
+    // Заменяем весь массив хлебных крошек на кастомный
+    $arResult = [];
+    
+    foreach ($GLOBALS["OS_BREADCRUMBS"] as $breadcrumb) {
+        $arResult[] = [
+            'TITLE' => $breadcrumb['ITEM'],
+            'LINK' => $breadcrumb['LINK']
+        ];
+    }
+}

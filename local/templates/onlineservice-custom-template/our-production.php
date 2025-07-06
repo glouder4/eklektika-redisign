@@ -50,7 +50,7 @@ $APPLICATION->SetTitle("Наше производство, служба каче
                 <div class="content-section--services-list__item">
                     <div class="list__item--icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" fill="none">
-                            <circle cx="40" cy="40" r="40" fill="#4BD783"/>
+                            <circle cx="40" cy="40" r="40" fill="#EF4A85"/>
                             <path d="M27.9773 28.9566V44.6092H53.0227V28.9566H27.9773ZM53.6818 27C54.4098 27 55 27.584 55 28.3044V45.2614C55 45.9818 54.4098 46.5658 53.6818 46.5658L41.312 46.5648V51.1425L46.2962 51.1434C46.8422 51.1434 47.2848 51.5814 47.2848 52.1217C47.2848 52.662 46.8422 53.1 46.2962 53.1H34.6728C34.1267 53.1 33.6841 52.662 33.6841 52.1217C33.6841 51.5814 34.1267 51.1434 34.6728 51.1434L39.3356 51.1425V46.5648L27.3182 46.5658C26.5902 46.5658 26 45.9818 26 45.2614V28.3044C26 27.584 26.5902 27 27.3182 27H53.6818Z" fill="white"/>
                         </svg>
                     </div>
@@ -65,7 +65,7 @@ $APPLICATION->SetTitle("Наше производство, служба каче
                 </div>
                 <div class="content-section--services-list__item">
                     <div class="list__item--icon">
-                        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" fill="none">
                             <circle cx="40" cy="40" r="40" fill="#744A9E"/>
                             <path d="M32.4033 37.4859L38.0678 28.4309C38.2873 28.073 38.5958 27.7781 38.9632 27.5748C39.3306 27.3716 39.7443 27.267 40.1641 27.2711V27.2711C40.4948 27.2592 40.8244 27.3137 41.1337 27.4313C41.4429 27.549 41.7254 27.7275 41.9645 27.9562C42.2036 28.1849 42.3944 28.4592 42.5257 28.7629C42.6569 29.0666 42.726 29.3936 42.7287 29.7245V36.2147H52.519C52.8807 36.2264 53.2359 36.3146 53.5611 36.4734C53.8864 36.6322 54.1743 36.8581 54.406 37.1362C54.6377 37.4143 54.808 37.7382 54.9055 38.0868C55.0031 38.4354 55.0258 38.8007 54.9721 39.1587L53.188 50.667C53.1119 51.282 52.8138 51.8481 52.3497 52.2588C51.8857 52.6695 51.2876 52.8966 50.668 52.8973H36.0384C35.342 52.9 34.6546 52.7396 34.0313 52.4289L32.4256 51.626" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M32.4033 37.4863V51.5595" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -177,7 +177,7 @@ $APPLICATION->SetTitle("Наше производство, служба каче
             </div>
 
             <div class="products-card-section-list">
-                <a href="#" class="products-card-section--list_item">
+                <a href="/services/s_dtf_pechat/" class="products-card-section--list_item">
                     <div class="products-card-section--list_item--image--wrapper">
                         <div class="products-card-section--list_item--image">
                             <img src="/local/templates/onlineservice-custom-template/components/our-production/assets/product1.png" alt="Дизайн студия" class="image">
@@ -193,7 +193,7 @@ $APPLICATION->SetTitle("Наше производство, служба каче
                         <span class="name">DTF печать</span>
                     </div>
                 </a>
-                <a href="#" class="products-card-section--list_item">
+                <a href="/services/s_tampopechat/" class="products-card-section--list_item">
                     <div class="products-card-section--list_item--image--wrapper">
                         <div class="products-card-section--list_item--image">
                             <img src="/local/templates/onlineservice-custom-template/components/our-production/assets/product2.png" alt="Дизайн студия" class="image">
@@ -209,7 +209,7 @@ $APPLICATION->SetTitle("Наше производство, служба каче
                         <span class="name">Тампопечать</span>
                     </div>
                 </a>
-                <a href="#" class="products-card-section--list_item">
+                <a href="/services/s_lazernaya-gravirovka/" class="products-card-section--list_item">
                     <div class="products-card-section--list_item--image--wrapper">
                         <div class="products-card-section--list_item--image">
                             <img src="/local/templates/onlineservice-custom-template/components/our-production/assets/product3.png" alt="Лазерная гравировка" class="image">
@@ -225,7 +225,7 @@ $APPLICATION->SetTitle("Наше производство, служба каче
                         <span class="name">Лазерная гравировка</span>
                     </div>
                 </a>
-                <a href="#" class="products-card-section--list_item">
+                <a href="/services/s_polnocvetnaya-uf-pechat/" class="products-card-section--list_item">
                     <div class="products-card-section--list_item--image--wrapper">
                         <div class="products-card-section--list_item--image">
                             <img src="/local/templates/onlineservice-custom-template/components/our-production/assets/product4.png" alt="УФ печать" class="image">
@@ -241,7 +241,7 @@ $APPLICATION->SetTitle("Наше производство, служба каче
                         <span class="name">УФ печать</span>
                     </div>
                 </a>
-                <a href="#" class="products-card-section--list_item">
+                <a href="/services/s_tisnenie/" class="products-card-section--list_item">
                     <div class="products-card-section--list_item--image--wrapper">
                         <div class="products-card-section--list_item--image">
                             <img src="/local/templates/onlineservice-custom-template/components/our-production/assets/product5.png" alt="Тиснение" class="image">
@@ -257,7 +257,7 @@ $APPLICATION->SetTitle("Наше производство, служба каче
                         <span class="name">Тиснение</span>
                     </div>
                 </a>
-                <a href="#" class="products-card-section--list_item">
+                <a href="/services/s_sublimacionnaya_pechat/" class="products-card-section--list_item">
                     <div class="products-card-section--list_item--image--wrapper">
                         <div class="products-card-section--list_item--image">
                             <img src="/local/templates/onlineservice-custom-template/components/our-production/assets/product6.png" alt="Сублимационная печать" class="image">
@@ -273,7 +273,7 @@ $APPLICATION->SetTitle("Наше производство, служба каче
                         <span class="name">Сублимационная печать</span>
                     </div>
                 </a>
-                <a href="#" class="products-card-section--list_item">
+                <a href="/services/s_shelkografiya/" class="products-card-section--list_item">
                     <div class="products-card-section--list_item--image--wrapper">
                         <div class="products-card-section--list_item--image">
                             <img src="/local/templates/onlineservice-custom-template/components/our-production/assets/product7.png" alt="Шелкография на ткани" class="image">
@@ -289,7 +289,7 @@ $APPLICATION->SetTitle("Наше производство, служба каче
                         <span class="name">Шелкография на ткани</span>
                     </div>
                 </a>
-                <a href="#" class="products-card-section--list_item">
+                <a href="/services/e_nanesenie-logotipov-na-ezhednevniki/" class="products-card-section--list_item">
                     <div class="products-card-section--list_item--image--wrapper">
                         <div class="products-card-section--list_item--image">
                             <img src="/local/templates/onlineservice-custom-template/components/our-production/assets/product8.png" alt="Печать на ежедневниках" class="image">
@@ -305,7 +305,7 @@ $APPLICATION->SetTitle("Наше производство, служба каче
                         <span class="name">Печать на ежедневниках</span>
                     </div>
                 </a>
-                <a href="#" class="products-card-section--list_item">
+                <a href="/services/e_pechat-na-futbolkax-optom/" class="products-card-section--list_item">
                     <div class="products-card-section--list_item--image--wrapper">
                         <div class="products-card-section--list_item--image">
                             <img src="/local/templates/onlineservice-custom-template/components/our-production/assets/product9.png" alt="Печать на текстиле оптом" class="image">

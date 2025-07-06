@@ -169,6 +169,7 @@
     font-size: 18px;
     line-height: 100%;
     letter-spacing: 0.29px;
+    text-transform: uppercase;
 }
 .backround-element>.bg-image{
     object-fit: contain;
@@ -276,7 +277,7 @@
     }
     .backround-element .additional-background-element{
         padding: 35px;
-        height: 130px;
+        height: 180px;
     }
     .additional-background-element .borders .border-top {
         top: -35px;
@@ -432,7 +433,7 @@
         top: 135px;
     }
     .additional-background-element .borders .border-left {
-        height: 154px;
+        height: 177px;
     }
     .backround-element>.bg-image{
         width: 547px;
@@ -599,6 +600,11 @@
 @media(min-width: 991px){
     .company-description--text p{
         font-size: 16px;
+    }
+}
+@media(min-width: 1200px){
+    .company-description--title>.title{
+        font-size: 36px;
     }
 }
 @media(min-width: 1330px){
@@ -911,6 +917,9 @@
     }
     .services--list--title_wrapper{
         padding: 0px;
+    }
+    .services--list--title_wrapper .title{
+        font-size: 36px;
     }
 }
 @media(min-width: 1920px){

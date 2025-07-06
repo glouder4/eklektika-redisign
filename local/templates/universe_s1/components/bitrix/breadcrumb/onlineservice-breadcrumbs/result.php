@@ -11,33 +11,39 @@ use intec\core\helpers\ArrayHelper;
 
 if (!Loader::includeModule('iblock'))
     return;
-
 // Мутация наименования раздела
 if (!empty($arResult)) {
+    // Создаем массив соответствий ссылок и кастомных названий
+    $customTitles = [];
+    
+    if (!empty($arParams['ITEM_0']) && !empty($arParams['ITEM_0_LINK'])) {
+        $customTitles[$arParams['ITEM_0_LINK']] = $arParams['ITEM_0'];
+    }
+    
+    if (!empty($arParams['ITEM_1']) && !empty($arParams['ITEM_1_LINK'])) {
+        $customTitles[$arParams['ITEM_1_LINK']] = $arParams['ITEM_1'];
+    }
+    
+    if (!empty($arParams['ITEM_2']) && !empty($arParams['ITEM_2_LINK'])) {
+        $customTitles[$arParams['ITEM_2_LINK']] = $arParams['ITEM_2'];
+    }
+    
+    if (!empty($arParams['ITEM_3']) && !empty($arParams['ITEM_3_LINK'])) {
+        $customTitles[$arParams['ITEM_3_LINK']] = $arParams['ITEM_3'];
+    }
+    
+    if (!empty($arParams['ITEM_4']) && !empty($arParams['ITEM_4_LINK'])) {
+        $customTitles[$arParams['ITEM_4_LINK']] = $arParams['ITEM_4'];
+    }
+    
+    if (!empty($arParams['ITEM_5']) && !empty($arParams['ITEM_5_LINK'])) {
+        $customTitles[$arParams['ITEM_5_LINK']] = $arParams['ITEM_5'];
+    }
+    
+    // Применяем кастомные названия
     foreach ($arResult as &$arItem) {
-        // Проверяем, есть ли параметры для переопределения названий
-        if (!empty($arParams['ITEM_0']) && $arItem['LINK'] === '/') {
-            $arItem['TITLE'] = $arParams['ITEM_0'];
-        }
-        
-        if (!empty($arParams['ITEM_1']) && $arItem['LINK'] === '/services/') {
-            $arItem['TITLE'] = $arParams['ITEM_1'];
-        }
-        
-        // Можно добавить дополнительные проверки для других разделов
-        // Например, для конкретных страниц услуг
-        if (!empty($arParams['ITEM_2']) && strpos($arItem['LINK'], '/nanesenie-logotipov-na-ezhednevniki/') !== false) {
-            $arItem['TITLE'] = $arParams['ITEM_2'];
-        }
-        
-        // Универсальная проверка по URL
-        if (!empty($arParams['CUSTOM_TITLES']) && is_array($arParams['CUSTOM_TITLES'])) {
-            foreach ($arParams['CUSTOM_TITLES'] as $url => $title) {
-                if ($arItem['LINK'] === $url) {
-                    $arItem['TITLE'] = $title;
-                    break;
-                }
-            }
+        if (isset($customTitles[$arItem['LINK']])) {
+            $arItem['TITLE'] = $customTitles[$arItem['LINK']];
         }
     }
     unset($arItem);

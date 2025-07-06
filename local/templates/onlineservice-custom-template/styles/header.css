@@ -299,6 +299,16 @@
     -ms-flex-direction: column;
     flex-direction: column;
 }
+.header__navigation-list--item-link:hover,
+.header__navigation-list--item-link:focus,
+.header__navigation-list--item-link:active{
+    color: #858585!important;
+    list-style: none;
+    text-decoration: unset;
+}
+.intec-template .intec-template-layout-header{
+    max-width: 100%;
+}
 .mobile-menu.open {
     -webkit-transform: translateX(0);
     -ms-transform: translateX(0);

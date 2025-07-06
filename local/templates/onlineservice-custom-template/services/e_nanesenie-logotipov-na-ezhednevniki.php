@@ -60,7 +60,12 @@ $advantagesFilter = array(
     "ID" => $advantagesIds,
     "ACTIVE" => "Y"
 );
-
+$GLOBALS["OS_BREADCRUMBS"] = [
+    [
+        'ITEM' => "Печать на ежедневниках",
+        "LINK" => "/services/e_nanesenie-logotipov-na-ezhednevniki/",
+    ]
+];
 ?>
 <div class="container">
     <?$APPLICATION->IncludeComponent(
@@ -325,7 +330,7 @@ $advantagesFilter = array(
 
     <?$APPLICATION->IncludeComponent(
         "bitrix:form.result.new",
-        "onlineservice-feedback-form-type-2",
+        "onlineservice-feedback-form-type-3",
         Array(
             "IMAGE" => 2,
             "CACHE_TIME" => "3600",

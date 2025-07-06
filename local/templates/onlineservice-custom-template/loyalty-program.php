@@ -1,12 +1,28 @@
 <?php
 $APPLICATION->SetTitle("Программа лояльности");
+
+$asset->addCss("/local/templates/onlineservice-custom-template/components/loyalty-program/styles/styles.css");
+
+$GLOBALS["OS_BREADCRUMBS"] = [
+    [
+        'ITEM' => "Программа лояльности",
+        "LINK" => "/informacziya-dlya-dilerov/",
+    ]
+];
 ?>
 <div class="container">
     <?$APPLICATION->IncludeComponent(
         "bitrix:breadcrumb",
         "onlineservice-breadcrumbs",
         Array(),
-        false
+        false,
+        array(
+            "HIDE_ICONS" => "Y",
+            "ITEM_0" => "Главная",
+            "ITEM_0_LINK" => "/",
+            "ITEM_1" => "Программа лояльности", // Здесь меняем название
+            "ITEM_1_LINK" => "/informacziya-dlya-dilerov/"
+        )
     );?>
 </div>
 <main class="main-content">

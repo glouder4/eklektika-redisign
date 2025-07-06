@@ -62,7 +62,12 @@ $advantagesFilter = array(
     "ACTIVE" => "Y"
 );
 
-
+$GLOBALS["OS_BREADCRUMBS"] = [
+    [
+        'ITEM' => "Услуги тампопечати",
+        "LINK" => "/services/s_tampopechat/",
+    ]
+];
 ?>
 <div class="container">
     <?$APPLICATION->IncludeComponent(
