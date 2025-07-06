@@ -1,5 +1,12 @@
 <?php
 $APPLICATION->SetTitle("Способы доставки товаров");
+
+$GLOBALS["OS_BREADCRUMBS"] = [
+    [
+        'ITEM' => "Способы доставки товаров",
+        "LINK" => "/dostavka/",
+    ]
+];
 ?>
 <div class="container">
     <?$APPLICATION->IncludeComponent(

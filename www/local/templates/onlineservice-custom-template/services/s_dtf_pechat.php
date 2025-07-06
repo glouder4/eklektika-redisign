@@ -5,7 +5,7 @@ $asset->addCss("/local/templates/onlineservice-custom-template/services/styles/s
 $asset->addCss("/local/templates/onlineservice-custom-template/services/styles/dtf_styles.css");
 
 $SECTION_IBLOCK_ID = 16;
-$SECTION_ID = 887;
+$SECTION_ID = 891;
 $ADVANTAGES_IBLOCK_ID = 56;
 $VIEW_TEMPLATE = "BLUE";
 
@@ -17,7 +17,6 @@ if (CModule::IncludeModule("iblock")) {
     if ($arSection = $rsSection->GetNext()) {
         // Получаем пользовательские поля раздела
         $userFields = $USER_FIELD_MANAGER->GetUserFields("IBLOCK_".$SECTION_IBLOCK_ID."_SECTION", $SECTION_ID, LANGUAGE_ID);
-        
         if (!empty($userFields['UF_ADVANTAGES_LIST']['VALUE'])) {
             $advantagesIds = $userFields['UF_ADVANTAGES_LIST']['VALUE'];
             
@@ -61,12 +60,21 @@ $advantagesFilter = array(
     "ACTIVE" => "Y"
 );
 
+$GLOBALS["OS_BREADCRUMBS"] = [
+    [
+        'ITEM' => "DTF печать",
+        "LINK" => "/services/s_dtf_pechat/",
+    ]
+];
 ?>
 <div class="container">
     <?$APPLICATION->IncludeComponent(
         "bitrix:breadcrumb",
         "onlineservice-breadcrumbs",
-        Array(),
+        array(
+            "HIDE_ICONS" => "Y",
+            "CACHE_TYPE" => "N"
+        ),
         false
     );?>
 </div>
@@ -187,7 +195,7 @@ $advantagesFilter = array(
                             "SORT_BY1" => "SORT",
                             "SORT_ORDER1" => "ASC",
                             "SORT_BY2" => "ACTIVE_FROM",
-                            "SORT_ORDER2" => "DESC",
+                            "SORT_ORDER2" => "ASC",
                             "FIELD_CODE" => array("ID", "NAME", "PREVIEW_TEXT", "PREVIEW_PICTURE", "DETAIL_PICTURE"),
                             "PROPERTY_CODE" => array(),
                             "CHECK_DATES" => "Y",
@@ -390,7 +398,7 @@ $advantagesFilter = array(
 
     <?$APPLICATION->IncludeComponent(
         "bitrix:form.result.new",
-        "onlineservice-feedback-form-type-2",
+        "onlineservice-feedback-form-type-3",
         Array(
             "IMAGE" => 2,
             "CACHE_TIME" => "3600",

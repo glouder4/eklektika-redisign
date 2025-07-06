@@ -1,5 +1,12 @@
 <?php
 $APPLICATION->SetTitle("Услуги");
+
+$GLOBALS["OS_BREADCRUMBS"] = [
+    [
+        'ITEM' => "Услуги",
+        "LINK" => "/services/",
+    ]
+];
 ?>
 <div class="container">
     <?$APPLICATION->IncludeComponent(
@@ -41,7 +48,7 @@ $APPLICATION->SetTitle("Услуги");
                         </p>
                     </div>
                     <div class="service--item--action">
-                        <a href="#" class="btn">
+                        <a href="/design-studiya/" class="btn">
                             Подробнее
                         </a>
                     </div>
@@ -66,7 +73,7 @@ $APPLICATION->SetTitle("Услуги");
                         </p>
                     </div>
                     <div class="service--item--action">
-                        <a href="#" class="btn">
+                        <a href="/vidy-naneseniy/" class="btn">
                             Подробнее
                         </a>
                     </div>
@@ -90,7 +97,7 @@ $APPLICATION->SetTitle("Услуги");
                         </p>
                     </div>
                     <div class="service--item--action">
-                        <a href="#" class="btn">
+                        <a href="/dostavka/" class="btn">
                             Подробнее
                         </a>
                     </div>
@@ -114,7 +121,7 @@ $APPLICATION->SetTitle("Услуги");
                         </p>
                     </div>
                     <div class="service--item--action">
-                        <a href="#" class="btn">
+                        <a href="/our-production/" class="btn">
                             Подробнее
                         </a>
                     </div>
@@ -144,7 +151,7 @@ $APPLICATION->SetTitle("Услуги");
                         </p>
                     </div>
                     <div class="service--item--action">
-                        <a href="#" class="btn">
+                        <a href="/informacziya-dlya-dilerov/" class="btn">
                             Подробнее
                         </a>
                     </div>

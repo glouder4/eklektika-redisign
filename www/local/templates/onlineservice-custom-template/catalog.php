@@ -1,5 +1,14 @@
 <?php
 $APPLICATION->SetTitle("Купить");
+
+$asset->addCss("/local/templates/onlineservice-custom-template/components/catalog/styles/styles.css");
+
+$GLOBALS["OS_BREADCRUMBS"] = [
+    [
+        'ITEM' => "Купить",
+        "LINK" => "/catalog/",
+    ]
+];
 ?>
 <div class="container">
     <?$APPLICATION->IncludeComponent(
@@ -20,7 +29,13 @@ $APPLICATION->SetTitle("Купить");
 
     <div class="container">
         <div class="content-description">
-            <p>Чтобы приобрести нашу продукцию на максимально выгодных для вас условиях, пройдите регистрацию ниже:</p>
+            <?$APPLICATION->IncludeComponent("bitrix:main.include","",Array(
+                    "AREA_FILE_SHOW" => "file",
+                    "PATH" => "/local/templates/onlineservice-custom-template/include/index_catalog.php",
+                    "AREA_FILE_SUFFIX" => "",
+                    "EDIT_TEMPLATE" => ""
+                )
+            );?>
         </div>
     </div>
 
@@ -37,7 +52,8 @@ $APPLICATION->SetTitle("Купить");
                             стать нашим дилером.</p>
                     </div>
                     <div class="cards-list-item--action">
-                        <a href="#" class="cards-list-item--action_btn">Стать дилером</a>
+                        <a href="/personal/profile/" class="cards-list-item--action_btn">Зарегистрироваться</a>
+                        <a href="/personal/profile/" class="cards-list-item--action_btn" style="background-color: #EF4A85;">Войти</a>
                     </div>
                 </div>
                 <div class="cards-list-item">
@@ -48,7 +64,8 @@ $APPLICATION->SetTitle("Купить");
                         <p>Приобретаете продукцию<br/>для&nbsp;своей компании? Обратитесь<br/>к&nbsp;одному из&nbsp;наших менеджеров</p>
                     </div>
                     <div class="cards-list-item--action">
-                        <a href="#" class="cards-list-item--action_btn">Зарегистрироваться</a>
+                        <a href="/personal/profile/" class="cards-list-item--action_btn">Зарегистрироваться</a>
+                        <a href="/personal/profile/" class="cards-list-item--action_btn" style="background-color: #EF4A85;">Войти</a>
                     </div>
                 </div>
                 <div class="cards-list-item">
@@ -59,7 +76,8 @@ $APPLICATION->SetTitle("Купить");
                         <p>Хотите приобрести продукцию Yoliba<br/>для&nbsp;личного пользования? Нет&nbsp;проблем!</p>
                     </div>
                     <div class="cards-list-item--action">
-                        <a href="#" class="cards-list-item--action_btn">Перейти к покупкам</a>
+                        <a href="/personal/profile/" class="cards-list-item--action_btn">Зарегистрироваться</a>
+                        <a href="/personal/profile/" class="cards-list-item--action_btn" style="background-color: #EF4A85;">К покупкам</a>
                     </div>
                 </div>
             </div>

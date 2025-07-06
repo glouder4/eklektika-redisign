@@ -6,6 +6,13 @@ $asset->addCss("/local/templates/onlineservice-custom-template/services/styles/s
 $SECTION_IBLOCK_ID = 16;
 $SECTION_ID = 43;
 $VIEW_TEMPLATE = "GREEN";
+
+$GLOBALS["OS_BREADCRUMBS"] = [
+    [
+        'ITEM' => "Тиснение",
+        "LINK" => "/services/s_tisnenie/",
+    ]
+];
 ?>
 <div class="container">
     <?$APPLICATION->IncludeComponent(
@@ -335,7 +342,7 @@ $VIEW_TEMPLATE = "GREEN";
 
     <?$APPLICATION->IncludeComponent(
         "bitrix:form.result.new",
-        "onlineservice-feedback-form-type-2",
+        "onlineservice-feedback-form-type-3",
         Array(
             "IMAGE" => 2,
             "CACHE_TIME" => "3600",

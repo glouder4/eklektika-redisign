@@ -7,6 +7,7 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
 
 
 $asset->addCss("/local/templates/onlineservice-custom-template/components/mainpage/categories-slider/styles/styles.css");
+$asset->addCss("/local/templates/onlineservice-custom-template/components/vidy-naneseniy/styles/styles.css");
 
 $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpage/categories-slider/scripts/scripts.js", true);
 ?>
@@ -88,7 +89,7 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
                                 <span>DTF печать</span>
                             </div>
                             <div class="services--blocks-list--item--header--elements--action">
-                                <a href="#">Подробнее
+                                <a href="/services/s_dtf_pechat/">Подробнее
                                     <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
                                         <circle cx="25" cy="25" r="25" fill="white"/>
                                         <path d="M22.8182 30L27 25L22.8182 20" stroke="#222222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -133,7 +134,7 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
                                 <span>Тампопечать</span>
                             </div>
                             <div class="services--blocks-list--item--header--elements--action">
-                                <a href="#">Подробнее
+                                <a href="/services/s_tampopechat/">Подробнее
                                     <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
                                         <circle cx="25" cy="25" r="25" fill="white"/>
                                         <path d="M22.8182 30L27 25L22.8182 20" stroke="#222222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -178,7 +179,7 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
                                 <span>Ультрафиолетовая печать</span>
                             </div>
                             <div class="services--blocks-list--item--header--elements--action">
-                                <a href="#">Подробнее
+                                <a href="/services/s_polnocvetnaya-uf-pechat/">Подробнее
                                     <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
                                         <circle cx="25" cy="25" r="25" fill="white"/>
                                         <path d="M22.8182 30L27 25L22.8182 20" stroke="#222222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -223,7 +224,7 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
                                 <span>Шелкография</span>
                             </div>
                             <div class="services--blocks-list--item--header--elements--action">
-                                <a href="#">Подробнее
+                                <a href="/services/s_shelkografiya/">Подробнее
                                     <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
                                         <circle cx="25" cy="25" r="25" fill="white"/>
                                         <path d="M22.8182 30L27 25L22.8182 20" stroke="#222222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -268,7 +269,7 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
                                 <span>Тиснение</span>
                             </div>
                             <div class="services--blocks-list--item--header--elements--action">
-                                <a href="#">Подробнее
+                                <a href="/services/s_tisnenie/">Подробнее
                                     <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
                                         <circle cx="25" cy="25" r="25" fill="white"/>
                                         <path d="M22.8182 30L27 25L22.8182 20" stroke="#222222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -312,7 +313,7 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
                                 <span>Лазерная гравировка</span>
                             </div>
                             <div class="services--blocks-list--item--header--elements--action">
-                                <a href="#">Подробнее
+                                <a href="/services/s_lazernaya-gravirovka/">Подробнее
                                     <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
                                         <circle cx="25" cy="25" r="25" fill="white"/>
                                         <path d="M22.8182 30L27 25L22.8182 20" stroke="#222222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -356,7 +357,7 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
                                 <span>Сублимационная печать</span>
                             </div>
                             <div class="services--blocks-list--item--header--elements--action">
-                                <a href="#">Подробнее
+                                <a href="/services/s_sublimacionnaya_pechat/">Подробнее
                                     <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
                                         <circle cx="25" cy="25" r="25" fill="white"/>
                                         <path d="M22.8182 30L27 25L22.8182 20" stroke="#222222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -400,7 +401,7 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
                                 <span>Нанесение логотипов на ежедневники</span>
                             </div>
                             <div class="services--blocks-list--item--header--elements--action">
-                                <a href="#">Подробнее
+                                <a href="/services/e_nanesenie-logotipov-na-ezhednevniki/">Подробнее
                                     <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
                                         <circle cx="25" cy="25" r="25" fill="white"/>
                                         <path d="M22.8182 30L27 25L22.8182 20" stroke="#222222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -444,7 +445,7 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
                                 <span>Печать на текстиле оптом</span>
                             </div>
                             <div class="services--blocks-list--item--header--elements--action">
-                                <a href="#">Подробнее
+                                <a href="/services/e_pechat-na-futbolkax-optom/">Подробнее
                                     <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
                                         <circle cx="25" cy="25" r="25" fill="white"/>
                                         <path d="M22.8182 30L27 25L22.8182 20" stroke="#222222" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -776,7 +777,7 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
 
     <?$APPLICATION->IncludeComponent(
         "bitrix:form.result.new",
-        "onlineservice-feedback-form-type-2",
+        "onlineservice-feedback-form-type-3",
         Array(
             "IMAGE" => 2,
             "CACHE_TIME" => "3600",
