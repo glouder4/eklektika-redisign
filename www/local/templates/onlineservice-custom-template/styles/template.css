@@ -47,6 +47,9 @@ a:active, [data-ui-markup="a"]:hover, [data-ui-markup="a"]:focus, [data-ui-marku
 .ns-bitrix.c-menu.c-menu-horizontal-1 .menu-submenu-banner-section .menu-submenu-main-section .menu-submenu-main-section-item .menu-submenu-main-section-item-text:active{
     color: #808080!important;
 }
+.fancybox-is-open .fancybox-bg{
+    opacity: 0.5;
+}
 @media(max-width: 768px){
     .ns-bitrix.c-menu.c-menu-horizontal-1 .menu-item.menu-item-section .menu-submenu{
         display: none!important;

@@ -363,7 +363,7 @@ $APPLICATION->SetTitle("О компании");
                         </p>
                     </div>
                     <div class="service--item--action">
-                        <a href="#" class="btn">
+                        <a href="/our-production/" class="btn">
                             Подробнее
                         </a>
                     </div>

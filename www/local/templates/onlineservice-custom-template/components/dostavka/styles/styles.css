@@ -127,6 +127,9 @@
     border-radius: 50%;
     background-color: #744A9E;
 }
+.fancybox-is-open .fancybox-bg{
+    opacity: 0.5;
+}
 @media(min-width: 576px){
     .delivery-variants--card{
         width: 250px;
@@ -197,16 +200,19 @@
         font-size: 16px;
     }
     .dostavka-modal-title>.title{
-        font-size: 28px;
+        font-size: 38px;
     }
     .dostavka-modal-description>p.description{
-        font-size: 16px;
+        font-size: 21px;
     }
     #dostavka-modal-1,
     #dostavka-modal-2,
     #dostavka-modal-3{
         padding-left: 81px;
         padding-right: 81px;
+
+        padding-top: 60px;
+        padding-bottom: 60px;
     }
 }
 @media(min-width: 1920px){
@@ -269,5 +275,11 @@
     }
     .alert-additional-list ul>li{
         font-size: 20px;
+    }
+    #dostavka-modal-1,
+    #dostavka-modal-2,
+    #dostavka-modal-3{
+        padding-top: 106px;
+        padding-bottom: 106px;
     }
 }

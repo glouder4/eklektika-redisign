@@ -9,11 +9,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 
     gap: 20px;
 
-    min-height: 175px;
     margin-top: 35px;
 
     padding: 25px;
@@ -99,12 +98,10 @@
         margin-top: 65px;
     }
     .alert-card{
-        padding: 50px;
         padding-left: 65px;
         padding-right: 65px;
-        padding-top: 33px;
-
-        height: 388px;
+        padding-top: 60px;
+        padding-bottom: 60px;
 
         gap: 18px;
     }
@@ -124,7 +121,7 @@
         font-size: 28px;
     }
     .alert-card--description{
-        width: 1297px;
+        width: 100%;
     }
     .alert-card--description p{
         font-size: 28px;
@@ -598,6 +595,9 @@
     }
     .products-card-section--list_item{
         width: 490px;
+    }
+    .products-card-section--title_wrapper{
+        margin-bottom: 50px;
     }
     .products-card-section-list{
         gap: 24px;

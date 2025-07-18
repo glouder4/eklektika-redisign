@@ -19,7 +19,7 @@ switch($VIEW_TEMPLATE){
         $SVG_COLOR = "#57B0EA";
         break;
     case "PINK":
-        $SVG_COLOR = "#57B0EA";
+        $SVG_COLOR = "#EF4A85";
         break;
     case "ORANGE":
         $SVG_COLOR = "#FF5B36";

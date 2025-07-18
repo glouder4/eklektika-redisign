@@ -107,7 +107,7 @@ $GLOBALS["OS_BREADCRUMBS"] = [
         </style>
         <div class="container">
             <div class="products-card-section--title_wrapper">
-                <h3 class="title">Примеры нанесения методом тиснения на разных материалах и разных видах сувенирной продукции </h3>
+                <h3 class="title">Примеры сублимационной печати на разных материалах и<br/>разных видах сувенирной продукции</h3>
             </div>
 
             <?php
@@ -162,9 +162,9 @@ $GLOBALS["OS_BREADCRUMBS"] = [
                     "SET_STATUS_404" => "N",
                     "SET_TITLE" => "N",
                     "SHOW_404" => "N",
-                    "SORT_BY1" => "ACTIVE_FROM",
-                    "SORT_BY2" => "SORT",
-                    "SORT_ORDER1" => "DESC",
+                    "SORT_BY1" => "SORT",
+                    "SORT_BY2" => "ID",
+                    "SORT_ORDER1" => "ASC",
                     "SORT_ORDER2" => "ASC",
                     "STRICT_SECTION_CHECK" => "N"
                 )

@@ -7,6 +7,60 @@ $SECTION_IBLOCK_ID = 16;
 $SECTION_ID = 43;
 $VIEW_TEMPLATE = "GREEN";
 
+$ADVANTAGES_IBLOCK_ID = 56;
+
+// Получаем значения UF_ADVANTAGES_LIST раздела
+$advantagesList = array();
+if (CModule::IncludeModule("iblock")) {
+    // Альтернативный способ получения пользовательских полей раздела
+    $rsSection = CIBlockSection::GetByID($SECTION_ID);
+    if ($arSection = $rsSection->GetNext()) {
+        // Получаем пользовательские поля раздела
+        $userFields = $USER_FIELD_MANAGER->GetUserFields("IBLOCK_".$SECTION_IBLOCK_ID."_SECTION", $SECTION_ID, LANGUAGE_ID);
+
+        if (!empty($userFields['UF_ADVANTAGES_LIST']['VALUE'])) {
+            $advantagesIds = $userFields['UF_ADVANTAGES_LIST']['VALUE'];
+
+            // Получаем элементы из привязки
+            $rsElements = CIBlockElement::GetList(
+                array("SORT" => "ASC"),
+                array(
+                    "ID" => $advantagesIds,
+                    "ACTIVE" => "Y"
+                ),
+                false,
+                false,
+                array("ID", "NAME", "PREVIEW_TEXT", "PREVIEW_PICTURE", "DETAIL_PICTURE","EDIT_LINK","DELETE_LINK")
+            );
+
+            while ($arElement = $rsElements->GetNext()) {
+                $advantagesList[] = array(
+                    "ID" => $arElement["ID"],
+                    "IBLOCK_ID" => $SECTION_IBLOCK_ID,
+                    "NAME" => $arElement["NAME"],
+                    "PREVIEW_TEXT" => $arElement["PREVIEW_TEXT"],
+                    "PREVIEW_PICTURE" => $arElement["PREVIEW_PICTURE"],
+                    "DETAIL_PICTURE" => $arElement["DETAIL_PICTURE"],
+                    "EDIT_LINK" => $arElement["EDIT_LINK"],
+                    "DELETE_LINK" => $arElement["DELETE_LINK"]
+                );
+            }
+        }
+    }
+}
+
+// Получаем ID элементов из массива преимуществ
+$advantagesIds = array();
+foreach ($advantagesList as $advantage) {
+    $advantagesIds[] = $advantage['ID'];
+}
+
+// Создаем фильтр для передачи ID элементов
+$advantagesFilter = array(
+    "ID" => $advantagesIds,
+    "ACTIVE" => "Y"
+);
+
 $GLOBALS["OS_BREADCRUMBS"] = [
     [
         'ITEM' => "Тиснение",
@@ -109,9 +163,9 @@ $GLOBALS["OS_BREADCRUMBS"] = [
                     "SET_STATUS_404" => "N",
                     "SET_TITLE" => "N",
                     "SHOW_404" => "N",
-                    "SORT_BY1" => "ACTIVE_FROM",
-                    "SORT_BY2" => "SORT",
-                    "SORT_ORDER1" => "DESC",
+                    "SORT_BY1" => "SORT",
+                    "SORT_BY2" => "ID",
+                    "SORT_ORDER1" => "ASC",
                     "SORT_ORDER2" => "ASC",
                     "STRICT_SECTION_CHECK" => "N"
                 )

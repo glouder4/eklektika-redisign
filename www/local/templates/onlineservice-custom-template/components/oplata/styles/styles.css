@@ -115,6 +115,9 @@
 #oplata-modal{
     max-width: 1520px;
 }
+.fancybox-is-open .fancybox-bg{
+    opacity: 0.5;
+}
 @media(min-width: 768px){
     .services--list{
         justify-content: center;
@@ -129,6 +132,16 @@
     }
 }
 @media(min-width: 1920px){
+    #oplata-modal{
+        padding-top: 106px;
+        padding-bottom: 106px;
+    }
+    .oplata-modal-title>.title{
+        font-size: 36px;
+    }
+    .oplata-modal-description>p.description{
+        font-size: 21px;
+    }
     .services--list{
         padding: 0;
         row-gap: 50px;
@@ -171,7 +184,7 @@
     }
     .service--item:nth-child(3){
         left: 38px;
-        top: 27px;
+        top: 0px;
     }
     .service--item:nth-child(3) .service--item--description{
         width: 342px;

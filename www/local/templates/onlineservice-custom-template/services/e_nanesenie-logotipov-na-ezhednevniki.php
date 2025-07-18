@@ -6,7 +6,7 @@ $asset->addCss("/local/templates/onlineservice-custom-template/services/styles/s
 $SECTION_IBLOCK_ID = 16;
 $ADVANTAGES_IBLOCK_ID = 56;
 $SECTION_ID = 571;
-$VIEW_TEMPLATE = "PINK";
+$VIEW_TEMPLATE = "BLUE";
 
 //UF_ADVANTAGES_LIST
 // Получаем значения UF_ADVANTAGES_LIST раздела
@@ -96,7 +96,7 @@ $GLOBALS["OS_BREADCRUMBS"] = [
                 <div class="alert-card--description">
                     <?$APPLICATION->IncludeComponent("bitrix:main.include","",Array(
                             "AREA_FILE_SHOW" => "file",
-                            "PATH" => "/local/templates/onlineservice-custom-template/services/include/index_dtf.php",
+                            "PATH" => "/local/templates/onlineservice-custom-template/services/include/index_logotipes.php",
                             "AREA_FILE_SUFFIX" => "",
                             "EDIT_TEMPLATE" => ""
                         )
@@ -169,9 +169,9 @@ $GLOBALS["OS_BREADCRUMBS"] = [
                     "SET_STATUS_404" => "N",
                     "SET_TITLE" => "N",
                     "SHOW_404" => "N",
-                    "SORT_BY1" => "ACTIVE_FROM",
-                    "SORT_BY2" => "SORT",
-                    "SORT_ORDER1" => "DESC",
+                    "SORT_BY1" => "SORT",
+                    "SORT_BY2" => "ID",
+                    "SORT_ORDER1" => "ASC",
                     "SORT_ORDER2" => "ASC",
                     "STRICT_SECTION_CHECK" => "N"
                 )
