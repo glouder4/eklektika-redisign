@@ -1,0 +1,24 @@
+<?php
+    // \OnlineService\B24\User
+    AddEventHandler("main", "OnBeforeUserDelete", "OnBeforeUserDeleteHandler");
+    function OnBeforeUserDeleteHandler($userId){
+        $user = new \OnlineService\B24\User();
+
+        $user->OnBeforeUserDeleteHandler($userId);
+    }
+
+    // \OnlineService\B24\RegisterUserCompany
+    AddEventHandler("main", "OnBeforeUserRegister", "OnBeforeUserRegisterHandler");
+
+    AddEventHandler("main", "OnAfterUserRegister", "OnAfterUserRegisterHandler");
+
+    function OnBeforeUserRegisterHandler(&$arFields){
+        $registerUserCompany = new \OnlineService\B24\RegisterUserCompany();
+
+        $registerUserCompany->OnBeforeUserRegisterHandler($arFields);
+    }
+    function OnAfterUserRegisterHandler(&$arFields){
+        $registerUserCompany = new \OnlineService\B24\RegisterUserCompany();
+
+        $registerUserCompany->OnAfterUserRegisterHandler($arFields);
+    }

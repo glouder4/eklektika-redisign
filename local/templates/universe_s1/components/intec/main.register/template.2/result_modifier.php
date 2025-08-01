@@ -35,3 +35,45 @@ if (!empty($arResult['CONSENT']['URL'])) {
 } else {
     $arResult['CONSENT']['SHOW'] = false;
 }
+
+$correctSortOrder = [
+    [
+        'WORK_COMPANY', // NAME => required
+        'UF_SITE',
+        'UF_CITY',
+        'LOGIN'
+    ],
+    [
+        'NAME',
+        'LAST_NAME',
+        'PERSONAL_BIRTHDAY',
+        'PERSONAL_PHONE',
+        'EMAIL',
+        'WORK_POSITION'
+    ],
+    [
+        'UF_NAME_COMPANY',
+        'UF_INN',
+        'UF_REQ',
+        'PERSONAL_NOTES',
+        'PASSWORD',
+        'CONFIRM_PASSWORD'
+    ]
+];
+
+$arResult['SORTED_FIELDS'] = [];
+
+foreach ($correctSortOrder as $key => $correctFieldBlock){
+    foreach ($correctFieldBlock as $correctFieldName){
+        if( in_array($correctFieldName,$arResult['SHOW_FIELDS']) ){
+            $arResult['SORTED_FIELDS'][$key][$correctFieldName] = $correctFieldName;
+            continue;
+        }
+
+        if( isset($arResult["USER_PROPERTIES"]["DATA"][$correctFieldName]) ){
+            $arResult['SORTED_FIELDS'][$key][$correctFieldName] = $arResult["USER_PROPERTIES"]["DATA"][$correctFieldName];
+            continue;
+        }
+    }
+}
+

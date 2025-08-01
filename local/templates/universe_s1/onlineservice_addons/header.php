@@ -56,4 +56,10 @@ if ($APPLICATION->GetCurPage(false) === '/company/'):
     Asset::getInstance()->addCss("/local/templates/onlineservice-custom-template/components/company/styles/styles.css");
 endif;
 
+if ($APPLICATION->GetCurPage(false) === '/personal/profile/registration.php'):
+    Asset::getInstance()->addCss("/local/templates/onlineservice-custom-template/components/diler-registration/styles/styles.css");
+
+    Asset::getInstance()->addJs("/local/templates/onlineservice-custom-template/scripts/jquery.maskedinput.min.js",true);
+endif;
+
 ?>

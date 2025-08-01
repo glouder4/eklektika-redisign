@@ -88,6 +88,7 @@ $arResult["VALUES"] = array();
 $arResult["ERRORS"] = array();
 $arResult["SHOW_SMS_FIELD"] = false;
 $register_done = false;
+$arResult['REGISTER_DONE'] = "N";
 
 // register user
 if ($_SERVER["REQUEST_METHOD"] == "POST" && $_REQUEST["register_submit_button"] <> '' && !$USER->IsAuthorized())
@@ -184,8 +185,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_REQUEST["register_submit_button"] 
 		{
 			if(ExecuteModuleEventEx($arEvent, array(&$arResult['VALUES'])) === false)
 			{
-				if($err = $APPLICATION->GetException())
-					$arResult['ERRORS'][] = $err->GetString();
+				if($err = $APPLICATION->GetException()){
+                    if( $err->id == "already_registered" ){
+                        if($arParams["USE_BACKURL"] == "Y" && $_REQUEST["backurl"] <> '')
+                            LocalRedirect($_REQUEST["backurl"]);
+                        elseif($arParams["SUCCESS_PAGE"] <> '')
+                            LocalRedirect($arParams["SUCCESS_PAGE"]);
+
+
+                        $arResult['REGISTER_DONE'] = "Y";
+                    }
+                    $arResult['ERRORS'][] = $err->GetString();
+                }
 
 				$bOk = false;
 				break;
@@ -355,6 +366,9 @@ if($register_done)
 		LocalRedirect($_REQUEST["backurl"]);
 	elseif($arParams["SUCCESS_PAGE"] <> '')
 		LocalRedirect($arParams["SUCCESS_PAGE"]);
+
+
+    $arResult['REGISTER_DONE'] = "Y";
 }
 
 $arResult["VALUES"] = htmlspecialcharsEx($arResult["VALUES"]);

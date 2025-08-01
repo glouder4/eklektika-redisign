@@ -1,0 +1,34 @@
+#diler-registration-fields{
+
+}
+#diler-registration-fields .block-fields{
+    width: 100%;
+    max-width: 100%;
+    flex: 0 0 100%;
+}
+#diler-registration-fields-controls{
+    display: flex;
+    justify-content: space-between;
+
+    position: relative;
+    z-index: 100;
+}
+.intec-content .intec-content-wrapper,
+.intec-template-title{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.intec-ui-form .intec-ui-form-field-title .starrequired{
+    color: red;
+}
+.ui-error-message{
+    color: red;
+}
+#submitFormBtn{
+    display: none;
+}
+.intec-template-title{
+    padding: 0px 20px 0 18px;
+
+    margin: auto;
+}

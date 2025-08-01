@@ -2,6 +2,8 @@
 if (headers_sent() === false) {
     header_remove('X-Frame-Options');
 }
+
+
 define('BX_CRONTAB_SUPPORT', true);
 //header("X-Frame-Options: testb24.yoliba.ru");
 //header('Content-Security-Policy: frame-ancestors https://testb24.yoliba.ru', true);
@@ -11,7 +13,9 @@ use intec\eklectika\advertising_agent\Company;
 CModule::IncludeModule("intec.eklectika");
 
 define('IBLOCK_ID_1C', 45);
-define('URL_B24', 'https://testb24.yoliba.ru/');
+define('URL_B24', 'https://b24.amiiya.ru/');
+
+require_once __DIR__.'/../classes/requires.php'; // Подключение кастомных обработчиков
 
 function pre($o) {
 
@@ -505,170 +509,6 @@ function newRest($param, $arFields, $select) {
     return sendRequestB24("crm.contact.list", $qrList);//$result["result"];
 }
 
-AddEventHandler("main", "OnBeforeUserRegister", "OnBeforeUserRegisterHandler");
-function OnBeforeUserRegisterHandler(&$arFields) {
-	global $APPLICATION;	
-	
-	// найти пользователя в б24 по EMAIL
-	$arResult = newRest("EMAIL", $arFields, "EMAIL");	
-	// найти пользователя в б24 по Телефону
-	if (empty($arResult)){
-		$arResult = newRest("PHONE", $arFields, "PERSONAL_PHONE");
-	}
-	
-	// если такой пользователь есть, то вывести предупреждение
-	if (!empty($arResult) && count($arResult) > 0) {
-		if (is_array($arResult[0]['PHONE']) && !empty($arResult[0]['PHONE'])) {
-			$field = $arFields['PERSONAL_PHONE'];
-		} else {
-			$field = $arFields['EMAIL'];
-		}
-		$APPLICATION->ThrowException('Такой пользователь уже существует в системе. Вы можете авторизоваться или восстановить пароль для '.$field); 
-		return false;
-	} else {
-		if ($arFields['PASSWORD'] == $arFields['CONFIRM_PASSWORD']) {
-			// данные для контакта
-			$dataContact = [
-				'fields' => [
-					'NAME' => $arFields['NAME'],
-					'SECOND_NAME' => $arFields['SECOND_NAME'],
-					'LAST_NAME' => $arFields['LAST_NAME'],
-					'OPENED' => 'Y',
-					'ASSIGNED_BY_ID' => 1,
-					'PHONE' => [[
-						"VALUE" => $arFields['PERSONAL_PHONE'], 
-						"VALUE_TYPE" => "WORK"
-					]],
-					'EMAIL' => [ [
-						"VALUE" => $arFields['EMAIL'], 
-						"VALUE_TYPE" => "WORK"
-					]]
-				],
-				'params' => []
-			];
-			
-			// если это компания или рекламынй агент
-			if ($arFields['UF_TYPE'] == '5' || $arFields['UF_TYPE'] == '6') {				
-				// проверить заполненность ИНН и названия компании
-				if (empty($arFields['UF_INN']) && empty($arFields['UF_NAME_COMPANY'])) {
-					$APPLICATION->ThrowException('Вы регистрируйтесь как рекламный агент или юридическое лицо. Поля "Название компании", "ИНН организации" обязательно для заполнения!'); 
-					return false;
-				} else {					
-					// если это рекламный агент
-					if ($arFields['UF_ADVERSTERING_AGENT'] == 'on') {
-						$dataContact['fields']['UF_CRM_1701839165901'] = "Пользователь зарегистрировался как рекламный агент";
-					}
-					$dataRequisite = [
-						'fields' => [],
-						'params' => [],
-						'select' => [
-							'ID', 
-							'RQ_INN',
-							'ENTITY_ID'
-						],
-						'filter' => [
-							'RQ_INN' => $arFields['UF_INN']
-						]
-					];
-					// найти реквизит по ИНН
-					$dataRequisite = sendRequestB24("crm.requisite.list", $dataRequisite);
-					
-					if (!empty($dataRequisite)) {		
-						$dataContact['fields']['COMPANY_ID'] = $dataRequisite[0]['ENTITY_ID'];
-						$companyId = $dataRequisite[0]['ENTITY_ID'];
-					} else {						
-						/*Создание компании*/			
-						$qrCompanyInfo = [
-							'fields' => [
-								'TITLE' => $arFields['UF_NAME_COMPANY'],
-								'PHONE' => [[
-									'VALUE' => $arFields['PERSONAL_PHONE'],
-									'VALUE_TYPE' => "WORK"
-								]],
-								'EMAIL' => [[ 
-									'VALUE' => $arFields['EMAIL'],
-									'VALUE_TYPE' => "WORK"
-								]],
-								'WEB' => [[
-									'VALUE' => $arFields['UF_SITE'],
-									"VALUE_TYPE" => "WORK"
-								]],
-								'UF_CRM_1669208000616' => $arFields['UF_SPERE'],
-								'UF_CRM_1669208295583' => $arFields['UF_JUR_ADDRESS'],
-								'COMPANY_TYPE' => 'CUSTOMER'
-							]
-						];											
-						$companyId = sendRequestB24("crm.company.add", $qrCompanyInfo);		
-						if (!empty($companyId)) {
-							$qrCompany['id'] = $companyId;							
-							$dataCompany = sendRequestB24("crm.company.get", $qrCompany);
-													
-							/*Добавление реквизита к компании*/		
-							$qrRequisite = [
-								'fields' => [
-									'ENTITY_ID' => $dataCompany['ID'],
-									'ENTITY_TYPE_ID' => '4',
-									'NAME' => 'Реквизит с формы сайта',
-									'PRESET_ID' => 1
-								]
-							];							
-							$requisiteId = sendRequestB24("crm.requisite.add", $qrRequisite);
-							
-							/*Обновление реквизитов у компании*/
-							$qrRequisites = array(
-								'id' => $requisiteId,
-								'fields' => [
-									'ENTITY_ID' => $dataCompany['ENTITY_ID'],
-									'ENTITY_TYPE_ID' => '4',
-									'RQ_INN' => $arFields['UF_INN'],
-									'RQ_KPP' => $arFields['UF_KPP'],
-									'RQ_COMPANY_FULL_NAME' => $arFields['UF_NAME_COMPANY']
-								]
-							);							
-							sendRequestB24("crm.requisite.update", $qrRequisites);
-						}
-					}
-					sleep(10);
-					// добавить компанию в инфоблок
-					$companySite = Company::findByIdB24($dataCompany['ID']);
-					$dataCompanyCreate = [
-						"NAME_COMPANY" => $arFields['UF_NAME_COMPANY'], // название компании
-						"INN" => $arFields['UF_INN'], // ИНН
-						"KPP" => $arFields['UF_KPP'], // КПП
-						"WEBSITE" => $arFields['UF_SITE'], // сайт
-						"SPHERE" => $arFields['UF_SPERE'], // сфера деятельности
-						"ADDRESS" => $arFields['UF_JUR_ADDRESS'], // адрес
-						"ID_B24" => $dataCompany['ID'],
-						"PHONE" => $arFields['PERSONAL_PHONE'],
-						"EMAIL" => $arFields['EMAIL'],
-					];
-					if ($companySite) {
-						Company::update($companySite["ID"], $dataCompanyCreate);
-					} else {
-						Company::add($dataCompanyCreate);
-					}
-					
-				} 
-			}
-			$contactId = sendRequestB24("crm.contact.add", $dataContact);
-			
-			if (!empty($companyId) && !empty($contactId)) {		
-				// добавить контакт в компанию
-				$qrCompanyAddContact = [
-					'fields' => ['COMPANY_ID' => $companyId],
-					'id' => $contactId
-				];
-				sendRequestB24("crm.contact.company.add", $qrCompanyAddContact);				
-			}
-		}
-		return $arFields;
-	}
-}
-
-AddEventHandler("main", "OnBeforeUserRegister", "OnBeforeUserRegisterHandler2");
-function OnBeforeUserRegisterHandler2(&$arFields) {
-	$arFields['UF_ADVERSTERING_AGENT'] = "";
-}
 
 AddEventHandler("iblock", "OnBeforeIBlockElementUpdate", "UpdateEmployees");
 // увольнение сотрудника
