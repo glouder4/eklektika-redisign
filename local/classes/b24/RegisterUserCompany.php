@@ -12,14 +12,11 @@ class RegisterUserCompany extends Request{
         // найти пользователя в б24 по EMAIL
         $b24User = new \OnlineService\B24\User();
 
-        if( isset($arFields['PERSONAL_PHONE']) && !isset($arFields['PHONE']) )
-            $arFields['PHONE'] = $arFields['PERSONAL_PHONE'];
-
-        $arResult = $b24User->getContactID($arFields,true);
+        $userObject = $b24User->isUserRegistered($arFields);
 
         // если такой пользователь есть, то вывести предупреждение
-        if (!empty($arResult) && isset($arResult['ID']) && $arResult['ID'] > 0) {
-            return $arResult;
+        if ($userObject && !empty($userObject)) {
+            return $userObject;
         }
 
         return false;
@@ -35,8 +32,10 @@ class RegisterUserCompany extends Request{
                 'SECOND_NAME' => $arFields['SECOND_NAME'],
                 'LAST_NAME' => $arFields['LAST_NAME'],
                 'POST' => $arFields['WORK_POSITION'],
+                'BIRTHDATE' => $arFields['PERSONAL_BIRTHDAY'],
                 'OPENED' => 'Y',
                 'ASSIGNED_BY_ID' => 1,
+                'UF_CRM_3804624445810' => $arFields['UF_CITY'],
                 'PHONE' => [[
                     "VALUE" => $arFields['PERSONAL_PHONE'],
                     "VALUE_TYPE" => "WORK"
@@ -220,17 +219,18 @@ class RegisterUserCompany extends Request{
 
     public function OnAfterUserRegisterHandler(&$arFields) {
         // если регистрация успешна то
-        /*if($arFields["USER_ID"]>0)
+        if($arFields["USER_ID"]>0)
         {
-            pre($arFields);
+            $response = $this->isUserRegistered($arFields);
 
-            $b24User = new \OnlineService\B24\User();
-            $contactId = $b24User->getContactID($arFields['USER_ID']);
+            if( $response ){
+                $contactId = $response['ID'];
 
-
-            pre($contactId);
-            die();
-        }*/
+                // Обновляем пользователя, записываем $contactId в UF_B24_USER_ID
+                $user = new \CUser;
+                $user->Update($arFields["USER_ID"], ["UF_B24_USER_ID" => $contactId]);
+            }
+        }
     }
     
     private function deleteStaffB24($arUser, $companyId, $idCompanySite) {

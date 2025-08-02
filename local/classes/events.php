@@ -10,14 +10,10 @@
     // \OnlineService\B24\RegisterUserCompany
     AddEventHandler("main", "OnBeforeUserRegister", "OnBeforeUserRegisterHandler");
 
-    AddEventHandler("main", "OnAfterUserRegister", "OnAfterUserRegisterHandler");
-
     function OnBeforeUserRegisterHandler(&$arFields){
-        pre("OnBeforeUserRegisterHandler called");
         $registerUserCompany = new \OnlineService\B24\RegisterUserCompany();
 
         $result = $registerUserCompany->OnBeforeUserRegisterHandler($arFields);
-        pre("OnBeforeUserRegisterHandler result: " . var_export($result, true));
         return $result;
     }
     function OnAfterUserRegisterHandler(&$arFields){
@@ -25,3 +21,15 @@
 
         $registerUserCompany->OnAfterUserRegisterHandler($arFields);
     }
+
+    AddEventHandler("main", "OnAfterUserRegister", "OnAfterUserRegisterHandler");
+
+
+    function OnAfterUserUpdateHandler(&$arFields){
+        if($arFields["RESULT"])
+            $user = new \OnlineService\B24\User();
+
+            $user->OnAfterUserUpdateHandler($arFields);
+    }
+
+    AddEventHandler("main", "OnAfterUserUpdate", "OnAfterUserUpdateHandler");
