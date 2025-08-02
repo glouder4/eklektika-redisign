@@ -7,15 +7,21 @@
         {
         }
 
-        public function getContactID($arFields){
+        public function getContactID($arFields,$returnAll = false){
+            $arFields = array_merge($arFields,[
+                "ACTION" => 'GET_CONTACT_ID',
+                "SORT" => 'ID',
+                "ORDER" => 'asc',
+            ]);
+
             // найти пользователя в б24 по EMAIL
-            $user = $this->newB24Rest("EMAIL", $arFields, "EMAIL");
-            // найти пользователя в б24 по Телефону
-            if (empty($arResult)){
-                $user = $this->newB24Rest("PHONE", $arFields, "PERSONAL_PHONE");
+            $response = $this->sendRequest($arFields);
+
+            if( $response['success'] == 1 ){
+                return ($returnAll) ? $response['data'] : $response['data']['ID'];
             }
 
-            return $user;
+            return [];
         }
 
 
@@ -23,20 +29,36 @@
 
         }
 
+        private function deleteContact($contactId){
+            $arFields = [
+                'ACTION' => "DELETE_CONTACT",
+                'ID' => $contactId
+            ];
+
+            // найти пользователя в б24 по EMAIL
+            $response = $this->sendRequest($arFields);
+
+            if( !$response['success'] ){
+                global $APPLICATION;
+                $APPLICATION->ThrowException($response);
+
+                return false;
+            }
+        }
+
 
         public function OnBeforeUserDeleteHandler($userId){
             $userObject = $this->getUserObject($userId);
 
-            $email = $userObject['$userObject'];
+            $email = $userObject['EMAIL'];
             $phone = $userObject['PERSONAL_PHONE'];
 
             $contactId = $this->getContactID([
                 'EMAIL' => $email,
                 'PHONE' => $phone
             ]);
-
-            pre($contactId);
-            die();
+            if( $contactId )
+                $this->deleteContact($contactId);
         }
 
         private function getUserObject($userId){

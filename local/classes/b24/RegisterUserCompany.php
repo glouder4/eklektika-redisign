@@ -11,10 +11,14 @@ class RegisterUserCompany extends Request{
     private function isUserRegistered($arFields){
         // найти пользователя в б24 по EMAIL
         $b24User = new \OnlineService\B24\User();
-        $arResult = $b24User->getContactID($arFields);
+
+        if( isset($arFields['PERSONAL_PHONE']) && !isset($arFields['PHONE']) )
+            $arFields['PHONE'] = $arFields['PERSONAL_PHONE'];
+
+        $arResult = $b24User->getContactID($arFields,true);
 
         // если такой пользователь есть, то вывести предупреждение
-        if (!empty($arResult) && count($arResult) > 0) {
+        if (!empty($arResult) && isset($arResult['ID']) && $arResult['ID'] > 0) {
             return $arResult;
         }
 
@@ -69,7 +73,7 @@ class RegisterUserCompany extends Request{
                     ]
                 ];
                 // найти реквизит по ИНН
-                $dataRequisite = $this->sendB24Request("crm.requisite.list", $dataRequisite);
+                $dataRequisite = sendRequestB24("crm.requisite.list", $dataRequisite);
 
                 if (!empty($dataRequisite)) {
                     $dataContact['fields']['COMPANY_ID'] = $dataRequisite[0]['ENTITY_ID'];
@@ -97,10 +101,10 @@ class RegisterUserCompany extends Request{
                             'COMPANY_TYPE' => 'CUSTOMER'
                         ]
                     ];
-                    $companyId = $this->sendB24Request("crm.company.add", $qrCompanyInfo);
+                    $companyId = sendRequestB24("crm.company.add", $qrCompanyInfo);
                     if (!empty($companyId)) {
                         $qrCompany['id'] = $companyId;
-                        $dataCompany = $this->sendB24Request("crm.company.get", $qrCompany);
+                        $dataCompany = sendRequestB24("crm.company.get", $qrCompany);
 
                         /*Добавление реквизита к компании*/
                         $qrRequisite = [
@@ -111,7 +115,7 @@ class RegisterUserCompany extends Request{
                                 'PRESET_ID' => 1
                             ]
                         ];
-                        $requisiteId = $this->sendB24Request("crm.requisite.add", $qrRequisite);
+                        $requisiteId = sendRequestB24("crm.requisite.add", $qrRequisite);
 
                         /*Обновление реквизитов у компании*/
                         $qrRequisites = array(
@@ -124,7 +128,7 @@ class RegisterUserCompany extends Request{
                                 'RQ_COMPANY_FULL_NAME' => $arFields['UF_NAME_COMPANY']
                             ]
                         );
-                        $this->sendB24Request("crm.requisite.update", $qrRequisites);
+                        sendRequestB24("crm.requisite.update", $qrRequisites);
                     }
                 }
 
@@ -168,7 +172,7 @@ class RegisterUserCompany extends Request{
             }
         }
 
-        $contactId = $this->sendB24Request("crm.contact.add", $dataContact);
+        $contactId = sendRequestB24("crm.contact.add", $dataContact);
 
         if (!empty($companyId) && !empty($contactId)) {
             // добавить контакт в компанию
@@ -176,7 +180,7 @@ class RegisterUserCompany extends Request{
                 'fields' => ['COMPANY_ID' => $companyId],
                 'id' => $contactId
             ];
-            $this->sendB24Request("crm.contact.company.add", $qrCompanyAddContact);
+            sendRequestB24("crm.contact.company.add", $qrCompanyAddContact);
         }
     }
 
@@ -189,14 +193,20 @@ class RegisterUserCompany extends Request{
 
         if( !$response ){
             if ($arFields['PASSWORD'] == $arFields['CONFIRM_PASSWORD']) {
-                $this->createB24Company($arFields);
+                $createResult = $this->createB24Company($arFields);
+                if ($createResult === false) {
+                    // Если createB24Company вернул false, значит была ошибка
+                    // Исключение уже было выброшено в createB24Company
+                    return false;
+                }
             }
 
             $arFields['UF_ADVERSTERING_AGENT'] = "";
             return $arFields;
         }
         else{
-            if (is_array($response[0]['PHONE']) && !empty($response[0]['PHONE'])) {
+            // Определяем какое поле использовать для сообщения об ошибке
+            if (isset($response['PHONE']) && !empty($response['PHONE'])) {
                 $field = $arFields['PERSONAL_PHONE'];
             } else {
                 $field = $arFields['EMAIL'];
@@ -210,17 +220,17 @@ class RegisterUserCompany extends Request{
 
     public function OnAfterUserRegisterHandler(&$arFields) {
         // если регистрация успешна то
-        if($arFields["USER_ID"]>0)
+        /*if($arFields["USER_ID"]>0)
         {
             pre($arFields);
 
             $b24User = new \OnlineService\B24\User();
-            $contactId = $b24User->getContactID($arFields);
+            $contactId = $b24User->getContactID($arFields['USER_ID']);
 
 
             pre($contactId);
             die();
-        }
+        }*/
     }
     
     private function deleteStaffB24($arUser, $companyId, $idCompanySite) {
@@ -234,7 +244,7 @@ class RegisterUserCompany extends Request{
 
         if ($arResult['ID']) {
             // убрать рекламную агентность		
-            $this->sendB24Request("crm.contact.update", [
+            sendRequestB24("crm.contact.update", [
                 "id" => $arResult['ID'],
                 "fields" => [
                     'UF_CRM_1698752707853' => ''
@@ -243,7 +253,7 @@ class RegisterUserCompany extends Request{
             intec\eklectika\advertising_agent\Client::eraseStatusRA($arUser["ID"], $idCompanySite);
 
             // уволить его!		
-            $this->sendB24Request("crm.contact.company.delete", [
+            sendRequestB24("crm.contact.company.delete", [
                 'id' => $arResult['ID'],
                 'fields' => array('COMPANY_ID' => $companyId),
             ]);

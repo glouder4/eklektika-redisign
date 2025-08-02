@@ -1,8 +1,8 @@
 <?php
     namespace OnlineService\B24;
     class Request{
-        protected function sendB24Request($method, $params){
-            $queryUrl = URL_B24.'rest/1/w8i2ce68y3wwps17/'.$method.'.json';
+        protected function sendRequest($params){
+            $queryUrl = URL_B24.'local/classes/site_requests_handler.php';
             $curl = curl_init();
             $queryData  = http_build_query($params);
             curl_setopt_array($curl, array(
@@ -19,20 +19,7 @@
             }
             curl_close($curl);
             $result = json_decode($result, true);
-            return $result["result"];
-        }
 
-        protected function newB24Rest($param, $arFields, $select) {
-            $qrList = array(
-                'fields' => array(),
-                'params' => array(),
-                'select' => array(),
-                'filter' => array()
-            );
-
-            $qrList['filter'][$param] = $arFields[$select];
-            $qrList['select'][] = $param;
-
-            return $this->sendB24Request("crm.contact.list", $qrList);//$result["result"];
+            return $result;
         }
     }

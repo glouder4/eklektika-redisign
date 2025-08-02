@@ -183,24 +183,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_REQUEST["register_submit_button"] 
 		$events = GetModuleEvents("main", "OnBeforeUserRegister", true);
 		foreach($events as $arEvent)
 		{
-			if(ExecuteModuleEventEx($arEvent, array(&$arResult['VALUES'])) === false)
-			{
-				if($err = $APPLICATION->GetException()){
-                    if( $err->id == "already_registered" ){
-                        if($arParams["USE_BACKURL"] == "Y" && $_REQUEST["backurl"] <> '')
-                            LocalRedirect($_REQUEST["backurl"]);
-                        elseif($arParams["SUCCESS_PAGE"] <> '')
-                            LocalRedirect($arParams["SUCCESS_PAGE"]);
+			$result = ExecuteModuleEventEx($arEvent, array(&$arResult['VALUES']));
+			
+			// Проверяем исключение независимо от результата
+			if($err = $APPLICATION->GetException()){
+                if( $err->id == "already_registered" ){
+                    if($arParams["USE_BACKURL"] == "Y" && $_REQUEST["backurl"] <> '')
+                        LocalRedirect($_REQUEST["backurl"]);
+                    elseif($arParams["SUCCESS_PAGE"] <> '')
+                        LocalRedirect($arParams["SUCCESS_PAGE"]);
 
-
-                        $arResult['REGISTER_DONE'] = "Y";
-                    }
-                    $arResult['ERRORS'][] = $err->GetString();
+                    $arResult['REGISTER_DONE'] = "Y";
                 }
-
+                $arResult['ERRORS'][] = $err->GetString();
+                $bOk = false;
+                break;
+            }
+			
+			/*if($result === false || $result === null)
+			{
 				$bOk = false;
 				break;
-			}
+			}*/
 		}
 
 		$ID = 0;
