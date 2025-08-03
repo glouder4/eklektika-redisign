@@ -13,7 +13,7 @@
 
         private function GroupAction(){
             if( $this->request['ACTION'] == "UPDATE_GROUP" ){
-                $this->group_id = $this->searchGroup();
+                $this->group_id = $this->searchGroup()['ID'];
 
                 if( !$this->group_id ){
                     $this->group_id = $this->createGroup();
@@ -33,9 +33,9 @@
                 'STRING_ID' => "GROUP_".$this->request['ID']
             )); // выбираем группы
 
-            return $rsGroups->Fetch()['ID'] ?? false;
+            return $rsGroups->Fetch() ?? false;
         }
-
+        // Создание статуса
         private function createGroup(){
             $group = new \CGroup;
             $arFields = Array(
@@ -51,13 +51,25 @@
 
             return $NEW_GROUP_ID;
         }
-
+        // Обновление статуса
         private function updateGroup(){
             $group = new \CGroup;
             $arFields = Array(
                 "ACTIVE"       => $this->request['ACTIVE'],
                 "C_SORT"       => $this->request['C_SORT'],
                 "NAME"         => $this->request['NAME'],
+            );
+            $group->Update($this->group_id, $arFields);
+            if (strlen($group->LAST_ERROR)>0) ShowError($group->LAST_ERROR);
+        }
+
+        public function updatePriceTypeID($id = null){
+            if ($id === null) {
+                return;
+            }
+            $group = new \CGroup;
+            $arFields = Array(
+                "PRICE_TYPE_ID" => $id
             );
             $group->Update($this->group_id, $arFields);
             if (strlen($group->LAST_ERROR)>0) ShowError($group->LAST_ERROR);

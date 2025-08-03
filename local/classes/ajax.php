@@ -12,3 +12,8 @@
         $user = new User($_REQUEST);
         echo $user->update($_REQUEST);
     }
+
+    if( $_REQUEST['ACTION'] == "UPDATE_BATCH_USERS" ){
+        $user = new User($_REQUEST);
+        echo $user->updateBatch($_REQUEST);
+    }

@@ -5,12 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a53d02d7-d404-452c-a903-dd81636134fa" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/local/classes/site/StatusDiscounter.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local/classes/ajax.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/classes/ajax.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/classes/b24/RegisterUserCompany.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/classes/b24/RegisterUserCompany.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/classes/b24/Request.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/classes/b24/Request.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local/classes/b24/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/classes/b24/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/classes/events.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/classes/events.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/classes/site/UserGroups.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/classes/site/UserGroups.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,6 +92,7 @@
       <workItem from="1753962020549" duration="706000" />
       <workItem from="1754026954970" duration="45415000" />
       <workItem from="1754120373685" duration="8394000" />
+      <workItem from="1754217686932" duration="9595000" />
     </task>
     <servers />
   </component>

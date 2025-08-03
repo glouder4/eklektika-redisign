@@ -3,6 +3,11 @@
     use OnlineService\B24\Request;
     class User extends Request{
         public ?int $contactId = null;
+
+        public int $userId;
+        
+        // Константы для ID групп
+        const MARKETING_AGENT_GROUP_ID = 12;
         public function __construct()
         {
         }
@@ -94,6 +99,7 @@
             );
 
             if( $userObject = $rsUser->Fetch() ){
+                $this->userId = $userObject['ID'];
                 $ID = $userObject['ID'];
                 $email = $userObject['EMAIL'];
                 $phone = $userObject['PERSONAL_PHONE'];
@@ -150,11 +156,182 @@
 
         public function OnAfterUserUpdateHandler($arFields){
             $userObject = $this->getUserObject($arFields['ID']);
+            $this->updateMarketingAgentPriceType($arFields['UF_ADVERSTERING_AGENT']);
 
-            if( $userObject )
-                $this->updateContact($userObject['CONTACT_ID']);
+            //if( $userObject )
+                //$this->updateContact($userObject['CONTACT_ID']);
 
             return true;
+        }
+
+        /**
+         * Получить список ID пользователей в группе
+         * @param int $groupId ID группы
+         * @return array Массив ID пользователей
+         */
+        public function getUsersInGroup($groupId){
+            $userIds = array();
+            
+            // Получаем список пользователей в группе
+            $rsUsers = \CUser::GetList(
+                array('ID' => 'ASC'),
+                array('ASC'),
+                array('GROUPS_ID' => $groupId),
+                array('SELECT' => array('ID'))
+            );
+            
+            while ($user = $rsUsers->Fetch()) {
+                $userIds[] = $user['ID'];
+            }
+            
+            return $userIds;
+        }
+
+        /**
+         * Получить список групп пользователя
+         * @param int $userId ID пользователя
+         * @return array Массив ID групп пользователя
+         */
+        public function getUserGroups($userId){
+            $groupIds = array();
+            
+            // Получаем данные пользователя
+            $rsUser = \CUser::GetByID($userId);
+            $userData = $rsUser->Fetch();
+            
+            if ($userData && !empty($userData['GROUPS_ID'])) {
+                $groupIds = $userData['GROUPS_ID'];
+                if (!is_array($groupIds)) {
+                    $groupIds = array($groupIds);
+                }
+            }
+            
+            return $groupIds;
+        }
+
+        /**
+         * Добавить пользователя в группу
+         * @param int $userId ID пользователя
+         * @param int $groupId ID группы
+         * @return bool Результат операции
+         */
+        public function addUserToGroup($userId, $groupId){
+            $user = new \CUser();
+            
+            // Получаем текущие группы пользователя
+            $rsUser = \CUser::GetByID($userId);
+            $userData = $rsUser->Fetch();
+            
+            if (!$userData) {
+                pre("Пользователь ID " . $userId . " не найден");
+                return false;
+            }
+            
+            // Получаем текущие группы пользователя
+            $userGroups = $userData['GROUPS_ID'];
+            if (!is_array($userGroups)) {
+                $userGroups = array();
+            }
+            
+            // Проверяем, не добавлен ли пользователь уже в эту группу
+            if (in_array($groupId, $userGroups)) {
+                pre("Пользователь ID " . $userId . " уже находится в группе " . $groupId);
+                return true;
+            }
+            
+            // Добавляем новую группу к существующим группам
+            $userGroups[] = $groupId;
+            
+            $arFields = array(
+                'GROUP_ID' => $userGroups,
+                'UF_ADVERSTERING_AGENT' => 1,
+                'ACTIVE' => 'Y'
+            );
+            
+            $result = $user->Update($userId, $arFields);
+            
+            if ($result) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        /**
+         * Удалить пользователя из группы
+         * @param int $userId ID пользователя
+         * @param int $groupId ID группы
+         * @return bool Результат операции
+         */
+        public function removeUserFromGroup($userId, $groupId){
+            $user = new \CUser();
+            
+            // Получаем текущие группы пользователя
+            $rsUser = \CUser::GetByID($userId);
+            $userData = $rsUser->Fetch();
+            
+            if (!$userData) {
+                pre("Пользователь ID " . $userId . " не найден");
+                return false;
+            }
+            
+            // Удаляем группу из списка групп пользователя
+            $userGroups = $userData['GROUPS_ID'];
+            if (is_array($userGroups)) {
+                $userGroups = array_diff($userGroups, array($groupId));
+            } else {
+                $userGroups = array();
+            }
+            
+            $arFields = array(
+                'GROUP_ID' => $userGroups,
+                'UF_ADVERSTERING_AGENT' => 0,
+                'ACTIVE' => 'N'
+            );
+            
+            $result = $user->Update($userId, $arFields);
+            
+            if ($result) {
+                pre("Пользователь ID " . $userId . " удален из группы " . $groupId);
+                return true;
+            } else {
+                pre("Ошибка удаления пользователя ID " . $userId . " из группы " . $groupId . ": " . $user->LAST_ERROR);
+                return false;
+            }
+        }
+
+        private function updateMarketingAgentPriceType($status, $userId = null){
+            // Получаем информацию о группе рекламных агентов
+            $rsGroup = \CGroup::GetByID(self::MARKETING_AGENT_GROUP_ID);
+            $groupData = $rsGroup->Fetch();
+
+            if( is_null($userId) ){
+                $userId = $this->userId;
+            }
+            
+            if (!$groupData) {
+                pre("Ошибка: группа рекламных агентов не найдена");
+                return false;
+            }
+            
+            // Получаем текущий список пользователей в группе
+            $currentUserIds = $this->getUsersInGroup(self::MARKETING_AGENT_GROUP_ID);
+            
+            // Определяем, нужно ли добавить или удалить пользователя из группы
+            $isUserInGroup = in_array($userId, $currentUserIds);
+            $shouldBeInGroup = ($status === 'Y' || $status === true || $status === 1 || $status === "1");
+            
+            if ($shouldBeInGroup && !$isUserInGroup) {
+                // Добавляем пользователя в группу
+                return $this->addUserToGroup($userId, self::MARKETING_AGENT_GROUP_ID);
+                
+            } elseif (!$shouldBeInGroup && $isUserInGroup) {
+                // Удаляем пользователя из группы
+                return $this->removeUserFromGroup($userId, self::MARKETING_AGENT_GROUP_ID);
+                
+            } else {
+                return true;
+            }
         }
 
 
@@ -184,16 +361,16 @@
             // Убираем ID из полей для обновления
             unset($fields['B24_ID']);
 
-            $userId = $this->getUserIDByB24ID($b24ID);
+            $this->userId = $this->getUserIDByB24ID($b24ID);
             
-            if (!$userId) {
+            if (!$this->userId) {
                 pre("Error: User not found for B24 contact ID: " . $b24ID);
                 return false;
             }
 
             // Обновляем пользователя на сайте
             $user = new \CUser();
-            $result = $user->Update($userId, $fields);
+            $result = $user->Update($this->userId, $fields);
 
             if ($result) {
                 pre("User updated successfully on site");
@@ -201,6 +378,19 @@
             } else {
                 pre("Error updating user on site: " . $user->LAST_ERROR);
                 return false;
+            }
+        }
+
+        public function updateBatch($fields){
+            // Проверяем обязательные поля
+            if (empty($fields['CONTACT_IDS'])) {
+                pre("Error: CONTACT_IDS is required for user update");
+                return false;
+            }
+
+            foreach ($fields['CONTACT_IDS'] as $b24Id){
+                $userId = $this->getUserIDByB24ID($b24Id);
+                $this->updateMarketingAgentPriceType($fields['IS_MARKETING_AGENT'],$userId);
             }
         }
     }
