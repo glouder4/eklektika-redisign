@@ -4,7 +4,7 @@ namespace intec\eklectika\advertising_agent;
 use \Bitrix\Main\Loader;
 use \Bitrix\Sale\Order;
 
-define('URL_B24', 'https://testb24.yoliba.ru/');
+define('URL_B24', 'https://testb24.yoliba.ru');
 
 class Company {
 	

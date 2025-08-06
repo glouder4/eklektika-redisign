@@ -4,7 +4,7 @@ $APPLICATION->SetTitle("Universe");
 
 <?php
     /**Список контакт*/
-    $queryUrl = 'https://testb24.yoliba.ru/rest/1/w8i2ce68y3wwps17/crm.contact.list.json';
+    $queryUrl = URL_B24.'rest/1/w8i2ce68y3wwps17/crm.contact.list.json';
     $qr = array(
         'fields' => array(),
         'params' => array(),

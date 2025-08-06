@@ -23,7 +23,7 @@ $APPLICATION->SetTitle("Оформление заказа");
 		"COMPATIBLE_MODE" => "Y",
 		"USE_PRELOAD" => "Y",
 		"ALLOW_USER_PROFILES" => "Y",
-		"ALLOW_NEW_PROFILE" => "Y",
+		"ALLOW_NEW_PROFILE" => "N",
 		"TEMPLATE_THEME" => "site",
 		"SHOW_ORDER_BUTTON" => "final_step",
 		"SHOW_TOTAL_ORDER_BUTTON" => "Y",

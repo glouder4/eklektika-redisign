@@ -7,7 +7,7 @@
         public int $userId;
         
         // Константы для ID групп
-        const MARKETING_AGENT_GROUP_ID = 12;
+        public int $MARKETING_AGENT_GROUP_ID = 12;
         public function __construct()
         {
         }
@@ -68,7 +68,7 @@
          * @param int $b24ContactId ID контакта в B24
          * @return int|false ID пользователя на сайте или false если не найден
          */
-        private function getUserIDByB24ID($b24ContactId){
+        public function getUserIDByB24ID($b24ContactId){
             if (empty($b24ContactId)) {
                 pre("Error: B24 Contact ID is required");
                 return false;
@@ -216,22 +216,9 @@
          * @return bool Результат операции
          */
         public function addUserToGroup($userId, $groupId){
-            $user = new \CUser();
-            
+            $user = (new \CUser);
             // Получаем текущие группы пользователя
-            $rsUser = \CUser::GetByID($userId);
-            $userData = $rsUser->Fetch();
-            
-            if (!$userData) {
-                pre("Пользователь ID " . $userId . " не найден");
-                return false;
-            }
-            
-            // Получаем текущие группы пользователя
-            $userGroups = $userData['GROUPS_ID'];
-            if (!is_array($userGroups)) {
-                $userGroups = array();
-            }
+            $userGroups = $this->getUserGroups($userId);
             
             // Проверяем, не добавлен ли пользователь уже в эту группу
             if (in_array($groupId, $userGroups)) {
@@ -248,8 +235,30 @@
                 'ACTIVE' => 'Y'
             );
             
-            $result = $user->Update($userId, $arFields);
+            $result = (new \CUser)->Update($userId, $arFields);
             
+            if ($result) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        public function addUserToGroups($userId, $groupIds, $userObj = null){
+            $user = (new \CUser);
+
+            // Получаем текущие группы пользователя
+            $userGroups = $groupIds;
+
+            $arFields = array(
+                'GROUP_ID' => $userGroups
+            );
+            
+            if( in_array($this->MARKETING_AGENT_GROUP_ID,$userGroups) ){
+                $arFields['UF_ADVERSTERING_AGENT'] = 1;
+                $arFields['ACTIVE'] = "Y";
+            }
+
+            $result = (new \CUser)->Update($userId, $arFields);
             if ($result) {
                 return true;
             } else {
@@ -302,7 +311,7 @@
 
         private function updateMarketingAgentPriceType($status, $userId = null){
             // Получаем информацию о группе рекламных агентов
-            $rsGroup = \CGroup::GetByID(self::MARKETING_AGENT_GROUP_ID);
+            $rsGroup = \CGroup::GetByID($this->MARKETING_AGENT_GROUP_ID);
             $groupData = $rsGroup->Fetch();
 
             if( is_null($userId) ){
@@ -315,7 +324,7 @@
             }
             
             // Получаем текущий список пользователей в группе
-            $currentUserIds = $this->getUsersInGroup(self::MARKETING_AGENT_GROUP_ID);
+            $currentUserIds = $this->getUsersInGroup($this->MARKETING_AGENT_GROUP_ID);
             
             // Определяем, нужно ли добавить или удалить пользователя из группы
             $isUserInGroup = in_array($userId, $currentUserIds);
@@ -323,11 +332,11 @@
             
             if ($shouldBeInGroup && !$isUserInGroup) {
                 // Добавляем пользователя в группу
-                return $this->addUserToGroup($userId, self::MARKETING_AGENT_GROUP_ID);
+                return $this->addUserToGroup($userId, $this->MARKETING_AGENT_GROUP_ID);
                 
             } elseif (!$shouldBeInGroup && $isUserInGroup) {
                 // Удаляем пользователя из группы
-                return $this->removeUserFromGroup($userId, self::MARKETING_AGENT_GROUP_ID);
+                return $this->removeUserFromGroup($userId, $this->MARKETING_AGENT_GROUP_ID);
                 
             } else {
                 return true;
@@ -392,5 +401,17 @@
                 $userId = $this->getUserIDByB24ID($b24Id);
                 $this->updateMarketingAgentPriceType($fields['IS_MARKETING_AGENT'],$userId);
             }
+        }
+
+        public function delete($fields){
+            $this->userId = $this->getUserIDByB24ID($fields['ID']);
+
+            if( $this->userId )
+                return \CUser::Delete($this->userId);
+            else return false;
+        }
+
+        public function getMarketingGroupId(){
+            return $this->MARKETING_AGENT_GROUP_ID;
         }
     }

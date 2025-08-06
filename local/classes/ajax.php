@@ -17,3 +17,17 @@
         $user = new User($_REQUEST);
         echo $user->updateBatch($_REQUEST);
     }
+    if( $_REQUEST['ACTION'] == "DELETE_CONTACT" ){
+        $user = new User($_REQUEST);
+        echo $user->delete($_REQUEST);
+    }
+
+    if( $_REQUEST['ACTION'] == "DELETE_COMPANY" ){
+        $company = new \OnlineService\Site\Company();
+        echo $company->deleteCompanyElement($_REQUEST);
+    }
+
+    if( $_REQUEST['ACTION'] == "UPDATE_COMPANY" ){
+        $company = new \OnlineService\Site\Company();
+        echo $company->updateCompanyElement($_REQUEST);
+    }

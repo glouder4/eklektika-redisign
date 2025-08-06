@@ -81,6 +81,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 			this.initializePrimaryFields();
 
 			this.result = parameters.result || {};
+			console.log('init',this.result)
 			this.prepareLocations(parameters.locations);
 			this.params = parameters.params || {};
 			this.signedParamsString = parameters.signedParamsString || '';
@@ -175,7 +176,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 			this.firstLoad = false;
 
 			action = BX.type.isNotEmptyString(action) ? action : 'refreshOrderAjax';
-// console.log(action);
+ 			//console.log(action,actionData);
 			if (action === 'saveOrderAjax')
 			{
 				form = BX('bx-soa-order-form');
@@ -5148,6 +5149,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 					{
 						options.unshift(BX.create('OPTION', {props: {value: 0}, text: BX.message('SOA_PROP_NEW_PROFILE')}));
 					}
+					//options.unshift(BX.create('OPTION', {props: {value: 'unset'}, text: "-- Не выбран --"}));
 
 					profileChangeInput = BX.create('INPUT', {
 						props: {

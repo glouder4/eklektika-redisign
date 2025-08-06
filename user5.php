@@ -6,7 +6,7 @@ $APPLICATION->SetTitle("Title");
 	$requisiteId = [];
 	$requisiteId['id'] = 2815;
 
-	$queryUrl = 'https://testb24.yoliba.ru/rest/1/w8i2ce68y3wwps17/crm.requisite.get.json';
+	$queryUrl = URL_B24.'rest/1/w8i2ce68y3wwps17/crm.requisite.get.json';
 
 	$queryDataCompany = http_build_query($requisiteId);
 

@@ -8,7 +8,8 @@
         {
             $this->request = $request;
 
-            $this->GroupAction();
+            if( isset($this->request['ACTION']) )
+                $this->GroupAction();
         }
 
         private function GroupAction(){
@@ -27,10 +28,10 @@
             return $this->group_id;
         }
 
-        private function searchGroup(){
+        public function searchGroup($id = null){
 
             $rsGroups = \CGroup::GetList($by = "c_sort", $order = "asc", array(
-                'STRING_ID' => "GROUP_".$this->request['ID']
+                'STRING_ID' => !is_null($id) ? "GROUP_".$id : "GROUP_".$this->request['ID']
             )); // выбираем группы
 
             return $rsGroups->Fetch() ?? false;

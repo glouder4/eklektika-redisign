@@ -1,6 +1,6 @@
 <?php
 
-/* 	$queryUrl = 'https://testb24.yoliba.ru/rest/1/w8i2ce68y3wwps17/crm.company.add.json';
+/* 	$queryUrl = URL_B24.'rest/1/w8i2ce68y3wwps17/crm.company.add.json';
 
 	$qrCompanyInfo = array(
 		'fields' => array()
@@ -41,7 +41,7 @@
 		
 	} */
 	
-	$queryUrl = 'https://testb24.yoliba.ru/rest/1/w8i2ce68y3wwps17/crm.contact.company.add.json';
+	$queryUrl = URL_B24.'rest/1/w8i2ce68y3wwps17/crm.contact.company.add.json';
 
 			$qrCompanyAddContact = array(
 				'fields' => array()

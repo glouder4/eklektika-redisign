@@ -17,7 +17,7 @@ die();
 
 <?php
     /**Добавляем контакт*/
-  /*   $queryUrl = 'https://testb24.yoliba.ru/rest/1/w8i2ce68y3wwps17/crm.contact.add.json';
+  /*   $queryUrl = URL_B24.'rest/1/w8i2ce68y3wwps17/crm.contact.add.json';
     $qr = array(
         'fields' => array(),
         'params' => array()
@@ -58,7 +58,7 @@ die();
 ?>
 
 <?php
-    $queryUrl = 'https://testb24.yoliba.ru/rest/1/w8i2ce68y3wwps17/crm.contact.get.json';
+    $queryUrl = URL_B24.'rest/1/w8i2ce68y3wwps17/crm.contact.get.json';
     $qr['id'] = 34731;
     $queryData = http_build_query($qr);
 

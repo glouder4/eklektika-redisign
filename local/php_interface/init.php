@@ -246,7 +246,7 @@ function getApplication($dl, $ord)
 {
 	if((CModule::IncludeModule('iblock'))&&(CModule::IncludeModule('sale'))) {
 		
-		$webhook = "https://testb24.yoliba.ru/rest/1/w8i2ce68y3wwps17/";
+		$webhook = URL_B24."/rest/1/w8i2ce68y3wwps17/";
 	
 		$method = "kit.productapplications.deal.productrows.get/?ID=";  
 
@@ -273,7 +273,7 @@ function getApplication($dl, $ord)
 
 function addApplication($dl, $ord) {
 	if((CModule::IncludeModule('iblock'))&&(CModule::IncludeModule('sale'))) {		
-		$webhook = "https://testb24.yoliba.ru/rest/1/w8i2ce68y3wwps17/";	
+		$webhook = URL_B24."/rest/1/w8i2ce68y3wwps17/";	
 		$method = "kit.productapplications.deal.productrows.get/?ID=";  
 		$iblockID = 50;  // ID инфоблока товаров 
 		$dealId = $dl;  // ID сделки
@@ -594,7 +594,7 @@ function checkUpdate(&$arFields){
 	file_put_contents($_SERVER['DOCUMENT_ROOT'].'/updates-logs/log-after-update-order.txt', print_r($arFields, true));
 } */
 
-$bxEventManager = \Bitrix\Main\EventManager::getInstance();
+/*$bxEventManager = \Bitrix\Main\EventManager::getInstance();
 $bxEventManager->addEventHandler(
     "sale",
     "OnSaleOrderBeforeSaved",
@@ -607,6 +607,6 @@ function changeStatusOnOrderCreate(Bitrix\Main\Event $event){
     $oldValue = $event->getParameter("OLD_VALUE");
 
 	file_put_contents($_SERVER['DOCUMENT_ROOT'].'/updates-logs/log-after-update-order.txt', print_r($order, true));
-}
+}*/
 
 

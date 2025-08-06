@@ -30,7 +30,7 @@ class DismissEmployees {
 	}
 	
 	public static function findUserId($email){
-		$queryUrl = 'https://testb24.yoliba.ru/rest/1/w8i2ce68y3wwps17/crm.contact.list';
+		$queryUrl = URL_B24.'rest/1/w8i2ce68y3wwps17/crm.contact.list';
 		$qrList = array(
 			'fields' => array(),
 			'params' => array(),
@@ -45,7 +45,7 @@ class DismissEmployees {
 	}
 	
 	public static function dismiss($uid, $cid){
-		$queryUrl = 'https://testb24.yoliba.ru/rest/1/w8i2ce68y3wwps17/crm.contact.company.delete';
+		$queryUrl = URL_B24.'rest/1/w8i2ce68y3wwps17/crm.contact.company.delete';
 		$qrList = array(
 			'id' => $uid,
 			'fields' => array('COMPANY_ID' => $cid),

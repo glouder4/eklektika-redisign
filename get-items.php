@@ -6,7 +6,7 @@ function addApplication1($dl, $ord)
 {
 	if((CModule::IncludeModule('iblock'))&&(CModule::IncludeModule('sale'))) {
 		
-		$webhook = "https://testb24.yoliba.ru/rest/1/w8i2ce68y3wwps17/";
+		$webhook = URL_B24."/rest/1/w8i2ce68y3wwps17/";
 	
 		$method = "kit.productapplications.deal.productrows.get/?ID=";  
 

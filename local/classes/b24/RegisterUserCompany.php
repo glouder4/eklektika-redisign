@@ -22,6 +22,11 @@ class RegisterUserCompany extends Request{
         return false;
     }
 
+    private function createCompanyElement($params){
+        $company = new \OnlineService\Site\Company();
+        $company->createCompanyElement($params);
+    }
+
     private function createB24Company($arFields){
         global $APPLICATION;
 
@@ -77,6 +82,18 @@ class RegisterUserCompany extends Request{
                 if (!empty($dataRequisite)) {
                     $dataContact['fields']['COMPANY_ID'] = $dataRequisite[0]['ENTITY_ID'];
                     $companyId = $dataRequisite[0]['ENTITY_ID'];
+
+                    $companyElementParamss = [
+                        'OS_COMPANY_INN' => $arFields['UF_INN'],
+                        'OS_COMPANY_WEB_SITE' => $arFields['UF_SITE'],
+                        'OS_COMPANY_NAME' => $arFields['UF_NAME_COMPANY'],
+                        'OS_COMPANY_EMAIL' => $arFields['EMAIL'],
+                        'OS_COMPANY_PHONE' => $arFields['PERSONAL_PHONE'],
+                        'OS_COMPANY_B24_ID' => $companyId,
+                        'OS_COMPANY_CITY' => $arFields['UF_CITY']
+                    ];
+
+                    $this->createCompanyElement($companyElementParamss);
                 } else {
                     /*Создание компании*/
                     $qrCompanyInfo = [
@@ -128,11 +145,24 @@ class RegisterUserCompany extends Request{
                             ]
                         );
                         sendRequestB24("crm.requisite.update", $qrRequisites);
+
+                        $companyElementParamss = [
+                            'OS_COMPANY_INN' => $arFields['UF_INN'],
+                            'OS_COMPANY_WEB_SITE' => $arFields['UF_SITE'],
+                            'OS_COMPANY_NAME' => $arFields['UF_NAME_COMPANY'],
+                            'OS_COMPANY_EMAIL' => $arFields['EMAIL'],
+                            'OS_COMPANY_PHONE' => $arFields['PERSONAL_PHONE'],
+                            'OS_COMPANY_B24_ID' => $dataCompany['ID'],
+                            'OS_COMPANY_CITY' => $arFields['UF_CITY']
+                        ];
+                        $dataContact['fields']['COMPANY_ID'] = $dataCompany['ID'];
+
+                        $this->createCompanyElement($companyElementParamss);
                     }
                 }
 
                 // Ждем синхронизации данных с повторными попытками
-                $maxAttempts = 5;
+                /*$maxAttempts = 5;
                 $attempt = 0;
                 $companySite = null;
 
@@ -144,7 +174,9 @@ class RegisterUserCompany extends Request{
                             sleep(2); // Ждем 2 секунды между попытками
                         }
                     }
-                }
+                }*/
+
+
                 $dataCompanyCreate = [
                     "NAME_COMPANY" => $arFields['UF_NAME_COMPANY'], // название компании
                     "INN" => $arFields['UF_INN'], // ИНН
@@ -155,14 +187,15 @@ class RegisterUserCompany extends Request{
                     "ID_B24" => $dataCompany['ID'],
                     "PHONE" => $arFields['PERSONAL_PHONE'],
                     "EMAIL" => $arFields['EMAIL'],
-                    'UF_CRM_1618551330657' => "Город",
+                    'UF_CRM_1618551330657' => $arFields['UF_CITY'],
                 ];
 
-                if (!$companySite) {
+                /*if (!$companySite) {
                     Company::add($dataCompanyCreate);
                 }
 
-                /*if ($companySite) {
+
+                if ($companySite) {
                     Company::update($companySite["ID"], $dataCompanyCreate);
                 } else {
                     Company::add($dataCompanyCreate);

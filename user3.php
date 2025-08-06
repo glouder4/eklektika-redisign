@@ -4,7 +4,7 @@ $APPLICATION->SetTitle("Universe");
 
 <?php
 /* 
-	$queryUrl = 'https://testb24.yoliba.ru/rest/1/w8i2ce68y3wwps17/crm.requisite.list.json';
+	$queryUrl = URL_B24.'rest/1/w8i2ce68y3wwps17/crm.requisite.list.json';
 	
 	$qr = array(
         'fields' => array(),
@@ -44,7 +44,7 @@ $APPLICATION->SetTitle("Universe");
 	
 	if (!empty($companyId)) {
 		echo $companyId[0]['ENTITY_ID'];
-		$queryUrl = 'https://testb24.yoliba.ru/rest/1/w8i2ce68y3wwps17/crm.company.get.json';
+		$queryUrl = URL_B24.'rest/1/w8i2ce68y3wwps17/crm.company.get.json';
 	
 		$qrCompany['id'] = $companyId[0]['ENTITY_ID'];
 
@@ -76,7 +76,7 @@ $APPLICATION->SetTitle("Universe");
 ?>
 
 <?
-/* $queryUrl = 'https://testb24.yoliba.ru/rest/1/w8i2ce68y3wwps17/crm.company.update.json';
+/* $queryUrl = URL_B24.'rest/1/w8i2ce68y3wwps17/crm.company.update.json';
 	
 	$qr = array(
         'fields' => array(),
@@ -117,7 +117,7 @@ $APPLICATION->SetTitle("Universe");
 ?>
 
 <?
-/* 	$queryUrl = 'https://testb24.yoliba.ru/rest/1/w8i2ce68y3wwps17/crm.requisite.add.json';
+/* 	$queryUrl = URL_B24.'rest/1/w8i2ce68y3wwps17/crm.requisite.add.json';
 	
 	$qr = array(
         'fields' => array()
@@ -155,7 +155,7 @@ $APPLICATION->SetTitle("Universe");
 ?>
 
 <?
-	$queryUrl = 'https://testb24.yoliba.ru/rest/1/w8i2ce68y3wwps17/crm.requisite.update.json';
+	$queryUrl = URL_B24.'rest/1/w8i2ce68y3wwps17/crm.requisite.update.json';
 	
 	$qr = array(
         'fields' => array()
@@ -194,7 +194,7 @@ $APPLICATION->SetTitle("Universe");
 ?>
 
 <?
-  /*   $queryUrl = 'https://testb24.yoliba.ru/rest/1/w8i2ce68y3wwps17/crm.requisite.list.json';
+  /*   $queryUrl = URL_B24.'rest/1/w8i2ce68y3wwps17/crm.requisite.list.json';
 	
 	$qr = array(
         'fields' => array(),
@@ -233,7 +233,7 @@ $APPLICATION->SetTitle("Universe");
 ?>
 
 <?
-	 	/* $queryUrl = 'https://testb24.yoliba.ru/rest/1/w8i2ce68y3wwps17/crm.company.get.json';
+	 	/* $queryUrl = URL_B24.'rest/1/w8i2ce68y3wwps17/crm.company.get.json';
 	
 		$qrCompany['id'] = '2505';
 

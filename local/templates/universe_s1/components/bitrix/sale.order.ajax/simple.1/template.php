@@ -75,6 +75,7 @@ $hideDelivery = empty($arResult['DELIVERY']);
                     <input type="hidden" name="<?=$arParams['ACTION_VARIABLE']?>" value="saveOrderAjax">
                     <input type="hidden" name="location_type" value="code">
                     <input type="hidden" name="BUYER_STORE" id="BUYER_STORE" value="<?=$arResult['BUYER_STORE']?>">
+
                     <div id="bx-soa-order" class="bx-<?=$arParams['TEMPLATE_THEME']?> intec-grid" style="opacity: 0">
                         <!--	MAIN BLOCK	-->
                         <div class="intec-grid-item bx-soa">
