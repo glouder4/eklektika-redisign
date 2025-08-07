@@ -26,10 +26,11 @@
 
 
     function OnAfterUserUpdateHandler(&$arFields){
-        if($arFields["RESULT"])
-            $user = new \OnlineService\B24\User();
+        if($arFields["RESULT"]){
+            $userObj = new \OnlineService\B24\User();
 
-            $user->OnAfterUserUpdateHandler($arFields);
+            $userObj->OnAfterUserUpdateHandler($arFields);
+        }
     }
 
     AddEventHandler("main", "OnAfterUserUpdate", "OnAfterUserUpdateHandler");

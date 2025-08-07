@@ -101,30 +101,67 @@ if ($arParams['SETTINGS_USE'] === 'Y') {
 if (!empty($arResult['SEF_FOLDER'])) {
     $arResult['ITEMS'][] = [
         'PATH' => $arResult['SEF_FOLDER'],
-        'NAME' => Loc::getMessage('C_SALE_PERSONAL_SECTION_TEMPLATE_1_TEMPLATE_MENU_ITEM_ROOT'),
-        'ICON' => '<i class="fa fa-home"></i>',
+        'NAME' => "Главное", //Loc::getMessage('C_SALE_PERSONAL_SECTION_TEMPLATE_1_TEMPLATE_MENU_ITEM_ROOT'),
+        'ICON' => "",//'<i class="fa fa-home"></i>',
         'ACTIVE' => $sPageUrl == $arResult['SEF_FOLDER'] && empty($sPageSection)
     ];
 }
 
+$arResult['ITEMS'][] = [
+    'PATH' => $arResult['PATH_TO_ORDERS'].'/?filter_status=N',
+    'NAME' => "Заказы",
+    'ICON' => "",//'<i class="fa fa-calculator"></i>',
+    'ACTIVE' => empty($sPageSection) ? $sPageUrl == $arResult['PATH_TO_ORDERS'] && empty($sHistoryPage) && !isset($_GET['filter_status']) : $sPageSection == 'orders' && empty($sHistoryPage)
+];
 if ($arParams['SHOW_ORDER_PAGE'] === 'Y') {
     $arResult['ITEMS'][] = [
-        'PATH' => $arResult['PATH_TO_ORDERS'],
-        'NAME' => Loc::getMessage('C_SALE_PERSONAL_SECTION_TEMPLATE_1_TEMPLATE_MENU_ITEM_ORDER'),
-        'ICON' => '<i class="fa fa-calculator"></i>',
-        'ACTIVE' => empty($sPageSection) ? $sPageUrl == $arResult['PATH_TO_ORDERS'] && empty($sHistoryPage) : $sPageSection == 'orders' && empty($sHistoryPage)
+        'PATH' => "/personal/profile/orders/?filter_date_from=&filter_date_to=&filter_status=R",
+        'NAME' => "Резервы",
+        'ICON' => '',
+        'ACTIVE' => isset($_GET['filter_status']) && $_GET['filter_status'] == "R"
     ];
 }
+$arResult['ITEMS'][] = [
+    'PATH' => "/personal/profile/orders/?filter_date_from=&filter_date_to=&filter_status=OB",
+    'NAME' => "Образцы",//Loc::getMessage('C_SALE_PERSONAL_SECTION_TEMPLATE_1_TEMPLATE_MENU_ITEM_ORDER'),
+    'ICON' => '',
+    'ACTIVE' => isset($_GET['filter_status']) && $_GET['filter_status'] == "OB"
+];
+$arResult['ITEMS'][] = [
+    'PATH' => "#",
+    'NAME' => "Оплаты",
+    'ICON' => "",//'<i class="fa fa-calculator"></i>',
+    'ACTIVE' => false
+];
+$arResult['ITEMS'][] = [
+    'PATH' => "#",
+    'NAME' => "Аналитика",
+    'ICON' => "",//'<i class="fa fa-calculator"></i>',
+    'ACTIVE' => false
+];
 
 if ($arParams['SHOW_ACCOUNT_PAGE'] === 'Y') {
     $arResult['ITEMS'][] = [
         'PATH' => $arResult['PATH_TO_ACCOUNT'],
         'NAME' => Loc::getMessage('C_SALE_PERSONAL_SECTION_TEMPLATE_1_TEMPLATE_MENU_ITEM_ACCOUNT'),
-        'ICON' => '<i class="fa fa-credit-card"></i>',
+        'ICON' => "",//'<i class="fa fa-credit-card"></i>',
         'ACTIVE' => empty($sPageSection) ? $sPageUrl == $arResult['PATH_TO_ACCOUNT'] : $sPageSection == 'account'
     ];
 }
-
+if ($arVisual['CLAIMS_BLOCK_SHOW']) {
+    $arResult['ITEMS']['CLAIMS'] = [
+        'PATH' => isset($arResult['PATH_TO_CLAIMS']) ? $arResult['PATH_TO_CLAIMS'] : $arResult['SEF_FOLDER'].'?SECTION=claims',
+        'NAME' => "Претензии",//Loc::getMessage('C_SALE_PERSONAL_SECTION_TEMPLATE_1_TEMPLATE_MENU_ITEM_CLAIMS'),
+        'ICON' => "",//'<i class="fa fa-question"></i>',
+        'ACTIVE' => empty($sPageSection) ? $sPageUrl == $arResult['PATH_TO_CLAIMS'] : $sPageSection == 'claims'
+    ];
+}
+$arResult['ITEMS']['KP'] = [
+    'PATH' => isset($arParams['PATH_TO_KP']) ? $arParams['PATH_TO_KP'] : $arResult['SEF_FOLDER'].'?SECTION=kp',
+    'NAME' => 'Комерческие предложения',
+    'ICON' => '<i class="fa fa-handshake"></i>',
+    'ACTIVE' => empty($sPageSection) ? $sPageUrl == $arParams['PATH_TO_KP'] : $sPageSection == 'kp'
+];
 if ($arParams['SHOW_PRIVATE_PAGE'] === 'Y') {
     $arResult['ITEMS'][] = [
         'PATH' => $arResult['PATH_TO_PRIVATE'],
@@ -135,13 +172,13 @@ if ($arParams['SHOW_PRIVATE_PAGE'] === 'Y') {
 }
 
 if ($arParams['SHOW_ORDER_PAGE'] === 'Y') {
-    $delimeter = ($arParams['SEF_MODE'] === 'Y') ? '?' : '&';
+    /*$delimeter = ($arParams['SEF_MODE'] === 'Y') ? '?' : '&';
     $arResult['ITEMS'][] = [
         'PATH' => $arResult['PATH_TO_ORDERS'].$delimeter.'filter_history=Y',
         'NAME' => Loc::getMessage('C_SALE_PERSONAL_SECTION_TEMPLATE_1_TEMPLATE_MENU_ITEM_ORDER_HISTORY'),
         'ICON' => '<i class="fa fa-list-alt"></i>',
         'ACTIVE' => empty($sPageSection) ? $sPageUrl == $arResult['PATH_TO_ORDERS'] && !empty($sHistoryPage) : $sPageSection == 'orders' && !empty($sHistoryPage)
-    ];
+    ];*/
 }
 
 if ($arParams['SHOW_PROFILE_PAGE'] === 'Y') {
@@ -161,14 +198,14 @@ if ($arParams['SHOW_BASKET_PAGE'] === 'Y') {
         'ACTIVE' => ''
     ];
 }
-if (isAgent()) {
+/*if (isAgent()) {
 	$arResult['ITEMS']['KP'] = [
 	        'PATH' => isset($arParams['PATH_TO_KP']) ? $arParams['PATH_TO_KP'] : $arResult['SEF_FOLDER'].'?SECTION=kp',
 	        'NAME' => 'Комерческие предложения',
 	        'ICON' => '<i class="fa fa-handshake"></i>',
 	        'ACTIVE' => empty($sPageSection) ? $sPageUrl == $arParams['PATH_TO_KP'] : $sPageSection == 'kp'
 	    ];
-}
+}*/
 
 if ($arParams['SHOW_SUBSCRIBE_PAGE'] === 'Y') {
     $arResult['ITEMS'][] = [
@@ -208,14 +245,6 @@ if ($arParams['CRM_SHOW_PAGE'] === 'Y') {
 }
 
 
-if ($arVisual['CLAIMS_BLOCK_SHOW']) {
-    $arResult['ITEMS']['CLAIMS'] = [
-        'PATH' => isset($arResult['PATH_TO_CLAIMS']) ? $arResult['PATH_TO_CLAIMS'] : $arResult['SEF_FOLDER'].'?SECTION=claims',
-        'NAME' => Loc::getMessage('C_SALE_PERSONAL_SECTION_TEMPLATE_1_TEMPLATE_MENU_ITEM_CLAIMS'),
-        'ICON' => '<i class="fa fa-question"></i>',
-        'ACTIVE' => empty($sPageSection) ? $sPageUrl == $arResult['PATH_TO_CLAIMS'] : $sPageSection == 'claims'
-    ];
-}
 
 if ($arParams['PRODUCT_VIEWED_SHOW_PAGE'] === 'Y') {
     $arResult['ITEMS']['PRODUCT_VIEWED'] = [

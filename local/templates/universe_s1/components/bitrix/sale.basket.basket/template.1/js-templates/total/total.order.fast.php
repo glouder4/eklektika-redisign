@@ -47,6 +47,33 @@ unset($key, $sParameter);
                 'size-2',
             ]
         ],
+        'id' => "CreateReserve",
+        /*'onclick' => 'template.api.components.show('.JavaScript::toObject([
+            'component' => 'intec.universe:sale.order.fast',
+            'template' => $arParameters['TEMPLATE'],
+            'parameters' => $arParameters['PARAMETERS'],
+            'settings' => [
+                'parameters' => [
+                    'width' => null
+                ]
+            ]
+        ]).*/')'
+    ]) ?>
+    <?= Html::tag('button', Loc::getMessage('C_BASKET_DEFAULT_1_TEMPLATE_TOTAL_ORDER_FAST_OBRAZEC'), [
+        'class' => [
+            'basket-order-button',
+            'basket-create-reserve',
+            'intec-ui' => [
+                '',
+                'control-button',
+                'mod-round-2',
+                'mod-transparent',
+                'scheme-current',
+                'mod-block',
+                'size-2',
+            ]
+        ],
+        'id' => "CreateObrazec",
         /*'onclick' => 'template.api.components.show('.JavaScript::toObject([
             'component' => 'intec.universe:sale.order.fast',
             'template' => $arParameters['TEMPLATE'],

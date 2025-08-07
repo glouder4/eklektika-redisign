@@ -47,39 +47,41 @@ $arSvg = [
             <div class="sale-personal-section-links-mobile">
                 <?php include(__DIR__.'/parts/menu_mobile.php') ?>
             </div>
-            <div class="sale-personal-section-orders-wrap">
-                <?php include(__DIR__.'/parts/orders.php') ?>
-            </div>
+            <!--<div class="sale-personal-section-orders-wrap">
+                <?php /*include(__DIR__.'/parts/orders.php') */?>
+            </div>-->
             <div class="sale-personal-section-blocks">
                 <div class="intec-grid intec-grid-wrap intec-grid-i-12 intec-grid-a-h-center intec-grid-a-v-start">
                     <div class="intec-grid-item-2 intec-grid-item-1024-1">
+                        <div style="margin-bottom: 24px;">
+                            <?php include (__DIR__.'/parts/companies.php') ?>
+                        </div>
+                        <div style="margin-bottom: 24px;">
                         <?php include(__DIR__.'/parts/private.php') ?>
-                    </div>					
-					<div class="intec-grid-item-2 intec-grid-item-1024-1">
+                        </div>
+                            <div style="margin-bottom: 24px;">
+                        <?php if ($arVisual['CLAIMS_BLOCK_SHOW']) { ?>
+                            <?php include (__DIR__.'/parts/claims.php') ?>
+                        <?php } ?>
+                            </div>
+                                <div style="margin-bottom: 24px;">
+                        <div class="intec-grid-item-2 intec-grid-item-1024-1">
+                            <?php include (__DIR__.'/parts/news.php') ?>
+                        </div>
+                                </div>
+                                    <div style="margin-bottom: 24px;">
+                        <div class="intec-grid-item-2 intec-grid-item-1024-1">
+                            <?php include (__DIR__.'/parts/info.php') ?>
+                        </div>
+                                    </div>
+                    </div>
+                    <div class="intec-grid-item-2 intec-grid-item-1024-1">
 						<?php if ($arVisual['MANAGER_BLOCK_SHOW']) { ?>
 							<?php include (__DIR__.'/parts/manager.php') ?>
-						<?php } ?>
-						<?php if ($arVisual['CLAIMS_BLOCK_SHOW']) { ?>
-							<?php include (__DIR__.'/parts/claims.php') ?>
 						<?php } ?>
 					</div>					
                 </div>
             </div>
-			<div class="sale-personal-section-blocks">
-				<div class="intec-grid intec-grid-wrap intec-grid-i-12 intec-grid-wrap intec-grid-a-h-start intec-grid-a-v-start">
-					<?php if (Client::getStatus() == "jur" || Client::getStatus() == "agent") {?>
-						<div class="intec-grid-item-2 intec-grid-item-1024-1">
-							<?php include (__DIR__.'/parts/companies.php') ?>
-						</div>
-					<?php }?>
-					<div class="intec-grid-item-2 intec-grid-item-1024-1">							
-						<?php include (__DIR__.'/parts/news.php') ?>
-					</div>
-					<div class="intec-grid-item-2 intec-grid-item-1024-1">							
-						<?php include (__DIR__.'/parts/info.php') ?>
-					</div>
-				</div>
-			</div>
         </div>
     </div>
 <?= Html::endTag('div') ?>

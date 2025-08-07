@@ -207,13 +207,13 @@ if ($arResult['CONTACTS']['SHOW']) {
                     </div>
                 </div>
                 <div class="header__icons">
-                    <a href="#" class="header__icon header__icon--dice">
+                    <!--<a href="#" class="header__icon header__icon--dice">
                         <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
                             <path d="M1 14.8673V2.41082C1 2.04374 1.14582 1.6917 1.40538 1.43214C1.66494 1.17258 2.01698 1.02676 2.38406 1.02676H14.8406C15.2077 1.02676 15.5597 1.17258 15.8193 1.43214C16.0788 1.6917 16.2246 2.04374 16.2246 2.41082V14.8673C16.2246 15.2344 16.0788 15.5865 15.8193 15.846C15.5597 16.1056 15.2077 16.2514 14.8406 16.2514H2.38406C2.01698 16.2514 1.66494 16.1056 1.40538 15.846C1.14582 15.5865 1 15.2344 1 14.8673Z" stroke="white" stroke-width="0.958194"/>
                             <path d="M10.6901 5.17896H13.4582M10.6901 11.0612H13.4582M10.6901 13.1373H13.4582M3.76978 5.17896H5.15383M5.15383 5.17896H6.53789M5.15383 5.17896V3.7949M5.15383 5.17896V6.56301M4.1753 13.0778L5.15383 12.0992M5.15383 12.0992L6.13305 11.1207M5.15383 12.0992L4.1753 11.1207M5.15383 12.0992L6.13305 13.0778" stroke="white" stroke-width="0.958194" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                         <span class="header__icon-title">Рассчет</span>
-                    </a>
+                    </a>-->
                     <?php include(__DIR__.'/../../../parts/onlineservice-basket.php') ?>
 
                     <!-- Авторизация -->
@@ -221,7 +221,7 @@ if ($arResult['CONTACTS']['SHOW']) {
                         $arResult['AUTHORIZATION']['SHOW']['DESKTOP'] ||
                         $sSearchPosition === 'top'
                     ) { ?>
-                        <div class="widget-panel-buttons-wrap intec-grid-item-auto">
+                        <div class="widget-panel-buttons-wrap intec-grid-item-auto" id="profileBtns">
                             <?php if ($arResult['AUTHORIZATION']['SHOW']['DESKTOP']) { ?>
                                 <?php include(__DIR__.'/../../../parts/auth/onlineservice-panel.1.php') ?>
                             <?php } ?>

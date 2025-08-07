@@ -200,13 +200,13 @@ if(is_array($arResult['ORDERS']) && !empty($arResult['ORDERS'])) {
         $arOrder['ORDER']['ORDER_STATUS_COLOR'] = $arOrder['ORDER']['CANCELED'] === 'Y' ? $arOrdersColor['PSEUDO_CANCELLED'] : $arOrdersColor[$arOrder['ORDER']['STATUS_ID']];
 		
         $arOrder['ORDER']['ORDER_STATUS_NAME'] = $arOrder['ORDER']['CANCELED'] !== 'Y' ? $arOrdersStatuses[$arOrder['ORDER']['STATUS_ID']]['NAME'] : '';
-		if ($arOrder["PROPERTIES"]["REQUEST_TO_RESERVE"] == "Y" && $arOrder['ORDER']['CANCELED'] !== 'Y') {
+		/*if ($arOrder["PROPERTIES"]["REQUEST_TO_RESERVE"] == "Y" && $arOrder['ORDER']['CANCELED'] !== 'Y') {
 			if ($arOrder["PROPERTIES"]["RESERVE_SUCCESS"] == "Y") {
 				$arOrder['ORDER']['ORDER_STATUS_NAME'] = "Резерв в обработке";
 			} else {
 				$arOrder['ORDER']['ORDER_STATUS_NAME'] = "Запрос на резерв";
 			}
-		}
+		}*/
 
         if (is_array($arOrder['BASKET_ITEMS']) && !empty($arOrder['BASKET_ITEMS'])) {
             foreach ($arOrder['BASKET_ITEMS'] as &$arBasketItem) {

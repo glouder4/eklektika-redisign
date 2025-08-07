@@ -15,13 +15,15 @@ CModule::IncludeModule("intec.eklectika");
 ?>
 <?php if ($arResult["ITEMS"]) {?>
 	<div class="companies intec-grid intec-grid-wrap intec-grid-i-5">
-		<?php foreach($arResult["ITEMS"] as $arItem) {?>
+		<?php foreach($arResult["ITEMS"] as $arItem) {
+            //pre($arItem);
+            ?>
 			<?
 			$this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));
 			$this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM')));
 			?>
 			<div class="companies__item intec-grid-item-2" id="<?=$this->GetEditAreaId($arItem['ID']);?>">
-				<b><?echo $arItem["PROPERTIES"]["NAME_COMPANY"]["VALUE"]?></b>
+				<b><?echo $arItem["PROPERTIES"]["OS_COMPANY_NAME"]["VALUE"]?></b>
 				<?php if (intec\eklectika\advertising_agent\Client::isBossCompany($arItem['ID'])) {?>
 					<a target="_blank" href="<?echo $arItem["DETAIL_PAGE_URL"]?>">
 						подробнее
@@ -31,23 +33,23 @@ CModule::IncludeModule("intec.eklectika");
 				<table>
 					<tr>
 						<td>ИНН:</td>
-						<td><?=$arItem["PROPERTIES"]["INN"]["VALUE"]?></td>
+						<td><?=$arItem["PROPERTIES"]["OS_COMPANY_INN"]["VALUE"]?></td>
 					</tr>
-					<tr>
+					<!--<tr>
 						<td>КПП:</td>
-						<td><?=$arItem["PROPERTIES"]["KPP"]["VALUE"]?></td>
-					</tr>
-					<tr>
+						<td><?php /*=$arItem["PROPERTIES"]["KPP"]["VALUE"]*/?></td>
+					</tr>-->
+					<!--<tr>
 						<td>Юр. адрес:</td>
-						<td><?=$arItem["PROPERTIES"]["ADDRESS"]["VALUE"]?></td>
-					</tr>
+						<td><?php /*=$arItem["PROPERTIES"]["ADDRESS"]["VALUE"]*/?></td>
+					</tr>-->
 					<tr>
 						<td>Сайт:</td>
-						<td><?=$arItem["PROPERTIES"]["WEBSITE"]["VALUE"]?></td>
+						<td><?=$arItem["PROPERTIES"]["OS_COMPANY_WEB_SITE"]["VALUE"]?></td>
 					</tr>
 					<tr>
 						<td>Сотрудников:</td>
-						<td><?=count($arItem["PROPERTIES"]["STAFFS"]["VALUE"])?></td>
+						<td><?=count($arItem["PROPERTIES"]["OS_COMPANY_USERS"]["VALUE"])?></td>
 					</tr>
 				</table>				
 			</div>

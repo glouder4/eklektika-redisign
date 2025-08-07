@@ -239,8 +239,7 @@ function checkBeforeDealUpdate($deal_new_fields,$order_data,$deal_info){
 	file_put_contents($_SERVER['DOCUMENT_ROOT'].'/updates-logs/log-before-deal-update-order1.txt', print_r($deal_new_fields, true));
 	file_put_contents($_SERVER['DOCUMENT_ROOT'].'/updates-logs/log-before-deal-update-order2.txt', print_r($order_data, true));
 	file_put_contents($_SERVER['DOCUMENT_ROOT'].'/updates-logs/log-before-deal-update-order3.txt', print_r($deal_info, true));
-	file_put_contents($_SERVER['DOCUMENT_ROOT'].'/updates-logs/log-before-deal-update-fields.txt', print_r($fields, true));
-} */
+}*/
 
 function getApplication($dl, $ord)
 {

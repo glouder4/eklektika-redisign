@@ -21,10 +21,10 @@ use intec\core\helpers\StringHelper;
     <div class="sale-personal-section-claims-wrap">
         <div class="sale-personal-section-claims-items">
 		   <?php global $USER; 
-			$GLOBALS["filterUser"] = ["PROPERTY_STAFFS" => $USER->GetID()];?>
+			$GLOBALS["filterUser"] = ["PROPERTY_OS_COMPANY_USERS" => $USER->GetID()];?>
            <?php $APPLICATION->IncludeComponent("bitrix:news.list", "companies", Array(
 					"IBLOCK_TYPE" => "personal",
-					"IBLOCK_ID" => "52",
+					"IBLOCK_ID" => "57",
 					"NEWS_COUNT" => "",
 					"SORT_BY1" => "ACTIVE_FROM",
 					"SORT_ORDER1" => "DESC",

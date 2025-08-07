@@ -8,14 +8,14 @@ use Bitrix\Sale\Fuser;
 use Bitrix\Currency\CurrencyManager;
 use Bitrix\Main\Context;
 use intec\Core;
+use intec\core\handling\Actions;
 use intec\core\helpers\ArrayHelper;
 use intec\core\helpers\Type;
 use CCatalogMeasureRatio;
 use CStartShopBasket;
 use CStartShopPrice;
 
-class BasketActions
-{
+class BasketActions extends Actions {
     /**
      * @var Basket
      */

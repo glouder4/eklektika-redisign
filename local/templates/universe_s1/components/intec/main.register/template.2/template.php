@@ -936,8 +936,8 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
 
         $.mask.definitions['h'] = "[0|1|3|4|5|6|7|9]";
         $('input[name="REGISTER[PERSONAL_PHONE]"]').click(function(){
-            $(this).setCursorPosition(3);
-        }).mask('+7 (h99) 999-99-99');
+            $(this).setCursorPosition(1);
+        }).mask('+9 (h99) 999-99-99');
         $('input[name="REGISTER[PERSONAL_BIRTHDAY]"]').mask('99.99.9999');
     })
 </script>

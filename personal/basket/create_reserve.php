@@ -141,6 +141,13 @@ foreach ($arProps as $arProperty) {
 }
 
 die();*/
+
+if( isset($_GET['STATUS_ID']) && ( $_GET['STATUS_ID'] == "R" || $_GET['STATUS_ID'] == "OB" ) ){
+    // Устанавливаем статус заказа "К"
+    $order->setField('STATUS_ID', $_GET['STATUS_ID']);
+}
+
+
 // Сохраняем заказ
 $order->doFinalAction(true);
 $result = $order->save();

@@ -918,3 +918,110 @@
         height: 55px;
     }
 }
+
+
+#profileBtns{
+    display: flex;
+    gap: 28px;
+    position: relative;
+}
+.ns-intec-universe.c-sale-basket-small.c-sale-basket-small-icons-1 .sale-basket-small-tab-counter{
+    background: #EF4A85;
+    background-color: #EF4A85 !important;
+    text-align: center;
+
+    right: 0!important;
+}
+
+
+#top_header-auth_reg-btns--wrapper{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+#top_header-auth_reg-btns--wrapper a.top_header-btn{
+    background: rgb(112,48,160);
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 15px;
+
+    font-family: Manrope;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0;
+}
+#profile_fields--wrapper{
+    position: absolute;
+    z-index: 1;
+    top: 39px;
+    width: 340px;
+    left: unset;
+    right: 0;
+    background: unset;
+    padding-top: 20px;
+
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s linear;
+}
+#profile_fields--wrapper .widgets{
+    background-color: #FFF;
+    border: 1px solid #FFF;
+    padding: 18px 30px;
+    display: flex;
+    flex-direction: column;
+
+    border-radius: 4px;
+    gap: 7px;
+
+    -webkit-box-shadow: 0px 0px 8px 0px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 0px 0px 8px 0px rgba(34, 60, 80, 0.2);
+    box-shadow: 0px 0px 8px 0px rgba(34, 60, 80, 0.2);
+}
+#profile_fields--wrapper:before {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 6px;
+    right: 115px;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 15px solid #fff;
+    z-index: 1;
+}
+#profile_fields--wrapper .widget .widget-item{
+    display: flex;
+    gap: 12px;
+
+    font-family: Manrope;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0;
+    color: #352ca6;
+
+    align-items: center;
+}
+#profile_fields--wrapper .widget .widget-item .icon>svg{
+    width: 22px;
+    height: 22px;
+}
+#profile_fields--wrapper .widget .widget-item:hover,
+#profile_fields--wrapper .widget .widget-item:focus,
+#profile_fields--wrapper .widget .widget-item:active{
+    font-family: Manrope;
+    font-weight: 400;
+    line-height: 100%;
+    letter-spacing: 0;
+    color: #352ca6!important;
+}
+
+#profile_fields--wrapper:hover,
+#profileBtns a.header__icon.header__icon--user:hover +#profile_fields--wrapper{
+    visibility: visible;
+    opacity: 1;
+}

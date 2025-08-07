@@ -11,6 +11,7 @@ use intec\core\helpers\Html;
  * @var CBitrixComponent $component
  */
 
+
 ?>
 
 <?php $fDraw = function ($arItem) use (&$fDraw, &$arParams, &$arResult) { ?>

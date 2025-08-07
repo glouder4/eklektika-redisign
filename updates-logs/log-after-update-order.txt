@@ -4,9 +4,9 @@ Bitrix\Sale\Order Object
         (
             [values:protected] => Array
                 (
-                    [ID] => 148
+                    [ID] => 162
                     [LID] => s1
-                    [ACCOUNT_NUMBER] => 148
+                    [ACCOUNT_NUMBER] => 162
                     [TRACKING_NUMBER] => 
                     [PAY_SYSTEM_ID] => 10
                     [DELIVERY_ID] => 1
@@ -14,7 +14,7 @@ Bitrix\Sale\Order Object
                         (
                             [value:protected] => DateTime Object
                                 (
-                                    [date] => 2025-04-28 10:06:17.000000
+                                    [date] => 2025-08-06 21:56:46.000000
                                     [timezone_type] => 3
                                     [timezone] => Europe/Moscow
                                 )
@@ -26,7 +26,7 @@ Bitrix\Sale\Order Object
                         (
                             [value:protected] => DateTime Object
                                 (
-                                    [date] => 2025-04-28 10:19:12.000000
+                                    [date] => 2025-08-06 21:56:46.000000
                                     [timezone_type] => 3
                                     [timezone] => Europe/Moscow
                                 )
@@ -34,8 +34,8 @@ Bitrix\Sale\Order Object
                             [userTimeEnabled:protected] => 1
                         )
 
-                    [PERSON_TYPE_ID] => 1
-                    [USER_ID] => 103
+                    [PERSON_TYPE_ID] => 2
+                    [USER_ID] => 144
                     [PAYED] => N
                     [IS_SYNC_B24] => N
                     [DATE_PAYED] => 
@@ -49,7 +49,7 @@ Bitrix\Sale\Order Object
                         (
                             [value:protected] => DateTime Object
                                 (
-                                    [date] => 2025-04-28 10:06:15.000000
+                                    [date] => 2025-08-06 21:56:45.000000
                                     [timezone_type] => 3
                                     [timezone] => Europe/Moscow
                                 )
@@ -57,7 +57,7 @@ Bitrix\Sale\Order Object
                             [userTimeEnabled:protected] => 1
                         )
 
-                    [EMP_STATUS_ID] => 103
+                    [EMP_STATUS_ID] => 144
                     [MARKED] => N
                     [DATE_MARKED] => 
                     [EMP_MARKED_ID] => 
@@ -67,10 +67,10 @@ Bitrix\Sale\Order Object
                     [DATE_ALLOW_DELIVERY] => 
                     [EMP_ALLOW_DELIVERY_ID] => 
                     [RESERVED] => N
-                    [PRICE] => 26303.2
+                    [PRICE] => 38255
                     [CURRENCY] => RUB
                     [DISCOUNT_VALUE] => 0
-                    [TAX_VALUE] => 4300.49
+                    [TAX_VALUE] => 6292.50
                     [SUM_PAID] => 0
                     [USER_DESCRIPTION] => 
                     [PAY_VOUCHER_NUM] => 
@@ -78,19 +78,19 @@ Bitrix\Sale\Order Object
                     [ADDITIONAL_INFO] => 
                     [COMMENTS] => 
                     [COMPANY_ID] => 0
-                    [CREATED_BY] => 103
+                    [CREATED_BY] => 144
                     [RESPONSIBLE_ID] => 7
-                    [STAT_GID] => BITRIX_SM.MTAwNzAuNzgyMS5SVS4uLnMx
+                    [STAT_GID] => BITRIX_SM.MTIwMjAuOTM0MC5OMC4uLnMx
                     [DATE_PAY_BEFORE] => 
                     [DATE_BILL] => 
                     [IS_RECURRING] => N
                     [RECURRING_ID] => 
-                    [LOCKED_BY] => 103
+                    [LOCKED_BY] => 108
                     [DATE_LOCK] => Bitrix\Main\Type\DateTime Object
                         (
                             [value:protected] => DateTime Object
                                 (
-                                    [date] => 2025-04-28 10:33:05.000000
+                                    [date] => 2025-08-06 21:57:06.000000
                                     [timezone_type] => 3
                                     [timezone] => Europe/Moscow
                                 )
@@ -104,10 +104,10 @@ Bitrix\Sale\Order Object
                     [DELIVERY_DOC_DATE] => 
                     [UPDATED_1C] => N
                     [ORDER_TOPIC] => 
-                    [XML_ID] => bx_680f28e7d4626
+                    [XML_ID] => bx_6893a56d0558e
                     [ID_1C] => 
                     [VERSION_1C] => 
-                    [VERSION] => 2
+                    [VERSION] => 0
                     [EXTERNAL_ORDER] => N
                     [STORE_ID] => 
                     [CANCELED] => N
@@ -121,10 +121,12 @@ Bitrix\Sale\Order Object
 
             [changedValues:protected] => Array
                 (
+                    [RESPONSIBLE_ID] => 1
                 )
 
             [originalValues:Bitrix\Sale\Internals\Fields:private] => Array
                 (
+                    [RESPONSIBLE_ID] => 
                 )
 
             [customFields:Bitrix\Sale\Internals\Fields:private] => Array
@@ -134,19 +136,31 @@ Bitrix\Sale\Order Object
             [isClone:protected] => 
         )
 
-    [eventName:protected] => 
+    [eventName:protected] => SaleOrder
     [calculatedFields:protected] => Bitrix\Sale\Internals\Fields Object
         (
             [values:protected] => Array
                 (
+                    [USE_VAT] => Y
+                    [VAT_RATE] => 0.2
+                    [VAT_SUM] => 6292.5
+                    [VAT_DELIVERY] => 0
                 )
 
             [changedValues:protected] => Array
                 (
+                    [USE_VAT] => 1
+                    [VAT_RATE] => 1
+                    [VAT_SUM] => 1
+                    [VAT_DELIVERY] => 1
                 )
 
             [originalValues:Bitrix\Sale\Internals\Fields:private] => Array
                 (
+                    [USE_VAT] => 
+                    [VAT_RATE] => 
+                    [VAT_SUM] => 
+                    [VAT_DELIVERY] => 
                 )
 
             [customFields:Bitrix\Sale\Internals\Fields:private] => Array
@@ -166,28 +180,28 @@ Bitrix\Sale\Order Object
                                 (
                                     [values:protected] => Array
                                         (
-                                            [ID] => 2562
+                                            [ID] => 2656
                                             [LID] => s1
                                             [MODULE] => catalog
-                                            [PRODUCT_ID] => 57984
-                                            [QUANTITY] => 3.0000
-                                            [WEIGHT] => 32.00
+                                            [PRODUCT_ID] => 123927
+                                            [QUANTITY] => 20.0000
+                                            [WEIGHT] => 0.00
                                             [DELAY] => N
                                             [CAN_BUY] => Y
-                                            [PRICE] => 36
+                                            [PRICE] => 1791
                                             [CUSTOM_PRICE] => N
-                                            [BASE_PRICE] => 40
-                                            [PRODUCT_PRICE_ID] => 11875
-                                            [PRICE_TYPE_ID] => 2
+                                            [BASE_PRICE] => 1791
+                                            [PRODUCT_PRICE_ID] => 177758
+                                            [PRICE_TYPE_ID] => 3
                                             [CURRENCY] => RUB
                                             [BARCODE_MULTI] => N
                                             [RESERVED] => N
                                             [RESERVE_QUANTITY] => 
-                                            [NAME] => Папка-конверт А4 (Красный)
+                                            [NAME] => Противоштормовой зонт с двойным куполом Yoliba (черный)
                                             [CATALOG_XML_ID] => 4ee13222-c329-4bfa-b3b0-7f125cbbce56#
                                             [VAT_RATE] => 0.2
-                                            [NOTES] => Оптовая цена
-                                            [DISCOUNT_PRICE] => 4
+                                            [NOTES] => Рекламная цена
+                                            [DISCOUNT_PRICE] => 0
                                             [PRODUCT_PROVIDER_CLASS] => \Bitrix\Catalog\Product\CatalogProvider
                                             [CALLBACK_FUNC] => 
                                             [ORDER_CALLBACK_FUNC] => 
@@ -196,16 +210,16 @@ Bitrix\Sale\Order Object
                                             [DIMENSIONS] => a:3:{s:5:"WIDTH";N;s:6:"HEIGHT";N;s:6:"LENGTH";N;}
                                             [TYPE] => 
                                             [SET_PARENT_ID] => 
-                                            [DETAIL_PAGE_URL] => /catalog/papki_oblozhki_tetradi/papka_konvert_a4/
-                                            [FUSER_ID] => 645466
+                                            [DETAIL_PAGE_URL] => /catalog/yo_zonty/protivoshtormovoy_zont_s_dvoynym_kupolom_yoliba_tsvet_chyernyy/
+                                            [FUSER_ID] => 887128
                                             [MEASURE_CODE] => 796
                                             [MEASURE_NAME] => шт
-                                            [ORDER_ID] => 148
+                                            [ORDER_ID] => 162
                                             [DATE_INSERT] => Bitrix\Main\Type\DateTime Object
                                                 (
                                                     [value:protected] => DateTime Object
                                                         (
-                                                            [date] => 2025-04-28 10:05:35.000000
+                                                            [date] => 2025-08-06 19:53:33.000000
                                                             [timezone_type] => 3
                                                             [timezone] => Europe/Moscow
                                                         )
@@ -217,7 +231,7 @@ Bitrix\Sale\Order Object
                                                 (
                                                     [value:protected] => DateTime Object
                                                         (
-                                                            [date] => 2025-04-28 10:19:12.000000
+                                                            [date] => 2025-08-06 21:56:45.000000
                                                             [timezone_type] => 3
                                                             [timezone] => Europe/Moscow
                                                         )
@@ -225,16 +239,16 @@ Bitrix\Sale\Order Object
                                                     [userTimeEnabled:protected] => 1
                                                 )
 
-                                            [PRODUCT_XML_ID] => 075e7feb-094b-11ed-80c1-5065f361991b#bdb53f91-094b-11ed-80c1-5065f361991b
+                                            [PRODUCT_XML_ID] => f7afae89-686e-11f0-89c1-005056a08cd2#f8594dc7-686e-11f0-89c1-005056a08cd2
                                             [SUBSCRIBE] => N
                                             [RECOMMENDATION] => 
                                             [VAT_INCLUDED] => Y
                                             [SORT] => 100
                                             [DATE_REFRESH] => 
-                                            [DISCOUNT_NAME] => [1] 111
-                                            [DISCOUNT_VALUE] => 10%
+                                            [DISCOUNT_NAME] => 
+                                            [DISCOUNT_VALUE] => 
                                             [DISCOUNT_COUPON] => 
-                                            [XML_ID] => bx_680f28bebcb55
+                                            [XML_ID] => bx_6893888d3b0b6
                                             [MARKING_CODE_GROUP] => 
                                         )
 
@@ -258,7 +272,94 @@ Bitrix\Sale\Order Object
  *RECURSION*
                             [internalIndex:protected] => 0
                             [isClone:protected] => 
-                            [propertyCollection:protected] => 
+                            [propertyCollection:protected] => Bitrix\Sale\BasketPropertiesCollection Object
+                                (
+                                    [collection:protected] => Array
+                                        (
+                                            [0] => Bitrix\Sale\BasketPropertyItem Object
+                                                (
+                                                    [fields:protected] => Bitrix\Sale\Internals\Fields Object
+                                                        (
+                                                            [values:protected] => Array
+                                                                (
+                                                                    [ID] => 1260
+                                                                    [BASKET_ID] => 2656
+                                                                    [NAME] => Catalog XML_ID
+                                                                    [VALUE] => 4ee13222-c329-4bfa-b3b0-7f125cbbce56#
+                                                                    [CODE] => CATALOG.XML_ID
+                                                                    [SORT] => 100
+                                                                    [XML_ID] => bx_6893888d73c65
+                                                                )
+
+                                                            [changedValues:protected] => Array
+                                                                (
+                                                                )
+
+                                                            [originalValues:Bitrix\Sale\Internals\Fields:private] => Array
+                                                                (
+                                                                )
+
+                                                            [customFields:Bitrix\Sale\Internals\Fields:private] => Array
+                                                                (
+                                                                )
+
+                                                            [isClone:protected] => 
+                                                        )
+
+                                                    [eventName:protected] => 
+                                                    [collection:protected] => Bitrix\Sale\BasketPropertiesCollection Object
+ *RECURSION*
+                                                    [internalIndex:protected] => 0
+                                                    [isClone:protected] => 
+                                                )
+
+                                            [1] => Bitrix\Sale\BasketPropertyItem Object
+                                                (
+                                                    [fields:protected] => Bitrix\Sale\Internals\Fields Object
+                                                        (
+                                                            [values:protected] => Array
+                                                                (
+                                                                    [ID] => 1261
+                                                                    [BASKET_ID] => 2656
+                                                                    [NAME] => Product XML_ID
+                                                                    [VALUE] => f7afae89-686e-11f0-89c1-005056a08cd2#f8594dc7-686e-11f0-89c1-005056a08cd2
+                                                                    [CODE] => PRODUCT.XML_ID
+                                                                    [SORT] => 100
+                                                                    [XML_ID] => bx_6893888d73d25
+                                                                )
+
+                                                            [changedValues:protected] => Array
+                                                                (
+                                                                )
+
+                                                            [originalValues:Bitrix\Sale\Internals\Fields:private] => Array
+                                                                (
+                                                                )
+
+                                                            [customFields:Bitrix\Sale\Internals\Fields:private] => Array
+                                                                (
+                                                                )
+
+                                                            [isClone:protected] => 
+                                                        )
+
+                                                    [eventName:protected] => 
+                                                    [collection:protected] => Bitrix\Sale\BasketPropertiesCollection Object
+ *RECURSION*
+                                                    [internalIndex:protected] => 1
+                                                    [isClone:protected] => 
+                                                )
+
+                                        )
+
+                                    [index:Bitrix\Sale\Internals\EntityCollection:private] => 1
+                                    [isClone:protected] => 
+                                    [anyItemDeleted:protected] => 
+                                    [anyItemAdded:protected] => 1
+                                    [basketItem:protected] => Bitrix\Sale\BasketItem Object
+ *RECURSION*
+                                )
+
                             [calculatedFields:protected] => Bitrix\Sale\Internals\Fields Object
                                 (
                                     [values:protected] => Array
@@ -280,23 +381,10 @@ Bitrix\Sale\Order Object
                                     [isClone:protected] => 
                                 )
 
-                            [provider:protected] => \Bitrix\Catalog\Product\CatalogProvider
-                            [internalId:protected] => 2562
+                            [provider:protected] => 
+                            [internalId:protected] => 2656
                             [bundleCollection:Bitrix\Sale\BasketItem:private] => 
-                            [reserveQuantityCollection:protected] => Bitrix\Sale\ReserveQuantityCollection Object
-                                (
-                                    [collection:protected] => Array
-                                        (
-                                        )
-
-                                    [index:Bitrix\Sale\Internals\EntityCollection:private] => 0
-                                    [isClone:protected] => 
-                                    [anyItemDeleted:protected] => 1
-                                    [anyItemAdded:protected] => 
-                                    [basketItem:protected] => Bitrix\Sale\BasketItem Object
- *RECURSION*
-                                )
-
+                            [reserveQuantityCollection:protected] => 
                         )
 
                     [1] => Bitrix\Sale\BasketItem Object
@@ -305,27 +393,27 @@ Bitrix\Sale\Order Object
                                 (
                                     [values:protected] => Array
                                         (
-                                            [ID] => 2564
+                                            [ID] => 2657
                                             [LID] => s1
                                             [MODULE] => catalog
-                                            [PRODUCT_ID] => 60315
-                                            [QUANTITY] => 3.0000
+                                            [PRODUCT_ID] => 123960
+                                            [QUANTITY] => 1.0000
                                             [WEIGHT] => 0.00
                                             [DELAY] => N
                                             [CAN_BUY] => Y
-                                            [PRICE] => 800
-                                            [CUSTOM_PRICE] => Y
-                                            [BASE_PRICE] => 791
-                                            [PRODUCT_PRICE_ID] => 86969
-                                            [PRICE_TYPE_ID] => 2
+                                            [PRICE] => 1935
+                                            [CUSTOM_PRICE] => N
+                                            [BASE_PRICE] => 1935
+                                            [PRODUCT_PRICE_ID] => 177852
+                                            [PRICE_TYPE_ID] => 3
                                             [CURRENCY] => RUB
                                             [BARCODE_MULTI] => N
                                             [RESERVED] => N
                                             [RESERVE_QUANTITY] => 
-                                            [NAME] => Бейсболка 2018 FIFA World Cup Russia™ (Бежевый; красный)
+                                            [NAME] => Зонт- трость с плечевым ремешком (черный)
                                             [CATALOG_XML_ID] => 4ee13222-c329-4bfa-b3b0-7f125cbbce56#
                                             [VAT_RATE] => 0.2
-                                            [NOTES] => Оптовая цена
+                                            [NOTES] => Рекламная цена
                                             [DISCOUNT_PRICE] => 0
                                             [PRODUCT_PROVIDER_CLASS] => \Bitrix\Catalog\Product\CatalogProvider
                                             [CALLBACK_FUNC] => 
@@ -335,16 +423,16 @@ Bitrix\Sale\Order Object
                                             [DIMENSIONS] => a:3:{s:5:"WIDTH";N;s:6:"HEIGHT";N;s:6:"LENGTH";N;}
                                             [TYPE] => 
                                             [SET_PARENT_ID] => 
-                                            [DETAIL_PAGE_URL] => /catalog/odezhda_dlya_sporta/beysbolka_2018_fifa_world_cup_russia_bezhevyy_krasnyy/
-                                            [FUSER_ID] => 645466
+                                            [DETAIL_PAGE_URL] => /catalog/yo_zonty/zont_trost_s_plechevym_remeshkom_yoliba_seryy/
+                                            [FUSER_ID] => 887128
                                             [MEASURE_CODE] => 796
                                             [MEASURE_NAME] => шт
-                                            [ORDER_ID] => 148
+                                            [ORDER_ID] => 162
                                             [DATE_INSERT] => Bitrix\Main\Type\DateTime Object
                                                 (
                                                     [value:protected] => DateTime Object
                                                         (
-                                                            [date] => 2025-04-28 10:19:12.000000
+                                                            [date] => 2025-08-06 19:53:33.000000
                                                             [timezone_type] => 3
                                                             [timezone] => Europe/Moscow
                                                         )
@@ -356,7 +444,7 @@ Bitrix\Sale\Order Object
                                                 (
                                                     [value:protected] => DateTime Object
                                                         (
-                                                            [date] => 2025-04-28 10:19:12.000000
+                                                            [date] => 2025-08-06 21:56:45.000000
                                                             [timezone_type] => 3
                                                             [timezone] => Europe/Moscow
                                                         )
@@ -364,16 +452,16 @@ Bitrix\Sale\Order Object
                                                     [userTimeEnabled:protected] => 1
                                                 )
 
-                                            [PRODUCT_XML_ID] => 9e4eb616-094e-11ed-80c1-5065f361991b#9e4eb617-094e-11ed-80c1-5065f361991b
+                                            [PRODUCT_XML_ID] => 382dfb83-60c1-11f0-89c1-005056a08cd2#1fdd4f09-6b91-11f0-89c1-005056a08cd2
                                             [SUBSCRIBE] => N
                                             [RECOMMENDATION] => 
                                             [VAT_INCLUDED] => Y
-                                            [SORT] => 100
+                                            [SORT] => 200
                                             [DATE_REFRESH] => 
                                             [DISCOUNT_NAME] => 
                                             [DISCOUNT_VALUE] => 
                                             [DISCOUNT_COUPON] => 
-                                            [XML_ID] => bx_680f2bef69688
+                                            [XML_ID] => bx_6893888d98160
                                             [MARKING_CODE_GROUP] => 
                                         )
 
@@ -387,7 +475,6 @@ Bitrix\Sale\Order Object
 
                                     [customFields:Bitrix\Sale\Internals\Fields:private] => Array
                                         (
-                                            [PRICE] => 1
                                         )
 
                                     [isClone:protected] => 
@@ -398,7 +485,94 @@ Bitrix\Sale\Order Object
  *RECURSION*
                             [internalIndex:protected] => 1
                             [isClone:protected] => 
-                            [propertyCollection:protected] => 
+                            [propertyCollection:protected] => Bitrix\Sale\BasketPropertiesCollection Object
+                                (
+                                    [collection:protected] => Array
+                                        (
+                                            [0] => Bitrix\Sale\BasketPropertyItem Object
+                                                (
+                                                    [fields:protected] => Bitrix\Sale\Internals\Fields Object
+                                                        (
+                                                            [values:protected] => Array
+                                                                (
+                                                                    [ID] => 1262
+                                                                    [BASKET_ID] => 2657
+                                                                    [NAME] => Catalog XML_ID
+                                                                    [VALUE] => 4ee13222-c329-4bfa-b3b0-7f125cbbce56#
+                                                                    [CODE] => CATALOG.XML_ID
+                                                                    [SORT] => 100
+                                                                    [XML_ID] => bx_6893888dd20d5
+                                                                )
+
+                                                            [changedValues:protected] => Array
+                                                                (
+                                                                )
+
+                                                            [originalValues:Bitrix\Sale\Internals\Fields:private] => Array
+                                                                (
+                                                                )
+
+                                                            [customFields:Bitrix\Sale\Internals\Fields:private] => Array
+                                                                (
+                                                                )
+
+                                                            [isClone:protected] => 
+                                                        )
+
+                                                    [eventName:protected] => 
+                                                    [collection:protected] => Bitrix\Sale\BasketPropertiesCollection Object
+ *RECURSION*
+                                                    [internalIndex:protected] => 0
+                                                    [isClone:protected] => 
+                                                )
+
+                                            [1] => Bitrix\Sale\BasketPropertyItem Object
+                                                (
+                                                    [fields:protected] => Bitrix\Sale\Internals\Fields Object
+                                                        (
+                                                            [values:protected] => Array
+                                                                (
+                                                                    [ID] => 1263
+                                                                    [BASKET_ID] => 2657
+                                                                    [NAME] => Product XML_ID
+                                                                    [VALUE] => 382dfb83-60c1-11f0-89c1-005056a08cd2#1fdd4f09-6b91-11f0-89c1-005056a08cd2
+                                                                    [CODE] => PRODUCT.XML_ID
+                                                                    [SORT] => 100
+                                                                    [XML_ID] => bx_6893888dd2136
+                                                                )
+
+                                                            [changedValues:protected] => Array
+                                                                (
+                                                                )
+
+                                                            [originalValues:Bitrix\Sale\Internals\Fields:private] => Array
+                                                                (
+                                                                )
+
+                                                            [customFields:Bitrix\Sale\Internals\Fields:private] => Array
+                                                                (
+                                                                )
+
+                                                            [isClone:protected] => 
+                                                        )
+
+                                                    [eventName:protected] => 
+                                                    [collection:protected] => Bitrix\Sale\BasketPropertiesCollection Object
+ *RECURSION*
+                                                    [internalIndex:protected] => 1
+                                                    [isClone:protected] => 
+                                                )
+
+                                        )
+
+                                    [index:Bitrix\Sale\Internals\EntityCollection:private] => 1
+                                    [isClone:protected] => 
+                                    [anyItemDeleted:protected] => 
+                                    [anyItemAdded:protected] => 1
+                                    [basketItem:protected] => Bitrix\Sale\BasketItem Object
+ *RECURSION*
+                                )
+
                             [calculatedFields:protected] => Bitrix\Sale\Internals\Fields Object
                                 (
                                     [values:protected] => Array
@@ -420,101 +594,48 @@ Bitrix\Sale\Order Object
                                     [isClone:protected] => 
                                 )
 
-                            [provider:protected] => \Bitrix\Catalog\Product\CatalogProvider
-                            [internalId:protected] => 2564
+                            [provider:protected] => 
+                            [internalId:protected] => 2657
                             [bundleCollection:Bitrix\Sale\BasketItem:private] => 
-                            [reserveQuantityCollection:protected] => Bitrix\Sale\ReserveQuantityCollection Object
-                                (
-                                    [collection:protected] => Array
-                                        (
-                                        )
-
-                                    [index:Bitrix\Sale\Internals\EntityCollection:private] => 0
-                                    [isClone:protected] => 
-                                    [anyItemDeleted:protected] => 1
-                                    [anyItemAdded:protected] => 
-                                    [basketItem:protected] => Bitrix\Sale\BasketItem Object
- *RECURSION*
-                                )
-
+                            [reserveQuantityCollection:protected] => 
                         )
 
-                    [2] => Bitrix\Sale\BasketItem Object
+                )
+
+            [index:Bitrix\Sale\Internals\EntityCollection:private] => 1
+            [isClone:protected] => 
+            [anyItemDeleted:protected] => 
+            [anyItemAdded:protected] => 
+            [siteId:protected] => s1
+            [fUserId:protected] => 887128
+            [order:protected] => Bitrix\Sale\Order Object
+ *RECURSION*
+            [basketItemIndexMap:protected] => Array
+                (
+                    [2656] => 0
+                    [2657] => 1
+                )
+
+            [maxItemSort:protected] => 
+            [isLoadForFUserId:Bitrix\Sale\BasketBase:private] => 
+            [isSaveExecuting:protected] => 
+        )
+
+    [propertyCollection:protected] => Bitrix\Sale\PropertyValueCollection Object
+        (
+            [collection:protected] => Array
+                (
+                    [0] => Bitrix\Sale\PropertyValue Object
                         (
                             [fields:protected] => Bitrix\Sale\Internals\Fields Object
                                 (
                                     [values:protected] => Array
                                         (
-                                            [ID] => 2563
-                                            [LID] => s1
-                                            [MODULE] => catalog
-                                            [PRODUCT_ID] => 57574
-                                            [QUANTITY] => 10.0000
-                                            [WEIGHT] => 1806.00
-                                            [DELAY] => N
-                                            [CAN_BUY] => Y
-                                            [PRICE] => 2329.52
-                                            [CUSTOM_PRICE] => N
-                                            [BASE_PRICE] => 2329.52
-                                            [PRODUCT_PRICE_ID] => 10385
-                                            [PRICE_TYPE_ID] => 2
-                                            [CURRENCY] => RUB
-                                            [BARCODE_MULTI] => N
-                                            [RESERVED] => N
-                                            [RESERVE_QUANTITY] => 
-                                            [NAME] => Деревянная игра в кости, XL "Dice" (натуральный)
-                                            [CATALOG_XML_ID] => 4ee13222-c329-4bfa-b3b0-7f125cbbce56#
-                                            [VAT_RATE] => 0.2
-                                            [NOTES] => Оптовая цена
-                                            [DISCOUNT_PRICE] => 0
-                                            [PRODUCT_PROVIDER_CLASS] => \Bitrix\Catalog\Product\CatalogProvider
-                                            [CALLBACK_FUNC] => 
-                                            [ORDER_CALLBACK_FUNC] => 
-                                            [PAY_CALLBACK_FUNC] => 
-                                            [CANCEL_CALLBACK_FUNC] => 
-                                            [DIMENSIONS] => a:3:{s:5:"WIDTH";N;s:6:"HEIGHT";N;s:6:"LENGTH";N;}
-                                            [TYPE] => 
-                                            [SET_PARENT_ID] => 
-                                            [DETAIL_PAGE_URL] => /catalog/igry_nastolnye/derevyannaya_igra_v_kosti_xl_dice/
-                                            [FUSER_ID] => 645466
-                                            [MEASURE_CODE] => 796
-                                            [MEASURE_NAME] => шт
-                                            [ORDER_ID] => 148
-                                            [DATE_INSERT] => Bitrix\Main\Type\DateTime Object
-                                                (
-                                                    [value:protected] => DateTime Object
-                                                        (
-                                                            [date] => 2025-04-28 10:05:37.000000
-                                                            [timezone_type] => 3
-                                                            [timezone] => Europe/Moscow
-                                                        )
-
-                                                    [userTimeEnabled:protected] => 1
-                                                )
-
-                                            [DATE_UPDATE] => Bitrix\Main\Type\DateTime Object
-                                                (
-                                                    [value:protected] => DateTime Object
-                                                        (
-                                                            [date] => 2025-04-28 10:19:12.000000
-                                                            [timezone_type] => 3
-                                                            [timezone] => Europe/Moscow
-                                                        )
-
-                                                    [userTimeEnabled:protected] => 1
-                                                )
-
-                                            [PRODUCT_XML_ID] => 3ddecb94-094a-11ed-80c1-5065f361991b#3ddecb95-094a-11ed-80c1-5065f361991b
-                                            [SUBSCRIBE] => N
-                                            [RECOMMENDATION] => 
-                                            [VAT_INCLUDED] => Y
-                                            [SORT] => 200
-                                            [DATE_REFRESH] => 
-                                            [DISCOUNT_NAME] => 
-                                            [DISCOUNT_VALUE] => 
-                                            [DISCOUNT_COUPON] => 
-                                            [XML_ID] => bx_680f28c198855
-                                            [MARKING_CODE_GROUP] => 
+                                            [ID] => 1868
+                                            [NAME] => Сумма оплаты
+                                            [VALUE] => 
+                                            [CODE] => SUMM_PAYMENT
+                                            [ORDER_PROPS_ID] => 34
                                         )
 
                                     [changedValues:protected] => Array
@@ -533,15 +654,67 @@ Bitrix\Sale\Order Object
                                 )
 
                             [eventName:protected] => 
-                            [collection:protected] => Bitrix\Sale\Basket Object
+                            [collection:protected] => Bitrix\Sale\PropertyValueCollection Object
  *RECURSION*
-                            [internalIndex:protected] => 2
+                            [internalIndex:protected] => 0
                             [isClone:protected] => 
-                            [propertyCollection:protected] => 
-                            [calculatedFields:protected] => Bitrix\Sale\Internals\Fields Object
+                            [property:protected] => Bitrix\Sale\Property Object
+                                (
+                                    [fields:protected] => Array
+                                        (
+                                            [ID] => 34
+                                            [PERSON_TYPE_ID] => 2
+                                            [NAME] => Сумма оплаты
+                                            [TYPE] => STRING
+                                            [REQUIRED] => N
+                                            [DEFAULT_VALUE] => 0
+                                            [SORT] => 0
+                                            [USER_PROPS] => N
+                                            [IS_LOCATION] => N
+                                            [PROPS_GROUP_ID] => 3
+                                            [DESCRIPTION] => 
+                                            [IS_EMAIL] => N
+                                            [IS_PROFILE_NAME] => N
+                                            [IS_PAYER] => N
+                                            [IS_LOCATION4TAX] => N
+                                            [IS_FILTERED] => N
+                                            [CODE] => SUMM_PAYMENT
+                                            [IS_ZIP] => N
+                                            [IS_PHONE] => N
+                                            [IS_ADDRESS] => N
+                                            [IS_ADDRESS_FROM] => N
+                                            [IS_ADDRESS_TO] => N
+                                            [ACTIVE] => Y
+                                            [UTIL] => Y
+                                            [INPUT_FIELD_LOCATION] => 0
+                                            [MULTIPLE] => N
+                                            [ENTITY_TYPE] => ORDER
+                                            [MINLENGTH] => 
+                                            [MAXLENGTH] => 
+                                            [PATTERN] => 
+                                            [MULTILINE] => N
+                                            [SIZE] => 
+                                            [RELATION] => Array
+                                                (
+                                                )
+
+                                        )
+
+                                )
+
+                        )
+
+                    [1] => Bitrix\Sale\PropertyValue Object
+                        (
+                            [fields:protected] => Bitrix\Sale\Internals\Fields Object
                                 (
                                     [values:protected] => Array
                                         (
+                                            [ID] => 1869
+                                            [NAME] => Взять в работу
+                                            [VALUE] => N
+                                            [CODE] => IN_WORK
+                                            [ORDER_PROPS_ID] => 30
                                         )
 
                                     [changedValues:protected] => Array
@@ -559,51 +732,1535 @@ Bitrix\Sale\Order Object
                                     [isClone:protected] => 
                                 )
 
-                            [provider:protected] => \Bitrix\Catalog\Product\CatalogProvider
-                            [internalId:protected] => 2563
-                            [bundleCollection:Bitrix\Sale\BasketItem:private] => 
-                            [reserveQuantityCollection:protected] => Bitrix\Sale\ReserveQuantityCollection Object
+                            [eventName:protected] => 
+                            [collection:protected] => Bitrix\Sale\PropertyValueCollection Object
+ *RECURSION*
+                            [internalIndex:protected] => 1
+                            [isClone:protected] => 
+                            [property:protected] => Bitrix\Sale\Property Object
                                 (
-                                    [collection:protected] => Array
+                                    [fields:protected] => Array
+                                        (
+                                            [ID] => 30
+                                            [PERSON_TYPE_ID] => 2
+                                            [NAME] => Взять в работу
+                                            [TYPE] => Y/N
+                                            [REQUIRED] => N
+                                            [DEFAULT_VALUE] => N
+                                            [SORT] => 0
+                                            [USER_PROPS] => N
+                                            [IS_LOCATION] => N
+                                            [PROPS_GROUP_ID] => 3
+                                            [DESCRIPTION] => 
+                                            [IS_EMAIL] => N
+                                            [IS_PROFILE_NAME] => N
+                                            [IS_PAYER] => N
+                                            [IS_LOCATION4TAX] => N
+                                            [IS_FILTERED] => N
+                                            [CODE] => IN_WORK
+                                            [IS_ZIP] => N
+                                            [IS_PHONE] => N
+                                            [IS_ADDRESS] => N
+                                            [IS_ADDRESS_FROM] => N
+                                            [IS_ADDRESS_TO] => N
+                                            [ACTIVE] => Y
+                                            [UTIL] => Y
+                                            [INPUT_FIELD_LOCATION] => 0
+                                            [MULTIPLE] => N
+                                            [ENTITY_TYPE] => ORDER
+                                            [RELATION] => Array
+                                                (
+                                                )
+
+                                        )
+
+                                )
+
+                        )
+
+                    [2] => Bitrix\Sale\PropertyValue Object
+                        (
+                            [fields:protected] => Bitrix\Sale\Internals\Fields Object
+                                (
+                                    [values:protected] => Array
+                                        (
+                                            [ID] => 1870
+                                            [NAME] => Запрос на резерв принят
+                                            [VALUE] => N
+                                            [CODE] => RESERVE_SUCCESS
+                                            [ORDER_PROPS_ID] => 28
+                                        )
+
+                                    [changedValues:protected] => Array
                                         (
                                         )
 
-                                    [index:Bitrix\Sale\Internals\EntityCollection:private] => 0
+                                    [originalValues:Bitrix\Sale\Internals\Fields:private] => Array
+                                        (
+                                        )
+
+                                    [customFields:Bitrix\Sale\Internals\Fields:private] => Array
+                                        (
+                                        )
+
                                     [isClone:protected] => 
-                                    [anyItemDeleted:protected] => 1
-                                    [anyItemAdded:protected] => 
-                                    [basketItem:protected] => Bitrix\Sale\BasketItem Object
+                                )
+
+                            [eventName:protected] => 
+                            [collection:protected] => Bitrix\Sale\PropertyValueCollection Object
  *RECURSION*
+                            [internalIndex:protected] => 2
+                            [isClone:protected] => 
+                            [property:protected] => Bitrix\Sale\Property Object
+                                (
+                                    [fields:protected] => Array
+                                        (
+                                            [ID] => 28
+                                            [PERSON_TYPE_ID] => 2
+                                            [NAME] => Запрос на резерв принят
+                                            [TYPE] => Y/N
+                                            [REQUIRED] => N
+                                            [DEFAULT_VALUE] => N
+                                            [SORT] => 0
+                                            [USER_PROPS] => N
+                                            [IS_LOCATION] => N
+                                            [PROPS_GROUP_ID] => 4
+                                            [DESCRIPTION] => 
+                                            [IS_EMAIL] => N
+                                            [IS_PROFILE_NAME] => N
+                                            [IS_PAYER] => N
+                                            [IS_LOCATION4TAX] => N
+                                            [IS_FILTERED] => N
+                                            [CODE] => RESERVE_SUCCESS
+                                            [IS_ZIP] => N
+                                            [IS_PHONE] => N
+                                            [IS_ADDRESS] => N
+                                            [IS_ADDRESS_FROM] => N
+                                            [IS_ADDRESS_TO] => N
+                                            [ACTIVE] => Y
+                                            [UTIL] => Y
+                                            [INPUT_FIELD_LOCATION] => 0
+                                            [MULTIPLE] => N
+                                            [ENTITY_TYPE] => ORDER
+                                            [RELATION] => Array
+                                                (
+                                                )
+
+                                        )
+
+                                )
+
+                        )
+
+                    [3] => Bitrix\Sale\PropertyValue Object
+                        (
+                            [fields:protected] => Bitrix\Sale\Internals\Fields Object
+                                (
+                                    [values:protected] => Array
+                                        (
+                                            [ID] => 1871
+                                            [NAME] => Запрос на резерв
+                                            [VALUE] => N
+                                            [CODE] => REQUEST_TO_RESERVE
+                                            [ORDER_PROPS_ID] => 26
+                                        )
+
+                                    [changedValues:protected] => Array
+                                        (
+                                        )
+
+                                    [originalValues:Bitrix\Sale\Internals\Fields:private] => Array
+                                        (
+                                        )
+
+                                    [customFields:Bitrix\Sale\Internals\Fields:private] => Array
+                                        (
+                                        )
+
+                                    [isClone:protected] => 
+                                )
+
+                            [eventName:protected] => 
+                            [collection:protected] => Bitrix\Sale\PropertyValueCollection Object
+ *RECURSION*
+                            [internalIndex:protected] => 3
+                            [isClone:protected] => 
+                            [property:protected] => Bitrix\Sale\Property Object
+                                (
+                                    [fields:protected] => Array
+                                        (
+                                            [ID] => 26
+                                            [PERSON_TYPE_ID] => 2
+                                            [NAME] => Запрос на резерв
+                                            [TYPE] => Y/N
+                                            [REQUIRED] => N
+                                            [DEFAULT_VALUE] => N
+                                            [SORT] => 0
+                                            [USER_PROPS] => N
+                                            [IS_LOCATION] => N
+                                            [PROPS_GROUP_ID] => 3
+                                            [DESCRIPTION] => 
+                                            [IS_EMAIL] => N
+                                            [IS_PROFILE_NAME] => N
+                                            [IS_PAYER] => N
+                                            [IS_LOCATION4TAX] => N
+                                            [IS_FILTERED] => N
+                                            [CODE] => REQUEST_TO_RESERVE
+                                            [IS_ZIP] => N
+                                            [IS_PHONE] => N
+                                            [IS_ADDRESS] => N
+                                            [IS_ADDRESS_FROM] => N
+                                            [IS_ADDRESS_TO] => N
+                                            [ACTIVE] => Y
+                                            [UTIL] => Y
+                                            [INPUT_FIELD_LOCATION] => 0
+                                            [MULTIPLE] => N
+                                            [ENTITY_TYPE] => ORDER
+                                            [RELATION] => Array
+                                                (
+                                                )
+
+                                        )
+
+                                )
+
+                        )
+
+                    [4] => Bitrix\Sale\PropertyValue Object
+                        (
+                            [fields:protected] => Bitrix\Sale\Internals\Fields Object
+                                (
+                                    [values:protected] => Array
+                                        (
+                                            [ID] => 1872
+                                            [NAME] => Срок действия резерва
+                                            [VALUE] => 
+                                            [CODE] => END_DATE_RESERVE
+                                            [ORDER_PROPS_ID] => 23
+                                        )
+
+                                    [changedValues:protected] => Array
+                                        (
+                                        )
+
+                                    [originalValues:Bitrix\Sale\Internals\Fields:private] => Array
+                                        (
+                                        )
+
+                                    [customFields:Bitrix\Sale\Internals\Fields:private] => Array
+                                        (
+                                        )
+
+                                    [isClone:protected] => 
+                                )
+
+                            [eventName:protected] => 
+                            [collection:protected] => Bitrix\Sale\PropertyValueCollection Object
+ *RECURSION*
+                            [internalIndex:protected] => 4
+                            [isClone:protected] => 
+                            [property:protected] => Bitrix\Sale\Property Object
+                                (
+                                    [fields:protected] => Array
+                                        (
+                                            [ID] => 23
+                                            [PERSON_TYPE_ID] => 2
+                                            [NAME] => Срок действия резерва
+                                            [TYPE] => DATE
+                                            [REQUIRED] => N
+                                            [DEFAULT_VALUE] => 
+                                            [SORT] => 0
+                                            [USER_PROPS] => N
+                                            [IS_LOCATION] => N
+                                            [PROPS_GROUP_ID] => 4
+                                            [DESCRIPTION] => 
+                                            [IS_EMAIL] => N
+                                            [IS_PROFILE_NAME] => N
+                                            [IS_PAYER] => N
+                                            [IS_LOCATION4TAX] => N
+                                            [IS_FILTERED] => N
+                                            [CODE] => END_DATE_RESERVE
+                                            [IS_ZIP] => N
+                                            [IS_PHONE] => N
+                                            [IS_ADDRESS] => N
+                                            [IS_ADDRESS_FROM] => N
+                                            [IS_ADDRESS_TO] => N
+                                            [ACTIVE] => Y
+                                            [UTIL] => Y
+                                            [INPUT_FIELD_LOCATION] => 0
+                                            [MULTIPLE] => N
+                                            [ENTITY_TYPE] => ORDER
+                                            [TIME] => Y
+                                            [RELATION] => Array
+                                                (
+                                                )
+
+                                        )
+
+                                )
+
+                        )
+
+                    [5] => Bitrix\Sale\PropertyValue Object
+                        (
+                            [fields:protected] => Bitrix\Sale\Internals\Fields Object
+                                (
+                                    [values:protected] => Array
+                                        (
+                                            [ID] => 1873
+                                            [NAME] => Рекламный агент (не передается в Б24)
+                                            [VALUE] => N
+                                            [CODE] => ADVERSTERING_AGENT
+                                            [ORDER_PROPS_ID] => 22
+                                        )
+
+                                    [changedValues:protected] => Array
+                                        (
+                                        )
+
+                                    [originalValues:Bitrix\Sale\Internals\Fields:private] => Array
+                                        (
+                                        )
+
+                                    [customFields:Bitrix\Sale\Internals\Fields:private] => Array
+                                        (
+                                        )
+
+                                    [isClone:protected] => 
+                                )
+
+                            [eventName:protected] => 
+                            [collection:protected] => Bitrix\Sale\PropertyValueCollection Object
+ *RECURSION*
+                            [internalIndex:protected] => 5
+                            [isClone:protected] => 
+                            [property:protected] => Bitrix\Sale\Property Object
+                                (
+                                    [fields:protected] => Array
+                                        (
+                                            [ID] => 22
+                                            [PERSON_TYPE_ID] => 2
+                                            [NAME] => Рекламный агент (не передается в Б24)
+                                            [TYPE] => Y/N
+                                            [REQUIRED] => N
+                                            [DEFAULT_VALUE] => N
+                                            [SORT] => 0
+                                            [USER_PROPS] => Y
+                                            [IS_LOCATION] => N
+                                            [PROPS_GROUP_ID] => 4
+                                            [DESCRIPTION] => 
+                                            [IS_EMAIL] => N
+                                            [IS_PROFILE_NAME] => N
+                                            [IS_PAYER] => N
+                                            [IS_LOCATION4TAX] => N
+                                            [IS_FILTERED] => N
+                                            [CODE] => ADVERSTERING_AGENT
+                                            [IS_ZIP] => N
+                                            [IS_PHONE] => N
+                                            [IS_ADDRESS] => N
+                                            [IS_ADDRESS_FROM] => N
+                                            [IS_ADDRESS_TO] => N
+                                            [ACTIVE] => Y
+                                            [UTIL] => Y
+                                            [INPUT_FIELD_LOCATION] => 0
+                                            [MULTIPLE] => N
+                                            [ENTITY_TYPE] => ORDER
+                                            [RELATION] => Array
+                                                (
+                                                )
+
+                                        )
+
+                                )
+
+                        )
+
+                    [6] => Bitrix\Sale\PropertyValue Object
+                        (
+                            [fields:protected] => Bitrix\Sale\Internals\Fields Object
+                                (
+                                    [values:protected] => Array
+                                        (
+                                            [ID] => 1874
+                                            [NAME] => Название компании
+                                            [VALUE] => Название юридического лица компании
+                                            [CODE] => COMPANY
+                                            [ORDER_PROPS_ID] => 8
+                                        )
+
+                                    [changedValues:protected] => Array
+                                        (
+                                        )
+
+                                    [originalValues:Bitrix\Sale\Internals\Fields:private] => Array
+                                        (
+                                        )
+
+                                    [customFields:Bitrix\Sale\Internals\Fields:private] => Array
+                                        (
+                                        )
+
+                                    [isClone:protected] => 
+                                )
+
+                            [eventName:protected] => 
+                            [collection:protected] => Bitrix\Sale\PropertyValueCollection Object
+ *RECURSION*
+                            [internalIndex:protected] => 6
+                            [isClone:protected] => 
+                            [property:protected] => Bitrix\Sale\Property Object
+                                (
+                                    [fields:protected] => Array
+                                        (
+                                            [ID] => 8
+                                            [PERSON_TYPE_ID] => 2
+                                            [NAME] => Название компании
+                                            [TYPE] => STRING
+                                            [REQUIRED] => Y
+                                            [DEFAULT_VALUE] => 
+                                            [SORT] => 200
+                                            [USER_PROPS] => Y
+                                            [IS_LOCATION] => N
+                                            [PROPS_GROUP_ID] => 3
+                                            [DESCRIPTION] => 
+                                            [IS_EMAIL] => N
+                                            [IS_PROFILE_NAME] => Y
+                                            [IS_PAYER] => N
+                                            [IS_LOCATION4TAX] => N
+                                            [IS_FILTERED] => Y
+                                            [CODE] => COMPANY
+                                            [IS_ZIP] => N
+                                            [IS_PHONE] => N
+                                            [IS_ADDRESS] => N
+                                            [IS_ADDRESS_FROM] => N
+                                            [IS_ADDRESS_TO] => N
+                                            [ACTIVE] => Y
+                                            [UTIL] => N
+                                            [INPUT_FIELD_LOCATION] => 0
+                                            [MULTIPLE] => N
+                                            [ENTITY_TYPE] => ORDER
+                                            [SIZE] => 40
+                                            [RELATION] => Array
+                                                (
+                                                )
+
+                                        )
+
+                                )
+
+                        )
+
+                    [7] => Bitrix\Sale\PropertyValue Object
+                        (
+                            [fields:protected] => Bitrix\Sale\Internals\Fields Object
+                                (
+                                    [values:protected] => Array
+                                        (
+                                            [ID] => 1875
+                                            [NAME] => ИНН
+                                            [VALUE] => ИНН организации
+                                            [CODE] => INN
+                                            [ORDER_PROPS_ID] => 10
+                                        )
+
+                                    [changedValues:protected] => Array
+                                        (
+                                        )
+
+                                    [originalValues:Bitrix\Sale\Internals\Fields:private] => Array
+                                        (
+                                        )
+
+                                    [customFields:Bitrix\Sale\Internals\Fields:private] => Array
+                                        (
+                                        )
+
+                                    [isClone:protected] => 
+                                )
+
+                            [eventName:protected] => 
+                            [collection:protected] => Bitrix\Sale\PropertyValueCollection Object
+ *RECURSION*
+                            [internalIndex:protected] => 7
+                            [isClone:protected] => 
+                            [property:protected] => Bitrix\Sale\Property Object
+                                (
+                                    [fields:protected] => Array
+                                        (
+                                            [ID] => 10
+                                            [PERSON_TYPE_ID] => 2
+                                            [NAME] => ИНН
+                                            [TYPE] => STRING
+                                            [REQUIRED] => N
+                                            [DEFAULT_VALUE] => 
+                                            [SORT] => 220
+                                            [USER_PROPS] => Y
+                                            [IS_LOCATION] => N
+                                            [PROPS_GROUP_ID] => 3
+                                            [DESCRIPTION] => 
+                                            [IS_EMAIL] => N
+                                            [IS_PROFILE_NAME] => N
+                                            [IS_PAYER] => N
+                                            [IS_LOCATION4TAX] => N
+                                            [IS_FILTERED] => N
+                                            [CODE] => INN
+                                            [IS_ZIP] => N
+                                            [IS_PHONE] => N
+                                            [IS_ADDRESS] => N
+                                            [IS_ADDRESS_FROM] => N
+                                            [IS_ADDRESS_TO] => N
+                                            [ACTIVE] => Y
+                                            [UTIL] => N
+                                            [INPUT_FIELD_LOCATION] => 0
+                                            [MULTIPLE] => N
+                                            [ENTITY_TYPE] => ORDER
+                                            [RELATION] => Array
+                                                (
+                                                )
+
+                                        )
+
+                                )
+
+                        )
+
+                    [8] => Bitrix\Sale\PropertyValue Object
+                        (
+                            [fields:protected] => Bitrix\Sale\Internals\Fields Object
+                                (
+                                    [values:protected] => Array
+                                        (
+                                            [ID] => 1876
+                                            [NAME] => Контактное лицо
+                                            [VALUE] => Андрей Егоров
+                                            [CODE] => CONTACT_PERSON
+                                            [ORDER_PROPS_ID] => 12
+                                        )
+
+                                    [changedValues:protected] => Array
+                                        (
+                                        )
+
+                                    [originalValues:Bitrix\Sale\Internals\Fields:private] => Array
+                                        (
+                                        )
+
+                                    [customFields:Bitrix\Sale\Internals\Fields:private] => Array
+                                        (
+                                        )
+
+                                    [isClone:protected] => 
+                                )
+
+                            [eventName:protected] => 
+                            [collection:protected] => Bitrix\Sale\PropertyValueCollection Object
+ *RECURSION*
+                            [internalIndex:protected] => 8
+                            [isClone:protected] => 
+                            [property:protected] => Bitrix\Sale\Property Object
+                                (
+                                    [fields:protected] => Array
+                                        (
+                                            [ID] => 12
+                                            [PERSON_TYPE_ID] => 2
+                                            [NAME] => Контактное лицо
+                                            [TYPE] => STRING
+                                            [REQUIRED] => Y
+                                            [DEFAULT_VALUE] => 
+                                            [SORT] => 240
+                                            [USER_PROPS] => Y
+                                            [IS_LOCATION] => N
+                                            [PROPS_GROUP_ID] => 4
+                                            [DESCRIPTION] => 
+                                            [IS_EMAIL] => N
+                                            [IS_PROFILE_NAME] => N
+                                            [IS_PAYER] => Y
+                                            [IS_LOCATION4TAX] => N
+                                            [IS_FILTERED] => N
+                                            [CODE] => CONTACT_PERSON
+                                            [IS_ZIP] => N
+                                            [IS_PHONE] => N
+                                            [IS_ADDRESS] => N
+                                            [IS_ADDRESS_FROM] => N
+                                            [IS_ADDRESS_TO] => N
+                                            [ACTIVE] => Y
+                                            [UTIL] => N
+                                            [INPUT_FIELD_LOCATION] => 0
+                                            [MULTIPLE] => N
+                                            [ENTITY_TYPE] => ORDER
+                                            [RELATION] => Array
+                                                (
+                                                )
+
+                                        )
+
+                                )
+
+                        )
+
+                    [9] => Bitrix\Sale\PropertyValue Object
+                        (
+                            [fields:protected] => Bitrix\Sale\Internals\Fields Object
+                                (
+                                    [values:protected] => Array
+                                        (
+                                            [ID] => 1877
+                                            [NAME] => E-Mail
+                                            [VALUE] => ea@on-lineservice.ru
+                                            [CODE] => EMAIL
+                                            [ORDER_PROPS_ID] => 13
+                                        )
+
+                                    [changedValues:protected] => Array
+                                        (
+                                        )
+
+                                    [originalValues:Bitrix\Sale\Internals\Fields:private] => Array
+                                        (
+                                        )
+
+                                    [customFields:Bitrix\Sale\Internals\Fields:private] => Array
+                                        (
+                                        )
+
+                                    [isClone:protected] => 
+                                )
+
+                            [eventName:protected] => 
+                            [collection:protected] => Bitrix\Sale\PropertyValueCollection Object
+ *RECURSION*
+                            [internalIndex:protected] => 9
+                            [isClone:protected] => 
+                            [property:protected] => Bitrix\Sale\Property Object
+                                (
+                                    [fields:protected] => Array
+                                        (
+                                            [ID] => 13
+                                            [PERSON_TYPE_ID] => 2
+                                            [NAME] => E-Mail
+                                            [TYPE] => STRING
+                                            [REQUIRED] => Y
+                                            [DEFAULT_VALUE] => 
+                                            [SORT] => 250
+                                            [USER_PROPS] => Y
+                                            [IS_LOCATION] => N
+                                            [PROPS_GROUP_ID] => 4
+                                            [DESCRIPTION] => 
+                                            [IS_EMAIL] => Y
+                                            [IS_PROFILE_NAME] => N
+                                            [IS_PAYER] => N
+                                            [IS_LOCATION4TAX] => N
+                                            [IS_FILTERED] => N
+                                            [CODE] => EMAIL
+                                            [IS_ZIP] => N
+                                            [IS_PHONE] => N
+                                            [IS_ADDRESS] => N
+                                            [IS_ADDRESS_FROM] => N
+                                            [IS_ADDRESS_TO] => N
+                                            [ACTIVE] => Y
+                                            [UTIL] => N
+                                            [INPUT_FIELD_LOCATION] => 0
+                                            [MULTIPLE] => N
+                                            [ENTITY_TYPE] => ORDER
+                                            [SIZE] => 40
+                                            [RELATION] => Array
+                                                (
+                                                )
+
+                                        )
+
+                                )
+
+                        )
+
+                    [10] => Bitrix\Sale\PropertyValue Object
+                        (
+                            [fields:protected] => Bitrix\Sale\Internals\Fields Object
+                                (
+                                    [values:protected] => Array
+                                        (
+                                            [ID] => 1878
+                                            [NAME] => Телефон
+                                            [VALUE] => 79178085003
+                                            [CODE] => PHONE
+                                            [ORDER_PROPS_ID] => 14
+                                        )
+
+                                    [changedValues:protected] => Array
+                                        (
+                                        )
+
+                                    [originalValues:Bitrix\Sale\Internals\Fields:private] => Array
+                                        (
+                                        )
+
+                                    [customFields:Bitrix\Sale\Internals\Fields:private] => Array
+                                        (
+                                        )
+
+                                    [isClone:protected] => 
+                                )
+
+                            [eventName:protected] => 
+                            [collection:protected] => Bitrix\Sale\PropertyValueCollection Object
+ *RECURSION*
+                            [internalIndex:protected] => 10
+                            [isClone:protected] => 
+                            [property:protected] => Bitrix\Sale\Property Object
+                                (
+                                    [fields:protected] => Array
+                                        (
+                                            [ID] => 14
+                                            [PERSON_TYPE_ID] => 2
+                                            [NAME] => Телефон
+                                            [TYPE] => STRING
+                                            [REQUIRED] => N
+                                            [DEFAULT_VALUE] => 
+                                            [SORT] => 260
+                                            [USER_PROPS] => Y
+                                            [IS_LOCATION] => N
+                                            [PROPS_GROUP_ID] => 4
+                                            [DESCRIPTION] => 
+                                            [IS_EMAIL] => N
+                                            [IS_PROFILE_NAME] => N
+                                            [IS_PAYER] => N
+                                            [IS_LOCATION4TAX] => N
+                                            [IS_FILTERED] => N
+                                            [CODE] => PHONE
+                                            [IS_ZIP] => N
+                                            [IS_PHONE] => Y
+                                            [IS_ADDRESS] => N
+                                            [IS_ADDRESS_FROM] => N
+                                            [IS_ADDRESS_TO] => N
+                                            [ACTIVE] => Y
+                                            [UTIL] => N
+                                            [INPUT_FIELD_LOCATION] => 0
+                                            [MULTIPLE] => N
+                                            [ENTITY_TYPE] => ORDER
+                                            [RELATION] => Array
+                                                (
+                                                )
+
+                                        )
+
+                                )
+
+                        )
+
+                    [11] => Bitrix\Sale\PropertyValue Object
+                        (
+                            [fields:protected] => Bitrix\Sale\Internals\Fields Object
+                                (
+                                    [values:protected] => Array
+                                        (
+                                            [ID] => 1879
+                                            [NAME] => Адрес доставки
+                                            [VALUE] => test
+                                            [CODE] => ADDRESS
+                                            [ORDER_PROPS_ID] => 19
+                                        )
+
+                                    [changedValues:protected] => Array
+                                        (
+                                        )
+
+                                    [originalValues:Bitrix\Sale\Internals\Fields:private] => Array
+                                        (
+                                        )
+
+                                    [customFields:Bitrix\Sale\Internals\Fields:private] => Array
+                                        (
+                                        )
+
+                                    [isClone:protected] => 
+                                )
+
+                            [eventName:protected] => 
+                            [collection:protected] => Bitrix\Sale\PropertyValueCollection Object
+ *RECURSION*
+                            [internalIndex:protected] => 11
+                            [isClone:protected] => 
+                            [property:protected] => Bitrix\Sale\Property Object
+                                (
+                                    [fields:protected] => Array
+                                        (
+                                            [ID] => 19
+                                            [PERSON_TYPE_ID] => 2
+                                            [NAME] => Адрес доставки
+                                            [TYPE] => STRING
+                                            [REQUIRED] => Y
+                                            [DEFAULT_VALUE] => 
+                                            [SORT] => 300
+                                            [USER_PROPS] => Y
+                                            [IS_LOCATION] => N
+                                            [PROPS_GROUP_ID] => 4
+                                            [DESCRIPTION] => 
+                                            [IS_EMAIL] => N
+                                            [IS_PROFILE_NAME] => N
+                                            [IS_PAYER] => N
+                                            [IS_LOCATION4TAX] => N
+                                            [IS_FILTERED] => N
+                                            [CODE] => ADDRESS
+                                            [IS_ZIP] => N
+                                            [IS_PHONE] => N
+                                            [IS_ADDRESS] => Y
+                                            [IS_ADDRESS_FROM] => N
+                                            [IS_ADDRESS_TO] => N
+                                            [ACTIVE] => Y
+                                            [UTIL] => N
+                                            [INPUT_FIELD_LOCATION] => 0
+                                            [MULTIPLE] => N
+                                            [ENTITY_TYPE] => ORDER
+                                            [MULTILINE] => Y
+                                            [COLS] => 30
+                                            [ROWS] => 10
+                                            [RELATION] => Array
+                                                (
+                                                )
+
+                                        )
+
                                 )
 
                         )
 
                 )
 
-            [index:Bitrix\Sale\Internals\EntityCollection:private] => 2
+            [index:Bitrix\Sale\Internals\EntityCollection:private] => 11
             [isClone:protected] => 
             [anyItemDeleted:protected] => 
             [anyItemAdded:protected] => 
-            [siteId:protected] => s1
-            [fUserId:protected] => 645466
             [order:protected] => Bitrix\Sale\Order Object
  *RECURSION*
-            [basketItemIndexMap:protected] => Array
-                (
-                    [2562] => 0
-                    [2564] => 1
-                    [2563] => 2
-                )
-
-            [maxItemSort:protected] => 
-            [isLoadForFUserId:Bitrix\Sale\BasketBase:private] => 
-            [isSaveExecuting:protected] => 
         )
 
-    [propertyCollection:protected] => 
-    [discount:protected] => 
-    [tax:protected] => 
-    [internalId:protected] => 1
+    [discount:protected] => Bitrix\Sale\Discount Object
+        (
+            [isClone:protected] => 
+            [orderRefresh:protected] => 
+            [newOrder:protected] => 
+            [useMode:protected] => 2
+            [context:protected] => Bitrix\Sale\Discount\Context\User Object
+                (
+                    [userId:protected] => 144
+                    [userGroups:protected] => Array
+                        (
+                            [0] => 2
+                            [1] => 12
+                            [2] => 13
+                        )
+
+                    [userGroupsHash:protected] => ab08f81ac6cabde6d1d5b1d37c26dcc7
+                )
+
+            [order:protected] => Bitrix\Sale\Order Object
+ *RECURSION*
+            [executeModuleFilter:protected] => Array
+                (
+                    [0] => all
+                    [1] => sale
+                    [2] => catalog
+                )
+
+            [loadedModules:protected] => Array
+                (
+                )
+
+            [discountIds:protected] => 
+            [saleDiscountCache:protected] => Array
+                (
+                )
+
+            [saleDiscountCacheKey:protected] => 
+            [basket:protected] => 
+            [orderData:protected] => Array
+                (
+                    [ID] => 162
+                    [USER_ID] => 144
+                    [USER_GROUPS] => Array
+                        (
+                            [0] => 2
+                            [1] => 12
+                            [2] => 13
+                        )
+
+                    [SITE_ID] => s1
+                    [LID] => s1
+                    [ORDER_PRICE] => 38255
+                    [ORDER_WEIGHT] => 0
+                    [CURRENCY] => RUB
+                    [PERSON_TYPE_ID] => 2
+                    [RECURRING_ID] => 
+                    [BASKET_ITEMS] => Array
+                        (
+                            [2656] => Array
+                                (
+                                    [ID] => 2656
+                                    [LID] => s1
+                                    [MODULE] => catalog
+                                    [PRODUCT_ID] => 123927
+                                    [QUANTITY] => 20.0000
+                                    [WEIGHT] => 0.00
+                                    [DELAY] => N
+                                    [CAN_BUY] => Y
+                                    [PRICE] => 1791
+                                    [CUSTOM_PRICE] => N
+                                    [BASE_PRICE] => 1791
+                                    [PRODUCT_PRICE_ID] => 177758
+                                    [PRICE_TYPE_ID] => 3
+                                    [CURRENCY] => RUB
+                                    [BARCODE_MULTI] => N
+                                    [RESERVED] => N
+                                    [RESERVE_QUANTITY] => 
+                                    [NAME] => Противоштормовой зонт с двойным куполом Yoliba (черный)
+                                    [CATALOG_XML_ID] => 4ee13222-c329-4bfa-b3b0-7f125cbbce56#
+                                    [VAT_RATE] => 0.2
+                                    [NOTES] => Рекламная цена
+                                    [DISCOUNT_PRICE] => 0
+                                    [PRODUCT_PROVIDER_CLASS] => \Bitrix\Catalog\Product\CatalogProvider
+                                    [CALLBACK_FUNC] => 
+                                    [ORDER_CALLBACK_FUNC] => 
+                                    [PAY_CALLBACK_FUNC] => 
+                                    [CANCEL_CALLBACK_FUNC] => 
+                                    [DIMENSIONS] => a:3:{s:5:"WIDTH";N;s:6:"HEIGHT";N;s:6:"LENGTH";N;}
+                                    [TYPE] => 
+                                    [SET_PARENT_ID] => 
+                                    [DETAIL_PAGE_URL] => /catalog/yo_zonty/protivoshtormovoy_zont_s_dvoynym_kupolom_yoliba_tsvet_chyernyy/
+                                    [FUSER_ID] => 887128
+                                    [MEASURE_CODE] => 796
+                                    [MEASURE_NAME] => шт
+                                    [ORDER_ID] => 162
+                                    [PRODUCT_XML_ID] => f7afae89-686e-11f0-89c1-005056a08cd2#f8594dc7-686e-11f0-89c1-005056a08cd2
+                                    [SUBSCRIBE] => N
+                                    [RECOMMENDATION] => 
+                                    [VAT_INCLUDED] => Y
+                                    [SORT] => 100
+                                    [DISCOUNT_NAME] => 
+                                    [DISCOUNT_VALUE] => 
+                                    [DISCOUNT_COUPON] => 
+                                    [XML_ID] => bx_6893888d3b0b6
+                                    [MARKING_CODE_GROUP] => 
+                                    [PROPERTIES] => Array
+                                        (
+                                            [CATALOG.XML_ID] => Array
+                                                (
+                                                    [CODE] => CATALOG.XML_ID
+                                                    [VALUE] => 4ee13222-c329-4bfa-b3b0-7f125cbbce56#
+                                                    [NAME] => Catalog XML_ID
+                                                    [SORT] => 100
+                                                    [ID] => 1260
+                                                )
+
+                                            [PRODUCT.XML_ID] => Array
+                                                (
+                                                    [CODE] => PRODUCT.XML_ID
+                                                    [VALUE] => f7afae89-686e-11f0-89c1-005056a08cd2#f8594dc7-686e-11f0-89c1-005056a08cd2
+                                                    [NAME] => Product XML_ID
+                                                    [SORT] => 100
+                                                    [ID] => 1261
+                                                )
+
+                                        )
+
+                                    [ACTION_APPLIED] => N
+                                )
+
+                            [2657] => Array
+                                (
+                                    [ID] => 2657
+                                    [LID] => s1
+                                    [MODULE] => catalog
+                                    [PRODUCT_ID] => 123960
+                                    [QUANTITY] => 1.0000
+                                    [WEIGHT] => 0.00
+                                    [DELAY] => N
+                                    [CAN_BUY] => Y
+                                    [PRICE] => 1935
+                                    [CUSTOM_PRICE] => N
+                                    [BASE_PRICE] => 1935
+                                    [PRODUCT_PRICE_ID] => 177852
+                                    [PRICE_TYPE_ID] => 3
+                                    [CURRENCY] => RUB
+                                    [BARCODE_MULTI] => N
+                                    [RESERVED] => N
+                                    [RESERVE_QUANTITY] => 
+                                    [NAME] => Зонт- трость с плечевым ремешком (черный)
+                                    [CATALOG_XML_ID] => 4ee13222-c329-4bfa-b3b0-7f125cbbce56#
+                                    [VAT_RATE] => 0.2
+                                    [NOTES] => Рекламная цена
+                                    [DISCOUNT_PRICE] => 0
+                                    [PRODUCT_PROVIDER_CLASS] => \Bitrix\Catalog\Product\CatalogProvider
+                                    [CALLBACK_FUNC] => 
+                                    [ORDER_CALLBACK_FUNC] => 
+                                    [PAY_CALLBACK_FUNC] => 
+                                    [CANCEL_CALLBACK_FUNC] => 
+                                    [DIMENSIONS] => a:3:{s:5:"WIDTH";N;s:6:"HEIGHT";N;s:6:"LENGTH";N;}
+                                    [TYPE] => 
+                                    [SET_PARENT_ID] => 
+                                    [DETAIL_PAGE_URL] => /catalog/yo_zonty/zont_trost_s_plechevym_remeshkom_yoliba_seryy/
+                                    [FUSER_ID] => 887128
+                                    [MEASURE_CODE] => 796
+                                    [MEASURE_NAME] => шт
+                                    [ORDER_ID] => 162
+                                    [PRODUCT_XML_ID] => 382dfb83-60c1-11f0-89c1-005056a08cd2#1fdd4f09-6b91-11f0-89c1-005056a08cd2
+                                    [SUBSCRIBE] => N
+                                    [RECOMMENDATION] => 
+                                    [VAT_INCLUDED] => Y
+                                    [SORT] => 200
+                                    [DISCOUNT_NAME] => 
+                                    [DISCOUNT_VALUE] => 
+                                    [DISCOUNT_COUPON] => 
+                                    [XML_ID] => bx_6893888d98160
+                                    [MARKING_CODE_GROUP] => 
+                                    [PROPERTIES] => Array
+                                        (
+                                            [CATALOG.XML_ID] => Array
+                                                (
+                                                    [CODE] => CATALOG.XML_ID
+                                                    [VALUE] => 4ee13222-c329-4bfa-b3b0-7f125cbbce56#
+                                                    [NAME] => Catalog XML_ID
+                                                    [SORT] => 100
+                                                    [ID] => 1262
+                                                )
+
+                                            [PRODUCT.XML_ID] => Array
+                                                (
+                                                    [CODE] => PRODUCT.XML_ID
+                                                    [VALUE] => 382dfb83-60c1-11f0-89c1-005056a08cd2#1fdd4f09-6b91-11f0-89c1-005056a08cd2
+                                                    [NAME] => Product XML_ID
+                                                    [SORT] => 100
+                                                    [ID] => 1263
+                                                )
+
+                                        )
+
+                                    [ACTION_APPLIED] => N
+                                )
+
+                        )
+
+                    [ORDER_PROP] => Array
+                        (
+                            [34] => 
+                            [30] => N
+                            [28] => N
+                            [26] => N
+                            [23] => 
+                            [22] => N
+                            [8] => Название юридического лица компании
+                            [10] => ИНН организации
+                            [12] => Андрей Егоров
+                            [13] => ea@on-lineservice.ru
+                            [14] => 79178085003
+                            [19] => test
+                        )
+
+                    [DELIVERY_LOCATION] => 
+                    [USER_EMAIL] => ea@on-lineservice.ru
+                    [PAYER_NAME] => Андрей Егоров
+                    [PROFILE_NAME] => Название юридического лица компании
+                    [DELIVERY_LOCATION_ZIP] => 
+                    [BASE_PRICE_DELIVERY] => 500
+                    [PRICE_DELIVERY] => 500
+                    [PRICE_DELIVERY_DIFF] => 0
+                    [DELIVERY_ID] => 1
+                    [CUSTOM_PRICE_DELIVERY] => N
+                    [SHIPMENT_CODE] => 300
+                    [SHIPMENT_ID] => 300
+                    [PAY_SYSTEM_ID] => 10
+                    [USE_BASE_PRICE] => N
+                )
+
+            [valid:protected] => 1
+            [saleOptions:protected] => Array
+                (
+                    [USE_BASE_PRICE] => N
+                    [SALE_DISCOUNT_ONLY] => Y
+                    [APPLY_MODE] => 0
+                )
+
+            [basketDiscountList:protected] => Array
+                (
+                )
+
+            [basketItemsData:protected] => Array
+                (
+                    [2656] => Array
+                        (
+                            [BASE_PRICE_ROUND_RULE] => Array
+                                (
+                                )
+
+                        )
+
+                    [2657] => Array
+                        (
+                            [BASE_PRICE_ROUND_RULE] => Array
+                                (
+                                )
+
+                        )
+
+                )
+
+            [discountsCache:protected] => Array
+                (
+                )
+
+            [couponsCache:protected] => Array
+                (
+                )
+
+            [discountResult:protected] => Array
+                (
+                    [APPLY_BLOCKS] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [BASKET] => Array
+                                        (
+                                        )
+
+                                    [BASKET_ROUND] => Array
+                                        (
+                                        )
+
+                                    [ORDER] => Array
+                                        (
+                                        )
+
+                                )
+
+                        )
+
+                    [DISCOUNT_LIST] => Array
+                        (
+                        )
+
+                    [COUPON_LIST] => Array
+                        (
+                        )
+
+                    [DELIVERY_LIST] => Array
+                        (
+                        )
+
+                    [SHIPMENT_LIST] => Array
+                        (
+                        )
+
+                )
+
+            [discountResultCounter:protected] => 0
+            [applyResult:protected] => Array
+                (
+                )
+
+            [discountStoredActionData:protected] => Array
+                (
+                )
+
+            [entityList:protected] => Array
+                (
+                )
+
+            [entityResultCache:protected] => Array
+                (
+                )
+
+            [currentStep:protected] => Array
+                (
+                )
+
+            [forwardBasketTable:protected] => Array
+                (
+                    [2656] => 2656
+                    [2657] => 2657
+                )
+
+            [reverseBasketTable:protected] => Array
+                (
+                    [2656] => 2656
+                    [2657] => 2657
+                )
+
+            [roundApplyMode:protected] => 4
+            [roundApplyConfig:protected] => Array
+                (
+                )
+
+            [fullDiscountList:protected] => Array
+                (
+                )
+
+            [shipment:protected] => Bitrix\Sale\Shipment Object
+                (
+                    [fields:protected] => Bitrix\Sale\Internals\Fields Object
+                        (
+                            [values:protected] => Array
+                                (
+                                    [ID] => 300
+                                    [ORDER_ID] => 162
+                                    [ACCOUNT_NUMBER] => 162/2
+                                    [DATE_INSERT] => Bitrix\Main\Type\DateTime Object
+                                        (
+                                            [value:protected] => DateTime Object
+                                                (
+                                                    [date] => 2025-08-06 21:56:45.000000
+                                                    [timezone_type] => 3
+                                                    [timezone] => Europe/Moscow
+                                                )
+
+                                            [userTimeEnabled:protected] => 1
+                                        )
+
+                                    [DATE_UPDATE] => Bitrix\Main\Type\DateTime Object
+                                        (
+                                            [value:protected] => DateTime Object
+                                                (
+                                                    [date] => 2025-08-06 21:56:45.000000
+                                                    [timezone_type] => 3
+                                                    [timezone] => Europe/Moscow
+                                                )
+
+                                            [userTimeEnabled:protected] => 1
+                                        )
+
+                                    [STATUS_ID] => DN
+                                    [DELIVERY_LOCATION] => 
+                                    [BASE_PRICE_DELIVERY] => 500
+                                    [PRICE_DELIVERY] => 500
+                                    [WEIGHT] => 0.0000
+                                    [CUSTOM_PRICE_DELIVERY] => N
+                                    [CURRENCY] => RUB
+                                    [DISCOUNT_PRICE] => 0
+                                    [ALLOW_DELIVERY] => N
+                                    [DATE_ALLOW_DELIVERY] => 
+                                    [EMP_ALLOW_DELIVERY_ID] => 
+                                    [DEDUCTED] => N
+                                    [DATE_DEDUCTED] => 
+                                    [EMP_DEDUCTED_ID] => 
+                                    [REASON_UNDO_DEDUCTED] => 
+                                    [RESERVED] => N
+                                    [DELIVERY_ID] => 1
+                                    [DELIVERY_DOC_NUM] => 
+                                    [DELIVERY_DOC_DATE] => 
+                                    [TRACKING_NUMBER] => 
+                                    [TRACKING_STATUS] => 
+                                    [TRACKING_DESCRIPTION] => 
+                                    [TRACKING_LAST_CHECK] => 
+                                    [TRACKING_LAST_CHANGE] => 
+                                    [XML_ID] => bx_6893a56d7da56
+                                    [PARAMS] => 
+                                    [DELIVERY_NAME] => Доставка курьером
+                                    [CANCELED] => N
+                                    [DATE_CANCELED] => 
+                                    [EMP_CANCELED_ID] => 
+                                    [REASON_CANCELED] => 
+                                    [MARKED] => N
+                                    [DATE_MARKED] => 
+                                    [EMP_MARKED_ID] => 
+                                    [REASON_MARKED] => 
+                                    [SYSTEM] => N
+                                    [RESPONSIBLE_ID] => 
+                                    [EMP_RESPONSIBLE_ID] => 
+                                    [DATE_RESPONSIBLE_ID] => 
+                                    [COMMENTS] => 
+                                    [COMPANY_ID] => 0
+                                    [UPDATED_1C] => N
+                                    [ID_1C] => 
+                                    [VERSION_1C] => 
+                                    [EXTERNAL_DELIVERY] => N
+                                )
+
+                            [changedValues:protected] => Array
+                                (
+                                )
+
+                            [originalValues:Bitrix\Sale\Internals\Fields:private] => Array
+                                (
+                                )
+
+                            [customFields:Bitrix\Sale\Internals\Fields:private] => Array
+                                (
+                                )
+
+                            [isClone:protected] => 
+                        )
+
+                    [eventName:protected] => 
+                    [collection:protected] => Bitrix\Sale\ShipmentCollection Object
+                        (
+                            [collection:protected] => Array
+                                (
+                                    [0] => Bitrix\Sale\Shipment Object
+ *RECURSION*
+                                    [1] => Bitrix\Sale\Shipment Object
+                                        (
+                                            [fields:protected] => Bitrix\Sale\Internals\Fields Object
+                                                (
+                                                    [values:protected] => Array
+                                                        (
+                                                            [ID] => 299
+                                                            [ORDER_ID] => 162
+                                                            [ACCOUNT_NUMBER] => 162/1
+                                                            [DATE_INSERT] => Bitrix\Main\Type\DateTime Object
+                                                                (
+                                                                    [value:protected] => DateTime Object
+                                                                        (
+                                                                            [date] => 2025-08-06 21:56:45.000000
+                                                                            [timezone_type] => 3
+                                                                            [timezone] => Europe/Moscow
+                                                                        )
+
+                                                                    [userTimeEnabled:protected] => 1
+                                                                )
+
+                                                            [DATE_UPDATE] => 
+                                                            [STATUS_ID] => DN
+                                                            [DELIVERY_LOCATION] => 
+                                                            [BASE_PRICE_DELIVERY] => 0
+                                                            [PRICE_DELIVERY] => 0
+                                                            [WEIGHT] => 0.0000
+                                                            [CUSTOM_PRICE_DELIVERY] => N
+                                                            [CURRENCY] => 
+                                                            [DISCOUNT_PRICE] => 0
+                                                            [ALLOW_DELIVERY] => N
+                                                            [DATE_ALLOW_DELIVERY] => 
+                                                            [EMP_ALLOW_DELIVERY_ID] => 
+                                                            [DEDUCTED] => N
+                                                            [DATE_DEDUCTED] => 
+                                                            [EMP_DEDUCTED_ID] => 
+                                                            [REASON_UNDO_DEDUCTED] => 
+                                                            [RESERVED] => N
+                                                            [DELIVERY_ID] => 1
+                                                            [DELIVERY_DOC_NUM] => 
+                                                            [DELIVERY_DOC_DATE] => 
+                                                            [TRACKING_NUMBER] => 
+                                                            [TRACKING_STATUS] => 
+                                                            [TRACKING_DESCRIPTION] => 
+                                                            [TRACKING_LAST_CHECK] => 
+                                                            [TRACKING_LAST_CHANGE] => 
+                                                            [XML_ID] => bx_6893a56d66a9c
+                                                            [PARAMS] => 
+                                                            [DELIVERY_NAME] => Доставка курьером
+                                                            [CANCELED] => N
+                                                            [DATE_CANCELED] => 
+                                                            [EMP_CANCELED_ID] => 
+                                                            [REASON_CANCELED] => 
+                                                            [MARKED] => N
+                                                            [DATE_MARKED] => 
+                                                            [EMP_MARKED_ID] => 
+                                                            [REASON_MARKED] => 
+                                                            [SYSTEM] => Y
+                                                            [RESPONSIBLE_ID] => 
+                                                            [EMP_RESPONSIBLE_ID] => 
+                                                            [DATE_RESPONSIBLE_ID] => 
+                                                            [COMMENTS] => 
+                                                            [COMPANY_ID] => 
+                                                            [UPDATED_1C] => N
+                                                            [ID_1C] => 
+                                                            [VERSION_1C] => 
+                                                            [EXTERNAL_DELIVERY] => N
+                                                        )
+
+                                                    [changedValues:protected] => Array
+                                                        (
+                                                        )
+
+                                                    [originalValues:Bitrix\Sale\Internals\Fields:private] => Array
+                                                        (
+                                                        )
+
+                                                    [customFields:Bitrix\Sale\Internals\Fields:private] => Array
+                                                        (
+                                                        )
+
+                                                    [isClone:protected] => 
+                                                )
+
+                                            [eventName:protected] => 
+                                            [collection:protected] => Bitrix\Sale\ShipmentCollection Object
+ *RECURSION*
+                                            [internalIndex:protected] => 1
+                                            [isClone:protected] => 
+                                            [shipmentItemCollection:protected] => 
+                                            [service:protected] => Bitrix\Sale\Delivery\Services\Configurable Object
+                                                (
+                                                    [handlerCode:protected] => BITRIX_CONFIGURABLE
+                                                    [id:protected] => 1
+                                                    [name:protected] => Доставка курьером
+                                                    [code:protected] => 1
+                                                    [vatId:protected] => 0
+                                                    [sort:protected] => 100
+                                                    [logotip:protected] => 784
+                                                    [parentId:protected] => 0
+                                                    [currency:protected] => RUB
+                                                    [active:protected] => 1
+                                                    [description:protected] => Доставка осуществляется в течение дня в удобное для вас время.
+                                                    [config:protected] => Array
+                                                        (
+                                                            [MAIN] => Array
+                                                                (
+                                                                    [CURRENCY] => RUB
+                                                                    [PRICE] => 500
+                                                                    [PERIOD] => Array
+                                                                        (
+                                                                            [FROM] => 0
+                                                                            [TO] => 0
+                                                                            [TYPE] => D
+                                                                        )
+
+                                                                )
+
+                                                        )
+
+                                                    [restricted:protected] => 
+                                                    [trackingClass:protected] => 
+                                                    [deliveryRequestHandler:protected] => 
+                                                    [extraServices:protected] => Bitrix\Sale\Delivery\ExtraServices\Manager Object
+                                                        (
+                                                            [items:protected] => Array
+                                                                (
+                                                                )
+
+                                                            [isClone:protected] => 
+                                                        )
+
+                                                    [trackingParams:protected] => Array
+                                                        (
+                                                        )
+
+                                                    [allowEditShipment:protected] => Y
+                                                    [isClone:protected] => 
+                                                )
+
+                                            [extraServices:protected] => 
+                                            [areExtraServicesChanged:protected] => 
+                                            [storeId:protected] => 
+                                            [isStoreIdChanged:protected] => 
+                                            [internalId:protected] => 0
+                                            [propertyCollection:protected] => 
+                                            [isNew:protected] => 1
+                                        )
+
+                                )
+
+                            [index:Bitrix\Sale\Internals\EntityCollection:private] => 1
+                            [isClone:protected] => 
+                            [anyItemDeleted:protected] => 
+                            [anyItemAdded:protected] => 
+                            [order:protected] => Bitrix\Sale\Order Object
+ *RECURSION*
+                        )
+
+                    [internalIndex:protected] => 0
+                    [isClone:protected] => 
+                    [shipmentItemCollection:protected] => 
+                    [service:protected] => Bitrix\Sale\Delivery\Services\Configurable Object
+                        (
+                            [handlerCode:protected] => BITRIX_CONFIGURABLE
+                            [id:protected] => 1
+                            [name:protected] => Доставка курьером
+                            [code:protected] => 1
+                            [vatId:protected] => 0
+                            [sort:protected] => 100
+                            [logotip:protected] => 784
+                            [parentId:protected] => 0
+                            [currency:protected] => RUB
+                            [active:protected] => 1
+                            [description:protected] => Доставка осуществляется в течение дня в удобное для вас время.
+                            [config:protected] => Array
+                                (
+                                    [MAIN] => Array
+                                        (
+                                            [CURRENCY] => RUB
+                                            [PRICE] => 500
+                                            [PERIOD] => Array
+                                                (
+                                                    [FROM] => 0
+                                                    [TO] => 0
+                                                    [TYPE] => D
+                                                )
+
+                                        )
+
+                                )
+
+                            [restricted:protected] => 
+                            [trackingClass:protected] => 
+                            [deliveryRequestHandler:protected] => 
+                            [extraServices:protected] => Bitrix\Sale\Delivery\ExtraServices\Manager Object
+                                (
+                                    [items:protected] => Array
+                                        (
+                                        )
+
+                                    [isClone:protected] => 
+                                )
+
+                            [trackingParams:protected] => Array
+                                (
+                                )
+
+                            [allowEditShipment:protected] => Y
+                            [isClone:protected] => 
+                        )
+
+                    [extraServices:protected] => 
+                    [areExtraServicesChanged:protected] => 
+                    [storeId:protected] => 
+                    [isStoreIdChanged:protected] => 
+                    [internalId:protected] => 300
+                    [propertyCollection:protected] => 
+                    [isNew:protected] => 1
+                )
+
+            [shipmentIds:protected] => Array
+                (
+                    [0] => 300
+                )
+
+            [enableCheckingPrediction:protected] => 
+        )
+
+    [tax:protected] => Bitrix\Sale\Tax Object
+        (
+            [order:protected] => Bitrix\Sale\Order Object
+ *RECURSION*
+            [list:protected] => Array
+                (
+                    [0] => Array
+                        (
+                            [ID] => 168
+                            [ORDER_ID] => 162
+                            [TAX_NAME] => НДС
+                            [VALUE] => 20.0000
+                            [VALUE_MONEY] => 6292.5000
+                            [APPLY_ORDER] => 100
+                            [CODE] => VAT
+                            [IS_PERCENT] => Y
+                            [IS_IN_PRICE] => Y
+                            [NAME] => НДС
+                            [VALUE_FORMATED] => (20%, включен в цену)
+                            [VALUE_MONEY_FORMATED] => 6&nbsp;292.50 &#8381;
+                            [TAX_VAL] => 6292.5
+                        )
+
+                )
+
+            [availableList:protected] => 
+            [changedValues:protected] => Array
+                (
+                    [НДС|VAT] => 1
+                )
+
+            [deliveryTax:protected] => 
+            [isClone:protected] => 
+            [isExternal:protected] => 
+        )
+
+    [internalId:protected] => 2
     [isNew:protected] => 
     [isSaveExecuting:protected] => 1
     [isClone:protected] => 
@@ -611,9 +2268,444 @@ Bitrix\Sale\Order Object
     [isMeaningfulField:protected] => 
     [isStartField:protected] => 
     [calculateType:protected] => C
-    [shipmentCollection:protected] => 
-    [paymentCollection:protected] => 
-    [tradeBindingCollection:protected] => 
+    [shipmentCollection:protected] => Bitrix\Sale\ShipmentCollection Object
+        (
+            [collection:protected] => Array
+                (
+                    [0] => Bitrix\Sale\Shipment Object
+                        (
+                            [fields:protected] => Bitrix\Sale\Internals\Fields Object
+                                (
+                                    [values:protected] => Array
+                                        (
+                                            [ID] => 300
+                                            [ORDER_ID] => 162
+                                            [ACCOUNT_NUMBER] => 162/2
+                                            [DATE_INSERT] => Bitrix\Main\Type\DateTime Object
+                                                (
+                                                    [value:protected] => DateTime Object
+                                                        (
+                                                            [date] => 2025-08-06 21:56:45.000000
+                                                            [timezone_type] => 3
+                                                            [timezone] => Europe/Moscow
+                                                        )
+
+                                                    [userTimeEnabled:protected] => 1
+                                                )
+
+                                            [DATE_UPDATE] => Bitrix\Main\Type\DateTime Object
+                                                (
+                                                    [value:protected] => DateTime Object
+                                                        (
+                                                            [date] => 2025-08-06 21:56:45.000000
+                                                            [timezone_type] => 3
+                                                            [timezone] => Europe/Moscow
+                                                        )
+
+                                                    [userTimeEnabled:protected] => 1
+                                                )
+
+                                            [STATUS_ID] => DN
+                                            [DELIVERY_LOCATION] => 
+                                            [BASE_PRICE_DELIVERY] => 500
+                                            [PRICE_DELIVERY] => 500
+                                            [WEIGHT] => 0.0000
+                                            [CUSTOM_PRICE_DELIVERY] => N
+                                            [CURRENCY] => RUB
+                                            [DISCOUNT_PRICE] => 0
+                                            [ALLOW_DELIVERY] => N
+                                            [DATE_ALLOW_DELIVERY] => 
+                                            [EMP_ALLOW_DELIVERY_ID] => 
+                                            [DEDUCTED] => N
+                                            [DATE_DEDUCTED] => 
+                                            [EMP_DEDUCTED_ID] => 
+                                            [REASON_UNDO_DEDUCTED] => 
+                                            [RESERVED] => N
+                                            [DELIVERY_ID] => 1
+                                            [DELIVERY_DOC_NUM] => 
+                                            [DELIVERY_DOC_DATE] => 
+                                            [TRACKING_NUMBER] => 
+                                            [TRACKING_STATUS] => 
+                                            [TRACKING_DESCRIPTION] => 
+                                            [TRACKING_LAST_CHECK] => 
+                                            [TRACKING_LAST_CHANGE] => 
+                                            [XML_ID] => bx_6893a56d7da56
+                                            [PARAMS] => 
+                                            [DELIVERY_NAME] => Доставка курьером
+                                            [CANCELED] => N
+                                            [DATE_CANCELED] => 
+                                            [EMP_CANCELED_ID] => 
+                                            [REASON_CANCELED] => 
+                                            [MARKED] => N
+                                            [DATE_MARKED] => 
+                                            [EMP_MARKED_ID] => 
+                                            [REASON_MARKED] => 
+                                            [SYSTEM] => N
+                                            [RESPONSIBLE_ID] => 
+                                            [EMP_RESPONSIBLE_ID] => 
+                                            [DATE_RESPONSIBLE_ID] => 
+                                            [COMMENTS] => 
+                                            [COMPANY_ID] => 0
+                                            [UPDATED_1C] => N
+                                            [ID_1C] => 
+                                            [VERSION_1C] => 
+                                            [EXTERNAL_DELIVERY] => N
+                                        )
+
+                                    [changedValues:protected] => Array
+                                        (
+                                        )
+
+                                    [originalValues:Bitrix\Sale\Internals\Fields:private] => Array
+                                        (
+                                        )
+
+                                    [customFields:Bitrix\Sale\Internals\Fields:private] => Array
+                                        (
+                                        )
+
+                                    [isClone:protected] => 
+                                )
+
+                            [eventName:protected] => 
+                            [collection:protected] => Bitrix\Sale\ShipmentCollection Object
+ *RECURSION*
+                            [internalIndex:protected] => 0
+                            [isClone:protected] => 
+                            [shipmentItemCollection:protected] => 
+                            [service:protected] => Bitrix\Sale\Delivery\Services\Configurable Object
+                                (
+                                    [handlerCode:protected] => BITRIX_CONFIGURABLE
+                                    [id:protected] => 1
+                                    [name:protected] => Доставка курьером
+                                    [code:protected] => 1
+                                    [vatId:protected] => 0
+                                    [sort:protected] => 100
+                                    [logotip:protected] => 784
+                                    [parentId:protected] => 0
+                                    [currency:protected] => RUB
+                                    [active:protected] => 1
+                                    [description:protected] => Доставка осуществляется в течение дня в удобное для вас время.
+                                    [config:protected] => Array
+                                        (
+                                            [MAIN] => Array
+                                                (
+                                                    [CURRENCY] => RUB
+                                                    [PRICE] => 500
+                                                    [PERIOD] => Array
+                                                        (
+                                                            [FROM] => 0
+                                                            [TO] => 0
+                                                            [TYPE] => D
+                                                        )
+
+                                                )
+
+                                        )
+
+                                    [restricted:protected] => 
+                                    [trackingClass:protected] => 
+                                    [deliveryRequestHandler:protected] => 
+                                    [extraServices:protected] => Bitrix\Sale\Delivery\ExtraServices\Manager Object
+                                        (
+                                            [items:protected] => Array
+                                                (
+                                                )
+
+                                            [isClone:protected] => 
+                                        )
+
+                                    [trackingParams:protected] => Array
+                                        (
+                                        )
+
+                                    [allowEditShipment:protected] => Y
+                                    [isClone:protected] => 
+                                )
+
+                            [extraServices:protected] => 
+                            [areExtraServicesChanged:protected] => 
+                            [storeId:protected] => 
+                            [isStoreIdChanged:protected] => 
+                            [internalId:protected] => 300
+                            [propertyCollection:protected] => 
+                            [isNew:protected] => 1
+                        )
+
+                    [1] => Bitrix\Sale\Shipment Object
+                        (
+                            [fields:protected] => Bitrix\Sale\Internals\Fields Object
+                                (
+                                    [values:protected] => Array
+                                        (
+                                            [ID] => 299
+                                            [ORDER_ID] => 162
+                                            [ACCOUNT_NUMBER] => 162/1
+                                            [DATE_INSERT] => Bitrix\Main\Type\DateTime Object
+                                                (
+                                                    [value:protected] => DateTime Object
+                                                        (
+                                                            [date] => 2025-08-06 21:56:45.000000
+                                                            [timezone_type] => 3
+                                                            [timezone] => Europe/Moscow
+                                                        )
+
+                                                    [userTimeEnabled:protected] => 1
+                                                )
+
+                                            [DATE_UPDATE] => 
+                                            [STATUS_ID] => DN
+                                            [DELIVERY_LOCATION] => 
+                                            [BASE_PRICE_DELIVERY] => 0
+                                            [PRICE_DELIVERY] => 0
+                                            [WEIGHT] => 0.0000
+                                            [CUSTOM_PRICE_DELIVERY] => N
+                                            [CURRENCY] => 
+                                            [DISCOUNT_PRICE] => 0
+                                            [ALLOW_DELIVERY] => N
+                                            [DATE_ALLOW_DELIVERY] => 
+                                            [EMP_ALLOW_DELIVERY_ID] => 
+                                            [DEDUCTED] => N
+                                            [DATE_DEDUCTED] => 
+                                            [EMP_DEDUCTED_ID] => 
+                                            [REASON_UNDO_DEDUCTED] => 
+                                            [RESERVED] => N
+                                            [DELIVERY_ID] => 1
+                                            [DELIVERY_DOC_NUM] => 
+                                            [DELIVERY_DOC_DATE] => 
+                                            [TRACKING_NUMBER] => 
+                                            [TRACKING_STATUS] => 
+                                            [TRACKING_DESCRIPTION] => 
+                                            [TRACKING_LAST_CHECK] => 
+                                            [TRACKING_LAST_CHANGE] => 
+                                            [XML_ID] => bx_6893a56d66a9c
+                                            [PARAMS] => 
+                                            [DELIVERY_NAME] => Доставка курьером
+                                            [CANCELED] => N
+                                            [DATE_CANCELED] => 
+                                            [EMP_CANCELED_ID] => 
+                                            [REASON_CANCELED] => 
+                                            [MARKED] => N
+                                            [DATE_MARKED] => 
+                                            [EMP_MARKED_ID] => 
+                                            [REASON_MARKED] => 
+                                            [SYSTEM] => Y
+                                            [RESPONSIBLE_ID] => 
+                                            [EMP_RESPONSIBLE_ID] => 
+                                            [DATE_RESPONSIBLE_ID] => 
+                                            [COMMENTS] => 
+                                            [COMPANY_ID] => 
+                                            [UPDATED_1C] => N
+                                            [ID_1C] => 
+                                            [VERSION_1C] => 
+                                            [EXTERNAL_DELIVERY] => N
+                                        )
+
+                                    [changedValues:protected] => Array
+                                        (
+                                        )
+
+                                    [originalValues:Bitrix\Sale\Internals\Fields:private] => Array
+                                        (
+                                        )
+
+                                    [customFields:Bitrix\Sale\Internals\Fields:private] => Array
+                                        (
+                                        )
+
+                                    [isClone:protected] => 
+                                )
+
+                            [eventName:protected] => 
+                            [collection:protected] => Bitrix\Sale\ShipmentCollection Object
+ *RECURSION*
+                            [internalIndex:protected] => 1
+                            [isClone:protected] => 
+                            [shipmentItemCollection:protected] => 
+                            [service:protected] => Bitrix\Sale\Delivery\Services\Configurable Object
+                                (
+                                    [handlerCode:protected] => BITRIX_CONFIGURABLE
+                                    [id:protected] => 1
+                                    [name:protected] => Доставка курьером
+                                    [code:protected] => 1
+                                    [vatId:protected] => 0
+                                    [sort:protected] => 100
+                                    [logotip:protected] => 784
+                                    [parentId:protected] => 0
+                                    [currency:protected] => RUB
+                                    [active:protected] => 1
+                                    [description:protected] => Доставка осуществляется в течение дня в удобное для вас время.
+                                    [config:protected] => Array
+                                        (
+                                            [MAIN] => Array
+                                                (
+                                                    [CURRENCY] => RUB
+                                                    [PRICE] => 500
+                                                    [PERIOD] => Array
+                                                        (
+                                                            [FROM] => 0
+                                                            [TO] => 0
+                                                            [TYPE] => D
+                                                        )
+
+                                                )
+
+                                        )
+
+                                    [restricted:protected] => 
+                                    [trackingClass:protected] => 
+                                    [deliveryRequestHandler:protected] => 
+                                    [extraServices:protected] => Bitrix\Sale\Delivery\ExtraServices\Manager Object
+                                        (
+                                            [items:protected] => Array
+                                                (
+                                                )
+
+                                            [isClone:protected] => 
+                                        )
+
+                                    [trackingParams:protected] => Array
+                                        (
+                                        )
+
+                                    [allowEditShipment:protected] => Y
+                                    [isClone:protected] => 
+                                )
+
+                            [extraServices:protected] => 
+                            [areExtraServicesChanged:protected] => 
+                            [storeId:protected] => 
+                            [isStoreIdChanged:protected] => 
+                            [internalId:protected] => 0
+                            [propertyCollection:protected] => 
+                            [isNew:protected] => 1
+                        )
+
+                )
+
+            [index:Bitrix\Sale\Internals\EntityCollection:private] => 1
+            [isClone:protected] => 
+            [anyItemDeleted:protected] => 
+            [anyItemAdded:protected] => 
+            [order:protected] => Bitrix\Sale\Order Object
+ *RECURSION*
+        )
+
+    [paymentCollection:protected] => Bitrix\Sale\PaymentCollection Object
+        (
+            [collection:protected] => Array
+                (
+                    [0] => Bitrix\Sale\Payment Object
+                        (
+                            [fields:protected] => Bitrix\Sale\Internals\Fields Object
+                                (
+                                    [values:protected] => Array
+                                        (
+                                            [ID] => 145
+                                            [ORDER_ID] => 162
+                                            [ACCOUNT_NUMBER] => 162/1
+                                            [PAID] => N
+                                            [DATE_PAID] => 
+                                            [EMP_PAID_ID] => 
+                                            [PAY_SYSTEM_ID] => 10
+                                            [PS_STATUS] => 
+                                            [PS_STATUS_CODE] => 
+                                            [PS_INVOICE_ID] => 
+                                            [PS_STATUS_DESCRIPTION] => 
+                                            [PS_STATUS_MESSAGE] => 
+                                            [PS_SUM] => 
+                                            [PS_CURRENCY] => 
+                                            [PS_RESPONSE_DATE] => 
+                                            [PS_RECURRING_TOKEN] => 
+                                            [PS_CARD_NUMBER] => 
+                                            [PAY_VOUCHER_NUM] => 
+                                            [PAY_VOUCHER_DATE] => 
+                                            [DATE_PAY_BEFORE] => 
+                                            [DATE_BILL] => Bitrix\Main\Type\DateTime Object
+                                                (
+                                                    [value:protected] => DateTime Object
+                                                        (
+                                                            [date] => 2025-08-06 21:56:45.000000
+                                                            [timezone_type] => 3
+                                                            [timezone] => Europe/Moscow
+                                                        )
+
+                                                    [userTimeEnabled:protected] => 1
+                                                )
+
+                                            [XML_ID] => bx_6893a56da0374
+                                            [SUM] => 38255
+                                            [PRICE_COD] => 0
+                                            [CURRENCY] => RUB
+                                            [PAY_SYSTEM_NAME] => Предоплата наличными
+                                            [RESPONSIBLE_ID] => 
+                                            [EMP_RESPONSIBLE_ID] => 
+                                            [DATE_RESPONSIBLE_ID] => 
+                                            [COMMENTS] => 
+                                            [COMPANY_ID] => 0
+                                            [PAY_RETURN_NUM] => 
+                                            [PAY_RETURN_DATE] => 
+                                            [EMP_RETURN_ID] => 
+                                            [PAY_RETURN_COMMENT] => 
+                                            [IS_RETURN] => N
+                                            [MARKED] => N
+                                            [DATE_MARKED] => 
+                                            [EMP_MARKED_ID] => 
+                                            [REASON_MARKED] => 
+                                            [UPDATED_1C] => N
+                                            [ID_1C] => 
+                                            [VERSION_1C] => 
+                                            [EXTERNAL_PAYMENT] => N
+                                        )
+
+                                    [changedValues:protected] => Array
+                                        (
+                                        )
+
+                                    [originalValues:Bitrix\Sale\Internals\Fields:private] => Array
+                                        (
+                                        )
+
+                                    [customFields:Bitrix\Sale\Internals\Fields:private] => Array
+                                        (
+                                        )
+
+                                    [isClone:protected] => 
+                                )
+
+                            [eventName:protected] => 
+                            [collection:protected] => Bitrix\Sale\PaymentCollection Object
+ *RECURSION*
+                            [internalIndex:protected] => 0
+                            [isClone:protected] => 
+                            [service:protected] => 
+                            [payableItemCollection:protected] => 
+                        )
+
+                )
+
+            [index:Bitrix\Sale\Internals\EntityCollection:private] => 0
+            [isClone:protected] => 
+            [anyItemDeleted:protected] => 
+            [anyItemAdded:protected] => 
+            [order:protected] => Bitrix\Sale\Order Object
+ *RECURSION*
+        )
+
+    [tradeBindingCollection:protected] => Bitrix\Sale\TradeBindingCollection Object
+        (
+            [collection:protected] => Array
+                (
+                )
+
+            [index:Bitrix\Sale\Internals\EntityCollection:private] => -1
+            [isClone:protected] => 
+            [anyItemDeleted:protected] => 
+            [anyItemAdded:protected] => 
+            [order:protected] => Bitrix\Sale\Order Object
+ *RECURSION*
+        )
+
     [printedChecks:protected] => Array
         (
         )
