@@ -106,3 +106,15 @@ a:active, [data-ui-markup="a"]:hover, [data-ui-markup="a"]:focus, [data-ui-marku
         width: 100%;
     }
 }
+
+#personal-confirmation{
+    width: 85%;
+}
+#personal-confirmation .personal-confirmation-wrapper{
+    max-height: 700px;
+    overflow-y: scroll;
+}
+#successFields{
+    padding-top: 15px;
+    border-top: 1px solid silver;
+}

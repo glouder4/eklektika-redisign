@@ -207,7 +207,7 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
 					</label>
 				</div>
 				<div>
-					Пожалуйста, будьте внимательны при заполнении.<br>Изменить информацию возможно только через менеджера. 
+                    * Компания Yo Merch сотрудничает с Рекламными и Event агентствами, интернет магазинами, типографиями и производственными компаниями
 				</div>
 				<br><br>
                 <?php if ($arResult['BACKURL'] <> '') { ?>
@@ -228,7 +228,7 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
                                                 ?>
 
                                                 <?php if ($arUserField["USER_TYPE_ID"] == "file") {?>
-                                                    <div class="intec-ui-form-field " data-name="<?=$arUserField["FIELD_NAME"]?>">
+                                                    <div class="parent--wrapper intec-ui-form-field <?= $arResult['REQUIRED_FIELDS_FLAGS'][$FIELD] == 'Y' || ( isset($arUserField["MANDATORY"]) && $arUserField["MANDATORY"] == "Y" )    ? 'os_required' : '' ?> <?= $arResult['REQUIRED_FIELDS_FLAGS'][$FIELD] == 'Y' ? 'intec-ui-form-field-required' : '' ?>" data-name="<?=$arUserField["FIELD_NAME"]?>">
                                                         <label class="intec-ui-form-field-title" for="REGISTER_<?=$arUserField["FIELD_NAME"]?>">
                                                             <?= $arUserField["EDIT_FORM_LABEL"] ?>:
                                                             <?php if ($arUserField["MANDATORY"] == "Y") {?>
@@ -244,14 +244,15 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
                                                                     data-role="input">
                                                         </div>
                                                     </div>
-                                                <?php } elseif ($arUserField["USER_TYPE_ID"] == "boolean") {?>
+                                                <?php }
+                                                elseif ($arUserField["USER_TYPE_ID"] == "boolean") {?>
                                                     <label class="intec-ui intec-ui-control-checkbox intec-ui-scheme-current" data-name="<?=$arUserField["FIELD_NAME"]?>">
                                                         <input type="checkbox" name="<?=$arUserField["FIELD_NAME"]?>">
                                                         <span class="intec-ui-part-selector"></span>
                                                         <span class="intec-ui-part-content"><?= $arUserField["EDIT_FORM_LABEL"] ?></span>
                                                     </label>
                                                 <?php } else {?>
-                                                    <div class="intec-ui-form-field" data-name="<?=$arUserField["FIELD_NAME"]?>">
+                                                    <div class="parent--wrapper intec-ui-form-field <?= $arResult['REQUIRED_FIELDS_FLAGS'][$FIELD] == 'Y' || ( isset($arUserField["MANDATORY"]) && $arUserField["MANDATORY"] == "Y" )    ? 'os_required' : '' ?> <?= $arResult['REQUIRED_FIELDS_FLAGS'][$FIELD] == 'Y' ? 'intec-ui-form-field-required' : '' ?>" data-name="<?=$arUserField["FIELD_NAME"]?>">
                                                         <label class="intec-ui-form-field-title" for="REGISTER_<?=$arUserField["FIELD_NAME"]?>">
                                                             <?= $arUserField["EDIT_FORM_LABEL"] ?>:
                                                             <?php if ($arUserField["MANDATORY"] == "Y") {?>
@@ -341,7 +342,7 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
                                                             </div>
                                                         </div>
                                                     <?php } else { ?>
-                                                        <div class="intec-ui-form-field <?= $arResult['REQUIRED_FIELDS_FLAGS'][$FIELD] == 'Y' ? 'intec-ui-form-field-required' : '' ?>" data-name="<?=$FIELD?>">
+                                                        <div class="parent--wrapper intec-ui-form-field <?= $arResult['REQUIRED_FIELDS_FLAGS'][$FIELD] == 'Y' || ( isset($arUserField["MANDATORY"]) && $arUserField["MANDATORY"] == "Y" )    ? 'os_required' : '' ?> <?= $arResult['REQUIRED_FIELDS_FLAGS'][$FIELD] == 'Y' ? 'intec-ui-form-field-required' : '' ?>" data-name="<?=$FIELD?>">
                                                             <label class="intec-ui-form-field-title" for="REGISTER_<?=$FIELD?>_POPUP2">
                                                                 <?= Loc::getMessage($sPrefix.'REGISTER_FIELD_' . $FIELD) ?>
                                                             </label>
@@ -590,12 +591,16 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
                                             ?>
                                                 <div class="main-register-consent">
                                                     <label class="intec-ui intec-ui-control-checkbox intec-ui-scheme-current">
-                                                        <input type="checkbox" checked="checked" onchange="this.checked = !this.checked" />
+                                                        <input id="mainConfirmation" type="checkbox" onchange="isConfirmed()" />
                                                         <span class="intec-ui-part-selector"></span>
                                                         <span class="intec-ui-part-content"><?= Loc::getMessage($sPrefix.'DEFAULT_CONSENT', [
                                                                 '#URL#' => $arResult['CONSENT']['URL']
                                                             ]) ?></span>
                                                     </label>
+                                                    <div class="action-links" style="display: flex; flex-direction: column;">
+                                                        <a href="/politika-konfidencialnosty.php" target="_blank">Согласие на обработку персональных данных</a>
+                                                        <a href="/politika-konfidencialnosty.php" target="_blank">Политика обработки персональных данных</a>
+                                                    </div>
                                                 </div>
                                             <?php
                                         }
@@ -627,7 +632,9 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
                                         'size-4'
                                     ]
                                 ],
-                                'name' => 'register_submit_button'
+                                'name' => 'register_submit_button',
+                                'disabled' => 'disabled',
+                                'required' => true
                             ]);?>
                         </div>
                     </div>
@@ -670,7 +677,30 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
     <?php } ?>
 </div>
 
+        <div style="display: none;" id="personal-confirmation">
+            <div class="personal-confirmation-wrapper">
+                <div class="modal-personal-confrmation--title">
+                    <h3>Политика конфиденциальности</h3>
+                </div>
+                <?
+                    $APPLICATION->IncludeFile(SITE_DIR."include/politika-konfidencialnosty.php", array(), array(
+                            "MODE" => "html",
+                            "NAME" => "",
+                        )
+                    );
+                ?>
+            </div>
+            <div id="successFields">
+                <label for="personalConfirmation">
+                    <input type="checkbox" id="personalConfirmation" />
+                    <span class="intec-ui-part-selector"></span>
+                    <span class="intec-ui-part-content">Я внимательно ознакомился с политикой конфиденциальности</span>
+                </label>
+            </div>
+        </div>
+
 <script>
+
     template.load(function (data) {
         var $ = this.getLibrary('$');
         var root = data.nodes;
@@ -844,6 +874,23 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
 </script>
 
 <script>
+    function isConfirmed(){
+        $('#mainConfirmation')[0].checked = false;
+        $.fancybox.open({
+            src: '#personal-confirmation',
+            type: 'inline'
+        });
+    }
+
+    $('#personalConfirmation').click(function (){
+        $('#mainConfirmation')[0].checked = $(this)[0].checked;
+
+        if( $(this)[0].checked )
+            $('#submitFormBtn>input').attr('disabled',false)
+        else
+            $('#submitFormBtn>input').attr('disabled',true)
+    })
+
     let activeBlock = 0;
     let correctSortOrder = [
         [
@@ -867,14 +914,17 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
         ]
     ];
 
+    window.is_personal_confirmed = false;
+
     $('#next-step').click(function (){
         let isBlockValid = true;
 
         correctSortOrder[activeBlock].forEach(function (val){
             let input = $(`.block-fields[data-index="${activeBlock}"] div[data-name="${val}"] input`);
+            let parent = $(input).closest('.parent--wrapper ');
             let fieldValue = input.val();
 
-            if( fieldValue.length == 0 ){
+            if( fieldValue.length == 0 && $(parent).hasClass('os_required') ){
                 isBlockValid = false;
 
                 $(input.closest(`div[data-name="${val}"`)).find('.ui-error-message').show();

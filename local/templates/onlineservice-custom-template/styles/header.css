@@ -390,7 +390,8 @@
     top: -2px;
     right: -1px;
 }
-.mobile-menu__sub li {
+.mobile-menu__sub li,
+.mobile-menu__sub li>a{
     color: #fff;
     padding: 0;
     height: 16px;
@@ -433,6 +434,13 @@
     font-size: 12px;
     line-height: 100%;
     letter-spacing: 0;
+}
+a.mobile-menu__call-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 10px;
 }
 .mobile-menu__footer {
     margin-top: auto;
@@ -939,6 +947,14 @@
     flex-direction: row;
     gap: 5px;
 }
+@media(max-width: 991px){
+    #top_header-auth_reg-btns--wrapper{
+        display: none;
+    }
+    #profile_fields--wrapper{
+        display: none!important;
+    }
+}
 #top_header-auth_reg-btns--wrapper a.top_header-btn{
     background: rgb(112,48,160);
     color: white;
@@ -962,7 +978,7 @@
     left: unset;
     right: 0;
     background: unset;
-    padding-top: 20px;
+    padding-top: 0px;
 
     visibility: hidden;
     opacity: 0;
@@ -1024,4 +1040,205 @@
 #profileBtns a.header__icon.header__icon--user:hover +#profile_fields--wrapper{
     visibility: visible;
     opacity: 1;
+}
+
+
+/* Стили для выпадающего меню профиля */
+#profile_fields--wrapper {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    border: 1px solid #e5e7eb;
+    min-width: 280px;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-top: 8px;
+}
+
+#profile_fields--wrapper.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+#profile_fields--wrapper::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    right: 95px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #fff;
+}
+
+#profile_fields--wrapper .widgets {
+    padding: 16px 0;
+}
+
+#profile_fields--wrapper .widget {
+    margin: 0;
+}
+
+#profile_fields--wrapper .widget-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: #374151;
+    transition: all 0.2s ease;
+    border: none;
+    background: transparent;
+    width: 100%;
+    text-align: left;
+}
+
+#profile_fields--wrapper .widget-item:hover {
+    background: #f8fafc;
+    color: #1f2937;
+    transform: translateX(4px);
+}
+
+#profile_fields--wrapper .widget-item:active {
+    background: #f1f5f9;
+    transform: translateX(2px);
+}
+
+#profile_fields--wrapper .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: #f3f4f6;
+    margin-right: 16px;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+}
+
+#profile_fields--wrapper .widget-item:hover .icon {
+    background: #e5e7eb;
+    transform: scale(1.05);
+}
+
+#profile_fields--wrapper .icon svg {
+    color: #6b7280;
+    transition: color 0.2s ease;
+}
+
+#profile_fields--wrapper .widget-item:hover .icon svg {
+    color: #374151;
+}
+
+#profile_fields--wrapper .data {
+    flex: 1;
+}
+
+#profile_fields--wrapper .data span {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.4;
+    color: inherit;
+}
+
+/* Анимация появления для каждого элемента */
+#profile_fields--wrapper .widget {
+    opacity: 0;
+    transform: translateX(20px);
+    animation: slideInRight 0.3s ease forwards;
+}
+
+#profile_fields--wrapper .widget:nth-child(1) { animation-delay: 0.05s; }
+#profile_fields--wrapper .widget:nth-child(2) { animation-delay: 0.1s; }
+#profile_fields--wrapper .widget:nth-child(3) { animation-delay: 0.15s; }
+#profile_fields--wrapper .widget:nth-child(4) { animation-delay: 0.2s; }
+#profile_fields--wrapper .widget:nth-child(5) { animation-delay: 0.25s; }
+#profile_fields--wrapper .widget:nth-child(6) { animation-delay: 0.3s; }
+#profile_fields--wrapper .widget:nth-child(7) { animation-delay: 0.35s; }
+
+@keyframes slideInRight {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    #profile_fields--wrapper {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+        margin-top: 0;
+        transform: translateY(0);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #profile_fields--wrapper::before {
+        display: none;
+    }
+
+    #profile_fields--wrapper .widgets {
+        max-width: 320px;
+        width: 100%;
+        max-height: 80vh;
+        overflow-y: auto;
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+}
+
+/* Темная тема (опционально) */
+@media (prefers-color-scheme: dark) {
+    #profile_fields--wrapper {
+        background: #1f2937;
+        border-color: #374151;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    #profile_fields--wrapper::before {
+        border-bottom-color: #1f2937;
+    }
+
+    #profile_fields--wrapper .widget-item {
+        color: #d1d5db;
+    }
+
+    #profile_fields--wrapper .widget-item:hover {
+        background: #374151;
+        color: #f9fafb;
+    }
+
+    #profile_fields--wrapper .icon {
+        background: #374151;
+    }
+
+    #profile_fields--wrapper .widget-item:hover .icon {
+        background: #4b5563;
+    }
+
+    #profile_fields--wrapper .icon svg {
+        color: #9ca3af;
+    }
+
+    #profile_fields--wrapper .widget-item:hover .icon svg {
+        color: #d1d5db;
+    }
 }

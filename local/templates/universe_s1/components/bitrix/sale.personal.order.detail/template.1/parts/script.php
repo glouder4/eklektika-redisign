@@ -27,6 +27,9 @@ use intec\core\helpers\JavaScript;
         var getParams = (new URL(document.location)).searchParams;
         var blockToScroll = blocks.filter('[data-block="' + getParams.get('data_block') + '"]');
 
+        var cancelReserve = $('#cancelReserve', root);
+        var reserveToNewRequest = $('#reserveToNewRequest', root);
+
         if (blockToScroll.length !== 0) {
             $('html, body').animate({
                 scrollTop: blockToScroll.offset().top - 72
@@ -126,6 +129,48 @@ use intec\core\helpers\JavaScript;
                 }
                 content.slideToggle(400);
             });
+        });
+
+        cancelReserve.on('click', function(e) {
+            e.preventDefault();
+            let self = $(this);
+            let conf = confirm("Вы действительно хотите отменить данный резерв?");
+            if (conf) {
+                $.ajax({
+                    url: "/personal/order/cancel_reserve.php?RESERVE_ID=<?=$arResult['ID'];?>",
+                    dataType: 'json'
+                }).done(function(response) {
+                    if (response.success) {
+                        alert("Заявка на резерв отменена");
+                        document.location.href = '/personal/profile/orders/<?=$arResult['ID'];?>';
+                    } else {
+                        alert("Ошибка: " + response.message);
+                    }
+                }).fail(function(xhr, status, error) {
+                    alert("Произошла ошибка при выполнении запроса");
+                    console.error("AJAX Error:", status, error);
+                });
+            }
+        });
+        reserveToNewRequest.on('click', function(e) {
+            e.preventDefault();
+            let self = $(this);
+            let conf = confirm("Вы действительно хотите перевести данный заказ в новый статус?");
+            if (conf) {
+                $.ajax({
+                    url: "/personal/order/change_to_new_request.php?RESERVE_ID=<?=$arResult['ID'];?>",
+                }).done(function(response) {
+                    if (response.success) {
+                        alert("Статус заказа успешно изменен");
+                        document.location.href = '/personal/profile/orders/<?=$arResult['ID'];?>'
+                    } else {
+                        alert("Ошибка: " + response.message);
+                    }
+                }).fail(function(xhr, status, error) {
+                    alert("Произошла ошибка при выполнении запроса");
+                    console.error("AJAX Error:", status, error);
+                });
+            }
         });
 
 

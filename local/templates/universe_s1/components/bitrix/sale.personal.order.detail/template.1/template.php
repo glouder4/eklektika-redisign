@@ -71,6 +71,9 @@ $APPLICATION->SetTitle(Loc::getMessage('C_SALE_PERSONAL_ORDER_DETAIL_TEMPLATE_1_
     '#NUMBER#' => Html::encode($arResult['ACCOUNT_NUMBER'])
 ]));
 
+
+$isReserve = isset($arResult['PROPERTIES']['REQUEST_TO_RESERVE']) && $arResult['PROPERTIES']['REQUEST_TO_RESERVE'] == "Y";
+
 ?>
 <div id="<?= $sTemplateId ?>" class="ns-bitrix c-sale-personal-order-detail c-sale-personal-order-detail-template-1">
     <div class="sale-personal-order-detail-wrapper intec-content">
@@ -115,8 +118,29 @@ $APPLICATION->SetTitle(Loc::getMessage('C_SALE_PERSONAL_ORDER_DETAIL_TEMPLATE_1_
                                 ]) ?>
                             </div>
                             <div class="intec-grid-item"></div>
-                            <?php if ($arParams['GUEST_MODE'] !== 'Y') { ?>
+                            <?php if ($arParams['GUEST_MODE'] !== 'Y') {?>
                                 <?php if ($arResult['CAN_CANCEL'] === 'Y' && $arParams['DISALLOW_CANCEL'] !== 'Y') { ?>
+                                  <?php
+                                        if( $isReserve && ( $arResult['STATUS']['ID'] == "R" || $arResult['STATUS']['ID'] == "RC"  )){ ?>
+                                            <div class="intec-grid-item-auto">
+                                                <?= Html::tag('a', Loc::getMessage('C_SALE_PERSONAL_ORDER_DETAIL_TEMPLATE_1_TEMPLATE_BUTTONS_CANCEL_RESERVE'), [
+                                                    'class' => [
+                                                        'sale-personal-order-detail-button',
+                                                        'intec-ui' => [
+                                                            '',
+                                                            'control-button',
+                                                            'mod-transparent',
+                                                            'mod-round-2',
+                                                            'scheme-current'
+                                                        ]
+                                                    ],
+                                                    'href' => $arResult['PATH_TO_CANCEL_RESERVE'],
+                                                    'id' => 'cancelReserve'
+                                                ]) ?>
+                                            </div>
+                                        <?php }
+                                  ?>
+
                                     <div class="intec-grid-item-auto">
                                         <?= Html::tag('a', Loc::getMessage('C_SALE_PERSONAL_ORDER_DETAIL_TEMPLATE_1_TEMPLATE_BUTTONS_CANCEL'), [
                                             'class' => [
@@ -134,19 +158,41 @@ $APPLICATION->SetTitle(Loc::getMessage('C_SALE_PERSONAL_ORDER_DETAIL_TEMPLATE_1_
                                     </div>
                                 <?php } ?>
                                 <div class="intec-grid-item-auto">
-                                    <?= Html::tag('a', Loc::getMessage('C_SALE_PERSONAL_ORDER_DETAIL_TEMPLATE_1_TEMPLATE_BUTTONS_REPEAT'), [
-                                        'class' => [
-                                            'sale-personal-order-detail-button',
-                                            'intec-ui' => [
-                                                '',
-                                                'control-button',
-                                                'mod-transparent',
-                                                'mod-round-2',
-                                                'scheme-current'
-                                            ]
-                                        ],
-                                        'href' => $arResult['URL_TO_COPY']
-                                    ]) ?>
+                                    <?php
+                                        if( $isReserve && ( $arResult['STATUS']['ID'] == "R" || $arResult['STATUS']['ID'] == "RC" ) ){?>
+
+                                            <?= Html::tag('a', Loc::getMessage('C_SALE_PERSONAL_ORDER_DETAIL_TEMPLATE_1_TEMPLATE_BUTTONS_TO_NEW_ORDER'), [
+                                                'class' => [
+                                                    'sale-personal-order-detail-button',
+                                                    'intec-ui' => [
+                                                        '',
+                                                        'control-button',
+                                                        'mod-transparent',
+                                                        'mod-round-2',
+                                                        'scheme-current'
+                                                    ]
+                                                ],
+                                                'href' => $arResult['PATH_TO_NEW_REQUEST'],
+                                                'id' => 'reserveToNewRequest'
+                                            ]) ?>
+
+                                        <?php }
+                                        else{ ?>
+                                            <?= Html::tag('a', Loc::getMessage('C_SALE_PERSONAL_ORDER_DETAIL_TEMPLATE_1_TEMPLATE_BUTTONS_REPEAT'), [
+                                                'class' => [
+                                                    'sale-personal-order-detail-button',
+                                                    'intec-ui' => [
+                                                        '',
+                                                        'control-button',
+                                                        'mod-transparent',
+                                                        'mod-round-2',
+                                                        'scheme-current'
+                                                    ]
+                                                ],
+                                                'href' => $arResult['URL_TO_COPY']
+                                            ]) ?>
+                                        <?php }
+                                    ?>
                                 </div>
                             <?php } ?>
                         </div>

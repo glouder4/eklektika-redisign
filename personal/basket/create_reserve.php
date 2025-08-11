@@ -51,12 +51,20 @@ if ($typePerson == 1) {
 		"VALUE" => $arUserInfo["PERSONAL_PHONE"]
 	];
 } else {
+    if( isset($_GET['STATUS_ID']) && ( $_GET['STATUS_ID'] == "R" ) ){
+        $arProps["REQUEST_TO_RESERVE"] = [
+            "ID" => 26,
+            "VALUE" => "Y"
+        ];
+    }
+    if( isset($_GET['STATUS_ID']) && ( $_GET['STATUS_ID'] == "OB" ) ){
+        $arProps["REQUEST_TO_SAMPLE"] = [
+            "ID" => 35,
+            "VALUE" => "Y"
+        ];
+    }
 	$arProps["ADVERSTERING_AGENT"] = [
 		"ID" => 22,
-		"VALUE" => "Y"
-	];
-	$arProps["REQUEST_TO_RESERVE"] = [
-		"ID" => 26,
 		"VALUE" => "Y"
 	];
 	$arProps["CONTACT_PERSON"] = [

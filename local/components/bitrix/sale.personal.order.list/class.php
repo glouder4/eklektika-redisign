@@ -472,7 +472,19 @@ class CBitrixPersonalOrderListComponent extends CBitrixComponent
 			}
 		}
 
-		$filterStatus = trim((string)($_REQUEST['filter_status'] ?? ''));
+        if( !is_array($_REQUEST['filter_status']) ){
+            $filterStatus = trim((string)($_REQUEST['filter_status'] ?? ''));
+            if ($filterStatus !== '')
+            {
+                $arFilter["STATUS_ID"] = $filterStatus;
+            }
+        }
+        else{
+            foreach ($_REQUEST['filter_status'] as $status_id)
+                $filterStatus[] = trim((string)($status_id ?? ''));
+        }
+
+
 		if ($filterStatus !== '')
 		{
 			$arFilter["STATUS_ID"] = $filterStatus;
@@ -515,6 +527,8 @@ class CBitrixPersonalOrderListComponent extends CBitrixComponent
 		{
 			$arFilter["CANCELED"] = $filterCanceled;
 		}
+
+        //pre($arFilter);die();
 
 		$this->filter = $arFilter;
 	}

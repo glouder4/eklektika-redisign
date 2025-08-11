@@ -1869,6 +1869,8 @@ class CBitrixPersonalOrderDetailComponent extends CBitrixComponent
 		{
 			$this->arResult["URL_TO_COPY"] = CComponentEngine::makePathFromTemplate($this->arParams["PATH_TO_COPY"], array("ID" => urlencode(urlencode( $this->arResult["ACCOUNT_NUMBER"]))));
 		}
+
+
 		$this->arResult["URL_TO_LIST"] = $this->arParams["PATH_TO_LIST"];
 		$this->arResult["SITE_ID"] =  $this->arResult["LID"];
 

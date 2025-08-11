@@ -219,6 +219,7 @@ CModule::IncludeModule("intec.eklectika");
 			"order_detail" => "orders/#ID#",
 			"order_cancel" => "cancel/#ID#",
 			"claims" => "claims/",
+			"reserve_to_new" => "reserve_to_new/",
 			"kp" => "kp/",
 			"saved_baskets" => "saved_baskets/",
 		)

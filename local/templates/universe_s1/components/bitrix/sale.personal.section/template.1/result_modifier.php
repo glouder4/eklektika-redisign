@@ -108,17 +108,18 @@ if (!empty($arResult['SEF_FOLDER'])) {
 }
 
 $arResult['ITEMS'][] = [
-    'PATH' => $arResult['PATH_TO_ORDERS'].'/?filter_status=N',
+    'PATH' => $arResult['PATH_TO_ORDERS'].'?filter_status=N',
     'NAME' => "Заказы",
     'ICON' => "",//'<i class="fa fa-calculator"></i>',
     'ACTIVE' => empty($sPageSection) ? $sPageUrl == $arResult['PATH_TO_ORDERS'] && empty($sHistoryPage) && !isset($_GET['filter_status']) : $sPageSection == 'orders' && empty($sHistoryPage)
 ];
+
 if ($arParams['SHOW_ORDER_PAGE'] === 'Y') {
     $arResult['ITEMS'][] = [
-        'PATH' => "/personal/profile/orders/?filter_date_from=&filter_date_to=&filter_status=R",
+        'PATH' => "/personal/profile/orders/?filter_date_from=&filter_status[]=R&filter_status[]=RO&filter_status[]=RС",
         'NAME' => "Резервы",
         'ICON' => '',
-        'ACTIVE' => isset($_GET['filter_status']) && $_GET['filter_status'] == "R"
+        'ACTIVE' => isset($_GET['filter_status']) && $_GET['filter_status'][0] == "R" && $_GET['filter_status'][1] == "RO" && $_GET['filter_status'][2] == "RС"
     ];
 }
 $arResult['ITEMS'][] = [

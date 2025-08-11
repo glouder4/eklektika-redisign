@@ -77,6 +77,9 @@ if (!empty($arParams['PROPERTY_CLAIMS']) && !empty($arResult['PATH_TO_NEW_CLAIM'
     $arResult['PATH_TO_NEW_CLAIM'] .= '&'.$arParams['PROPERTY_CLAIMS'].'='.$arResult['ID'];
 }
 
+$arResult['PATH_TO_NEW_REQUEST'] = '/personal/profile/orders/'.$arResult['ID'].'?order_to_new_request=Y';
+$arResult['PATH_TO_CANCEL_RESERVE'] = '/personal/profile/orders/'.$arResult['ID'].'?cancel_reserve=Y';
+
 if ($arVisual['CLAIMS_BLOCK_SHOW']) {
     $sSortBy = 's_id';
     $sSortOrder = 'desc';
@@ -168,10 +171,11 @@ if ($order) {
 // print_r($arResult['STATUS']);
 // return;
 if ($arResult["PROPERTIES"]["REQUEST_TO_RESERVE"] == "Y" && $arResult['ORDER']['CANCELED'] !== 'Y') {
-		if ($arResult["PROPERTIES"]["RESERVE_SUCCESS"] == "Y") {
+		/*if ($arResult["PROPERTIES"]["RESERVE_SUCCESS"] == "Y") {
 			$arResult['STATUS']["NAME"] = "Резерв в обработке";
 		} else {
+            if( $arResult['STATUS']['ID'] != "" )
 			$arResult['STATUS']["NAME"] = "Запрос на резерв";
-		}
+		}*/
 	}
 unset($groups, $props, $arVisual);
