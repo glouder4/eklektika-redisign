@@ -21,7 +21,7 @@ if (strlen($arParams['MAIN_CHAIN_NAME']) > 0) {
 
 $sTemplateId = Html::getUniqueId(null, Component::getUniqueId($this));
 ?>
-
+    <div class="container">
 <div class="intec-content intec-content-visible">
     <div class="intec-content-wrapper">
         <?= Html::beginTag('div', [
@@ -119,3 +119,4 @@ $APPLICATION->IncludeComponent(
 ?>
 
 <?php include(__DIR__.'/parts/script.php') ?>
+    </div>

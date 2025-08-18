@@ -20,8 +20,8 @@ use Bitrix\Main\Localization\Loc;
             var print = $('[data-role="print"]', root);
             var clear = $('[data-role="clear"]', root);
             var save = $('[data-role="save"]', root);
-            var createReserve = $('#CreateReserve', root);
-            var CreateObrazec = $('#CreateObrazec', root);
+            /*var createReserve = $('#CreateReserve', root);
+            var CreateObrazec = $('#CreateObrazec', root);*/
             var items;
             var quickItemsId = [];
             var quickItems = Object.create(null);
@@ -204,31 +204,6 @@ use Bitrix\Main\Localization\Loc;
 
             });
 
-            createReserve.on('click', function() {
-                let self = $(this);
-                let conf = confirm("Вы действительно хотите зарезервировать данный заказ?");
-                if (conf) {
-                    $.ajax({
-                        url: "/personal/basket/create_reserve.php?STATUS_ID=R",
-                    }).done(function() {
-                        alert("Заявка на резерв оформлена");
-                        document.location.href = '/personal/profile/'
-                    });
-                }
-            });
-            CreateObrazec.on('click', function() {
-                let self = $(this);
-                let conf = confirm("Вы действительно хотите получить образец для заказа?");
-                if (conf) {
-                    $.ajax({
-                        url: "/personal/basket/create_reserve.php?STATUS_ID=OB",
-                    }).done(function() {
-                        alert("Заявка на образец оформлена");
-                        document.location.href = '/personal/profile/'
-                    });
-                }
-            });
-
             confirmRemoveProductCancel.each(function () {
                 $(this).on('click', function () {
                     confirmRemoveProduct[0].dataset.state = 'hidden';
@@ -249,6 +224,31 @@ use Bitrix\Main\Localization\Loc;
             'nodes': <?= JavaScript::toObject('#'.$sTemplateId) ?>,
             'loader': {
                 'name': 'lazy'
+            }
+        });
+
+        $(document).on('click', '#CreateReserve', function() {
+            let self = $(this);
+            let conf = confirm("Вы действительно хотите зарезервировать данный заказ?");
+            if (conf) {
+                $.ajax({
+                    url: "/personal/basket/create_reserve.php?STATUS_ID=R",
+                }).done(function() {
+                    alert("Заявка на резерв оформлена");
+                    document.location.href = '/personal/profile/'
+                });
+            }
+        });
+        $(document).on('click', '#CreateObrazec', function() {
+            let self = $(this);
+            let conf = confirm("Вы действительно хотите получить образец для заказа?");
+            if (conf) {
+                $.ajax({
+                    url: "/personal/basket/create_reserve.php?STATUS_ID=OB",
+                }).done(function() {
+                    alert("Заявка на образец оформлена");
+                    document.location.href = '/personal/profile/'
+                });
             }
         });
     })

@@ -85,7 +85,7 @@
             if ($userObject = $rsUser->Fetch()) {
                 return $userObject['ID'];
             } else {
-                pre("User not found for B24 contact ID: " . $b24ContactId);
+                //pre("User not found for B24 contact ID: " . $b24ContactId);
                 return false;
             }
         }
@@ -301,10 +301,10 @@
             $result = $user->Update($userId, $arFields);
             
             if ($result) {
-                pre("Пользователь ID " . $userId . " удален из группы " . $groupId);
+                //pre("Пользователь ID " . $userId . " удален из группы " . $groupId);
                 return true;
             } else {
-                pre("Ошибка удаления пользователя ID " . $userId . " из группы " . $groupId . ": " . $user->LAST_ERROR);
+                //pre("Ошибка удаления пользователя ID " . $userId . " из группы " . $groupId . ": " . $user->LAST_ERROR);
                 return false;
             }
         }
@@ -399,7 +399,9 @@
 
             foreach ($fields['CONTACT_IDS'] as $b24Id){
                 $userId = $this->getUserIDByB24ID($b24Id);
-                $this->updateMarketingAgentPriceType($fields['IS_MARKETING_AGENT'],$userId);
+
+                if( $userId )
+                    $this->updateMarketingAgentPriceType($fields['IS_MARKETING_AGENT'],$userId);
             }
         }
 

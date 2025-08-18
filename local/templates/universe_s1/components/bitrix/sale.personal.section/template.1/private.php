@@ -24,7 +24,7 @@ if ($arParams['SET_TITLE'] == 'Y') {
 
 $sTemplateId = Html::getUniqueId(null, Component::getUniqueId($this));
 ?>
-
+<div class="container">
 <div class="intec-content intec-content-visible">
     <div class="intec-content-wrapper">
         <?= Html::beginTag('div', [
@@ -70,3 +70,4 @@ $sTemplateId = Html::getUniqueId(null, Component::getUniqueId($this));
 	$component
 ) ?>
 <?php include(__DIR__.'/parts/script.php') ?>
+</div>

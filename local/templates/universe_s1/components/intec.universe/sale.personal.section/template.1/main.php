@@ -4,6 +4,7 @@
 use intec\core\helpers\Html;
 
 ?>
+<div class="container">
 <div class="ns-intec c-sale-personal-section c-sale-personal-section-template-1 p-main">
     <div class="sale-personal-section-wrapper intec-content">
         <div class="sale-personal-section-wrapper intec-content-wrapper">
@@ -37,4 +38,5 @@ use intec\core\helpers\Html;
             </div>
         </div>
     </div>
+</div>
 </div>

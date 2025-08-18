@@ -50,7 +50,7 @@ $APPLICATION->AddChainItem(Loc::getMessage('C_SALE_PERSONAL_SECTION_TEMPLATE_1_T
 $sTemplateId = Html::getUniqueId(null, Component::getUniqueId($this));
 
 ?>
-
+<div class="container">
 <div class="intec-content intec-content-visible">
     <div class="intec-content-wrapper">
         <?= Html::beginTag('div', [
@@ -82,4 +82,5 @@ $sTemplateId = Html::getUniqueId(null, Component::getUniqueId($this));
 ) ?>
 <?php unset($arParameters, $arSortOrder) ?>
 <?php include(__DIR__.'/parts/script.php') ?>
+</div>
 

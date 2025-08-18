@@ -776,7 +776,7 @@ a.mobile-menu__call-btn{
         top: 9px;
     }
     .header__icon--user .header__icon-title{
-        top: 9px;
+        top: 7px;
     }
     .header__social-links-icons{
         gap: 20px;
@@ -868,7 +868,7 @@ a.mobile-menu__call-btn{
         left: -1px;
     }
     .header__icon--user .header__icon-title {
-        top: 17px;
+        top: 14px;
     }
     .header__icon>svg{
         -webkit-transform: scale(1.5);

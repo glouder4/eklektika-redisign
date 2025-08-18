@@ -35,7 +35,7 @@ $oFrame = $this->createFrame();
         <?php
         if( !$USER->IsAuthorized() ){ ?>
             <div class="widget">
-                <a href="<?=$arResult['PROFILE_URL'];?>" rel="nofollow" class="widget-item">
+                <a href="/personal/profile/" rel="nofollow" class="widget-item">
                     <div class="icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>

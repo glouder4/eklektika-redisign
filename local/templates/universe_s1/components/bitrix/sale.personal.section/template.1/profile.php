@@ -21,40 +21,43 @@ $sTemplateId = Html::getUniqueId(null, Component::getUniqueId($this));
 $sProfileAddPath = isset($arResult['ITEMS']['PROFILE_ADD']) ? $arResult['ITEMS']['PROFILE_ADD']['PATH'] : '';
 
 ?>
+<div class="container">
 
-<div class="intec-content intec-content-visible">
-    <div class="intec-content-wrapper">
-        <?= Html::beginTag('div', [
-            'id' => $sTemplateId,
-            'class' => Html::cssClassFromArray([
-                'ns-bitrix' => true,
-                'c-sale-personal-section' => true,
-                'c-sale-personal-section-template-1' => true,
-            ], true),
-            'data' => [
-                'role' => 'personal'
-            ]
-        ]) ?>
-            <div class="sale-personal-section-links-desktop">
-                <?php include(__DIR__.'/parts/menu_desktop.php') ?>
-            </div>
-            <div class="sale-personal-section-links-mobile">
-                <?php include(__DIR__.'/parts/menu_mobile.php') ?>
-            </div>
-        <?= Html::endTag('div') ?>
+
+    <div class="intec-content intec-content-visible">
+        <div class="intec-content-wrapper">
+            <?= Html::beginTag('div', [
+                'id' => $sTemplateId,
+                'class' => Html::cssClassFromArray([
+                    'ns-bitrix' => true,
+                    'c-sale-personal-section' => true,
+                    'c-sale-personal-section-template-1' => true,
+                ], true),
+                'data' => [
+                    'role' => 'personal'
+                ]
+            ]) ?>
+                <div class="sale-personal-section-links-desktop">
+                    <?php include(__DIR__.'/parts/menu_desktop.php') ?>
+                </div>
+                <div class="sale-personal-section-links-mobile">
+                    <?php include(__DIR__.'/parts/menu_mobile.php') ?>
+                </div>
+            <?= Html::endTag('div') ?>
+        </div>
     </div>
-</div>
 
-<?php $APPLICATION->IncludeComponent(
-	'bitrix:sale.personal.profile.list',
-	'',
-	[
-		'PATH_TO_DETAIL' => $arResult['PATH_TO_PROFILE_DETAIL'],
-		'PATH_TO_DELETE' => $arResult['PATH_TO_PROFILE_DELETE'],
-		'PER_PAGE' => $arParams['PROFILES_PER_PAGE'],
-		'SET_TITLE' => $arParams['SET_TITLE'],
-        'PATH_TO_ADD' => $sProfileAddPath
-	],
-	$component
-) ?>
-<?php include(__DIR__.'/parts/script.php') ?>
+    <?php $APPLICATION->IncludeComponent(
+        'bitrix:sale.personal.profile.list',
+        '',
+        [
+            'PATH_TO_DETAIL' => $arResult['PATH_TO_PROFILE_DETAIL'],
+            'PATH_TO_DELETE' => $arResult['PATH_TO_PROFILE_DELETE'],
+            'PER_PAGE' => $arParams['PROFILES_PER_PAGE'],
+            'SET_TITLE' => $arParams['SET_TITLE'],
+            'PATH_TO_ADD' => $sProfileAddPath
+        ],
+        $component
+    ) ?>
+    <?php include(__DIR__.'/parts/script.php') ?>
+</div>

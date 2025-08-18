@@ -118,3 +118,49 @@ a:active, [data-ui-markup="a"]:hover, [data-ui-markup="a"]:focus, [data-ui-marku
     padding-top: 15px;
     border-top: 1px solid silver;
 }
+
+#personal-profile-menu-desktop{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+
+    margin-bottom: 40px;
+}
+.menu-desktop-link{
+    font-family: Manrope;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0;
+    color: #222222;
+
+    min-width: 136px;
+    height: 55px;
+    opacity: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    padding-left: 40px;
+    padding-right: 40px;
+
+
+    border: 3px solid #57B0EA
+}
+.menu-desktop-link:hover,
+.menu-desktop-link:focus,
+.menu-desktop-link:active{
+    color: #222222!important;
+}
+.menu-desktop-link.active{
+    background-color: #57B0EA;
+    color: #FFFFFF;
+}
+.menu-desktop-link.active:hover,
+.menu-desktop-link.active:focus,
+.menu-desktop-link.active:active{
+    color: #FFFFFF!important;
+}

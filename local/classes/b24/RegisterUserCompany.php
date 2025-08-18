@@ -30,6 +30,37 @@ class RegisterUserCompany extends Request{
     private function createB24Company($arFields){
         global $APPLICATION;
 
+        $reqFile = [];
+        $file = [];
+        if( !empty($arFields['UF_REQ']) ){
+            $file = $arFields['UF_REQ'];
+
+            // Сохраняем в систему Битрикс
+            $savedFileId = \CFile::SaveFile($file, 'os_requisites');
+            $fileInfo = \CFile::GetFileArray($savedFileId);
+
+            if ($file['error'] === 0) {
+                $fileName = $file['name'];
+                $filePath = $file['tmp_name'];
+
+                // Читаем содержимое файла
+                $fileContent = file_get_contents($filePath);
+
+                if ($fileContent !== false) {
+                    // Кодируем в base64
+                    $fileData = [
+                        $fileName,
+                        base64_encode($fileContent),
+                    ];
+
+                    // Передаём в поле Bitrix24
+                    $arFields['UF_CRM_1755002252732'] = [
+                        'fileData' => $fileData
+                    ];
+                }
+            }
+        }
+
         // данные для контакта
         $dataContact = [
             'fields' => [
@@ -90,8 +121,9 @@ class RegisterUserCompany extends Request{
                         'OS_COMPANY_EMAIL' => $arFields['EMAIL'],
                         'OS_COMPANY_PHONE' => $arFields['PERSONAL_PHONE'],
                         'OS_COMPANY_B24_ID' => $companyId,
-                        'OS_COMPANY_CITY' => $arFields['UF_CITY']
-                    ];
+                        'OS_COMPANY_CITY' => $arFields['UF_CITY'],
+                        'OS_REQUSITES_FILE' => $arFields['UF_CRM_1755002252732']
+                    ]; 
 
                     $this->createCompanyElement($companyElementParamss);
                 } else {
@@ -114,9 +146,11 @@ class RegisterUserCompany extends Request{
                             'UF_CRM_1669208000616' => $arFields['UF_SPERE'],
                             'UF_CRM_1669208295583' => $arFields['UF_JUR_ADDRESS'],
                             'UF_CRM_1618551330657' => $arFields['UF_CITY'],
+                            'UF_CRM_1755002252732' => $arFields['UF_CRM_1755002252732'],
                             'COMPANY_TYPE' => 'CUSTOMER'
                         ]
                     ];
+
                     $companyId = sendRequestB24("crm.company.add", $qrCompanyInfo);
                     if (!empty($companyId)) {
                         $qrCompany['id'] = $companyId;
@@ -153,28 +187,20 @@ class RegisterUserCompany extends Request{
                             'OS_COMPANY_EMAIL' => $arFields['EMAIL'],
                             'OS_COMPANY_PHONE' => $arFields['PERSONAL_PHONE'],
                             'OS_COMPANY_B24_ID' => $dataCompany['ID'],
-                            'OS_COMPANY_CITY' => $arFields['UF_CITY']
+                            'OS_COMPANY_CITY' => $arFields['UF_CITY'],
+                            'OS_REQUSITES_FILE' => $arFields['UF_CRM_1755002252732']
                         ];
                         $dataContact['fields']['COMPANY_ID'] = $dataCompany['ID'];
 
                         $this->createCompanyElement($companyElementParamss);
+
+
+                        /*\OnlineService\Site\Company::updateB24Company([
+                            'ID' => $companyId,
+                            'UF_CRM_1755002252732' => $reqFile
+                        ]);*/
                     }
                 }
-
-                // Ждем синхронизации данных с повторными попытками
-                /*$maxAttempts = 5;
-                $attempt = 0;
-                $companySite = null;
-
-                while ($attempt < $maxAttempts && $companySite === null) {
-                    $companySite = Company::findByIdB24($dataCompany['ID']);
-                    if ($companySite === null) {
-                        $attempt++;
-                        if ($attempt < $maxAttempts) {
-                            sleep(2); // Ждем 2 секунды между попытками
-                        }
-                    }
-                }*/
 
 
                 $dataCompanyCreate = [
@@ -200,7 +226,6 @@ class RegisterUserCompany extends Request{
                 } else {
                     Company::add($dataCompanyCreate);
                 }*/
-
             }
         }
 
@@ -215,6 +240,7 @@ class RegisterUserCompany extends Request{
             sendRequestB24("crm.contact.company.add", $qrCompanyAddContact);
         }
     }
+
 
     public function OnBeforeUserRegisterHandler(&$arFields) {
         global $APPLICATION;

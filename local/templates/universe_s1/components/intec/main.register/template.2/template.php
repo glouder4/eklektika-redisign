@@ -598,8 +598,8 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
                                                             ]) ?></span>
                                                     </label>
                                                     <div class="action-links" style="display: flex; flex-direction: column;">
-                                                        <a href="/politika-konfidencialnosty.php" target="_blank">Согласие на обработку персональных данных</a>
-                                                        <a href="/politika-konfidencialnosty.php" target="_blank">Политика обработки персональных данных</a>
+                                                        <a href="/soglasiye-na-obrabotku.php" target="_blank">Согласие на обработку персональных данных</a>
+                                                        <a href="/politika-obrabotki-personalnih-dannih.php" target="_blank">Политика обработки персональных данных</a>
                                                     </div>
                                                 </div>
                                             <?php
@@ -774,7 +774,7 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
 
 
 		
-		$("#REGISTER_UF_INN").on("input", function() {
+		/*$("#REGISTER_UF_INN").on("input", function() {
 			
 			let val = $(this).val();			
 			let length = val.length;
@@ -816,7 +816,7 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
 					}
 				});
 			}
-		});
+		});*/
 		
         //for adaptation window
         window.dispatchEvent(new Event('resize'));

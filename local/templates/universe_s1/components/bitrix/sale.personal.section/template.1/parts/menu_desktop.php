@@ -22,17 +22,29 @@ use intec\core\helpers\Html;
     ?>
 <?php } ?>
 
-<div class="sale-personal-section-links-wrap" data-role="links">
+<?php
+    //pre($arResult['ITEMS']);
+?>
+
+<div id="personal-profile-menu-desktop">
+    <?php foreach ($arResult['ITEMS'] as $arItem) {
+        $bActive = $arItem['ACTIVE'];
+    ?>
+        <a class="menu-desktop-link <?=$bActive ? "active" : null;?>" href="<?=$arItem['PATH'];?>"><?=$arItem['NAME'];?></a>
+    <?php } ?>
+</div>
+
+<!--<div class="sale-personal-section-links-wrap" data-role="links">
     <div class="sale-personal-section-links intec-grid intec-grid-wrap intec-grid-a-h-start intec-grid-a-v-stretch" data-role="items">
-        <?php foreach ($arResult['ITEMS'] as $arItem) { ?>
+        <?php /*foreach ($arResult['ITEMS'] as $arItem) { */?>
             <?php
-                $bActive = $arItem['ACTIVE'];
+/*                $bActive = $arItem['ACTIVE'];
 
                 $sUrl = $bActive ? null : Html::encode($arItem['PATH']);
                 $sTag = $bActive ? 'div' : 'a';
-            ?>
+            */?>
             <div class="sale-personal-section-link-item intec-grid-item-auto" data-role="item">
-                <?= Html::beginTag($sTag, [
+                <?php /*= Html::beginTag($sTag, [
                     'class' => Html::cssClassFromArray([
                         'sale-personal-section-link' => true,
                         'intec-grid' => [
@@ -52,21 +64,21 @@ use intec\core\helpers\Html;
                     'data' => [
                         'active' => $bActive ? 'true' : 'false'
                     ]
-                ]) ?>
-                    <?php if ($arResult['VISUAL']['SHOW_ICON']) { ?>
+                ]) */?>
+                    <?php /*if ($arResult['VISUAL']['SHOW_ICON']) { */?>
                         <div class="sale-personal-section-link-icon intec-grid-item-auto">
-                            <?= $arItem['ICON'] ?>
+                            <?php /*= $arItem['ICON'] */?>
                         </div>
-                    <?php } ?>
+                    <?php /*} */?>
                     <div class="sale-personal-section-link-text intec-grid-item-auto">
-                        <?= Html::encode($arItem['NAME']) ?>
+                        <?php /*= Html::encode($arItem['NAME']) */?>
                     </div>
-                <?= Html::endTag($sTag) ?>
+                <?php /*= Html::endTag($sTag) */?>
             </div>
-        <?php } ?>
-        <?php unset($arItem) ?>
+        <?php /*} */?>
+        <?php /*unset($arItem) */?>
         <div class="sale-personal-section-link-item intec-grid-item-auto" data-role="more">
-            <?= Html::beginTag('div', [
+            <?php /*= Html::beginTag('div', [
                 'class' => [
                     'sale-personal-section-link',
                     'intec-grid' => [
@@ -80,12 +92,12 @@ use intec\core\helpers\Html;
                         'border-hover'
                     ]
                 ]
-            ]) ?>
+            ]) */?>
             <div class="sale-personal-section-link-text intec-grid-item-auto">
-                <?= Loc::getMessage('C_SALE_PERSONAL_SECTION_TEMPLATE_1_TEMPLATE_MENU_ITEM_MORE_LINKS') ?>
+                <?php /*= Loc::getMessage('C_SALE_PERSONAL_SECTION_TEMPLATE_1_TEMPLATE_MENU_ITEM_MORE_LINKS') */?>
             </div>
-            <?= Html::endTag('div') ?>
-            <?php $fDraw($arResult) ?>
+            <?php /*= Html::endTag('div') */?>
+            <?php /*$fDraw($arResult) */?>
         </div>
     </div>
-</div>
+</div>-->

@@ -10,13 +10,13 @@ CHTTP::SetStatus('404 Not Found');
 
 require($_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php');
 
-$APPLICATION->SetTitle('Политика обработки персональных данных');
+$APPLICATION->SetTitle('Согласие на обработку персональных данных');
 
 ?>
     <div class="intec-page intec-page-404 intec-content">
         <div class="intec-content-wrapper">
             <?
-            $APPLICATION->IncludeFile(SITE_DIR."include/politika-konfidencialnosty.php", array(), array(
+            $APPLICATION->IncludeFile(SITE_DIR."include/soglasiye-na-obrabotku.php", array(), array(
                     "MODE" => "html",
                     "NAME" => "",
                 )

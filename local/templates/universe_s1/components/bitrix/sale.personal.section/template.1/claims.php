@@ -42,7 +42,7 @@ $arProperties['TICKET_EDIT_TEMPLATE'] = $arResult['ITEMS']['CLAIMS']['PATH'].($a
 $arProperties['TICKET_LIST_URL'] = $arResult['ITEMS']['CLAIMS']['PATH'];
 
 ?>
-
+<div class="container">
 <div class="intec-content intec-content-visible">
     <div class="intec-content-wrapper">
         <?= Html::beginTag('div', [
@@ -78,4 +78,5 @@ $arProperties['TICKET_LIST_URL'] = $arResult['ITEMS']['CLAIMS']['PATH'];
         <?php } ?>
         <?php unset($sTemplate, $arProperties); ?>
     </div>
+</div>
 </div>
