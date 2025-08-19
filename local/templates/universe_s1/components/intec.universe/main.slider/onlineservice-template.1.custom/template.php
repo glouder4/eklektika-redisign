@@ -48,7 +48,7 @@ die();*/
         $this->AddDeleteAction($sId, $arItem['DELETE_LINK']);
 
         $arData = $arItem['DATA'];
-        $sItemName = $arItem['NAME'];
+        $sItemName = $arItem['PROPERTIES']['TITLE']['~VALUE']['TEXT'] ?? $arItem['NAME'];
         $sTag = !empty($arData['LINK']['VALUE']) && !$arData['BUTTON']['SHOW'] && !$arData['PRODUCT']['USE'] && !$arResult['FORM']['SHOW'] ? 'a' : 'div';
         $sPicture = ArrayHelper::getValue($arItem, ['PREVIEW_PICTURE', 'SRC']);
 
@@ -57,6 +57,8 @@ die();*/
 
         if (empty($sPicture))
             $sPicture = SITE_TEMPLATE_PATH.'/images/picture.missing.png';
+
+        $view_type = $arItem['PROPERTIES']['BANNER_VIEW_TYPE']['VALUE_XML_ID'] ?? "VIEW_1";
 
         ?>
         <div class="fullscreen-slider--slide">
@@ -72,7 +74,7 @@ die();*/
             </div>
 
             <div class="fullscreen-slider--slide-data">
-                <div class="fullscreen-slider--slide-data--title">
+                <div class="fullscreen-slider--slide-data--title <?=$view_type;?>">
                     <span><?=$sItemName;?></span>
                 </div>
                 <div class="fullscreen-slider--slide-data--description">

@@ -288,7 +288,7 @@
 
 .mobile-menu {
     position: fixed;
-    top: 103px; left: 0; right: 0; bottom: 0;
+    top: 64px; left: 0; right: 0; bottom: 0;
     background: #7B4FA3;
     z-index: 1000;
     -webkit-transform: translateX(100%);

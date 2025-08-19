@@ -1,5 +1,5 @@
 <?php
-$APPLICATION->SetTitle("Нанесение логотипов и изображений");
+$APPLICATION->SetTitle("Виды нанесения");
 
 $asset->addJs("/local/templates/onlineservice-custom-template/scripts/jquery.min.js", false);
 $asset->addCss("/local/templates/onlineservice-custom-template/components/mainpage/slider/styles/owl.carousel.min.css");
@@ -54,7 +54,7 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
                 </div>
                 <div class="banner-description">
                     <p>
-                        Располагаем собственным оборудованием для всех основных методов печати: DTF -печать, лазерная гравировка, тампопечать, шелкография, УФ-печать, сублимация, термотрансфер, тиснение.
+                        Располагаем собственным оборудованием для всех основных методов печати: DTF -печать, лазерная гравировка, тампопечать, шелкография, УФ-печать, термотрансфер, тиснение.
                     </p>
                 </div>
             </div>
@@ -67,7 +67,7 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
             </div>
             <div class="company-description--text">
                 <p class="text">
-                    Компания «Эклектика» выполняет нанесение логотипов и полноцветных, в том числе широкоформатных изображений на промопродукцию и бизнес-сувениры, предоставленные заказчиком.
+                    Компания YO!merch выполняет нанесение логотипов на промопродукцию и бизнес сувениры из собственного ассортимента
                 </p>
                 <p class="text">
                     В зависимости от материала, цвета, формы и габаритов продукции наши менеджеры порекомендуют технологию нанесения, которая обеспечит корректность цветопередачи, устойчивость рисунка к механическому и химическому воздействию, солнечному свету.
@@ -107,7 +107,7 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
                                     <span>о технологии</span>
                                 </div>
                                 <div class="services--blocks-list--item--body--column_item--description">
-                                    <p>DTF-печать (Direct-to-Film) — это&nbsp;современная технология, позволяющая наносить высококачественные изображения на&nbsp;различные типы одежды</p>
+                                    <p>DTF-печать (Direct-to-Film) — это современная технология, позволяющая наносить высококачественные изображения на одежду и аксессуары</p>
                                 </div>
                             </div>
                             <div class="services--blocks-list--item--body--column">
@@ -115,7 +115,7 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
                                     <span>Где применяется</span>
                                 </div>
                                 <div class="services--blocks-list--item--body--column_item--description">
-                                    <p>Футболки, кепки и&nbsp;рюкзаки. Этот&nbsp;метод печати обладает рядом преимуществ, таких как&nbsp;высокая производительность, автоматизация, низкая себестоимость и&nbsp;возможность изготовления продукции в&nbsp;любых объёмах</p>
+                                    <p>Футболки, толстовки, верхняя одежда, кепки, шопперы ,рюкзаки, сумки и т.д Этот метод печати обладает рядом преимуществ, таких как высокая производительность, низкая себестоимость и возможность изготовления продукции в любых объёмах</p>
                                 </div>
                             </div>
                         </div>
@@ -213,7 +213,7 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
                 </div>
             </div>
 
-            <div class="services--blocks-list--item" data-color="4">
+            <!--<div class="services--blocks-list--item" data-color="4">
                 <div class="services--blocks-list--item--header">
                     <div class="container">
                         <div class="services--blocks-list--item--header--elements">
@@ -256,14 +256,14 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>-->
 
             <div class="services--blocks-list--item" data-color="5">
                 <div class="services--blocks-list--item--header">
                     <div class="container">
                         <div class="services--blocks-list--item--header--elements">
                             <div class="services--blocks-list--item--header--elements--counter">
-                                <span>05</span>
+                                <span>04</span>
                             </div>
                             <div class="services--blocks-list--item--header--elements--name">
                                 <span>Тиснение</span>
@@ -307,7 +307,7 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
                     <div class="container">
                         <div class="services--blocks-list--item--header--elements">
                             <div class="services--blocks-list--item--header--elements--counter">
-                                <span>06</span>
+                                <span>05</span>
                             </div>
                             <div class="services--blocks-list--item--header--elements--name">
                                 <span>Лазерная гравировка</span>
@@ -346,7 +346,7 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
                     </div>
                 </div>
             </div>
-            <div class="services--blocks-list--item" data-color="7">
+            <!--<div class="services--blocks-list--item" data-color="7">
                 <div class="services--blocks-list--item--header">
                     <div class="container">
                         <div class="services--blocks-list--item--header--elements">
@@ -477,7 +477,7 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>
     </section>
 

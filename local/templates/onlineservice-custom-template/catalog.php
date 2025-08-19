@@ -1,4 +1,4 @@
-<?php
+    <?php
 $APPLICATION->SetTitle("Купить");
 
 $asset->addCss("/local/templates/onlineservice-custom-template/components/catalog/styles/styles.css");
@@ -52,7 +52,7 @@ $GLOBALS["OS_BREADCRUMBS"] = [
                             стать нашим дилером.</p>
                     </div>
                     <div class="cards-list-item--action">
-                        <a href="/personal/profile/" class="cards-list-item--action_btn">Зарегистрироваться</a>
+                        <a href="/personal/profile/registration.php" class="cards-list-item--action_btn">Зарегистрироваться</a>
                         <a href="/personal/profile/" class="cards-list-item--action_btn" style="background-color: #EF4A85;">Войти</a>
                     </div>
                 </div>
@@ -64,7 +64,7 @@ $GLOBALS["OS_BREADCRUMBS"] = [
                         <p>Приобретаете продукцию<br/>для&nbsp;своей компании? Обратитесь<br/>к&nbsp;одному из&nbsp;наших менеджеров</p>
                     </div>
                     <div class="cards-list-item--action">
-                        <a href="/personal/profile/" class="cards-list-item--action_btn">Зарегистрироваться</a>
+                        <a href="/personal/profile/registration.php" class="cards-list-item--action_btn">Зарегистрироваться</a>
                         <a href="/personal/profile/" class="cards-list-item--action_btn" style="background-color: #EF4A85;">Войти</a>
                     </div>
                 </div>
@@ -76,7 +76,7 @@ $GLOBALS["OS_BREADCRUMBS"] = [
                         <p>Хотите приобрести продукцию Yoliba<br/>для&nbsp;личного пользования? Нет&nbsp;проблем!</p>
                     </div>
                     <div class="cards-list-item--action">
-                        <a href="/personal/profile/" class="cards-list-item--action_btn">Зарегистрироваться</a>
+                        <a href="/personal/profile/registration.php" class="cards-list-item--action_btn">Зарегистрироваться</a>
                         <a href="/personal/profile/" class="cards-list-item--action_btn" style="background-color: #EF4A85;">К покупкам</a>
                     </div>
                 </div>

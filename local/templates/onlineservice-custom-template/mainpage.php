@@ -454,7 +454,7 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
         </div>
     </div>
 
-    <?$APPLICATION->IncludeComponent(
+    <?/*$APPLICATION->IncludeComponent(
         "bitrix:news.list",
         "onlineservice-brands-news.list",
         Array(
@@ -511,7 +511,7 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
             "SORT_ORDER2" => "ASC",
             "STRICT_SECTION_CHECK" => "N"
         )
-    );?>
+    );*/?>
 
     <?$APPLICATION->IncludeComponent(
         "bitrix:form.result.new",

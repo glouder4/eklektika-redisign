@@ -69,6 +69,7 @@
 }
 .footer__main-brand_info-social-link{
     display: block;
+    max-width: 17px;
 }
 .footer__main-brand_info-social-link:nth-child(1){
     width: 31.638795852661133px;
@@ -130,6 +131,12 @@
     font-size: 14px;
     line-height: 100%;
     letter-spacing: 0;
+    color: #FFFFFF;
+}
+.footer__main-categories__columns-column--title>span>a,
+.footer__main-categories__columns-column--title>span>a:focus,
+.footer__main-categories__columns-column--title>span>a:hover,
+.footer__main-categories__columns-column--title>span>a:active{
     color: #FFFFFF;
 }
 .footer__main-categories__columns-column--list_item{
@@ -236,6 +243,7 @@
     .footer__main-brand_info{
         width: 30%;
         max-width: 455px;
+        padding-bottom: 35px;
     }
     .footer__main{
         padding-top: 75px;
@@ -254,6 +262,9 @@
     }
     .footer__main-brand_info-links{
         margin-top: 43px;
+    }
+    .footer__main-brand_info-social-link{
+        max-width: 30px;
     }
     .footer__main-brand_info-social-links{
         margin-top: 40px;

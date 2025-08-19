@@ -1,11 +1,9 @@
-<?php
-header("Location: /");
-die();
-require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+<?php require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 
 $APPLICATION->SetTitle("Бренды");
 
 ?>
+
 <?php $APPLICATION->IncludeComponent(
 	"bitrix:news", 
 	"brands.1", 

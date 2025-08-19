@@ -1,4 +1,4 @@
-<?php
+    <?php
 $APPLICATION->SetTitle("Контакты");
 ?>
 <div class="container">
@@ -32,12 +32,13 @@ $APPLICATION->SetTitle("Контакты");
                             <span>Адрес офиса</span>
                         </div>
                         <div class="contacts--map_data--item_description">
-                            <p>109428, г. Москва, Рязанский проспект, дом 24, корп.2</p>
+                            <p>127254, г.Москва, Огородный пр-д, д.16/1, стр. 4, 1005</p>
+                            <p><a href="tel:+74951614100">+7 (495) 161-41-00</a></p>
                         </div>
                     </div>
                     <div class="contacts--map_data--item">
                         <div class="contacts--map_data--item_title">
-                            <span>Адрес склада</span>
+                            <span>Склад и Производство</span>
                         </div>
                         <div class="contacts--map_data--item_description">
                             <p>109428, г. Москва, Рязанский проспект, дом 16, стр. 3<br/>
@@ -63,7 +64,7 @@ $APPLICATION->SetTitle("Контакты");
                     </div>
                     <div class="contacts--map_data--item">
                         <div class="contacts--map_data--item--additional_info">
-                            <a href="mailto:team@eklektika.ru" class="contacts--map_data--item_description-email">team@eklektika.ru</a>
+                            <a href="mailto:office@yomerch.ru" class="contacts--map_data--item_description-email">office@yomerch.ru</a>
                             <span>Время работы:</span>
                             <span>9:30 - 18:00 (кроме сб.,вс.)</span>
                         </div>
@@ -83,61 +84,7 @@ $APPLICATION->SetTitle("Контакты");
             <div class="contacts--accordion-section-description">
                 <p>Офис и&nbsp;склад находятся в&nbsp;шаговой доступности друг от&nbsp;друга (1&nbsp;автобусная остановка). Проход и&nbsp;проезд на&nbsp;склад осуществляется через&nbsp;проходную предприятия по&nbsp;адресу: Москва, 2-й Вязовский проезд,&nbsp;д..&nbsp;2а</p>
             </div>
-            <div class="contacts--accordion-section-items">
-                <div class="contacts--accordion-section-item">
-                    <div class="contacts--accordion-section-item-header">
-                        От станции метро «Рязанский&nbsp;проспект»
-                        <div class="icon-container">
-                            <svg class="plus-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 40 40" fill="none">
-                                <circle cx="20" cy="20" r="19" stroke="#744A9E" stroke-width="2"/>
-                                <path d="M20.4004 15.2001V25.6001" stroke="#744A9E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M15.2012 20.368H25.6012" stroke="#744A9E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                            <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 40 40" fill="none">
-                                <circle cx="20" cy="20" r="19" stroke="#744A9E" stroke-width="2"/>
-                                <path d="M15.2012 15.368L25.6012 25.768" stroke="#744A9E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M25.6012 15.368L15.2012 25.768" stroke="#744A9E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="contacts--accordion-section-item-content">
-                        <p style="font-weight: bold;">От станции метро «Рязанский проспект» (в первом вагоне из центра):</p>
-                        <p>
-                            <b>Офис:</b> В сторону центра проехать до остановки «НИЦ Строительство»(3 остановки).От остановки перейти на противоположную сторону Рязанского проспекта по подземному переходу.Офис находится в Бизнесс-центре "Юнион", вход через центральные двери со стороны Рязанского проспекта
-                            (под вывеской ПЕНЕТРОН)
-                        </p>
-                        <p>
-                            <b>Склад:</b> В сторону центра проехать до остановки «Комбинат ЖБК № 2» (4 остановки) на автобусах 143, 143к, 169, 279, 29к и т63 или на маршрутном такси 311к, либо на автобусе-экспресс М7 (2 остановки). От остановки перейти на противоположную сторону Рязанского проспекта по подземному переходу. Склад находятся в стоящем справа 7-ми этажном кирпичном здании за бетонным забором.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="contacts--accordion-section-item">
-                    <div class="contacts--accordion-section-item-header">
-                        От станции МЦК «Нижегородская»
-                        <div class="icon-container">
-                            <svg class="plus-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 40 40" fill="none">
-                                <circle cx="20" cy="20" r="19" stroke="#744A9E" stroke-width="2"/>
-                                <path d="M20.4004 15.2001V25.6001" stroke="#744A9E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M15.2012 20.368H25.6012" stroke="#744A9E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                            <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 40 40" fill="none">
-                                <circle cx="20" cy="20" r="19" stroke="#744A9E" stroke-width="2"/>
-                                <path d="M15.2012 15.368L25.6012 25.768" stroke="#744A9E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M25.6012 15.368L15.2012 25.768" stroke="#744A9E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div class="contacts--accordion-section-item-content">
-                        <p style="font-weight: bold;">
-                            От станции МЦК «Нижегородская»:
-                        </p>
-                        <p>
-                            Перейти на светофоре по пешеходному переходу на противоположную сторону Рязанского проспекта к остановке общественного транспорта «Станция Нижегородская» (перед ТЦ Ашан), оттуда в сторону области проехать до остановки «НИЦ Строительство» (в офис) или «Комбинат ЖБК № 2» (на склад и производство) на автобусах 143, 143к, 279 и т63 или на маршрутном такси 311к, либо на автобусе-экспресс М7 (доезджает только
-                            до остановки «Комбинат ЖБК № 2»).
-                        </p>
-                    </div>
-                </div>
+            <!--<div class="contacts--accordion-section-items">
 
                 <div class="contacts--accordion-section-item">
                     <div class="contacts--accordion-section-item-header">
@@ -244,7 +191,7 @@ $APPLICATION->SetTitle("Контакты");
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>
     </div>
     <div class="container">
@@ -255,19 +202,23 @@ $APPLICATION->SetTitle("Контакты");
             <div class="requisites--list">
                 <div class="requisites--list-item">
                     <span class="requisites--list-item_name">Наименование</span>
-                    <span>ООО «Эклектика»</span>
+                    <span>Общество с ограниченной ответственностью «ЙOкаталог»</span>
                 </div>
                 <div class="requisites--list-item">
-                    <span class="requisites--list-item_name">Почтовые адреса</span>
-                    <span>109428, г. Москва, Рязанский проспект, дом 16, строение 3, помещение I, комната 39, этаж 7</span>
+                    <span class="requisites--list-item_name">Сокращенное наименование </span>
+                    <span>ООО «ЙOкаталог» </span>
                 </div>
                 <div class="requisites--list-item">
-                    <span class="requisites--list-item_name">ИНН участника</span>
-                    <span>7704404228</span>
+                    <span class="requisites--list-item_name">Юридический, фактический, почтовый адрес</span>
+                    <span>127254, г. Москва, вн. тер. г. муниципальный округ Бутырский, пр-д Огородный, д. 16/1, стр. 4, помещ. 1005</span>
                 </div>
                 <div class="requisites--list-item">
-                    <span class="requisites--list-item_name">КПП участника</span>
-                    <span>772101001</span>
+                    <span class="requisites--list-item_name">ОГРН</span>
+                    <span>1257700330865</span>
+                </div>
+                <div class="requisites--list-item">
+                    <span class="requisites--list-item_name">ИНН / КПП</span>
+                    <span>9715514096 / 771501001</span>
                 </div>
                 <div class="requisites--list-item">
                     <span class="requisites--list-item_name">Банк получателя</span>
@@ -283,7 +234,7 @@ $APPLICATION->SetTitle("Контакты");
                 </div>
                 <div class="requisites--list-item">
                     <span class="requisites--list-item_name">Расчетный счет</span>
-                    <span>40702810202880003884</span>
+                    <span>40702810702590008239</span>
                 </div>
             </div>
         </div>

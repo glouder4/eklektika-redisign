@@ -49,7 +49,7 @@ $oFrame = $this->createFrame();
                 </a>
             </div>
             <div class="widget">
-                <a href="/personal/profile/registration.php" rel="nofollow" class="widget-item">
+                <a href="/catalog/" rel="nofollow" class="widget-item">
                     <div class="icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
@@ -121,7 +121,7 @@ $oFrame = $this->createFrame();
                 </a>
             </div>
             <div class="widget">
-                <a href="#" rel="nofollow" class="widget-item">
+                <a href="/personal/profile/kp/" rel="nofollow" class="widget-item">
                     <div class="icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
@@ -129,12 +129,12 @@ $oFrame = $this->createFrame();
                         </svg>
                     </div>
                     <div class="data">
-                        <span>Оплаты</span>
+                        <span>Коммерческие предложения</span>
                     </div>
                 </a>
             </div>
             <div class="widget">
-                <a href="#" rel="nofollow" class="widget-item">
+                <a href="/personal/profile/" rel="nofollow" class="widget-item">
                     <div class="icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <line x1="18" y1="20" x2="18" y2="10"/>
@@ -143,7 +143,7 @@ $oFrame = $this->createFrame();
                         </svg>
                     </div>
                     <div class="data">
-                        <span>Аналитика</span>
+                        <span>Написать менеджеру</span>
                     </div>
                 </a>
             </div>
