@@ -3,7 +3,7 @@
 use intec\eklectika\advertising_agent\Company;
 use intec\eklectika\advertising_agent\Client;
 use intec\eklectika\advertising_agent\Manager;
-
+/*
 require_once($_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/include/prolog_before.php');
 CModule::IncludeModule("intec.eklectika");
 $contactId = $_REQUEST['data']['FIELDS']['ID'];
@@ -176,4 +176,4 @@ if ($idUser) {
 
 function addLog($file, $text) {
 	file_put_contents($file, date("d.m.Y H:i:s")." - ".$text.PHP_EOL, FILE_APPEND);
-}
+}*/

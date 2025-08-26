@@ -3,7 +3,7 @@ use intec\eklectika\advertising_agent\Company;
 require_once($_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/include/prolog_before.php');
 CModule::IncludeModule("intec.eklectika");
 
-if ($_REQUEST['event'] == 'ONCRMCOMPANYADD' || $_REQUEST['event'] == 'ONCRMCOMPANYUPDATE') {
+/*if ($_REQUEST['event'] == 'ONCRMCOMPANYADD' || $_REQUEST['event'] == 'ONCRMCOMPANYUPDATE') {
 
 	$companyB24Id = $_REQUEST['data']['FIELDS']['ID'];
 	$companySite = Company::findByIdB24($companyB24Id);
@@ -51,4 +51,4 @@ if ($_REQUEST['event'] == 'ONCRMCOMPANYADD' || $_REQUEST['event'] == 'ONCRMCOMPA
 			intec\eklectika\advertising_agent\Company::update($companySite["ID"], ["STAFFS" => $arStaffs]);
 		}
 	}
-}
+}*/

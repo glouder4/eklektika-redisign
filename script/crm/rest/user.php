@@ -2,7 +2,7 @@
 use intec\eklectika\advertising_agent\Manager;
 require_once($_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/include/prolog_before.php');
 
-if($_REQUEST['event'] == 'ONUSERUPDATE'){
+/*if($_REQUEST['event'] == 'ONUSERUPDATE'){
 	$managerInfoNew = sendRequestB24("user.get", ["ID" => $_REQUEST['data']['FIELDS'][0]['ID']]);
 	$managerInfo = $managerInfoNew[0];
 	
@@ -21,4 +21,4 @@ if($_REQUEST['event'] == 'ONUSERUPDATE'){
 	} else {
 		Manager::add($arData);
 	}
-}
+}*/

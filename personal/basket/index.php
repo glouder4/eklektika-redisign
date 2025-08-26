@@ -191,7 +191,7 @@ $APPLICATION->SetTitle("Корзина")
 		"ORDER_FAST_AJAX_OPTION_STYLE" => "Y",
 		"ORDER_FAST_AJAX_OPTION_HISTORY" => "N",
 		"ORDER_FAST_AJAX_OPTION_ADDITIONAL" => "",
-		"MIN_SUMM" => "15000",
+		"MIN_SUMM" => "0",
 		"QUICK_VIEW_OFFERS_FIELD_CODE" => array(
 			0 => "",
 			1 => "",

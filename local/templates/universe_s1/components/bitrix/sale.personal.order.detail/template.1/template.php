@@ -74,6 +74,11 @@ $APPLICATION->SetTitle(Loc::getMessage('C_SALE_PERSONAL_ORDER_DETAIL_TEMPLATE_1_
 
 $isReserve = isset($arResult['PROPERTIES']['REQUEST_TO_RESERVE']) && $arResult['PROPERTIES']['REQUEST_TO_RESERVE'] == "Y";
 
+$isObrazec = isset($arResult['PROPERTIES']['REQUEST_TO_SAMPLE']) && $arResult['PROPERTIES']['REQUEST_TO_SAMPLE'] == "Y";
+
+if( $isObrazec && $arResult['STATUS']['ID'] == "N" )
+    $arResult['STATUS']['NAME'] = "Запрос образца";
+
 ?>
 <div id="<?= $sTemplateId ?>" class="ns-bitrix c-sale-personal-order-detail c-sale-personal-order-detail-template-1">
     <div class="sale-personal-order-detail-wrapper intec-content">
@@ -121,9 +126,9 @@ $isReserve = isset($arResult['PROPERTIES']['REQUEST_TO_RESERVE']) && $arResult['
                             <?php if ($arParams['GUEST_MODE'] !== 'Y') {?>
                                 <?php if ($arResult['CAN_CANCEL'] === 'Y' && $arParams['DISALLOW_CANCEL'] !== 'Y') { ?>
                                   <?php
-                                        if( $isReserve && ( $arResult['STATUS']['ID'] == "R" || $arResult['STATUS']['ID'] == "RC"  )){ ?>
-                                            <div class="intec-grid-item-auto">
-                                                <?= Html::tag('a', Loc::getMessage('C_SALE_PERSONAL_ORDER_DETAIL_TEMPLATE_1_TEMPLATE_BUTTONS_CANCEL_RESERVE'), [
+                                        if( $isReserve && ( $arResult['STATUS']['ID'] == "R"  )){ ?>
+                                            <!--<div class="intec-grid-item-auto">
+                                                <?php /*= Html::tag('a', Loc::getMessage('C_SALE_PERSONAL_ORDER_DETAIL_TEMPLATE_1_TEMPLATE_BUTTONS_CANCEL_RESERVE'), [
                                                     'class' => [
                                                         'sale-personal-order-detail-button',
                                                         'intec-ui' => [
@@ -136,30 +141,43 @@ $isReserve = isset($arResult['PROPERTIES']['REQUEST_TO_RESERVE']) && $arResult['
                                                     ],
                                                     'href' => $arResult['PATH_TO_CANCEL_RESERVE'],
                                                     'id' => 'cancelReserve'
-                                                ]) ?>
-                                            </div>
+                                                ]) */?>
+                                            </div>-->
                                         <?php }
                                   ?>
 
                                     <div class="intec-grid-item-auto">
-                                        <?= Html::tag('a', Loc::getMessage('C_SALE_PERSONAL_ORDER_DETAIL_TEMPLATE_1_TEMPLATE_BUTTONS_CANCEL'), [
-                                            'class' => [
-                                                'sale-personal-order-detail-button',
-                                                'intec-ui' => [
-                                                    '',
-                                                    'control-button',
-                                                    'mod-transparent',
-                                                    'mod-round-2',
-                                                    'scheme-current'
-                                                ]
-                                            ],
-                                            'href' => $arResult['URL_TO_CANCEL']
-                                        ]) ?>
-                                    </div>
+                                    <?php
+                                        $messageKey = "C_SALE_PERSONAL_ORDER_DETAIL_TEMPLATE_1_TEMPLATE_BUTTONS_CANCEL";
+                                        if( $isReserve ){
+                                            $messageKey = "C_SALE_PERSONAL_ORDER_DETAIL_TEMPLATE_1_TEMPLATE_BUTTONS_CANCEL_RESERVE";
+                                        }
+                                        elseif( $isObrazec ){
+                                            $messageKey = "C_SALE_PERSONAL_ORDER_DETAIL_TEMPLATE_1_TEMPLATE_BUTTONS_CANCEL_OBRAZEC";
+                                        }
+                                        if( ( $arResult['STATUS']['ID'] != "SS" && $arResult['STATUS']['ID'] != "RO"  )){ ?>
+                                            <?= Html::tag('a', Loc::getMessage(
+                                                $messageKey
+                                            ), [
+                                                'class' => [
+                                                    'sale-personal-order-detail-button',
+                                                    'intec-ui' => [
+                                                        '',
+                                                        'control-button',
+                                                        'mod-transparent',
+                                                        'mod-round-2',
+                                                        'scheme-current'
+                                                    ]
+                                                ],
+                                                'href' => $arResult['URL_TO_CANCEL']
+                                            ]) ?>
+                                        </div>
+                                    <?php }
+                                    ?>
                                 <?php } ?>
                                 <div class="intec-grid-item-auto">
                                     <?php
-                                        if( $isReserve && ( $arResult['STATUS']['ID'] == "R" || $arResult['STATUS']['ID'] == "RC" ) ){?>
+                                            if( $isReserve && ( $arResult['STATUS']['ID'] == "R" || $arResult['STATUS']['ID'] == "RC" ) ){?>
 
                                             <?= Html::tag('a', Loc::getMessage('C_SALE_PERSONAL_ORDER_DETAIL_TEMPLATE_1_TEMPLATE_BUTTONS_TO_NEW_ORDER'), [
                                                 'class' => [
@@ -222,6 +240,34 @@ $isReserve = isset($arResult['PROPERTIES']['REQUEST_TO_RESERVE']) && $arResult['
                                     ]) ?>
                                 </div>
                             </div>
+                            <?php
+                                if( $arResult['STATUS_ID'] == "RC" && isset($arResult['PROPERTIES']['END_DATE_RESERVE']) && !empty($arResult['PROPERTIES']['END_DATE_RESERVE']) ):
+                            ?>
+                                <div class="intec-grid-item-auto intec-grid-item-425-1 intec-grid intec-grid-wrap intec-grid-a-h-start intec-grid-a-v-start intec-grid-i-8">
+                                    <div class="sale-personal-order-detail-field-title intec-grid-item-1 intec-grid-item-425-2">
+                                        Срок резервации
+                                    </div>
+                                    <div class="sale-personal-order-detail-field-value intec-grid-item-1 intec-grid-item-425-2">
+                                        До <?=$arResult['PROPERTIES']['END_DATE_RESERVE'];?>
+                                    </div>
+                                </div>
+                            <?php
+                                endif;
+                            ?>
+                            <?php //pre($arResult['PROPERTIES']['END_DATE_SAMPLE']);
+                            if( $arResult['STATUS_ID'] == "SS" && isset($arResult['PROPERTIES']['END_DATE_SAMPLE']) && !empty($arResult['PROPERTIES']['END_DATE_SAMPLE']) ):
+                                ?>
+                                <div class="intec-grid-item-auto intec-grid-item-425-1 intec-grid intec-grid-wrap intec-grid-a-h-start intec-grid-a-v-start intec-grid-i-8">
+                                    <div class="sale-personal-order-detail-field-title intec-grid-item-1 intec-grid-item-425-2">
+                                        Срок сдачи образца
+                                    </div>
+                                    <div class="sale-personal-order-detail-field-value intec-grid-item-1 intec-grid-item-425-2">
+                                        До <?=$arResult['PROPERTIES']['END_DATE_SAMPLE'];?>
+                                    </div>
+                                </div>
+                            <?php
+                            endif;
+                            ?>
                             <div class="intec-grid-item-auto intec-grid-item-425-1 intec-grid intec-grid-wrap intec-grid-a-h-start intec-grid-a-v-start intec-grid-i-8">
                                 <div class="sale-personal-order-detail-field-title intec-grid-item-1 intec-grid-item-425-2">
                                     <?= Loc::getMessage('C_SALE_PERSONAL_ORDER_DETAIL_TEMPLATE_1_TEMPLATE_HEADER_ORDER_CANCELED') ?>

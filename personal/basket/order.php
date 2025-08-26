@@ -117,7 +117,7 @@ $APPLICATION->SetTitle("Оформление заказа");
 		"ORDER_GROUP_PROPS" => "1",
 		"ORDER_PROP_DELIVERY" => "",
 		"COMPONENT_TEMPLATE" => "simple.1",
-		"MIN_SUMM" => "15000",
+		"MIN_SUMM" => "0",
 		"USER_CONSENT_ID" => "0",
 		"USER_CONSENT_IS_CHECKED" => "Y",
 		"USER_CONSENT_IS_LOADED" => "N",

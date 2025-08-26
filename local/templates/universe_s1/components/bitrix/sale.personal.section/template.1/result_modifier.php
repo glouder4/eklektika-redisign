@@ -108,7 +108,7 @@ if (!empty($arResult['SEF_FOLDER'])) {
 }
 
 $arResult['ITEMS'][] = [
-    'PATH' => $arResult['PATH_TO_ORDERS'].'?filter_status=N',
+    'PATH' => $arResult['PATH_TO_ORDERS'].'?filter_status=N&show_all=Y',
     'NAME' => "Заказы",
     'ICON' => "",//'<i class="fa fa-calculator"></i>',
     'ACTIVE' => empty($sPageSection) ? $sPageUrl == $arResult['PATH_TO_ORDERS'] && empty($sHistoryPage) && isset($_GET['filter_status']) && $_GET['filter_status'] == "N" : $sPageSection == 'orders' && empty($sHistoryPage)
@@ -116,17 +116,17 @@ $arResult['ITEMS'][] = [
 
 if ($arParams['SHOW_ORDER_PAGE'] === 'Y') {
     $arResult['ITEMS'][] = [
-        'PATH' => "/personal/profile/orders/?filter_date_from=&filter_status[]=R&filter_status[]=RO&filter_status[]=RС",
+        'PATH' => "/personal/profile/orders/?filter_date_from=&filter_status[]=R&filter_status[]=RO&filter_status[]=RC&show_all=Y",
         'NAME' => "Резервы",
         'ICON' => '',
-        'ACTIVE' => isset($_GET['filter_status']) && $_GET['filter_status'][0] == "R" && $_GET['filter_status'][1] == "RO" && $_GET['filter_status'][2] == "RС"
+        'ACTIVE' => isset($_GET['filter_status']) && $_GET['filter_status'][0] == "R" && $_GET['filter_status'][1] == "RO" && $_GET['filter_status'][2] == "RC"
     ];
 }
 $arResult['ITEMS'][] = [
-    'PATH' => "/personal/profile/orders/?filter_status[]=OB&filter_status[]=SC&filter_status[]=SO",
+    'PATH' => "/personal/profile/orders/?filter_status[]=OB&filter_status[]=SC&filter_status[]=SO&filter_status[]=SS&show_all=Y",
     'NAME' => "Образцы",//Loc::getMessage('C_SALE_PERSONAL_SECTION_TEMPLATE_1_TEMPLATE_MENU_ITEM_ORDER'),
     'ICON' => '',
-    'ACTIVE' => isset($_GET['filter_status']) && ($_GET['filter_status'] == "OB" || $_GET['filter_status'] == "SC" || $_GET['filter_status'] == "SO")
+    'ACTIVE' => isset($_GET['filter_status']) && ($_GET['filter_status'][0] == "OB" || $_GET['filter_status'][1] == "SC" || $_GET['filter_status'][2] == "SO"  || $_GET['filter_status'][3] == "SS")
 ];
 $arResult['ITEMS'][] = [
     'PATH' => "#",

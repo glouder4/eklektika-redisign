@@ -57,7 +57,7 @@ CJSCore::Init(['date']);
                     <div class="intec-grid-item-auto intec-grid-item-768-1">
                         <div class="sale-personal-order-list-filter-form-label"><?= Loc::getMessage('C_SALE_PERSONAL_ORDER_LIST_TEMPLATE_1_TEMPLATE_FILTER_LABEL_STATUS') ?></div>
                         <select class="sale-personal-order-list-filter-form-status" name="filter_status">
-                            <option value=""><?= Loc::getMessage('C_SALE_PERSONAL_ORDER_LIST_TEMPLATE_1_TEMPLATE_FILTER_SELECT_ALL') ?></option>
+                            <!--<option value=""><?php /*= Loc::getMessage('C_SALE_PERSONAL_ORDER_LIST_TEMPLATE_1_TEMPLATE_FILTER_SELECT_ALL') */?></option>-->
                             <?php foreach ($arResult['INFO']['STATUS'] as $status) { ?>
                                 <option value="<?= $status['ID'] ?>" <?= isset($arGet['filter_status']) && $arGet['filter_status'] == $status['ID'] ? 'selected=""' : null ?>><?= $status['NAME'] ?></option>
                             <?php } ?>

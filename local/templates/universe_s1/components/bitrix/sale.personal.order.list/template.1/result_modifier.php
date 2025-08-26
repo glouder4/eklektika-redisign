@@ -221,3 +221,27 @@ if(is_array($arResult['ORDERS']) && !empty($arResult['ORDERS'])) {
 
 $arResult['VISUAL'] = $arVisual;
 unset($arOrder, $arVisual);
+
+
+
+$excludedReserve = ["RO", "RC", "R"];
+$excludedObrazec = ["OB","SS", "SO", "SC"];
+
+if( $_GET['filter_status'][0] == "R" ){
+    foreach ($arResult['INFO']['STATUS'] as $key => &$status) {
+        if (!in_array($key, $excludedReserve))
+            unset($arResult['INFO']['STATUS'][$key]);
+    }
+}
+elseif( $_GET['filter_status'][0] == "OB" ){
+    foreach ($arResult['INFO']['STATUS'] as $key => &$status) {
+        if (!in_array($key, $excludedObrazec))
+            unset($arResult['INFO']['STATUS'][$key]);
+    }
+}
+else{
+    foreach ($arResult['INFO']['STATUS'] as $key => &$status) {
+        if (in_array($key, $excludedReserve) || in_array($key, $excludedObrazec))
+            unset($arResult['INFO']['STATUS'][$key]);
+    }
+}

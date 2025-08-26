@@ -17,27 +17,37 @@ $arUserInfo = Client::getInfo($userId);
 
 $order = Sale\Order::create(SITE_ID, $userId); 
 
-if ($statusClient == "fiz") {	
+/*if ($statusClient == "fiz") {
 	$typePerson = 1;
 	$order->setPersonTypeId($typePerson);  
 	
 } else {
 	$typePerson = 2;
 	$order->setPersonTypeId($typePerson);  
-}
+}*/
+$typePerson = 2;
+$order->setPersonTypeId($typePerson);
 
 $basket = Sale\Basket::loadItemsForFUser(Sale\Fuser::getId(), Bitrix\Main\Context::getCurrent()->getSite());
 $order->setBasket($basket);
 $basketSum = $order->getPrice();
-if ($basketSum < 15000) {
+/*if ($basketSum < 15000) {
 	die();
-}
+}*/
 $arProps = [];
-if ($typePerson == 1) {	
-	$arProps["REQUEST_TO_RESERVE"] = [
-		"ID" => 25,
-		"VALUE" => "Y"
-	];
+if ($typePerson == 1) {
+    if( isset($_GET['STATUS_ID']) && ( $_GET['STATUS_ID'] == "R" ) ) {
+        $arProps["REQUEST_TO_RESERVE"] = [
+            "ID" => 25,
+            "VALUE" => "Y"
+        ];
+    }
+    if( isset($_GET['STATUS_ID']) && ( $_GET['STATUS_ID'] == "OB" ) ){
+        $arProps["REQUEST_TO_SAMPLE"] = [
+            "ID" => 35,
+            "VALUE" => "Y"
+        ];
+    }
 	$arProps["FIO"] = [
 		"ID" => 1,
 		"VALUE" => $arUserInfo["LAST_NAME"]." ".$arUserInfo["NAME"]
@@ -84,8 +94,7 @@ if ($typePerson == 1) {
 		"VALUE" => $arUserInfo["UF_INN"]
 	];	
 }
-// print_r($arProps );
-// die();
+
 
 
 $oProperties = $order->getPropertyCollection();

@@ -116,3 +116,14 @@
 		margin-bottom: 100px;
 	}
 }
+.manager-action-links--wrapper>.link>a:hover .data,
+.manager-action-links--wrapper>.link>a:focus .data,
+.manager-action-links--wrapper>.link>a:active .data{
+	color: #858585!important;
+}
+.ns-intec-universe.c-sale-basket-small.c-sale-basket-small-notifications-1 .sale-basket-small-content .sale-basket-small-product-name,
+.ns-intec-universe.c-sale-basket-small.c-sale-basket-small-notifications-1 .sale-basket-small-content .sale-basket-small-product-name:hover,
+.ns-intec-universe.c-sale-basket-small.c-sale-basket-small-notifications-1 .sale-basket-small-content .sale-basket-small-product-name:focus,
+.ns-intec-universe.c-sale-basket-small.c-sale-basket-small-notifications-1 .sale-basket-small-content .sale-basket-small-product-name:active{
+	color: #888888!important;
+}

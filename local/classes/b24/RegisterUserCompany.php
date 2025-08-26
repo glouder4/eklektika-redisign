@@ -59,6 +59,38 @@ class RegisterUserCompany extends Request{
                     ];
                 }
             }
+            else{
+                // Вывести подробную ошибку
+                $errorMessage = 'Ошибка загрузки файла реквизитов: ';
+                switch ($file['error']) {
+                    case UPLOAD_ERR_INI_SIZE:
+                        $errorMessage .= 'Размер файла превышает максимально допустимый размер, указанный в php.ini.';
+                        break;
+                    case UPLOAD_ERR_FORM_SIZE:
+                        $errorMessage .= 'Размер файла превышает максимально допустимый размер, указанный в форме.';
+                        break;
+                    case UPLOAD_ERR_PARTIAL:
+                        $errorMessage .= 'Файл был загружен только частично.';
+                        break;
+                    case UPLOAD_ERR_NO_FILE:
+                        $errorMessage .= 'Файл не был загружен.';
+                        break;
+                    case UPLOAD_ERR_NO_TMP_DIR:
+                        $errorMessage .= 'Отсутствует временная папка для загрузки файла.';
+                        break;
+                    case UPLOAD_ERR_CANT_WRITE:
+                        $errorMessage .= 'Не удалось записать файл на диск.';
+                        break;
+                    case UPLOAD_ERR_EXTENSION:
+                        $errorMessage .= 'Загрузка файла была остановлена расширением PHP.';
+                        break;
+                    default:
+                        $errorMessage .= 'Неизвестная ошибка (код: ' . $file['error'] . ').';
+                        break;
+                }
+                $APPLICATION->ThrowException($errorMessage);
+                return false;
+            }
         }
 
         // данные для контакта
@@ -252,15 +284,14 @@ class RegisterUserCompany extends Request{
         if( !$response ){
             if ($arFields['PASSWORD'] == $arFields['CONFIRM_PASSWORD']) {
                 $createResult = $this->createB24Company($arFields);
-                if ($createResult === false) {
+                /*if ($createResult === false) {
                     // Если createB24Company вернул false, значит была ошибка
                     // Исключение уже было выброшено в createB24Company
                     return false;
-                }
+                }*/
+                $arFields['UF_ADVERSTERING_AGENT'] = "";
+                return $arFields;
             }
-
-            $arFields['UF_ADVERSTERING_AGENT'] = "";
-            return $arFields;
         }
         else{
             // Определяем какое поле использовать для сообщения об ошибке

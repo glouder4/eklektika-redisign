@@ -3873,11 +3873,16 @@ class SaleOrderAjax extends \CBitrixComponent
         $profilesIblock = 57;
         $dbUserProfiles = \CIBlockElement::GetList(
             [],
-            ['IBLOCK_ID' => $profilesIblock, 'ACTIVE' => 'Y'],
+            [
+                'IBLOCK_ID' => $profilesIblock,
+                'ACTIVE' => 'Y',
+                'PROPERTY_OS_COMPANY_USERS' => $order->getUserId() // Конкретный пользователь
+            ],
             false,
             false,
-            ['ID', 'NAME', 'PROPERTY_OS_COMPANY_B24_ID']
+            ['ID', 'NAME', 'PROPERTY_OS_COMPANY_B24_ID', 'PROPERTY_OS_COMPANY_USERS']
         );
+
         while ($arUserProfiles = $dbUserProfiles->GetNext())
 		{
             $profile= [];
@@ -3894,6 +3899,7 @@ class SaleOrderAjax extends \CBitrixComponent
 
             $arResult['ORDER_PROP']['USER_PROFILES'][$arUserProfiles['ID']] = $arUserProfiles;
 		}
+        //pre($arResult['ORDER_PROP']['USER_PROFILES']);
 
 
 

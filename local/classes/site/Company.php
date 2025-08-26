@@ -198,14 +198,17 @@
 
         public function getCompany($id){
             $rsCompany = \CIBlockElement::GetById($id);
-            $ob = $rsCompany->GetNextElement();
-            $arProps = $ob->GetProperties();
-            $arFields = $ob->GetFields();
-            $arCompany["ID"] = $arFields["ID"];
-            foreach (self::$codeProps as $code) {
-                $arCompany[$code] = $arProps[$code]["VALUE"];
+            if($ob = $rsCompany->GetNextElement()) {
+                $arProps = $ob->GetProperties();
+                $arFields = $ob->GetFields();
+                $arCompany["ID"] = $arFields["ID"];
+                foreach (self::$codeProps as $code) {
+                    $arCompany[$code] = $arProps[$code]["VALUE"];
+                }
+
+                return $arCompany;
             }
-            return $arCompany;
+            return [];
         }
 
         public function getProfileValues($id){
