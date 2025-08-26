@@ -4883,9 +4883,12 @@ class SaleOrderAjax extends \CBitrixComponent
 				}
 			}
 
+            if( $this->arResult["ERROR"][0]['CODE'] == "PROFILE_NOT_FOUND" )
+                unset($this->arResult["ERROR"][0]);
+
 			if (empty($this->arResult["ERROR"]))
 			{
-				$arOrderRes["REDIRECT_URL"] = $this->arParams["~CURRENT_PAGE"]."?ORDER_ID=".urlencode($this->arResult["ACCOUNT_NUMBER"]);
+				$arOrderRes["REDIRECT_URL"] = "/personal/profile/orders/".urlencode($this->arResult["ACCOUNT_NUMBER"]);
 				$arOrderRes["ID"] = $this->arResult["ACCOUNT_NUMBER"];
 			}
 			else

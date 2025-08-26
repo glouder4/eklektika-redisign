@@ -170,12 +170,28 @@ $bSearchApply = isset($arGet['filter_id']) && !empty($arGet['filter_id']);
                                 </div>
 								 <div class="sale-personal-order-list-item-wrap intec-grid-item intec-grid intec-grid-nowrap intec-grid-a-v-end" data-code="end_date_reserve">
                                     <div class="sale-personal-order-list-item-header-text-mobile intec-grid-item-768-2">
-                                        <?= Loc::getMessage('C_SALE_PERSONAL_ORDER_LIST_TEMPLATE_1_TEMPLATE_HEADER_DATE_INSERT') ?>
+                                        <?php
+                                            $key_name = "C_SALE_PERSONAL_ORDER_LIST_TEMPLATE_1_TEMPLATE_HEADER_DATE_INSERT";
+                                            if( $_GET['filter_status'][0] == "OB" ){
+                                                $key_name = "C_SALE_PERSONAL_ORDER_LIST_TEMPLATE_1_TEMPLATE_HEADER_END_DATE_SAMPLE";
+                                            }
+                                        ?>
+                                        <?= Loc::getMessage($key_name) ?>
                                     </div>
-										<?php if ($arOrder['PROPERTIES']['END_DATE_RESERVE']) {?>
-											<?= date("d.m.Y", strtotime($arOrder['PROPERTIES']['END_DATE_RESERVE'])); ?>
-										<?php }?>
-                                   
+										<?php
+                                        if( $_GET['filter_status'][0] == "OB" ){
+                                            if ($arOrder['PROPERTIES']['END_DATE_SAMPLE']) {?>
+                                                <?= date("d.m.Y", strtotime($arOrder['PROPERTIES']['END_DATE_SAMPLE'])); ?>
+                                                <?php
+                                            }
+                                        }
+                                        elseif( $_GET['filter_status'][0] == "R" ){
+                                            if ($arOrder['PROPERTIES']['END_DATE_RESERVE']) {?>
+                                                <?= date("d.m.Y", strtotime($arOrder['PROPERTIES']['END_DATE_RESERVE'])); ?>
+                                                <?php
+                                            }
+                                        }
+                                        ?>
                                 </div>
                                 <div class="sale-personal-order-list-item-wrap intec-grid-item intec-grid intec-grid-nowrap intec-grid-a-v-center" data-code="status">
                                     <div class="sale-personal-order-list-item-header-text-mobile intec-grid-item-768-2">

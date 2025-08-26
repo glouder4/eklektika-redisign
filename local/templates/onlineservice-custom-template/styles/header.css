@@ -932,6 +932,7 @@ a.mobile-menu__call-btn{
     display: flex;
     gap: 28px;
     position: relative;
+    top: 8px;
 }
 .ns-intec-universe.c-sale-basket-small.c-sale-basket-small-icons-1 .sale-basket-small-tab-counter{
     background: #EF4A85;
@@ -946,6 +947,9 @@ a.mobile-menu__call-btn{
     display: flex;
     flex-direction: row;
     gap: 5px;
+
+    position: relative;
+    top: -7px;
 }
 @media(max-width: 991px){
     #top_header-auth_reg-btns--wrapper{
@@ -956,25 +960,32 @@ a.mobile-menu__call-btn{
     }
 }
 #top_header-auth_reg-btns--wrapper a.top_header-btn{
-    background: rgb(112,48,160);
-    color: white;
+    height: 49px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 5px 15px;
+    border-width: 1px;
+    padding-top: 15px;
+    padding-right: 40px;
+    padding-bottom: 15px;
+    padding-left: 40px;
+
+    border: 1px solid #FFFFFF;
 
     font-family: Manrope;
-    font-weight: 400;
+    font-weight: 600;
     font-size: 14px;
     line-height: 100%;
     letter-spacing: 0;
+
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 #profile_fields--wrapper{
     position: absolute;
     z-index: 1;
     top: 39px;
-    width: 340px;
+    width: 317px;
     left: unset;
     right: 0;
     background: unset;
@@ -1047,9 +1058,9 @@ a.mobile-menu__call-btn{
 #profile_fields--wrapper {
     position: absolute;
     top: 100%;
-    right: 0;
+    right: 250px;
     background: #fff;
-    border-radius: 12px;
+    border-radius: 0px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
     border: 1px solid #e5e7eb;
     min-width: 280px;

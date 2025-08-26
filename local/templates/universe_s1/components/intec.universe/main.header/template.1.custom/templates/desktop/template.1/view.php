@@ -301,20 +301,20 @@ if ($arResult['CONTACTS']['SHOW']) {
                         <a class="header__navigation-list--item-link" href="/company/">О компании</a>
                     </li>
                     <li class="header__navigation-list--item">
-                        <a class="header__navigation-list--item-link" href="/services/">Услуги</a>
+                        <a class="header__navigation-list--item-link" href="/services/">Производство</a>
                     </li>
                     <li class="header__navigation-list--item">
                         <a class="header__navigation-list--item-link" href="/catalog/">Купить</a>
                     </li>
                     <li class="header__navigation-list--item">
-                        <a class="header__navigation-list--item-link" href="/informacziya-dlya-dilerov/">Дилерам</a>
+                        <a class="header__navigation-list--item-link" href="/informacziya-dlya-dilerov/">Стать дилером</a>
                     </li>
                     <li class="header__navigation-list--item">
                         <a class="header__navigation-list--item-link" href="/company/contacts/">Контакты</a>
                     </li>
                 </ul>
             </div>
-            <button href="#" class="header__callback-btn" data-action="forms.call.open">
+            <button style="display: none" href="#" class="header__callback-btn" data-action="forms.call.open">
                 Заказать звонок
             </button>
             <?php include(__DIR__.'/../../../parts/forms/call.php') ?>

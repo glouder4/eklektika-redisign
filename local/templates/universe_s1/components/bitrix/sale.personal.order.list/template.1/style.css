@@ -239,7 +239,10 @@
   order: 2;
 }
 .ns-bitrix.c-sale-personal-order-list.c-sale-personal-order-list-template-1 .sale-personal-order-list-item-header[data-code=end_date_reserve],
-.ns-bitrix.c-sale-personal-order-list.c-sale-personal-order-list-template-1 .sale-personal-order-list-item-wrap[data-code=end_date_reserve] {
+.ns-bitrix.c-sale-personal-order-list.c-sale-personal-order-list-template-1 .sale-personal-order-list-item-wrap[data-code=end_date_reserve],
+
+.ns-bitrix.c-sale-personal-order-list.c-sale-personal-order-list-template-1 .sale-personal-order-list-item-header[data-code=end_date_sample],
+.ns-bitrix.c-sale-personal-order-list.c-sale-personal-order-list-template-1 .sale-personal-order-list-item-wrap[data-code=end_date_sample]{
   max-width: 12%;
   order: 2;
 }

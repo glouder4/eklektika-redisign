@@ -1806,7 +1806,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 			if (this.isValidForm())
 			{
 				this.allowOrderSave();
-
+				console.log(this.params.USER_CONSENT, BX.UserConsent)
 				if (this.params.USER_CONSENT === 'Y' && BX.UserConsent)
 				{
 					BX.onCustomEvent('bx-soa-order-save', []);

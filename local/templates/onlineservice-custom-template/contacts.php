@@ -29,7 +29,7 @@ $APPLICATION->SetTitle("Контакты");
                 <div class="contacts--map_data-wrapper">
                     <div class="contacts--map_data--item">
                         <div class="contacts--map_data--item_title">
-                            <span>Адрес офиса</span>
+                            <span>Офис и Пункт выдачи образцов</span>
                         </div>
                         <div class="contacts--map_data--item_description">
                             <p>127254, г.Москва, Огородный пр-д, д.16/1, стр. 4, 1005</p>
@@ -41,8 +41,7 @@ $APPLICATION->SetTitle("Контакты");
                             <span>Склад и Производство</span>
                         </div>
                         <div class="contacts--map_data--item_description">
-                            <p>109428, г. Москва, Рязанский проспект, дом 16, стр. 3<br/>
-                                Проход и проезд через проходную предприятия по адресу: г. Москва, 2-й Вязовский проезд, д.2а</p>
+                            <p>109428, г. Москва, Рязанский проспект, дом 16, стр. 3</p>
                         </div>
                     </div>
                     <div class="contacts--map_data--item">
@@ -82,7 +81,7 @@ $APPLICATION->SetTitle("Контакты");
     <div class="container">
         <div class="contacts--accordion-section">
             <div class="contacts--accordion-section-description">
-                <p>Офис и&nbsp;склад находятся в&nbsp;шаговой доступности друг от&nbsp;друга (1&nbsp;автобусная остановка). Проход и&nbsp;проезд на&nbsp;склад осуществляется через&nbsp;проходную предприятия по&nbsp;адресу: Москва, 2-й Вязовский проезд,&nbsp;д..&nbsp;2а</p>
+                <!--<p>Офис и&nbsp;склад находятся в&nbsp;шаговой доступности друг от&nbsp;друга (1&nbsp;автобусная остановка). Проход и&nbsp;проезд на&nbsp;склад осуществляется через&nbsp;проходную предприятия по&nbsp;адресу: Москва, 2-й Вязовский проезд,&nbsp;д..&nbsp;2а</p>-->
             </div>
             <!--<div class="contacts--accordion-section-items">
 
@@ -242,7 +241,7 @@ $APPLICATION->SetTitle("Контакты");
 
     <?$APPLICATION->IncludeComponent(
         "bitrix:form.result.new",
-        "onlineservice-feedback-form-type-2",
+        "onlineservice-feedback-form-type-3",
         Array(
             "CACHE_TIME" => "3600",
             "CACHE_TYPE" => "A",

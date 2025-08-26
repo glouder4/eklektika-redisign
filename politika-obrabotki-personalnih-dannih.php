@@ -16,7 +16,7 @@ $APPLICATION->SetTitle('Политика обработки персональн
     <div class="intec-page intec-page-404 intec-content">
         <div class="intec-content-wrapper">
             <?
-            $APPLICATION->IncludeFile(SITE_DIR."include/politika-konfidencialnosty.php", array(), array(
+            $APPLICATION->IncludeFile(SITE_DIR."include/soglasiye-na-obrabotku.php", array(), array(
                     "MODE" => "html",
                     "NAME" => "",
                 )

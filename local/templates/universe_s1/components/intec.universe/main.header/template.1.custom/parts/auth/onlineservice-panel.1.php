@@ -9,7 +9,7 @@ $arAuthParams = !empty($arAuthParams) ? $arAuthParams : [];
 <!--noindex-->
 <?php $APPLICATION->IncludeComponent(
     'bitrix:system.auth.form',
-    'onlineservice-panel',
+    'onlineservice-dropdown-panel',
     ArrayHelper::merge([
         'LOGIN_URL' => $arResult['URL']['LOGIN'],
         'PROFILE_URL' => $arResult['URL']['PROFILE'],

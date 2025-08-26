@@ -79,27 +79,38 @@ if ($oRequest->get('filter_history') === 'Y') {
 if ($oRequest->get('show_all') === 'Y')
     $arResult['FILTER']['VALUE'] = 'all';
 
-$arResult['HEADER'] = [
-    'ID' => [
-        'CODE' => 'id',
+
+$arResult['HEADER'] = [];
+$arResult['HEADER']['ID'] = [
+    'CODE' => 'id',
+    'URL' => ''
+];
+$arResult['HEADER']['DATE_INSERT'] = [
+    'CODE' => 'date_insert',
+    'URL' => ''
+];
+$arResult['HEADER']['STATUS'] = [
+    'CODE' => 'status',
+    'URL' => ''
+];
+
+if( $_GET['filter_status'][0] == "R" ){
+    $arResult['HEADER']['END_DATE_RESERVE'] = [
+        'CODE' => 'end_date_reserve',
         'URL' => ''
-    ],	
-    'DATE_INSERT' => [
-        'CODE' => 'date_insert',
+    ];
+}
+elseif( $_GET['filter_status'][0] == "OB" ){
+    $arResult['HEADER']['END_DATE_SAMPLE'] = [
+        'CODE' => 'end_date_sample',
         'URL' => ''
-    ],	
-    'STATUS' => [
-        'CODE' => 'status',
-        'URL' => ''
-    ],
-	'END_DATE_RESERVE' => [
-		'CODE' => 'end_date_reserve',
-		'URL' => ''
-	],
-    'PRICE' => [
-        'CODE' => 'price',
-        'URL' => ''
-    ]
+    ];
+}
+
+
+$arResult['HEADER']['PRICE'] = [
+    'CODE' => 'price',
+    'URL' => ''
 ];
 
 $oUrl = new Url($oRequest->getUrl());
@@ -113,6 +124,11 @@ foreach ($arResult['HEADER'] as $keyHeader => $valueHeader) {
     $oUrl->getQuery()->setRange($sort);
 	if ($keyHeader == 'END_DATE_RESERVE') 
 		continue;
+
+    if ($keyHeader == 'END_DATE_SAMPLE')
+        continue;
+
+
     $arResult['HEADER'][$keyHeader]['URL'] = $oUrl->build();
 }
 

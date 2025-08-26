@@ -157,10 +157,10 @@ $arData = [
             </div>
             <div class="footer__main-categories__columns-column-2">
                 <div class="footer__main-categories__columns-column--title">
-                    <span>Для клиентов</span>
+                    <span>Для дилеров</span>
                 </div>
                 <ul class="footer__main-categories__columns-column--list">
-                    <li class="footer__main-categories__columns-column--list_item">
+                    <!--<li class="footer__main-categories__columns-column--list_item">
                         <a href="/informacziya-dlya-dilerov/" class="footer__main-categories__columns-column--list_item_link">
                             Программа привилегий и бонусов для дилеров
                         </a>
@@ -169,10 +169,10 @@ $arData = [
                         <a href="/oplata/" class="footer__main-categories__columns-column--list_item_link">
                             Гибкая система оплаты
                         </a>
-                    </li>
+                    </li>-->
                     <li class="footer__main-categories__columns-column--list_item">
                         <a href="#" class="footer__main-categories__columns-column--list_item_link">
-                            Разработка дизайна сувенирной продукции
+                            Дизайн
                         </a>
                     </li>
                     <li class="footer__main-categories__columns-column--list_item">
@@ -185,7 +185,15 @@ $arData = [
                             Доставка
                         </a>
                     </li>
+                    <li class="footer__main-categories__columns-column--list_item">
+                        <a href="/dostavka/" class="footer__main-categories__columns-column--list_item_link">
+                            Наши Дилеры
+                        </a>
+                    </li>
                 </ul>
+                <div class="footer__main-categories__columns-column--title">
+                    <span>Поставщикам</span>
+                </div>
             </div>
             <div class="footer__main-categories__columns-column-3">
                 <div class="footer__main-categories__columns-column--title">
@@ -207,11 +215,11 @@ $arData = [
                             Бренды
                         </a>
                     </li> -->
-                    <li class="footer__main-categories__columns-column--list_item">
+                    <!--<li class="footer__main-categories__columns-column--list_item">
                         <a href="#" class="footer__main-categories__columns-column--list_item_link">
                             Новинки
                         </a>
-                    </li>
+                    </li>-->
                     <li class="footer__main-categories__columns-column--list_item">
                         <a href="/shares/" class="footer__main-categories__columns-column--list_item_link">
                             Акции и Скидки

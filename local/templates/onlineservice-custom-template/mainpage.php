@@ -87,7 +87,7 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
         )
     );?>
 
-    <?$APPLICATION->IncludeComponent(
+    <?/*$APPLICATION->IncludeComponent(
         "bitrix:news.list",
         "onlineservice-undersliderpromo.news.list",
         array(
@@ -158,7 +158,7 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
             "DATE_SHOW" => "N"
         ),
         false
-    );?>
+    );*/?>
 
     <div class="container">
         <div class="categories-slider--container-title">

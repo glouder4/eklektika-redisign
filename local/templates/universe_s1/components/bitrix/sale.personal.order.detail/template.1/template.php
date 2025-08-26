@@ -150,7 +150,7 @@ if( $isObrazec && $arResult['STATUS']['ID'] == "N" )
                                     <?php
                                         $messageKey = "C_SALE_PERSONAL_ORDER_DETAIL_TEMPLATE_1_TEMPLATE_BUTTONS_CANCEL";
                                         if( $isReserve ){
-                                            $messageKey = "C_SALE_PERSONAL_ORDER_DETAIL_TEMPLATE_1_TEMPLATE_BUTTONS_CANCEL_RESERVE";
+                                            //$messageKey = "C_SALE_PERSONAL_ORDER_DETAIL_TEMPLATE_1_TEMPLATE_BUTTONS_CANCEL_RESERVE";
                                         }
                                         elseif( $isObrazec ){
                                             $messageKey = "C_SALE_PERSONAL_ORDER_DETAIL_TEMPLATE_1_TEMPLATE_BUTTONS_CANCEL_OBRAZEC";
