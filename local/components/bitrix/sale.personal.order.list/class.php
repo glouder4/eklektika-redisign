@@ -521,7 +521,16 @@ class CBitrixPersonalOrderListComponent extends CBitrixComponent
 				];
 			}
 		}
+        elseif( !is_array($_REQUEST['filter_status']) ){
+            $excludedKeys = EXLUDED_ORDER_KEYS;
+            $excludedReserve = EXLUDED_RESERVE_KEYS;
+            $excludedObrazec = EXLUDED_SAMPLE_KEYS;
 
+            //unset($arFilter['STATUS_ID']);
+            $arFilter[] = [
+                '!@STATUS_ID' => array_merge($excludedObrazec,array_merge($excludedKeys,$excludedReserve)),
+            ];
+        }
 		$filterCanceled = trim((string)($_REQUEST['filter_canceled'] ?? ''));
 		if ($filterCanceled !== '')
 		{

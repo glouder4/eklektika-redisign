@@ -83,13 +83,13 @@ $arSections = [
         'NAME' => $arVisual['INFORMATION']['PAYMENT']['NAME'],
         'VALUE' => __DIR__.'/sections/information.payment.php'
     ],
-    'SHIPMENT' => [
+    /*'SHIPMENT' => [
         'ID' => 'shipment',
         'SHOW' => $arVisual['INFORMATION']['SHIPMENT']['SHOW'],
         'TYPE' => 'file',
         'NAME' => $arVisual['INFORMATION']['SHIPMENT']['NAME'],
         'VALUE' => __DIR__.'/sections/information.shipment.php'
-    ]
+    ]*/
 ];
 
 if ($arVisual['DESCRIPTION']['DETAIL']['SHOW']) {

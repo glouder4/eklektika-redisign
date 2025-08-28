@@ -9,7 +9,33 @@ CModule::IncludeModule("intec.eklectika");
 
 
 ?>
-<?php if (ModuleManager::isModuleInstalled('sale')) { ?>
+<?php if (ModuleManager::isModuleInstalled('sale')) {
+	$showTitle = "Y";
+	if( isset($_GET['filter_status']) ){
+		$sampleIds = ["OB","SC","SO","SS","OG"];
+		$reserveIds = ["R","RO","RC"];
+
+		if( in_array($_GET['filter_status'],$reserveIds) )
+			$showTitle = "N";
+		elseif ( in_array($_GET['filter_status'],$sampleIds) )
+			$showTitle = "N";
+		elseif( isset($_GET['filter_status'][0]) ){
+			foreach ($_GET['filter_status'] as $filter_status){
+				if( in_array($filter_status,$reserveIds) ){
+					$showTitle = "N";
+					break;
+				}
+
+				elseif ( in_array($filter_status,$sampleIds) ){
+					$showTitle = "N";
+					break;
+				}
+
+			}
+		}
+	}
+
+	?>
     <?php $APPLICATION->IncludeComponent(
 	"bitrix:sale.personal.section", 
 	"template.1", 
@@ -84,7 +110,7 @@ CModule::IncludeModule("intec.eklectika");
 		"CACHE_TIME" => "3600000",
 		"CACHE_GROUPS" => "Y",
 		"MAIN_CHAIN_NAME" => "Мой кабинет",
-		"SET_TITLE" => "Y",
+		"SET_TITLE" => $showTitle,
 		"ORDERS_LINK" => "",
 		"PROFILE_LINK" => "",
 		"CHANGE_PASSWORD_LINK" => "",

@@ -19,7 +19,7 @@
 			1 => "",
 		),
 		"BASKET_USE" => "Y",
-		"DELAY_USE" => "Y",
+		"DELAY_USE" => "N",
 		"COMPARE_USE" => "Y",
 		"COMPARE_IBLOCK_TYPE" => "1c_catalog",
 		"COMPARE_IBLOCK_ID" => "43",

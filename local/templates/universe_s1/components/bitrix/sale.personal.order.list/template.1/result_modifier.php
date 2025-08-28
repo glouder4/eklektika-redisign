@@ -238,10 +238,14 @@ if(is_array($arResult['ORDERS']) && !empty($arResult['ORDERS'])) {
 $arResult['VISUAL'] = $arVisual;
 unset($arOrder, $arVisual);
 
-
+$excludedKeys = ["KO","UD","KP",'SD'];
+foreach ($arResult['INFO']['STATUS'] as $key => $val){
+    if( in_array($val['ID'],$excludedKeys) )
+        unset($arResult['INFO']['STATUS'][$key]);
+}
 
 $excludedReserve = ["RO", "RC", "R"];
-$excludedObrazec = ["OB","SS", "SO", "SC"];
+$excludedObrazec = ["OB","SS", "SO", "SC","OG"];
 
 if( $_GET['filter_status'][0] == "R" ){
     foreach ($arResult['INFO']['STATUS'] as $key => &$status) {

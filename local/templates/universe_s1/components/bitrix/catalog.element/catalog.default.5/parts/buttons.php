@@ -88,9 +88,9 @@ use intec\core\helpers\Html;
                 <?= Html::endTag('span') ?>
             <?= Html::endTag('div') ?>
         <?php } ?>
-        <?php if ($arResult['DELAY']['USE'] && $arItem['CAN_BUY'] && ($bOffer || empty($arItem['OFFERS']))) { ?>
-            <?php $arPrice = ArrayHelper::getValue($arItem, ['ITEM_PRICES', 0]) ?>
-            <?= Html::beginTag('div', [
+        <?php /*if ($arResult['DELAY']['USE'] && $arItem['CAN_BUY'] && ($bOffer || empty($arItem['OFFERS']))) { */?><!--
+            <?php /*$arPrice = ArrayHelper::getValue($arItem, ['ITEM_PRICES', 0]) */?>
+            <?php /*= Html::beginTag('div', [
                 'class' => [
                     'catalog-element-button-action',
                     'catalog-element-button-action-add',
@@ -105,17 +105,17 @@ use intec\core\helpers\Html;
                     'basket-state' => 'none',
                     'basket-price' => !empty($arPrice) ? $arPrice['PRICE_TYPE_ID'] : null
                 ]
-            ]) ?>
+            ]) */?>
                 <span class="catalog-element-button-action-content intec-ui-part-content">
                     <span class="catalog-element-button-action-icon">
-                        <?= $arSvg['BUTTONS']['DELAY'] ?>
+                        <?php /*= $arSvg['BUTTONS']['DELAY'] */?>
                     </span>
                     <span class="catalog-element-button-action-text">
-                        <?= Loc::getMessage('C_CATALOG_ELEMENT_DEFAULT_5_TEMPLATE_DELAY') ?>
+                        <?php /*= Loc::getMessage('C_CATALOG_ELEMENT_DEFAULT_5_TEMPLATE_DELAY') */?>
                     </span>
                 </span>
-            <?= Html::endTag('div') ?>
-            <?= Html::beginTag('div', [
+            <?php /*= Html::endTag('div') */?>
+            <?php /*= Html::beginTag('div', [
                 'class' => [
                     'catalog-element-button-action',
                     'catalog-element-button-action-added',
@@ -131,16 +131,16 @@ use intec\core\helpers\Html;
                     'basket-action' => 'remove',
                     'basket-state' => 'none'
                 ]
-            ]) ?>
+            ]) */?>
                 <span class="catalog-element-button-action-content intec-ui-part-content">
                     <span class="catalog-element-button-action-icon">
-                        <?= $arSvg['BUTTONS']['DELAY'] ?>
+                        <?php /*= $arSvg['BUTTONS']['DELAY'] */?>
                     </span>
                     <span class="catalog-element-button-action-text">
-                        <?= Loc::getMessage('C_CATALOG_ELEMENT_DEFAULT_5_TEMPLATE_DELAYED') ?>
+                        <?php /*= Loc::getMessage('C_CATALOG_ELEMENT_DEFAULT_5_TEMPLATE_DELAYED') */?>
                     </span>
                 </span>
-                <?= Html::beginTag('span', [
+                <?php /*= Html::beginTag('span', [
                     'class' => Html::cssClassFromArray([
                         'intec-ui-part-effect' => [
                             '' => true,
@@ -148,13 +148,13 @@ use intec\core\helpers\Html;
                             'folding' => $arVisual['MAIN_VIEW'] == 3
                         ]
                     ], true)
-                ]) ?>
+                ]) */?>
                     <span class="intec-ui-part-effect-wrapper">
                         <i></i><i></i><i></i>
                     </span>
-                <?= Html::endTag('span') ?>
-            <?= Html::endTag('div') ?>
-        <?php } ?>
+                <?php /*= Html::endTag('span') */?>
+            <?php /*= Html::endTag('div') */?>
+        --><?php /*}*/ ?>
     <?= Html::endTag('div') ?>
 <?php } ?>
 <div class="catalog-element-button-action-container">

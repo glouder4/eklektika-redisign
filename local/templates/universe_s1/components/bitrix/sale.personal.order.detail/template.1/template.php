@@ -155,7 +155,9 @@ if( $isObrazec && $arResult['STATUS']['ID'] == "N" )
                                         elseif( $isObrazec ){
                                             $messageKey = "C_SALE_PERSONAL_ORDER_DETAIL_TEMPLATE_1_TEMPLATE_BUTTONS_CANCEL_OBRAZEC";
                                         }
-                                        if( ( $arResult['STATUS']['ID'] != "SS" && $arResult['STATUS']['ID'] != "RO"  )){ ?>
+
+                                        $excludedIds = ["SS","RO", "SC", "DF", "SO", "SP"];
+                                        if( ( !in_array($arResult['STATUS']['ID'],$excludedIds)  )){ ?>
                                             <?= Html::tag('a', Loc::getMessage(
                                                 $messageKey
                                             ), [

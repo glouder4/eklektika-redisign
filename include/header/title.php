@@ -5,6 +5,7 @@
  * @global CMain $APPLICATION
  */
 
+
 ?>
 <div class="intec-content">
     <div class="intec-content-wrapper">

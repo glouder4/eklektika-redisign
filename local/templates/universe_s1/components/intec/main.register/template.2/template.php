@@ -80,7 +80,9 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
                 if (intval($key) == 0 && $key !== 0)
                     $arResult['ERRORS'][$key] = str_replace('#FIELD_NAME#', '&quot;' . Loc::getMessage($sPrefix.'REGISTER_FIELD_' . $key) . '&quot;', $error);
 
-            ShowError(implode('<br />', $arResult['ERRORS']));
+            echo "<div style='color: red;' class='registration-errors-wrapper'>";
+                echo implode('<br>', array_map('htmlspecialchars_decode', $arResult['ERRORS']));
+            echo "</div><br><br>";
         } else if ($arResult['USE_EMAIL_CONFIRMATION'] === 'Y') { ?>
             <?= Html::tag('p', Loc::getMessage($sPrefix.'REGISTER_EMAIL_WILL_BE_SENT'), []) ?>
         <?php } ?>
@@ -171,7 +173,7 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
             </script>
         <?php } else { ?>
             <form class="main-register-form intec-ui-form" method="post" action="<?= POST_FORM_ACTION_URI ?>" name="regform" enctype="multipart/form-data">
-				<?php $valueType = $arResult["VALUES"]["UF_TYPE"] ? $arResult["VALUES"]["UF_TYPE"] : null;
+				<?php $valueType =  $arResult["VALUES"]["UF_TYPE"] ?? null;
                 ?>
 				<div class="c-main-register__tabs" style="display: none">
 					<!--<label class="intec-ui intec-ui-control-radiobox">
@@ -664,7 +666,7 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
                                 </span>
                         </div>
                         <div class="intec-grid-item-auto">
-                            <a href="<?= $arParams['AUTH_URL'] ?>" class="main-register-auth-link intec-cl-text intec-cl-text-light-hover">
+                            <a href="/personal/profile/?login=yes" class="main-register-auth-link intec-cl-text intec-cl-text-light-hover">
                                 <?= Loc::getMessage($sPrefix.'SOCIALS_COME_IN') ?>
                             </a>
                         </div>

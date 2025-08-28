@@ -69,7 +69,7 @@ use intec\core\io\Path;
   'COMPARE_CODE' => 'compare',
   'ACTION' => 'buy',
   'BASKET_URL' => '/personal/basket/',
-  'DELAY_USE' => 'Y',
+  'DELAY_USE' => 'N',
   'SUBSCRIBE_USE' => 'Y',
   'COUNTER_SHOW' => 'Y',
   'TIMER_SHOW' => 'Y',

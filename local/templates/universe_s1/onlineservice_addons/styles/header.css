@@ -31,7 +31,8 @@
     height: 27.80425453186035px;
     width: 83.41276550292969px;
     position: relative;
-    top: 2px;
+    top: -2px;
+    left: 1px;
 }
 .header__logo--link{
     height: 27.80425453186035px;
@@ -257,7 +258,7 @@
     background: transparent;
     color: #7B4FA3;
     padding: 0;
-    padding-left: 16px;
+    padding-left: 37px;
     height: 45px;
     width: 134px;
 }
@@ -729,9 +730,9 @@ a.mobile-menu__call-btn{
         height: 22px;
     }
     .header__top .header__icon>svg{
-        -webkit-transform: scale(1.5);
-        -ms-transform: scale(1.5);
-        transform: scale(1.5);
+        -webkit-transform: scale(2);
+        -ms-transform: scale(2);
+        transform: scale(2);
     }
     .header__icon-title{
         font-size: 14px;
@@ -759,7 +760,7 @@ a.mobile-menu__call-btn{
         font-size: 14px;
     }
     .header__logo{
-        width: 162px;
+        width: 177px;
         height: 54px;
     }
     .header__logo--link{
@@ -852,11 +853,17 @@ a.mobile-menu__call-btn{
         height: 100px;
         padding: 0;
     }
+    .header__social-links-icons {
+        position: relative;
+        top: -2px;
+    }
     .header__brand-description {
         margin-left: 40px;
+        top: 1px;
+        position: relative;
     }
     .header__social-links {
-        margin-right: 55px;
+        margin-right: 66px;
         margin-left: auto;
     }
     .header__icons,
@@ -864,8 +871,8 @@ a.mobile-menu__call-btn{
         gap: 38px;
     }
     .header__icon--user{
-        top: -5px;
-        left: -1px;
+        top: -3px;
+        left: -21px;
     }
     .header__icon--user .header__icon-title {
         top: 14px;
@@ -875,7 +882,11 @@ a.mobile-menu__call-btn{
         -ms-transform: scale(1.5);
         transform: scale(1.5);
 
-        max-width: 19px;
+        max-width: 13px;
+    }
+    .header__search-btn>span{
+        position: relative;
+        left: -12px;
     }
     .header__catalog-btn>.header__icon>svg{
         -webkit-transform: scale(1);
@@ -884,15 +895,15 @@ a.mobile-menu__call-btn{
     }
     .header__icon--bag {
         width: 36px;
-        top: -4px;
-        left: -2px;
+        top: -5px;
+        left: -21px;
     }
     .header__icon--heart{
-        left: 1px;
-        top: -3px;
+        left: -20px;
+        top: -1px;
     }
     .header__icon--bag .header__icon-title {
-        top: 16px;
+        top: 19px;
     }
     .header__icon--heart .header__icon-title{
         top: 14px;
@@ -916,14 +927,18 @@ a.mobile-menu__call-btn{
         margin-left: auto;
     }
     .header__navigation{
-        margin-left: 40px;
+        margin-left: 24px;
     }
     .header__navigation-list{
         gap: 41px;
     }
     .header__search{
-        width: 418px;
+        width: 678px;
         height: 55px;
+    }
+    .header__catalog-btn{
+        position: relative;
+        top: -3px;
     }
 }
 
@@ -960,6 +975,10 @@ a.mobile-menu__call-btn{
     }
 }
 #top_header-auth_reg-btns--wrapper a.top_header-btn{
+    position: relative;
+    left: -3px;
+    top: -2px;
+
     height: 49px;
 
     border-width: 1px;
@@ -980,6 +999,11 @@ a.mobile-menu__call-btn{
     display: flex;
     align-items: center;
     justify-content: center;
+}
+#top_header-auth_reg-btns--wrapper a.top_header-btn.reg{
+    position: relative;
+    left: 0px;
+    top: -2px;
 }
 #profile_fields--wrapper{
     position: absolute;
@@ -1058,7 +1082,7 @@ a.mobile-menu__call-btn{
 #profile_fields--wrapper {
     position: absolute;
     top: 100%;
-    right: 250px;
+    right: 65px;
     background: #fff;
     border-radius: 0px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);

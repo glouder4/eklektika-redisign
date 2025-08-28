@@ -31,3 +31,10 @@
         $company = new \OnlineService\Site\Company();
         echo $company->updateCompanyElement($_REQUEST);
     }
+
+    if( $_REQUEST['ACTION'] == "UPDATE_MANAGER" ){
+        $manager = new \OnlineService\Site\Manager();
+        echo $manager->update($_REQUEST);
+    }
+
+    //UPDATE_MANAGER

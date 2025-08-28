@@ -47,7 +47,7 @@ use intec\core\io\Path;
   'FORM_REQUEST_PROPERTY_PRODUCT' => 'form_text_25',
   'FORM_REQUEST_TEMPLATE' => '.default',
   'FORM_PROPERTY_PRODUCT' => 'form_text_21',
-  'DELAY_USE' => 'Y',
+  'DELAY_USE' => 'N',
   'OFFERS_LIMIT' => '0',
   'QUICK_VIEW_USE' => 'Y',
   'QUICK_VIEW_DETAIL' => 'N',

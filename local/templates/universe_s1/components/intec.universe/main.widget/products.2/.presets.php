@@ -26,7 +26,7 @@ return [
             'CONSENT_URL' => '#SITE_DIR#company/consent/',
             'CACHE_TYPE' => 'A',
             'CACHE_TIME' => 3600000,
-            'DELAY_USE' => 'Y',
+            'DELAY_USE' => 'N',
             'OFFERS_LIMIT' => '0',
             'QUICK_VIEW_USE' => 'Y',
             'QUICK_VIEW_DETAIL' => 'N',

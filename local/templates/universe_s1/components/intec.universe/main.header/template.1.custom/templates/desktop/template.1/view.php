@@ -100,8 +100,8 @@ if ($arResult['CONTACTS']['SHOW']) {
                     <img src="/local/templates/universe_s1/onlineservice_addons/assets/logo.svg" alt="yoliba logo" class="header__logo">
                 </a>
                 <div class="header__brand-description">
-                    <span>Откройте для себя новый</span>
-                    <span>каталог мерча</span>
+                    <span>Откройте для себя</span>
+                    <span>новый каталог мерча</span>
                 </div>
                 <div class="header__social-links">
                     <div class="header__social-links-phones">

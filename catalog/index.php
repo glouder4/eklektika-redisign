@@ -10,7 +10,7 @@ $APPLICATION->SetTitle("Каталог товаров");
 		"IBLOCK_TYPE" => "1c_catalog",
 		"IBLOCK_ID" => "43",
 		"SETTINGS_USE" => "Y",
-		"DELAY_USE" => "Y",
+		"DELAY_USE" => "N",
 		"MENU_TEMPLATE" => "1",
 		"MENU_ROOT" => "left",
 		"MENU_CHILD" => "left",
@@ -874,7 +874,7 @@ $APPLICATION->SetTitle("Каталог товаров");
 		"ORDER_FAST_VARIABLES_ACTION" => "action",
 		"ORDER_FAST_VARIABLES_VALUES" => "values",
 		"ORDER_FAST_CURRENCY" => "",
-		"ORDER_FAST_DELIVERY" => "1",
+		"ORDER_FAST_DELIVERY" => "2",
 		"ORDER_FAST_PAYMENT" => "1",
 		"ORDER_FAST_PERSON" => "1",
 		"ORDER_FAST_FIELDS_COMMENT_USE" => "Y",
@@ -885,6 +885,8 @@ $APPLICATION->SetTitle("Каталог товаров");
 		"ORDER_FAST_MESSAGES_TITLE" => "",
 		"ORDER_FAST_MESSAGES_ORDER" => "",
 		"ORDER_FAST_MESSAGES_BUTTON" => "",
+		"ORDER_FAST_PROPERTIES" => array(
+		),
 		"SEF_URL_TEMPLATES" => array(
 			"sections" => "",
 			"section" => "#SECTION_CODE#/",

@@ -64,7 +64,7 @@ $GLOBALS["OS_BREADCRUMBS"] = [
         <div class="container">
             <div class="discounts--list--title">
                 <h3 class="title">
-                    Система скидок от Yoliba by Эклектика
+                    Система скидок от Yoliba by ЙОкаталог
                 </h3>
             </div>
             <div class="discounts--list-block">

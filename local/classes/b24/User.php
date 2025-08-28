@@ -20,7 +20,7 @@
             ]);
 
             // найти пользователя в б24 по EMAIL
-            $response = $this->sendRequest($arFields);
+            $response = $this->sendRequest($arFields,false);
 
             if( $response['success'] == 1 ){
                 return ($returnAll) ? $response['data'] : $response['data']['ID'];
@@ -371,6 +371,25 @@
             unset($fields['B24_ID']);
 
             $this->userId = $this->getUserIDByB24ID($b24ID);
+
+            // Ищем элемент по внешнему коду (XML_ID)
+            $arFilter = [
+                'IBLOCK_ID' => 53,
+                'XML_ID' => $fields['ASSIGNED_MANAGER']
+            ];
+            unset($fields['ASSIGNED_MANAGER']);
+
+            $rsElement = \CIBlockElement::GetList(
+                ['SORT' => 'ASC'],
+                $arFilter,
+                false,
+                false,
+                ['ID', 'NAME', 'XML_ID', 'IBLOCK_ID']
+            );
+
+            if ($managerElement = $rsElement->GetNext()) {
+                $fields['UF_MANAGER'] = $managerElement['ID'];
+            }
             
             if (!$this->userId) {
                 pre("Error: User not found for B24 contact ID: " . $b24ID);

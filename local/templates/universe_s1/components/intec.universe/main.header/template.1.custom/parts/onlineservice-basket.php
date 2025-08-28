@@ -7,7 +7,7 @@ $arBasketParams = !empty($arBasketParams) ? $arBasketParams : [];
 
 ?>
 <?php if ($arResult['BASKET']['POPUP'] && $arData['type'] !== 'MOBILE') { ?>
-    <?php $APPLICATION->IncludeComponent(
+    <?php /*$APPLICATION->IncludeComponent(
         "intec.universe:sale.basket.small",
         "onlineservice-icons.1.custom",
         ArrayHelper::merge([
@@ -22,7 +22,7 @@ $arBasketParams = !empty($arBasketParams) ? $arBasketParams : [];
             "ORDER_URL" => $arResult['URL']['ORDER']
         ], $arBasketParams),
         $this->getComponent()
-    ) ?>
+    )*/ ?>
 <?php } else { ?>
     <?php $APPLICATION->IncludeComponent(
         "intec.universe:sale.basket.icons",

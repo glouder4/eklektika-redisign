@@ -17,12 +17,12 @@ if (empty($template))
         <?php include($directory.'/parts/'.$part.'/footer.php'); ?>
 
         <?php if (FileHelper::isFile($directory.'/parts/custom/body.end.php')) include($directory.'/parts/custom/body.end.php') ?>
-		<script>
+		<!--<script>
 		   (function(w,d,u){
 				   var s=d.createElement('script');s.async=true;s.src=u+'?'+(Date.now()/60000|0);
 				   var h=d.getElementsByTagName('script')[0];h.parentNode.insertBefore(s,h);
-		   })(window,document,'<?=URL_B24;?>upload/crm/site_button/loader_6_22nko2.js');
-		</script>
+		   })(window,document,'<?php /*=URL_B24;*/?>upload/crm/site_button/loader_6_22nko2.js');
+		</script>-->
     </body>
 </html>
 <?php if (FileHelper::isFile($directory.'/parts/custom/end.php')) include($directory.'/parts/custom/end.php') ?>

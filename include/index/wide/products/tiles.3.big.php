@@ -49,7 +49,7 @@ use intec\core\io\Path;
   'FORM_REQUEST_PROPERTY_PRODUCT' => 'form_text_25',
   'FORM_REQUEST_TEMPLATE' => '.default',
   'ORDER_FAST_USE' => 'N',
-  'DELAY_USE' => 'Y',
+  'DELAY_USE' => 'N',
   'OFFERS_LIMIT' => '0',
   'BANNER_SHOW' => 'Y',
   'PROPERTY_BANNER_SHOW' => 'MAIN_BANNER_SHOW',

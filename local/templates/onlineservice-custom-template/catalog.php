@@ -44,12 +44,10 @@ $GLOBALS["OS_BREADCRUMBS"] = [
             <div class="cards-list">
                 <div class="cards-list-item">
                     <div class="cards-list-item--title">
-                        <h4 class="title">Я рекламное агентство</h4>
+                        <h4 class="title">Хочу стать дилером</h4>
                     </div>
                     <div class="cards-list-item--description">
-                        <p>Хотите приобрести продукцию<br/>
-                            Для своих клиентов? Вам достаточно<br/>
-                            стать нашим дилером.</p>
+                        <p>Хотите приобрести продукцию для своих клиентов?<br/>Станьте нашим дилером!</p>
                     </div>
                     <div class="cards-list-item--action">
                         <a href="/personal/profile/registration.php" class="cards-list-item--action_btn">Зарегистрироваться</a>
@@ -61,7 +59,7 @@ $GLOBALS["OS_BREADCRUMBS"] = [
                         <h4 class="title">Я корпоративный заказчик</h4>
                     </div>
                     <div class="cards-list-item--description">
-                        <p>Приобретаете продукцию<br/>для&nbsp;своей компании? Обратитесь<br/>к&nbsp;одному из&nbsp;наших менеджеров</p>
+                        <p>Приобретаете продукцию для&nbsp;своей компании?<br/>Обратитесь к&nbsp;одному из&nbsp;наших дилеров!</p>
                     </div>
                     <div class="cards-list-item--action">
                         <a href="/personal/profile/registration.php" class="cards-list-item--action_btn">Зарегистрироваться</a>

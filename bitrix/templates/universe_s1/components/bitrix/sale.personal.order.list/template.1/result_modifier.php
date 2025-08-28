@@ -184,3 +184,5 @@ if(is_array($arResult['ORDERS']) && !empty($arResult['ORDERS'])) {
 
 $arResult['VISUAL'] = $arVisual;
 unset($arOrder, $arVisual);
+
+

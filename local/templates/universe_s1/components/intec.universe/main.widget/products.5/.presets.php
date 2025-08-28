@@ -11,7 +11,7 @@ return [
             'SETTINGS_USE' => 'Y',
             'LAZYLOAD_USE' => 'N',
             'MODE' => 'all',
-            'DELAY_USE' => 'Y',
+            'DELAY_USE' => 'N',
             'DELAY_SHOW_INACTIVE' => 'Y',
             'COMPARE_SHOW_INACTIVE' => 'Y',
             'MEASURE_SHOW' => 'Y',

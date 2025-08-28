@@ -13,7 +13,10 @@ use intec\eklectika\advertising_agent\Company;
 CModule::IncludeModule("intec.eklectika");
 
 define('IBLOCK_ID_1C', 45);
-define('URL_B24', 'https://b24.amiiya.ru/');
+define('URL_B24', 'https://testb24.yoliba.ru/');
+define("EXLUDED_ORDER_KEYS",["KO","UD","KP",'SD']);
+define("EXLUDED_RESERVE_KEYS",["RO", "RC", "R"]);
+define("EXLUDED_SAMPLE_KEYS",["OB","SS", "SO", "SC","OG"]);
 
 require_once __DIR__.'/../classes/requires.php'; // Подключение кастомных обработчиков
 
@@ -33,7 +36,24 @@ function pre($o) {
     </div>
     <?
 }
+/*
+use Bitrix\Main\EventManager;
 
+// Получаем все обработчики события
+$eventManager = EventManager::getInstance();
+$handlers = $eventManager->findEventHandlers("main", "OnAfterUserUpdate");
+
+echo "<pre>";
+foreach ($handlers as $handler) {
+    echo "Module: " . $handler['MODULE_ID'] . "\n";
+    echo "Class: " . $handler['TO_CLASS'] . "\n";
+    echo "Method: " . $handler['TO_METHOD'] . "\n";
+    echo "File: " . $handler['TO_PATH'] . "\n";
+    echo "Sort: " . $handler['SORT'] . "\n";
+    echo "------------------------\n";
+}
+echo "</pre>";
+die(); */
 /**
 * отправить запрос к Б24
 */

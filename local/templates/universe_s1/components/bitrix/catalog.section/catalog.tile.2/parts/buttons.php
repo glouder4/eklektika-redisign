@@ -9,6 +9,8 @@ use intec\core\helpers\Html;
  * @var array $arResult
  */
 
+
+
 ?>
 <?php $vButtons = function (&$arItem) use (&$arResult, &$arVisual) { ?>
     <?php $arParent = [
@@ -24,7 +26,9 @@ use intec\core\helpers\Html;
         ]) ?>
             <?php if ($arItem['DATA']['DELAY']['USE'] && $arItem['CAN_BUY']) { ?>
                 <?php $arPrice = ArrayHelper::getValue($arItem, ['ITEM_PRICES', 0]) ?>
-                <?= Html::beginTag('div', [
+
+
+                <?php /*= Html::beginTag('div', [
                     'class' => [
                         'catalog-section-item-image-button',
                         'catalog-section-item-image-button-delay',
@@ -37,9 +41,9 @@ use intec\core\helpers\Html;
                         'basket-state' => 'none',
                         'basket-price' => !empty($arPrice) ? $arPrice['PRICE_TYPE_ID'] : null
                     ]
-                ]) ?>
-                    <i class="intec-ui-icon intec-ui-icon-heart-1"></i>
-                <?= Html::endTag('div') ?>
+                ])*/ ?>
+                    <!--<i class="intec-ui-icon intec-ui-icon-heart-1"></i>-->
+                <?//= Html::endTag('div') ?>
                 <?= Html::beginTag('div', [
                     'class' => [
                         'catalog-section-item-image-button',

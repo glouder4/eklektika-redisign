@@ -188,3 +188,19 @@ a:active, [data-ui-markup="a"]:hover, [data-ui-markup="a"]:focus, [data-ui-marku
         max-width: 310px;
     }
 }
+
+.main-register-consent a,
+.main-register-consent a:hover,
+.main-register-consent a:active,
+.main-register-consent a:focus{
+    color: #352ca6!important;
+}
+.registration-errors-wrapper a,
+.registration-errors-wrapper a:hover,
+.registration-errors-wrapper a:focus,
+.registration-errors-wrapper a:active{
+    color: #453acb!important;
+}
+#bx-soa-paysystem-and-delivery{
+    display: none;
+}

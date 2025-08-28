@@ -29,6 +29,8 @@ $customPages = [
     '/services/e_nanesenie-logotipov-na-ezhednevniki/'
 ];
 
+
+
 if (in_array($APPLICATION->GetCurPage(), $customPages)) {
 
         // Перехватываем отображение страницы

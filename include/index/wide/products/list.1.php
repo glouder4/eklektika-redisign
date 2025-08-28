@@ -25,7 +25,7 @@ use intec\core\io\Path;
   'IBLOCK_TYPE' => 'catalogs',
   'IBLOCK_ID' => '13',
   'MODE' => 'all',
-  'DELAY_USE' => 'Y',
+  'DELAY_USE' => 'N',
   'DELAY_SHOW_INACTIVE' => 'Y',
   'COMPARE_SHOW_INACTIVE' => 'Y',
   'MEASURE_SHOW' => 'Y',

@@ -28,7 +28,7 @@ $this->setFrameMode(true);
                 [
                     'TICKET_EDIT_TEMPLATE' => !empty($arParams['TICKET_EDIT_TEMPLATE']) ? $arParams['TICKET_EDIT_TEMPLATE'] : $arResult['FOLDER'].$arResult['URL_TEMPLATES']['ticket_edit'],
                     'TICKETS_PER_PAGE' => $arParams['TICKETS_PER_PAGE'],
-                    'SET_PAGE_TITLE' => $arParams['SET_PAGE_TITLE'],
+                    'SET_PAGE_TITLE' => "N",
                     'TICKET_ID_VARIABLE' => $arResult['ALIASES']['ID'],
                     'SITE_ID' => $arParams['SITE_ID'],
                     'SET_SHOW_USER_FIELD' => $arParams['SET_SHOW_USER_FIELD'],

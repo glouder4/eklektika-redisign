@@ -24,7 +24,7 @@ use intec\core\io\Path;
   'IBLOCK_TYPE' => 'catalogs',
   'IBLOCK_ID' => '13',
   'MODE' => 'all',
-  'DELAY_USE' => 'Y',
+  'DELAY_USE' => 'N',
   'FORM_ID' => '6',
   'FORM_PROPERTY_PRODUCT' => 'form_text_21',
   'FORM_REQUEST_ID' => '7',

@@ -12,7 +12,7 @@ class RegisterUserCompany extends Request{
         // найти пользователя в б24 по EMAIL
         $b24User = new \OnlineService\B24\User();
 
-        $userObject = $b24User->isUserRegistered($arFields);
+        $userObject = $b24User->isUserRegistered($arFields);		
 
         // если такой пользователь есть, то вывести предупреждение
         if ($userObject && !empty($userObject)) {
@@ -32,7 +32,7 @@ class RegisterUserCompany extends Request{
 
         $reqFile = [];
         $file = [];
-        if( !empty($arFields['UF_REQ']) ){
+        if( !empty($arFields['UF_REQ']) && !empty($arFields['UF_REQ']['name']) ){
             $file = $arFields['UF_REQ'];
 
             // Сохраняем в систему Битрикс
@@ -54,12 +54,12 @@ class RegisterUserCompany extends Request{
                     ];
 
                     // Передаём в поле Bitrix24
-                    $arFields['UF_CRM_1755002252732'] = [
+                    $arFields['UF_CRM_1755643990423'] = [
                         'fileData' => $fileData
                     ];
                 }
             }
-            else{
+			else{
                 // Вывести подробную ошибку
                 $errorMessage = 'Ошибка загрузки файла реквизитов: ';
                 switch ($file['error']) {
@@ -142,7 +142,8 @@ class RegisterUserCompany extends Request{
                 // найти реквизит по ИНН
                 $dataRequisite = sendRequestB24("crm.requisite.list", $dataRequisite);
 
-                if (!empty($dataRequisite)) {
+                if (!empty($dataRequisite)) {			
+					//pre($dataRequisite);
                     $dataContact['fields']['COMPANY_ID'] = $dataRequisite[0]['ENTITY_ID'];
                     $companyId = $dataRequisite[0]['ENTITY_ID'];
 
@@ -154,7 +155,7 @@ class RegisterUserCompany extends Request{
                         'OS_COMPANY_PHONE' => $arFields['PERSONAL_PHONE'],
                         'OS_COMPANY_B24_ID' => $companyId,
                         'OS_COMPANY_CITY' => $arFields['UF_CITY'],
-                        'OS_REQUSITES_FILE' => $arFields['UF_CRM_1755002252732']
+                        'OS_REQUSITES_FILE' => $arFields['UF_CRM_1755643990423']
                     ]; 
 
                     $this->createCompanyElement($companyElementParamss);
@@ -178,12 +179,13 @@ class RegisterUserCompany extends Request{
                             'UF_CRM_1669208000616' => $arFields['UF_SPERE'],
                             'UF_CRM_1669208295583' => $arFields['UF_JUR_ADDRESS'],
                             'UF_CRM_1618551330657' => $arFields['UF_CITY'],
-                            'UF_CRM_1755002252732' => $arFields['UF_CRM_1755002252732'],
+                            'UF_CRM_1755643990423' => $arFields['UF_CRM_1755643990423'],
                             'COMPANY_TYPE' => 'CUSTOMER'
                         ]
                     ];
 
                     $companyId = sendRequestB24("crm.company.add", $qrCompanyInfo);
+					
                     if (!empty($companyId)) {
                         $qrCompany['id'] = $companyId;
                         $dataCompany = sendRequestB24("crm.company.get", $qrCompany);
@@ -220,7 +222,7 @@ class RegisterUserCompany extends Request{
                             'OS_COMPANY_PHONE' => $arFields['PERSONAL_PHONE'],
                             'OS_COMPANY_B24_ID' => $dataCompany['ID'],
                             'OS_COMPANY_CITY' => $arFields['UF_CITY'],
-                            'OS_REQUSITES_FILE' => $arFields['UF_CRM_1755002252732']
+                            'OS_REQUSITES_FILE' => $arFields['UF_CRM_1755643990423']
                         ];
                         $dataContact['fields']['COMPANY_ID'] = $dataCompany['ID'];
 
@@ -229,7 +231,7 @@ class RegisterUserCompany extends Request{
 
                         /*\OnlineService\Site\Company::updateB24Company([
                             'ID' => $companyId,
-                            'UF_CRM_1755002252732' => $reqFile
+                            'UF_CRM_1755643990423' => $reqFile
                         ]);*/
                     }
                 }
@@ -271,7 +273,7 @@ class RegisterUserCompany extends Request{
             ];
             sendRequestB24("crm.contact.company.add", $qrCompanyAddContact);
         }
-    }
+    } 
 
 
     public function OnBeforeUserRegisterHandler(&$arFields) {
@@ -283,7 +285,8 @@ class RegisterUserCompany extends Request{
 
         if( !$response ){
             if ($arFields['PASSWORD'] == $arFields['CONFIRM_PASSWORD']) {
-                $createResult = $this->createB24Company($arFields);
+
+                //$createResult = $this->createB24Company($arFields);
                 /*if ($createResult === false) {
                     // Если createB24Company вернул false, значит была ошибка
                     // Исключение уже было выброшено в createB24Company
@@ -295,13 +298,11 @@ class RegisterUserCompany extends Request{
         }
         else{
             // Определяем какое поле использовать для сообщения об ошибке
-            if (isset($response['PHONE']) && !empty($response['PHONE'])) {
-                $field = $arFields['PERSONAL_PHONE'];
+            if (isset($response['PHONE']) && !empty($response['PHONE']) || isset($response['EMAIL']) && !empty($response['EMAIL'])) {
+                $APPLICATION->ThrowException('Пользователь с указанными почтой или телефоном уже существует в системе. Вы можете <a href="/personal/profile/">авторизоваться</a> или <a href="/personal/profile/?forgot_password=yes">восстановить пароль</a>','already_registered');
             } else {
-                $field = $arFields['EMAIL'];
+                $APPLICATION->ThrowException('Что-то пошло не так.','already_registered');
             }
-
-            $APPLICATION->ThrowException('Такой пользователь уже существует в системе. Вы можете авторизоваться или восстановить пароль для ' . $field,'already_registered');
 
             return false;
         }
@@ -313,12 +314,18 @@ class RegisterUserCompany extends Request{
         {
             $response = $this->isUserRegistered($arFields);
 
+            if( !$response ){
+                $createResult = $this->createB24Company($arFields);
+
+                $response = $this->isUserRegistered($arFields);
+            }
+
             if( $response ){
                 $contactId = $response['ID'];
 
                 // Обновляем пользователя, записываем $contactId в UF_B24_USER_ID
                 $user = new \CUser;
-                $user->Update($arFields["USER_ID"], ["UF_B24_USER_ID" => $contactId]);
+                $user->Update($arFields["USER_ID"], ["ACTIVE" => "N","UF_B24_USER_ID" => $contactId]);
             }
         }
     }

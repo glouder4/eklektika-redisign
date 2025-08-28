@@ -1,7 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetPageProperty("description", "Компания &laquo;Эклектика&raquo; &mdash; принимает самые удобные способы оплаты: наличный, безналичный расчет, оплата картой.");
-$APPLICATION->SetPageProperty("title", "Условия оплаты заказа  из интернет-магазина &laquo;Эклектика&raquo; &mdash; сувенирная продукция с логотипом компании на заказ, бизнес сувениры оптом в Москве");
+$APPLICATION->SetPageProperty("description", "Компания &laquo;ЙОкаталог&raquo; &mdash; принимает самые удобные способы оплаты: наличный, безналичный расчет, оплата картой.");
+$APPLICATION->SetPageProperty("title", "Условия оплаты заказа  из интернет-магазина &laquo;ЙОкаталог&raquo; &mdash; сувенирная продукция с логотипом компании на заказ, бизнес сувениры оптом в Москве");
 $APPLICATION->SetTitle("Способы оплаты");
 ?><div class="intec-content">
 <div class="intec-content-wrapper">

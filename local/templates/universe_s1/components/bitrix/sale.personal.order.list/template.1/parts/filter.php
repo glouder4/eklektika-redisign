@@ -11,6 +11,7 @@ use Bitrix\Main\Localization\Loc;
 
 CJSCore::Init(['date']);
 
+
 ?>
 
 <div class="sale-personal-order-list-filter">

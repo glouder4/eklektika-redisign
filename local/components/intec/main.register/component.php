@@ -93,6 +93,8 @@ $arResult['REGISTER_DONE'] = "N";
 // register user
 if ($_SERVER["REQUEST_METHOD"] == "POST" && $_REQUEST["register_submit_button"] <> '' && !$USER->IsAuthorized())
 {
+    $resultValues = false;
+
 	if(COption::GetOptionString('main', 'use_encrypted_auth', 'N') == 'Y')
 	{
 		//possible encrypted user password
@@ -179,37 +181,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_REQUEST["register_submit_button"] 
 			$arResult["VALUES"]["AUTO_TIME_ZONE"] = "";
 
 		$bOk = true;
+        $resultValues = $arResult["VALUES"];
 
 		$events = GetModuleEvents("main", "OnBeforeUserRegister", true);
 		foreach($events as $arEvent)
 		{
 			$result = ExecuteModuleEventEx($arEvent, array(&$arResult['VALUES']));
-			
+
 			// Проверяем исключение независимо от результата
 			if($err = $APPLICATION->GetException()){
-                if( $err->id == "already_registered" ){
-                    if($arParams["USE_BACKURL"] == "Y" && $_REQUEST["backurl"] <> '')
-                        LocalRedirect($_REQUEST["backurl"]);
-                    elseif($arParams["SUCCESS_PAGE"] <> '')
-                        LocalRedirect($arParams["SUCCESS_PAGE"]);
-
-                    $arResult['REGISTER_DONE'] = "Y";
-                }
                 $arResult['ERRORS'][] = $err->GetString();
                 $bOk = false;
                 break;
             }
-			
-			/*if($result === false || $result === null)
-			{
-				$bOk = false;
-				break;
-			}*/
 		}
 
 		$ID = 0;
-		$user = new CUser();		
-		$resultValues = $arResult["VALUES"];
+		$user = new CUser();
+
 		switch($arResult["VALUES"]["UF_TYPE"]) {
 			case "4":
 				unset($resultValues["UF_INN"]);
@@ -366,16 +355,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_REQUEST["code_submit_button"] <> '
 // if user is registered - redirect him to backurl or to success_page; currently added users too
 if($register_done)
 {
-	if($arParams["USE_BACKURL"] == "Y" && $_REQUEST["backurl"] <> '')
-		LocalRedirect($_REQUEST["backurl"]);
-	elseif($arParams["SUCCESS_PAGE"] <> '')
-		LocalRedirect($arParams["SUCCESS_PAGE"]);
-
-
     $arResult['REGISTER_DONE'] = "Y";
 }
 
-$arResult["VALUES"] = htmlspecialcharsEx($arResult["VALUES"]);
+$arResult["VALUES"] = htmlspecialcharsEx($resultValues);
 
 // redefine required list - for better use in template
 $arResult["REQUIRED_FIELDS_FLAGS"] = array();

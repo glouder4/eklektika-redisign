@@ -90,7 +90,7 @@ CJSCore::Init();
                     <div class="form-actions btns">
                         <input type="submit" name="Login" value="<?=GetMessage("AUTH_LOGIN_BUTTON")?>" />
 
-                        <noindex><a class="register-btn" href="<?=$arResult["AUTH_REGISTER_URL"]?>" rel="nofollow"><?=GetMessage("AUTH_REGISTER")?></a></noindex>
+                        <noindex><a class="register-btn" href="/catalog/<?//=$arResult["AUTH_REGISTER_URL"]?>" rel="nofollow"><?=GetMessage("AUTH_REGISTER")?></a></noindex>
                     </div>
 
                     <table width="95%">

@@ -16,6 +16,29 @@ if ($arParams['SHOW_ORDER_PAGE'] !== 'Y') {
 if (strlen($arParams['MAIN_CHAIN_NAME']) > 0) {
 	$APPLICATION->AddChainItem(htmlspecialcharsbx($arParams['MAIN_CHAIN_NAME']), $arResult['SEF_FOLDER']);
 }
+if( isset($_GET['filter_status']) ){
+    $sampleIds = ["OB","SC","SO","SS","OG"];
+    $reserveIds = ["R","RO","RC"];
+
+    if( in_array($_GET['filter_status'],$reserveIds) )
+        $APPLICATION->SetTitle("Мои резервы");
+    elseif ( in_array($_GET['filter_status'],$sampleIds) )
+        $APPLICATION->SetTitle("Мои образцы");
+    elseif( isset($_GET['filter_status'][0]) ){
+        foreach ($_GET['filter_status'] as $filter_status){
+            if( in_array($filter_status,$reserveIds) ){
+                $APPLICATION->SetTitle("Мои резервы");
+                break;
+            }
+
+                elseif ( in_array($filter_status,$sampleIds) ){
+                $APPLICATION->SetTitle("Мои образцы");
+                break;
+            }
+
+        }
+    }
+}
 
 $arParameters = [
     'PATH_TO_DETAIL' => $arResult['PATH_TO_ORDER_DETAIL'],
