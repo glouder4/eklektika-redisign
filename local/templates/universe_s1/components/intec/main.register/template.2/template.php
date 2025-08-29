@@ -682,10 +682,10 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
         <div style="display: none;" id="personal-confirmation">
             <div class="personal-confirmation-wrapper">
                 <div class="modal-personal-confrmation--title">
-                    <h3>Политика конфиденциальности</h3>
+                    <h3>Согласие на обработку персональных данных</h3>
                 </div>
                 <?
-                    $APPLICATION->IncludeFile(SITE_DIR."include/politika-konfidencialnosty.php", array(), array(
+                    $APPLICATION->IncludeFile(SITE_DIR."include/soglasiye-na-obrabotku.php", array(), array(
                             "MODE" => "html",
                             "NAME" => "",
                         )

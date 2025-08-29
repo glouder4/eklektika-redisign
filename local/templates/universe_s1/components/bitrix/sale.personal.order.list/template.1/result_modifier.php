@@ -238,7 +238,7 @@ if(is_array($arResult['ORDERS']) && !empty($arResult['ORDERS'])) {
 $arResult['VISUAL'] = $arVisual;
 unset($arOrder, $arVisual);
 
-$excludedKeys = ["KO","UD","KP",'SD'];
+$excludedKeys = ["KO","UD","KP",'SD',"SP"];
 foreach ($arResult['INFO']['STATUS'] as $key => $val){
     if( in_array($val['ID'],$excludedKeys) )
         unset($arResult['INFO']['STATUS'][$key]);

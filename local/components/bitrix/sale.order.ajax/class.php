@@ -3871,6 +3871,7 @@ class SaleOrderAjax extends \CBitrixComponent
 
 		//Здесь вместо стандартной логики, нужно получить все активные элементы инфоблока 57, и проверить, есть ли среди них элемент с свойством OS_COMPANY_B24_ID = $order->getUserId()
         $profilesIblock = 57;
+
         $dbUserProfiles = \CIBlockElement::GetList(
             [],
             [
@@ -3899,7 +3900,6 @@ class SaleOrderAjax extends \CBitrixComponent
 
             $arResult['ORDER_PROP']['USER_PROFILES'][$arUserProfiles['ID']] = $arUserProfiles;
 		}
-        //pre($arResult['ORDER_PROP']['USER_PROFILES']);
 
 
 

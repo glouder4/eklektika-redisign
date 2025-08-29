@@ -268,9 +268,9 @@ $hideDelivery = empty($arResult['DELIVERY']);
                                         </div>
                                     <?php } ?>
                                     <div class="intec-grid-item-auto intec-grid-item-700-1">
-                                        <a href="javascript:void(0)" style="margin: 10px 0" class="intec-ui intec-ui-control-button intec-ui-mod-round-3 intec-ui-scheme-current intec-ui-size-3" data-save-button="true">
-                                            <?=$arParams['MESS_ORDER']?>
-                                        </a>
+                                        <!--<a href="javascript:void(0)" style="margin: 10px 0" class="intec-ui intec-ui-control-button intec-ui-mod-round-3 intec-ui-scheme-current intec-ui-size-3" data-save-button="true">
+                                            <?php /*=$arParams['MESS_ORDER']*/?>
+                                        </a>-->
                                     </div>
                                 </div>
                             </div>
