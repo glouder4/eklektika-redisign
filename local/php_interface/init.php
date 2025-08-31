@@ -5,15 +5,15 @@ if (headers_sent() === false) {
 
 
 define('BX_CRONTAB_SUPPORT', true);
-//header("X-Frame-Options: testb24.yoliba.ru");
-//header('Content-Security-Policy: frame-ancestors https://testb24.yoliba.ru', true);
+//header("X-Frame-Options: bitrix.yomerch.ru");
+//header('Content-Security-Policy: frame-ancestors https://bitrix.yomerch.ru', true);
 use Bitrix\Sale;
 
 use intec\eklectika\advertising_agent\Company;
 CModule::IncludeModule("intec.eklectika");
 
 define('IBLOCK_ID_1C', 45);
-define('URL_B24', 'https://testb24.yoliba.ru/');
+define('URL_B24', 'https://bitrix.yomerch.ru/');
 define("EXLUDED_ORDER_KEYS",["KO","UD","KP",'SD']);
 define("EXLUDED_RESERVE_KEYS",["RO", "RC", "R"]);
 define("EXLUDED_SAMPLE_KEYS",["OB","SS", "SO", "SC","OG"]);
@@ -58,7 +58,7 @@ die(); */
 * отправить запрос к Б24
 */
 function sendRequestB24($method, $params,$debug = false) {
-	$queryUrl = URL_B24.'rest/1/w8i2ce68y3wwps17/'.$method.'.json';
+	$queryUrl = URL_B24.'rest/1/oak1tjz71elzz2xt/'.$method.'.json';
 
     $curl = curl_init();
     $queryData  = http_build_query($params);

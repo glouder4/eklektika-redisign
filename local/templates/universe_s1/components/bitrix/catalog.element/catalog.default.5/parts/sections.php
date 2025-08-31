@@ -178,7 +178,7 @@ if ($arSections['SHIPMENT']['SHOW']) {
                 <?php $bFirst = true ?>
                 <?php foreach ($arSections as $arSection) {
 
-                    if (!$arSection['SHOW'])
+                    if (!$arSection['SHOW'] || $arSection['ID'] == "reviews")
                         continue;
 
                 ?>

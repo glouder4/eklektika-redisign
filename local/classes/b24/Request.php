@@ -3,10 +3,10 @@
     class Request{
         protected function sendRequest($params,$debug = false){
             $queryUrl = URL_B24.'local/classes/site_requests_handler.php';
-            $curl = curl_init();
-            $queryData  = http_build_query($params);
+            $curl = \curl_init();
+            $queryData  = \http_build_query($params);
             
-            curl_setopt_array($curl, array(
+            \curl_setopt_array($curl, array(
                 CURLOPT_SSL_VERIFYPEER => 0,
                 CURLOPT_SSL_VERIFYHOST => FALSE,
                 CURLOPT_POST => 1,

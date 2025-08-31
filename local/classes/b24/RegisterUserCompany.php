@@ -8,11 +8,11 @@ class RegisterUserCompany extends Request{
     {
     }
 
-    private function isUserRegistered($arFields){
+    private function isUserRegistered($arFields,$debug = false){
         // найти пользователя в б24 по EMAIL
         $b24User = new \OnlineService\B24\User();
 
-        $userObject = $b24User->isUserRegistered($arFields);		
+        $userObject = $b24User->isUserRegistered($arFields,$debug);
 
         // если такой пользователь есть, то вывести предупреждение
         if ($userObject && !empty($userObject)) {
@@ -140,7 +140,7 @@ class RegisterUserCompany extends Request{
                     ]
                 ];
                 // найти реквизит по ИНН
-                $dataRequisite = sendRequestB24("crm.requisite.list", $dataRequisite);
+                $dataRequisite = sendRequestB24("crm.requisite.list", $dataRequisite,false);
 
                 if (!empty($dataRequisite)) {			
 					//pre($dataRequisite);
@@ -312,12 +312,12 @@ class RegisterUserCompany extends Request{
         // если регистрация успешна то
         if($arFields["USER_ID"]>0)
         {
-            $response = $this->isUserRegistered($arFields);
+            $response = $this->isUserRegistered($arFields,false);
 
             if( !$response ){
                 $createResult = $this->createB24Company($arFields);
 
-                $response = $this->isUserRegistered($arFields);
+                $response = $this->isUserRegistered($arFields,false);
             }
 
             if( $response ){

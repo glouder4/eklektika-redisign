@@ -57,33 +57,33 @@ $arSvg = [
                                 <?php include (__DIR__.'/parts/companies.php') ?>
                             </div>
                             <div style="margin-bottom: 24px;">
-                            <?php include(__DIR__.'/parts/private.php') ?>
+                                <?php include(__DIR__.'/parts/private.php') ?>
                             </div>
-                                <div style="margin-bottom: 24px;">
-                            <?php if ($arVisual['CLAIMS_BLOCK_SHOW']) { ?>
-                                <?php include (__DIR__.'/parts/claims.php') ?>
-                            <?php } ?>
+                            <!--<div style="margin-bottom: 24px;">
+                                <?php /*if ($arVisual['CLAIMS_BLOCK_SHOW']) { */?>
+                                    <?php /*include (__DIR__.'/parts/claims.php') */?>
+                                <?php /*} */?>
+                            </div>
+                            <div style="margin-bottom: 24px;">
+                                <div class="intec-grid-item-2 intec-grid-item-1024-1">
+                                    <?php /*include (__DIR__.'/parts/news.php') */?>
                                 </div>
-                                    <div style="margin-bottom: 24px;">
-                            <div class="intec-grid-item-2 intec-grid-item-1024-1">
-                                <?php include (__DIR__.'/parts/news.php') ?>
                             </div>
-                                    </div>
-                                        <div style="margin-bottom: 24px;">
-                            <div class="intec-grid-item-2 intec-grid-item-1024-1">
-                                <?php include (__DIR__.'/parts/info.php') ?>
-                            </div>
-                                        </div>
-                        </div>
-                        <div class="intec-grid-item-2 intec-grid-item-1024-1">
-                            <?php if ($arVisual['MANAGER_BLOCK_SHOW']) { ?>
-                                <?php include (__DIR__.'/parts/manager.php') ?>
-                            <?php } ?>
-                        </div>
+                            <div style="margin-bottom: 24px;">
+                                <div class="intec-grid-item-2 intec-grid-item-1024-1">
+                                    <?php /*include (__DIR__.'/parts/info.php') */?>
+                                </div>
+                            </div>-->
+                    </div>
+                    <div class="intec-grid-item-2 intec-grid-item-1024-1">
+                        <?php if ($arVisual['MANAGER_BLOCK_SHOW']) { ?>
+                            <?php include (__DIR__.'/parts/manager.php') ?>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     <?= Html::endTag('div') ?>
     <?php include(__DIR__.'/parts/script.php') ?>
 </div>

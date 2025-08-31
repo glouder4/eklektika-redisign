@@ -12,7 +12,7 @@
         {
         }
 
-        public function getContactID($arFields,$returnAll = false){
+        public function getContactID($arFields,$returnAll = false,$debug = false){
             $arFields = array_merge($arFields,[
                 "ACTION" => 'GET_CONTACT_ID',
                 "SORT" => 'ID',
@@ -20,7 +20,7 @@
             ]);
 
             // найти пользователя в б24 по EMAIL
-            $response = $this->sendRequest($arFields,false);
+            $response = $this->sendRequest($arFields,$debug);
 
             if( $response['success'] == 1 ){
                 return ($returnAll) ? $response['data'] : $response['data']['ID'];
@@ -55,11 +55,11 @@
                 $this->deleteContact($userObject['CONTACT_ID']);
         }
 
-        public function isUserRegistered($arFields){
+        public function isUserRegistered($arFields,$debug){
             return $this->getContactID([
                 'EMAIL' => $arFields['EMAIL'],
                 'PHONE' => $arFields['PERSONAL_PHONE']
-            ],true);
+            ],true,$debug);
         }
 
         /**

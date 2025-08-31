@@ -51,11 +51,11 @@ $arData = [
                     </svg>
                     +7 (495) 161-41-00
                 </a>
-                <a href="mailto:office@yomerch.ru" class="footer__main-brand_info-links-link">
+                <a href="mailto:info@yomerch.ru" class="footer__main-brand_info-links-link">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17" fill="none">
                         <path d="M2.38472 16.0167C1.85864 16.0167 1.40843 15.8296 1.03411 15.4553C0.659796 15.081 0.472317 14.6304 0.47168 14.1037V2.62545C0.47168 2.09936 0.659158 1.64916 1.03411 1.27484C1.40907 0.900518 1.85927 0.71304 2.38472 0.712402H17.6891C18.2152 0.712402 18.6657 0.89988 19.0406 1.27484C19.4156 1.64979 19.6028 2.1 19.6021 2.62545V14.1037C19.6021 14.6298 19.415 15.0803 19.0406 15.4553C18.6663 15.8302 18.2158 16.0174 17.6891 16.0167H2.38472ZM10.0369 9.3211L2.38472 4.53849V14.1037H17.6891V4.53849L10.0369 9.3211ZM10.0369 7.40805L17.6891 2.62545H2.38472L10.0369 7.40805ZM2.38472 4.53849V2.62545V14.1037V4.53849Z" fill="#EF4A85"/>
                     </svg>
-                    office@yomerch.ru
+                    info@yomerch.ru
                 </a>
             </div>
             <div class="footer__main-brand_info-social-links">
@@ -173,12 +173,12 @@ $arData = [
                         </a>
                     </li>
                     <li class="footer__main-categories__columns-column--list_item">
-                        <a href="/dostavka/" class="footer__main-categories__columns-column--list_item_link">
+                        <a href="#/dostavka/" class="footer__main-categories__columns-column--list_item_link">
                             Доставка
                         </a>
                     </li>
                     <li class="footer__main-categories__columns-column--list_item">
-                        <a href="/dostavka/" class="footer__main-categories__columns-column--list_item_link">
+                        <a href="#/dostavka/" class="footer__main-categories__columns-column--list_item_link">
                             Наши Дилеры
                         </a>
                     </li>
@@ -193,12 +193,12 @@ $arData = [
                 </div>
                 <ul class="footer__main-categories__columns-column--list">
                     <li class="footer__main-categories__columns-column--list_item">
-                        <a href="/company/" class="footer__main-categories__columns-column--list_item_link">
+                        <a href="#/company/" class="footer__main-categories__columns-column--list_item_link">
                             О компании
                         </a>
                     </li>
                     <li class="footer__main-categories__columns-column--list_item">
-                        <a href="/company/news/" class="footer__main-categories__columns-column--list_item_link">
+                        <a href="#/company/news/" class="footer__main-categories__columns-column--list_item_link">
                             Новости
                         </a>
                     </li>
@@ -213,7 +213,7 @@ $arData = [
                         </a>
                     </li>-->
                     <li class="footer__main-categories__columns-column--list_item">
-                        <a href="/shares/" class="footer__main-categories__columns-column--list_item_link">
+                        <a href="#/shares/" class="footer__main-categories__columns-column--list_item_link">
                             Акции и Скидки
                         </a>
                     </li>

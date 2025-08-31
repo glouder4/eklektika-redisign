@@ -90,7 +90,7 @@ $GLOBALS["OS_BREADCRUMBS"] = [
             </h1>
         </div>
     </div>
-    <div class="container">
+    <div style="margin-bottom:35px;" class="container">
         <div class="alert-section">
             <div class="alert-card">
                 <div class="alert-card--description">
@@ -106,7 +106,7 @@ $GLOBALS["OS_BREADCRUMBS"] = [
         </div>
     </div>
 
-    <section class="products-card-section">
+    <!--<section class="products-card-section">
         <style>
             .products-card-section--list_item--name{
                 background-color: #EF4A85;
@@ -118,7 +118,7 @@ $GLOBALS["OS_BREADCRUMBS"] = [
             </div>
 
             <?php
-            $APPLICATION->IncludeComponent(
+/*            $APPLICATION->IncludeComponent(
                 "bitrix:news.list",
                 "eklektika_services_list",
                 Array(
@@ -176,11 +176,11 @@ $GLOBALS["OS_BREADCRUMBS"] = [
                     "STRICT_SECTION_CHECK" => "N"
                 )
             );
-            ?>
+            */?>
         </div>
-    </section>
+    </section>-->
 
-    <div class="container">
+    <!--<div class="container">
         <style>
             .how_to_request--item:nth-child(1)::before{
                 content: "01";
@@ -326,7 +326,7 @@ $GLOBALS["OS_BREADCRUMBS"] = [
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
 
     <?$APPLICATION->IncludeComponent(
         "bitrix:form.result.new",

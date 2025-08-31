@@ -39,8 +39,8 @@
     [ts] => 1721278378
     [auth] => Array
         (
-            [domain] => testb24.yoliba.ru
-            [client_endpoint] => https://testb24.yoliba.ru/rest/
+            [domain] => bitrix.yomerch.ru
+            [client_endpoint] => https://bitrix.yomerch.ru/rest/
             [server_endpoint] => https://oauth.bitrix.info/rest/
             [member_id] => 5ea29b45c15fb0d4d9e4114f6c233c1c
             [application_token] => qgq5d7gsiytqu27yclcq82a2nyg488ru

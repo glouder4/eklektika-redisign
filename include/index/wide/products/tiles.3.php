@@ -28,7 +28,7 @@ use intec\core\io\Path;
 		"ACTION" => "buy",
 		"PRICE_CODE" => array(
 			0 => "BASE",
-			1 => "Оптовая цена",
+			1 => "Цена",
 			2 => "Рекламная цена",
 		),
 		"DISCOUNT_SHOW" => "Y",

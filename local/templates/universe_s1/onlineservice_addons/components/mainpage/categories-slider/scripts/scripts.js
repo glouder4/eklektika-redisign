@@ -12,11 +12,11 @@ $('#categoriesSlider').owlCarousel({
             items:3
         },
         1200:{
-            items:5,
+            items:4,
             margin: 10,
         },
         1520:{
-            items:5,
+            items:4,
             margin: 15,
         }
     }

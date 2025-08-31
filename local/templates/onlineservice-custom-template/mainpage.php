@@ -22,6 +22,8 @@ $asset->addCss("/local/templates/onlineservice-custom-template/components/mainpa
 //$asset->addCss("/local/templates/onlineservice-custom-template/components/mainpage/slider/styles/styles.css");
 $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpage/slider/scripts/owl.carousel.min.js", true);
 $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpage/categories-slider/scripts/scripts.js", true);
+
+$APPLICATION->SetTitle('YO!merch');
 ?>
 
 <main class="main-content">
@@ -179,6 +181,7 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
                     'DETAIL_PICTURE',
                     'SECTION_PAGE_URL',
                     'UF_SVG',
+                    'UF_IMAGE',
                     'UF_HOVER_TEMPLATE'
                 );
                 $rsSections = CIBlockSection::GetList(
@@ -192,6 +195,7 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
                 $columnCounter = 0;
                 while ($arSection = $rsSections->GetNext()) {
                     $sectionSvg = ( !empty($arSection['UF_SVG']) ) ? CFile::GetPath($arSection['UF_SVG']) : null;
+                    $hoverImage = ( !empty($arSection['UF_IMAGE']) ) ? CFile::GetPath($arSection['UF_IMAGE']) : null;
 
                     // Получаем URL изображения раздела
                     $sectionImage = CFile::GetPath($arSection['PICTURE']);
@@ -255,10 +259,13 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
 
                         if(empty($sectionSvg))
                             $sectionSvg = $sectionImage;
+
+                        if(empty($hoverImage))
+                            $hoverImage = $sectionImage;
                     ?>
                     <a href="<?= $arSection['SECTION_PAGE_URL'] ?>"
                        class="categories-slider--item_category <?=$additional_class;?>"
-                       style="background-image: url('<?= $sectionImage ?>')"
+                       style="background-image: url('<?= $hoverImage ?>')"
                     >
                         <div class="categories-slider--item_category-image">
                             <img src="<?= $sectionSvg ?>" alt="<?= $arSection['NAME'] ?>">

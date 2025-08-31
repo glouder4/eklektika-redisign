@@ -44,14 +44,14 @@ $APPLICATION->SetTitle("Контакты");
                             <p>109428, г. Москва, Рязанский проспект, дом 16, стр. 3</p>
                         </div>
                     </div>
-                    <div class="contacts--map_data--item">
+                    <!--<div class="contacts--map_data--item">
                         <div class="contacts--map_data--item_title">
                             <span>Телефон склада</span>
                         </div>
                         <div class="contacts--map_data--item_description">
                             <a href="#" class="contacts--map_data--item_description-phone">+7(925)667-33-83</a>
                         </div>
-                    </div>
+                    </div>-->
                     <!--<div class="contacts--map_data--item">
                         <div class="contacts--map_data--item_title">
                             <span>Оформление заказов</span>

@@ -479,9 +479,14 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
                 </div>
             </div>-->
         </div>
+        <div class="container">
+            <div class="actions">
+                <a href="/upload/yomerch_Прайс_нанесение.pdf" target="_blank">Скачать Прайс-лист на услуги производства</a>
+            </div>
+        </div>
     </section>
 
-    <div class="container">
+    <!--<div class="container">
         <div class="company-description--section">
             <div class="company-description--title">
                 <h2 class="title">Нанесение логотипа на заказ</h2>
@@ -501,7 +506,7 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
         <div class="catalog--section">
             <div class="categories-slider owl-carousel owl-theme" id="categoriesSlider">
                 <?php
-                $arFilter = array(
+/*                $arFilter = array(
                     'IBLOCK_ID' => 43,
                     'ACTIVE' => 'Y',
                     'GLOBAL_ACTIVE' => 'Y',
@@ -514,6 +519,7 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
                     'DETAIL_PICTURE',
                     'SECTION_PAGE_URL',
                     'UF_SVG',
+                    'UF_IMAGE',
                     'UF_HOVER_TEMPLATE'
                 );
                 $rsSections = CIBlockSection::GetList(
@@ -527,6 +533,7 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
                 $columnCounter = 0;
                 while ($arSection = $rsSections->GetNext()) {
                     $sectionSvg = ( !empty($arSection['UF_SVG']) ) ? CFile::GetPath($arSection['UF_SVG']) : null;
+                    $hoverImage = ( !empty($arSection['UF_IMAGE']) ) ? CFile::GetPath($arSection['UF_IMAGE']) : null;
 
                     // Получаем URL изображения раздела
                     $sectionImage = CFile::GetPath($arSection['PICTURE']);
@@ -548,37 +555,37 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
                     if( empty($sectionSvg) ){
                         $isEmptyPicture = true;
                     }
-                    ?>
+                    */?>
                     <?php
-                    if ($isEmptyPicture){
-                        ?>
+/*                    if ($isEmptyPicture){
+                        */?>
                         <style>
-                            #categoriesSlider .owl-item:nth-child(<?=$columnCounter;?>) .categories-slider--item_category:nth-of-type(<?=$keyCounter;?>)::before{
-                                content: "<?= str_replace('"', '\\"', html_entity_decode($arSection['NAME'])) ?>";
+                            #categoriesSlider .owl-item:nth-child(<?php /*=$columnCounter;*/?>) .categories-slider--item_category:nth-of-type(<?php /*=$keyCounter;*/?>)::before{
+                                content: "<?php /*= str_replace('"', '\\"', html_entity_decode($arSection['NAME'])) */?>";
                             }
                             <?php
-                                if( strlen($arSection['NAME'])/2 > 11 ){ ?>
-                            #categoriesSlider .owl-item:nth-child(<?=$columnCounter;?>) .categories-slider--item_category:nth-of-type(<?=$keyCounter;?>)::before{
+/*                                if( strlen($arSection['NAME'])/2 > 11 ){ */?>
+                            #categoriesSlider .owl-item:nth-child(<?php /*=$columnCounter;*/?>) .categories-slider--item_category:nth-of-type(<?php /*=$keyCounter;*/?>)::before{
                                 font-size: 16px;
                                 text-align: center;
                             }
                             @media(min-width: 1520px){
-                                #categoriesSlider .owl-item:nth-child(<?=$columnCounter;?>) .categories-slider--item_category:nth-of-type(<?=$keyCounter;?>)::before{
+                                #categoriesSlider .owl-item:nth-child(<?php /*=$columnCounter;*/?>) .categories-slider--item_category:nth-of-type(<?php /*=$keyCounter;*/?>)::before{
                                     font-size: 26px;
                                 }
                             }
-                            <?php }
-                        ?>
+                            <?php /*}
+                        */?>
                             <?php
-                                if( strlen($arSection['NAME'])/2 > 18 ){ ?>
-                            #categoriesSlider .owl-item:nth-child(<?=$columnCounter;?>) .categories-slider--item_category:nth-of-type(<?=$keyCounter;?>) .categories-slider--item_category-title{
+/*                                if( strlen($arSection['NAME'])/2 > 18 ){ */?>
+                            #categoriesSlider .owl-item:nth-child(<?php /*=$columnCounter;*/?>) .categories-slider--item_category:nth-of-type(<?php /*=$keyCounter;*/?>) .categories-slider--item_category-title{
                                 top: 109px!important;
                             }
-                            <?php }
-                            ?>
+                            <?php /*}
+                            */?>
                         </style>
                         <?php
-                    }
+/*                    }
 
                     $additional_class = null;
                     if($isEmptyPicture || $arSection == 7 || empty($sectionSvg)){
@@ -590,20 +597,23 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
 
                     if(empty($sectionSvg))
                         $sectionSvg = $sectionImage;
-                    ?>
-                    <a href="<?= $arSection['SECTION_PAGE_URL'] ?>"
-                       class="categories-slider--item_category <?=$additional_class;?>"
-                       style="background-image: url('<?= $sectionImage ?>')"
+
+                    if(empty($hoverImage))
+                        $hoverImage = $sectionImage;
+                    */?>
+                    <a href="<?php /*= $arSection['SECTION_PAGE_URL'] */?>"
+                       class="categories-slider--item_category <?php /*=$additional_class;*/?>"
+                       style="background-image: url('<?php /*= $hoverImage */?>')"
                     >
                         <div class="categories-slider--item_category-image">
-                            <img src="<?= $sectionSvg ?>" alt="<?= $arSection['NAME'] ?>">
+                            <img src="<?php /*= $sectionSvg */?>" alt="<?php /*= $arSection['NAME'] */?>">
                         </div>
                         <div class="categories-slider--item_category-title">
-                            <span><?= $arSection['NAME'] ?></span>
+                            <span><?php /*= $arSection['NAME'] */?></span>
                         </div>
                     </a>
                     <?php
-                    $counter++;
+/*                    $counter++;
                     $keyCounter++;
                     if($keyCounter == 4)
                         $keyCounter = 1;
@@ -611,7 +621,7 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
                 if ($counter > 0) {
                     echo '</div>';
                 }
-                ?>
+                */?>
             </div>
         </div>
     </div>
@@ -773,7 +783,7 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
 
     <?$APPLICATION->IncludeComponent(
         "bitrix:form.result.new",

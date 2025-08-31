@@ -62,7 +62,7 @@ $GLOBALS["OS_BREADCRUMBS"] = [
                         <p>Приобретаете продукцию для&nbsp;своей компании?<br/>Обратитесь к&nbsp;одному из&nbsp;наших дилеров!</p>
                     </div>
                     <div class="cards-list-item--action">
-                        <a href="/personal/profile/registration.php" class="cards-list-item--action_btn">Зарегистрироваться</a>
+                        <!--<a href="/personal/profile/registration.php" class="cards-list-item--action_btn">Зарегистрироваться</a>-->
                         <a href="/personal/profile/" class="cards-list-item--action_btn" style="background-color: #EF4A85;">Войти</a>
                     </div>
                 </div>
@@ -74,7 +74,7 @@ $GLOBALS["OS_BREADCRUMBS"] = [
                         <p>Хотите приобрести продукцию Yoliba<br/>для&nbsp;личного пользования? Нет&nbsp;проблем!</p>
                     </div>
                     <div class="cards-list-item--action">
-                        <a href="/personal/profile/registration.php" class="cards-list-item--action_btn">Зарегистрироваться</a>
+                        <!--<a href="/personal/profile/registration.php" class="cards-list-item--action_btn">Зарегистрироваться</a>-->
                         <a href="/personal/profile/" class="cards-list-item--action_btn" style="background-color: #EF4A85;">К покупкам</a>
                     </div>
                 </div>

@@ -134,12 +134,12 @@ $arResult['ITEMS'][] = [
     'ICON' => "",//'<i class="fa fa-calculator"></i>',
     'ACTIVE' => false
 ];
-$arResult['ITEMS'][] = [
+/*$arResult['ITEMS'][] = [
     'PATH' => "#",
     'NAME' => "Аналитика",
     'ICON' => "",//'<i class="fa fa-calculator"></i>',
     'ACTIVE' => false
-];
+];*/
 
 if ($arParams['SHOW_ACCOUNT_PAGE'] === 'Y') {
     $arResult['ITEMS'][] = [
@@ -149,14 +149,14 @@ if ($arParams['SHOW_ACCOUNT_PAGE'] === 'Y') {
         'ACTIVE' => empty($sPageSection) ? $sPageUrl == $arResult['PATH_TO_ACCOUNT'] : $sPageSection == 'account'
     ];
 }
-if ($arVisual['CLAIMS_BLOCK_SHOW']) {
+/*if ($arVisual['CLAIMS_BLOCK_SHOW']) {
     $arResult['ITEMS']['CLAIMS'] = [
         'PATH' => isset($arResult['PATH_TO_CLAIMS']) ? $arResult['PATH_TO_CLAIMS'] : $arResult['SEF_FOLDER'].'?SECTION=claims',
         'NAME' => "Претензии",//Loc::getMessage('C_SALE_PERSONAL_SECTION_TEMPLATE_1_TEMPLATE_MENU_ITEM_CLAIMS'),
         'ICON' => "",//'<i class="fa fa-question"></i>',
         'ACTIVE' => empty($sPageSection) ? $sPageUrl == $arResult['PATH_TO_CLAIMS'] : $sPageSection == 'claims'
     ];
-}
+}*/
 $arResult['ITEMS']['KP'] = [
     'PATH' => isset($arParams['PATH_TO_KP']) ? $arParams['PATH_TO_KP'] : $arResult['SEF_FOLDER'].'?SECTION=kp',
     'NAME' => 'Комерческие предложения',
@@ -265,12 +265,12 @@ if ($arParams['PROFILE_ADD_USE'] === 'Y') {
     ];
 }
 
- $arResult['ITEMS']['SAVED_BASKETS'] = [
+/* $arResult['ITEMS']['SAVED_BASKETS'] = [
         'PATH' => isset($arParams['PATH_TO_SAVED_BASKETS']) ? $arParams['PATH_TO_SAVED_BASKETS'] : $arResult['SEF_FOLDER'].'?SECTION=saved_baskets',
         'NAME' => 'Сохраненные корзины',
         'ICON' => '<i class="fa fa-shopping-cart"></i>',
         'ACTIVE' => empty($sPageSection) ? $sPageUrl == $arParams['PATH_TO_SAVED_BASKETS'] : $sPageSection == 'saved_baskets'
-    ];
+    ];*/
 	
  
 $customPagesList = CUtil::JsObjectToPhp($arParams['~CUSTOM_PAGES']);

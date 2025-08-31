@@ -205,6 +205,9 @@
     .categories-slider--container-title>.title{
         font-size: 48px;
     }
+    #categoriesSlider .owl-item{
+        /*max-width: 230px;*/
+    }
     .categories-slider--item{
         width: 230px;
     }

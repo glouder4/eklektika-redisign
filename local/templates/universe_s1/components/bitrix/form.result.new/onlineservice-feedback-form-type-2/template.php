@@ -33,7 +33,7 @@ $sTemplateId = Html::getUniqueId(null, Component::getUniqueId($this));
         <div class="feedback__form">
             <div class="feedback__form--form_wrapper">
                 <div class="feedback__form--form_title">
-                    <span>Оставьте заявку и мы с вами свяжемся</span>
+                    <span>Закажите подробную<br/>консультацию</span>
                 </div>
                 <form class="feedback__form--form" id="feedback__form--form">
                     <?=bitrix_sessid_post()?>
@@ -52,7 +52,7 @@ $sTemplateId = Html::getUniqueId(null, Component::getUniqueId($this));
                     </div>
 
                     <div class="feedback__form--form--action_item">
-                        <button type="submit" id="feedback__form-SendForm" class="feedback__form--form--action_item--send_form">Оставить заявку</button>
+                        <button type="submit" id="feedback__form-SendForm" class="feedback__form--form--action_item--send_form">Заказать консультацию</button>
                     </div>
                 </form>
             </div>

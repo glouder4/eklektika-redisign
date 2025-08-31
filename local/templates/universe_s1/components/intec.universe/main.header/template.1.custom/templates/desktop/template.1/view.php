@@ -297,11 +297,11 @@ if ($arResult['CONTACTS']['SHOW']) {
             ) ?>
             <div class="header__navigation">
                 <ul class="header__navigation-list">
-                    <li class="header__navigation-list--item">
+                    <!--<li class="header__navigation-list--item">
                         <a class="header__navigation-list--item-link" href="/company/">О компании</a>
-                    </li>
+                    </li>-->
                     <li class="header__navigation-list--item">
-                        <a class="header__navigation-list--item-link" href="/services/">Производство</a>
+                        <a class="header__navigation-list--item-link" href="/nanesenie/">Производство</a>
                     </li>
                     <li class="header__navigation-list--item">
                         <a class="header__navigation-list--item-link" href="/catalog/">Купить</a>

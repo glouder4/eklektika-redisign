@@ -16,14 +16,14 @@ document.addEventListener("DOMContentLoaded", function() {
                 items: 4
             },
             991: {
-                items: 5
+                items: 4
             },
             1200: {
-                items: 5,
+                items: 4,
                 margin: 10
             },
             1520: {
-                items: 5,
+                items: 4,
                 margin: 15
             }
         }
