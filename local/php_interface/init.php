@@ -4,7 +4,6 @@ if (headers_sent() === false) {
 }
 
 
-define('BX_CRONTAB_SUPPORT', true);
 //header("X-Frame-Options: bitrix.yomerch.ru");
 //header('Content-Security-Policy: frame-ancestors https://bitrix.yomerch.ru', true);
 use Bitrix\Sale;

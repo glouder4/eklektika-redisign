@@ -81,6 +81,10 @@ $arVisual = [
     ]
 ];
 
+if( empty($arResult) && !empty($GLOBALS["OS_BREADCRUMBS"]) ){
+    $arResult = $GLOBALS["OS_BREADCRUMBS"];
+}
+
 // Мутация наименования раздела
 if (!empty($arResult) && !empty($GLOBALS["OS_BREADCRUMBS"])) {
     // Заменяем весь массив хлебных крошек на кастомный

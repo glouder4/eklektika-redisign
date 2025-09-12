@@ -112,7 +112,7 @@ $GLOBALS["OS_BREADCRUMBS"] = [
             <?php
 /*            $APPLICATION->IncludeComponent(
                 "bitrix:news.list",
-                "eklektika_services_list",
+                "yomerch_services_list",
                 Array(
                     "VIEW_TEMPLATE" => $VIEW_TEMPLATE,
                     "ACTIVE_DATE_FORMAT" => "d.m.Y",
@@ -182,7 +182,7 @@ $GLOBALS["OS_BREADCRUMBS"] = [
             if (!empty($advantagesIds)) {
                 $APPLICATION->IncludeComponent(
                     "bitrix:news.list",
-                    "eklektika_advantages_list",
+                    "yomerch_advantages_list",
                     Array(
                         "VIEW_TEMPLATE" => $VIEW_TEMPLATE,
                         "IBLOCK_ID" => $ADVANTAGES_IBLOCK_ID,

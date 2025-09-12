@@ -7,6 +7,7 @@ use intec\core\helpers\Html;
 
 /**
  * @var array $arManager
+ * @var array $arManager2
  * @var array $arSvg
  * @var CBitrixComponentTemplate $this
  * @var CBitrixComponent $component
@@ -58,7 +59,7 @@ use intec\core\helpers\Html;
             <?php } ?>
         </div>
 
-        <div class="manager--banner--wrapper">
+        <!--<div class="manager--banner--wrapper">
             <div class="field">
                 <svg xmlns="http://www.w3.org/2000/svg" width="362" height="145" viewBox="0 0 362 145" fill="none">
                     <rect width="362" height="145" fill="#F1F1F1"/>
@@ -67,8 +68,71 @@ use intec\core\helpers\Html;
                     </g>
                 </svg>
             </div>
-        </div>
+        </div>-->
 
+    </div>
+
+    <?php
+        if(!empty($arManager2)){ ?>
+            <div class="manager-card-fields" style="margin-top: 15px;">
+                <div class="manager-personal-info">
+                    <div class="manager--avatar_field">
+                        <?php
+                        if( isset($arManager2['PICTURE']) && !empty($arManager2['PICTURE']) ){?>
+                            <img src="<?=$arManager2['PICTURE'];?>" alt="<?= $arManager2['NAME'] ?>">
+                        <?php }
+                        else{ ?>
+                            <svg fill="#c4c4c4" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 311.541 311.541" xml:space="preserve" stroke="#c4c4c4"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M155.771,26.331C69.74,26.331,0,96.071,0,182.102c0,37.488,13.25,71.883,35.314,98.761 c3.404-27.256,30.627-50.308,68.8-61.225c13.946,12.994,31.96,20.878,51.656,20.878c19.233,0,36.894-7.487,50.698-19.936 c38.503,11.871,65.141,36.27,66.017,64.63c24.284-27.472,39.056-63.555,39.056-103.108 C311.541,96.071,241.801,26.331,155.771,26.331z M155.771,222.069c-9.944,0-19.314-2.732-27.634-7.464 c-20.05-11.409-33.855-34.756-33.855-61.711c0-38.143,27.583-69.176,61.489-69.176c33.909,0,61.489,31.033,61.489,69.176 c0,27.369-14.237,51.004-34.786,62.215C174.379,219.523,165.346,222.069,155.771,222.069z"></path> </g> </g> </g></svg>
+                        <?php }
+                        ?>
+                    </div>
+                    <div class="manager--info">
+                        <?php if (!empty($arManager2['MANAGER_PROPERTY']['POSITION'])) { ?>
+                            <div class="field post">
+                                <span><?= $arManager2['MANAGER_PROPERTY']['POSITION'] ?></span>
+                            </div>
+                        <?php } ?>
+                        <div class="field name">
+                            <span><?= $arManager2['NAME'] ?></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="manager-action-links--wrapper">
+                    <?php if (!empty($arManager2['MANAGER_PROPERTY']['PHONE'])) { ?>
+                        <div class="phone-link link">
+                            <a href="tel:<?= $arManager2['MANAGER_PROPERTY']['PHONE'] ?>">
+                                <div class="icon"><?= $arSvg['PHONE'] ?></div>
+                                <div class="data"><?= $arManager2['MANAGER_PROPERTY']['PHONE'] ?></div>
+                            </a>
+                        </div>
+                    <?php } ?>
+                    <?php if (!empty($arManager2['MANAGER_PROPERTY']['EMAIL'])) { ?>
+                        <div class="email-link link">
+                            <a href="mailto:<?= $arManager2['MANAGER_PROPERTY']['EMAIL'] ?>">
+                                <div class="icon"><?= $arSvg['EMAIL'] ?></div>
+                                <div class="data"><?= $arManager2['MANAGER_PROPERTY']['EMAIL'] ?></div>
+                            </a>
+                        </div>
+                    <?php } ?>
+                </div>
+
+                <!--<div class="manager--banner--wrapper">
+                    <div class="field">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="362" height="145" viewBox="0 0 362 145" fill="none">
+                            <rect width="362" height="145" fill="#F1F1F1"/>
+                            <g opacity="0.2">
+                                <path d="M172.25 61.75H188.5C189.495 61.75 190.448 62.1451 191.152 62.8483C191.855 63.5516 192.25 64.5054 192.25 65.5V81.75C192.25 82.7446 191.855 83.6984 191.152 84.4017C190.448 85.1049 189.495 85.5 188.5 85.5H172.25C171.255 85.5 170.302 85.1049 169.598 84.4017C168.895 83.6984 168.5 82.7446 168.5 81.75V65.5C168.5 64.5054 168.895 63.5516 169.598 62.8483C170.302 62.1451 171.255 61.75 172.25 61.75ZM172.25 63C171.587 63 170.951 63.2634 170.482 63.7322C170.013 64.2011 169.75 64.837 169.75 65.5V79.9875L175.113 74.6125L178.238 77.7375L184.488 71.4875L191 78V65.5C191 64.837 190.737 64.2011 190.268 63.7322C189.799 63.2634 189.163 63 188.5 63H172.25ZM178.238 79.5125L175.113 76.3875L169.75 81.75C169.75 82.413 170.013 83.0489 170.482 83.5178C170.951 83.9866 171.587 84.25 172.25 84.25H188.5C189.163 84.25 189.799 83.9866 190.268 83.5178C190.737 83.0489 191 82.413 191 81.75V79.7625L184.488 73.2625L178.238 79.5125ZM175.375 65.5C176.204 65.5 176.999 65.8292 177.585 66.4153C178.171 67.0013 178.5 67.7962 178.5 68.625C178.5 69.4538 178.171 70.2487 177.585 70.8347C176.999 71.4208 176.204 71.75 175.375 71.75C174.546 71.75 173.751 71.4208 173.165 70.8347C172.579 70.2487 172.25 69.4538 172.25 68.625C172.25 67.7962 172.579 67.0013 173.165 66.4153C173.751 65.8292 174.546 65.5 175.375 65.5ZM175.375 66.75C174.878 66.75 174.401 66.9475 174.049 67.2992C173.698 67.6508 173.5 68.1277 173.5 68.625C173.5 69.1223 173.698 69.5992 174.049 69.9508C174.401 70.3025 174.878 70.5 175.375 70.5C175.872 70.5 176.349 70.3025 176.701 69.9508C177.052 69.5992 177.25 69.1223 177.25 68.625C177.25 68.1277 177.052 67.6508 176.701 67.2992C176.349 66.9475 175.872 66.75 175.375 66.75Z" fill="black"/>
+                            </g>
+                        </svg>
+                    </div>
+                </div>-->
+
+            </div>
+        <?php }
+    ?>
+
+    <div class="manager-card-fields">
         <div class="our-social_links">
             <div class="title">
                 <span>Мы в сети</span>

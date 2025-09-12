@@ -285,7 +285,9 @@
 
 
 #personal-manager--wrapper{
-
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 .manager-card-fields{
   display: flex;
@@ -299,6 +301,9 @@
 .manager--avatar_field{
   width: 60px;
   height: 60px;
+  border-radius: 50%;
+}
+.manager--avatar_field img{
   border-radius: 50%;
 }
 .manager--info{

@@ -99,6 +99,7 @@ a:active, [data-ui-markup="a"]:hover, [data-ui-markup="a"]:focus, [data-ui-marku
     .container {
         max-width: 1480px;
         width: 100%;
+        padding: 0px 20px 0 18px;
     }
 }
 @media (min-width: 1920px) {

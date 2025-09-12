@@ -25,7 +25,7 @@ Asset::getInstance()->addCss("/local/templates/universe_s1/onlineservice_addons/
                         <div class="our-dealers-section--list">
                             <span class="city--title">Москва</span>
                             <ul>
-                                <li>Эклектика</li>
+                                <li>YOMerch</li>
                                 <li>Бизон</li>
                                 <li>Прагматика</li>
                             </ul>

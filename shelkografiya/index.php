@@ -46,7 +46,7 @@ $APPLICATION->SetTitle("Шелкография на ткани");
 				<div class="item-text item" style="background-color: #ef6a33">
 					<div style="z-index:100" class="item-text-title">
 						<p>
-							Заказ шелкографии и шелкотрансфера в Эклектике
+							Заказ шелкографии и шелкотрансфера в YOMerch
 						</p>
 					</div>
 					<div style="z-index:100" class="item-text-txt">

@@ -24,6 +24,53 @@ $arVisual = [
 ];
 $arManager = [];
 $iManagerId = null;
+$iSecondManagerId = null;
+
+function loadManager($iManagerId,$arParams)
+{
+    $arFilter = ['ID' => $iManagerId, 'IBLOCK_ID' => $arParams['MANAGER_IBLOCK_ID'], 'ACTIVE' => 'Y'];
+    $arKeyField = ['POSITION','WORK_POSITION', 'PHONE', 'EMAIL', 'SOCIAL_VK', 'SOCIAL_FB', 'SOCIAL_INST', 'SOCIAL_TW', 'SOCIAL_SKYPE'];
+    $arManagerProperties = [
+        'WORK_POSITION' => null,
+        'POSITION' => null,
+        'PHONE' => null,
+        'EMAIL' => null,
+        'SOCIAL_VK' => null,
+        'SOCIAL_FB' => null,
+        'SOCIAL_INST' => null,
+        'SOCIAL_TW' => null,
+        'SOCIAL_SKYPE' => null
+    ];
+    $arSelect = ['*'];
+
+    foreach ($arKeyField as $keyField) {
+        if (!empty($arParams['MANAGER_PROPERTY_' . $keyField]))
+            $arSelect[] = 'PROPERTY_' . $arParams['MANAGER_PROPERTY_' . $keyField];
+    }
+
+    unset($keyField);
+
+    $arManager = Arrays::fromDBResult(CIBlockElement::GetList([], $arFilter, false, [], $arSelect))->asArray();
+
+    if (empty($arManager)) {
+        return false;
+        //$arVisual['MANAGER_BLOCK_SHOW'] = false;
+    } else {
+        foreach ($arKeyField as $keyField) {
+            if (!empty($arParams['MANAGER_PROPERTY_' . $keyField]))
+                $arManagerProperties[$keyField] = $arManager[0]['PROPERTY_' . $arParams['MANAGER_PROPERTY_' . $keyField] . '_VALUE'];
+        }
+
+        $arManager = $arManager[0];
+        $arManager['MANAGER_PROPERTY'] = $arManagerProperties;
+        $sImg = !empty($arManager['PREVIEW_PICTURE']) ? $arManager['PREVIEW_PICTURE'] : $arManager['DETAIL_PICTURE'];
+        $arManager['PICTURE'] = !empty($sImg) ? CFile::GetPath($sImg) : SITE_TEMPLATE_PATH . '/images/picture.missing.png';
+
+        unset($arFilter, $arKeyField, $arManagerProperties, $arSelect, $sImg);
+    }
+
+    return $arManager;
+}
 
 if ($arVisual['MANAGER_BLOCK_SHOW']) {
     if ($arParams['MANAGER_DEFAULT_USE'] === 'Y')
@@ -32,47 +79,17 @@ if ($arVisual['MANAGER_BLOCK_SHOW']) {
     if (!empty($arUser[$arParams['PROPERTY_MANAGER']]))
         $iManagerId = $arUser[$arParams['PROPERTY_MANAGER']];
 
+    if (!empty($arUser[$arParams['PROPERTY_MANAGER2']]))
+        $iSecondManagerId = $arUser[$arParams['PROPERTY_MANAGER2']];
+
     $arVisual['MANAGER_BLOCK_SHOW'] = !empty($iManagerId);
 
     if (!empty($iManagerId)) {
-        $arFilter = ['ID' => $iManagerId, 'IBLOCK_ID' => $arParams['MANAGER_IBLOCK_ID'], 'ACTIVE' => 'Y'];
-        $arKeyField = ['POSITION', 'PHONE', 'EMAIL', 'SOCIAL_VK', 'SOCIAL_FB', 'SOCIAL_INST', 'SOCIAL_TW', 'SOCIAL_SKYPE'];
-        $arManagerProperties = [
-            'POSITION' => null,
-            'PHONE' => null,
-            'EMAIL' => null,
-            'SOCIAL_VK' => null,
-            'SOCIAL_FB' => null,
-            'SOCIAL_INST' => null,
-            'SOCIAL_TW' => null,
-            'SOCIAL_SKYPE' => null
-        ];
-        $arSelect = ['*'];
-
-        foreach ($arKeyField as $keyField) {
-            if (!empty($arParams['MANAGER_PROPERTY_' . $keyField]))
-                $arSelect[] = 'PROPERTY_' . $arParams['MANAGER_PROPERTY_' . $keyField];
-        }
-
-        unset($keyField);
-
-        $arManager = Arrays::fromDBResult(CIBlockElement::GetList([], $arFilter, false, [], $arSelect))->asArray();
-
-        if (empty($arManager)) {
+        $arManager = loadManager($iManagerId,$arParams);
+        if( !$arManager )
             $arVisual['MANAGER_BLOCK_SHOW'] = false;
-        } else {
-            foreach ($arKeyField as $keyField) {
-                if (!empty($arParams['MANAGER_PROPERTY_' . $keyField]))
-                    $arManagerProperties[$keyField] = $arManager[0]['PROPERTY_' . $arParams['MANAGER_PROPERTY_' . $keyField] . '_VALUE'];
-            }
 
-            $arManager = $arManager[0];
-            $arManager['MANAGER_PROPERTY'] = $arManagerProperties;
-            $sImg = !empty($arManager['PREVIEW_PICTURE']) ? $arManager['PREVIEW_PICTURE'] : $arManager['DETAIL_PICTURE'];
-            $arManager['PICTURE'] = !empty($sImg) ? CFile::GetPath($sImg) : SITE_TEMPLATE_PATH . '/images/picture.missing.png';
-
-            unset($arFilter, $arKeyField, $arManagerProperties, $arSelect, $sImg);
-        }
+        $arManager2 = !empty($iSecondManagerId) ? loadManager($iSecondManagerId,$arParams) : false;
     }
 }
 
@@ -324,6 +341,7 @@ if ($arVisual['CLAIMS_BLOCK_SHOW']) {
 }
 
 $arResult['MANAGER'] = $arManager;
+$arResult['MANAGER2'] = $arManager2;
 $arResult['VISUAL'] = $arVisual;
 
 

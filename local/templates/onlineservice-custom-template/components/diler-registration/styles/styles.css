@@ -32,3 +32,42 @@
 
     margin: auto;
 }
+#diler-registration-fields .intec-ui-form-field-content input[type="text"],
+#diler-registration-fields .intec-ui-form-field-content input[type="password"],
+#diler-registration-fields .intec-ui-form-field-content input[type="file"]{
+    border: 0;
+    border-bottom: 1px solid #C8C8C8;
+    outline: 0;
+    background-color: unset;
+}
+.intec-ui.intec-ui-control-button.intec-ui-scheme-current:disabled{
+    background-color: #744A9E!important;
+
+    border: 0;
+}
+.intec-ui.intec-ui-control-button.intec-ui-scheme-current{
+    background-color: #9F7CC3!important;
+    border: 0;
+}
+.action-links{
+    margin-top: 17px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.action-links>a{
+    font-family: Manrope;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0;
+    text-decoration: underline;
+    text-decoration-style: solid;
+    text-decoration-offset: 0%;
+    text-decoration-thickness: 0%;
+    text-decoration-skip-ink: auto;
+    color: #80E0A7!important;
+}
+.action-links>a:hover{
+    color: #80E0A7!important;
+}

@@ -139,7 +139,24 @@ use intec\template\Properties;
 
 
             if ($zone->getCode() === 'header') {
-                if ($page['blocks']['breadcrumb']['show']) {
+                if( $APPLICATION->GetCurPage() == "/personal/profile/" ){
+                    $GLOBALS["OS_BREADCRUMBS"] = [
+                        [
+                            'ITEM' => "Авторизация",
+                            "LINK" => "/personal/profile/",
+                        ]
+                    ];
+
+                    echo "<div class='container'>";
+                        $APPLICATION->IncludeComponent(
+                            "bitrix:breadcrumb",
+                            "onlineservice-breadcrumbs",
+                            Array(),
+                            false,
+                        );
+                    echo "</div>";
+                }
+                elseif ($page['blocks']['breadcrumb']['show']) {
                     echo Html::beginTag('div', [
                         'id' => 'navigation',
                         'class' => 'intec-template-breadcrumb'

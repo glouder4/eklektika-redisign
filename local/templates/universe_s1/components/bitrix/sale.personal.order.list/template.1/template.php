@@ -168,6 +168,9 @@ $bSearchApply = isset($arGet['filter_id']) && !empty($arGet['filter_id']);
                                         <?= $arOrder['ORDER']['DATE_INSERT_FORMATED'] ?>
                                     </a>
                                 </div>
+                                <?php
+                                    if( $_GET['filter_status'][0] == "OB" || $_GET['filter_status'][0] == "R" ){
+                                ?>
 								 <div class="sale-personal-order-list-item-wrap intec-grid-item intec-grid intec-grid-nowrap intec-grid-a-v-end" data-code="end_date_reserve">
                                     <div class="sale-personal-order-list-item-header-text-mobile intec-grid-item-768-2">
                                         <?php
@@ -193,6 +196,9 @@ $bSearchApply = isset($arGet['filter_id']) && !empty($arGet['filter_id']);
                                         }
                                         ?>
                                 </div>
+                                <?php
+                                    }
+                                ?>
                                 <div class="sale-personal-order-list-item-wrap intec-grid-item intec-grid intec-grid-nowrap intec-grid-a-v-center" data-code="status">
                                     <div class="sale-personal-order-list-item-header-text-mobile intec-grid-item-768-2">
                                         <?= Loc::getMessage('C_SALE_PERSONAL_ORDER_LIST_TEMPLATE_1_TEMPLATE_HEADER_STATUS') ?>

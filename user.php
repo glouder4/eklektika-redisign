@@ -92,7 +92,7 @@ die();
 
 $filter = [
 		"ACTIVE"              => "Y",
-		"EMAIL"               => "ai@eklektika.ru",
+		"EMAIL"               => "ai@yomerch.ru",
 	];
 $rsUsers = CUser::GetList(
 	[ $by="personal_country" ], 

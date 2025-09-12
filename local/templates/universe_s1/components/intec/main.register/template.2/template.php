@@ -27,7 +27,7 @@ $arSvg = [
 $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
 
 ?>
-
+<div class="container">
 <?php
     if( isset($arResult["REGISTER_DONE"]) && $arResult["REGISTER_DONE"] == "Y" ):
 ?>
@@ -209,7 +209,7 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
 					</label>
 				</div>
 				<div>
-                    * Компания Yo Merch сотрудничает с Рекламными и Event агентствами, интернет магазинами, типографиями и производственными компаниями
+                    Компания Yo Merch сотрудничает с Рекламными и Event агентствами,<br/>интернет магазинами, типографиями и производственными компаниями
 				</div>
 				<br><br>
                 <?php if ($arResult['BACKURL'] <> '') { ?>
@@ -684,7 +684,7 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
     <?php } ?>
 </div>
 
-        <div style="display: none;" id="personal-confirmation">
+<div style="display: none;" id="personal-confirmation">
             <div class="personal-confirmation-wrapper">
                 <div class="modal-personal-confrmation--title">
                     <h3>Согласие на обработку персональных данных</h3>
@@ -705,7 +705,7 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
                 </label>
             </div>
         </div>
-
+</div>
 <script>
 
     template.load(function (data) {

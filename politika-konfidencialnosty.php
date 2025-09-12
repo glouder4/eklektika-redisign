@@ -15,13 +15,15 @@ $APPLICATION->SetTitle('Политика конфиденциальности');
 ?>
     <div class="intec-page intec-page-404 intec-content">
         <div class="intec-content-wrapper">
-            <?
-            $APPLICATION->IncludeFile(SITE_DIR."include/politika-konfidencialnosty.php", array(), array(
-                    "MODE" => "html",
-                    "NAME" => "",
-                )
-            );
-            ?>
+            <div class="container">
+                <?
+                $APPLICATION->IncludeFile(SITE_DIR."include/politika-konfidencialnosty.php", array(), array(
+                        "MODE" => "html",
+                        "NAME" => "",
+                    )
+                );
+                ?>
+            </div>
         </div>
     </div>
 <?php require($_SERVER['DOCUMENT_ROOT'].'/bitrix/footer.php') ?>

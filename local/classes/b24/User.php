@@ -344,6 +344,28 @@
             }
         }
 
+        private function getManagerID($manager_xml_id){
+            // Ищем элемент по внешнему коду (XML_ID)
+            $arFilter = [
+                'IBLOCK_ID' => 53,
+                'XML_ID' => $manager_xml_id
+            ];
+
+            $rsElement = \CIBlockElement::GetList(
+                ['SORT' => 'ASC'],
+                $arFilter,
+                false,
+                false,
+                ['ID', 'NAME', 'XML_ID', 'IBLOCK_ID']
+            );
+
+            if ($managerElement = $rsElement->GetNext()) {
+                return $managerElement['ID'];
+            }
+
+            return false;
+        }
+
 
         /**
          * Обновление пользователя на сайте по ID контакта в B24
@@ -373,24 +395,8 @@
 
             $this->userId = $this->getUserIDByB24ID($b24ID);
 
-            // Ищем элемент по внешнему коду (XML_ID)
-            $arFilter = [
-                'IBLOCK_ID' => 53,
-                'XML_ID' => $fields['ASSIGNED_MANAGER']
-            ];
-            unset($fields['ASSIGNED_MANAGER']);
-
-            $rsElement = \CIBlockElement::GetList(
-                ['SORT' => 'ASC'],
-                $arFilter,
-                false,
-                false,
-                ['ID', 'NAME', 'XML_ID', 'IBLOCK_ID']
-            );
-
-            if ($managerElement = $rsElement->GetNext()) {
-                $fields['UF_MANAGER'] = $managerElement['ID'];
-            }
+            $fields['UF_MANAGER'] = $this->getManagerID($fields['ASSIGNED_MANAGER']);
+            $fields['UF_MANAGER2'] = $this->getManagerID($fields['SECOND_MANAGER']);
             
             if (!$this->userId) {
                 pre("Error: User not found for B24 contact ID: " . $b24ID);

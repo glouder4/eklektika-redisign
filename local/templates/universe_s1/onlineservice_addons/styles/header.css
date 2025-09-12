@@ -23,7 +23,6 @@
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between;
-    padding: 0px 20px 0 18px;
     height: 64px;
 }
 
@@ -190,7 +189,7 @@
     -ms-flex-align: center;
     align-items: center;
     gap: 10px;
-    padding: 20px;
+    padding: 20px 0;
 }
 
 .header__catalog-btn {
@@ -1412,11 +1411,7 @@ a.mobile-menu__call-btn{
 #profile_fields--wrapper .widget .widget-item:active .data span{
     color: #222222!important;
 }
-#navigation,
-#pagetitle{
-    padding-left: 10px;
-    padding-right: 10px;
-}
+
 .intec-content .intec-content-wrapper{
     margin-left: 10px;
     margin-right: 10px;
@@ -1425,4 +1420,7 @@ a.mobile-menu__call-btn{
     #navigation, #pagetitle{
         padding: 0;
     }
+    /*.intec-template .intec-template-title{
+        padding: 0;
+    }*/
 }

@@ -29,7 +29,7 @@
 .breadcrumbs__list--item_link:hover,
 .breadcrumbs__list--item_link:active,
 .breadcrumbs__list--item_link:focus{
-  color: #222222;
+  color: #222222!important;
 }
 .breadcrumbs__list--item.current-item .breadcrumbs__list--item_link{
   color: #989898;

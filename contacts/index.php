@@ -102,22 +102,22 @@ $APPLICATION->SetTitle("") ?>
 					<table class="intec-ui-markup-table">
 						<tbody><tr>
 							<td>Максим Рак</td>
-							<td><a href="mailto:team@eklektika.ru"><a href="mailto:team@eklektika.ru">team@eklektika.ru</a></a></td>
+							<td><a href="mailto:team@yomerch.ru"><a href="mailto:team@yomerch.ru">team@yomerch.ru</a></a></td>
 							<td>доб. 114</td>
 						</tr>
 						<tr>
 							<td>Оксана Капышова</td>
-							<td><a href="mailto:team@eklektika.ru"><a href="mailto:team@eklektika.ru">team@eklektika.ru</a></a></td>
+							<td><a href="mailto:team@yomerch.ru"><a href="mailto:team@yomerch.ru">team@yomerch.ru</a></a></td>
 							<td>доб. 111</td>
 						</tr>
 						<tr>
 							<td>Юлия Сухорукова</td>
-							<td><a href="mailto:team@eklektika.ru"><a href="mailto:team@eklektika.ru">team@eklektika.ru</a></a></td>
+							<td><a href="mailto:team@yomerch.ru"><a href="mailto:team@yomerch.ru">team@yomerch.ru</a></a></td>
 							<td>доб. 135</td>
 						</tr>
 						<tr>
 							<td>Татьяна Вавилова</td>
-							<td><a href="mailto:team@eklektika.ru"><a href="mailto:team@eklektika.ru">team@eklektika.ru</a></a></td>
+							<td><a href="mailto:team@yomerch.ru"><a href="mailto:team@yomerch.ru">team@yomerch.ru</a></a></td>
 							<td>доб. 134</td>
 						</tr>
 						</tbody>
@@ -233,7 +233,7 @@ $APPLICATION->SetTitle("") ?>
 
                           <div class="con-map">
 
-                          <img src="https://eklektika.ru/img/dom.jpeg" alt="офис">
+                          <img src="https://yomerch.ru/img/dom.jpeg" alt="офис">
 
                         </div><div class="con-txt">  <h3>Офис: </h3><p>
  Офис находится в Бизнесс-центре "Юнион", вход через центральные двери со стороны Рязанского проспекта (под вывеской ПЕНЕТРОН). На проходной обратиться в бюро пропусков и выписать пропуск в компанию «ЙОкаталог» (обязательно наличие паспорта). Подняться на 12 этаж, после стеклянных дверей повернуть налево.</p>
@@ -241,7 +241,7 @@ $APPLICATION->SetTitle("") ?>
  </div>
                         <div class="con-map">
 
-                        <img src="https://eklektika.ru/content/map.png" alt="склад">
+                        <img src="https://yomerch.ru/content/map.png" alt="склад">
 
                         </div>
 

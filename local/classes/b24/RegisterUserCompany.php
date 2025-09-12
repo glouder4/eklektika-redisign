@@ -348,9 +348,7 @@ class RegisterUserCompany extends Request{
                 \Bitrix\Main\Mail\Event::send([
                     'EVENT_NAME' => 'NEW_USER_CONFIRM',
                     'LID' => 's1', // ID вашего сайта
-                    'C_FIELDS' => [
-                        'EMAIL' => $arFields['EMAIL']
-                    ],
+                    'C_FIELDS' => $arFields,
                 ]);
             }
         }

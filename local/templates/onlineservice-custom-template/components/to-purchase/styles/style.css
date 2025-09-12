@@ -1,0 +1,43 @@
+.purchase-cards-list{
+    display: flex;
+    flex-direction: column;
+}
+.purchase-card{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #C8C8C8;
+    border-radius: 13px;
+    max-width: 490px;
+
+    transition: all 0.4s ease;
+}
+@media(min-width: 768px){
+    .purchase-cards-list{
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        justify-content: flex-start;
+    }
+    .purchase-card{
+        width: 49%;
+    }
+}
+#navigation .breadcrumb-item:nth-child(1) .breadcrumb-link{
+    color: #222222;
+    font-weight: 400;
+}
+@media(min-width: 1520px){
+    #pagetitle{
+        font-family: Manrope;
+        font-weight: 600;
+        font-size: 48px;
+        line-height: 100%;
+        letter-spacing: 0;
+    }
+}
+.purchase-card:hover{
+    border-color: #744A9E;
+}

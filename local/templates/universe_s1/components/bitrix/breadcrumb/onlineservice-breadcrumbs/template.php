@@ -36,6 +36,7 @@ if (defined('EDITOR'))
         'LINK' => ''
     ]];
 
+
 if (empty($arResult))
     return '';
 

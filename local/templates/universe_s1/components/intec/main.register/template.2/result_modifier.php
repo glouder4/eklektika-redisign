@@ -39,13 +39,14 @@ if (!empty($arResult['CONSENT']['URL'])) {
 $correctSortOrder = [
     [
         'WORK_COMPANY', // NAME => required
-        'UF_SITE',
         'UF_CITY',
+        'UF_SITE',
         'LOGIN'
     ],
     [
         'NAME',
         'LAST_NAME',
+        'SECOND_NAME',
         'PERSONAL_BIRTHDAY',
         'PERSONAL_PHONE',
         'EMAIL',

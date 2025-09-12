@@ -62,6 +62,7 @@ a:active,
     .container{
         max-width: 375px;
         margin: auto;
+        padding: 0px 20px 0 18px;
     }
     #mobileMenu>.container{
         width: 339px;
@@ -104,6 +105,7 @@ a:active,
     .container {
         max-width: 1480px;
         width: 100%;
+        padding: 0px 20px 0 18px;
     }
 }
 @media (min-width: 1920px) {
@@ -209,4 +211,41 @@ a:active,
 }
 #bx-soa-paysystem-and-delivery{
     display: none;
+}
+
+#os-authoroze-form #USER_LOGIN_1,
+#os-authoroze-form #USER_PASSWORD_1{
+    background-color: unset;
+    border: 0;
+    outline: none;
+    border-bottom: 1px solid #C8C8C8;
+    border-radius: 0;
+}
+
+#os-authoroze-form .intec-ui-form-fields{
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+#os-authoroze-form button[type="submit"]{
+    background-color: #80E0A7;
+    border-radius: 0;
+    border: 0;
+}
+#os-authoroze-form a.system-auth-authorize-registration-button{
+    background-color: #744A9E;
+    border: 0;
+    border-radius: 0;
+}
+#os-authoroze-form .system-auth-authorize-form-restore:hover{
+    color: #352ca6!important;
+}
+.ns-bitrix.c-system-auth-authorize.c-system-auth-authorize-default .system-auth-authorize-block.os-system-auth-authorize-block{
+    border: 0;
+    padding: 0px 10px;
+}
+@media(min-width: 1520px){
+    .ns-bitrix.c-system-auth-authorize.c-system-auth-authorize-default .system-auth-authorize-block.os-system-auth-authorize-block{
+        padding: 0;
+    }
 }

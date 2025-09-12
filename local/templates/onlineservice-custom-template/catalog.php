@@ -72,13 +72,13 @@ $GLOBALS["OS_BREADCRUMBS"] = [
                 <div class="cards-list-item--wrapper">
                     <div class="cards-list-item">
                         <div class="cards-list-item--title">
-                            <h4 class="title">Хочу купить для себя</h4>
+                            <h4 class="title">  Хочу купить для себя</h4>
                         </div>
                         <div class="cards-list-item--description">
                             <p>Хотите приобрести продукцию Yoliba для&nbsp;личного пользования?<br/>Нет&nbsp;проблем!</p>
                         </div>
                         <div class="cards-list-item--action">
-                            <a href="/catalog/" class="cards-list-item--action_btn" style="background-color: #80E0A7;">К покупкам</a>
+                            <a href="/to-purchase/" class="cards-list-item--action_btn" style="background-color: #80E0A7;">К покупкам</a>
                         </div>
                     </div>
                 </div>

@@ -120,7 +120,7 @@ $GLOBALS["OS_BREADCRUMBS"] = [
             <?php
 /*            $APPLICATION->IncludeComponent(
                 "bitrix:news.list",
-                "eklektika_services_list",
+                "yomerch_services_list",
                 Array(
                     "VIEW_TEMPLATE" => $VIEW_TEMPLATE,
                     "ACTIVE_DATE_FORMAT" => "d.m.Y",

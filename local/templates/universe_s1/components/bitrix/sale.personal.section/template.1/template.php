@@ -15,6 +15,8 @@ if (strlen($arParams['MAIN_CHAIN_NAME']) > 0) {
 $sTemplateId = Html::getUniqueId(null, Component::getUniqueId($this));
 $arVisual = $arResult['VISUAL'];
 $arManager = $arResult['MANAGER'];
+$arManager2 = $arResult['MANAGER2'];
+
 $arTickets = $arResult['TICKETS'];
 $arSvg = [
     'PHONE' => FileHelper::getFileData(__DIR__.'/images/phone.svg'),
