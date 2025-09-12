@@ -17284,7 +17284,7 @@ a.intec-ui-mod-dotted, [data-ui-markup="a"].intec-ui-mod-dotted, .intec-ui-marku
 a:hover, a:focus, a:active, [data-ui-markup="a"]:hover, [data-ui-markup="a"]:focus, [data-ui-markup="a"]:active, .intec-ui-markup-a:hover, .intec-ui-markup-a:focus, .intec-ui-markup-a:active {
   text-decoration: underline;
   outline: none;
-  color: #23527c;
+  /*color: #23527c;*/
 }
 
 a:hover.intec-ui-mod-dashed, a:hover.intec-ui-mod-dotted, a:focus.intec-ui-mod-dashed, a:focus.intec-ui-mod-dotted, a:active.intec-ui-mod-dashed, a:active.intec-ui-mod-dotted, [data-ui-markup="a"]:hover.intec-ui-mod-dashed, [data-ui-markup="a"]:hover.intec-ui-mod-dotted, [data-ui-markup="a"]:focus.intec-ui-mod-dashed, [data-ui-markup="a"]:focus.intec-ui-mod-dotted, [data-ui-markup="a"]:active.intec-ui-mod-dashed, [data-ui-markup="a"]:active.intec-ui-mod-dotted, .intec-ui-markup-a:hover.intec-ui-mod-dashed, .intec-ui-markup-a:hover.intec-ui-mod-dotted, .intec-ui-markup-a:focus.intec-ui-mod-dashed, .intec-ui-markup-a:focus.intec-ui-mod-dotted, .intec-ui-markup-a:active.intec-ui-mod-dashed, .intec-ui-markup-a:active.intec-ui-mod-dotted {

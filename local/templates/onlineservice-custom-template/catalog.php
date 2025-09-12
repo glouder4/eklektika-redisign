@@ -42,40 +42,44 @@ $GLOBALS["OS_BREADCRUMBS"] = [
     <div class="container">
         <div class="catalog-section-content">
             <div class="cards-list">
-                <div class="cards-list-item">
-                    <div class="cards-list-item--title">
-                        <h4 class="title">Хочу стать дилером</h4>
-                    </div>
-                    <div class="cards-list-item--description">
-                        <p>Хотите приобрести продукцию для своих клиентов?<br/>Станьте нашим дилером!</p>
-                    </div>
-                    <div class="cards-list-item--action">
-                        <a href="/personal/profile/registration.php" class="cards-list-item--action_btn">Зарегистрироваться</a>
-                        <a href="/personal/profile/" class="cards-list-item--action_btn" style="background-color: #EF4A85;">Войти</a>
-                    </div>
-                </div>
-                <div class="cards-list-item">
-                    <div class="cards-list-item--title">
-                        <h4 class="title">Я корпоративный заказчик</h4>
-                    </div>
-                    <div class="cards-list-item--description">
-                        <p>Приобретаете продукцию для&nbsp;своей компании?<br/>Обратитесь к&nbsp;одному из&nbsp;наших дилеров!</p>
-                    </div>
-                    <div class="cards-list-item--action">
-                        <!--<a href="/personal/profile/registration.php" class="cards-list-item--action_btn">Зарегистрироваться</a>-->
-                        <a href="/personal/profile/" class="cards-list-item--action_btn" style="background-color: #EF4A85;">Войти</a>
+                <div class="cards-list-item--wrapper">
+                    <div class="cards-list-item">
+                        <div class="cards-list-item--title">
+                            <h4 class="title">Хочу стать дилером</h4>
+                        </div>
+                        <div class="cards-list-item--description">
+                            <p>Хотите приобрести продукцию для своих клиентов?<br/>Станьте нашим дилером!</p>
+                        </div>
+                        <div class="cards-list-item--action">
+                            <a href="/personal/profile/registration.php" class="cards-list-item--action_btn">Зарегистрироваться</a>
+                            <a href="/personal/profile/" class="cards-list-item--action_btn" style="background-color: #80E0A7;">Войти</a>
+                        </div>
                     </div>
                 </div>
-                <div class="cards-list-item">
-                    <div class="cards-list-item--title">
-                        <h4 class="title">Хочу купить для себя</h4>
+                <div class="cards-list-item--wrapper">
+                    <div class="cards-list-item">
+                        <div class="cards-list-item--title">
+                            <h4 class="title">Я корпоративный заказчик</h4>
+                        </div>
+                        <div class="cards-list-item--description">
+                            <p>Приобретаете продукцию для&nbsp;своей компании?<br/>Обратитесь к&nbsp;одному из&nbsp;наших дилеров!</p>
+                        </div>
+                        <div class="cards-list-item--action">
+                            <a href="/buy/our-dealers/" class="cards-list-item--action_btn" style="background-color: #80E0A7;">Наши дилеры</a>
+                        </div>
                     </div>
-                    <div class="cards-list-item--description">
-                        <p>Хотите приобрести продукцию Yoliba<br/>для&nbsp;личного пользования? Нет&nbsp;проблем!</p>
-                    </div>
-                    <div class="cards-list-item--action">
-                        <!--<a href="/personal/profile/registration.php" class="cards-list-item--action_btn">Зарегистрироваться</a>-->
-                        <a href="/personal/profile/" class="cards-list-item--action_btn" style="background-color: #EF4A85;">К покупкам</a>
+                </div>
+                <div class="cards-list-item--wrapper">
+                    <div class="cards-list-item">
+                        <div class="cards-list-item--title">
+                            <h4 class="title">Хочу купить для себя</h4>
+                        </div>
+                        <div class="cards-list-item--description">
+                            <p>Хотите приобрести продукцию Yoliba для&nbsp;личного пользования?<br/>Нет&nbsp;проблем!</p>
+                        </div>
+                        <div class="cards-list-item--action">
+                            <a href="/catalog/" class="cards-list-item--action_btn" style="background-color: #80E0A7;">К покупкам</a>
+                        </div>
                     </div>
                 </div>
             </div>

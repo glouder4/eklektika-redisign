@@ -26,6 +26,16 @@
         height: 714px;
     }
 }
+@media(min-width: 991px){
+    .categories-slider{
+        height: 530px;
+    }
+}
+@media(min-width: 1200px){
+    .categories-slider{
+        height: 595px;
+    }
+}
 .categories-slider--item_category-image{
 
 }

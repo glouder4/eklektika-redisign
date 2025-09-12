@@ -20,32 +20,68 @@
             'OS_REQUSITES_FILE'
         ];
         public function createCompanyElement($params){
-            /*$companyElementParamss = [
-                'OS_COMPANY_INN' => $arFields['UF_INN'],
-                'OS_COMPANY_WEB_SITE' => $arFields['UF_SITE'],
-                'OS_COMPANY_NAME' => $arFields['UF_NAME_COMPANY'],
-                'OS_COMPANY_EMAIL' => $arFields['EMAIL'],
-                'OS_COMPANY_PHONE' => $arFields['PERSONAL_PHONE'],
-                'OS_COMPANY_B24_ID' => $dataCompany['ID'],
-                'OS_COMPANY_CITY' => $arFields['UF_CITY']
-            ];*/
+            /*$params = [
+                'OS_COMPANY_INN'
+                'OS_COMPANY_WEB_SITE'
+                'OS_COMPANY_NAME'
+                'OS_COMPANY_EMAIL'
+                'OS_COMPANY_PHONE'
+                'OS_COMPANY_B24_ID' - ID уже существующей компании
+                'OS_COMPANY_CITY'
+                'OS_REQUSITES_FILE',
+                'USER_ID'
+            ]; */
 
-            $el = new \CIBlockElement;
 
-            $arLoadProductArray = [
-                "IBLOCK_SECTION_ID" => false,
-                "IBLOCK_TYPE" => 'personal',
-                "IBLOCK_ID" => $this->iblock_id,
-                "PROPERTY_VALUES" => $params,
-                "NAME" => $params["OS_COMPANY_NAME"],
-                "ACTIVE" => "N",
-                "CODE" => $params["OS_COMPANY_B24_ID"]
-            ];
-            if ($companyId = $el->Add($arLoadProductArray)) {
+            // Ищем существующую компанию по OS_COMPANY_B24_ID
+            $existingCompany = $this->getCompanyByB24ID($params['OS_COMPANY_B24_ID']);
+            
+            if ($existingCompany && !empty($existingCompany['ID'])) {
+                // Компания найдена - дописываем пользователя в OS_COMPANY_USERS
+                $companyId = $existingCompany['ID'];
+                $currentUsers = $existingCompany['OS_COMPANY_USERS'] ?? [];
+                
+                // Если это массив, добавляем новый ID, иначе создаем массив
+                if (is_array($currentUsers)) {
+                    if (!in_array($params['USER_ID'], $currentUsers)) {
+                        $currentUsers[] = $params['USER_ID'];
+                    }
+                } else {
+                    $currentUsers = [$currentUsers, $params['USER_ID']];
+                }
+                
+                // Обновляем свойство OS_COMPANY_USERS
+                \CIBlockElement::SetPropertyValues(
+                    $companyId,
+                    $this->iblock_id,
+                    $currentUsers,
+                    'OS_COMPANY_USERS'
+                );
+                
                 return $companyId;
             } else {
-                echo "Error: ".$el->LAST_ERROR;
-                return false;
+                // Компания не найдена - создаем новую
+                $el = new \CIBlockElement;
+
+                // Устанавливаем пользователя в OS_COMPANY_USERS для новой компании
+                $params['OS_COMPANY_USERS'] = [$params['USER_ID']];
+
+                $arLoadProductArray = [
+                    "IBLOCK_SECTION_ID" => false,
+                    "IBLOCK_TYPE" => 'personal',
+                    "IBLOCK_ID" => $this->iblock_id,
+                    "PROPERTY_VALUES" => $params,
+                    "NAME" => $params["OS_COMPANY_NAME"],
+                    "ACTIVE" => "N",
+                    "CODE" => $params["OS_COMPANY_B24_ID"]
+                ];
+
+                if ($companyId = $el->Add($arLoadProductArray)) {
+                    return $companyId;
+                } else {
+                    echo "Error: ".$el->LAST_ERROR;
+                    return false;
+                }
             }
         }
 
@@ -234,14 +270,43 @@
                 false,
                 ['ID', 'NAME', 'PROPERTY_OS_COMPANY_B24_ID']
             );  
-            $ob = $rsCompany->GetNextElement();
-            $arProps = $ob->GetProperties();
-            $arFields = $ob->GetFields();
-            $arCompany["ID"] = $arFields["ID"];
-            foreach (self::$codeProps as $code) {
-                $arCompany[$code] = $arProps[$code]["VALUE"];
+            
+            if ($ob = $rsCompany->GetNextElement()) {
+                $arFields = $ob->GetFields();
+                $arCompany["ID"] = $arFields["ID"];
+                
+                // Загружаем свойства через GetPropertyValues для каждого свойства отдельно
+                foreach (self::$codeProps as $code) {
+                    $propertyValues = \CIBlockElement::GetProperty(
+                        $this->iblock_id,
+                        $arFields["ID"],
+                        [],
+                        ["CODE" => $code]
+                    );
+                    
+                    $values = [];
+                    $isMultiple = false;
+                    while ($prop = $propertyValues->GetNext()) {
+                        $values[] = $prop["VALUE"];
+                        // Проверяем, является ли свойство множественным
+                        if ($prop["MULTIPLE"] === "Y") {
+                            $isMultiple = true;
+                        }
+                    }
+                    
+                    // Для множественных свойств всегда возвращаем массив
+                    if ($isMultiple) {
+                        $arCompany[$code] = $values; // Всегда массив для множественных свойств
+                    } else {
+                        // Для обычных свойств возвращаем первое значение или null
+                        $arCompany[$code] = count($values) > 0 ? $values[0] : null;
+                    }
+                }
+                
+                return $arCompany;
             }
-            return $arCompany;
+            
+            return false;
         }
 
         public static function query($url,$params,$debug = false){

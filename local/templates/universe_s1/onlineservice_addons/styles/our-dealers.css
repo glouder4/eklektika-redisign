@@ -1,0 +1,57 @@
+.our-dealers--list{
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+.our-dealers--list--column,
+.our-dealers-section,
+.our-dealers-section--list{
+    display: flex;
+    flex-direction: column;
+}
+.our-dealers-section{
+    gap: 25px;
+}
+.our-dealers-section--list{
+    gap: 20px;
+}
+.our-dealers-section--list ul{
+    list-style: none;
+}
+.our-dealers-section--list ul>li{
+    font-family: Manrope;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 135%;
+    letter-spacing: 0;
+    color: #222222;
+    padding: 0;
+
+    list-style: none;
+}
+.our-dealers-section--list ul>li:before{
+    content: none;
+}
+.our-dealers-section--title>span{
+    font-family: Manrope;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 135%;
+    letter-spacing: 0;
+    color: #222222;
+}
+.city--title{
+    font-family: Manrope;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 135%;
+    letter-spacing: 0;
+    color: #744A9E;
+}
+@media(min-width: 768px){
+    .our-dealers--list{
+        max-width: 730px;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}

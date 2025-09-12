@@ -8,7 +8,7 @@ $customPages = [
     '/company/news/', // Новости
     '/help/how-to-request/', // Как заказать
     '/company/contacts/', // Контакты
-    '/catalog/', //Купить
+    '/buy/', //Купить
     '/dostavka/', // Способы доставки
     '/design-studiya/', // Дизайн студия
     '/our-production/', // Наше производство, служба качества
@@ -407,7 +407,7 @@ if (in_array($APPLICATION->GetCurPage(), $customPages)) {
             case '/company/contacts/':
                 include($_SERVER['DOCUMENT_ROOT'].'/local/templates/onlineservice-custom-template/contacts.php');
                 break;
-            case '/catalog/':
+            case '/buy/':
                 include($_SERVER['DOCUMENT_ROOT'].'/local/templates/onlineservice-custom-template/catalog.php');
                 break;
             case '/dostavka/':

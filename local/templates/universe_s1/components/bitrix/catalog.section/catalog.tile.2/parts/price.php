@@ -24,7 +24,8 @@ use intec\core\helpers\ArrayHelper;
             'discount' => !empty($arPrice) && $arPrice['PERCENT'] > 0 ? 'true' : 'false'
         ]
     ]) ?>
-	<?foreach ($arPrices as $codePrice => $arPrice) {?>
+	<?foreach ($arPrices as $codePrice => $arPrice) {
+        ?>
 		<div class="catalog-element-price-code" data-role="price.code" data-value="<?=$codePrice?>">
 
 			<div class="catalog-element-price-name"><?=$arPrice["TITLE"]?>:</div>

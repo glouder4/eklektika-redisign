@@ -31,7 +31,13 @@ body>.intec-template .intec-template-layout-header-wrapper{
 
 a:hover,
 a:focus,
-a:active, [data-ui-markup="a"]:hover, [data-ui-markup="a"]:focus, [data-ui-markup="a"]:active, .intec-ui-markup-a:hover, .intec-ui-markup-a:focus, .intec-ui-markup-a:active{
+a:active,
+[data-ui-markup="a"]:hover,
+[data-ui-markup="a"]:focus,
+[data-ui-markup="a"]:active,
+.intec-ui-markup-a:hover,
+.intec-ui-markup-a:focus,
+.intec-ui-markup-a:active{
     color: #fff!important;
     text-decoration: unset;
 }

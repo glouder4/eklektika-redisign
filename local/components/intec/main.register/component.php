@@ -148,6 +148,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_REQUEST["register_submit_button"] 
 
 	if(!empty($arResult["ERRORS"]))
 	{
+        $resultValues = $arResult["VALUES"];
 		if(COption::GetOptionString("main", "event_log_register_fail", "N") === "Y")
 		{
 			$arError = $arResult["ERRORS"];
@@ -182,6 +183,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_REQUEST["register_submit_button"] 
 
 		$bOk = true;
         $resultValues = $arResult["VALUES"];
+
 
 		$events = GetModuleEvents("main", "OnBeforeUserRegister", true);
 		foreach($events as $arEvent)

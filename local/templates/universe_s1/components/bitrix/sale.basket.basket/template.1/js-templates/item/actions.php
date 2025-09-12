@@ -14,9 +14,9 @@ use intec\core\helpers\FileHelper;
     <div class="basket-item-desktop-actions">
         <div class="intec-grid intec-grid-i-10 intec-grid-a-h-end">
             <?php if (ArrayHelper::isIn('DELAY', $arParams['COLUMNS_LIST'])) { ?>
-                {{^DELAYED}}
+                <!--{{^DELAYED}}
                     <div class="intec-grid-item-auto">
-                        <?= Html::beginTag('div', [
+                        <?php /*= Html::beginTag('div', [
                             'class' => [
                                 'basket-item-desktop-action',
                                 'intec-ui' => [
@@ -33,16 +33,16 @@ use intec\core\helpers\FileHelper;
                                 'entity' => 'basket-item-add-delayed',
                                 'type' => 'default'
                             ]
-                        ]) ?>
+                        ]) */?>
                             <span class="intec-ui-part-icon intec-ui-picture">
-                                <?= FileHelper::getFileData(__DIR__.'/../../svg/item.desktop.action.delay.svg') ?>
+                                <?php /*= FileHelper::getFileData(__DIR__.'/../../svg/item.desktop.action.delay.svg') */?>
                             </span>
                             <span class="basket-item-desktop-action-text intec-ui-part-content">
-                                <?= Loc::getMessage('C_BASKET_DEFAULT_1_TEMPLATE_ITEM_DELAY') ?>
+                                <?php /*= Loc::getMessage('C_BASKET_DEFAULT_1_TEMPLATE_ITEM_DELAY') */?>
                             </span>
-                        <?= Html::endTag('div') ?>
+                        <?php /*= Html::endTag('div') */?>
                     </div>
-                {{/DELAYED}}
+                {{/DELAYED}}-->
             <?php } ?>
             <?php if (ArrayHelper::isIn('DELETE', $arParams['COLUMNS_LIST'])) { ?>
                 <div class="intec-grid-item-auto">

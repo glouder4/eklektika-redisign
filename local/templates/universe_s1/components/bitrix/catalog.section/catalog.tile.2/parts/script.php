@@ -271,9 +271,9 @@ $sSignedParameters = $oSigner->sign(base64_encode(serialize($arResult['ORIGINAL_
                             <?php if ($bBase && $arVisual['PRICE']['RECALCULATION']) { ?>
                                 var summary = [];
 
-                                summary.base = price.base.value * item.quantity.get();
+                                summary.base = price.base.value * ( item.quantity.get() > 0 ? item.quantity.get() : 1 );
                                 summary.base = summary.base.toFixed(price.currency.DECIMALS);
-                                summary.discount = price.discount.value * item.quantity.get();
+                                summary.discount = price.discount.value * ( item.quantity.get() > 0 ? item.quantity.get() : 1 );
                                 summary.discount = summary.discount.toFixed(price.currency.DECIMALS);
 
                                 BX.Currency.setCurrencyFormat(price.currency.CURRENCY, price.currency);
@@ -316,8 +316,8 @@ $sSignedParameters = $oSigner->sign(base64_encode(serialize($arResult['ORIGINAL_
                     }
 
                     item.find('[data-basket-id]')
-                        .data('basketQuantity', item.quantity.get())
-                        .attr('data-basket-quantity', item.quantity.get());
+                        .data('basketQuantity', ( item.quantity.get() > 0 ? item.quantity.get() : 1 ))
+                        .attr('data-basket-quantity', ( item.quantity.get() > 0 ? item.quantity.get() : 1 ));
 
                     <?php if ($arVisual['TIMER']['SHOW']) { ?>
                         timerUpdate(item.timer, entity.id);

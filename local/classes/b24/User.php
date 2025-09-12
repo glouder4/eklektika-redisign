@@ -156,7 +156,8 @@
 
         public function OnAfterUserUpdateHandler($arFields){
             $userObject = $this->getUserObject($arFields['ID']);
-            $this->updateMarketingAgentPriceType($arFields['UF_ADVERSTERING_AGENT']);
+            if( isset($arFields['UF_ADVERSTERING_AGENT']) )
+                $this->updateMarketingAgentPriceType($arFields['UF_ADVERSTERING_AGENT']);
 
             //if( $userObject )
                 //$this->updateContact($userObject['CONTACT_ID']);

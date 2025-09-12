@@ -30,7 +30,7 @@ $oFrame = $this->createFrame();
     <span class="header__icon-title">Профиль</span>
 </a>
 
-<div id="profile_fields--wrapper">
+<div id="profile_fields--wrapper" class="<?=!($USER->IsAuthorized()) ? "_hoverable" : null;?>">
     <div class="widgets">
         <?php
         if( !$USER->IsAuthorized() ){ ?>
@@ -49,7 +49,7 @@ $oFrame = $this->createFrame();
                 </a>
             </div>
             <div class="widget">
-                <a href="/catalog/" rel="nofollow" class="widget-item">
+                <a href="/buy/" rel="nofollow" class="widget-item">
                     <div class="icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>

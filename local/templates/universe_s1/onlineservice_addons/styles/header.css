@@ -87,7 +87,7 @@
 }
 
 .header__icon--menu {
-    background: #F85A9A;
+    background: unset;
     width: 33px;
     height: 33px;
     display: -webkit-box;
@@ -201,7 +201,7 @@
     -ms-flex-align: center;
     align-items: center;
     gap: 14px;
-    background: #F85A9A;
+    background: #80E0A7;
     color: #fff;
     border: none;
     width: 119px;
@@ -529,8 +529,6 @@ a.mobile-menu__call-btn{
 }
 .header__icon--user .header__icon-title{
     white-space: nowrap;    /* Запрещает перенос текста на новую строку */
-    overflow: hidden;       /* Скрывает текст, выходящий за границы */
-    text-overflow: ellipsis; /* Добавляет "..." если текст обрезается */
     width: 100%;           /* Или фиксированная ширина, например 200px */
 }
 @media(max-width: 768px){
@@ -650,6 +648,11 @@ a.mobile-menu__call-btn{
         -webkit-box-pack: start;
         -ms-flex-pack: start;
         justify-content: flex-start;
+    }
+}
+@media(max-width: 1200px){
+    .header__icon--user  .header__icon-title{
+        left: -4px;
     }
 }
 @media (min-width: 768px) {
@@ -947,7 +950,12 @@ a.mobile-menu__call-btn{
     display: flex;
     gap: 28px;
     position: relative;
-    top: 8px;
+    top: 0px;
+}
+@media(min-width: 991px){
+    #profileBtns{
+        top: 8px;
+    }
 }
 .ns-intec-universe.c-sale-basket-small.c-sale-basket-small-icons-1 .sale-basket-small-tab-counter{
     background: #EF4A85;
@@ -1072,7 +1080,8 @@ a.mobile-menu__call-btn{
 }
 
 #profile_fields--wrapper:hover,
-#profileBtns a.header__icon.header__icon--user:hover +#profile_fields--wrapper{
+#profileBtns a.header__icon.header__icon--user:hover +#profile_fields--wrapper,
+#profile_fields--wrapper.hover{
     visibility: visible;
     opacity: 1;
 }
@@ -1082,7 +1091,7 @@ a.mobile-menu__call-btn{
 #profile_fields--wrapper {
     position: absolute;
     top: 100%;
-    right: 65px;
+    right: 0px;
     background: #fff;
     border-radius: 0px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
@@ -1095,6 +1104,10 @@ a.mobile-menu__call-btn{
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     margin-top: 8px;
 }
+#profile_fields--wrapper.profile-hover._hoverable,
+#profileBtns a.header__icon.header__icon--user:hover +#profile_fields--wrapper._hoverable{
+    right: 270px;
+}
 
 #profile_fields--wrapper.show {
     opacity: 1;
@@ -1102,7 +1115,7 @@ a.mobile-menu__call-btn{
     transform: translateY(0);
 }
 
-#profile_fields--wrapper::before {
+/*#profile_fields--wrapper::before {
     content: '';
     position: absolute;
     top: -8px;
@@ -1112,7 +1125,7 @@ a.mobile-menu__call-btn{
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
     border-bottom: 8px solid #fff;
-}
+}*/
 
 #profile_fields--wrapper .widgets {
     padding: 16px 0;
@@ -1240,40 +1253,176 @@ a.mobile-menu__call-btn{
     }
 }
 
-/* Темная тема (опционально) */
-@media (prefers-color-scheme: dark) {
-    #profile_fields--wrapper {
-        background: #1f2937;
-        border-color: #374151;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
-    }
 
-    #profile_fields--wrapper::before {
-        border-bottom-color: #1f2937;
-    }
+#header-dropdown-panel-wrapper{
 
-    #profile_fields--wrapper .widget-item {
-        color: #d1d5db;
-    }
+}
 
-    #profile_fields--wrapper .widget-item:hover {
-        background: #374151;
-        color: #f9fafb;
-    }
+#header-dropdown-panel-wrapper .fields-wrapper{
+    border-radius: 0px;
+    padding: 30px;
+}
+#header-dropdown-panel-wrapper .fields-wrapper form{
 
-    #profile_fields--wrapper .icon {
-        background: #374151;
-    }
+}
+#header-dropdown-panel-wrapper .fields-wrapper form .form-fields{
+    display: flex;
+    flex-direction: column;
 
-    #profile_fields--wrapper .widget-item:hover .icon {
-        background: #4b5563;
-    }
+    gap: 29px;
 
-    #profile_fields--wrapper .icon svg {
-        color: #9ca3af;
-    }
+    margin-top: 7px;
+}
+#header-dropdown-panel-wrapper .fields-wrapper form .form-fields .field_wrapper{
+    display: flex;
+    flex-direction: column;
 
-    #profile_fields--wrapper .widget-item:hover .icon svg {
-        color: #d1d5db;
+    height: 58px;
+    box-sizing: border-box;
+    justify-content: space-between;
+}
+#header-dropdown-panel-wrapper .fields-wrapper form .form-fields .field_wrapper input[type="text"],
+#header-dropdown-panel-wrapper .fields-wrapper form .form-fields .field_wrapper input[type="password"]{
+    border: 0;
+    outline: none;
+    padding: 0;
+    margin: 0;
+
+    border-bottom: 1px solid #858585;
+}
+#header-dropdown-panel-wrapper .fields-wrapper form .form-fields .field_wrapper .form-field-name{
+    font-family: "Manrope";
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0;
+
+}
+#header-dropdown-panel-wrapper .fields-wrapper form .form-fields .field_wrapper .form-field-name>.required-field{
+    font-family: "Manrope";
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0;
+    color: #EF4A85;
+
+    position: relative;
+    top: -3px;
+    left: 2px;
+}
+
+#header-dropdown-panel-wrapper .fields-wrapper form .form-actions{
+    display: flex;
+    justify-content: space-between;
+
+    margin-top: 29px;
+}
+
+#store_password{
+
+}
+#store_password input[type="checkbox"]{
+    border-radius: 50%;
+    position: relative;
+    top: 2px;
+    left: 0px;
+}
+#store_password label{
+    font-family: Manrope;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 100%;
+    letter-spacing: 0;
+    color: #858585;
+
+    margin-left: 11px;
+}
+#forgot-password a{
+    font-family: Manrope;
+    font-weight: 600;
+    font-size: 10px;
+    line-height: 100%;
+    letter-spacing: 0;
+    text-decoration: underline;
+    text-decoration-style: solid;
+    text-decoration-thickness: 0%;
+    text-decoration-skip-ink: auto;
+    color: #80E0A7!important;
+}
+#forgot-password a:hover,
+#forgot-password a:focus,
+#forgot-password a:active{
+    color: #80E0A7!important;
+}
+
+#header-dropdown-panel-wrapper .fields-wrapper form .form-actions.btns input[type="submit"]{
+    width: 100px;
+    height: 39px;
+    padding-top: 10px;
+    padding-right: 25px;
+    padding-bottom: 10px;
+    padding-left: 25px;
+    background-color: #80E0A7;
+
+    border: 0;
+    outline: none;
+
+
+    font-family: Manrope;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0;
+    color: #FFFFFF;
+}
+#header-dropdown-panel-wrapper .fields-wrapper form .form-actions.btns input[type="submit"]:hover{
+    cursor: pointer;
+}
+#header-dropdown-panel-wrapper .fields-wrapper form .form-actions.btns a.register-btn{
+    width: 147px;
+    height: 39px;
+    padding-top: 10px;
+    padding-right: 30px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+
+    background-color: #744A9E;
+
+    font-family: Manrope;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0;
+    color: #FFFFFF;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#profile_fields--wrapper .data span{
+    font-family: Manrope;
+    font-weight: 500!important;
+    font-size: 16px!important;
+    line-height: 100%!important;
+    letter-spacing: 0.29px!important;
+    color: #858585!important;
+}
+#profile_fields--wrapper .widget .widget-item:hover .data span,
+#profile_fields--wrapper .widget .widget-item:focus .data span,
+#profile_fields--wrapper .widget .widget-item:active .data span{
+    color: #222222!important;
+}
+#navigation,
+#pagetitle{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.intec-content .intec-content-wrapper{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+@media(min-width: 1520px){
+    #navigation, #pagetitle{
+        padding: 0;
     }
 }

@@ -156,8 +156,7 @@ if( $isObrazec && $arResult['STATUS']['ID'] == "N" )
                                             $messageKey = "C_SALE_PERSONAL_ORDER_DETAIL_TEMPLATE_1_TEMPLATE_BUTTONS_CANCEL_OBRAZEC";
                                         }
 
-                                        $excludedIds = ["SS","RO", "SC", "DF", "SO", "SP"];
-                                        if( ( !in_array($arResult['STATUS']['ID'],$excludedIds)  )){ ?>
+                                        if( $arResult['STATUS']['ID'] == "N" ){ ?>
                                             <?= Html::tag('a', Loc::getMessage(
                                                 $messageKey
                                             ), [
@@ -299,7 +298,7 @@ if( $isObrazec && $arResult['STATUS']['ID'] == "N" )
                                 <?php include(__DIR__.'/parts/payment.php') ?>
                             <?php } ?>
                             <?php if (!empty($arResult['CHANGE_HISTORY'])) { ?>
-                                <?php include(__DIR__.'/parts/change_history.php') ?>
+                                <?php //include(__DIR__.'/parts/change_history.php') ?>
                             <?php } ?>
                             <?php if (!empty($arResult['SHIPMENT'])) { ?>
                                 <?php include(__DIR__.'/parts/shipment.php') ?>

@@ -34,8 +34,8 @@ use intec\core\helpers\Html;
 			<?/**
 			 * сохранение корзины
 			 */?>
-			<div class="intec-grid-item-auto">
-				<?= Html::beginTag('div', [
+			<!--<div class="intec-grid-item-auto">
+				<?php /*= Html::beginTag('div', [
 					'class' => [
 						'basket-items-panel-button',
 						'basket-items-panel-button-save',
@@ -47,12 +47,12 @@ use intec\core\helpers\Html;
 						]
 					],
 					'data-role' => 'save'
-				]) ?>
+				]) */?>
 					<span class="basket-items-panel-button-content intec-ui-part-content">
 						Сохранить
 					</span>
-				<?= Html::endTag('div') ?>
-			</div>
+				<?php /*= Html::endTag('div') */?>
+			</div>-->
 			<?php if (isAgent()) {?>
 				<?/**
 				 * создать КП

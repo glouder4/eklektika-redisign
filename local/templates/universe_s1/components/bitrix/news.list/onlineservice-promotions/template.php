@@ -69,7 +69,7 @@ $this->setFrameMode(true);
         </div>
     </a>
 <?endforeach;?>
-    <div class="promotions-action">
+    <!--<div class="promotions-action">
         <a data-fancybox href="#promotions-action-popup" rel="nofollow" class="promotions-action_open-popup">Показать еще</a>
-    </div>
+    </div>-->
 </div>

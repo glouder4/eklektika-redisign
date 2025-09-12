@@ -10,7 +10,7 @@ CJSCore::Init();
     <span class="header__icon-title">Профиль</span>
 </a>
 
-<div id="profile_fields--wrapper">
+<div id="profile_fields--wrapper"  class="<?=!($USER->IsAuthorized()) ? "_hoverable" : null;?>">
     <?php
     if( !$USER->IsAuthorized() ){ ?>
     <div id="header-dropdown-panel-wrapper">
@@ -90,7 +90,7 @@ CJSCore::Init();
                     <div class="form-actions btns">
                         <input type="submit" name="Login" value="<?=GetMessage("AUTH_LOGIN_BUTTON")?>" />
 
-                        <noindex><a class="register-btn" href="/catalog/<?//=$arResult["AUTH_REGISTER_URL"]?>" rel="nofollow"><?=GetMessage("AUTH_REGISTER")?></a></noindex>
+                        <noindex><a class="register-btn" href="/buy/<?//=$arResult["AUTH_REGISTER_URL"]?>" rel="nofollow"><?=GetMessage("AUTH_REGISTER")?></a></noindex>
                     </div>
 
                     <table width="95%">

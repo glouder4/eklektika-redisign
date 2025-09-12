@@ -247,13 +247,25 @@ foreach ($arResult['INFO']['STATUS'] as $key => $val){
 $excludedReserve = ["RO", "RC", "R"];
 $excludedObrazec = ["OB","SS", "SO", "SC","OG"];
 
-if( $_GET['filter_status'][0] == "R" ){
+if( is_array( $_GET['filter_status'] ) && $_GET['filter_status'][0] == "R" ){
     foreach ($arResult['INFO']['STATUS'] as $key => &$status) {
         if (!in_array($key, $excludedReserve))
             unset($arResult['INFO']['STATUS'][$key]);
     }
 }
-elseif( $_GET['filter_status'][0] == "OB" ){
+elseif( !is_array($_GET['filter_status']) && ( in_array($_GET['filter_status'],$excludedReserve) ) ){
+    foreach ($arResult['INFO']['STATUS'] as $key => &$status) {
+        if (!in_array($key, $excludedReserve))
+            unset($arResult['INFO']['STATUS'][$key]);
+    }
+}
+elseif( is_array($_GET['filter_status']) && ( $_GET['filter_status'][0] == "OB" ) ){
+    foreach ($arResult['INFO']['STATUS'] as $key => &$status) {
+        if (!in_array($key, $excludedObrazec))
+            unset($arResult['INFO']['STATUS'][$key]);
+    }
+}
+elseif( !is_array($_GET['filter_status']) && ( in_array($_GET['filter_status'],$excludedObrazec) ) ){
     foreach ($arResult['INFO']['STATUS'] as $key => &$status) {
         if (!in_array($key, $excludedObrazec))
             unset($arResult['INFO']['STATUS'][$key]);

@@ -121,3 +121,8 @@
 }
 
 /*# sourceMappingURL=style.css.map */
+
+.intec-ui.intec-ui-control-checkbox .intec-ui-part-selector+.intec-ui-part-content a,
+.intec-ui.intec-ui-control-checkbox .intec-ui-part-selector+.intec-ui-part-content a:hover{
+  color: #352ca6!important;
+}

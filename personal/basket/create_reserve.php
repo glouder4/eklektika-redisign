@@ -15,7 +15,11 @@ Loader::includeModule('sale');
 $statusClient = Client::getStatus();
 $arUserInfo = Client::getInfo($userId);
 
-$order = Sale\Order::create(SITE_ID, $userId); 
+$order = Sale\Order::create(SITE_ID, $userId);
+if( isset($_GET['STATUS_ID']) && ( $_GET['STATUS_ID'] == "R" || $_GET['STATUS_ID'] == "OB" ) ){
+    // Устанавливаем статус заказа "К"
+    $order->setField('STATUS_ID', $_GET['STATUS_ID']);
+}
 
 /*if ($statusClient == "fiz") {
 	$typePerson = 1;
@@ -92,7 +96,7 @@ if ($typePerson == 1) {
 	$arProps["INN"] = [
 		"ID" => 10,
 		"VALUE" => $arUserInfo["UF_INN"]
-	];	
+	];
 }
 
 
@@ -158,11 +162,6 @@ foreach ($arProps as $arProperty) {
 }
 
 die();*/
-
-if( isset($_GET['STATUS_ID']) && ( $_GET['STATUS_ID'] == "R" || $_GET['STATUS_ID'] == "OB" ) ){
-    // Устанавливаем статус заказа "К"
-    $order->setField('STATUS_ID', $_GET['STATUS_ID']);
-}
 
 
 // Сохраняем заказ

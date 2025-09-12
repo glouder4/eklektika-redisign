@@ -94,95 +94,161 @@
     text-decoration: unset;
     color: #fff;
 }
+
+.our-services--list{
+    gap: 25px;
+    margin-bottom: 35px;
+}
+.our-services--list-column{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+.our-services--list-item{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 7px;
+}
+.our-services--list-item__title{
+    width: 100%;
+}
+.our-services--list-item__title>span{
+    display: block;
+    font-family: Manrope;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0.29px;
+    text-align: center;
+    color: #222222;
+    font-weight: 600;
+}
 @media(min-width: 576px){
     .our-services--list{
         flex-direction: row;
-        flex-wrap: wrap;
+        justify-content: center;
     }
     .our-services--list-item{
-        width: calc( 50% - 60px );
-        height: 365px;
-    }
-    .our-services--list-item--action{
-        margin-bottom: 0;
-        margin-top: auto;
+        height: -webkit-fill-available;
     }
 }
 @media(min-width: 991px){
-    .our-services--list-item{
-        width: calc( 33% - 63px );
-        max-width: 466px;
-        height: 365px;
-    }
     .our-services--list{
-        justify-content: center;
+        gap: 50px;
     }
-    .our-services--list-item--action{
-        margin-top: 30px;
+}
+@media(min-width: 1200px){
+    .our-services--title{
+        font-size: 48px;
+    }
+    .our-services--list-item__title>span{
+        font-size: 20px;
+        text-align: left;
+    }
+    .our-services--list-item{
+        gap: 50px;
     }
 }
 @media(min-width: 1520px){
-    .our-services--title {
-        font-size: 48px;
-        margin-top: 160px;
+    .our-services{
+        margin-top: 112px;
     }
+    .our-services--list{
+        gap: 282px;
+        margin-top: 61px;
+    }
+    .our-services--list-column{
+        gap: 35px;
+    }
+
     .our-services--list-item{
-        padding: 0;
-    }
-    .our-services--list-item--image{
-        width: 80px;
-        height: 80px;
-        margin: auto;
-        margin-top: 0;
-        margin-bottom: 0;
-    }
-    .our-services--list-item--image>svg{
-        height: 100%;
-    }
-    .our-services--list-item--title{
-        margin-top: 42px;
-        top: 0;
-    }
-    .our-services--list-item--title>span{
-        font-size: 28px;
-    }
-    .our-services--list-item--description{
-        width: 360px;
-        margin: auto;
-        margin-top: 21px;
-        margin-bottom: 0;
-    }
-    .our-services--list-item--description>p{
-        font-size: 16px;
-    }
-    .our-services--list-item:nth-child(4),
-    .our-services--list-item:nth-child(5){
-        width: 50%;
-    }
-    .our-services--list-item--action_btn{
-        font-size: 16px;
-    }
-    .our-services--title{
-        margin-top: 185px;
-    }
-}
-@media(min-width: 1920px){
-    .our-services--list-item:nth-child(1){
         position: relative;
-        left: -62px;
     }
-    .our-services--list-item:nth-child(3){
+    .our-services--list-column:nth-child(1) .our-services--list-item:nth-child(1) .our-services--list-item__title{
         position: relative;
-        left: 62px;
+        top: -3px;
+        left: -1px;
     }
-    .our-services--list-item:nth-child(4){
+    .our-services--list-column:nth-child(1) .our-services--list-item:nth-child(2) .our-services--list-item__title{
         position: relative;
-        top: 25px;
-        left: -21px;
+        top: -2px;
+        left: 4px;
     }
-    .our-services--list-item:nth-child(5){
+    .our-services--list-column:nth-child(1) .our-services--list-item:nth-child(3) .our-services--list-item__icon{
         position: relative;
-        top: 25px;
-        left: 53px;
+        top: 3px;
+        left: -1px;
+    }
+
+    .our-services--list-column:nth-child(1) .our-services--list-item:nth-child(4) .our-services--list-item__title{
+        position: relative;
+        top: 2px;
+        left: 0px;
+    }
+    .our-services--list-column:nth-child(1) .our-services--list-item:nth-child(4) .our-services--list-item__icon{
+        position: relative;
+        top: 5px;
+        left: -1px;
+    }
+    .our-services--list-column:nth-child(1) .our-services--list-item:nth-child(5) .our-services--list-item__icon{
+        position: relative;
+        top: 5px;
+        left: -1px;
+    }
+
+    .our-services--list-column:nth-child(2) .our-services--list-item:nth-child(1) .our-services--list-item__icon{
+        position: relative;
+        top: 5px;
+        left: 0px;
+    }
+    .our-services--list-column:nth-child(2) .our-services--list-item:nth-child(1) .our-services--list-item__title{
+        position: relative;
+        top: 2px;
+        left: 0px;
+    }
+
+    .our-services--list-column:nth-child(2) .our-services--list-item:nth-child(2) .our-services--list-item__icon{
+        position: relative;
+        top: 10px;
+        left: 0px;
+    }
+    .our-services--list-column:nth-child(2) .our-services--list-item:nth-child(2) .our-services--list-item__title{
+        position: relative;
+        top: 7px;
+        left: 0px;
+    }
+
+    .our-services--list-column:nth-child(2) .our-services--list-item:nth-child(3) .our-services--list-item__icon{
+        position: relative;
+        top: 7px;
+        left: 0px;
+    }
+    .our-services--list-column:nth-child(2) .our-services--list-item:nth-child(3) .our-services--list-item__title{
+        position: relative;
+        top: 3px;
+        left: 0px;
+    }
+
+    .our-services--list-column:nth-child(2) .our-services--list-item:nth-child(4) .our-services--list-item__icon{
+        position: relative;
+        top: 7px;
+        left: 0px;
+    }
+    .our-services--list-column:nth-child(2) .our-services--list-item:nth-child(4) .our-services--list-item__title{
+        position: relative;
+        top: 3px;
+        left: 0px;
+    }
+
+    .our-services--list-column:nth-child(2) .our-services--list-item:nth-child(5) .our-services--list-item__icon{
+        position: relative;
+        top: 7px;
+        left: 0px;
+    }
+    .our-services--list-column:nth-child(2) .our-services--list-item:nth-child(5) .our-services--list-item__title{
+        position: relative;
+        top: 3px;
+        left: 0px;
     }
 }

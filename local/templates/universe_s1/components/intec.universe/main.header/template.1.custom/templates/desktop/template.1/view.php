@@ -304,10 +304,10 @@ if ($arResult['CONTACTS']['SHOW']) {
                         <a class="header__navigation-list--item-link" href="/nanesenie/">Производство</a>
                     </li>
                     <li class="header__navigation-list--item">
-                        <a class="header__navigation-list--item-link" href="/catalog/">Купить</a>
+                        <a class="header__navigation-list--item-link" href="<?=isAuthorized() ? '/catalog/' : '/buy/'?>">Купить</a> 
                     </li>
                     <li class="header__navigation-list--item">
-                        <a class="header__navigation-list--item-link" href="/informacziya-dlya-dilerov/">Стать дилером</a>
+                        <a class="header__navigation-list--item-link" href="/personal/profile/registration.php">Стать дилером</a>
                     </li>
                     <li class="header__navigation-list--item">
                         <a class="header__navigation-list--item-link" href="/company/contacts/">Контакты</a>
@@ -333,7 +333,7 @@ if ($arResult['CONTACTS']['SHOW']) {
                             </svg>
                         </span>
                 </li>
-                <li><a href="#">Купить</a></li>
+                <li><a href="<?=isAuthorized() ? '/catalog/' : '/buy/'; ?>">Купить</a></li>
                 <li><a href="/informacziya-dlya-dilerov/">Дилерам</a></li>
                 <li><a href="/contacts/">Контакты</a></li>
             </ul>

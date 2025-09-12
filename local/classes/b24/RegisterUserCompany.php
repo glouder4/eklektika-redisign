@@ -30,6 +30,7 @@ class RegisterUserCompany extends Request{
     private function createB24Company($arFields){
         global $APPLICATION;
 
+        $companyId = false;
         $reqFile = [];
         $file = [];
         if( !empty($arFields['UF_REQ']) && !empty($arFields['UF_REQ']['name']) ){
@@ -102,7 +103,7 @@ class RegisterUserCompany extends Request{
                 'POST' => $arFields['WORK_POSITION'],
                 'BIRTHDATE' => $arFields['PERSONAL_BIRTHDAY'],
                 'OPENED' => 'Y',
-                'ASSIGNED_BY_ID' => 1,
+                'ASSIGNED_BY_ID' => 3036,
                 'UF_CRM_3804624445810' => $arFields['UF_CITY'],
                 'PHONE' => [[
                     "VALUE" => $arFields['PERSONAL_PHONE'],
@@ -156,7 +157,11 @@ class RegisterUserCompany extends Request{
                         'OS_COMPANY_B24_ID' => $companyId,
                         'OS_COMPANY_CITY' => $arFields['UF_CITY'],
                         'OS_REQUSITES_FILE' => $arFields['UF_CRM_1755643990423']
-                    ]; 
+                    ];
+                    if( isset($arFields['USER_ID']) ){
+                        $companyElementParamss['USER_ID'] = $arFields['USER_ID'];
+                        $dataContact['fields']['UF_CRM_3804624445748'] = $arFields['USER_ID'];
+                    }
 
                     $this->createCompanyElement($companyElementParamss);
                 } else {
@@ -180,7 +185,8 @@ class RegisterUserCompany extends Request{
                             'UF_CRM_1669208295583' => $arFields['UF_JUR_ADDRESS'],
                             'UF_CRM_1618551330657' => $arFields['UF_CITY'],
                             'UF_CRM_1755643990423' => $arFields['UF_CRM_1755643990423'],
-                            'COMPANY_TYPE' => 'CUSTOMER'
+                            'COMPANY_TYPE' => 'CUSTOMER',
+                            'ASSIGNED_BY_ID' => 3036,
                         ]
                     ];
 
@@ -224,6 +230,10 @@ class RegisterUserCompany extends Request{
                             'OS_COMPANY_CITY' => $arFields['UF_CITY'],
                             'OS_REQUSITES_FILE' => $arFields['UF_CRM_1755643990423']
                         ];
+                        if( isset($arFields['USER_ID']) ){
+                            $companyElementParamss['USER_ID'] = $arFields['USER_ID'];
+                            $dataContact['fields']['UF_CRM_3804624445748'] = $arFields['USER_ID'];
+                        }
                         $dataContact['fields']['COMPANY_ID'] = $dataCompany['ID'];
 
                         $this->createCompanyElement($companyElementParamss);
@@ -273,6 +283,8 @@ class RegisterUserCompany extends Request{
             ];
             sendRequestB24("crm.contact.company.add", $qrCompanyAddContact);
         }
+
+        return true;
     } 
 
 
@@ -326,6 +338,20 @@ class RegisterUserCompany extends Request{
                 // Обновляем пользователя, записываем $contactId в UF_B24_USER_ID
                 $user = new \CUser;
                 $user->Update($arFields["USER_ID"], ["ACTIVE" => "N","UF_B24_USER_ID" => $contactId]);
+
+                /*$event = new \CEvent;
+                $event->SendImmediate("NEW_USER", SITE_ID, $arFields);*/
+
+                unset($arFields["PASSWORD"]);
+                unset($arFields["CONFIRM_PASSWORD"]);
+
+                \Bitrix\Main\Mail\Event::send([
+                    'EVENT_NAME' => 'NEW_USER_CONFIRM',
+                    'LID' => 's1', // ID вашего сайта
+                    'C_FIELDS' => [
+                        'EMAIL' => $arFields['EMAIL']
+                    ],
+                ]);
             }
         }
     }

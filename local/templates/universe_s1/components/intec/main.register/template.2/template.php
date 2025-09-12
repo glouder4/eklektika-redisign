@@ -223,7 +223,7 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
                             <?php
                                 foreach ($arResult['SORTED_FIELDS'] as $key => $FIELDS_BLOCK){
                                     ?>
-                                    <div class="intec-grid-item-2 block-fields" data-index="<?=$key;?>" style="display: <?=($key == 0) ? "block" : "none";?>;">
+                                    <div class="intec-grid-item-2 block-fields" data-index="<?=$key;?>" style="display: <?=($key == 0) ? "block" : "block";?>;">
                                         <?php
                                         foreach ($FIELDS_BLOCK as $FIELD => $arUserField){
                                             if (substr($FIELD, 0, 3) === 'UF_'){
@@ -508,23 +508,28 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
                                                                     ]) ?>
                                                                     <? break;
                                                                 default: ?>
-                                                                <?= Html::input('text', 'REGISTER['.$FIELD.']', $arResult['VALUES'][$FIELD], [
-                                                                    'class' => [
-                                                                        'date-picker',
-                                                                        'intec-ui' => [
-                                                                            '',
-                                                                            'control-input',
-                                                                            'mod-block',
-                                                                            'size-4'
-                                                                        ]
-                                                                    ],
-                                                                    'size' => 30,
-                                                                    'placeholder' => $FIELD == 'PERSONAL_BIRTHDAY' ? $arResult['DATE_FORMAT'] : null,
-                                                                    'data' => [
-                                                                        'role' => 'input'
-                                                                    ],
-                                                                    'id' => 'REGISTER_'.$FIELD.'_POPUP2'
-                                                                ]) ?>
+                                                                <?php
+                                                                    //if( isset($arResult['VALUES'][$FIELD]) ):                                                             ?>
+                                                                        <?= Html::input('text', 'REGISTER['.$FIELD.']', $arResult['VALUES'][$FIELD], [
+                                                                            'class' => [
+                                                                                'date-picker',
+                                                                                'intec-ui' => [
+                                                                                    '',
+                                                                                    'control-input',
+                                                                                    'mod-block',
+                                                                                    'size-4'
+                                                                                ]
+                                                                            ],
+                                                                            'size' => 30,
+                                                                            'placeholder' => $FIELD == 'PERSONAL_BIRTHDAY' ? $arResult['DATE_FORMAT'] : null,
+                                                                            'data' => [
+                                                                                'role' => 'input'
+                                                                            ],
+                                                                            'id' => 'REGISTER_'.$FIELD.'_POPUP2'
+                                                                        ]) ?>
+                                                                <?php
+                                                                    //endif;
+                                                                ?>
                                                                 <?php if ($FIELD == 'PERSONAL_BIRTHDAY') { ?>
                                                                     <div class="main-register-form-calendar-icon">
                                                                         <?php $APPLICATION->IncludeComponent(
@@ -601,7 +606,7 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
                                                     </label>
                                                     <div class="action-links" style="display: flex; flex-direction: column;">
                                                         <a href="/soglasiye-na-obrabotku.php" target="_blank">Согласие на обработку персональных данных</a>
-                                                        <a href="/politika-obrabotki-personalnih-dannih.php" target="_blank">Политика обработки персональных данных</a>
+                                                        <a href="/company/consent/" target="_blank">Политика обработки персональных данных</a>
                                                     </div>
                                                 </div>
                                             <?php
@@ -615,12 +620,12 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
                     </div>
 
                     <div id="diler-registration-fields-controls">
-                        <button id="prev-step" type="button" disabled="true" class="main-register-button intec-ui intec-ui-control-button intec-ui-mod-round-2 intec-ui-size-4">
+                        <!--<button id="prev-step" type="button" disabled="true" class="main-register-button intec-ui intec-ui-control-button intec-ui-mod-round-2 intec-ui-size-4">
                             Назад
                         </button>
                         <button id="next-step" type="button" class="main-register-button intec-ui intec-ui-control-button intec-ui-mod-round-2 intec-ui-scheme-current intec-ui-size-4">
                             Далее
-                        </button>
+                        </button>-->
 
                         <div id="submitFormBtn">
                             <?= Html::submitInput(Loc::getMessage($sPrefix.'AUTH_REGISTER'), [
@@ -917,8 +922,9 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
     ];
 
     window.is_personal_confirmed = false;
-
-    $('#next-step').click(function (){
+    $('#next-step').hide();
+    $('#submitFormBtn').show();
+    /*$('#next-step').click(function (){
         let isBlockValid = true;
 
         correctSortOrder[activeBlock].forEach(function (val){
@@ -963,7 +969,7 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
         $('#next-step').show();
 
         $(`.block-fields[data-index="${activeBlock}"]`).show();
-    })
+    })*/
 
     $('.block-fields input').change(function (){
         $($(this).closest(`div[data-name]`)).find('.ui-error-message').hide();
