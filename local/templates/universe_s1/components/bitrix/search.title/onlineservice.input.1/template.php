@@ -16,7 +16,7 @@ foreach ($arParams as $sKey => $sValue)
     }
 
 $arParameters = ArrayHelper::merge($arParameters, $arSearchParams);
-$arParameters['PAGE'] = $arResult['SEARCH']['MODE'] === 'site' ? $arResult['URL']['SEARCH'] : $arResult['URL']['CATALOG'];
+$arParameters['PAGE'] = $arParams['MODE'] === 'site' ? $arParams['URL'] : $arParams['PAGE'];
 $arParameters['INPUT_ID'] = $arParameters['INPUT_ID'].'-input-1';
 
 $arMenu = $arResult['MENU']['MAIN'];

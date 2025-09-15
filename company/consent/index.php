@@ -1,6 +1,6 @@
 <?php require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 
-$APPLICATION->SetTitle("Политика обработки персональных данных");
+$APPLICATION->SetTitle("Согласие на обработку персональных данных");
 
 ?><p>
     &nbsp;&nbsp;ПОЛИТИКА ОБРАБОТКИ ПЕРСОНАЛЬНЫХ ДАННЫХ ООО «ЙOкаталог»

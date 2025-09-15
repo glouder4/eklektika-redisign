@@ -64,6 +64,10 @@ use intec\core\helpers\Type;
                             $iPicturesCount = 1;
                         }
 
+                        if( is_null($arVideos) )
+                            $arVideos = [];
+
+
                         $iSumCount = $iPicturesCount + count($arVideos);
 
                         if ((!empty($arPictures) && $iPicturesCount > 1) || $bVideoGalleryUse)  {
@@ -361,11 +365,13 @@ use intec\core\helpers\Type;
                                                     'src' =>
                                                         !empty($arVideo['FILES']['FILE_MP4']) ?
                                                             $arVideo['FILES']['FILE_MP4']['SRC'].'#t=0.5' :
-                                                                (!empty($arVideo['FILES']['FILE_WEBM']) ?
-                                                                    $arVideo['FILES']['FILE_WEBM']['SRC'].'#t=0.5' :
-                                                                    !empty($arVideo['FILES']['FILE_OGV']) ?
-                                                                        $arVideo['FILES']['FILE_OGV']['SRC'].'#t=0.5'
-                                                                        : null)
+                                                            (!empty($arVideo['FILES']['FILE_WEBM']) ?
+                                                                $arVideo['FILES']['FILE_WEBM']['SRC'].'#t=0.5' :
+                                                                (!empty($arVideo['FILES']['FILE_OGV']) ?
+                                                                    $arVideo['FILES']['FILE_OGV']['SRC'].'#t=0.5'
+                                                                    : null
+                                                                )
+                                                            )
                                                 ],
                                                 'loop' => true,
                                                 'controls' => $arVisual['GALLERY']['VIDEO']['CONTROLS'],

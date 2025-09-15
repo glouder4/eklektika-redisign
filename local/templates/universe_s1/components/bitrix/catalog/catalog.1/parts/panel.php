@@ -57,6 +57,7 @@ unset($arViews["TEXT"]);
                     <div class="catalog-panel-sort-text">
                         <?php
                             $arSortProperty = null;
+                            $defaultProperty = null;
 
                             foreach ($arSort['PROPERTIES'] as $sSortPropertyKey => $arSortProperty) {
                                 if ($arSortProperty['ACTIVE'])
@@ -68,7 +69,8 @@ unset($arViews["TEXT"]);
                             if (!empty($arSortProperty)) {
                                 echo $arSortProperty['NAME'];
                             } else {
-                                echo Loc::getMessage('C_CATALOG_CATALOG_1_SORT');
+                                //echo Loc::getMessage('C_CATALOG_CATALOG_1_SORT');
+                                echo $arSort['PROPERTIES']['PRICE_ASC']['NAME'];
                             }
 
                             unset($sSortPropertyKey, $arSortProperty);

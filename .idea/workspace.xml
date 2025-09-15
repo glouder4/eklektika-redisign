@@ -5,63 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a53d02d7-d404-452c-a903-dd81636134fa" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/components/to-purchase/styles/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitrix/templates/universe_s1/components/bitrix/main.register/.default1/lang/ru/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/bitrix/templates/universe_s1/components/bitrix/main.register/.default1/lang/ru/template.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitrix/templates/universe_s1/components/bitrix/main.register/template.1/lang/ru/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/bitrix/templates/universe_s1/components/bitrix/main.register/template.1/lang/ru/template.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/buy/our-dealers/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/buy/our-dealers/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/company/consent/.section.php" beforeDir="false" afterPath="$PROJECT_DIR$/company/consent/.section.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/company/consent/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/company/consent/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/company/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/company/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contacts/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/contacts/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/soglasiye-na-obrabotku.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/soglasiye-na-obrabotku.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/informacziya-dlya-dilerov/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/informacziya-dlya-dilerov/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/classes/b24/RegisterUserCompany.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/classes/b24/RegisterUserCompany.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/classes/b24/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/classes/b24/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/components/intec/main.register/templates/.default/lang/ru/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/components/intec/main.register/templates/.default/lang/ru/template.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/php_interface/init.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/php_interface/init.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/catalog.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/catalog.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/components/contacts/map/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/components/contacts/map/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/components/diler-registration/styles/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/components/diler-registration/styles/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/e_nanesenie-logotipov-na-ezhednevniki.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/e_nanesenie-logotipov-na-ezhednevniki.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/s_dtf_pechat.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/s_dtf_pechat.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/s_lazernaya-gravirovka.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/s_lazernaya-gravirovka.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/s_polnocvetnaya-uf-pechat.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/s_polnocvetnaya-uf-pechat.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/s_shelkografiya.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/s_shelkografiya.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/s_sublimacionnaya_pechat.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/s_sublimacionnaya_pechat.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/s_tampopechat.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/s_tampopechat.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/s_tisnenie.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/s_tisnenie.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/styles/header.css" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/styles/header.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/styles/template.css" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/styles/template.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/breadcrumb/onlineservice-breadcrumbs/result_modifier.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/breadcrumb/onlineservice-breadcrumbs/result_modifier.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/breadcrumb/onlineservice-breadcrumbs/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/breadcrumb/onlineservice-breadcrumbs/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/breadcrumb/onlineservice-breadcrumbs/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/breadcrumb/onlineservice-breadcrumbs/template.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/main.register/.default1/lang/ru/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/main.register/.default1/lang/ru/template.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/main.register/template.1/lang/ru/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/main.register/template.1/lang/ru/template.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/sale.personal.order.list/template.1/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/sale.personal.order.list/template.1/template.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/sale.personal.section/template.1/parts/manager.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/sale.personal.section/template.1/parts/manager.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/sale.personal.section/template.1/result_modifier.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/sale.personal.section/template.1/result_modifier.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/sale.personal.section/template.1/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/sale.personal.section/template.1/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/sale.personal.section/template.1/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/sale.personal.section/template.1/template.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/system.auth.authorize/.default/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/system.auth.authorize/.default/template.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/system.auth.authorize/template.1/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/system.auth.authorize/template.1/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/intec/main.register/template.2/lang/ru/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/intec/main.register/template.2/lang/ru/template.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/intec/main.register/template.2/result_modifier.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/intec/main.register/template.2/result_modifier.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/intec/main.register/template.2/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/intec/main.register/template.2/template.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/onlineservice_addons/components/contacts/map/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/onlineservice_addons/components/contacts/map/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/onlineservice_addons/styles/header.css" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/onlineservice_addons/styles/header.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/onlineservice_addons/styles/template.css" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/onlineservice_addons/styles/template.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/parts/custom/body.start.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/parts/custom/body.start.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/parts/lite/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/parts/lite/header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/offers.xml" beforeDir="false" afterPath="$PROJECT_DIR$/log/offers.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pechat-na-futbolkax-optom/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/pechat-na-futbolkax-optom/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/personal/profile/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/personal/profile/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/politika-konfidencialnosty.php" beforeDir="false" afterPath="$PROJECT_DIR$/politika-konfidencialnosty.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/politika-obrabotki-personalnih-dannih.php" beforeDir="false" afterPath="$PROJECT_DIR$/politika-obrabotki-personalnih-dannih.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shelkografiya/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/shelkografiya/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/soglasiye-na-obrabotku.php" beforeDir="false" afterPath="$PROJECT_DIR$/soglasiye-na-obrabotku.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/updates-logs/log-before-deal-update-order3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/updates-logs/log-before-deal-update-order3.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user.php" beforeDir="false" afterPath="$PROJECT_DIR$/user.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.2/parts/data.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.2/parts/data.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.2/parts/gallery.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.2/parts/gallery.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog/catalog.1/parts/panel.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog/catalog.1/parts/panel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1/template.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -197,6 +147,7 @@
       <workItem from="1757532793459" duration="605000" />
       <workItem from="1757602155045" duration="5084000" />
       <workItem from="1757661362925" duration="16371000" />
+      <workItem from="1757919545781" duration="4306000" />
     </task>
     <servers />
   </component>

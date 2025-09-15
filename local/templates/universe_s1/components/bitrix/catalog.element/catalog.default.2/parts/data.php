@@ -41,7 +41,7 @@ $hData = function (&$arItem, $bOffer = false) use (&$arResult, &$bBase, &$bLite)
             'base' => null,
             'selected' => null,
             'items' => $arItem['MEASURES'],
-            'use' => count($arItem['MEASURES']) > 1 ? 'true' : 'false'
+            'use' => (!is_null($arItem['MEASURES']) && count($arItem['MEASURES'])) > 1 ? 'true' : 'false'
         ]
     ];
 
