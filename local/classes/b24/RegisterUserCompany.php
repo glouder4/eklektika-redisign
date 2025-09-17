@@ -8,7 +8,7 @@ class RegisterUserCompany extends Request{
     {
     }
 
-    private function isUserRegistered($arFields,$debug = false){
+    public function isUserRegistered($arFields,$debug = false){
         // найти пользователя в б24 по EMAIL
         $b24User = new \OnlineService\B24\User();
 
@@ -245,31 +245,6 @@ class RegisterUserCompany extends Request{
                         ]);*/
                     }
                 }
-
-
-                $dataCompanyCreate = [
-                    "NAME_COMPANY" => $arFields['UF_NAME_COMPANY'], // название компании
-                    "INN" => $arFields['UF_INN'], // ИНН
-                    "KPP" => $arFields['UF_KPP'], // КПП
-                    "WEBSITE" => $arFields['UF_SITE'], // сайт
-                    "SPHERE" => $arFields['UF_SPERE'], // сфера деятельности
-                    "ADDRESS" => $arFields['UF_JUR_ADDRESS'], // адрес
-                    "ID_B24" => $dataCompany['ID'],
-                    "PHONE" => $arFields['PERSONAL_PHONE'],
-                    "EMAIL" => $arFields['EMAIL'],
-                    'UF_CRM_1618551330657' => $arFields['UF_CITY'],
-                ];
-
-                /*if (!$companySite) {
-                    Company::add($dataCompanyCreate);
-                }
-
-
-                if ($companySite) {
-                    Company::update($companySite["ID"], $dataCompanyCreate);
-                } else {
-                    Company::add($dataCompanyCreate);
-                }*/
             }
         }
 

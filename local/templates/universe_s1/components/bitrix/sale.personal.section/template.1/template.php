@@ -58,6 +58,18 @@ $arSvg = [
                             <div style="margin-bottom: 24px;">
                                 <?php include (__DIR__.'/parts/companies.php') ?>
                             </div>
+
+                            <?php
+                                $user = \CUser::GetByID($USER->GetID())->Fetch();
+
+                                if( $user['UF_IS_DIRECTOR'] ){
+                            ?>
+                                <div style="margin-bottom: 24px;">
+                                    <a href="/director/add_new_branch.php" id="lk-add-new-company">Добавить филиал</a>
+                                </div>
+                            <?php
+                                }
+                            ?>
                             <div style="margin-bottom: 24px;">
                                 <?php include(__DIR__.'/parts/private.php') ?>
                             </div>

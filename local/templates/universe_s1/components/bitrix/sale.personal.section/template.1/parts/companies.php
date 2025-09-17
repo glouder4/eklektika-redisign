@@ -20,8 +20,90 @@ use intec\core\helpers\StringHelper;
     </div>
     <div class="sale-personal-section-claims-wrap">
         <div class="sale-personal-section-claims-items">
-		   <?php global $USER; 
-			$GLOBALS["filterUser"] = ["PROPERTY_OS_COMPANY_USERS" => $USER->GetID()];?>
+		   <?php 
+		   global $USER; 
+		   
+		   // Получаем компанию пользователя
+		   $rsCompany = CIBlockElement::GetList(
+			   [],
+			   [
+				   'IBLOCK_ID' => 57,
+				   'PROPERTY_OS_COMPANY_USERS' => $USER->GetID(),
+				   'ACTIVE' => 'Y'
+			   ],
+			   false,
+			   false,
+			   ['ID', 'PROPERTY_OS_COMPANY_IS_HEAD_OF_HOLDING', 'PROPERTY_OS_HOLDING_OF']
+		   );
+		   
+		   $userCompany = $rsCompany->GetNext();
+		   $companyIds = [];
+		   
+		   if ($userCompany) {
+			   // Проверяем, является ли компания головной холдинга
+			   if (!empty($userCompany['PROPERTY_OS_COMPANY_IS_HEAD_OF_HOLDING_VALUE']) && 
+				   ($userCompany['PROPERTY_OS_COMPANY_IS_HEAD_OF_HOLDING_VALUE'] === 'Y' || 
+					$userCompany['PROPERTY_OS_COMPANY_IS_HEAD_OF_HOLDING_VALUE'] === 'Да')) {
+				   
+				   // Сценарий 1: Головная компания - получаем все компании холдинга
+				   $rsHoldingCompanies = CIBlockElement::GetList(
+					   [],
+					   [
+						   'IBLOCK_ID' => 57,
+						   'PROPERTY_OS_HOLDING_OF' => $userCompany['ID'],
+						   'ACTIVE' => 'Y'
+					   ],
+					   false,
+					   false,
+					   ['ID']
+				   );
+				   
+				   while ($holdingCompany = $rsHoldingCompanies->GetNext()) {
+					   $companyIds[] = $holdingCompany['ID'];
+				   }
+				   
+				   // Добавляем саму головную компанию
+				   $companyIds[] = $userCompany['ID'];
+				   
+			   } else if (!empty($userCompany['PROPERTY_OS_HOLDING_OF_VALUE'])) {
+				   
+				   // Сценарий 2: Обычная компания - получаем все компании того же холдинга
+				   $holdingId = $userCompany['PROPERTY_OS_HOLDING_OF_VALUE'];
+				   
+				   // Получаем все компании этого холдинга
+				   $rsHoldingCompanies = CIBlockElement::GetList(
+					   [],
+					   [
+						   'IBLOCK_ID' => 57,
+						   'PROPERTY_OS_HOLDING_OF' => $holdingId,
+						   'ACTIVE' => 'Y'
+					   ],
+					   false,
+					   false,
+					   ['ID']
+				   );
+				   
+				   while ($holdingCompany = $rsHoldingCompanies->GetNext()) {
+					   $companyIds[] = $holdingCompany['ID'];
+				   }
+				   
+				   // Добавляем головную компанию холдинга
+				   $companyIds[] = $holdingId;
+				   
+			   } else {
+				   // Если нет связей с холдингом - только своя компания
+				   $companyIds[] = $userCompany['ID'];
+			   }
+		   }
+		   
+		   // Формируем фильтр для компонента
+		   if (!empty($companyIds)) {
+			   $GLOBALS["filterUser"] = ["ID" => $companyIds];
+		   } else {
+			   $GLOBALS["filterUser"] = ["ID" => 0]; // Нет доступа ни к каким компаниям
+		   }
+
+            ?>
            <?php $APPLICATION->IncludeComponent("bitrix:news.list", "companies", Array(
 					"IBLOCK_TYPE" => "personal",
 					"IBLOCK_ID" => "57",

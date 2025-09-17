@@ -74,7 +74,7 @@ class SaleOrderAjax extends \CBitrixComponent
 	protected $checkSession = true;
 	protected $isRequestViaAjax;
 
-    protected array $customDataFieldIds = [8,10,12,13,14];
+    protected array $customDataFieldIds = [8,10,12,13,14,37];
 
 	public function onPrepareComponentParams($arParams)
 	{
@@ -3853,6 +3853,163 @@ class SaleOrderAjax extends \CBitrixComponent
 	}
 
 	/**
+	 * Получает все компании холдинга для пользователя
+	 * 
+	 * @param int $userId ID пользователя
+	 * @param int $iblockId ID инфоблока
+	 * @return array Массив компаний холдинга
+	 */
+	protected function getUserHoldingCompanies($userId, $iblockId)
+	{
+		$companies = [];
+		$processedHeadCompanies = []; // Для избежания дублирования при работе с несколькими холдингами
+		
+		// Сначала находим компании, к которым напрямую привязан пользователь
+		$userCompanies = $this->getUserDirectCompanies($userId, $iblockId);
+		
+		foreach ($userCompanies as $company) {
+			$companies[$company['ID']] = $company;
+			
+			// Определяем головную компанию холдинга
+			$headCompanyId = $this->getHeadCompanyId($company, $iblockId);
+			
+			// Если текущая компания является головной, то headCompanyId будет равен ID этой компании
+			// Если текущая компания дочерняя, то headCompanyId будет равен ID головной компании
+			if ($headCompanyId && !in_array($headCompanyId, $processedHeadCompanies)) {
+				$processedHeadCompanies[] = $headCompanyId;
+				
+				// Если текущая компания не является головной, получаем головную компанию
+				if ($headCompanyId !== $company['ID']) {
+					$headCompany = $this->getCompanyById($headCompanyId, $iblockId);
+					if ($headCompany) {
+						$companies[$headCompany['ID']] = $headCompany;
+					}
+				}
+				
+				// Получаем все дочерние компании этого холдинга
+				$childCompanies = $this->getChildCompanies($headCompanyId, $iblockId);
+				foreach ($childCompanies as $childCompany) {
+					$companies[$childCompany['ID']] = $childCompany;
+				}
+			}
+		}
+		
+		return $companies;
+	}
+	
+	/**
+	 * Получает компании, к которым напрямую привязан пользователь
+	 * 
+	 * @param int $userId ID пользователя
+	 * @param int $iblockId ID инфоблока
+	 * @return array Массив компаний
+	 */
+	protected function getUserDirectCompanies($userId, $iblockId)
+	{
+		$companies = [];
+		
+		$dbUserProfiles = \CIBlockElement::GetList(
+			[],
+			[
+				'IBLOCK_ID' => $iblockId,
+				'ACTIVE' => 'Y',
+				'PROPERTY_OS_COMPANY_USERS' => $userId
+			],
+			false,
+			false,
+			['ID', 'NAME', 'PROPERTY_OS_COMPANY_B24_ID', 'PROPERTY_OS_COMPANY_USERS', 'PROPERTY_OS_HOLDING_OF', 'PROPERTY_OS_COMPANY_IS_HEAD_OF_HOLDING']
+		);
+
+		while ($arUserProfiles = $dbUserProfiles->GetNext()) {
+			$companies[] = $arUserProfiles;
+		}
+		
+		return $companies;
+	}
+	
+	/**
+	 * Определяет ID головной компании холдинга
+	 * 
+	 * @param array $company Данные компании
+	 * @param int $iblockId ID инфоблока
+	 * @return int|null ID головной компании или null
+	 */
+	protected function getHeadCompanyId($company, $iblockId)
+	{
+		// Если текущая компания является головной
+		if (!empty($company['PROPERTY_OS_COMPANY_IS_HEAD_OF_HOLDING_VALUE']) && 
+			($company['PROPERTY_OS_COMPANY_IS_HEAD_OF_HOLDING_VALUE'] === 'Y' || 
+			 $company['PROPERTY_OS_COMPANY_IS_HEAD_OF_HOLDING_VALUE'] === 'Да')) {
+			return $company['ID'];
+		}
+		
+		// Если у компании есть привязка к головной компании
+		if (!empty($company['PROPERTY_OS_HOLDING_OF_VALUE'])) {
+			return (int)$company['PROPERTY_OS_HOLDING_OF_VALUE'];
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * Получает данные компании по ID
+	 * 
+	 * @param int $companyId ID компании
+	 * @param int $iblockId ID инфоблока
+	 * @return array|null Данные компании или null
+	 */
+	protected function getCompanyById($companyId, $iblockId)
+	{
+		$dbCompany = \CIBlockElement::GetList(
+			[],
+			[
+				'IBLOCK_ID' => $iblockId,
+				'ACTIVE' => 'Y',
+				'ID' => $companyId
+			],
+			false,
+			false,
+			['ID', 'NAME', 'PROPERTY_OS_COMPANY_B24_ID', 'PROPERTY_OS_COMPANY_USERS', 'PROPERTY_OS_HOLDING_OF', 'PROPERTY_OS_COMPANY_IS_HEAD_OF_HOLDING']
+		);
+
+		if ($arCompany = $dbCompany->GetNext()) {
+			return $arCompany;
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * Получает все дочерние компании холдинга
+	 * 
+	 * @param int $headCompanyId ID головной компании
+	 * @param int $iblockId ID инфоблока
+	 * @return array Массив дочерних компаний
+	 */
+	protected function getChildCompanies($headCompanyId, $iblockId)
+	{
+		$companies = [];
+		
+		$dbChildCompanies = \CIBlockElement::GetList(
+			[],
+			[
+				'IBLOCK_ID' => $iblockId,
+				'ACTIVE' => 'Y',
+				'PROPERTY_OS_HOLDING_OF' => $headCompanyId
+			],
+			false,
+			false,
+			['ID', 'NAME', 'PROPERTY_OS_COMPANY_B24_ID', 'PROPERTY_OS_COMPANY_USERS', 'PROPERTY_OS_HOLDING_OF', 'PROPERTY_OS_COMPANY_IS_HEAD_OF_HOLDING']
+		);
+
+		while ($arChildCompany = $dbChildCompanies->GetNext()) {
+			$companies[] = $arChildCompany;
+		}
+		
+		return $companies;
+	}
+
+	/**
 	 * Initialization of user profiles. Set user profiles data to $this->arResult.
 	 *
 	 * @param Order $order
@@ -3872,19 +4029,10 @@ class SaleOrderAjax extends \CBitrixComponent
 		//Здесь вместо стандартной логики, нужно получить все активные элементы инфоблока 57, и проверить, есть ли среди них элемент с свойством OS_COMPANY_B24_ID = $order->getUserId()
         $profilesIblock = 57;
 
-        $dbUserProfiles = \CIBlockElement::GetList(
-            [],
-            [
-                'IBLOCK_ID' => $profilesIblock,
-                'ACTIVE' => 'Y',
-                'PROPERTY_OS_COMPANY_USERS' => $order->getUserId() // Конкретный пользователь
-            ],
-            false,
-            false,
-            ['ID', 'NAME', 'PROPERTY_OS_COMPANY_B24_ID', 'PROPERTY_OS_COMPANY_USERS']
-        );
+        // Получаем все компании холдинга для пользователя
+        $holdingCompanies = $this->getUserHoldingCompanies($order->getUserId(), $profilesIblock);
 
-        while ($arUserProfiles = $dbUserProfiles->GetNext())
+        foreach ($holdingCompanies as $arUserProfiles)
 		{
             $profile= [];
             if (!$bFirst && ($profileIsNotSelected || $isPersonTypeChanged || $justAuthorized))
@@ -5209,6 +5357,9 @@ class SaleOrderAjax extends \CBitrixComponent
                 if( in_array((int)$propertyData['ID'],$this->customDataFieldIds) ){
                     if( $propertyData['ID'] == 8 ){
                         $arr['properties'][$index]['VALUE'][0] = $companyFields['OS_COMPANY_NAME'];
+                    }
+                    elseif( $propertyData['ID'] == 37 ){
+                        $arr['properties'][$index]['VALUE'][0] = $companyFields['OS_COMPANY_B24_ID'];
                     }
                     elseif( $propertyData['ID'] == 10 ){
                         $arr['properties'][$index]['VALUE'][0] = $companyFields['OS_COMPANY_INN'];

@@ -329,6 +329,7 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 					this.deliveryCachedInfo = [];
 
 				this.result = result.order;
+				console.log(result)
 				this.prepareLocations(result.locations);
 				this.locationsInitialized = false;
 				this.maxWaitTimeExpired = false;

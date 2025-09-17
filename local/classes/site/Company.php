@@ -6,6 +6,10 @@
     class Company{
         private int $iblock_id = 57;
         private static $codeProps = [
+            "OS_COMPANY_IS_HEAD_OF_HOLDING",
+            "OS_COMPANY_BOSS",
+            "OS_HEAD_COMPANY_B24_ID",
+            "OS_HOLDING_OF",
             "OS_COMPANY_INN",
             "OS_COMPANY_WEB_SITE",
             "OS_COMPANY_USERS",
@@ -93,6 +97,7 @@
          * @param array $params Массив параметров компании:
          *   - OS_COMPANY_B24_ID (string|int) — ID компании в B24 (обязательный)
          *   - OS_COMPANY_NAME (string) — Название компании
+         *   - OS_COMPANY_IS_HEAD_OF_HOLDING (boolean) — Головная компания
          *   - OS_COMPANY_STATUS (string|int) — Статус компании
          *   - OS_COMPANY_USERS (array|int) — ID связанных контактов
          *   - OS_COMPANY_INN (string) — ИНН компании
@@ -188,19 +193,50 @@
                     }
                 }
 
+                if( !empty($params['OS_HOLDING_OF']) && $params['OS_HOLDING_OF'] ){
+                    $params['OS_HOLDING_OF'] = $this->getCompanyByB24ID($params['OS_HOLDING_OF']);
+                }
 
-                // Формируем массив свойств для обновления
-                $arProps = [];
+                // Получаем текущие значения всех свойств компании
+                $currentProps = [];
                 foreach (self::$codeProps as $code) {
-                    if (isset($params[$code])) {
-                        $arProps[$code] = $params[$code];
+                    $propertyValues = \CIBlockElement::GetProperty(
+                        $this->iblock_id,
+                        $companyId,
+                        [],
+                        ["CODE" => $code]
+                    );
+                    
+                    $values = [];
+                    $isMultiple = false;
+                    while ($prop = $propertyValues->GetNext()) {
+                        $values[] = $prop["VALUE"];
+                        if ($prop["MULTIPLE"] === "Y") {
+                            $isMultiple = true;
+                        }
+                    }
+                    
+                    if ($isMultiple) {
+                        $currentProps[$code] = $values;
+                    } else {
+                        $currentProps[$code] = count($values) > 0 ? $values[0] : null;
                     }
                 }
+
+                // Формируем массив свойств для обновления - объединяем текущие и новые значения
+                $arProps = $currentProps; // Начинаем с текущих значений
+                foreach (self::$codeProps as $code) {
+                    if (isset($params[$code])) {
+                        $arProps[$code] = $params[$code]; // Перезаписываем только переданные значения
+                    }
+                }
+
+                $params['OS_COMPANY_B24_ID'] = $company['CODE'];
 
                 $arUpdateArray = [
                     "PROPERTY_VALUES" => $arProps,
                     "NAME" => $params["OS_COMPANY_NAME"],
-                    "ACTIVE" => $params['ACTIVE']
+                    "ACTIVE" => $params['ACTIVE'],
                 ];
 
 
@@ -265,10 +301,10 @@
         public function getCompanyByB24ID($b24_id){
             $rsCompany = \CIBlockElement::GetList(
                 [],
-                ['PROPERTY_OS_COMPANY_B24_ID' => $b24_id],
+                ['CODE' => $b24_id],
                 false,
                 false,
-                ['ID', 'NAME', 'PROPERTY_OS_COMPANY_B24_ID']
+                ['ID', 'NAME', 'PROPERTY_OS_COMPANY_B24_ID','CODE','XML_ID']
             );  
             
             if ($ob = $rsCompany->GetNextElement()) {

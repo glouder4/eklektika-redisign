@@ -127,3 +127,38 @@
 .ns-intec-universe.c-sale-basket-small.c-sale-basket-small-notifications-1 .sale-basket-small-content .sale-basket-small-product-name:active{
 	color: #888888!important;
 }
+#lk-add-new-company{
+	width: 192px;
+	height: 55px;
+	background-color: #EF4A85;
+	font-family: Manrope;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 100%;
+	letter-spacing: 0;
+	color: #FFFFFF;
+	outline: none;
+	border: 0;
+	transition: all 0.3s ease;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	margin-left: auto;
+}
+@media (min-width: 1520px) {
+	#lk-add-new-company{
+		width: 224px;
+		height: 55px;
+		padding-top: 15px;
+		padding-right: 40px;
+		padding-bottom: 15px;
+		padding-left: 40px;
+		font-family: Manrope;
+		font-weight: 500;
+		font-size: 16px;
+		line-height: 100%;
+		letter-spacing: 0;
+	}
+}
