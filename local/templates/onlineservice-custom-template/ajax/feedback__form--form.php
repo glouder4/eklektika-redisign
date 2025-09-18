@@ -37,8 +37,21 @@ if (check_bitrix_sessid() && !empty($_REQUEST["submit"])) {
             "form_textarea_4" => $fields['message'],          // Сообщение
         ];
         $RESULT_ID = 0;
-        if (CFormResult::Add($formId, $arValues, "N", $RESULT_ID)) {
+        if ($RESULT_ID = CFormResult::Add($formId, $arValues)) {
             // Успех, результат добавлен
+            // Принудительно отправляем письмо
+            /*CEvent::Send("FORM_FILLING_SIMPLE_FORM_".$formId, SITE_ID, [
+                "RESULT_ID" => $RESULT_ID,
+                "FORM_ID" => $formId
+            ]);*/
+
+            // создает событие в модуле CRM
+            CFormCRM::onResultAdded($formId, $RESULT_ID);
+            // создает событие в модуле Статистика, возвращает true в случае успеха, в противном случае false
+            CFormResult::SetEvent($RESULT_ID);
+            // создает почтовое событие для отсылки данных результата по e-mail, возвращает true в случае успеха, в противном случае false
+            CFormResult::Mail($RESULT_ID);
+
             echo json_encode(['success' => true, 'fields' => $fields]);
             exit;
         } else {

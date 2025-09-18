@@ -49,7 +49,10 @@ CModule::IncludeModule("intec.eklectika");
 					</tr>
 					<tr>
 						<td>Сотрудников:</td>
-						<td><?=count($arItem["PROPERTIES"]["OS_COMPANY_USERS"]["VALUE"])?></td>
+						<td><?php
+                            $value = $arItem["PROPERTIES"]["OS_COMPANY_USERS"]["VALUE"] ?? null;
+                            echo (is_array($value) || $value instanceof Countable) ? count($value) : 0;
+                            ?></td>
 					</tr>
 				</table>				
 			</div>

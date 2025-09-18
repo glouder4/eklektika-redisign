@@ -5,32 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a53d02d7-d404-452c-a903-dd81636134fa" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/director/add_new_branch-action.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/director/add_new_branch.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/intec/main.register/director-add-new-branch/.parameters.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/intec/main.register/director-add-new-branch/bitrix/socserv.auth.form/.default/component_epilog.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/intec/main.register/director-add-new-branch/bitrix/socserv.auth.form/.default/images/sprite.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/intec/main.register/director-add-new-branch/bitrix/socserv.auth.form/.default/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/intec/main.register/director-add-new-branch/bitrix/socserv.auth.form/.default/template.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/intec/main.register/director-add-new-branch/lang/ru/.parameters.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/intec/main.register/director-add-new-branch/lang/ru/template.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/intec/main.register/director-add-new-branch/result_modifier.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/intec/main.register/director-add-new-branch/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/intec/main.register/director-add-new-branch/style.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/intec/main.register/director-add-new-branch/style.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/intec/main.register/director-add-new-branch/svg/eye_close.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/intec/main.register/director-add-new-branch/svg/eye_open.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/intec/main.register/director-add-new-branch/template.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/company/consent/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/company/consent/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/classes/b24/RegisterUserCompany.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/classes/b24/RegisterUserCompany.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/classes/b24/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/classes/b24/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/classes/site/Company.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/classes/site/Company.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/components/bitrix/sale.order.ajax/class.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/components/bitrix/sale.order.ajax/class.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/sale.order.ajax/simple.1/order_ajax.js" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/sale.order.ajax/simple.1/order_ajax.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/sale.personal.section/template.1/parts/companies.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/sale.personal.section/template.1/parts/companies.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/sale.personal.section/template.1/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/sale.personal.section/template.1/template.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/css/custom.css" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/css/custom.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/ajax/feedback__form--form.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/ajax/feedback__form--form.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/s_dtf_pechat.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/s_dtf_pechat.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/s_lazernaya-gravirovka.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/s_lazernaya-gravirovka.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/s_polnocvetnaya-uf-pechat.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/s_polnocvetnaya-uf-pechat.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/s_shelkografiya.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/s_shelkografiya.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/s_sublimacionnaya_pechat.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/s_sublimacionnaya_pechat.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/s_tampopechat.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/s_tampopechat.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/s_tisnenie.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/s_tisnenie.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/news.list/companies/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/news.list/companies/template.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,24 +35,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "true",
-    "WebServerToolWindowPanel.toolwindow.highlight.mappings": "true",
-    "WebServerToolWindowPanel.toolwindow.highlight.symlinks": "true",
-    "WebServerToolWindowPanel.toolwindow.show.date": "false",
-    "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
-    "WebServerToolWindowPanel.toolwindow.show.size": "false",
-    "last_opened_file_path": "C:/Git_projects/eklektika-beget/local/templates/universe_s1/components/intec/main.register",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.highlight.mappings&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.highlight.symlinks&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.show.date&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.show.permissions&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.show.size&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Git_projects/eklektika-beget/local/templates/universe_s1/components/intec/main.register&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Git_projects\eklektika-beget\local\templates\universe_s1\components\intec\main.register" />
@@ -170,7 +154,8 @@
       <workItem from="1758028942549" duration="11000" />
       <workItem from="1758041460979" duration="1825000" />
       <workItem from="1758092232159" duration="3413000" />
-      <workItem from="1758096615940" duration="13792000" />
+      <workItem from="1758096615940" duration="14033000" />
+      <workItem from="1758182226388" duration="8073000" />
     </task>
     <servers />
   </component>
