@@ -6,15 +6,23 @@
   <component name="ChangeListManager">
     <list default="true" id="a53d02d7-d404-452c-a903-dd81636134fa" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/ajax/feedback__form--form.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/ajax/feedback__form--form.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/s_dtf_pechat.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/s_dtf_pechat.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/s_lazernaya-gravirovka.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/s_lazernaya-gravirovka.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/s_polnocvetnaya-uf-pechat.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/s_polnocvetnaya-uf-pechat.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/s_shelkografiya.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/s_shelkografiya.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/s_sublimacionnaya_pechat.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/s_sublimacionnaya_pechat.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/s_tampopechat.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/s_tampopechat.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/s_tisnenie.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/services/s_tisnenie.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/news.list/companies/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/news.list/companies/template.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/director/add_new_branch-action.php" beforeDir="false" afterPath="$PROJECT_DIR$/director/add_new_branch-action.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/classes/b24/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/classes/b24/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/components/bitrix/sale.order.ajax/class.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/components/bitrix/sale.order.ajax/class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/php_interface/init.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/php_interface/init.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/parts/sections.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/parts/sections.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/parts/sections/accessories.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/parts/sections/accessories.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/parts/sections/articles.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/parts/sections/articles.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/parts/sections/documents.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/parts/sections/documents.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/parts/sections/information.buy.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/parts/sections/information.buy.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/parts/sections/information.payment.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/parts/sections/information.payment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/parts/sections/information.shipment.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/parts/sections/information.shipment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/parts/sections/properties.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/parts/sections/properties.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/parts/sections/reviews.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/parts/sections/reviews.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/parts/sections/stores.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/parts/sections/stores.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/parts/sections/video.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/parts/sections/video.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/intec/main.register/director-add-new-branch/result_modifier.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/intec/main.register/director-add-new-branch/result_modifier.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/intec/main.register/director-add-new-branch/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/intec/main.register/director-add-new-branch/template.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +52,7 @@
     &quot;WebServerToolWindowPanel.toolwindow.show.date&quot;: &quot;false&quot;,
     &quot;WebServerToolWindowPanel.toolwindow.show.permissions&quot;: &quot;false&quot;,
     &quot;WebServerToolWindowPanel.toolwindow.show.size&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Git_projects/eklektika-beget/local/templates/universe_s1/components/intec/main.register&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Git_projects/panzer-auto&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -156,6 +164,8 @@
       <workItem from="1758092232159" duration="3413000" />
       <workItem from="1758096615940" duration="14033000" />
       <workItem from="1758182226388" duration="8073000" />
+      <workItem from="1759734289910" duration="5866000" />
+      <workItem from="1759767197652" duration="1094000" />
     </task>
     <servers />
   </component>

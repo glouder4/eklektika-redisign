@@ -1,0 +1,626 @@
+# Документация: Интеграция с Bitrix24 CRM
+
+## Описание
+Комплексная интеграция сайта с Bitrix24 CRM, включающая синхронизацию контактов, компаний, пользователей, веб-хуки и двусторонний обмен данными.
+
+## Основные характеристики
+- **URL Bitrix24**: `https://bitrix.yomerch.ru/`
+- **REST API**: Использование REST методов для взаимодействия
+- **Веб-хуки**: Обработка событий CRM в реальном времени
+- **Двусторонняя синхронизация**: Данные передаются в обе стороны
+- **Файловая интеграция**: Загрузка и скачивание документов
+
+## Места использования и реализации
+
+### 1. Основные константы и настройки
+**Файл**: `local/php_interface/init.php`
+
+#### Константы:
+```php
+define('URL_B24', 'https://bitrix.yomerch.ru/');
+```
+
+#### Функция отправки запросов к B24:
+```php
+function sendRequestB24($method, $params, $debug = false) {
+    $queryUrl = URL_B24.'rest/1/oak1tjz71elzz2xt/'.$method.'.json';
+
+    $curl = curl_init();
+    $queryData = http_build_query($params);
+
+    curl_setopt_array($curl, array(
+        CURLOPT_SSL_VERIFYPEER => 0,
+        CURLOPT_SSL_VERIFYHOST => FALSE,
+        CURLOPT_POST => 1,
+        CURLOPT_HEADER => 0,
+        CURLOPT_RETURNTRANSFER => 1,
+        CURLOPT_URL => $queryUrl,
+        CURLOPT_POSTFIELDS => $queryData,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_CONNECTTIMEOUT => 10,
+    ));
+
+    $result = curl_exec($curl);
+    $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+    $curlError = curl_error($curl);
+    $curlErrno = curl_errno($curl);
+
+    curl_close($curl);
+
+    // Обработка ошибок и логирование
+    if ($curlErrno) {
+        return [
+            'success' => 0,
+            'error' => 'CURL Error: ' . $curlError,
+            'errno' => $curlErrno
+        ];
+    }
+
+    if ($httpCode !== 200) {
+        return [
+            'success' => 0,
+            'error' => 'HTTP Error: ' . $httpCode,
+            'response' => $result
+        ];
+    }
+
+    $decodedResult = json_decode($result, true);
+    return $decodedResult;
+}
+```
+
+### 2. Базовый класс для запросов
+**Файл**: `local/classes/b24/Request.php`
+
+#### Базовый класс:
+```php
+namespace OnlineService\B24;
+
+class Request {
+    protected function sendRequest($params, $debug = false) {
+        $queryUrl = URL_B24.'local/classes/site_requests_handler.php';
+        $curl = \curl_init();
+        $queryData = \http_build_query($params);
+        
+        \curl_setopt_array($curl, array(
+            CURLOPT_SSL_VERIFYPEER => 0,
+            CURLOPT_SSL_VERIFYHOST => FALSE,
+            CURLOPT_POST => 1,
+            CURLOPT_HEADER => 0,
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_URL => $queryUrl,
+            CURLOPT_POSTFIELDS => $queryData,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_CONNECTTIMEOUT => 10,
+        ));
+        
+        $result = curl_exec($curl);
+        // ... обработка ответа аналогично sendRequestB24()
+    }
+}
+```
+
+### 3. Регистрация пользователей и компаний
+**Файл**: `local/classes/b24/RegisterUserCompany.php`
+
+#### Основная логика:
+```php
+namespace OnlineService\B24;
+
+class RegisterUserCompany extends Request {
+    
+    // Проверка существования пользователя в B24
+    public function isUserRegistered($arFields, $debug = false) {
+        $b24User = new \OnlineService\B24\User();
+        $userObject = $b24User->isUserRegistered($arFields, $debug);
+        
+        if ($userObject && !empty($userObject)) {
+            return $userObject;
+        }
+        return false;
+    }
+
+    // Создание компании в B24
+    private function createB24Company($arFields) {
+        global $APPLICATION;
+
+        $companyId = false;
+        $reqFile = [];
+        
+        // Обработка файла реквизитов
+        if (!empty($arFields['UF_REQ']) && !empty($arFields['UF_REQ']['name'])) {
+            $file = $arFields['UF_REQ'];
+            
+            // Сохраняем файл в систему Битрикс
+            $savedFileId = \CFile::SaveFile($file, 'os_requisites');
+            $fileInfo = \CFile::GetFileArray($savedFileId);
+
+            if ($file['error'] === 0) {
+                $fileName = $file['name'];
+                $filePath = $file['tmp_name'];
+                $fileContent = file_get_contents($filePath);
+
+                if ($fileContent !== false) {
+                    // Кодируем в base64 для передачи в B24
+                    $fileData = [
+                        $fileName,
+                        base64_encode($fileContent),
+                    ];
+
+                    $arFields['UF_CRM_1755643990423'] = [
+                        'fileData' => $fileData
+                    ];
+                }
+            }
+        }
+
+        // Данные для контакта в B24
+        $dataContact = [
+            'fields' => [
+                'NAME' => $arFields['NAME'],
+                'LAST_NAME' => $arFields['LAST_NAME'],
+                'EMAIL' => [
+                    ['VALUE' => $arFields['EMAIL'], 'VALUE_TYPE' => 'WORK']
+                ],
+                'PHONE' => [
+                    ['VALUE' => $arFields['PERSONAL_PHONE'], 'VALUE_TYPE' => 'WORK']
+                ],
+                'UF_CRM_1701839165901' => "Пользователь зарегистрировался через сайт",
+                'UF_CRM_1681120601710' => 0, // Не в черном списке
+                'UF_CRM_1698752707853' => $arFields['UF_ADVERSTERING_AGENT'] == 'on' ? 1 : 0, // Рекламный агент
+            ]
+        ];
+
+        // Если есть файл реквизитов, добавляем его
+        if (!empty($arFields['UF_CRM_1755643990423'])) {
+            $dataContact['fields']['UF_CRM_1755643990423'] = $arFields['UF_CRM_1755643990423'];
+        }
+
+        // Отправка запроса на создание контакта
+        $response = $this->sendRequest([
+            'action' => 'create_contact',
+            'data' => $dataContact
+        ]);
+
+        if ($response && isset($response['result'])) {
+            $contactId = $response['result'];
+            
+            // Если это компания или рекламный агент
+            if ($arFields['UF_TYPE'] == '5' || $arFields['UF_TYPE'] == '6') {
+                // Создание компании в B24
+                $dataCompany = [
+                    'fields' => [
+                        'TITLE' => $arFields['UF_NAME_COMPANY'],
+                        'UF_CRM_1669208000616' => $arFields['UF_SPERE'],
+                        'UF_CRM_1669208295583' => $arFields['UF_JUR_ADDRESS'],
+                        'UF_CRM_1755643990423' => $arFields['UF_CRM_1755643990423'] ?? null,
+                    ]
+                ];
+
+                $companyResponse = $this->sendRequest([
+                    'action' => 'create_company',
+                    'data' => $dataCompany
+                ]);
+
+                if ($companyResponse && isset($companyResponse['result'])) {
+                    $companyId = $companyResponse['result'];
+                    
+                    // Привязка контакта к компании
+                    $this->sendRequest([
+                        'action' => 'bind_contact_company',
+                        'data' => [
+                            'contact_id' => $contactId,
+                            'company_id' => $companyId
+                        ]
+                    ]);
+                }
+            }
+
+            // Создание элемента компании на сайте
+            $companyElementParamss = [
+                'OS_COMPANY_B24_ID' => $companyId ?: $contactId,
+                'OS_COMPANY_NAME' => $arFields['UF_NAME_COMPANY'] ?: $arFields['NAME'] . ' ' . $arFields['LAST_NAME'],
+                'OS_COMPANY_INN' => $arFields['UF_INN'],
+                'OS_COMPANY_EMAIL' => $arFields['EMAIL'],
+                'OS_COMPANY_PHONE' => $arFields['PERSONAL_PHONE'],
+                'OS_COMPANY_CITY' => $arFields['UF_CITY'],
+                'USER_ID' => $arFields['ID'],
+                'OS_REQUSITES_FILE' => $savedFileId ?? null,
+            ];
+
+            $this->createCompanyElement($companyElementParamss);
+        }
+
+        return $contactId;
+    }
+}
+```
+
+### 4. Веб-хуки для обработки событий CRM
+**Файлы**: `script/crm/rest/`
+
+#### Обработка событий контактов:
+**Файл**: `script/crm/rest/contact.php`
+
+```php
+<?php
+// Веб-хук на изменения контактов
+// Примечание: Этот файл использует сторонний модуль intec.eklectika
+// и не является частью собственных разработок
+
+require_once($_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/include/prolog_before.php');
+
+$contactId = $_REQUEST['data']['FIELDS']['ID'];
+if (empty($contactId)) {
+    return;
+}
+
+// Получение информации о контакте из B24
+$contactInfo = sendRequestB24("crm.contact.get", ["id" => $contactId]);    
+
+if (empty($contactInfo['EMAIL'][0]['VALUE']) && empty($contactInfo['NAME'])) {
+    return;
+}
+
+// Обработка событий B24
+if ($_REQUEST['event'] == 'ONCRMCONTACTADD') {    
+    $logFile = $_SERVER['DOCUMENT_ROOT'].'/script/crm/logs/user.add.txt';
+    addLog($logFile, 'ID contact CRM - '.$contactId);    
+    
+    // Логика создания пользователя (использует сторонний модуль)
+} 
+
+if ($_REQUEST['event'] == 'ONCRMCONTACTUPDATE') {    
+    // Логика обновления пользователя (использует сторонний модуль)
+}
+
+function addLog($file, $text) {
+    file_put_contents($file, date("d.m.Y H:i:s")." - ".$text.PHP_EOL, FILE_APPEND);
+}
+```
+
+#### Обработка событий компаний:
+**Файл**: `script/crm/rest/company.php`
+
+```php
+<?php
+// Обработка событий компаний в B24
+// Примечание: Этот файл использует сторонний модуль intec.eklectika
+// и не является частью собственных разработок
+
+require_once($_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/include/prolog_before.php');
+
+if ($_REQUEST['event'] == 'ONCRMCOMPANYADD' || $_REQUEST['event'] == 'ONCRMCOMPANYUPDATE') {
+    $companyB24Id = $_REQUEST['data']['FIELDS']['ID'];
+    
+    if (!empty($companyB24Id)) {
+        $file = $_SERVER['DOCUMENT_ROOT'].'/script/crm/logs/company.txt';
+        file_put_contents($file, date('Y.m.d').PHP_EOL, FILE_APPEND);
+        file_put_contents($file, 'Запрос из Б24 на работу компании ID - '.$companyB24Id.PHP_EOL, FILE_APPEND);
+        
+        // Получение данных о компании из B24
+        $companyInfo = sendRequestB24("crm.company.get", ["id" => $companyB24Id]);
+        
+        // Логика обработки компании (использует сторонний модуль)
+    }
+}
+```
+
+#### Обработка событий реквизитов:
+**Файл**: `script/crm/rest/requisite.php`
+
+```php
+<?php
+// Обработка событий реквизитов в B24
+// Примечание: Этот файл использует сторонний модуль intec.eklectika
+// и не является частью собственных разработок
+
+require_once($_SERVER['DOCUMENT_ROOT'].'/bitrix/modules/main/include/prolog_before.php');
+
+if ($_REQUEST['event'] == 'ONCRMREQUISITEUPDATE') {
+    $file = $_SERVER['DOCUMENT_ROOT'].'/script/crm/logs/requisite.txt';
+    file_put_contents($file, date('Y.m.d').PHP_EOL, FILE_APPEND);
+    file_put_contents($file, 'Запрос из Б24 на работу реквизитов ID - '.$_REQUEST['data']['FIELDS']['ID'].PHP_EOL, FILE_APPEND);
+
+    // Получение реквизитов из B24
+    $companyB24 = sendRequestB24("crm.requisite.get", [
+        'id' =>  $_REQUEST['data']['FIELDS']['ID']
+    ]);    
+    
+    // Логика обработки реквизитов (использует сторонний модуль)
+}
+```
+
+### 5. Синхронизация пользователей
+**Файл**: `local/classes/b24/User.php`
+
+#### Основные методы:
+```php
+// Получение пользователя по B24 ID
+public function getUserIDByB24ID($b24_id) {
+    $rsUser = \CUser::GetList([], ["XML_ID" => $b24_id]);
+    if ($arUser = $rsUser->Fetch()) {
+        return $arUser['ID'];
+    }
+    return false;
+}
+
+// Получить компанию пользователя
+public function getUserCompany($userId = null, $userRole = 'boss') {
+    // Определяем фильтр в зависимости от роли
+    $filter = [
+        'IBLOCK_ID' => 57,
+        'ACTIVE' => 'Y'
+    ];
+
+    if ($userRole === 'boss') {
+        $filter['PROPERTY_OS_COMPANY_BOSS'] = $userId;
+    } else {
+        $filter['PROPERTY_OS_COMPANY_USERS'] = $userId;
+    }
+
+    // Получаем компанию пользователя
+    $rsCompany = \CIBlockElement::GetList(
+        [], $filter, false, false,
+        ['ID', 'NAME', 'PROPERTY_OS_COMPANY_IS_HEAD_OF_HOLDING', 
+         'PROPERTY_OS_HOLDING_OF', 'PROPERTY_OS_COMPANY_B24_ID',
+         'PROPERTY_OS_HEAD_COMPANY_B24_ID']
+    );
+
+    return ($company = $rsCompany->GetNext()) ? $company : false;
+}
+
+// Проверить, является ли пользователь руководителем компании
+public function isCompanyBoss($userId = null) {
+    return $this->getUserCompany($userId, 'boss') !== false;
+}
+
+// Получить ID головной компании холдинга
+public function getHeadCompanyId($userId = null) {
+    $company = $this->getUserCompany($userId, 'boss');
+    if (!$company) return false;
+
+    // Логика определения головной компании холдинга
+    if (!empty($company['PROPERTY_OS_COMPANY_IS_HEAD_OF_HOLDING_VALUE'])) {
+        return $company['PROPERTY_OS_HEAD_COMPANY_B24_ID_VALUE'] ?: 
+               $company['PROPERTY_OS_COMPANY_B24_ID_VALUE'];
+    }
+    
+    if (!empty($company['PROPERTY_OS_HOLDING_OF_VALUE'])) {
+        return $company['PROPERTY_OS_HOLDING_OF_VALUE'];
+    }
+
+    return $company['PROPERTY_OS_COMPANY_B24_ID_VALUE'];
+}
+```
+
+// Создание пользователя из данных B24
+public function createUserFromB24($fields) {
+    if (empty($fields['B24_ID'])) {
+        return false;
+    }
+
+    $b24ID = $fields['B24_ID'];
+    unset($fields['B24_ID']);
+
+    $user = new \CUser;
+    $userFields = [
+        'NAME' => $fields['NAME'],
+        'LAST_NAME' => $fields['LAST_NAME'],
+        'EMAIL' => $fields['EMAIL'],
+        'LOGIN' => $fields['EMAIL'],
+        'PASSWORD' => $fields['EMAIL'], // Временный пароль
+        'CONFIRM_PASSWORD' => $fields['EMAIL'],
+        'ACTIVE' => 'Y',
+        'XML_ID' => $b24ID, // Связь с B24
+        'UF_ADVERSTERING_AGENT' => $fields['IS_MARKETING_AGENT'] ?? 0,
+    ];
+
+    $userId = $user->Add($userFields);
+    
+    if ($userId) {
+        // Обновление типа цены для маркетинговых агентов
+        $this->updateMarketingAgentPriceType($fields['IS_MARKETING_AGENT'], $userId);
+        return $userId;
+    }
+    
+    return false;
+}
+
+// Синхронизация компаний пользователя
+public function syncUserCompanies($userId) {
+    // Получение компаний пользователя из B24
+    $rsCompany = CIBlockElement::GetList(
+        [],
+        [
+            'IBLOCK_ID' => 57,
+            'PROPERTY_OS_COMPANY_USERS' => $userId,
+            'ACTIVE' => 'Y'
+        ],
+        false, false,
+        ['ID', 'PROPERTY_OS_COMPANY_IS_HEAD_OF_HOLDING', 'PROPERTY_OS_HOLDING_OF']
+    );
+
+    // Обработка холдингов и назначение руководителя
+    if ($userCompany = $rsCompany->GetNext()) {
+        if (!empty($userCompany['PROPERTY_OS_COMPANY_IS_HEAD_OF_HOLDING_VALUE'])) {
+            // Головная компания - обновляем все дочерние
+            $this->updateHoldingCompanies($userCompany['ID'], $userId);
+        } else if (!empty($userCompany['PROPERTY_OS_HOLDING_OF_VALUE'])) {
+            // Дочерняя компания - обновляем холдинг
+            $holdingId = $userCompany['PROPERTY_OS_HOLDING_OF_VALUE'];
+            $this->updateHoldingCompanies($holdingId, $userId);
+        }
+        
+        // Назначение руководителя
+        $el = new \CIBlockElement;
+        $companyUpdated = $el->SetPropertyValues(
+            $companyId, 57, [$this->userId], "OS_COMPANY_BOSS"
+        );
+    }
+}
+```
+
+### 6. Файловая интеграция
+**Файл**: `local/classes/site/Company.php`
+
+#### Скачивание и обработка файлов:
+```php
+// Обработка файла реквизитов при обновлении компании
+if ($params['OS_REQUSITES_FILE'] && !empty($params['OS_REQUSITES_FILE'])) {
+    $downloadableUrl = URL_B24.$params['OS_REQUSITES_FILE']['SUBDIR'].'/'.urlencode($params['OS_REQUSITES_FILE']['FILE_NAME']);
+
+    // Директория для сохранения
+    $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/upload/os_requisites/';
+    if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0777, true);
+    }
+
+    $originalName = $params['OS_REQUSITES_FILE']['ORIGINAL_NAME'];
+    $filePath = $uploadDir . $originalName;
+
+    // Скачивание файла из B24
+    $fileContent = file_get_contents($downloadableUrl);
+
+    if ($fileContent === false) {
+        pre($downloadableUrl);
+        die("Не удалось скачать файл. Проверь URL и доступ к B24.");
+    }
+
+    // Сохранение на сервер
+    $content = file_put_contents($filePath, $fileContent);
+
+    if ($content && file_put_contents($filePath, $content)) {
+        // Загрузка файла в Битрикс
+        $fileArray = \CFile::MakeFileArray($filePath, false, $originalName);
+
+        if ($fileArray && !isset($fileArray['error'])) {
+            // Сохранение в систему Битрикс
+            $savedFileId = \CFile::SaveFile($fileArray, 'os_requisites');
+
+            if ($savedFileId) {
+                $params['OS_REQUSITES_FILE'] = $savedFileId;
+            }
+
+            // Удаление временного файла
+            unlink($filePath);
+        } else {
+            echo 'Ошибка загрузки файла: ' . ($fileArray['error'] ?? 'неизвестная ошибка');
+        }
+    }
+}
+```
+
+### 7. Веб-хуки для заказов и сделок
+**Файл**: `local/php_interface/init.php`
+
+#### Отправка данных в B24:
+```php
+// Функция отправки webhook в B24
+function sendWebhookToB24($method, $dealId, $data = []) {
+    $webhook = URL_B24."/rest/1/w8i2ce68y3wwps17/";
+    
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $webhook . $method . $dealId);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    
+    if (!empty($data)) {
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+    }
+    
+    curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+    
+    $result = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    
+    curl_close($ch);
+    
+    return [
+        'result' => $result,
+        'http_code' => $httpCode
+    ];
+}
+```
+
+## Логика работы
+
+### Регистрация пользователя:
+1. **Проверка существования** - поиск пользователя в B24 по email
+2. **Создание контакта** - отправка данных в B24 CRM
+3. **Создание компании** - если это юридическое лицо или рекламный агент
+4. **Привязка контакта к компании** - установка связей в B24
+5. **Создание на сайте** - создание элемента компании в инфоблоке
+6. **Загрузка файлов** - обработка реквизитов и документов
+
+### Синхронизация из B24:
+1. **Веб-хук получает событие** - ONCRMCONTACTADD, ONCRMCONTACTUPDATE и т.д.
+2. **Получение данных** - запрос к B24 API для получения полной информации
+3. **Поиск на сайте** - поиск существующего пользователя/компании
+4. **Создание/обновление** - создание нового или обновление существующего
+5. **Управление статусами** - блокировка, назначение агентов, руководителей
+6. **Логирование** - запись всех операций в лог-файлы
+
+### Файловая интеграция:
+1. **Загрузка на сайт** - файл сохраняется в системе Битрикс
+2. **Кодирование в base64** - для передачи в B24
+3. **Отправка в B24** - через REST API
+4. **Скачивание из B24** - автоматическое скачивание при обновлении
+5. **Сохранение на сервер** - в директорию upload/os_requisites/
+
+## Связанные поля и сущности
+
+### Поля связи с B24:
+- `XML_ID` - ID пользователя в B24
+- `OS_COMPANY_B24_ID` - ID компании в B24
+- `OS_HEAD_COMPANY_B24_ID` - ID головной компании в B24
+- `UF_CRM_*` - пользовательские поля CRM
+
+### События B24:
+- `ONCRMCONTACTADD` - добавление контакта
+- `ONCRMCONTACTUPDATE` - обновление контакта
+- `ONCRMCOMPANYADD` - добавление компании
+- `ONCRMCOMPANYUPDATE` - обновление компании
+- `ONCRMREQUISITEUPDATE` - обновление реквизитов
+- `ONUSERUPDATE` - обновление пользователя
+
+### Логи и мониторинг:
+- `script/crm/logs/user.add.txt` - логи добавления пользователей
+- `script/crm/logs/company.txt` - логи работы с компаниями
+- `script/crm/logs/requisite.txt` - логи работы с реквизитами
+
+## Безопасность и производительность
+
+### Безопасность:
+- SSL-соединения с отключенной проверкой сертификатов (для разработки)
+- Валидация входящих данных от B24
+- Логирование всех операций для аудита
+- Проверка прав доступа при синхронизации
+
+### Производительность:
+- Таймауты для CURL запросов (30 сек)
+- Обработка ошибок сети и API
+- Логирование для отладки
+- Асинхронная обработка веб-хуков
+
+## Примечания
+
+### Особенности реализации:
+1. **Двусторонняя синхронизация** - данные передаются в обе стороны
+2. **Автоматическая обработка файлов** - загрузка и скачивание документов
+3. **Управление статусами** - автоматическое назначение ролей и прав
+4. **Система холдингов** - сложная логика управления группами компаний
+5. **Логирование** - подробные логи всех операций для отладки
+
+### Настройки:
+- URL B24: `https://bitrix.yomerch.ru/`
+- REST токен: `oak1tjz71elzz2xt` (для чтения)
+- Webhook токен: `w8i2ce68y3wwps17` (для записи)
+- Таймауты: 30 сек для запросов, 10 сек для подключения
+
+### Мониторинг:
+- Лог-файлы в `script/crm/logs/`
+- Обработка ошибок CURL и HTTP
+- Детальное логирование всех операций
+- Возможность включения debug-режима

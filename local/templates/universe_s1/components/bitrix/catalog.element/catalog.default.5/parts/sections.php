@@ -9,7 +9,6 @@ use intec\core\helpers\Html;
  * @var array $arVisual
  * @var array arFields
  */
-
 $arSections = [
     'DESCRIPTION' => [
         'ID' => 'description',
@@ -48,6 +47,13 @@ $arSections = [
         'NAME' => $arVisual['DOCUMENTS']['NAME'],
         'VALUE' => __DIR__.'/sections/documents.php'
     ],
+	'DOC_DOCUMENTS' => [
+        'ID' => 'doc_documents',
+        'SHOW' => $arResult['PROPERTIES']['PROD_LIST_DOCS']['VALUE'],
+        'TYPE' => 'file',
+        'NAME' => 'Нанесение',
+        'VALUE' => __DIR__.'/sections/prod_documents.php'
+    ],
     'VIDEO' => [
         'ID' => 'video',
         'SHOW' => $arFields['VIDEO']['SHOW'],
@@ -83,6 +89,7 @@ $arSections = [
         'NAME' => $arVisual['INFORMATION']['PAYMENT']['NAME'],
         'VALUE' => __DIR__.'/sections/information.payment.php'
     ],
+
     /*'SHIPMENT' => [
         'ID' => 'shipment',
         'SHOW' => $arVisual['INFORMATION']['SHIPMENT']['SHOW'],
@@ -167,7 +174,7 @@ if ($arSections['SHIPMENT']['SHOW']) {
     <div class="catalog-element-sections">
         <?= Html::beginTag('div', [
             'class' => [
-                'catalog-element-sections-tabs'
+                'catalog-element-sections-tabs '
             ],
             'data' => [
                 'role' => 'section.tabs',
@@ -194,6 +201,7 @@ if ($arSections['SHIPMENT']['SHOW']) {
                             'href' => $arSection['LINK'],
                             'target' => '_blank'
                         ]) ?>
+
                     <?php } else { ?>
                         <?= Html::tag('div', $arSection['NAME'], [
                             'class' => Html::cssClassFromArray([
@@ -214,6 +222,7 @@ if ($arSections['SHIPMENT']['SHOW']) {
                         <?php if ($bFirst) $bFirst = false ?>
                     <?php } ?>
                 <?php } ?>
+
             </div>
         <?= Html::endTag('div') ?>
         <div class="catalog-element-sections-content" data-role="section.content">
@@ -232,6 +241,7 @@ if ($arSections['SHIPMENT']['SHOW']) {
                         'active' => $bFirst ? 'true' : 'false'
                     ]
                 ]) ?>
+
                     <?php if ($arSection['TYPE'] === 'print') { ?>
                         <div class="catalog-element-sections-content-text">
                             <?= $arSection['VALUE'] ?>
@@ -242,6 +252,7 @@ if ($arSections['SHIPMENT']['SHOW']) {
                 <?= Html::endTag('div') ?>
                 <?php if ($bFirst) $bFirst = false ?>
             <?php } ?>
+
         </div>
     </div>
 </div>

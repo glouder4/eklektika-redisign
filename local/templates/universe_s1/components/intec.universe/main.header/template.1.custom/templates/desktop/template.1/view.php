@@ -258,7 +258,7 @@ if ($arResult['CONTACTS']['SHOW']) {
             $arParameters = ArrayHelper::merge($arParameters, $arSearchParams);
             $arParameters['PAGE'] = $arResult['SEARCH']['MODE'] === 'site' ? $arResult['URL']['SEARCH'] : $arResult['URL']['CATALOG'];
             $arParameters['INPUT_ID'] = $arParameters['INPUT_ID'].'-input-1';
-
+print_r($arMenu);
             $arMenu = $arResult['MENU']['MAIN'];
             $arMenuParams = !empty($arMenuParams) ? $arMenuParams : [];
 
@@ -334,7 +334,7 @@ if ($arResult['CONTACTS']['SHOW']) {
                         </span>
                 </li>
                 <li><a href="<?=isAuthorized() ? '/catalog/' : '/buy/'; ?>">Купить</a></li>
-                <li><a href="/informacziya-dlya-dilerov/">Дилерам</a></li>
+                
                 <li><a href="/contacts/">Контакты</a></li>
             </ul>
             <ul class="mobile-menu__sub">

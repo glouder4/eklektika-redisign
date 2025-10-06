@@ -27,6 +27,122 @@ $arSvg = [
 $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
 
 ?>
+<style>
+.notification-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.notification {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    min-width: 400px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.notification.success {
+    border-left: 6px solid #4CAF50;
+}
+
+.notification.error {
+    border-left: 6px solid #f44336;
+}
+
+.notification-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+}
+
+.notification-icon.success {
+    background: #E8F5E8;
+    color: #4CAF50;
+}
+
+.notification-icon.error {
+    background: #FFEBEE;
+    color: #f44336;
+}
+
+.notification-title {
+    font-size: 24px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.notification-message {
+    color: #666;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 4px;
+    background: #f0f0f0;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    transition: width 3s linear;
+}
+
+.progress-fill.success {
+    background: #4CAF50;
+}
+
+.progress-fill.error {
+    background: #f44336;
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+</style>
+
+<div class="notification-overlay" id="notificationOverlay">
+    <div class="notification" id="notification">
+        <div class="notification-icon" id="notificationIcon">
+            <div class="loading-spinner" id="loadingSpinner"></div>
+            <span id="statusIcon" style="display: none;">✓</span>
+        </div>
+        <h3 class="notification-title" id="notificationTitle">Обработка запроса</h3>
+        <p class="notification-message" id="notificationMessage">Пожалуйста, подождите...</p>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+    </div>
+</div>
+
 <div class="container">
 <?php
     if( isset($arResult["REGISTER_DONE"]) && $arResult["REGISTER_DONE"] == "Y" ):
@@ -167,7 +283,7 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
             });
         </script>
     <?php } else { ?>
-        <form class="main-register-form intec-ui-form" method="post" action="<?= $arParams['FORM_ACTION']; ?>" name="regform" enctype="multipart/form-data">
+        <form class="main-register-form intec-ui-form" method="post" action="<?= $arParams['FORM_ACTION']; ?>" name="regform" enctype="multipart/form-data" id="registrationForm">
             <?php $valueType =  $arResult["VALUES"]["UF_TYPE"] ?? null;
             ?>
             <div class="c-main-register__tabs" style="display: none">
@@ -617,7 +733,8 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
                             ],
                             'name' => 'register_submit_button',
                             'disabled' => 'disabled',
-                            'required' => true
+                            'required' => true,
+                            'id' => 'registerSubmitBtn'
                         ]);?>
                     </div>
                 </div>
@@ -825,6 +942,87 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
 </script>
 
 <script>
+    // Функция для показа уведомления
+    function showNotification(type, title, message, redirectUrl = null) {
+        const overlay = document.getElementById('notificationOverlay');
+        const notification = document.getElementById('notification');
+        const notificationIcon = document.getElementById('notificationIcon');
+        const statusIcon = document.getElementById('statusIcon');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const notificationTitle = document.getElementById('notificationTitle');
+        const notificationMessage = document.getElementById('notificationMessage');
+        const progressFill = document.getElementById('progressFill');
+        
+        // Настройка стилей в зависимости от типа
+        notification.className = 'notification ' + type;
+        notificationIcon.className = 'notification-icon ' + type;
+        progressFill.className = 'progress-fill ' + type;
+        
+        if (type === 'success') {
+            statusIcon.innerHTML = '✓';
+            statusIcon.style.display = 'block';
+            loadingSpinner.style.display = 'none';
+        } else {
+            statusIcon.innerHTML = '✕';
+            statusIcon.style.display = 'block';
+            loadingSpinner.style.display = 'none';
+        }
+        
+        notificationTitle.textContent = title;
+        notificationMessage.textContent = message;
+        overlay.style.display = 'flex';
+        
+        // Запускаем прогресс-бар
+        progressFill.style.width = '0%';
+        setTimeout(() => {
+            progressFill.style.width = '100%';
+        }, 10);
+        
+        // Обработка завершения
+        setTimeout(() => {
+            if (type === 'success' && redirectUrl) {
+                window.location.href = redirectUrl;
+            } else if (type === 'error') {
+                overlay.style.display = 'none';
+            }
+        }, 3000);
+    }
+
+    // Модифицируем обработчик отправки формы
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('registrationForm');
+        
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Показываем уведомление о обработке
+                showNotification('success', 'Обработка запроса', 'Отправляем данные для регистрации...');
+                
+                // Собираем данные формы
+                const formData = new FormData(form);
+                
+                // Отправляем AJAX запрос
+                fetch('/director/add_new_branch-action.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        showNotification('success', 'Успешно!', data.message || 'Регистрация завершена успешно', '/personal/profile/');
+                    } else {
+                        showNotification('error', 'Ошибка!', data.message || 'Произошла ошибка при регистрации');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showNotification('error', 'Ошибка!', 'Произошла ошибка при отправке формы');
+                });
+            });
+        }
+    });
+
     function isConfirmed(){
         $('#mainConfirmation')[0].checked = false;
         $.fancybox.open({
@@ -837,9 +1035,9 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
         $('#mainConfirmation')[0].checked = $(this)[0].checked;
 
         if( $(this)[0].checked )
-            $('#submitFormBtn>input').attr('disabled',false)
+            $('#registerSubmitBtn').attr('disabled',false)
         else
-            $('#submitFormBtn>input').attr('disabled',true)
+            $('#registerSubmitBtn').attr('disabled',true)
     })
 
     let activeBlock = 0;

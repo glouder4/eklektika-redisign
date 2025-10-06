@@ -5,6 +5,17 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_be
 global $USER;
 global $APPLICATION;
 
+// Функция для отправки JSON ответа
+function sendJsonResponse($success, $message = '', $redirect = '') {
+    header('Content-Type: application/json');
+    echo json_encode([
+        'success' => $success,
+        'message' => $message,
+        'redirect' => $redirect
+    ]);
+    exit();
+}
+
 function createB24Company($arFields){
     global $APPLICATION;
 
@@ -63,8 +74,7 @@ function createB24Company($arFields){
                     $errorMessage .= 'Неизвестная ошибка (код: ' . $file['error'] . ').';
                     break;
             }
-            $APPLICATION->ThrowException($errorMessage);
-            return false;
+            throw new Exception($errorMessage);
         }
     }
 
@@ -72,9 +82,7 @@ function createB24Company($arFields){
     if ($arFields['UF_TYPE'] == '5' || $arFields['UF_TYPE'] == '6') {
         // проверить заполненность ИНН и названия компании
         if (empty($arFields['UF_INN']) && empty($arFields['UF_NAME_COMPANY'])) {
-            echo 'Поля "Название компании", "ИНН организации" обязательно для заполнения!';
-            $APPLICATION->ThrowException('Поля "Название компании", "ИНН организации" обязательно для заполнения!');
-            return false;
+            throw new Exception('Поля "Название компании", "ИНН организации" обязательно для заполнения!');
         } else {
             $dataRequisite = [
                 'fields' => [],
@@ -150,14 +158,10 @@ function createB24Company($arFields){
                     $company = new \OnlineService\Site\Company();
                     $company->createCompanyElement($companyElementParamss);
 
-                    echo 'Компания успешно создана';
-
                     return true;
                 }
             } else {
-                echo 'Компания с указанным ИНН уже существует!';
-                $APPLICATION->ThrowException('Компания с указанным ИНН уже существует!');
-                return false;
+                throw new Exception('Компания с указанным ИНН уже существует!');
             }
         }
     }
@@ -165,40 +169,42 @@ function createB24Company($arFields){
     return false;
 }
 
-$userId = $USER->GetID();
-if( $USER->IsAuthorized() ){
+// Основная логика обработки
+try {
+    $userId = $USER->GetID();
+    
+    if (!$USER->IsAuthorized()) {
+        throw new Exception("Вам запрещено выполнять это действие.");
+    }
+
     $arResult['HEAD_COMPANY_ID'] = false;
 
-// Получаем компанию пользователя
-    $rsCompany = CIBlockElement::GetList(
-        [],
-        [
-            'IBLOCK_ID' => 57,
-            'PROPERTY_OS_COMPANY_BOSS' => $USER->GetID(),
-            'PROPERTY_OS_COMPANY_IS_HEAD_OF_HOLDING' => 31520,
-            'ACTIVE' => 'Y'
-        ],
-        false,
-        false,
-        ['ID', 'PROPERTY_OS_COMPANY_IS_HEAD_OF_HOLDING', 'PROPERTY_OS_HOLDING_OF','PROPERTY_OS_COMPANY_B24_ID','PROPERTY_OS_HEAD_COMPANY_B24_ID']
-    );
-    if( $headCompany = $rsCompany->GetNext() ){
-        if( $_POST['head_company_id'] != $headCompany['PROPERTY_OS_HEAD_COMPANY_B24_ID_VALUE'] ){
-            echo "Ошибка в идентификации руководителя!";
-            $APPLICATION->ThrowException("Ошибка в идентификации руководителя!");
-            return false;
-        }
+    // Получаем головную компанию холдинга пользователя
+    $user = new \OnlineService\B24\User();
+    $user->userId = $userId;
+    
+    $headCompany = $user->getHeadCompany($userId);
+    
+    if (!$headCompany) {
+        throw new Exception("Вы не являетесь руководителем головной компании холдинга");
+    }
 
-        createB24Company($_POST);
+    // Получаем ID головной компании холдинга
+    $headCompanyId = $user->getHeadCompanyId($userId);
+    
+    if ($_POST['head_company_id'] != $headCompanyId) {
+        throw new Exception("Ошибка в идентификации руководителя!");
     }
-    else{
-        echo "Вы не являетесь руководителем компании";
-        $APPLICATION->ThrowException("Вы не являетесь руководителем компании");
-        return false;
+
+    // Пытаемся создать компанию
+    $result = createB24Company($_POST);
+    
+    if ($result) {
+        sendJsonResponse(true, 'Компания успешно создана и отправлена на модерацию', '/personal/profile/');
+    } else {
+        throw new Exception('Неизвестная ошибка при создании компании');
     }
-}
-else{
-    echo "Вам запрещено выполнять это действие.";
-    $APPLICATION->ThrowException("Вам запрещено выполнять это действие.");
-    return false;
+
+} catch (Exception $e) {
+    sendJsonResponse(false, $e->getMessage());
 }

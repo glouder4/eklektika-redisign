@@ -67,20 +67,13 @@ foreach ($correctSortOrder as $key => $correctFieldBlock){
 global $USER;
 $arResult['HEAD_COMPANY_ID'] = false;
 
-// Получаем компанию пользователя
-$rsCompany = CIBlockElement::GetList(
-    [],
-    [
-        'IBLOCK_ID' => 57,
-        'PROPERTY_OS_COMPANY_BOSS' => $USER->GetID(),
-        'PROPERTY_OS_COMPANY_IS_HEAD_OF_HOLDING' => 31520,
-        'ACTIVE' => 'Y'
-    ],
-    false,
-    false,
-    ['ID', 'PROPERTY_OS_COMPANY_IS_HEAD_OF_HOLDING', 'PROPERTY_OS_HOLDING_OF','PROPERTY_OS_COMPANY_B24_ID','PROPERTY_OS_HEAD_COMPANY_B24_ID']
-);
-if( $headCompany = $rsCompany->GetNext() ){
+// Получаем головную компанию холдинга пользователя через новый метод
+$user = new \OnlineService\B24\User();
+$user->userId = $USER->GetID();
+
+$headCompany = $user->getHeadCompany($USER->GetID());
+
+if ($headCompany) {
     $arResult['HEAD_COMPANY_B24_ID'] = $headCompany['PROPERTY_OS_HEAD_COMPANY_B24_ID_VALUE'];
     $arResult['HEAD_COMPANY_ID'] = $headCompany['ID'];
 }

@@ -5031,7 +5031,7 @@ class SaleOrderAjax extends \CBitrixComponent
 				}
 			}
 
-            if( $this->arResult["ERROR"][0]['CODE'] == "PROFILE_NOT_FOUND" )
+            if( is_array($this->arResult["ERROR"]) && isset($this->arResult["ERROR"][0]['CODE']) && $this->arResult["ERROR"][0]['CODE'] == "PROFILE_NOT_FOUND" )
                 unset($this->arResult["ERROR"][0]);
 
 			if (empty($this->arResult["ERROR"]))

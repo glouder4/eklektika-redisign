@@ -526,4 +526,144 @@
         public function getMarketingGroupId(){
             return $this->MARKETING_AGENT_GROUP_ID;
         }
+
+        /**
+         * Получить головную компанию холдинга, где пользователь является руководителем
+         * 
+         * @param int|null $userId ID пользователя (если не указан, используется текущий)
+         * @return array|false Данные головной компании или false если не найдена
+         */
+        public function getHeadCompany($userId = null) {
+            if ($userId === null) {
+                $userId = $this->userId;
+            }
+
+            if (empty($userId)) {
+                pre("Error: User ID is required");
+                return false;
+            }
+
+            // Ищем головную компанию холдинга, где пользователь является руководителем
+            $filter = [
+                'IBLOCK_ID' => 57,
+                'PROPERTY_OS_COMPANY_BOSS' => $userId,
+                'PROPERTY_OS_COMPANY_IS_HEAD_OF_HOLDING' => 31520, // Константа для головной компании холдинга
+                'ACTIVE' => 'Y'
+            ];
+
+            // Получаем головную компанию холдинга пользователя
+            $rsCompany = \CIBlockElement::GetList(
+                [],
+                $filter,
+                false,
+                false,
+                [
+                    'ID', 
+                    'NAME',
+                    'PROPERTY_OS_COMPANY_IS_HEAD_OF_HOLDING', 
+                    'PROPERTY_OS_HOLDING_OF',
+                    'PROPERTY_OS_COMPANY_B24_ID',
+                    'PROPERTY_OS_HEAD_COMPANY_B24_ID'
+                ]
+            );
+
+            if ($company = $rsCompany->GetNext()) {
+                return $company;
+            }
+
+            return false;
+        }
+
+        /**
+         * Получить любую компанию пользователя (руководитель или сотрудник)
+         * 
+         * @param int|null $userId ID пользователя (если не указан, используется текущий)
+         * @param string $userRole Роль пользователя: 'boss' - руководитель, 'user' - обычный пользователь
+         * @return array|false Данные компании или false если не найдена
+         */
+        public function getUserCompany($userId = null, $userRole = 'boss') {
+            if ($userId === null) {
+                $userId = $this->userId;
+            }
+
+            if (empty($userId)) {
+                pre("Error: User ID is required");
+                return false;
+            }
+
+            // Определяем фильтр в зависимости от роли
+            $filter = [
+                'IBLOCK_ID' => 57,
+                'ACTIVE' => 'Y'
+            ];
+
+            if ($userRole === 'boss') {
+                $filter['PROPERTY_OS_COMPANY_BOSS'] = $userId;
+            } else {
+                $filter['PROPERTY_OS_COMPANY_USERS'] = $userId;
+            }
+
+            // Получаем компанию пользователя
+            $rsCompany = \CIBlockElement::GetList(
+                [],
+                $filter,
+                false,
+                false,
+                [
+                    'ID', 
+                    'NAME',
+                    'PROPERTY_OS_COMPANY_IS_HEAD_OF_HOLDING', 
+                    'PROPERTY_OS_HOLDING_OF',
+                    'PROPERTY_OS_COMPANY_B24_ID',
+                    'PROPERTY_OS_HEAD_COMPANY_B24_ID'
+                ]
+            );
+
+            if ($company = $rsCompany->GetNext()) {
+                return $company;
+            }
+
+            return false;
+        }
+
+        /**
+         * Проверить, является ли пользователь руководителем головной компании холдинга
+         * 
+         * @param int|null $userId ID пользователя (если не указан, используется текущий)
+         * @return bool true если пользователь руководитель головной компании холдинга
+         */
+        public function isCompanyBoss($userId = null) {
+            $company = $this->getHeadCompany($userId);
+            return $company !== false;
+        }
+
+        /**
+         * Получить ID головной компании холдинга для пользователя
+         * 
+         * @param int|null $userId ID пользователя (если не указан, используется текущий)
+         * @return int|false ID головной компании холдинга или false если не найдена
+         */
+        public function getHeadCompanyId($userId = null) {
+            $company = $this->getHeadCompany($userId);
+            
+            if (!$company) {
+                return false;
+            }
+
+            // Если это головная компания холдинга
+            if (!empty($company['PROPERTY_OS_COMPANY_IS_HEAD_OF_HOLDING_VALUE']) && 
+                ($company['PROPERTY_OS_COMPANY_IS_HEAD_OF_HOLDING_VALUE'] === 'Y' || 
+                 $company['PROPERTY_OS_COMPANY_IS_HEAD_OF_HOLDING_VALUE'] === 'Да')) {
+                
+                return $company['PROPERTY_OS_HEAD_COMPANY_B24_ID_VALUE'] ?: $company['PROPERTY_OS_COMPANY_B24_ID_VALUE'];
+            }
+            
+            // Если это дочерняя компания в холдинге
+            if (!empty($company['PROPERTY_OS_HOLDING_OF_VALUE'])) {
+                return $company['PROPERTY_OS_HOLDING_OF_VALUE'];
+            }
+
+            // Если нет связей с холдингом - возвращаем ID самой компании
+            return $company['PROPERTY_OS_COMPANY_B24_ID_VALUE'];
+        }
     }

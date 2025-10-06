@@ -667,4 +667,100 @@ function newRest($param, $arFields, $select) {
     return sendRequestB24("crm.contact.list", $qrList);//$result["result"];
 }
 
+if( isset($_GET['test']) ){
+    // Подключаем prolog_before.php для инициализации Bitrix
+    require_once($_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_before.php');
+    
+    // Проверяем наличие user_id в параметрах
+    if (!isset($_GET['user_id']) || empty($_GET['user_id'])) {
+        pre("Использование: ?test=1&user_id=ID_ПОЛЬЗОВАТЕЛЯ");
+        pre("Пример: ?test=1&user_id=123");
+        die();
+    }
+
+    $userId = intval($_GET['user_id']);
+    pre("Тестируем методы для пользователя ID: " . $userId);
+
+    // Используем новые методы класса User
+    $user = new \OnlineService\B24\User();
+    $user->userId = $userId;
+
+    // Тест 1: Проверяем, является ли пользователь руководителем головной компании
+    pre("=== Тест 1: isCompanyBoss() ===");
+    $isBoss = $user->isCompanyBoss($userId);
+    pre("Является руководителем головной компании: " . ($isBoss ? 'ДА' : 'НЕТ'));
+
+    if ($isBoss) {
+        // Тест 2: Получаем головную компанию
+        pre("=== Тест 2: getHeadCompany() ===");
+        $headCompany = $user->getHeadCompany($userId);
+        if ($headCompany) {
+            pre("Данные головной компании:");
+            pre($headCompany);
+        } else {
+            pre("Головная компания не найдена");
+        }
+
+        // Тест 3: Получаем ID головной компании холдинга
+        pre("=== Тест 3: getHeadCompanyId() ===");
+        $headCompanyId = $user->getHeadCompanyId($userId);
+        if ($headCompanyId) {
+            pre("ID головной компании холдинга: " . $headCompanyId);
+        } else {
+            pre("ID головной компании холдинга не найден");
+        }
+
+        // Тест 4: Получаем любую компанию пользователя (как руководитель)
+        pre("=== Тест 4: getUserCompany() - boss ===");
+        $userCompanyBoss = $user->getUserCompany($userId, 'boss');
+        if ($userCompanyBoss) {
+            pre("Компания пользователя (как руководитель):");
+            pre($userCompanyBoss);
+        } else {
+            pre("Компания пользователя (как руководитель) не найдена");
+        }
+
+        // Тест 5: Получаем любую компанию пользователя (как сотрудник)
+        pre("=== Тест 5: getUserCompany() - user ===");
+        $userCompanyUser = $user->getUserCompany($userId, 'user');
+        if ($userCompanyUser) {
+            pre("Компания пользователя (как сотрудник):");
+            pre($userCompanyUser);
+        } else {
+            pre("Компания пользователя (как сотрудник) не найдена");
+        }
+
+    } else {
+        pre("Пользователь не является руководителем головной компании холдинга");
+    }
+
+    // Тест 6: Старый способ для сравнения
+    pre("=== Тест 6: Старый способ (для сравнения) ===");
+    $rsCompany = CIBlockElement::GetList(
+        [],
+        [
+            'IBLOCK_ID' => 57,
+            'PROPERTY_OS_COMPANY_BOSS' => $userId,
+            'PROPERTY_OS_COMPANY_IS_HEAD_OF_HOLDING' => 31520,
+            'ACTIVE' => 'Y'
+        ],
+        false,
+        false,
+        ['ID', 'PROPERTY_OS_COMPANY_IS_HEAD_OF_HOLDING', 'PROPERTY_OS_HOLDING_OF','PROPERTY_OS_COMPANY_B24_ID','PROPERTY_OS_HEAD_COMPANY_B24_ID']
+    );
+
+    $foundOldWay = false;
+    while($headCompany = $rsCompany->GetNext()) {
+        pre("Найдено старым способом:");
+        pre($headCompany);
+        $foundOldWay = true;
+        break; // Берем только первую компанию
+    }
+    
+    if (!$foundOldWay) {
+        pre("Старым способом компания не найдена");
+    }
+
+    die("Тестирование завершено");
+}
 
