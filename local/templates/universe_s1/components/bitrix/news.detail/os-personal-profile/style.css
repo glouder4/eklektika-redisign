@@ -1,13 +1,404 @@
-div.news-detail
-{
-	word-wrap: break-word;
+/* Основной контейнер профиля компании */
+.company-profile {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 16px;
+    padding: 20px 0;
 }
-div.news-detail img.detail_picture
-{
-	float:left;
-	margin:0 8px 6px 1px;
+
+/* Левая и правая колонки */
+.company-profile__left,
+.company-profile__right {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
-.news-date-time
-{
-	color:#486DAA;
+
+/* Общие стили для блоков */
+.company-profile__block {
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    transition: border-color 0.2s ease;
 }
+
+.company-profile__block:hover {
+    border-color: #c0c0c0;
+}    
+
+.company-profile__title {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 16px 0;
+    color: #2c3e50;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+/* Обёртка заголовка с кнопкой */
+.company-profile__title-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.company-profile__title-wrapper .company-profile__title {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+    flex: 1;
+}
+
+/* Кнопка добавления сотрудника */
+.company-employees__add-btn {
+    padding: 6px 14px;
+    background: #5DC393;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    white-space: nowrap;
+}
+
+.company-employees__add-btn:hover {
+    background: #4db582;
+}
+
+/* Блок 1: Информация о компании */
+.company-info__content {
+    display: grid;
+    gap: 0;
+}
+
+.company-info__name {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: #1a1a1a;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.company-info__item {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    padding: 10px 0;
+    border-bottom: 1px solid #f5f5f5;
+    align-items: center;
+}
+
+.company-info__item:last-child {
+    border-bottom: none;
+}
+
+.company-info__label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #7f8c8d;
+}
+
+.company-info__value {
+    font-size: 14px;
+    color: #2c3e50;
+}
+
+.company-info__value a {
+    color: #3498db;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.company-info__value a:hover {
+    color: #2980b9;
+}
+
+/* Блок 2: Информация о руководстве */
+.company-management__content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.management-card {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 16px;
+    align-items: start;
+    padding: 16px;
+    background: #fafafa;
+    border-radius: 6px;
+    border: 1px solid #e8e8e8;
+}
+
+.management-card__avatar {
+    flex-shrink: 0;
+}
+
+.management-card__avatar img {
+    width: 64px;
+    height: 64px;
+    border-radius: 6px;
+    object-fit: cover;
+    border: 1px solid #e0e0e0;
+}
+
+.management-card__avatar-placeholder {
+    width: 64px;
+    height: 64px;
+    border-radius: 6px;
+    background: #34495e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 600;
+    color: #fff;
+    text-transform: uppercase;
+    border: 1px solid #2c3e50;
+}
+
+.management-card__info {
+    flex: 1;
+    min-width: 0;
+}
+
+.management-card__name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 8px;
+}
+
+.management-card__position {
+    font-size: 14px;
+    font-weight: 400;
+    color: #7f8c8d;
+}
+
+.management-card__contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.management-card__contact {
+    font-size: 13px;
+}
+
+.management-card__contact a {
+    color: #3498db;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.management-card__contact a:hover {
+    color: #2980b9;
+}
+
+.company-management__empty {
+    padding: 16px;
+    text-align: center;
+    color: #95a5a6;
+    font-size: 14px;
+    background: #fafafa;
+    border-radius: 6px;
+}
+
+/* Блок 3: Список сотрудников */
+.employees-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.employee-card {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 10px;
+    padding: 12px;
+    background: #fafafa;
+    border-radius: 6px;
+    border: 1px solid #e8e8e8;
+    transition: all 0.2s ease;
+    align-items: start;
+}
+
+.employee-card:hover {
+    border-color: #d0d0d0;
+    background: #f5f5f5;
+}
+
+.employee-card__avatar {
+    flex-shrink: 0;
+}
+
+.employee-card__avatar img {
+    width: 48px;
+    height: 48px;
+    border-radius: 6px;
+    object-fit: cover;
+    border: 1px solid #e0e0e0;
+}
+
+.employee-card__avatar-placeholder {
+    width: 48px;
+    height: 48px;
+    border-radius: 6px;
+    background: #95a5a6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.employee-card__info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.employee-card__name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 4px;
+    line-height: 1.3;
+    word-wrap: break-word;
+}
+
+.employee-card__position {
+    font-size: 11px;
+    font-weight: 400;
+    color: #7f8c8d;
+}
+
+.employee-card__contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    width: 100%;
+}
+
+.employee-card__contact {
+    font-size: 10px;
+    color: #3498db;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.4;
+}
+
+.employee-card__contact:hover {
+    color: #2980b9;
+}
+
+.company-employees__empty {
+    padding: 16px;
+    text-align: center;
+    color: #95a5a6;
+    font-size: 14px;
+    background: #fafafa;
+    border-radius: 6px;
+}
+
+/* Адаптивность */
+@media (max-width: 992px) {
+    .company-profile {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .company-profile__block {
+        padding: 16px;
+    }
+    
+    .employees-list {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .company-profile {
+        padding: 12px 0;
+    }
+    
+    .company-profile__block {
+        padding: 14px;
+        border-radius: 6px;
+    }
+    
+    .company-profile__title {
+        font-size: 16px;
+        margin-bottom: 12px;
+    }
+    
+    .company-info__item {
+        grid-template-columns: 1fr;
+        gap: 4px;
+        padding: 8px 0;
+    }
+    
+    .company-info__label {
+        font-size: 13px;
+    }
+    
+    .company-info__value {
+        font-size: 13px;
+    }
+    
+    .management-card {
+        grid-template-columns: 1fr;
+        text-align: center;
+        justify-items: center;
+    }
+    
+    .management-card__contacts {
+        align-items: center;
+    }
+    
+    .employees-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .company-profile__block {
+        padding: 12px;
+    }
+    
+    .company-profile__title {
+        font-size: 15px;
+    }
+    
+    .company-info__name {
+        font-size: 18px;
+    }
+    
+    .employee-card {
+        padding: 10px;
+    }
+}
+
+/* Контейнер страницы */
+.personal-profile-wrapper {
+    padding: 20px 16px;
+}
+
+@media (max-width: 768px) {
+    .personal-profile-wrapper {
+        padding: 12px 8px;
+    }
+}
+

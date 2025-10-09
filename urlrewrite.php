@@ -210,10 +210,18 @@ $arUrlRewrite=array (
   ),
   50 =>
   array (
-    'CONDITION' => '#^/company/profile/([^/]+)/?#',
+    'CONDITION' => '#^/company/profile/([^/?]+)/?#',
     'RULE' => 'ELEMENT_CODE=$1',
     'ID' => 'bitrix:news',
     'PATH' => '/company/profile/index.php',
+    'SORT' => 100,
+  ),
+  51 =>
+  array (
+    'CONDITION' => '#^/company/user/([^/?]+)/?#',
+    'RULE' => 'ELEMENT_CODE=$1',
+    'ID' => 'bitrix:news',
+    'PATH' => '/company/user/index.php',
     'SORT' => 100,
   ),
 );

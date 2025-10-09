@@ -4,25 +4,20 @@
  * @global $APPLICATION
  */
 
-$APPLICATION->SetTitle("Компания");
+$APPLICATION->SetTitle("Профиль пользователя");
 
 // Получаем код элемента из URL
 $elementCode = $_REQUEST['ELEMENT_CODE'] ?? '';
-
-// Убираем GET параметры если они попали в ELEMENT_CODE
-if (strpos($elementCode, '?') !== false) {
-    $elementCode = substr($elementCode, 0, strpos($elementCode, '?'));
-}
 
 ?>
 <div class="container personal-profile-wrapper">
     <?$APPLICATION->IncludeComponent(
         "bitrix:news.detail",
-        "os-personal-profile",
+        "os-personal-user-profile",
         Array(
             "ACTIVE_DATE_FORMAT" => "d.m.Y",
-            "ADD_ELEMENT_CHAIN" => "Y",
-            "ADD_SECTIONS_CHAIN" => "N",
+            "ADD_ELEMENT_CHAIN" => "N",
+            "ADD_SECTIONS_CHAIN" => "Y",
             "AJAX_MODE" => "N",
             "AJAX_OPTION_ADDITIONAL" => "",
             "AJAX_OPTION_HISTORY" => "N",
@@ -30,8 +25,8 @@ if (strpos($elementCode, '?') !== false) {
             "AJAX_OPTION_STYLE" => "Y",
             "BROWSER_TITLE" => "-",
             "CACHE_GROUPS" => "Y",
-            "CACHE_TIME" => "0",
-            "CACHE_TYPE" => "N",
+            "CACHE_TIME" => "36000000",
+            "CACHE_TYPE" => "A",
             "CHECK_DATES" => "N",
             "DETAIL_URL" => "",
             "DISPLAY_BOTTOM_PAGER" => "Y",
@@ -40,13 +35,13 @@ if (strpos($elementCode, '?') !== false) {
             "DISPLAY_PICTURE" => "Y",
             "DISPLAY_PREVIEW_TEXT" => "Y",
             "DISPLAY_TOP_PAGER" => "N",
-            "ELEMENT_CODE" => $elementCode,
+            "ELEMENT_CODE" => $_REQUEST["ELEMENT_CODE"],
             "ELEMENT_ID" => "",
             "FIELD_CODE" => array("", ""),
-            "IBLOCK_ID" => "57",
+            "IBLOCK_ID" => "58", // ID инфоблока пользователей (нужно уточнить)
             "IBLOCK_TYPE" => "personal",
             "IBLOCK_URL" => "",
-            "INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+            "INCLUDE_IBLOCK_INTO_CHAIN" => "Y",
             "MESSAGE_404" => "",
             "META_DESCRIPTION" => "-",
             "META_KEYWORDS" => "-",
@@ -54,7 +49,7 @@ if (strpos($elementCode, '?') !== false) {
             "PAGER_SHOW_ALL" => "N",
             "PAGER_TEMPLATE" => ".default",
             "PAGER_TITLE" => "Страница",
-            "PROPERTY_CODE" => array("OS_COMPANY_EMAIL", "OS_COMPANY_INN", "OS_COMPANY_BOSS", "OS_COMPANY_USERS", "OS_COMPANY_PHONE", ""),
+            "PROPERTY_CODE" => array("", ""),
             "SET_BROWSER_TITLE" => "Y",
             "SET_CANONICAL_URL" => "N",
             "SET_LAST_MODIFIED" => "N",

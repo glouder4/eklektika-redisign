@@ -11,85 +11,203 @@
 /** @var string $componentPath */
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
-?>
-<div class="news-detail">
-	<?if((!isset($arParams["DISPLAY_PICTURE"]) || $arParams["DISPLAY_PICTURE"]!="N") && is_array($arResult["DETAIL_PICTURE"])):?>
-		<img
-			class="detail_picture"
-			border="0"
-			src="<?=$arResult["DETAIL_PICTURE"]["SRC"]?>"
-			width="<?=$arResult["DETAIL_PICTURE"]["WIDTH"]?>"
-			height="<?=$arResult["DETAIL_PICTURE"]["HEIGHT"]?>"
-			alt="<?=$arResult["DETAIL_PICTURE"]["ALT"]?>"
-			title="<?=$arResult["DETAIL_PICTURE"]["TITLE"]?>"
-			/>
-	<?endif?>
-	<?if((!isset($arParams["DISPLAY_DATE"]) || $arParams["DISPLAY_DATE"]!="N") && $arResult["DISPLAY_ACTIVE_FROM"]):?>
-		<span class="news-date-time"><?=$arResult["DISPLAY_ACTIVE_FROM"]?></span>
-	<?endif;?>
-	<?if((!isset($arParams["DISPLAY_NAME"]) || $arParams["DISPLAY_NAME"]!="N") && $arResult["NAME"]):?>
-		<h3><?=$arResult["NAME"]?></h3>
-	<?endif;?>
-	<?if((!isset($arParams["DISPLAY_PREVIEW_TEXT"]) || $arParams["DISPLAY_PREVIEW_TEXT"]!="N") && ($arResult["FIELDS"]["PREVIEW_TEXT"] ?? '') !== ''):?>
-		<p><?=$arResult["FIELDS"]["PREVIEW_TEXT"];unset($arResult["FIELDS"]["PREVIEW_TEXT"]);?></p>
-	<?endif;?>
-	<?if($arResult["NAV_RESULT"]):?>
-		<?if($arParams["DISPLAY_TOP_PAGER"]):?><?=$arResult["NAV_STRING"]?><br /><?endif;?>
-		<?echo $arResult["NAV_TEXT"];?>
-		<?if($arParams["DISPLAY_BOTTOM_PAGER"]):?><br /><?=$arResult["NAV_STRING"]?><?endif;?>
-	<?elseif($arResult["DETAIL_TEXT"] <> ''):?>
-		<?echo $arResult["DETAIL_TEXT"];?>
-	<?else:?>
-		<?echo $arResult["PREVIEW_TEXT"];?>
-	<?endif?>
-	<div style="clear:both"></div>
-	<br />
-	<?foreach($arResult["FIELDS"] as $code=>$value):
-		if ('PREVIEW_PICTURE' == $code || 'DETAIL_PICTURE' == $code)
-		{
-			?><?=GetMessage("IBLOCK_FIELD_".$code)?>:&nbsp;<?
-			if (!empty($value) && is_array($value))
-			{
-				?><img border="0" src="<?=$value["SRC"]?>" width="<?=$value["WIDTH"]?>" height="<?=$value["HEIGHT"]?>"><?
-			}
-		}
-		else
-		{
-			?><?=GetMessage("IBLOCK_FIELD_".$code)?>:&nbsp;<?=$value;?><?
-		}
-		?><br />
-	<?endforeach;
-	foreach($arResult["DISPLAY_PROPERTIES"] as $pid=>$arProperty):?>
 
-		<?=$arProperty["NAME"]?>:&nbsp;
-		<?if(is_array($arProperty["DISPLAY_VALUE"])):?>
-			<?=implode("&nbsp;/&nbsp;", $arProperty["DISPLAY_VALUE"]);?>
-		<?else:?>
-			<?=$arProperty["DISPLAY_VALUE"];?>
-		<?endif?>
-		<br />
-	<?endforeach;
-	if(array_key_exists("USE_SHARE", $arParams) && $arParams["USE_SHARE"] == "Y")
-	{
-		?>
-		<div class="news-detail-share">
-			<noindex>
-			<?
-			$APPLICATION->IncludeComponent("bitrix:main.share", "", array(
-					"HANDLERS" => $arParams["SHARE_HANDLERS"],
-					"PAGE_URL" => $arResult["~DETAIL_PAGE_URL"],
-					"PAGE_TITLE" => $arResult["~NAME"],
-					"SHORTEN_URL_LOGIN" => $arParams["SHARE_SHORTEN_URL_LOGIN"],
-					"SHORTEN_URL_KEY" => $arParams["SHARE_SHORTEN_URL_KEY"],
-					"HIDE" => $arParams["SHARE_HIDE"],
-				),
-				$component,
-				array("HIDE_ICONS" => "Y")
-			);
-			?>
-			</noindex>
-		</div>
-		<?
-	}
-	?>
+// Получаем данные компании
+$companyName = $arResult["NAME"];
+$companyEmail = $arResult["PROPERTIES"]["OS_COMPANY_EMAIL"]["VALUE"] ?? '';
+$companyPhone = $arResult["PROPERTIES"]["OS_COMPANY_PHONE"]["VALUE"] ?? '';
+$companyInn = $arResult["PROPERTIES"]["OS_COMPANY_INN"]["VALUE"] ?? '';
+$companyBossIds = $arResult["PROPERTIES"]["OS_COMPANY_BOSS"]["VALUE"] ?? [];
+$companyUserIds = $arResult["PROPERTIES"]["OS_COMPANY_USERS"]["VALUE"] ?? [];
+
+// Преобразуем в массив если пришло одно значение
+if (!is_array($companyBossIds)) {
+    $companyBossIds = $companyBossIds ? [$companyBossIds] : [];
+}
+if (!is_array($companyUserIds)) {
+    $companyUserIds = $companyUserIds ? [$companyUserIds] : [];
+}
+
+// Получаем информацию о руководителях
+$bosses = [];
+if (!empty($companyBossIds)) {
+    foreach ($companyBossIds as $bossId) {
+        if ($bossId) {
+            $rsUser = CUser::GetByID($bossId);
+            if ($boss = $rsUser->Fetch()) {
+                $bosses[] = $boss;
+            }
+        }
+    }
+}
+
+// Получаем информацию о сотрудниках (исключая руководителей)
+$employees = [];
+if (!empty($companyUserIds)) {
+    foreach ($companyUserIds as $userId) {
+        if (!in_array($userId, $companyBossIds)) {
+            $rsUser = CUser::GetByID($userId);
+            if ($user = $rsUser->Fetch()) {
+                $employees[] = $user;
+            }
+        }
+    }
+}
+
+// Проверяем, является ли текущий пользователь руководителем компании
+global $USER;
+$currentUserId = $USER->GetID();
+$isCompanyBoss = in_array($currentUserId, $companyBossIds);
+?>
+
+<div class="company-profile">
+    <!-- Левая колонка: Информация о компании + Руководство -->
+    <div class="company-profile__left">
+        <!-- Блок 1: Информация о компании -->
+        <div class="company-profile__block company-info">
+            <h2 class="company-profile__title">Информация о компании</h2>
+            <div class="company-info__content">
+                <div class="company-info__name">
+                    <strong><?=$companyName?></strong>
+                </div>
+                
+                <?if($companyInn):?>
+                <div class="company-info__item">
+                    <span class="company-info__label">ИНН:</span>
+                    <span class="company-info__value"><?=$companyInn?></span>
+                </div>
+                <?endif;?>
+                
+                <?if($companyPhone):?>
+                <div class="company-info__item">
+                    <span class="company-info__label">Телефон:</span>
+                    <span class="company-info__value">
+                        <a href="tel:<?=$companyPhone?>"><?=$companyPhone?></a>
+                    </span>
+                </div>
+                <?endif;?>
+                
+                <?if($companyEmail):?>
+                <div class="company-info__item">
+                    <span class="company-info__label">Email:</span>
+                    <span class="company-info__value">
+                        <a href="mailto:<?=$companyEmail?>"><?=$companyEmail?></a>
+                    </span>
+                </div>
+                <?endif;?>
+            </div>
+        </div>
+
+        <!-- Блок 2: Информация о руководстве -->
+        <div class="company-profile__block company-management">
+            <h2 class="company-profile__title">Руководство</h2>
+            <div class="company-management__content">
+                <?if(!empty($bosses)):?>
+                <?foreach($bosses as $boss):?>
+                <div class="management-card">
+                    <div class="management-card__avatar">
+                        <?if($boss['PERSONAL_PHOTO']):?>
+                            <?$photoSrc = CFile::GetPath($boss['PERSONAL_PHOTO']);?>
+                            <img src="<?=$photoSrc?>" alt="<?=$boss['NAME']?> <?=$boss['LAST_NAME']?>">
+                        <?else:?>
+                            <div class="management-card__avatar-placeholder">
+                                <?=mb_substr($boss['NAME'], 0, 1)?>
+                            </div>
+                        <?endif;?>
+                    </div>
+                    <div class="management-card__info">
+                        <div class="management-card__name">
+                            <?=$boss['NAME']?> <?=$boss['LAST_NAME']?>
+                            <?if($boss['WORK_POSITION']):?>
+                                <span class="management-card__position"> - <?=$boss['WORK_POSITION']?></span>
+                            <?endif;?>
+                        </div>
+                        <div class="management-card__contacts">
+                            <?if($boss['PERSONAL_PHONE']):?>
+                            <div class="management-card__contact">
+                                <a href="tel:<?=$boss['PERSONAL_PHONE']?>">
+                                    <?=$boss['PERSONAL_PHONE']?>
+                                </a>
+                            </div>
+                            <?endif;?>
+                            <?if($boss['EMAIL']):?>
+                            <div class="management-card__contact">
+                                <a href="mailto:<?=$boss['EMAIL']?>">
+                                    <?=$boss['EMAIL']?>
+                                </a>
+                            </div>
+                            <?endif;?>
+                        </div>
+                    </div>
+                </div>
+                <?endforeach;?>
+                <?else:?>
+                <div class="company-management__empty">
+                    Руководитель не назначен
+                </div>
+                <?endif;?>
+            </div>
+        </div>
+    </div>
+
+    <!-- Правая колонка: Список сотрудников -->
+    <div class="company-profile__right">
+        <!-- Блок 3: Список сотрудников -->
+        <div class="company-profile__block company-employees">
+            <div class="company-profile__title-wrapper">
+                <h2 class="company-profile__title">Сотрудники</h2>
+                <?if($isCompanyBoss):?>
+                <button class="company-employees__add-btn" onclick="alert('Добавление сотрудника')">
+                    + Добавить
+                </button>
+                <?endif;?>
+            </div>
+            <div class="company-employees__content">
+                <?if(!empty($employees)):?>
+                <div class="employees-list">
+                    <?foreach($employees as $employee):?>
+                    <div class="employee-card">
+                        <div class="employee-card__avatar">
+                            <?if($employee['PERSONAL_PHOTO']):?>
+                                <?$photoSrc = CFile::GetPath($employee['PERSONAL_PHOTO']);?>
+                                <img src="<?=$photoSrc?>" alt="<?=$employee['NAME']?> <?=$employee['LAST_NAME']?>">
+                            <?else:?>
+                                <div class="employee-card__avatar-placeholder">
+                                    <?=mb_substr($employee['NAME'], 0, 1)?>
+                                </div>
+                            <?endif;?>
+                        </div>
+                        <div class="employee-card__info">
+                            <div class="employee-card__name">
+                                <?=$employee['NAME']?> <?=$employee['LAST_NAME']?>
+                                <?if($employee['WORK_POSITION']):?>
+                                    <span class="employee-card__position"> - <?=$employee['WORK_POSITION']?></span>
+                                <?endif;?>
+                            </div>
+                            <?if($employee['PERSONAL_PHONE'] || $employee['EMAIL']):?>
+                            <div class="employee-card__contacts">
+                                <?if($employee['PERSONAL_PHONE']):?>
+                                <a href="tel:<?=$employee['PERSONAL_PHONE']?>" class="employee-card__contact">
+                                    <?=$employee['PERSONAL_PHONE']?>
+                                </a>
+                                <?endif;?>
+                                <?if($employee['EMAIL']):?>
+                                <a href="mailto:<?=$employee['EMAIL']?>" class="employee-card__contact">
+                                    <?=$employee['EMAIL']?>
+                                </a>
+                                <?endif;?>
+                            </div>
+                            <?endif;?>
+                        </div>
+                    </div>
+                    <?endforeach;?>
+                </div>
+                <?else:?>
+                <div class="company-employees__empty">
+                    Сотрудники не добавлены
+                </div>
+                <?endif;?>
+            </div>
+        </div>
+    </div>
 </div>
