@@ -54,7 +54,19 @@ CModule::IncludeModule("intec.eklectika");
                             echo (is_array($value) || $value instanceof Countable) ? count($value) : 0;
                             ?></td>
 					</tr>
-				</table>				
+				</table>
+
+                <?php
+                $user = \CUser::GetByID($USER->GetID())->Fetch();
+
+                if( $user['UF_IS_DIRECTOR'] ){
+                    ?>
+                    <div>
+                        <a href="<?=$arItem['DETAIL_PAGE_URL']?>">Подробнее</a>
+                    </div>
+                    <?php
+                }
+                ?>
 			</div>
 		<?php }?>
 	</div>

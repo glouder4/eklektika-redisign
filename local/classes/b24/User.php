@@ -8,6 +8,7 @@
         
         // Константы для ID групп
         public int $MARKETING_AGENT_GROUP_ID = 12;
+        public int $DIRECTOR_GROUP_ID = 432;
         public function __construct()
         {
         }
@@ -486,6 +487,22 @@
                         $el = new \CIBlockElement;
                         $companyUpdated = $el->SetPropertyValues($companyId, 57,[$this->userId],"OS_COMPANY_BOSS");
                     }
+                }
+                
+                // Добавляем пользователя в группу руководителей (ID: 432)
+                $userGroups = \CUser::GetUserGroup($this->userId);
+                if (!in_array($this->DIRECTOR_GROUP_ID, $userGroups)) {
+                    $userGroups[] = $this->DIRECTOR_GROUP_ID;
+                    \CUser::SetUserGroup($this->userId, $userGroups);
+                    pre("User ID " . $this->userId . " added to Directors group (ID: " . $this->DIRECTOR_GROUP_ID . ")");
+                }
+            } else if (!$fields['UF_IS_DIRECTOR'] && $fields['ACTION'] == "UPDATE_CONTACT") {
+                // Убираем пользователя из группы руководителей при снятии галочки
+                $userGroups = \CUser::GetUserGroup($this->userId);
+                if (($key = array_search($this->DIRECTOR_GROUP_ID, $userGroups)) !== false) {
+                    unset($userGroups[$key]);
+                    \CUser::SetUserGroup($this->userId, $userGroups);
+                    pre("User ID " . $this->userId . " removed from Directors group (ID: " . $this->DIRECTOR_GROUP_ID . ")");
                 }
             }
 
