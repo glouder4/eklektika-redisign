@@ -156,7 +156,32 @@ function createB24Company($arFields){
                     ];
 
                     $company = new \OnlineService\Site\Company();
-                    $company->createCompanyElement($companyElementParamss);
+                    $newCompanyId = $company->createCompanyElement($companyElementParamss);
+                    
+                    // Получаем головную компанию для синхронизации руководителей и связей
+                    if (!empty($arFields['head_company_element_id']) && $newCompanyId) {
+                        $headCompanyData = $company->getCompany($arFields['head_company_element_id']);
+                        
+                        if ($headCompanyData) {
+                            // Получаем руководителей головной компании
+                            $headCompanyManagers = $headCompanyData['OS_COMPANY_BOSS'] ?? [];
+                            if (!is_array($headCompanyManagers)) {
+                                $headCompanyManagers = $headCompanyManagers ? [$headCompanyManagers] : [];
+                            }
+                            
+                            // Применяем руководителей к новой дочерней компании
+                            \CIBlockElement::SetPropertyValues($newCompanyId, $company->getIblockId(), $headCompanyManagers, 'OS_COMPANY_BOSS');
+                            
+                            // Устанавливаем связь с головной компанией (ID элемента инфоблока)
+                            \CIBlockElement::SetPropertyValueCode($newCompanyId, 'OS_HOLDING_OF', $arFields['head_company_element_id']);
+                            
+                            // Устанавливаем B24 ID головной компании
+                            $headCompanyB24Id = $headCompanyData['OS_COMPANY_B24_ID'] ?? '';
+                            if ($headCompanyB24Id) {
+                                \CIBlockElement::SetPropertyValueCode($newCompanyId, 'OS_HEAD_COMPANY_B24_ID', $headCompanyB24Id);
+                            }
+                        }
+                    }
 
                     return true;
                 }
@@ -175,25 +200,32 @@ try {
     
     if (!$USER->IsAuthorized()) {
         throw new Exception("Вам запрещено выполнять это действие.");
+    }   
+
+    // Проверяем, передан ли ID элемента головной компании
+    if (empty($_POST['head_company_element_id']) || intval($_POST['head_company_element_id']) <= 0) {
+        throw new Exception("Не указана головная компания");
     }
-
-    $arResult['HEAD_COMPANY_ID'] = false;
-
-    // Получаем головную компанию холдинга пользователя
-    $user = new \OnlineService\B24\User();
-    $user->userId = $userId;
     
-    $headCompany = $user->getHeadCompany($userId);
+    $headCompanyElementId = intval($_POST['head_company_element_id']);
     
-    if (!$headCompany) {
-        throw new Exception("Вы не являетесь руководителем головной компании холдинга");
+    // Получаем данные головной компании
+    $company = new \OnlineService\Site\Company();
+    $headCompanyData = $company->getCompany($headCompanyElementId);
+    
+    if (!$headCompanyData) {
+        throw new Exception("Головная компания не найдена");
     }
-
-    // Получаем ID головной компании холдинга
-    $headCompanyId = $user->getHeadCompanyId($userId);
     
-    if ($_POST['head_company_id'] != $headCompanyId) {
-        throw new Exception("Ошибка в идентификации руководителя!");
+    // Проверяем, является ли пользователь руководителем этой компании
+    $companyBosses = $headCompanyData['OS_COMPANY_BOSS'] ?? [];
+    if (!is_array($companyBosses)) {
+        $companyBosses = $companyBosses ? [$companyBosses] : [];
+    }
+    
+    // Проверяем права: администратор или руководитель компании
+    if (!$USER->IsAdmin() && !in_array($userId, $companyBosses)) {
+        throw new Exception("Вы не являетесь руководителем этой компании");
     }
 
     // Пытаемся создать компанию

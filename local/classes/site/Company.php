@@ -23,6 +23,15 @@
             "OS_COMPANY_STATUS",
             'OS_REQUSITES_FILE'
         ];
+
+        /**
+         * Получить ID инфоблока компаний
+         * @return int
+         */
+        public function getIblockId(): int {
+            return $this->iblock_id;
+        }
+
         public function createCompanyElement($params){
             /*$params = [
                 'OS_COMPANY_INN'
@@ -276,6 +285,10 @@
                 $arCompany["ID"] = $arFields["ID"];
                 foreach (self::$codeProps as $code) {
                     $arCompany[$code] = $arProps[$code]["VALUE"];
+                    // Для свойств типа "Список" также сохраняем VALUE_XML_ID
+                    if (isset($arProps[$code]["VALUE_XML_ID"])) {
+                        $arCompany[$code . "_XML_ID"] = $arProps[$code]["VALUE_XML_ID"];
+                    }
                 }
 
                 return $arCompany;
@@ -423,5 +436,149 @@
             }
 
             return $decodedResult;
+        }
+
+        /**
+         * Синхронизация всех контактов (руководители + сотрудники) между головной компанией и всеми дочерними
+         */
+        public function syncCompanyContacts($params) {
+            try {
+                $headCompanyId = $params['COMPANY_ID'] ?? null;
+                
+                if (!$headCompanyId) {
+                    return json_encode(['success' => false, 'error' => 'Не указан ID головной компании']);
+                }
+
+                // Получаем данные головной компании
+                $headCompany = $this->getCompany($headCompanyId);
+                
+                // Проверяем, является ли компания головной (используем VALUE_XML_ID как в шаблоне)
+                $isHeadOfHolding = $headCompany['OS_COMPANY_IS_HEAD_OF_HOLDING_XML_ID'] ?? $headCompany['OS_COMPANY_IS_HEAD_OF_HOLDING'] ?? '';
+                if (!$headCompany || !in_array($isHeadOfHolding, ['Y', 'YES', '1', true])) {
+                    return json_encode(['success' => false, 'error' => 'Компания не является головной. Значение: ' . $isHeadOfHolding]);
+                }
+
+                // Получаем всех руководителей головной компании
+                $headCompanyManagers = $headCompany['OS_COMPANY_BOSS'] ?? [];
+                if (!is_array($headCompanyManagers)) {
+                    $headCompanyManagers = $headCompanyManagers ? [$headCompanyManagers] : [];
+                }
+
+                // Получаем все дочерние компании
+                $childCompanies = $this->getChildCompanies($headCompanyId);
+                
+                // Собираем всех уникальных руководителей из ВСЕХ компаний холдинга
+                $allManagers = $headCompanyManagers;
+                
+                foreach ($childCompanies as $childCompany) {
+                    $childCompanyData = $this->getCompany($childCompany['ID']);
+                    
+                    // Собираем руководителей дочерней компании
+                    $childManagers = $childCompanyData['OS_COMPANY_BOSS'] ?? [];
+                    if (!is_array($childManagers)) {
+                        $childManagers = $childManagers ? [$childManagers] : [];
+                    }
+                    
+                    // Добавляем в общий список (с проверкой на уникальность)
+                    foreach ($childManagers as $manager) {
+                        if (!empty($manager) && !in_array($manager, $allManagers)) {
+                            $allManagers[] = $manager;
+                        }
+                    }
+                }
+                
+                $updatedCompanies = 0;
+                $errors = [];
+                $debugInfo = [];
+
+                $debugInfo[] = "Головная компания ID: {$headCompanyId}";
+                $debugInfo[] = "Найдено дочерних компаний: " . count($childCompanies);
+                $debugInfo[] = "ИТОГО уникальных руководителей: " . count($allManagers);
+
+                // Обновляем руководителей во всех дочерних компаниях (общим списком!)
+                foreach ($childCompanies as $childCompany) {
+                    $debugInfo[] = "Обновляем компанию: {$childCompany['NAME']} (ID: {$childCompany['ID']})";
+                    $result = $this->updateCompanyManagers($childCompany['ID'], $allManagers);
+                    if ($result) {
+                        $updatedCompanies++;
+                        $debugInfo[] = "✓ Компания {$childCompany['NAME']} обновлена успешно";
+                    } else {
+                        $errors[] = "Ошибка обновления компании {$childCompany['NAME']} (ID: {$childCompany['ID']})";
+                        $debugInfo[] = "✗ Ошибка обновления компании {$childCompany['NAME']}";
+                    }
+                }
+
+                // Также обновляем саму головную компанию (общим списком!)
+                $this->updateCompanyManagers($headCompanyId, $allManagers);
+                $updatedCompanies++;
+
+                return json_encode([
+                    'success' => true,
+                    'message' => "Синхронизация завершена. Обновлено компаний: {$updatedCompanies}",
+                    'updated_companies' => $updatedCompanies,
+                    'errors' => $errors,
+                    'managers_count' => count($allManagers),
+                    'debug_info' => $debugInfo
+                ]);
+
+            } catch (Exception $e) {
+                return json_encode(['success' => false, 'error' => 'Ошибка синхронизации: ' . $e->getMessage()]);
+            }
+        }
+
+        /**
+         * Получить все дочерние компании холдинга
+         */
+        private function getChildCompanies($headCompanyId) {
+            $headCompany = $this->getCompany($headCompanyId);
+            if (!$headCompany) {
+                return [];
+            }
+
+            // Ищем все компании, у которых OS_HOLDING_OF указывает на головную компанию (по ID элемента)
+            $rsCompanies = \CIBlockElement::GetList(
+                [],
+                [
+                    'IBLOCK_ID' => $this->iblock_id,
+                    'PROPERTY_OS_HOLDING_OF' => $headCompanyId,
+                    'ACTIVE' => 'Y'
+                ],
+                false,
+                false,
+                ['ID', 'NAME', 'CODE', 'PROPERTY_OS_HOLDING_OF']
+            );
+
+            $childCompanies = [];
+            while ($ob = $rsCompanies->GetNextElement()) {
+                $arFields = $ob->GetFields();
+                $arProps = $ob->GetProperties();
+                $childCompanies[] = [
+                    'ID' => $arFields['ID'],
+                    'NAME' => $arFields['NAME'],
+                    'CODE' => $arFields['CODE'],
+                    'OS_HOLDING_OF' => $arProps['OS_HOLDING_OF']['VALUE'] ?? null
+                ];
+            }
+
+            return $childCompanies;
+        }
+
+        /**
+         * Обновить руководителей компании
+         */
+        private function updateCompanyManagers($companyId, $managers) {
+            try {
+                // Убираем пустые значения
+                $managers = array_filter($managers, function($manager) {
+                    return !empty($manager);
+                });
+
+                // Обновляем свойство OS_COMPANY_BOSS
+                \CIBlockElement::SetPropertyValues($companyId, $this->iblock_id, $managers, 'OS_COMPANY_BOSS');
+
+                return true;
+            } catch (Exception $e) {
+                return false;
+            }
         }
     }

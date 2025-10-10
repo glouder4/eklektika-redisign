@@ -145,7 +145,7 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
 
 <div class="container">
 <?php
-    // Проверка на наличие головной компании
+    // Проверка на наличие компании
     if ($arResult['SHOW_ERROR_NO_HEAD_COMPANY']):
 ?>
     <div class="ns-bitrix c-main-register c-main-register-template-2">
@@ -158,7 +158,7 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
             </div>
             <h2 class="registration-error-title">Ошибка доступа</h2>
             <p class="registration-error-description">
-                Для добавления дочерней компании необходимо перейти через профиль головной компании.
+                Для добавления сотрудника компании необходимо перейти через профиль компании.
             </p>
             <div class="registration-error-actions">
                 <a href="/personal/profile/" class="registration-error-button">Перейти в личный кабинет</a>
@@ -207,37 +207,7 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
     }
     </style>
 </div>
-<?php
-    elseif( isset($arResult["REGISTER_DONE"]) && $arResult["REGISTER_DONE"] == "Y" ):
-?>
-    <div class="ns-bitrix c-main-register c-main-register-template-2">
-        <div class="registration-success-block">
-            <div class="registration-success-icon">
-                <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="32" cy="32" r="32" fill="#E8F5E8"/>
-                    <path d="M28 40L22 34L24.59 31.41L28 34.83L39.41 23.42L42 26L28 40Z" fill="#4CAF50"/>
-                </svg>
-            </div>
-            <h2 class="registration-success-title">Заявка успешно отправлена!</h2>
-            <p class="registration-success-description">
-                Спасибо за регистрацию! Ваша заявка проходит модерацию. 
-                В ближайшее время с вами свяжется наш менеджер для подтверждения данных.
-            </p>
-            <div class="registration-success-info">
-                <div class="registration-success-info-item">
-                    <div class="info-icon">📧</div>
-                    <div class="info-text">Проверьте указанную почту для получения уведомлений</div>
-                </div>
-                <div class="registration-success-info-item">
-                    <div class="info-icon">📞</div>
-                    <div class="info-text">Менеджер свяжется с вами в течение 24 часов</div>
-                </div>
-            </div>
-            <div class="registration-success-actions">
-                <a href="/" class="registration-success-button">Вернуться на главную</a>
-            </div>
-        </div>
-    </div>
+
 <?php
     else:
 ?>
@@ -263,28 +233,6 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
     <?php
     $arServices = [];
     ?>
-    <?php if (!empty($arServices)) { ?>
-        <div class="main-register-socserv">
-            <div class="main-register-socserv-title">
-                <?= Loc::getMessage($sPrefix.'SOCIALS') ?>
-            </div>
-            <div class="main-register-socserv-content">
-                <?php $APPLICATION->IncludeComponent(
-                    'bitrix:socserv.auth.form', '', [
-                    'AUTH_SERVICES' => $arServices,
-                    'CURRENT_SERVICE' => $arResult['CURRENT_SERVICE'],
-                    'AUTH_URL' => $arParams['AUTH_URL'],
-                    'POST' => $arResult['POST'],
-                    'SUFFIX' => 'main'
-                ],
-                    $component
-                ) ?>
-            </div>
-            <div class="main-register-socserv-bottom">
-                <?= Html::tag('span', Loc::getMessage($sPrefix.'SOCIALS_POSTFIX'), []) ?>
-            </div>
-        </div>
-    <?php } ?>
     <?php if ($arResult['SHOW_SMS_FIELD']) { ?>
         <form class="main-register-form intec-ui-form" method="post" action="<?= POST_FORM_ACTION_URI ?>" name="regform">
             <?php if ($arResult['BACKURL'] <> '') { ?>
@@ -752,19 +700,6 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
                                 <?php }
 
                                 ?>
-                                <div class="main-register-consent">
-                                    <label class="intec-ui intec-ui-control-checkbox intec-ui-scheme-current">
-                                        <input id="mainConfirmation" type="checkbox" onchange="isConfirmed()" />
-                                        <span class="intec-ui-part-selector"></span>
-                                        <span class="intec-ui-part-content"><?= Loc::getMessage($sPrefix.'DEFAULT_CONSENT', [
-                                                '#URL#' => $arResult['CONSENT']['URL']
-                                            ]) ?></span>
-                                    </label>
-                                    <div class="action-links" style="display: flex; flex-direction: column;">
-                                        <a href="/soglasiye-na-obrabotku.php" target="_blank">Согласие на обработку персональных данных</a>
-                                        <a href="/company/consent/" target="_blank">Политика обработки персональных данных</a>
-                                    </div>
-                                </div>
                                 <?php
                             }
                             ?>
@@ -796,7 +731,6 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
                                 ]
                             ],
                             'name' => 'register_submit_button',
-                            'disabled' => 'disabled',
                             'required' => true,
                             'id' => 'registerSubmitBtn'
                         ]);?>
@@ -1067,7 +1001,7 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
                 const formData = new FormData(form);
                 
                 // Отправляем AJAX запрос
-                fetch('/director/add_new_branch-action.php', {
+                fetch('/director/person/add-new-person.php', {
                     method: 'POST',
                     body: formData
                 })
@@ -1087,47 +1021,8 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
         }
     });
 
-    function isConfirmed(){
-        $('#mainConfirmation')[0].checked = false;
-        $.fancybox.open({
-            src: '#personal-confirmation',
-            type: 'inline'
-        });
-    }
-
-    $('#personalConfirmation').click(function (){
-        $('#mainConfirmation')[0].checked = $(this)[0].checked;
-
-        if( $(this)[0].checked )
-            $('#registerSubmitBtn').attr('disabled',false)
-        else
-            $('#registerSubmitBtn').attr('disabled',true)
-    })
-
     let activeBlock = 0;
-    let correctSortOrder = [
-        [
-            'WORK_COMPANY', // NAME => required
-            'UF_SITE',
-            'UF_CITY'
-        ],
-        [
-            'NAME',
-            'LAST_NAME',
-            'PERSONAL_BIRTHDAY',
-            'PERSONAL_PHONE',
-            'EMAIL',
-            'WORK_POSITION'
-        ],
-        [
-            'UF_NAME_COMPANY',
-            'UF_INN',
-            'UF_REQ',
-            'PERSONAL_NOTES'
-        ]
-    ];
 
-    window.is_personal_confirmed = false;
     $('#next-step').hide();
     $('#submitFormBtn').show();
 

@@ -60,8 +60,24 @@ if (!empty($companyUserIds)) {
 global $USER;
 $currentUserId = $USER->GetID();
 $isCompanyBoss = in_array($currentUserId, $companyBossIds);
+$isCompanyEmployee = in_array($currentUserId, $companyUserIds);
+$isAdmin = $USER->IsAdmin();
+$canManageCompany = $isAdmin || $isCompanyBoss;
+$hasAccess = $isAdmin || $isCompanyBoss || $isCompanyEmployee;
+
+$GLOBALS["OS_BREADCRUMBS"] = [
+    [
+        'ITEM' => "Личный кабинет",
+        "LINK" => "/personal/profile/",
+    ],
+    [
+        'ITEM' => $arResult['NAME'],
+        "LINK" => "#",
+    ]
+];
 ?>
 
+<?if($hasAccess):?>
 <div class="company-profile">
     <!-- Левая колонка: Информация о компании + Руководство -->
     <div class="company-profile__left">
@@ -69,13 +85,20 @@ $isCompanyBoss = in_array($currentUserId, $companyBossIds);
         <div class="company-profile__block company-info">
             <div class="company-profile__header">
                 <h2 class="company-profile__title">Информация о компании</h2>
-                <div class="company-status-badge <?=($isMarketingAgent == 'YES') ? 'company-status-badge--active' : 'company-status-badge--inactive'?>">
-                    <?=($isMarketingAgent == 'YES') ? 'Активно' : 'Не активно'?>
+                <div class="company-profile__badges">
+                    <div class="company-status-badge <?=($isMarketingAgent == 'YES') ? 'company-status-badge--active' : 'company-status-badge--inactive'?>">
+                        <?=($isMarketingAgent == 'YES') ? 'Активно' : 'Не активно'?>
+                    </div>
+                    <?if($isHeadOfHolding == 'Y'):?>
+                    <div class="company-status-badge company-status-badge--head">
+                        Головная компания
+                    </div>
+                    <?endif;?>
                 </div>
             </div>
             <div class="company-info__content">
                 <div class="company-info__name">
-                    <strong><?=$companyName?><?if($isHeadOfHolding == 'Y' || $isHeadOfHolding == '1'):?> (Головная компания)<?endif;?></strong>
+                    <strong><?=$companyName?></strong>
                 </div>  
                 
                 <?if($companyInn):?>
@@ -107,7 +130,17 @@ $isCompanyBoss = in_array($currentUserId, $companyBossIds);
 
         <!-- Блок 2: Информация о руководстве -->
         <div class="company-profile__block company-management">
-            <h2 class="company-profile__title">Руководство</h2>
+            <div class="company-profile__title-wrapper">
+                <h2 class="company-profile__title">Руководство</h2>
+                <?if(($isHeadOfHolding == 'Y') && $canManageCompany):?>
+                <button class="company-sync__btn" onclick="syncCompanyContacts(<?=$arResult['ID']?>)">
+                    <svg class="company-sync__icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13.65 2.35C12.2 0.9 10.21 0 8 0 3.58 0 0.01 3.58 0.01 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L9 7h7V0l-2.35 2.35z" fill="currentColor"/>
+                    </svg>
+                    <span class="company-sync__text">Синхронизировать</span>
+                </button>
+                <?endif;?>
+            </div>
             <div class="company-management__content">
                 <?if(!empty($bosses)):?>
                 <?foreach($bosses as $boss):?>
@@ -157,16 +190,91 @@ $isCompanyBoss = in_array($currentUserId, $companyBossIds);
         </div>
     </div>
 
-    <!-- Правая колонка: Список сотрудников -->
+    <!-- Правая колонка: Дочерние фирмы + Список сотрудников -->
     <div class="company-profile__right">
+        <!-- Блок дочерних фирм (только для головной компании) -->
+        <?if($isHeadOfHolding == 'Y'):?>
+        <?
+        // Получаем дочерние компании
+        $company = new \OnlineService\Site\Company();
+        $childCompaniesData = [];
+        
+        $rsChildCompanies = CIBlockElement::GetList(
+            ['NAME' => 'ASC'],  
+            [
+                'IBLOCK_ID' => $arResult['IBLOCK_ID'],
+                'PROPERTY_OS_HOLDING_OF' => $arResult['ID']
+            ],
+            false,
+            false,
+            ['ID', 'NAME', 'CODE', 'DETAIL_PAGE_URL', 'PROPERTY_OS_IS_MARKETING_AGENT']
+        );
+        
+        while($arChild = $rsChildCompanies->GetNext()) {
+            $childCompaniesData[] = $arChild;
+        }
+        ?>
+        <div class="company-profile__block company-children">
+            <div class="company-profile__title-wrapper">
+                <h2 class="company-profile__title">Дочерние фирмы (<?=count($childCompaniesData)?>)</h2>
+                <?if($canManageCompany):?>
+                <a href="/director/add_new_branch.php?head_company=<?=$arResult['ID']?>" id="lk-add-new-company" class="company-children__add-btn">
+                    + Добавить
+                </a>
+                <?endif;?>
+            </div>
+            <div class="company-children__content">
+                <?if(!empty($childCompaniesData)):?>
+                <div class="children-list">
+                    <?foreach($childCompaniesData as $child):?>
+                    <?php
+                    $isChildActive = $child['PROPERTY_OS_IS_MARKETING_AGENT_VALUE'] ?? '';
+                    $isChildActive = ($isChildActive == 'Да');
+                    ?>
+                    <div class="child-company-card">
+                        <?if($isChildActive):?>
+                        <a href="<?=$child['DETAIL_PAGE_URL']?>" class="child-company-card__link">
+                        <?else:?>
+                        <div class="child-company-card__link child-company-card__link--disabled">
+                        <?endif;?>
+                            <div class="child-company-card__icon">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3 5C3 3.89543 3.89543 3 5 3H9L11 5H15C16.1046 5 17 5.89543 17 7V15C17 16.1046 16.1046 17 15 17H5C3.89543 17 3 16.1046 3 15V5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div class="child-company-card__content">
+                                <div class="child-company-card__name"><?=$child['NAME']?></div>
+                            </div>
+                            <div class="child-company-card__badges">
+                                <span class="badge badge--<?=$isChildActive ? 'active' : 'inactive'?>">
+                                    <?=$isChildActive ? 'Активно' : 'На модерации'?>
+                                </span>
+                            </div>
+                        <?if($isChildActive):?>
+                        </a>
+                        <?else:?>
+                        </div>
+                        <?endif;?>
+                    </div>
+                    <?endforeach;?>
+                </div>
+                <?else:?>
+                <div class="company-children__empty">
+                    Дочерние фирмы не добавлены
+                </div>
+                <?endif;?>
+            </div>
+        </div>
+        <?endif;?>
+        
         <!-- Блок 3: Список сотрудников -->
         <div class="company-profile__block company-employees">
             <div class="company-profile__title-wrapper">
                 <h2 class="company-profile__title">Сотрудники</h2>
                 <?if($isCompanyBoss):?>
-                <button class="company-employees__add-btn" onclick="alert('Добавление сотрудника')">
+                <a href="/director/person/add-new-person.php?head_company=<?=$arResult['ID']?>"class="company-employees__add-btn">
                     + Добавить
-                </button>
+                </a>
                 <?endif;?>
             </div>
             <div class="company-employees__content">
@@ -218,3 +326,96 @@ $isCompanyBoss = in_array($currentUserId, $companyBossIds);
         </div>
     </div>
 </div>
+
+<script>
+function syncCompanyContacts(companyId) {
+    const btn = document.querySelector('.company-sync__btn');
+    const originalText = btn.querySelector('.company-sync__text').textContent;
+    const icon = btn.querySelector('.company-sync__icon');
+    
+    // Показываем состояние загрузки
+    btn.disabled = true;
+    btn.querySelector('.company-sync__text').textContent = 'Синхронизация...';
+    icon.style.animation = 'spin 1s linear infinite';
+    
+    // AJAX запрос
+    fetch('/local/classes/ajax.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `ACTION=SYNC_COMPANY_CONTACTS&COMPANY_ID=${companyId}`
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Успешная синхронизация
+            btn.querySelector('.company-sync__text').textContent = 'Готово!';
+            btn.style.background = '#d4edda';
+            btn.style.color = '#155724';
+            btn.style.borderColor = '#c3e6cb';
+            
+            // Перезагружаем страницу через 2 секунды
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
+        } else {
+            // Ошибка
+            btn.querySelector('.company-sync__text').textContent = 'Ошибка';
+            btn.style.background = '#f8d7da';
+            btn.style.color = '#721c24';
+            btn.style.borderColor = '#f5c6cb';
+            
+            alert('Ошибка синхронизации: ' + data.error);
+            
+            // Возвращаем исходное состояние через 3 секунды
+            setTimeout(() => {
+                resetButton();
+            }, 3000);
+        }
+    })
+    .catch(error => {
+        btn.querySelector('.company-sync__text').textContent = 'Ошибка';
+        btn.style.background = '#f8d7da';
+        btn.style.color = '#721c24';
+        btn.style.borderColor = '#f5c6cb';
+        
+        alert('Ошибка сети при синхронизации');
+        
+        setTimeout(() => {
+            resetButton();
+        }, 3000);
+    });
+    
+    function resetButton() {
+        btn.disabled = false;
+        btn.querySelector('.company-sync__text').textContent = originalText;
+        icon.style.animation = '';
+        btn.style.background = '';
+        btn.style.color = '';
+        btn.style.borderColor = '';
+    }
+}
+
+// CSS анимация для иконки 
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+`;
+document.head.appendChild(style);
+</script>
+<?else:?>
+<div class="company-profile__no-access">
+    <div class="no-access-message">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8 0-1.85.63-3.55 1.69-4.9L16.9 18.31C15.55 19.37 13.85 20 12 20zm6.31-3.1L7.1 5.69C8.45 4.63 10.15 4 12 4c4.42 0 8 3.58 8 8 0 1.85-.63 3.55-1.69 4.9z" fill="currentColor"/>
+        </svg>
+        <h3>Доступ ограничен</h3>
+        <p>У вас нет прав для просмотра информации об этой компании.</p>
+        <a href="/personal/profile/" class="btn btn-primary">Вернуться в личный кабинет</a>
+    </div>
+</div>
+<?endif;?>

@@ -37,4 +37,7 @@
         echo $manager->update($_REQUEST);
     }
 
-    //UPDATE_MANAGER
+    if( $_REQUEST['ACTION'] == "SYNC_COMPANY_CONTACTS" ){
+        $company = new \OnlineService\Site\Company();
+        echo $company->syncCompanyContacts($_REQUEST);
+    }

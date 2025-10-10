@@ -158,7 +158,11 @@ $sMobileWithoutSliderRender =
         '</a>'.
     '</div>';
 
-$sReturns =
+$sReturns = "";
+if( isset($GLOBALS["OS_BREADCRUMBS_ADD_CONTAINER"]) && $GLOBALS["OS_BREADCRUMBS_ADD_CONTAINER"] == "Y" ){
+    $sReturns .= "<div class='container'>";
+}
+$sReturns .=
     Html::beginTag('div', [
         'id' => 'breadcrumbs',
         'class' => 'breadcrumbs'
@@ -185,6 +189,10 @@ foreach ($arResult as $iIndex => $arItem) {
     }
 }
 
-$sReturns .= '</ul></div>';
+$sReturns .= '</ul>'.Html::endTag('div');
+
+if( isset($GLOBALS["OS_BREADCRUMBS_ADD_CONTAINER"]) && $GLOBALS["OS_BREADCRUMBS_ADD_CONTAINER"] == "Y" ){
+    $sReturns .= "</div>";
+}
 
 return $sReturns;

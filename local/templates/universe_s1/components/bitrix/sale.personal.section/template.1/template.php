@@ -55,23 +55,8 @@ $arSvg = [
                 <div class="sale-personal-section-blocks">
                     <div class="intec-grid intec-grid-wrap intec-grid-i-12 intec-grid-a-h-center intec-grid-a-v-start">
                         <div class="intec-grid-item-2 intec-grid-item-1024-1">
-                            <div style="margin-bottom: 24px;">
+                            <div style="margin-bottom: 24px; margin-top:0;">
                                 <?php include (__DIR__.'/parts/companies.php') ?>
-                            </div>
-
-                            <?php
-                                $user = \CUser::GetByID($USER->GetID())->Fetch();
-
-                                if( $user['UF_IS_DIRECTOR'] ){
-                            ?>
-                                <div style="margin-bottom: 24px;">
-                                    <a href="/director/add_new_branch.php" id="lk-add-new-company">Добавить филиал</a>
-                                </div>
-                            <?php
-                                }
-                            ?>
-                            <div style="margin-bottom: 24px;">
-                                <?php include(__DIR__.'/parts/private.php') ?>
                             </div>
                             <!--<div style="margin-bottom: 24px;">
                                 <?php /*if ($arVisual['CLAIMS_BLOCK_SHOW']) { */?>

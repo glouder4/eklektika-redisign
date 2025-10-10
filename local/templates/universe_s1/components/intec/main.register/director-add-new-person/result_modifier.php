@@ -38,13 +38,13 @@ if (!empty($arResult['CONSENT']['URL'])) {
 
 $correctSortOrder = [
     [
-        'WORK_COMPANY', // NAME => required
-        'UF_CITY',
-        'UF_SITE',
+        'NAME', // NAME => required
+        'LAST_NAME',
+        'EMAIL',
         'LOGIN',
-        'UF_NAME_COMPANY',
-        'UF_INN',
-        'UF_REQ'
+        'WORK_POSITION',
+        'PASSWORD',
+        'CONFIRM_PASSWORD'
     ]
 ];
 

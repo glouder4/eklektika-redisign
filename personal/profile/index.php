@@ -8,6 +8,13 @@ $APPLICATION->SetTitle("Личный кабинет пользователя");
 CModule::IncludeModule("intec.eklectika");
 
 
+$GLOBALS["OS_BREADCRUMBS_ADD_CONTAINER"] = "N";
+$GLOBALS["OS_BREADCRUMBS"] = [
+	[
+		'ITEM' => "Личный кабинет",
+		"LINK" => "",
+	]
+];
 ?>
 <?php if (ModuleManager::isModuleInstalled('sale')) {
 	$showTitle = "Y";

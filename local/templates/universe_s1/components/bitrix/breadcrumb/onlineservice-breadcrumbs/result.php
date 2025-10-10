@@ -3,7 +3,7 @@
 use Bitrix\Main\Loader;
 use Bitrix\Main\Application;
 use intec\core\helpers\ArrayHelper;
-
+pre("here2");
 /**
  * @var array $arResult
  * @var array $arParams

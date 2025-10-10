@@ -162,10 +162,12 @@ use intec\template\Properties;
                         'class' => 'intec-template-breadcrumb'
                     ]);
 
-                    $APPLICATION->IncludeComponent('bitrix:main.include', '.default', [
-                        'AREA_FILE_SHOW' => 'file',
-                        'PATH' => SITE_DIR.'include/header/breadcrumb.php'
-                    ], false, ['HIDE_ICONS' => 'Y']);
+                    $APPLICATION->IncludeComponent(
+                        "bitrix:breadcrumb",
+                        "onlineservice-breadcrumbs",
+                        Array(),
+                        false
+                    );
 
                     echo Html::endTag('div');
                 }

@@ -6,3 +6,5 @@
     require_once __DIR__.'/site/Company.php';
     require_once __DIR__.'/site/Manager.php';
     require_once __DIR__.'/events.php';
+
+$GLOBALS["OS_BREADCRUMBS_ADD_CONTAINER"] = "Y";

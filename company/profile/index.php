@@ -13,7 +13,7 @@ $elementCode = $_REQUEST['ELEMENT_CODE'] ?? '';
 if (strpos($elementCode, '?') !== false) {
     $elementCode = substr($elementCode, 0, strpos($elementCode, '?'));
 }
-
+$GLOBALS["OS_BREADCRUMBS_ADD_CONTAINER"] = "Y";
 ?>
 <div class="container personal-profile-wrapper">
     <?$APPLICATION->IncludeComponent(
