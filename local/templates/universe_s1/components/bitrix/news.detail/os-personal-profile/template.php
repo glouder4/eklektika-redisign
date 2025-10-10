@@ -19,6 +19,8 @@ $companyPhone = $arResult["PROPERTIES"]["OS_COMPANY_PHONE"]["VALUE"] ?? '';
 $companyInn = $arResult["PROPERTIES"]["OS_COMPANY_INN"]["VALUE"] ?? '';
 $companyBossIds = $arResult["PROPERTIES"]["OS_COMPANY_BOSS"]["VALUE"] ?? [];
 $companyUserIds = $arResult["PROPERTIES"]["OS_COMPANY_USERS"]["VALUE"] ?? [];
+$isMarketingAgent = $arResult["PROPERTIES"]["OS_IS_MARKETING_AGENT"]["VALUE_XML_ID"] ?? '';
+$isHeadOfHolding = $arResult["PROPERTIES"]["OS_COMPANY_IS_HEAD_OF_HOLDING"]["VALUE_XML_ID"] ?? '';
 
 // Преобразуем в массив если пришло одно значение
 if (!is_array($companyBossIds)) {
@@ -65,11 +67,16 @@ $isCompanyBoss = in_array($currentUserId, $companyBossIds);
     <div class="company-profile__left">
         <!-- Блок 1: Информация о компании -->
         <div class="company-profile__block company-info">
-            <h2 class="company-profile__title">Информация о компании</h2>
+            <div class="company-profile__header">
+                <h2 class="company-profile__title">Информация о компании</h2>
+                <div class="company-status-badge <?=($isMarketingAgent == 'YES') ? 'company-status-badge--active' : 'company-status-badge--inactive'?>">
+                    <?=($isMarketingAgent == 'YES') ? 'Активно' : 'Не активно'?>
+                </div>
+            </div>
             <div class="company-info__content">
                 <div class="company-info__name">
-                    <strong><?=$companyName?></strong>
-                </div>
+                    <strong><?=$companyName?><?if($isHeadOfHolding == 'Y' || $isHeadOfHolding == '1'):?> (Головная компания)<?endif;?></strong>
+                </div>  
                 
                 <?if($companyInn):?>
                 <div class="company-info__item">

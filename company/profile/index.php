@@ -54,7 +54,7 @@ if (strpos($elementCode, '?') !== false) {
             "PAGER_SHOW_ALL" => "N",
             "PAGER_TEMPLATE" => ".default",
             "PAGER_TITLE" => "Страница",
-            "PROPERTY_CODE" => array("OS_COMPANY_EMAIL", "OS_COMPANY_INN", "OS_COMPANY_BOSS", "OS_COMPANY_USERS", "OS_COMPANY_PHONE", ""),
+            "PROPERTY_CODE" => array("OS_COMPANY_EMAIL", "OS_COMPANY_IS_HEAD_OF_HOLDING", "OS_COMPANY_INN", "OS_COMPANY_BOSS", "OS_COMPANY_USERS", "OS_COMPANY_PHONE", "OS_IS_MARKETING_AGENT", ""),
             "SET_BROWSER_TITLE" => "Y",
             "SET_CANONICAL_URL" => "N",
             "SET_LAST_MODIFIED" => "N",
