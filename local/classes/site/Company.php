@@ -91,13 +91,12 @@
 
                 if ($companyId = $el->Add($arLoadProductArray)) {
                     return $companyId;
-                } else {
-                    echo "Error: ".$el->LAST_ERROR;
-                    return false;
                 }
+                
+                return false;
             }
         }
-
+ 
         protected array $orderCustomFieldIds = [8 => "OS_COMPANY_NAME",10 => "OS_COMPANY_INN",12 => "USER_NAME__USER_LASTNAME",13 => "OS_COMPANY_EMAIL",14 => "OS_COMPANY_PHONE"];
 
         /**
@@ -124,10 +123,12 @@
             $company = $this->getCompanyByB24ID($b24_id);
 
             if ($company && !empty($company['ID'])) {
-                $el = new \CIBlockElement;
+                // Компания найдена - обновляем
                 $companyId = $company['ID'];
-
-                $params['OS_COMPANY_STATUS'] =  (new UserGroups([]))->searchGroup($params['OS_COMPANY_STATUS'])['ID'];
+                
+                if (!empty($params['OS_COMPANY_STATUS'])) {
+                    $params['OS_COMPANY_STATUS'] = (new UserGroups([]))->searchGroup($params['OS_COMPANY_STATUS'])['ID'];
+                }
 
                 if( $params['OS_COMPANY_USERS'] ){
                     foreach ($params['OS_COMPANY_USERS'] as $key => $b24_id){
@@ -150,55 +151,10 @@
                     }
                 }
 
-                if( $params['OS_REQUSITES_FILE'] && !empty($params['OS_REQUSITES_FILE']) ){
-                    $downloadableUrl = URL_B24.$params['OS_REQUSITES_FILE']['SUBDIR'].'/'.urlencode($params['OS_REQUSITES_FILE']['FILE_NAME']);
-
-                    // Куда сохранить (на твоём сервере)
-                    $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/upload/os_requisites/';
-                    if (!is_dir($uploadDir)) {
-                        mkdir($uploadDir, 0777, true);
-                    }
-
-                    // Оригинальное имя файла (если нужно)
-                    $originalName = $params['OS_REQUSITES_FILE']['ORIGINAL_NAME'];
-
-                    $filePath = $uploadDir . $originalName;
-
-                    // Скачиваем файл
-                    $fileContent = file_get_contents($downloadableUrl);
-
-                    if ($fileContent === false) {
-                        pre($downloadableUrl);
-                        die("Не удалось скачать файл. Проверь URL и доступ к B24.");
-                    }
-
-                    // Сохраняем на сервер
-                    $content = file_put_contents($filePath, $fileContent);
-
-                    if ($content && file_put_contents($filePath, $content)) {
-                        // Путь к сохраненному файлу
-                        $filePath = $filePath;
-                        $fileName = $originalName;
-
-                        // Загружаем файл в Битрикс
-                        $fileArray = \CFile::MakeFileArray($filePath, false, $fileName);
-
-                        if ($fileArray && !isset($fileArray['error'])) {
-
-                            // Сохраняем в систему Битрикс
-                            $savedFileId = \CFile::SaveFile($fileArray, 'os_requisites');
-
-                            if ($savedFileId) {
-                                // Формируем значение для свойства
-                                $params['OS_REQUSITES_FILE'] = $savedFileId;
-                            }
-
-                            // Удаляем временный файл
-                            unlink($filePath);
-                        } else {
-                            // Обработка ошибки
-                            echo 'Ошибка загрузки файла: ' . ($fileArray['error'] ?? 'неизвестная ошибка');
-                        }
+                if (!empty($params['OS_REQUSITES_FILE'])) {
+                    $fileId = $this->processRequisitesFile($params['OS_REQUSITES_FILE']);
+                    if ($fileId) {
+                        $params['OS_REQUSITES_FILE'] = $fileId;
                     }
                 }
 
@@ -248,17 +204,162 @@
                     "ACTIVE" => $params['ACTIVE'],
                 ];
 
-
+                $el = new \CIBlockElement;
                 if ($el->Update($companyId, $arUpdateArray)) {
                     return $companyId;
                 } else {
-                    echo "Ошибка при обновлении компании: " . $el->LAST_ERROR;
                     return false;
                 }
             } else {
-                echo "Компания с B24_ID {$b24_id} не найдена";
+                // Компания не найдена - создаем новую
+                $companyId = $this->createCompanyFromUpdate($params);
+                
+                if (!$companyId) {
+                    return false;
+                }
+                
+                // После создания компания уже содержит все данные
+                return $companyId;
+            }
+        }
+
+        /**
+         * Создает новую компанию на основе данных из updateCompanyElement
+         * @param array $params - параметры компании
+         * @return int|false - ID созданной компании или false
+         */
+        private function createCompanyFromUpdate($params){
+            if (!\CModule::IncludeModule('iblock')) {
                 return false;
             }
+
+            $el = new \CIBlockElement;
+            
+            // Обрабатываем пользователей
+            if (!empty($params['OS_COMPANY_USERS'])) {
+                foreach ($params['OS_COMPANY_USERS'] as $key => $b24_id) {
+                    $user = new User();
+                    $userId = $user->getUserIDByB24ID($b24_id);
+                    
+                    if ($userId) {
+                        $params['OS_COMPANY_USERS'][$key] = $userId;
+                        
+                        $groups = [];
+                        if (!empty($params['OS_IS_MARKETING_AGENT']['VALUE'])) {
+                            $groups[] = $user->getMarketingGroupId();
+                        }
+                        if (!empty($params['OS_COMPANY_STATUS'])) {
+                            $statusId = (new UserGroups([]))->searchGroup($params['OS_COMPANY_STATUS'])['ID'];
+                            if ($statusId) {
+                                $groups[] = $statusId;
+                            }
+                        }
+                        
+                        if (!empty($groups)) {
+                            $user->addUserToGroups($userId, $groups);
+                        }
+                    }
+                }
+            }
+            
+            // Обрабатываем файл реквизитов
+            if (!empty($params['OS_REQUSITES_FILE'])) {
+                $fileId = $this->processRequisitesFile($params['OS_REQUSITES_FILE']);
+                if ($fileId) {
+                    $params['OS_REQUSITES_FILE'] = $fileId;
+                }
+            }
+            
+            // Обрабатываем связь с холдингом
+            if (!empty($params['OS_HOLDING_OF'])) {
+                $holdingCompany = $this->getCompanyByB24ID($params['OS_HOLDING_OF']);
+                if ($holdingCompany) {
+                    $params['OS_HOLDING_OF'] = $holdingCompany['ID'];
+                }
+            }
+            
+            // Формируем массив свойств
+            $arProps = [];
+            foreach (self::$codeProps as $code) {
+                if (isset($params[$code])) {
+                    $arProps[$code] = $params[$code];
+                }
+            }
+            
+            $arFields = [
+                'IBLOCK_ID' => $this->iblock_id,
+                'IBLOCK_TYPE' => 'personal',
+                'NAME' => $params['OS_COMPANY_NAME'] ?? 'Новая компания',
+                'CODE' => $params['OS_COMPANY_B24_ID'],
+                'ACTIVE' => $params['ACTIVE'] ?? 'N',
+                'PROPERTY_VALUES' => $arProps
+            ];
+            
+            $companyId = $el->Add($arFields);
+            
+            if ($companyId) {
+                return $companyId;
+            }
+            
+            return false;
+        }
+
+        /**
+         * Обрабатывает файл реквизитов - скачивает и сохраняет в Bitrix
+         * @param array $fileData - данные файла из B24
+         * @return int|false - ID сохраненного файла или false
+         */
+        private function processRequisitesFile($fileData){
+            if (empty($fileData)) {
+                return false;
+            }
+            
+            try {
+                $downloadableUrl = URL_B24 . $fileData['SUBDIR'] . '/' . urlencode($fileData['FILE_NAME']);
+                
+                // Куда сохранить
+                $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/upload/os_requisites/';
+                if (!is_dir($uploadDir)) {
+                    mkdir($uploadDir, 0777, true);
+                }
+                
+                $originalName = $fileData['ORIGINAL_NAME'];
+                $filePath = $uploadDir . $originalName;
+                
+                // Скачиваем файл
+                $fileContent = file_get_contents($downloadableUrl);
+                
+                if ($fileContent === false) {
+                    return false;
+                }
+                
+                // Сохраняем на сервер
+                if (file_put_contents($filePath, $fileContent)) {
+                    // Загружаем файл в Битрикс
+                    $fileArray = \CFile::MakeFileArray($filePath, false, $originalName);
+                    
+                    if ($fileArray && !isset($fileArray['error'])) {
+                        // Сохраняем в систему Битрикс
+                        $savedFileId = \CFile::SaveFile($fileArray, 'os_requisites');
+                        
+                        // Удаляем временный файл
+                        unlink($filePath);
+                        
+                        if ($savedFileId) {
+                            return $savedFileId;
+                        }
+                    }
+                    
+                    // Удаляем временный файл в случае ошибки
+                    if (file_exists($filePath)) {
+                        unlink($filePath);
+                    }
+                }
+            } catch (\Exception $e) {
+                // Ошибка обработки файла
+            }
+            
+            return false;
         }
 
         public function deleteCompanyElement($params){
@@ -267,14 +368,9 @@
             if ($company && !empty($company['ID'])) {
                 if (\CIBlockElement::Delete($company['ID'])) {
                     return true;
-                } else {
-                    echo "Ошибка при удалении компании с ID: " . $company['ID'];
-                    return false;
                 }
-            } else {
-                echo "Компания с B24_ID {$b24_id} не найдена";
-                return false;
             }
+            return false;
         }
 
         public function getCompany($id){
