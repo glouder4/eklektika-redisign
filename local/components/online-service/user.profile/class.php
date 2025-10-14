@@ -48,6 +48,9 @@ class OnlineServiceUserProfileComponent extends CBitrixComponent implements Cont
             return;
         }
 
+        // Устанавливаем заголовок страницы
+        $this->setPageTitle();
+
         // Подключаем шаблон
         $this->includeComponentTemplate();
     }
@@ -71,9 +74,13 @@ class OnlineServiceUserProfileComponent extends CBitrixComponent implements Cont
         // Получаем дополнительную информацию
         $userGroups = CUser::GetUserGroup($userId);
         
+        // Получаем менеджеров пользователя
+        $managers = $this->getUserManagers($userId);
+        
         return [
             'USER' => $arUser,
             'COMPANIES' => $companies,
+            'MANAGERS' => $managers,
             'USER_GROUPS' => $userGroups,
             'IS_CURRENT_USER' => ($USER->GetID() == $userId),
             'CAN_EDIT' => $this->canEditProfile($userId)
@@ -146,6 +153,69 @@ class OnlineServiceUserProfileComponent extends CBitrixComponent implements Cont
     }
 
     /**
+     * Получение менеджеров пользователя
+     */
+    private function getUserManagers($userId)
+    {
+        $managers = [];
+        
+        if (!Loader::includeModule('iblock')) {
+            return [];
+        }
+        
+        // Получаем значения пользовательских полей
+        $rsUser = CUser::GetByID($userId);
+        if ($arUser = $rsUser->Fetch()) {
+            // Собираем ID менеджеров из обоих полей
+            $managerIds = [];
+            
+            // UF_MANAGER может быть массивом или одиночным значением
+            if (!empty($arUser['UF_MANAGER'])) {
+                if (is_array($arUser['UF_MANAGER'])) {
+                    $managerIds = array_merge($managerIds, $arUser['UF_MANAGER']);
+                } else {
+                    $managerIds[] = $arUser['UF_MANAGER'];
+                }
+            }
+            
+            // UF_MANAGER2 может быть массивом или одиночным значением
+            if (!empty($arUser['UF_MANAGER2'])) {
+                if (is_array($arUser['UF_MANAGER2'])) {
+                    $managerIds = array_merge($managerIds, $arUser['UF_MANAGER2']);
+                } else {
+                    $managerIds[] = $arUser['UF_MANAGER2'];
+                }
+            }
+            
+            // Убираем дубликаты
+            $managerIds = array_unique($managerIds);
+            
+            // Получаем полную информацию о каждом менеджере из инфоблока 553
+            foreach ($managerIds as $managerId) {
+                if ($managerId && intval($managerId) > 0) {
+                    $rsManager = CIBlockElement::GetByID($managerId);
+                    if ($arManagerElement = $rsManager->GetNextElement()) {
+                        $arManagerFields = $arManagerElement->GetFields();
+                        $arManagerProps = $arManagerElement->GetProperties();
+                        
+                        // Формируем массив с данными менеджера
+                        $managers[] = [
+                            'ID' => $arManagerFields['ID'],
+                            'NAME' => $arManagerFields['NAME'],
+                            'PREVIEW_PICTURE' => $arManagerFields['PREVIEW_PICTURE'],
+                            'DETAIL_PICTURE' => $arManagerFields['DETAIL_PICTURE'],
+                            'PROPERTIES' => $arManagerProps,
+                            'FIELDS' => $arManagerFields
+                        ];
+                    }
+                }
+            }
+        }
+        
+        return $managers;
+    }
+
+    /**
      * Проверка прав доступа
      */
     private function checkAccess($arResult)
@@ -199,6 +269,30 @@ class OnlineServiceUserProfileComponent extends CBitrixComponent implements Cont
         }
         
         return false;
+    }
+
+    /**
+     * Установка заголовка страницы (H1)
+     */
+    private function setPageTitle()
+    {
+        global $APPLICATION;
+        
+        if (!empty($this->arResult['USER'])) {
+            $user = $this->arResult['USER'];
+            
+            // Формируем полное имя пользователя
+            $fullName = trim($user['NAME'] . ' ' . $user['LAST_NAME']);
+            if (empty($fullName)) {
+                $fullName = $user['LOGIN'];
+            }
+            
+            // Устанавливаем заголовок через SetPageProperty (более надежный способ)
+            $APPLICATION->SetPageProperty('title', $fullName);
+            
+            // Дублируем через SetTitle для совместимости
+            $APPLICATION->SetTitle($fullName);
+        }
     }
 
     /**

@@ -4,8 +4,6 @@
  * @global $APPLICATION
  */
 
-$APPLICATION->SetTitle("Профиль пользователя");
-
 // Получаем ID пользователя из URL
 $userId = $_REQUEST['USER_ID'] ?? '';
 $userId = intval($userId);
