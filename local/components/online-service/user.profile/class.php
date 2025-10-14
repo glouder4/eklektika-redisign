@@ -71,16 +71,24 @@ class OnlineServiceUserProfileComponent extends CBitrixComponent implements Cont
         // Получаем информацию о компаниях пользователя
         $companies = $this->getUserCompanies($userId);
         
+        // Группируем компании по холдингам
+        $holdingsData = $this->groupCompaniesByHoldings($companies);
+        
         // Получаем дополнительную информацию
         $userGroups = CUser::GetUserGroup($userId);
         
         // Получаем менеджеров пользователя
         $managers = $this->getUserManagers($userId);
         
+        // Получаем руководителей компаний пользователя
+        $bosses = $this->getCompanyBosses($companies, $userId);
+        
         return [
             'USER' => $arUser,
             'COMPANIES' => $companies,
+            'HOLDINGS_DATA' => $holdingsData,
             'MANAGERS' => $managers,
+            'BOSSES' => $bosses,
             'USER_GROUPS' => $userGroups,
             'IS_CURRENT_USER' => ($USER->GetID() == $userId),
             'CAN_EDIT' => $this->canEditProfile($userId)
@@ -108,13 +116,18 @@ class OnlineServiceUserProfileComponent extends CBitrixComponent implements Cont
             ],
             false,
             false,
-            ['ID', 'NAME', 'CODE', 'DETAIL_PAGE_URL', 'PROPERTY_OS_COMPANY_NAME', 'PROPERTY_OS_IS_MARKETING_AGENT']
+            ['ID', 'NAME', 'CODE', 'DETAIL_PAGE_URL']
         );
         
-        while ($arCompany = $rsBossCompanies->GetNext()) {
+        while ($arCompanyElement = $rsBossCompanies->GetNextElement()) {
+            $arCompanyFields = $arCompanyElement->GetFields();
+            $arCompanyProps = $arCompanyElement->GetProperties();
+            
             $companies[] = [
                 'TYPE' => 'boss',
-                'DATA' => $arCompany
+                'DATA' => array_merge($arCompanyFields, [
+                    'PROPERTIES' => $arCompanyProps
+                ])
             ];
         }
         
@@ -128,14 +141,17 @@ class OnlineServiceUserProfileComponent extends CBitrixComponent implements Cont
             ],
             false,
             false,
-            ['ID', 'NAME', 'CODE', 'DETAIL_PAGE_URL', 'PROPERTY_OS_COMPANY_NAME', 'PROPERTY_OS_IS_MARKETING_AGENT']
+            ['ID', 'NAME', 'CODE', 'DETAIL_PAGE_URL']
         );
         
-        while ($arCompany = $rsEmployeeCompanies->GetNext()) {
+        while ($arCompanyElement = $rsEmployeeCompanies->GetNextElement()) {
+            $arCompanyFields = $arCompanyElement->GetFields();
+            $arCompanyProps = $arCompanyElement->GetProperties();
+            
             // Проверяем, не является ли пользователь уже руководителем этой компании
             $isAlreadyBoss = false;
             foreach ($companies as $company) {
-                if ($company['DATA']['ID'] == $arCompany['ID']) {
+                if ($company['DATA']['ID'] == $arCompanyFields['ID']) {
                     $isAlreadyBoss = true;
                     break;
                 }
@@ -144,12 +160,148 @@ class OnlineServiceUserProfileComponent extends CBitrixComponent implements Cont
             if (!$isAlreadyBoss) {
                 $companies[] = [
                     'TYPE' => 'employee',
-                    'DATA' => $arCompany
+                    'DATA' => array_merge($arCompanyFields, [
+                        'PROPERTIES' => $arCompanyProps
+                    ])
                 ];
             }
         }
         
         return $companies;
+    }
+
+    /**
+     * Группировка компаний по холдингам
+     */
+    private function groupCompaniesByHoldings($companies)
+    {
+        $holdingsData = [];
+        $processedHoldings = [];
+        
+        foreach ($companies as $companyData) {
+            $company = $companyData['DATA'];
+            $holdingKey = null;
+            $headCompany = null;
+            $childCompanies = [];
+            
+            // Проверяем, является ли компания головной холдинга
+            if (!empty($company['PROPERTIES']['OS_COMPANY_IS_HEAD_OF_HOLDING']['VALUE']) && 
+                ($company['PROPERTIES']['OS_COMPANY_IS_HEAD_OF_HOLDING']['VALUE'] === 'Y' || 
+                 $company['PROPERTIES']['OS_COMPANY_IS_HEAD_OF_HOLDING']['VALUE'] === 'Да')) {
+                
+                $holdingKey = 'head_' . $company['ID'];
+                
+                if (in_array($holdingKey, $processedHoldings)) {
+                    continue;
+                }
+                
+                $headCompany = $company;
+                
+                // Получаем дочерние компании
+                $rsChildCompanies = CIBlockElement::GetList(
+                    [],
+                    [
+                        'IBLOCK_ID' => 57,
+                        'PROPERTY_OS_HOLDING_OF' => $company['ID']
+                    ],
+                    false,
+                    false,
+                    ['ID']
+                );
+                
+                while ($childCompany = $rsChildCompanies->GetNext()) {
+                    $childCompanies[] = $childCompany['ID'];
+                }
+                
+            } else if (!empty($company['PROPERTIES']['OS_HOLDING_OF']['VALUE'])) {
+                
+                $holdingId = $company['PROPERTIES']['OS_HOLDING_OF']['VALUE'];
+                $holdingKey = 'head_' . $holdingId;
+                
+                if (in_array($holdingKey, $processedHoldings)) {
+                    continue;
+                }
+                
+                // Получаем головную компанию
+                $rsHeadCompany = CIBlockElement::GetById($holdingId);
+                if ($headCompanyElement = $rsHeadCompany->GetNextElement()) {
+                    $headCompanyFields = $headCompanyElement->GetFields();
+                    $headCompanyProps = $headCompanyElement->GetProperties();
+                    $headCompany = array_merge($headCompanyFields, [
+                        'PROPERTIES' => $headCompanyProps
+                    ]);
+                }
+                
+                // Получаем все дочерние компании
+                $rsHoldingCompanies = CIBlockElement::GetList(
+                    [],
+                    [
+                        'IBLOCK_ID' => 57,
+                        'PROPERTY_OS_HOLDING_OF' => $holdingId
+                    ],
+                    false,
+                    false,
+                    ['ID']
+                );
+                
+                while ($holdingCompany = $rsHoldingCompanies->GetNext()) {
+                    $childCompanies[] = $holdingCompany['ID'];
+                }
+                
+            } else {
+                
+                $holdingKey = 'standalone_' . $company['ID'];
+                
+                if (in_array($holdingKey, $processedHoldings)) {
+                    continue;
+                }
+                
+                $headCompany = $company;
+            }
+            
+            if ($headCompany) {
+                $holdingsData[] = [
+                    'head_company' => $headCompany,
+                    'child_companies' => $childCompanies
+                ];
+                $processedHoldings[] = $holdingKey;
+            }
+        }
+        
+        return $holdingsData;
+    }
+
+    /**
+     * Получение руководителей компаний пользователя
+     */
+    private function getCompanyBosses($companies, $userId)
+    {
+        $bosses = [];
+        $processedBossIds = [];
+        
+        foreach ($companies as $companyData) {
+            $company = $companyData['DATA'];
+            
+            // Получаем руководителей компании
+            $bossIds = $company['PROPERTIES']['OS_COMPANY_BOSS']['VALUE'] ?? [];
+            
+            if (!is_array($bossIds)) {
+                $bossIds = $bossIds ? [$bossIds] : [];
+            }
+            
+            foreach ($bossIds as $bossId) {
+                // Исключаем самого пользователя и уже обработанных руководителей
+                if ($bossId && $bossId != $userId && !in_array($bossId, $processedBossIds)) {
+                    $rsUser = CUser::GetByID($bossId);
+                    if ($boss = $rsUser->Fetch()) {
+                        $bosses[] = $boss;
+                        $processedBossIds[] = $bossId;
+                    }
+                }
+            }
+        }
+        
+        return $bosses;
     }
 
     /**

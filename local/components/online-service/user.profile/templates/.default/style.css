@@ -114,3 +114,9 @@
     flex-direction: row;
     gap: 23px;
 }
+.sale-personal-section-claims-title{
+    font-weight: 500!important;
+    font-size: 16px!important;
+    line-height: 18px;
+    color: #404040!important;
+}

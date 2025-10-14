@@ -19,7 +19,9 @@ $this->setFrameMode(true);
 
 // Получаем данные пользователя
 $user = $arResult['USER'];
+
 $companies = $arResult['COMPANIES'];
+$holdingsData = $arResult['HOLDINGS_DATA'];
 $managers = $arResult['MANAGERS'];
 $isCurrentUser = $arResult['IS_CURRENT_USER'];
 $canEdit = $arResult['CAN_EDIT'];
@@ -58,120 +60,16 @@ $arSvg = [
             </div>
             <div class="sale-personal-section-claims-wrap">
                 <div class="sale-personal-section-claims-items">
-            <?php
-            // Группируем компании по холдингам (аналогично companies.php)
-            $holdingsData = [];
-            $processedHoldings = [];
-            
-            foreach ($companies as $companyData) {
-                $company = $companyData['DATA'];
-                $holdingKey = null;
-                $headCompany = null;
-                $childCompanies = [];
-                
-                // Получаем полную информацию о компании
-                $rsCompany = CIBlockElement::GetById($company['ID']);
-                if ($companyElement = $rsCompany->GetNextElement()) {
-                    $companyProps = $companyElement->GetProperties();
-                    $companyFields = $companyElement->GetFields();
-                    
-                    // Проверяем, является ли компания головной холдинга
-                    if (!empty($companyProps['OS_COMPANY_IS_HEAD_OF_HOLDING']['VALUE']) && 
-                        ($companyProps['OS_COMPANY_IS_HEAD_OF_HOLDING']['VALUE'] === 'Y' || 
-                         $companyProps['OS_COMPANY_IS_HEAD_OF_HOLDING']['VALUE'] === 'Да')) {
-                        
-                        $holdingKey = 'head_' . $company['ID'];
-                        
-                        if (in_array($holdingKey, $processedHoldings)) {
-                            continue;
-                        }
-                        
-                        $headCompany = $companyFields;
-                        
-                        // Получаем дочерние компании
-                        $rsChildCompanies = CIBlockElement::GetList(
-                            [],
-                            [
-                                'IBLOCK_ID' => 57,
-                                'PROPERTY_OS_HOLDING_OF' => $company['ID']
-                            ],
-                            false,
-                            false,
-                            ['ID']
-                        );
-                        
-                        while ($childCompany = $rsChildCompanies->GetNext()) {
-                            $childCompanies[] = $childCompany['ID'];
-                        }
-                        
-                    } else if (!empty($companyProps['OS_HOLDING_OF']['VALUE'])) {
-                        
-                        $holdingId = $companyProps['OS_HOLDING_OF']['VALUE'];
-                        $holdingKey = 'head_' . $holdingId;
-                        
-                        if (in_array($holdingKey, $processedHoldings)) {
-                            continue;
-                        }
-                        
-                        // Получаем головную компанию
-                        $rsHeadCompany = CIBlockElement::GetById($holdingId);
-                        if ($headCompanyData = $rsHeadCompany->GetNextElement()) {
-                            $headCompany = $headCompanyData->GetFields();
-                        }
-                        
-                        // Получаем все дочерние компании
-                        $rsHoldingCompanies = CIBlockElement::GetList(
-                            [],
-                            [
-                                'IBLOCK_ID' => 57,
-                                'PROPERTY_OS_HOLDING_OF' => $holdingId
-                            ],
-                            false,
-                            false,
-                            ['ID']
-                        );
-                        
-                        while ($holdingCompany = $rsHoldingCompanies->GetNext()) {
-                            $childCompanies[] = $holdingCompany['ID'];
-                        }
-                        
-                    } else {
-                        
-                        $holdingKey = 'standalone_' . $company['ID'];
-                        
-                        if (in_array($holdingKey, $processedHoldings)) {
-                            continue;
-                        }
-                        
-                        $headCompany = $companyFields;
-                    }
-                    
-                    if ($headCompany) {
-                        $holdingsData[] = [
-                            'head_company' => $headCompany,
-                            'child_companies' => $childCompanies
-                        ];
-                        $processedHoldings[] = $holdingKey;
-                    }
-                }
-            }
-            ?>
-            
             <?php if (!empty($holdingsData)): ?>
                 <?php foreach ($holdingsData as $holdingIndex => $companiesData): ?>
                 <div class="companies-compact <?= $holdingIndex > 0 ? 'companies-compact--additional' : '' ?>">
                     <!-- Головная компания -->
                     <?php
                     $headCompanyData = $companiesData['head_company'];
-                    $rsHeadCompany = CIBlockElement::GetById($headCompanyData['ID']);
-                    if ($headCompanyElement = $rsHeadCompany->GetNextElement()) {
-                        $headCompanyProps = $headCompanyElement->GetProperties();
-                        $headCompanyFields = $headCompanyElement->GetFields();
-                        
-                        $isMarketingAgent = $headCompanyProps['OS_IS_MARKETING_AGENT']['VALUE_XML_ID'] ?? '';
-                        $isHeadOfHolding = $headCompanyProps['OS_COMPANY_IS_HEAD_OF_HOLDING']['VALUE_XML_ID'] ?? '';
-                        $companyName = $headCompanyFields['NAME'];
-                        $detailUrl = $headCompanyFields['DETAIL_PAGE_URL'];
+                    $isMarketingAgent = $headCompanyData['PROPERTIES']['OS_IS_MARKETING_AGENT']['VALUE_XML_ID'] ?? '';
+                    $isHeadOfHolding = $headCompanyData['PROPERTIES']['OS_COMPANY_IS_HEAD_OF_HOLDING']['VALUE_XML_ID'] ?? '';
+                    $companyName = $headCompanyData['NAME'];
+                    $detailUrl = $headCompanyData['DETAIL_PAGE_URL'];
                     ?>
                     <a href="<?= $detailUrl ?>" class="company-item company-item--head">
                         <div class="company-item__content">
@@ -186,20 +84,20 @@ $arSvg = [
                             </div>
                         </div>
                     </a>
-                    <?php } ?>
                     
                     <!-- Дочерние компании -->
                     <?php if (!empty($companiesData['child_companies'])): ?>
                         <?php foreach ($companiesData['child_companies'] as $childId): ?>
                             <?php
+                            // Получаем данные дочерней компании
                             $rsChildCompany = CIBlockElement::GetById($childId);
-                            if ($childElement = $rsChildCompany->GetNextElement()) {
-                                $childProps = $childElement->GetProperties();
-                                $childFields = $childElement->GetFields();
+                            if ($childCompanyElement = $rsChildCompany->GetNextElement()) {
+                                $childCompanyFields = $childCompanyElement->GetFields();
+                                $childCompanyProps = $childCompanyElement->GetProperties();
                                 
-                                $isMarketingAgent = $childProps['OS_IS_MARKETING_AGENT']['VALUE_XML_ID'] ?? '';
-                                $companyName = $childFields['NAME'];
-                                $detailUrl = $childFields['DETAIL_PAGE_URL'];
+                                $isMarketingAgent = $childCompanyProps['OS_IS_MARKETING_AGENT']['VALUE_XML_ID'] ?? '';
+                                $companyName = $childCompanyFields['NAME'];
+                                $detailUrl = $childCompanyFields['DETAIL_PAGE_URL'];
                             ?>
                                 <?php if ($isMarketingAgent == 'YES'): ?>
                                     <a href="<?= $detailUrl ?>" class="company-item company-item--child">
@@ -258,9 +156,9 @@ $arSvg = [
                             $managerPhoto = $arPhoto['SRC'];
                         }
                     }
-                    
+
                     // Получаем должность из свойств
-                    $managerPost = $manager['PROPERTIES']['POST']['VALUE'] ?? 
+                    $managerPost = $manager['PROPERTIES']['WORK_POSITION']['VALUE'] ??
                                    $manager['PROPERTIES']['POSITION']['VALUE'] ?? 
                                    $manager['PROPERTIES']['DOLZHNOST']['VALUE'] ?? 
                                    'Менеджер';

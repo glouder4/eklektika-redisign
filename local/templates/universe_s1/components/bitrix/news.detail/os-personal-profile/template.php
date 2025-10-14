@@ -19,6 +19,7 @@ $companyPhone = $arResult["PROPERTIES"]["OS_COMPANY_PHONE"]["VALUE"] ?? '';
 $companyInn = $arResult["PROPERTIES"]["OS_COMPANY_INN"]["VALUE"] ?? '';
 $companyBossIds = $arResult["PROPERTIES"]["OS_COMPANY_BOSS"]["VALUE"] ?? [];
 $companyUserIds = $arResult["PROPERTIES"]["OS_COMPANY_USERS"]["VALUE"] ?? [];
+
 $isMarketingAgent = $arResult["PROPERTIES"]["OS_IS_MARKETING_AGENT"]["VALUE_XML_ID"] ?? '';
 $isHeadOfHolding = $arResult["PROPERTIES"]["OS_COMPANY_IS_HEAD_OF_HOLDING"]["VALUE_XML_ID"] ?? '';
 
@@ -144,7 +145,7 @@ $GLOBALS["OS_BREADCRUMBS"] = [
             <div class="company-management__content">
                 <?if(!empty($bosses)):?>
                 <?foreach($bosses as $boss):?>
-                <div class="management-card">
+                <div class="management-card" data-employee-id="<?=$boss['ID']?>">
                     <div class="management-card__avatar">
                         <?if($boss['PERSONAL_PHOTO']):?>
                             <?$photoSrc = CFile::GetPath($boss['PERSONAL_PHOTO']);?>
@@ -164,15 +165,15 @@ $GLOBALS["OS_BREADCRUMBS"] = [
                         </div>
                         <div class="management-card__contacts">
                             <?if($boss['PERSONAL_PHONE']):?>
-                            <div class="management-card__contact">
-                                <a href="tel:<?=$boss['PERSONAL_PHONE']?>">
+                            <div>
+                                <a href="tel:<?=$boss['PERSONAL_PHONE']?>" class="management-card__contact">
                                     <?=$boss['PERSONAL_PHONE']?>
                                 </a>
                             </div>
                             <?endif;?>
                             <?if($boss['EMAIL']):?>
-                            <div class="management-card__contact">
-                                <a href="mailto:<?=$boss['EMAIL']?>">
+                            <div>
+                                <a href="mailto:<?=$boss['EMAIL']?>" class="management-card__contact">
                                     <?=$boss['EMAIL']?>
                                 </a>
                             </div>
@@ -405,29 +406,29 @@ style.textContent = `
         100% { transform: rotate(360deg); }
     }
     
-    .employee-card {
+    .employee-card, .management-card {
         cursor: pointer;
         transition: background-color 0.2s ease;
     }
     
-    .employee-card:hover {
+    .employee-card:hover, .management-card:hover {
         background-color: #f8f9fa;
     }
 `;
 document.head.appendChild(style);
 
-// Обработка кликов по карточкам сотрудников
+// Обработка кликов по карточкам сотрудников и руководителей
 document.addEventListener('DOMContentLoaded', function() {
-    const employeeCards = document.querySelectorAll('.employee-card');
+    const employeeCards = document.querySelectorAll('.employee-card, .management-card');
     
     employeeCards.forEach(function(card) {
         card.addEventListener('click', function(event) {
             // Проверяем, не был ли клик по ссылке контакта
-            if (event.target.closest('.employee-card__contact')) {
+            if (event.target.closest('.employee-card__contact') || event.target.closest('.management-card__contact')) {
                 return; // Не переходим на профиль, если клик по телефону/email
             }
             
-            // Получаем ID сотрудника и переходим на его профиль
+            // Получаем ID сотрудника/руководителя и переходим на его профиль
             const employeeId = card.getAttribute('data-employee-id');
             if (employeeId) {
                 window.location.href = '/company/user/' + employeeId + '/';

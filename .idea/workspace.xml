@@ -6,10 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="a53d02d7-d404-452c-a903-dd81636134fa" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/company/user/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/company/user/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local/components/online-service/user.profile/class.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/components/online-service/user.profile/class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local/components/online-service/user.profile/templates/.default/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/local/components/online-service/user.profile/templates/.default/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local/components/online-service/user.profile/templates/.default/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/components/online-service/user.profile/templates/.default/template.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/news.detail/os-personal-profile/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/news.detail/os-personal-profile/template.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/sale.personal.section/template.1/parts/companies.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/sale.personal.section/template.1/parts/companies.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,7 +158,7 @@
       <workItem from="1760077991920" duration="16359000" />
       <workItem from="1760336834012" duration="18000" />
       <workItem from="1760357581184" duration="2147000" />
-      <workItem from="1760424456781" duration="7433000" />
+      <workItem from="1760424456781" duration="10393000" />
     </task>
     <servers />
   </component>
