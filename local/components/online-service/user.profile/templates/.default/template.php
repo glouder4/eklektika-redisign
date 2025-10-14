@@ -51,6 +51,103 @@ $arSvg = [
 <div class="user-profile-layout">
     <!-- Левая колонка: Компании -->
     <div class="user-profile__left">
+        <!-- Карточка сотрудника -->
+        <div class="sale-personal-section-claims employee-card">
+            <div class="sale-personal-section-claims-header">
+                <div class="sale-personal-section-claims-title">
+                    Информация о сотруднике
+                </div>
+            </div>
+            <div class="sale-personal-section-claims-wrap">
+                <div class="manager-card-fields">
+                    <div class="manager-personal-info">
+                        <div class="manager--avatar_field">
+                            <?php
+                            // Получаем фото сотрудника
+                            $userPhoto = '';
+                            if (!empty($user['PERSONAL_PHOTO'])) {
+                                $arPhoto = CFile::GetFileArray($user['PERSONAL_PHOTO']);
+                                if ($arPhoto) {
+                                    $userPhoto = $arPhoto['SRC'];
+                                }
+                            }
+                            
+                            // Получаем инициалы
+                            $initials = '';
+                            if (!empty($user['NAME'])) {
+                                $initials .= mb_substr($user['NAME'], 0, 1);
+                            }
+                            if (!empty($user['LAST_NAME'])) {
+                                $initials .= mb_substr($user['LAST_NAME'], 0, 1);
+                            }
+                            $initials = mb_strtoupper($initials);
+                            
+                            if (!empty($userPhoto)):
+                            ?>
+                                <img src="<?= htmlspecialchars($userPhoto) ?>" alt="<?= htmlspecialchars($fullName) ?>">
+                            <?php else: ?>
+                                <div class="avatar-placeholder">
+                                    <span><?= htmlspecialchars($initials) ?></span>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                        <div class="manager--info">
+                            <?php if (!empty($user['WORK_POSITION'])): ?>
+                                <div class="field post">
+                                    <span><?= htmlspecialchars($user['WORK_POSITION']) ?></span>
+                                </div>
+                            <?php endif; ?>
+                            <div class="field name">
+                                <span><?= htmlspecialchars($fullName) ?></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="manager-action-links--wrapper">
+                        <?php
+                        // Определяем основной телефон
+                        $userPhone = $user['PERSONAL_MOBILE'] ?? $user['WORK_PHONE'] ?? $user['PERSONAL_PHONE'] ?? '';
+                        if (!empty($userPhone)):
+                        ?>
+                            <div class="phone-link link">
+                                <a href="tel:<?= htmlspecialchars(preg_replace('/[^0-9+]/', '', $userPhone)) ?>">
+                                    <div class="icon">
+                                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M16.5643 12.7424L14.3315 10.5095C13.534 9.71209 12.1784 10.0311 11.8594 11.0678C11.6202 11.7855 10.8227 12.1842 10.105 12.0247C8.51012 11.626 6.35702 9.5526 5.9583 7.87797C5.71906 7.16024 6.19753 6.36279 6.91523 6.12359C7.95191 5.80461 8.27089 4.44895 7.47344 3.65151L5.2406 1.41866C4.60264 0.860447 3.64571 0.860447 3.08749 1.41866L1.57235 2.93381C0.0572004 4.5287 1.73184 8.75516 5.47983 12.5032C9.22782 16.2511 13.4543 18.0056 15.0492 16.4106L16.5643 14.8955C17.1226 14.2575 17.1226 13.3006 16.5643 12.7424Z" fill="#0065FF"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="data"><?= htmlspecialchars($userPhone) ?></div>
+                                </a>
+                            </div>
+                        <?php endif; ?>
+                        
+                        <?php if (!empty($user['EMAIL'])): ?>
+                            <div class="email-link link">
+                                <a href="mailto:<?= htmlspecialchars($user['EMAIL']) ?>">
+                                    <div class="icon">
+                                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <g clip-path="url(#clip0)">
+                                                <path d="M11.9316 9.09224L17.9999 12.9285V5.09399L11.9316 9.09224Z" fill="#0065FF"></path>
+                                                <path d="M0 5.09399V12.9285L6.06825 9.09224L0 5.09399Z" fill="#0065FF"></path>
+                                                <path d="M16.8754 2.8125H1.12543C0.564055 2.8125 0.118555 3.231 0.0341797 3.76988L9.00043 9.67725L17.9667 3.76988C17.8823 3.231 17.4368 2.8125 16.8754 2.8125Z" fill="#0065FF"></path>
+                                                <path d="M10.9014 9.77188L9.30951 10.8204C9.21501 10.8823 9.10813 10.9126 9.00013 10.9126C8.89213 10.9126 8.78526 10.8823 8.69076 10.8204L7.09888 9.77075L0.0361328 14.2381C0.122758 14.7725 0.566008 15.1876 1.12513 15.1876H16.8751C17.4343 15.1876 17.8775 14.7725 17.9641 14.2381L10.9014 9.77188Z" fill="#0065FF"></path>
+                                            </g>
+                                            <defs>
+                                                <clipPath id="clip0">
+                                                    <rect width="18" height="18" fill="white"></rect>
+                                                </clipPath>
+                                            </defs>
+                                        </svg>
+                                    </div>
+                                    <div class="data"><?= htmlspecialchars($user['EMAIL']) ?></div>
+                                </a>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <?php if (!empty($companies)): ?>
         <div class="sale-personal-section-claims">
             <div class="sale-personal-section-claims-header">

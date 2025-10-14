@@ -114,9 +114,52 @@
     flex-direction: row;
     gap: 23px;
 }
+.sale-personal-section-claims{
+    margin-top: 20px!important;
+}
+.sale-personal-section-claims.employee-card{
+    margin-top: 0px!important;
+}
 .sale-personal-section-claims-title{
     font-weight: 500!important;
     font-size: 16px!important;
     line-height: 18px;
     color: #404040!important;
+
+}
+
+/* Карточка сотрудника */
+.employee-card {
+    margin-bottom: 24px;
+}
+
+.employee-card .manager--avatar_field {
+    width: 80px;
+    height: 80px;
+}
+
+.employee-card .manager--avatar_field img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Заглушка аватара с инициалами */
+.avatar-placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: #744A9E;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatar-placeholder span {
+    font-family: Manrope, sans-serif;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 1;
+    color: #FFFFFF;
+    user-select: none;
 }
