@@ -420,6 +420,29 @@ class OnlineServiceUserProfileComponent extends CBitrixComponent implements Cont
             return true;
         }
         
+        // Проверяем, является ли текущий пользователь руководителем компании, где userId является сотрудником
+        $currentUserId = $USER->GetID();
+        if ($currentUserId && $userId != $currentUserId) {
+            // Получаем компании просматриваемого пользователя
+            $targetUserCompanies = $this->getUserCompanies($userId);
+            
+            foreach ($targetUserCompanies as $companyData) {
+                $company = $companyData['DATA'];
+                
+                // Получаем руководителей компании
+                $bossIds = $company['PROPERTIES']['OS_COMPANY_BOSS']['VALUE'] ?? [];
+                
+                if (!is_array($bossIds)) {
+                    $bossIds = $bossIds ? [$bossIds] : [];
+                }
+                
+                // Проверяем, является ли текущий пользователь руководителем этой компании
+                if (in_array($currentUserId, $bossIds)) {
+                    return true;
+                }
+            }
+        }
+        
         return false;
     }
 

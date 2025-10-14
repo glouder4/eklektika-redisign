@@ -163,3 +163,34 @@
     color: #FFFFFF;
     user-select: none;
 }
+
+/* Кнопка редактирования в заголовке */
+.sale-personal-section-claims-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+
+.btn-edit-profile {
+    font-family: Manrope, sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1;
+    color: #0065FF;
+    text-decoration: none;
+    transition: color 0.2s ease, opacity 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn-edit-profile:hover,
+.btn-edit-profile:active,
+.btn-edit-profile:focus{
+    color: #0052CC!important;
+    text-decoration: none;
+}
+
+.btn-edit-profile:active {
+    color: #0052CC;
+    opacity: 0.8;
+}

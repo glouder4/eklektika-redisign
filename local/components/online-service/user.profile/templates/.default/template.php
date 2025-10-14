@@ -57,6 +57,11 @@ $arSvg = [
                 <div class="sale-personal-section-claims-title">
                     Информация о сотруднике
                 </div>
+                <?php if ($canEdit): ?>
+                    <a href="./edit?type=profile" class="btn-edit-profile">
+                        Редактировать
+                    </a>
+                <?php endif; ?>
             </div>
             <div class="sale-personal-section-claims-wrap">
                 <div class="manager-card-fields">
@@ -154,6 +159,11 @@ $arSvg = [
                 <div class="sale-personal-section-claims-title">
                     Компании
                 </div>
+                <?php if ($canEdit): ?>
+                    <a href="./edit?type=companies" class="btn-edit-profile">
+                        Редактировать
+                    </a>
+                <?php endif; ?>
             </div>
             <div class="sale-personal-section-claims-wrap">
                 <div class="sale-personal-section-claims-items">
