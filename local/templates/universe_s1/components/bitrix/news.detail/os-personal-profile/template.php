@@ -281,7 +281,7 @@ $GLOBALS["OS_BREADCRUMBS"] = [
                 <?if(!empty($employees)):?>
                 <div class="employees-list">
                     <?foreach($employees as $employee):?>
-                    <div class="employee-card">
+                    <div class="employee-card" data-employee-id="<?=$employee['ID']?>">
                         <div class="employee-card__avatar">
                             <?if($employee['PERSONAL_PHOTO']):?>
                                 <?$photoSrc = CFile::GetPath($employee['PERSONAL_PHOTO']);?>
@@ -404,8 +404,37 @@ style.textContent = `
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
     }
+    
+    .employee-card {
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+    }
+    
+    .employee-card:hover {
+        background-color: #f8f9fa;
+    }
 `;
 document.head.appendChild(style);
+
+// Обработка кликов по карточкам сотрудников
+document.addEventListener('DOMContentLoaded', function() {
+    const employeeCards = document.querySelectorAll('.employee-card');
+    
+    employeeCards.forEach(function(card) {
+        card.addEventListener('click', function(event) {
+            // Проверяем, не был ли клик по ссылке контакта
+            if (event.target.closest('.employee-card__contact')) {
+                return; // Не переходим на профиль, если клик по телефону/email
+            }
+            
+            // Получаем ID сотрудника и переходим на его профиль
+            const employeeId = card.getAttribute('data-employee-id');
+            if (employeeId) {
+                window.location.href = '/company/user/' + employeeId + '/';
+            }
+        });
+    });
+});
 </script>
 <?else:?>
 <div class="company-profile__no-access">

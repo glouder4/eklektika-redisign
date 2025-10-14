@@ -61,61 +61,73 @@ die();*/
         $view_type = $arItem['PROPERTIES']['BANNER_VIEW_TYPE']['VALUE_XML_ID'] ?? "VIEW_1";
 
         ?>
-        <div class="fullscreen-slider--slide">
+        <div class="fullscreen-slider--slide">\
             <?php
-            $sPictureMobile = $arData['MOBILE']['PICTURE']['USE'] ? $arData['MOBILE']['PICTURE']['VALUE']['SRC'] : $sPicture;
-            //$mainPicture = $arData['PICTURE']['VALUE']['SRC'];
+                if( $arItem['PROPERTIES']['IS_BANNER_LINK']['VALUE_XML_ID'] == "YES" ){
+                    $targetBlack = $arData['LINK']['BLANK'] ? "target='_blank'" : null;
+                    echo "<a href='".$arData['LINK']['VALUE']."' $targetBlack>";
+                }
             ?>
-            <div class="fullscreen-slider--slide_mobile-slide">
-                <img src="<?=$sPictureMobile;?>" alt="Название слайда 1">
-            </div>
-            <div class="fullscreen-slider--slide_desktop-slide">
-                <img src="<?=$sPicture;?>" alt="Название слайда 1">
-            </div>
 
-            <div class="fullscreen-slider--slide-data">
-                <div class="fullscreen-slider--slide-data--title <?=$view_type;?>">
-                    <span><?=$sItemName;?></span>
+                <?php
+                $sPictureMobile = $arData['MOBILE']['PICTURE']['USE'] ? $arData['MOBILE']['PICTURE']['VALUE']['SRC'] : $sPicture;
+                //$mainPicture = $arData['PICTURE']['VALUE']['SRC'];
+                ?>
+                <div class="fullscreen-slider--slide_mobile-slide">
+                    <img src="<?=$sPictureMobile;?>" alt="Название слайда 1">
                 </div>
-                <div class="fullscreen-slider--slide-data--description">
-                    <?php
-
-                    $vText($arData, $bItemsFirst && $arVisual['HEADER']['H1'], $arResult['FORM']);
-                    ?>
-                    <?php //$vAdditional($arData) ?>
+                <div class="fullscreen-slider--slide_desktop-slide">
+                    <img src="<?=$sPicture;?>" alt="Название слайда 1">
                 </div>
-                <?php if ($arData['BUTTON']['SHOW'] || $arResult['FORM']['SHOW']) {
-                    $vTextButton = include(__DIR__.'/parts/buttons/onlineserice-view.1.php');
-                    ?>
-                    <?php if ($arData['BUTTON']['SHOW']) {
 
-                        if (empty($arData['BUTTON']['TEXT']))
-                            $arData['BUTTON']['TEXT'] = Loc::getMessage('C_MAIN_SLIDER_TEMPLATE_1_BUTTON_TEXT_DEFAULT');
+                <div class="fullscreen-slider--slide-data">
+                    <div class="fullscreen-slider--slide-data--title <?=$view_type;?>">
+                        <span><?=$sItemName;?></span>
+                    </div>
+                    <div class="fullscreen-slider--slide-data--description">
+                        <?php
 
+                        $vText($arData, $bItemsFirst && $arVisual['HEADER']['H1'], $arResult['FORM']);
                         ?>
-                        <?php $vTextButton(
-                            $arData['LINK']['VALUE'],
-                            $arData['LINK']['BLANK'],
-                            $arData['BUTTON']['TEXT']
-                        ) ?>
-                    <?php } ?>
-                    <?php if ($arResult['FORM']['SHOW']) { ?>
-                        <?= Html::tag('div', $arResult['FORM']['BUTTON'], [
-                            'class' => [
-                                'widget-item-button',
-                                'intec-cl-background' => [
-                                    '',
-                                    'light-hover'
+                        <?php //$vAdditional($arData) ?>
+                    </div>
+                    <?php if ($arData['BUTTON']['SHOW'] || $arResult['FORM']['SHOW']) {
+                        $vTextButton = include(__DIR__.'/parts/buttons/onlineserice-view.1.php');
+                        ?>
+                        <?php if ($arData['BUTTON']['SHOW']) {
+
+                            if (empty($arData['BUTTON']['TEXT']))
+                                $arData['BUTTON']['TEXT'] = Loc::getMessage('C_MAIN_SLIDER_TEMPLATE_1_BUTTON_TEXT_DEFAULT');
+
+                            ?>
+                            <?php $vTextButton(
+                                $arData['LINK']['VALUE'],
+                                $arData['LINK']['BLANK'],
+                                $arData['BUTTON']['TEXT']
+                            ) ?>
+                        <?php } ?>
+                        <?php if ($arResult['FORM']['SHOW']) { ?>
+                            <?= Html::tag('div', $arResult['FORM']['BUTTON'], [
+                                'class' => [
+                                    'widget-item-button',
+                                    'intec-cl-background' => [
+                                        '',
+                                        'light-hover'
+                                    ]
+                                ],
+                                'data' => [
+                                    'role' => 'form',
+                                    'name' => $arData['NAME']
                                 ]
-                            ],
-                            'data' => [
-                                'role' => 'form',
-                                'name' => $arData['NAME']
-                            ]
-                        ]) ?>
+                            ]) ?>
+                        <?php } ?>
                     <?php } ?>
-                <?php } ?>
-            </div>
+                </div>
+            <?php
+                if( $arItem['PROPERTIES']['IS_BANNER_LINK']['VALUE_XML_ID'] == "YES" ){
+                    echo "</a>";
+                }
+            ?>
         </div>
         <?php $bItemsFirst = false ?>
     <?php } ?>

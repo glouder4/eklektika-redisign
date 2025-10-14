@@ -1,0 +1,399 @@
+/* Стили для профиля пользователя */
+.user-profile {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.user-profile__header {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 32px;
+    padding: 24px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-profile__avatar {
+    flex-shrink: 0;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-profile__avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.user-profile__avatar-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.user-profile__info {
+    flex: 1;
+    min-width: 0;
+}
+
+.user-profile__name {
+    font-size: 32px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0 0 8px 0;
+    line-height: 1.2;
+}
+
+.user-profile__position {
+    font-size: 18px;
+    color: #7f8c8d;
+    margin-bottom: 16px;
+    font-weight: 500;
+}
+
+.user-profile__contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.user-profile__contact {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #34495e;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.user-profile__contact:hover {
+    color: #3498db;
+    text-decoration: none;
+}
+
+.user-profile__contact-icon {
+    color: #95a5a6;
+    flex-shrink: 0;
+}
+
+.user-profile__actions {
+    margin-top: 20px;
+}
+
+.user-profile__section {
+    margin-bottom: 32px;
+}
+
+.user-profile__section-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #ecf0f1;
+}
+
+.companies-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+}
+
+.company-card {
+    position: relative;
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border-left: 4px solid #e9ecef;
+}
+
+.company-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.company-card--boss {
+    border-left-color: #f39c12;
+}
+
+.company-card--boss .company-card__icon {
+    color: #f39c12;
+}
+
+.company-card--employee {
+    border-left-color: #3498db;
+}
+
+.company-card--employee .company-card__icon {
+    color: #3498db;
+}
+
+.company-card__icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.company-card__content {
+    margin-bottom: 12px;
+}
+
+.company-card__name {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 4px;
+}
+
+.company-card__role {
+    font-size: 14px;
+    color: #7f8c8d;
+    font-weight: 500;
+}
+
+.company-card__status {
+    margin-bottom: 12px;
+}
+
+.company-card__link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    border-radius: 12px;
+}
+
+.badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.badge--active {
+    background: #d4edda;
+    color: #155724;
+}
+
+.badge--inactive {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.user-profile__address {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-profile__address div {
+    color: #34495e;
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+.user-profile__address div:last-child {
+    margin-bottom: 0;
+}
+
+/* Стили для модального окна */
+.modal-content {
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+    border-bottom: 1px solid #e9ecef;
+    padding: 20px 24px;
+}
+
+.modal-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.modal-body {
+    padding: 24px;
+}
+
+.modal-footer {
+    border-top: 1px solid #e9ecef;
+    padding: 20px 24px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #34495e;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.form-control {
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+    outline: none;
+}
+
+/* Кнопки */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+
+.btn-primary:hover {
+    background: #2980b9;
+    border-color: #2980b9;
+    color: white;
+}
+
+.btn-outline-primary {
+    background: transparent;
+    color: #3498db;
+    border-color: #3498db;
+}
+
+.btn-outline-primary:hover {
+    background: #3498db;
+    color: white;
+}
+
+.btn-secondary {
+    background: #95a5a6;
+    color: white;
+    border-color: #95a5a6;
+}
+
+.btn-secondary:hover {
+    background: #7f8c8d;
+    border-color: #7f8c8d;
+    color: white;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .user-profile {
+        padding: 16px;
+    }
+    
+    .user-profile__header {
+        flex-direction: column;
+        text-align: center;
+        gap: 16px;
+    }
+    
+    .user-profile__avatar {
+        width: 100px;
+        height: 100px;
+        align-self: center;
+    }
+    
+    .user-profile__name {
+        font-size: 24px;
+    }
+    
+    .user-profile__position {
+        font-size: 16px;
+    }
+    
+    .companies-list {
+        grid-template-columns: 1fr;
+    }
+    
+    .company-card {
+        padding: 16px;
+    }
+    
+    .modal-dialog {
+        margin: 16px;
+    }
+    
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+        padding: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .user-profile__header {
+        padding: 16px;
+    }
+    
+    .user-profile__avatar {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .user-profile__avatar-placeholder {
+        font-size: 32px;
+    }
+    
+    .user-profile__name {
+        font-size: 20px;
+    }
+    
+    .user-profile__position {
+        font-size: 14px;
+    }
+    
+    .user-profile__contact {
+        font-size: 14px;
+    }
+}

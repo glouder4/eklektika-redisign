@@ -219,7 +219,7 @@ $arUrlRewrite=array (
   51 =>
   array (
     'CONDITION' => '#^/company/user/([^/?]+)/?#',
-    'RULE' => 'ELEMENT_CODE=$1',
+    'RULE' => 'USER_ID=$1',
     'ID' => 'bitrix:news',
     'PATH' => '/company/user/index.php',
     'SORT' => 100,
