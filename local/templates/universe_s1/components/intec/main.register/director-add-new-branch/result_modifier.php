@@ -67,6 +67,8 @@ foreach ($correctSortOrder as $key => $correctFieldBlock){
 global $USER;
 $arResult['HEAD_COMPANY_ID'] = false;
 $arResult['SHOW_ERROR_NO_HEAD_COMPANY'] = false;
+$arResult['SHOW_ERROR_B24_SYNC'] = false;
+$arResult['ERROR_MESSAGE'] = '';
 
 // Проверяем, передан ли ID головной компании в параметрах
 if (!empty($_GET['head_company']) && intval($_GET['head_company']) > 0) {
@@ -89,20 +91,32 @@ if (!empty($_GET['head_company']) && intval($_GET['head_company']) > 0) {
         
         // Проверяем права доступа: администратор или руководитель компании
         if ($USER->IsAdmin() || in_array($currentUserId, $companyBosses)) {
-            // Все ок, пользователь имеет право добавлять дочерние компании
-            $arResult['HEAD_COMPANY_ID'] = $headCompanyId;
-            $arResult['HEAD_COMPANY_B24_ID'] = $headCompanyData['OS_COMPANY_B24_ID'];
+            // Проверяем наличие OS_HEAD_COMPANY_B24_ID (ВАЖНО!)
+            $headCompanyB24Id = $headCompanyData['OS_HEAD_COMPANY_B24_ID'] ?? '';
+            
+            if (empty($headCompanyB24Id)) {
+                // Критическая ошибка: нет синхронизации с B24
+                $arResult['SHOW_ERROR_B24_SYNC'] = true;
+                $arResult['ERROR_MESSAGE'] = 'Ошибка синхронизации с Bitrix24. Головная компания не имеет связи с CRM системой. Пожалуйста, обратитесь к персональному менеджеру для исправления данной ошибки.';
+            } else {
+                // Все ок, пользователь имеет право добавлять дочерние компании
+                $arResult['HEAD_COMPANY_ID'] = $headCompanyId;
+                $arResult['HEAD_COMPANY_B24_ID'] = $headCompanyB24Id;
+            }
         } else {
             // Пользователь не является руководителем этой компании
             $arResult['SHOW_ERROR_NO_HEAD_COMPANY'] = true;
+            $arResult['ERROR_MESSAGE'] = 'Вы не являетесь руководителем данной компании и не можете создавать для неё филиалы.';
         }
     } else {
         // Компания не найдена
         $arResult['SHOW_ERROR_NO_HEAD_COMPANY'] = true;
+        $arResult['ERROR_MESSAGE'] = 'Головная компания не найдена в системе.';
     }
 } else {
     // Если параметр не передан, показываем ошибку
     $arResult['SHOW_ERROR_NO_HEAD_COMPANY'] = true;
+    $arResult['ERROR_MESSAGE'] = 'Не указана головная компания. Невозможно создать филиал.';
 }
 
 

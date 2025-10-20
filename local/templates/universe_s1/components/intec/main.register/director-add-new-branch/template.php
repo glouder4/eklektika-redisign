@@ -27,108 +27,6 @@ $arSvg = [
 $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
 
 ?>
-<style>
-.notification-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 10000;
-}
-
-.notification {
-    background: white;
-    border-radius: 12px;
-    padding: 30px;
-    text-align: center;
-    min-width: 400px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-}
-
-.notification.success {
-    border-left: 6px solid #4CAF50;
-}
-
-.notification.error {
-    border-left: 6px solid #f44336;
-}
-
-.notification-icon {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    margin: 0 auto 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 36px;
-}
-
-.notification-icon.success {
-    background: #E8F5E8;
-    color: #4CAF50;
-}
-
-.notification-icon.error {
-    background: #FFEBEE;
-    color: #f44336;
-}
-
-.notification-title {
-    font-size: 24px;
-    margin-bottom: 15px;
-    font-weight: 600;
-}
-
-.notification-message {
-    color: #666;
-    margin-bottom: 25px;
-    line-height: 1.5;
-}
-
-.progress-bar {
-    width: 100%;
-    height: 4px;
-    background: #f0f0f0;
-    border-radius: 2px;
-    overflow: hidden;
-}
-
-.progress-fill {
-    height: 100%;
-    width: 0%;
-    transition: width 3s linear;
-}
-
-.progress-fill.success {
-    background: #4CAF50;
-}
-
-.progress-fill.error {
-    background: #f44336;
-}
-
-.loading-spinner {
-    width: 40px;
-    height: 40px;
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #3498db;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin: 0 auto 20px;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-</style>
-
 <div class="notification-overlay" id="notificationOverlay">
     <div class="notification" id="notification">
         <div class="notification-icon" id="notificationIcon">
@@ -145,8 +43,15 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
 
 <div class="container">
 <?php
-    // Проверка на наличие головной компании
-    if ($arResult['SHOW_ERROR_NO_HEAD_COMPANY']):
+    // Проверка на наличие головной компании или ошибку синхронизации с B24
+    if ($arResult['SHOW_ERROR_NO_HEAD_COMPANY'] || $arResult['SHOW_ERROR_B24_SYNC']):
+        $errorTitle = 'Ошибка доступа';
+        $errorDescription = $arResult['ERROR_MESSAGE'];
+        
+        // Определяем заголовок в зависимости от типа ошибки
+        if ($arResult['SHOW_ERROR_B24_SYNC']) {
+            $errorTitle = 'Ошибка синхронизации с Bitrix24';
+        }
 ?>
     <div class="ns-bitrix c-main-register c-main-register-template-2">
         <div class="registration-error-block">
@@ -156,56 +61,15 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
                     <path d="M32 20v16M32 42v2" stroke="#f44336" stroke-width="4" stroke-linecap="round"/>
                 </svg>
             </div>
-            <h2 class="registration-error-title">Ошибка доступа</h2>
+            <h2 class="registration-error-title"><?= htmlspecialchars($errorTitle) ?></h2>
             <p class="registration-error-description">
-                Для добавления дочерней компании необходимо перейти через профиль головной компании.
+                <?= htmlspecialchars($errorDescription) ?>
             </p>
             <div class="registration-error-actions">
                 <a href="/personal/profile/" class="registration-error-button">Перейти в личный кабинет</a>
             </div>
         </div>
     </div>
-    <style>
-    .registration-error-block {
-        text-align: center;
-        padding: 60px 20px;
-        max-width: 600px;
-        margin: 0 auto;
-    }
-    .registration-error-icon {
-        margin-bottom: 30px;
-        display: flex;
-        justify-content: center;
-    }
-    .registration-error-title {
-        font-size: 32px;
-        font-weight: 700;
-        color: #2c3e50;
-        margin-bottom: 20px;
-    }
-    .registration-error-description {
-        font-size: 16px;
-        color: #666;
-        line-height: 1.6;
-        margin-bottom: 40px;
-    }
-    .registration-error-button {
-        display: inline-block;
-        padding: 14px 32px;
-        background: #3498db;
-        color: #fff;
-        text-decoration: none;
-        border-radius: 6px;
-        font-size: 16px;
-        font-weight: 500;
-        transition: all 0.2s ease;
-    }
-    .registration-error-button:hover {
-        background: #2980b9;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
-    }
-    </style>
 </div>
 <?php
     elseif( isset($arResult["REGISTER_DONE"]) && $arResult["REGISTER_DONE"] == "Y" ):

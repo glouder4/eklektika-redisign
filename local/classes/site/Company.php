@@ -810,7 +810,7 @@
 
             // Синхронизируем данные с Bitrix24
             $b24SyncSuccess = false;
-            if (!empty($company['OS_COMPANY_B24_ID'])) {
+            if (!empty($company['OS_COMPANY_B24_ID'])) { 
                 // Если файл не был изменен, но существует - добавляем его в данные для синхронизации
                 if (!isset($data['OS_REQUSITES_FILE']) && !empty($company['OS_REQUSITES_FILE'])) {
                     $data['OS_REQUSITES_FILE'] = $company['OS_REQUSITES_FILE'];
@@ -1031,5 +1031,283 @@
                 error_log('Bitrix24 company update error: ' . $e->getMessage());
                 return false;
             }
+        }
+
+        /**
+         * Создать дочернюю компанию (филиал) в холдинге
+         * 
+         * @param array $data - данные для создания:
+         *   - UF_NAME_COMPANY (string) - название компании
+         *   - UF_INN (string) - ИНН
+         *   - UF_CITY (string) - город
+         *   - UF_SITE (string) - сайт
+         *   - head_company_element_id (int) - ID головной компании (элемент инфоблока)
+         *   - UF_TYPE (string) - тип компании ('5' = юр.лицо, '6' = рекламный агент)
+         * @param array|null $uploadedFile - данные загруженного файла из $_FILES['UF_REQ']
+         * 
+         * @return array - результат операции ['success' => bool, 'message' => string, 'data' => array]
+         */
+        public function createBranchCompany($data, $uploadedFile = null) {
+            if (!\CModule::IncludeModule('iblock')) {
+                return [
+                    'success' => false,
+                    'message' => 'Ошибка подключения модуля инфоблоков'
+                ];
+            }
+
+            // Валидация обязательных полей
+            if (empty($data['UF_NAME_COMPANY']) || empty($data['UF_INN'])) {
+                return [
+                    'success' => false,
+                    'message' => 'Поля "Название компании" и "ИНН организации" обязательны для заполнения'
+                ];
+            }
+
+            // Проверяем существование головной компании
+            $headCompanyId = intval($data['head_company_element_id'] ?? 0);
+            if (empty($headCompanyId)) {
+                return [
+                    'success' => false,
+                    'message' => 'Не указана головная компания'
+                ];
+            }
+
+            $headCompany = $this->getCompany($headCompanyId);
+            if (!$headCompany) {
+                return [
+                    'success' => false,
+                    'message' => 'Головная компания не найдена'
+                ];
+            }
+
+            // Обработка файла реквизитов (как в RegisterUserCompany.php)
+            $fileDataB24 = null;
+            $savedFileId = null;
+            
+            if ($uploadedFile && $uploadedFile['error'] === UPLOAD_ERR_OK) {
+                // Сохраняем файл локально
+                $savedFileId = \CFile::SaveFile($uploadedFile, 'os_requisites');
+                
+                if ($savedFileId) {
+                    // Подготавливаем для отправки в B24
+                    $fileName = $uploadedFile['name'];
+                    $filePath = $uploadedFile['tmp_name'];
+                    $fileContent = file_get_contents($filePath);
+                    
+                    if ($fileContent !== false) {
+                        // Кодируем в base64 (как в RegisterUserCompany.php)
+                        $fileDataB24 = [
+                            'fileData' => [
+                                $fileName,
+                                base64_encode($fileContent)
+                            ]
+                        ];
+                    }
+                }
+            }
+
+            // Проверяем существование компании с таким ИНН в B24
+            $dataRequisite = [
+                'fields' => [],
+                'params' => [],
+                'select' => ['ID', 'RQ_INN', 'ENTITY_ID'],
+                'filter' => ['RQ_INN' => $data['UF_INN']]
+            ];
+            
+            $existingRequisite = sendRequestB24("crm.requisite.list", $dataRequisite, false);
+            
+            if (!empty($existingRequisite)) {
+                return [
+                    'success' => false,
+                    'message' => 'Компания с указанным ИНН уже существует в системе'
+                ];
+            }
+
+            // Получаем B24 ID головной компании из поля OS_HEAD_COMPANY_B24_ID
+            $headCompanyB24Id = $headCompany['OS_HEAD_COMPANY_B24_ID'] ?? '';
+            
+            // Если поле пустое - это критическая ошибка синхронизации
+            if (empty($headCompanyB24Id)) {
+                error_log('ERROR: OS_HEAD_COMPANY_B24_ID головной компании пустое! Head company ID: ' . $headCompanyId);
+                return [
+                    'success' => false,
+                    'message' => 'Ошибка синхронизации с Bitrix24. Головная компания не имеет связи с CRM системой. Пожалуйста, обратитесь к персональному менеджеру для исправления данной ошибки.'
+                ];
+            }
+            
+            // Логируем успешное получение
+            error_log('INFO: B24 ID головной компании для UF_CRM_1758028816: ' . $headCompanyB24Id);
+            
+            // Создаем компанию в Bitrix24
+            $b24CompanyFields = [
+                'TITLE' => $data['UF_NAME_COMPANY'],
+                'WEB' => [[
+                    'VALUE' => $data['UF_SITE'] ?? '',
+                    'VALUE_TYPE' => 'WORK'
+                ]],
+                'UF_CRM_1618551330657' => $data['UF_CITY'] ?? '',
+                'UF_CRM_1758028816' => $headCompanyB24Id, // ID головной компании в B24
+                'COMPANY_TYPE' => 'CUSTOMER',
+                'ASSIGNED_BY_ID' => 3036,
+            ];
+
+            // Логируем данные отправки в B24 для отладки
+            error_log('Creating branch company in B24. Parent B24 ID: ' . $headCompanyB24Id);
+
+            // Добавляем файл реквизитов если есть
+            if ($fileDataB24) {
+                $b24CompanyFields['UF_CRM_1755643990423'] = $fileDataB24;
+            }
+
+            // Создаем компанию в B24
+            $companyB24Id = sendRequestB24("crm.company.add", ['fields' => $b24CompanyFields]);
+            
+            if (empty($companyB24Id)) {
+                return [
+                    'success' => false,
+                    'message' => 'Ошибка создания компании в Bitrix24'
+                ];
+            }
+
+            // Получаем данные созданной компании из B24
+            $dataCompany = sendRequestB24("crm.company.get", ['id' => $companyB24Id]);
+
+            // Привязываем текущего пользователя (руководителя) к созданной компании в B24
+            global $USER;
+            $currentUser = \CUser::GetByID($USER->GetID())->Fetch();
+            
+            if ($currentUser && !empty($currentUser['UF_B24_USER_ID'])) {
+                $contactId = $currentUser['UF_B24_USER_ID'];
+                
+                // Добавляем контакт в компанию (как в RegisterUserCompany.php)
+                $qrCompanyAddContact = [
+                    'fields' => ['COMPANY_ID' => $dataCompany['ID']],
+                    'id' => $contactId
+                ];
+                sendRequestB24("crm.contact.company.add", $qrCompanyAddContact);
+                
+                error_log('INFO: Контакт руководителя привязан к новой компании. Contact ID: ' . $contactId . ', Company ID: ' . $dataCompany['ID']);
+            } else {
+                error_log('WARNING: У пользователя нет UF_B24_USER_ID, контакт не привязан к компании');
+            }
+
+            // Добавляем реквизит к компании в B24
+            $requisiteId = sendRequestB24("crm.requisite.add", [
+                'fields' => [
+                    'ENTITY_ID' => $dataCompany['ID'],
+                    'ENTITY_TYPE_ID' => '4',
+                    'NAME' => 'Реквизит с формы сайта',
+                    'PRESET_ID' => 1
+                ]
+            ]);
+
+            // Обновляем реквизиты компании
+            if ($requisiteId) {
+                sendRequestB24("crm.requisite.update", [
+                    'id' => $requisiteId,
+                    'fields' => [
+                        'ENTITY_ID' => $dataCompany['ENTITY_ID'],
+                        'ENTITY_TYPE_ID' => '4',
+                        'RQ_INN' => $data['UF_INN'],
+                        'RQ_COMPANY_FULL_NAME' => $data['UF_NAME_COMPANY']
+                    ]
+                ]);
+            }
+
+            // Создаем элемент компании на сайте
+            $companyElementParams = [
+                'OS_COMPANY_INN' => $data['UF_INN'],
+                'OS_COMPANY_WEB_SITE' => $data['UF_SITE'] ?? '',
+                'OS_COMPANY_NAME' => $data['UF_NAME_COMPANY'],
+                'OS_COMPANY_B24_ID' => $dataCompany['ID'],
+                'OS_COMPANY_CITY' => $data['UF_CITY'] ?? '',
+                'OS_REQUSITES_FILE' => $fileDataB24 ?? ''
+            ];
+
+            $newCompanyId = $this->createCompanyElement($companyElementParams);
+            
+            if (!$newCompanyId) {
+                return [
+                    'success' => false,
+                    'message' => 'Ошибка создания компании на сайте'
+                ];
+            }
+
+            // Синхронизируем руководителей головной компании с дочерней
+            $headCompanyManagers = $headCompany['OS_COMPANY_BOSS'] ?? [];
+            if (!is_array($headCompanyManagers)) {
+                $headCompanyManagers = $headCompanyManagers ? [$headCompanyManagers] : [];
+            }
+
+            // Применяем руководителей к дочерней компании
+            if (!empty($headCompanyManagers)) {
+                \CIBlockElement::SetPropertyValues(
+                    $newCompanyId, 
+                    $this->iblock_id, 
+                    $headCompanyManagers, 
+                    'OS_COMPANY_BOSS'
+                );
+            }
+
+            // Устанавливаем связь с головной компанией (ID элемента инфоблока)
+            \CIBlockElement::SetPropertyValueCode($newCompanyId, 'OS_HOLDING_OF', $headCompanyId);
+
+            // Устанавливаем B24 ID головной компании (значение уже проверено выше)
+            \CIBlockElement::SetPropertyValueCode($newCompanyId, 'OS_HEAD_COMPANY_B24_ID', $headCompanyB24Id);
+            error_log('INFO: Установлено OS_HEAD_COMPANY_B24_ID для дочерней компании ID=' . $newCompanyId . ': ' . $headCompanyB24Id);
+
+            return [
+                'success' => true,
+                'message' => 'Дочерняя компания успешно создана',
+                'data' => [
+                    'company_id' => $newCompanyId,
+                    'company_b24_id' => $dataCompany['ID'],
+                    'company_name' => $data['UF_NAME_COMPANY']
+                ]
+            ];
+        }
+
+        /**
+         * Проверить права пользователя на создание дочерней компании
+         * 
+         * @param int $headCompanyId - ID головной компании
+         * @param int $userId - ID пользователя
+         * @return array - ['has_access' => bool, 'message' => string]
+         */
+        public function checkBranchCreatePermission($headCompanyId, $userId) {
+            global $USER;
+
+            // Админы могут создавать дочерние компании
+            if ($USER->IsAdmin()) {
+                return [
+                    'has_access' => true
+                ];
+            }
+
+            // Получаем данные головной компании
+            $headCompany = $this->getCompany($headCompanyId);
+            if (!$headCompany) {
+                return [
+                    'has_access' => false,
+                    'message' => 'Головная компания не найдена'
+                ];
+            }
+
+            // Проверяем, является ли пользователь руководителем головной компании
+            $bosses = $headCompany['OS_COMPANY_BOSS'] ?? [];
+            if (!is_array($bosses)) {
+                $bosses = $bosses ? [$bosses] : [];
+            }
+
+            if (in_array($userId, $bosses)) {
+                return [
+                    'has_access' => true
+                ];
+            }
+
+            return [
+                'has_access' => false,
+                'message' => 'Вы не являетесь руководителем головной компании'
+            ];
         }
     }
