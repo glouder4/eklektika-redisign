@@ -261,7 +261,7 @@ use intec\core\helpers\Html;
 		"COMPOSITE_FRAME_MODE" => "A",
 		"COMPOSITE_FRAME_TYPE" => "AUTO",
 		"SEARCH_CATEGORY_0" => array(
-			0 => "no",
+			0 => "iblock_1c_catalog",
 		),
 		"SEARCH_PRICE_CODE" => array(
 		),
@@ -324,7 +324,10 @@ use intec\core\helpers\Html;
 		"MENU_MAIN_SECTION_BANNER_IBLOCK_ID" => "",
 		"BANNER_PROPERTY_MOBILE_PICTURE" => "PICTURE_MOBILE",
 		"BANNER_SLIDER_AUTO_TIME" => "5000",
-		"BANNER_SLIDER_AUTO_HOVER" => "N"
+		"BANNER_SLIDER_AUTO_HOVER" => "N",
+		"SEARCH_CATEGORY_0_iblock_1c_catalog" => array(
+			0 => "all",
+		)
 	),
 	false
 );?>

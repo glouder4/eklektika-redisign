@@ -122,9 +122,9 @@ return [
             'CONSENT_URL' => '/company/consent/',
             'COMPOSITE_FRAME_MODE' => 'A',
             'COMPOSITE_FRAME_TYPE' => 'AUTO',
-            'SEARCH_CATEGORY_0' => [
-                'no'
-            ],
+            "SEARCH_CATEGORY_0" => array(
+                0 => "iblock_1c_catalog",
+            ),
             'SEARCH_PRICE_CODE' => [
                 'BASE'
             ],
@@ -132,7 +132,10 @@ return [
             'SEARCH_CURRENCY_CONVERT' => 'Y',
             'SEARCH_CURRENCY_ID' => 'RUB',
             'BANNER_SORT_BY' => 'SORT',
-            'BANNER_ORDER_BY' => 'ASC'
+            'BANNER_ORDER_BY' => 'ASC',
+            "SEARCH_CATEGORY_0_iblock_1c_catalog" => array(
+                0 => "all",
+            )
         ]
     ]
 ];

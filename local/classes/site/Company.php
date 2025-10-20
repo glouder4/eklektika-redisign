@@ -810,7 +810,7 @@
 
             // Синхронизируем данные с Bitrix24
             $b24SyncSuccess = false;
-            if (!empty($company['OS_COMPANY_B24_ID'])) { 
+            if (!empty($company['OS_COMPANY_B24_ID'])) {
                 // Если файл не был изменен, но существует - добавляем его в данные для синхронизации
                 if (!isset($data['OS_REQUSITES_FILE']) && !empty($company['OS_REQUSITES_FILE'])) {
                     $data['OS_REQUSITES_FILE'] = $company['OS_REQUSITES_FILE'];
