@@ -677,4 +677,359 @@
                 return false;
             }
         }
+
+        /**
+         * Обновить профиль компании через веб-интерфейс
+         * 
+         * @param int $companyId - ID компании
+         * @param array $data - данные для обновления:
+         *   - OS_COMPANY_NAME (string) - название компании
+         *   - OS_COMPANY_INN (string) - ИНН
+         *   - OS_COMPANY_CITY (string) - город
+         *   - OS_COMPANY_PHONE (string) - телефон
+         *   - OS_COMPANY_EMAIL (string) - email
+         *   - OS_COMPANY_WEB_SITE (string) - сайт
+         * @param array|null $uploadedFile - данные загруженного файла из $_FILES
+         * @param bool $deleteRequisites - флаг удаления файла реквизитов
+         * 
+         * @return array - результат операции ['success' => bool, 'message' => string, 'data' => array]
+         */
+        public function updateCompanyProfile($companyId, $data, $uploadedFile = null, $deleteRequisites = false) {
+            if (!\CModule::IncludeModule('iblock')) {
+                return [
+                    'success' => false,
+                    'message' => 'Ошибка подключения модуля инфоблоков'
+                ];
+            }
+
+            // Проверяем существование компании
+            $company = $this->getCompany($companyId);
+            if (!$company) {
+                return [
+                    'success' => false,
+                    'message' => 'Компания не найдена'
+                ];
+            }
+
+            // Валидация обязательных полей
+            $requiredFields = [
+                'OS_COMPANY_NAME' => 'Название компании',
+                'OS_COMPANY_INN' => 'ИНН',
+                'OS_COMPANY_CITY' => 'Город',
+                'OS_COMPANY_WEB_SITE' => 'Сайт'
+            ];
+
+            $errors = [];
+            foreach ($requiredFields as $field => $fieldName) {
+                if (empty($data[$field])) {
+                    $errors[] = $fieldName;
+                }
+            }
+
+            if (!empty($errors)) {
+                return [
+                    'success' => false,
+                    'message' => 'Не заполнены обязательные поля: ' . implode(', ', $errors)
+                ];
+            }
+
+            // Валидация email
+            if (!empty($data['OS_COMPANY_EMAIL'])) {
+                if (!filter_var($data['OS_COMPANY_EMAIL'], FILTER_VALIDATE_EMAIL)) {
+                    return [
+                        'success' => false,
+                        'message' => 'Некорректный формат email'
+                    ];
+                }
+            }
+
+            // Обработка файла реквизитов
+            $fileId = null;
+            if ($uploadedFile && $uploadedFile['error'] === UPLOAD_ERR_OK) {
+                $fileResult = $this->processUploadedRequisitesFile($uploadedFile);
+                if (!$fileResult['success']) {
+                    return $fileResult;
+                }
+                $fileId = $fileResult['file_id'];
+            }
+
+            // Обработка удаления файла
+            if ($deleteRequisites && !empty($company['OS_REQUSITES_FILE'])) {
+                \CFile::Delete($company['OS_REQUSITES_FILE']);
+                $data['OS_REQUSITES_FILE'] = '';
+            } elseif ($fileId) {
+                // Удаляем старый файл только если новый успешно загружен
+                if (!empty($company['OS_REQUSITES_FILE'])) {
+                    \CFile::Delete($company['OS_REQUSITES_FILE']);
+                }
+                $data['OS_REQUSITES_FILE'] = $fileId;
+            }
+
+            // Начинаем обновление
+            $el = new \CIBlockElement();
+
+            // Обновляем название элемента
+            $arUpdateFields = [
+                'NAME' => $data['OS_COMPANY_NAME']
+            ];
+
+            if (!$el->Update($companyId, $arUpdateFields)) {
+                return [
+                    'success' => false,
+                    'message' => 'Ошибка обновления компании: ' . $el->LAST_ERROR
+                ];
+            }
+
+            // Обновляем свойства
+            $fieldsToUpdate = [
+                'OS_COMPANY_NAME',
+                'OS_COMPANY_INN',
+                'OS_COMPANY_CITY',
+                'OS_COMPANY_PHONE',
+                'OS_COMPANY_EMAIL',
+                'OS_COMPANY_WEB_SITE'
+            ];
+
+            foreach ($fieldsToUpdate as $field) {
+                if (isset($data[$field])) {
+                    \CIBlockElement::SetPropertyValueCode($companyId, $field, $data[$field]);
+                }
+            }
+
+            // Обновляем файл реквизитов, если был изменен
+            if (isset($data['OS_REQUSITES_FILE'])) {
+                \CIBlockElement::SetPropertyValueCode($companyId, 'OS_REQUSITES_FILE', $data['OS_REQUSITES_FILE']);
+            }
+
+            // Получаем обновленные данные для ответа
+            $rsElement = \CIBlockElement::GetByID($companyId);
+            $companyCode = $companyId;
+            if ($arElement = $rsElement->Fetch()) {
+                $companyCode = $arElement['CODE'] ?? $companyId;
+            }
+
+            // Синхронизируем данные с Bitrix24
+            $b24SyncSuccess = false;
+            if (!empty($company['OS_COMPANY_B24_ID'])) {
+                // Если файл не был изменен, но существует - добавляем его в данные для синхронизации
+                if (!isset($data['OS_REQUSITES_FILE']) && !empty($company['OS_REQUSITES_FILE'])) {
+                    $data['OS_REQUSITES_FILE'] = $company['OS_REQUSITES_FILE'];
+                }
+                
+                $b24Result = $this->sendToBitrix24($company['OS_COMPANY_B24_ID'], $data);
+                $b24SyncSuccess = !empty($b24Result);
+            } 
+
+            return [
+                'success' => true,
+                'message' => 'Данные компании успешно обновлены',
+                'data' => [
+                    'company_id' => $companyId,
+                    'company_code' => $companyCode,
+                    'b24_synced' => $b24SyncSuccess
+                ]
+            ];
+        }
+
+        /**
+         * Обработать загруженный файл реквизитов
+         * 
+         * @param array $uploadedFile - данные из $_FILES
+         * @return array - ['success' => bool, 'message' => string, 'file_id' => int|null]
+         */
+        private function processUploadedRequisitesFile($uploadedFile) {
+            // Проверка размера файла (10 МБ)
+            $maxFileSize = 10 * 1024 * 1024;
+            if ($uploadedFile['size'] > $maxFileSize) {
+                return [
+                    'success' => false,
+                    'message' => 'Размер файла превышает 10 МБ'
+                ];
+            }
+
+            // Проверка расширения файла
+            $allowedExtensions = ['pdf', 'doc', 'docx', 'xls', 'xlsx', 'jpg', 'jpeg', 'png'];
+            $fileExtension = strtolower(pathinfo($uploadedFile['name'], PATHINFO_EXTENSION));
+            
+            if (!in_array($fileExtension, $allowedExtensions)) {
+                return [
+                    'success' => false,
+                    'message' => 'Недопустимый формат файла. Разрешены: ' . implode(', ', $allowedExtensions)
+                ];
+            }
+
+            // Подготавливаем файл для загрузки
+            $arFile = $uploadedFile;
+            $arFile['MODULE_ID'] = 'iblock';
+            
+            $fileId = \CFile::SaveFile($arFile, 'company_requisites');
+            
+            if (!$fileId) {
+                return [
+                    'success' => false,
+                    'message' => 'Ошибка сохранения файла'
+                ];
+            }
+
+            return [
+                'success' => true,
+                'file_id' => $fileId
+            ];
+        }
+
+        /**
+         * Проверить права пользователя на редактирование компании
+         * 
+         * @param int $companyId - ID компании
+         * @param int $userId - ID пользователя
+         * @return array - ['has_access' => bool, 'message' => string]
+         */
+        public function checkEditPermission($companyId, $userId) {
+            global $USER;
+
+            // Админы могут редактировать любую компанию
+            if ($USER->IsAdmin()) {
+                return [
+                    'has_access' => true
+                ];
+            }
+
+            // Получаем данные компании
+            $company = $this->getCompany($companyId);
+            if (!$company) {
+                return [
+                    'has_access' => false,
+                    'message' => 'Компания не найдена'
+                ];
+            }
+
+            // Проверяем, является ли пользователь руководителем компании
+            $bosses = $company['OS_COMPANY_BOSS'] ?? [];
+            if (!is_array($bosses)) {
+                $bosses = $bosses ? [$bosses] : [];
+            }
+
+            if (in_array($userId, $bosses)) {
+                return [
+                    'has_access' => true
+                ];
+            }
+
+            return [
+                'has_access' => false,
+                'message' => 'У вас нет прав для редактирования этой компании'
+            ];
+        }
+
+        /**
+         * Отправить обновленные данные компании в Bitrix24
+         *
+         * @param int $companyId - ID компании в Bitrix (из CODE элемента)
+         * @param array $data - данные компании для отправки:
+         *   - OS_COMPANY_NAME (string) - название компании
+         *   - OS_COMPANY_INN (string) - ИНН
+         *   - OS_COMPANY_CITY (string) - город
+         *   - OS_COMPANY_PHONE (string) - телефон
+         *   - OS_COMPANY_EMAIL (string) - email
+         *   - OS_COMPANY_WEB_SITE (string) - сайт
+         *   - OS_REQUSITES_FILE (int) - ID файла реквизитов в Bitrix
+         * @param bool $debug - режим отладки
+         * 
+         * @return array|false - результат отправки или false при ошибке
+         */
+        private function sendToBitrix24($companyId, $data, $debug = false) {
+            if (empty($companyId)) {
+                return false;
+            }
+
+            // Маппинг полей сайта на поля Bitrix24
+            $b24Fields = [];
+            
+            // Название компании
+            if (!empty($data['OS_COMPANY_NAME'])) {
+                $b24Fields['TITLE'] = $data['OS_COMPANY_NAME'];
+            }
+            
+            // ИНН (UF_CRM_1669208589 - пример, может отличаться)
+            if (!empty($data['OS_COMPANY_INN'])) {
+                $b24Fields['UF_CRM_INN'] = $data['OS_COMPANY_INN'];
+            }
+            
+            // Город/Адрес
+            if (!empty($data['OS_COMPANY_CITY'])) {
+                $b24Fields['UF_CRM_1669208295583'] = $data['OS_COMPANY_CITY']; // Адрес
+            }
+            
+            // Телефон
+            if (!empty($data['OS_COMPANY_PHONE'])) {
+                $b24Fields['PHONE'] = [
+                    [
+                        'VALUE' => $data['OS_COMPANY_PHONE'],
+                        'VALUE_TYPE' => 'WORK'
+                    ]
+                ];
+            }
+            
+            // Email
+            if (!empty($data['OS_COMPANY_EMAIL'])) {
+                $b24Fields['EMAIL'] = [
+                    [
+                        'VALUE' => $data['OS_COMPANY_EMAIL'],
+                        'VALUE_TYPE' => 'WORK'
+                    ]
+                ];
+            }
+            
+            // Сайт
+            if (!empty($data['OS_COMPANY_WEB_SITE'])) {
+                $b24Fields['WEB'] = [
+                    [
+                        'VALUE' => $data['OS_COMPANY_WEB_SITE'],
+                        'VALUE_TYPE' => 'WORK'
+                    ]
+                ];
+            }
+
+            // Файл реквизитов (как в RegisterUserCompany.php)
+            if (!empty($data['OS_REQUSITES_FILE'])) {
+                $fileId = $data['OS_REQUSITES_FILE'];
+                
+                // Получаем информацию о файле из Bitrix
+                $fileInfo = \CFile::GetFileArray($fileId);
+                
+                if ($fileInfo && !empty($fileInfo['SRC'])) {
+                    $filePath = $_SERVER['DOCUMENT_ROOT'] . $fileInfo['SRC'];
+                    
+                    // Проверяем существование файла
+                    if (file_exists($filePath)) {
+                        // Читаем содержимое файла
+                        $fileContent = file_get_contents($filePath);
+                        
+                        if ($fileContent !== false) {
+                            // Кодируем в base64 и передаем в B24 (как в RegisterUserCompany.php)
+                            $b24Fields['UF_CRM_1755643990423'] = [
+                                'fileData' => [
+                                    $fileInfo['ORIGINAL_NAME'],
+                                    base64_encode($fileContent)
+                                ]
+                            ];
+                        }
+                    }
+                }
+            }
+
+            // Отправляем запрос в Bitrix24
+            try {
+                $result = sendRequestB24('crm.company.update', [
+                    'id'     => $companyId,
+                    'fields' => $b24Fields,
+                ], $debug);
+
+                return $result;
+            } catch (\Exception $e) {
+                // Логируем ошибку, но не прерываем процесс
+                error_log('Bitrix24 company update error: ' . $e->getMessage());
+                return false;
+            }
+        }
     }

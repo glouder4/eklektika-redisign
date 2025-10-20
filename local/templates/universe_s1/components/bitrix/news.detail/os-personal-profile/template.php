@@ -17,11 +17,31 @@ $companyName = $arResult["NAME"];
 $companyEmail = $arResult["PROPERTIES"]["OS_COMPANY_EMAIL"]["VALUE"] ?? '';
 $companyPhone = $arResult["PROPERTIES"]["OS_COMPANY_PHONE"]["VALUE"] ?? '';
 $companyInn = $arResult["PROPERTIES"]["OS_COMPANY_INN"]["VALUE"] ?? '';
+$companyWebSite = $arResult["PROPERTIES"]["OS_COMPANY_WEB_SITE"]["VALUE"] ?? '';
+$companyCity = $arResult["PROPERTIES"]["OS_COMPANY_CITY"]["VALUE"] ?? '';
 $companyBossIds = $arResult["PROPERTIES"]["OS_COMPANY_BOSS"]["VALUE"] ?? [];
 $companyUserIds = $arResult["PROPERTIES"]["OS_COMPANY_USERS"]["VALUE"] ?? [];
 
 $isMarketingAgent = $arResult["PROPERTIES"]["OS_IS_MARKETING_AGENT"]["VALUE_XML_ID"] ?? '';
 $isHeadOfHolding = $arResult["PROPERTIES"]["OS_COMPANY_IS_HEAD_OF_HOLDING"]["VALUE_XML_ID"] ?? '';
+
+// Проверка обязательных полей компании
+$requiredFields = [
+    'ИНН' => !empty($companyInn),
+    'Сайт' => !empty($companyWebSite),
+    'Название компании' => !empty($companyName),
+    'Город' => !empty($companyCity)
+];
+
+$missingFields = [];
+foreach ($requiredFields as $fieldName => $isFilled) {
+    if (!$isFilled) {
+        $missingFields[] = $fieldName;
+    }
+}
+
+$hasRequiredFieldsErrors = !empty($missingFields);
+$canShowFunctionalButtons = !$hasRequiredFieldsErrors;
 
 // Преобразуем в массив если пришло одно значение
 if (!is_array($companyBossIds)) {
@@ -87,6 +107,11 @@ $GLOBALS["OS_BREADCRUMBS"] = [
             <div class="company-profile__header">
                 <h2 class="company-profile__title">Информация о компании</h2>
                 <div class="company-profile__badges">
+                    <?if($hasRequiredFieldsErrors):?>
+                    <div class="company-status-badge company-status-badge--error" title="Не заполнены обязательные поля: <?=implode(', ', $missingFields)?>">
+                        Требует заполнения
+                    </div>
+                    <?endif;?>
                     <div class="company-status-badge <?=($isMarketingAgent == 'YES') ? 'company-status-badge--active' : 'company-status-badge--inactive'?>">
                         <?=($isMarketingAgent == 'YES') ? 'Активно' : 'Не активно'?>
                     </div>
@@ -100,6 +125,14 @@ $GLOBALS["OS_BREADCRUMBS"] = [
             <div class="company-info__content">
                 <div class="company-info__name">
                     <strong><?=$companyName?></strong>
+                    <?if($canManageCompany):?>
+                    <a href="/company/profile/edit/?id=<?=$arResult['ID']?>" class="company-info__edit-btn" title="Редактировать компанию">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.333 2.00004C11.5081 1.82494 11.716 1.68605 11.9447 1.59129C12.1735 1.49653 12.4187 1.44775 12.6663 1.44775C12.914 1.44775 13.1592 1.49653 13.3879 1.59129C13.6167 1.68605 13.8246 1.82494 13.9997 2.00004C14.1748 2.17513 14.3137 2.383 14.4084 2.61178C14.5032 2.84055 14.552 3.08575 14.552 3.33337C14.552 3.58099 14.5032 3.82619 14.4084 4.05497C14.3137 4.28374 14.1748 4.49161 13.9997 4.66671L5.33301 13.3334L1.33301 14.6667L2.66634 10.6667L11.333 2.00004Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Редактировать
+                    </a>
+                    <?endif;?>
                 </div>  
                 
                 <?if($companyInn):?>
@@ -133,7 +166,7 @@ $GLOBALS["OS_BREADCRUMBS"] = [
         <div class="company-profile__block company-management">
             <div class="company-profile__title-wrapper">
                 <h2 class="company-profile__title">Руководство</h2>
-                <?if(($isHeadOfHolding == 'Y') && $canManageCompany):?>
+                <?if(($isHeadOfHolding == 'Y') && $canManageCompany && $canShowFunctionalButtons):?>
                 <button class="company-sync__btn" onclick="syncCompanyContacts(<?=$arResult['ID']?>)">
                     <svg class="company-sync__icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M13.65 2.35C12.2 0.9 10.21 0 8 0 3.58 0 0.01 3.58 0.01 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L9 7h7V0l-2.35 2.35z" fill="currentColor"/>
@@ -218,7 +251,7 @@ $GLOBALS["OS_BREADCRUMBS"] = [
         <div class="company-profile__block company-children">
             <div class="company-profile__title-wrapper">
                 <h2 class="company-profile__title">Дочерние фирмы (<?=count($childCompaniesData)?>)</h2>
-                <?if($canManageCompany):?>
+                <?if($canManageCompany && $canShowFunctionalButtons):?>
                 <a href="/director/add_new_branch.php?head_company=<?=$arResult['ID']?>" id="lk-add-new-company" class="company-children__add-btn">
                     + Добавить
                 </a>
@@ -272,8 +305,8 @@ $GLOBALS["OS_BREADCRUMBS"] = [
         <div class="company-profile__block company-employees">
             <div class="company-profile__title-wrapper">
                 <h2 class="company-profile__title">Сотрудники</h2>
-                <?if($isCompanyBoss):?>
-                <a href="/director/person/add-new-person.php?head_company=<?=$arResult['ID']?>"class="company-employees__add-btn">
+                <?if($isCompanyBoss && $canShowFunctionalButtons):?>
+                <a href="/director/person/add-new-person.php?head_company=<?=$arResult['ID']?>" class="company-employees__add-btn">
                     + Добавить
                 </a>
                 <?endif;?>

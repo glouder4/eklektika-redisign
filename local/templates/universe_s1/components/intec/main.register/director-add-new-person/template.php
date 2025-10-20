@@ -27,108 +27,6 @@ $arSvg = [
 $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
 
 ?>
-<style>
-.notification-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 10000;
-}
-
-.notification {
-    background: white;
-    border-radius: 12px;
-    padding: 30px;
-    text-align: center;
-    min-width: 400px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-}
-
-.notification.success {
-    border-left: 6px solid #4CAF50;
-}
-
-.notification.error {
-    border-left: 6px solid #f44336;
-}
-
-.notification-icon {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    margin: 0 auto 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 36px;
-}
-
-.notification-icon.success {
-    background: #E8F5E8;
-    color: #4CAF50;
-}
-
-.notification-icon.error {
-    background: #FFEBEE;
-    color: #f44336;
-}
-
-.notification-title {
-    font-size: 24px;
-    margin-bottom: 15px;
-    font-weight: 600;
-}
-
-.notification-message {
-    color: #666;
-    margin-bottom: 25px;
-    line-height: 1.5;
-}
-
-.progress-bar {
-    width: 100%;
-    height: 4px;
-    background: #f0f0f0;
-    border-radius: 2px;
-    overflow: hidden;
-}
-
-.progress-fill {
-    height: 100%;
-    width: 0%;
-    transition: width 3s linear;
-}
-
-.progress-fill.success {
-    background: #4CAF50;
-}
-
-.progress-fill.error {
-    background: #f44336;
-}
-
-.loading-spinner {
-    width: 40px;
-    height: 40px;
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #3498db;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin: 0 auto 20px;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-</style>
-
 <div class="notification-overlay" id="notificationOverlay">
     <div class="notification" id="notification">
         <div class="notification-icon" id="notificationIcon">
@@ -165,47 +63,6 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
             </div>
         </div>
     </div>
-    <style>
-    .registration-error-block {
-        text-align: center;
-        padding: 60px 20px;
-        max-width: 600px;
-        margin: 0 auto;
-    }
-    .registration-error-icon {
-        margin-bottom: 30px;
-        display: flex;
-        justify-content: center;
-    }
-    .registration-error-title {
-        font-size: 32px;
-        font-weight: 700;
-        color: #2c3e50;
-        margin-bottom: 20px;
-    }
-    .registration-error-description {
-        font-size: 16px;
-        color: #666;
-        line-height: 1.6;
-        margin-bottom: 40px;
-    }
-    .registration-error-button {
-        display: inline-block;
-        padding: 14px 32px;
-        background: #3498db;
-        color: #fff;
-        text-decoration: none;
-        border-radius: 6px;
-        font-size: 16px;
-        font-weight: 500;
-        transition: all 0.2s ease;
-    }
-    .registration-error-button:hover {
-        background: #2980b9;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
-    }
-    </style>
 </div>
 
 <?php
@@ -349,6 +206,7 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
                                                         name="<?=$arUserField["FIELD_NAME"]?>"
                                                         data-role="input">
                                             </div>
+                                            <div class="ui-error-message" style="display: none;"><span>Поле обязательно для заполнения</span></div>
                                         </div>
                                     <?php }
                                     elseif ($arUserField["USER_TYPE_ID"] == "boolean") {?>
@@ -940,6 +798,106 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
 </script>
 
 <script>
+    // Функция валидации обязательных полей
+    function validateRequiredFields() {
+        let isValid = true;
+        let firstErrorField = null;
+        
+        // Находим все обязательные поля
+        const requiredFields = document.querySelectorAll('.parent--wrapper.os_required');
+        
+        requiredFields.forEach(function(fieldWrapper) {
+            const input = fieldWrapper.querySelector('input[data-role="input"], textarea[data-role="input"], select[data-role="input"]');
+            const errorMessage = fieldWrapper.querySelector('.ui-error-message');
+            
+            if (input) {
+                const isVisible = fieldWrapper.offsetParent !== null; // Проверяем, видимо ли поле
+                let isEmpty = false;
+                let errorText = 'Поле обязательно для заполнения';
+                
+                // Проверяем только видимые поля
+                if (isVisible) {
+                    // Проверка в зависимости от типа поля
+                    if (input.type === 'file') {
+                        // Для файлов проверяем наличие выбранных файлов
+                        isEmpty = input.files.length === 0;
+                    } else {
+                        // Для остальных полей проверяем значение
+                        const value = input.value.trim();
+                        isEmpty = value === '';
+                        
+                        // Дополнительная валидация для email
+                        if (!isEmpty && input.type === 'text' && input.name.includes('EMAIL')) {
+                            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                            if (!emailRegex.test(value)) {
+                                isEmpty = true;
+                                errorText = 'Введите корректный email адрес';
+                            }
+                        }
+                        
+                        // Дополнительная валидация для телефона
+                        if (!isEmpty && input.name.includes('PHONE')) {
+                            const phoneValue = value.replace(/[\s\-\(\)]/g, '');
+                            if (phoneValue.length < 11) {
+                                isEmpty = true;
+                                errorText = 'Введите корректный номер телефона';
+                            }
+                        }
+                        
+                        // Дополнительная валидация для подтверждения пароля
+                        if (!isEmpty && input.name.includes('CONFIRM_PASSWORD')) {
+                            const passwordInput = document.querySelector('input[name="REGISTER[PASSWORD]"]');
+                            if (passwordInput && value !== passwordInput.value) {
+                                isEmpty = true;
+                                errorText = 'Пароли не совпадают';
+                            }
+                        }
+                    }
+                    
+                    if (isEmpty) {
+                        // Поле пустое или невалидное - добавляем ошибку
+                        fieldWrapper.classList.add('has-error');
+                        if (errorMessage) {
+                            const errorSpan = errorMessage.querySelector('span');
+                            if (errorSpan) {
+                                errorSpan.textContent = errorText;
+                            }
+                            errorMessage.style.display = 'block';
+                        }
+                        isValid = false;
+                        
+                        // Запоминаем первое поле с ошибкой
+                        if (!firstErrorField) {
+                            firstErrorField = fieldWrapper;
+                        }
+                    } else {
+                        // Поле заполнено корректно - убираем ошибку
+                        fieldWrapper.classList.remove('has-error');
+                        if (errorMessage) {
+                            errorMessage.style.display = 'none';
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Прокручиваем к первому полю с ошибкой
+        if (!isValid && firstErrorField) {
+            firstErrorField.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'center' 
+            });
+            
+            // Фокусируемся на поле с ошибкой
+            const errorInput = firstErrorField.querySelector('input[data-role="input"], textarea[data-role="input"], select[data-role="input"]');
+            if (errorInput) {
+                setTimeout(() => errorInput.focus(), 500);
+            }
+        }
+        
+        return isValid;
+    }
+
     // Функция для показа уведомления
     function showNotification(type, title, message, redirectUrl = null) {
         const overlay = document.getElementById('notificationOverlay');
@@ -994,6 +952,13 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
                 
+                // Валидируем обязательные поля
+                if (!validateRequiredFields()) {
+                    // Если валидация не прошла, просто выходим
+                    // Ошибки уже показаны под полями
+                    return;
+                }
+                
                 // Показываем уведомление о обработке
                 showNotification('success', 'Обработка запроса', 'Отправляем данные для регистрации...');
                 
@@ -1001,14 +966,14 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
                 const formData = new FormData(form);
                 
                 // Отправляем AJAX запрос
-                fetch('/director/person/add-new-person.php', {
+                fetch('/director/person/add-new-person-action.php', { 
                     method: 'POST',
                     body: formData
                 })
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        showNotification('success', 'Успешно!', data.message || 'Регистрация завершена успешно', '/personal/profile/');
+                        showNotification('success', 'Успешно!', data.message || 'Регистрация завершена успешно', '/company/profile/<?=$arResult['HEAD_COMPANY_B24_ID'];?>');
                     } else {
                         showNotification('error', 'Ошибка!', data.message || 'Произошла ошибка при регистрации');
                     }
@@ -1026,8 +991,13 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
     $('#next-step').hide();
     $('#submitFormBtn').show();
 
-    $('.block-fields input').change(function (){
-        $($(this).closest(`div[data-name]`)).find('.ui-error-message').hide();
+    // Убираем ошибку при изменении поля
+    $('.block-fields input, .block-fields textarea, .block-fields select').on('input change', function (){
+        const fieldWrapper = $(this).closest('.parent--wrapper');
+        if (fieldWrapper.length) {
+            fieldWrapper.removeClass('has-error');
+            fieldWrapper.find('.ui-error-message').hide();
+        }
     })
 
     $('input#REGISTER_EMAIL_POPUP2').change(function (){
@@ -1035,23 +1005,68 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
     });
 
     document.addEventListener("DOMContentLoaded", function() {
-        $.fn.setCursorPosition = function(pos) {
-            if ($(this).get(0).setSelectionRange) {
-                $(this).get(0).setSelectionRange(pos, pos);
-            } else if ($(this).get(0).createTextRange) {
-                var range = $(this).get(0).createTextRange();
-                range.collapse(true);
-                range.moveEnd('character', pos);
-                range.moveStart('character', pos);
-                range.select();
-            }
-        };
-
-        $.mask.definitions['h'] = "[0|1|3|4|5|6|7|9]";
-        $('input[name="REGISTER[PERSONAL_PHONE]"]').click(function(){
-            $(this).setCursorPosition(1);
-        }).mask('+9 (h99) 999-99-99');
-        $('input[name="REGISTER[PERSONAL_BIRTHDAY]"]').mask('99.99.9999');
+        // Маска для телефона (нативный JS, без плагинов)
+        const phoneInput = document.querySelector('input[name="REGISTER[PERSONAL_PHONE]"]');
+        if (phoneInput) {
+            phoneInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                let formattedValue = '';
+                
+                if (value.length > 0) {
+                    formattedValue = '+' + value.substring(0, 1);
+                    if (value.length > 1) {
+                        formattedValue += ' (' + value.substring(1, 4);
+                        if (value.length > 4) {
+                            formattedValue += ') ' + value.substring(4, 7);
+                            if (value.length > 7) {
+                                formattedValue += '-' + value.substring(7, 9);
+                                if (value.length > 9) {
+                                    formattedValue += '-' + value.substring(9, 11);
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                e.target.value = formattedValue;
+            });
+            
+            phoneInput.addEventListener('focus', function(e) {
+                if (e.target.value === '') {
+                    e.target.value = '+';
+                }
+            });
+            
+            phoneInput.addEventListener('blur', function(e) {
+                if (e.target.value === '+') {
+                    e.target.value = '';
+                }
+            });
+        }
+        
+        // Маска для даты рождения (нативный JS, без плагинов)
+        const birthdayInput = document.querySelector('input[name="REGISTER[PERSONAL_BIRTHDAY]"]');
+        if (birthdayInput) {
+            birthdayInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                let formattedValue = '';
+                
+                if (value.length > 0) {
+                    formattedValue = value.substring(0, 2);
+                    if (value.length > 2) {
+                        formattedValue += '.' + value.substring(2, 4);
+                        if (value.length > 4) {
+                            formattedValue += '.' + value.substring(4, 8);
+                        }
+                    }
+                }
+                
+                e.target.value = formattedValue;
+            });
+            
+            birthdayInput.setAttribute('placeholder', 'ДД.ММ.ГГГГ');
+            birthdayInput.setAttribute('maxlength', '10');
+        }
     })
 </script>
 

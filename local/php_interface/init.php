@@ -667,5 +667,3 @@ function newRest($param, $arFields, $select) {
     return sendRequestB24("crm.contact.list", $qrList);//$result["result"];
 }
 
-
-
