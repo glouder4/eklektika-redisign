@@ -31,7 +31,8 @@ $APPLICATION->SetTitle("Каталог товаров");
 		"HIDE_NOT_AVAILABLE_OFFERS" => "N",
 		"PROPERTY_MARKS_RECOMMEND" => "RECOMMEND",
 		"PROPERTY_MARKS_NEW" => "NEW",
-		"PROPERTY_MARKS_HIT" => "SALE",
+		"PROPERTY_MARKS_HIT" => "HIT",
+		"PROPERTY_MARKS_SALE" => "SALE",
 		"PROPERTY_ORDER_USE" => "ORDER_USE",
 		"PROPERTY_ARTICLE" => "CML2_ARTICLE",
 		"PROPERTY_BRAND" => "BRAND",
@@ -327,10 +328,9 @@ $APPLICATION->SetTitle("Каталог товаров");
 		"USE_GIFTS_MAIN_PR_SECTION_LIST" => "N",
 		"USE_STORE" => "Y",
 		"STORES" => array(
-			0 => "",
-			1 => "1",
-			2 => "3",
-			3 => "",
+			0 => "1",
+			1 => "3",
+			2 => "",
 		),
 		"USE_MIN_AMOUNT" => "Y",
 		"USER_FIELDS" => array(
@@ -892,6 +892,7 @@ $APPLICATION->SetTitle("Каталог товаров");
 		"ORDER_FAST_MESSAGES_BUTTON" => "",
 		"ORDER_FAST_PROPERTIES" => array(
 		),
+		"DETAIL_PROPERTY_MARKS_SALE" => "SALE",
 		"SEF_URL_TEMPLATES" => array(
 			"sections" => "",
 			"section" => "#SECTION_CODE#/",

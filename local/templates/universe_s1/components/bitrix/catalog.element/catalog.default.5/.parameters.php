@@ -148,7 +148,7 @@ if (!empty($arCurrentValues['IBLOCK_ID'])) {
     ];
     $arTemplateParameters['PROPERTY_MARKS_HIT'] = [
         'PARENT' => 'DATA_SOURCE',
-        'NAME' => Loc::getMessage('C_CATALOG_ELEMENT_DEFAULT_5_PROPERTY_MARKS_SALE'),
+        'NAME' => Loc::getMessage('C_CATALOG_ELEMENT_DEFAULT_5_PROPERTY_MARKS_HIT'),
         'TYPE' => 'LIST',
         'VALUES' => $arPropertyCheckboxSingle,
         'ADDITIONAL_VALUES' => 'Y',
@@ -429,6 +429,7 @@ if (!empty($arCurrentValues['PROPERTY_BRAND'])) {
 
 if (
     !empty($arCurrentValues['PROPERTY_MARKS_HIT']) ||
+    !empty($arCurrentValues['PROPERTY_MARKS_SALE']) ||
     !empty($arCurrentValues['PROPERTY_MARKS_NEW']) ||
     !empty($arCurrentValues['PROPERTY_MARKS_RECOMMEND'])
 ) {

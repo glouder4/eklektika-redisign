@@ -17,7 +17,6 @@ if (
     !$arResult['HIT']
 ) return;
 
-pre($arResult);
 ?>
 <div class="widget c-markers c-markers-template-1" data-orientation="<?= $arVisual['ORIENTATION'] ?>">
     <?php if ($arResult['RECOMMEND']) { ?>

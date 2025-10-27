@@ -5,6 +5,7 @@
  * @var CMain $APPLICATION
  * @var CBitrixComponent $component
  */
+
 ?>
 <div class="catalog-element-marks">
     <?php $APPLICATION->IncludeComponent(
