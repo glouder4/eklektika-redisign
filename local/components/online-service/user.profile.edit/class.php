@@ -448,11 +448,33 @@ class OnlineServiceUserProfileEditComponent extends CBitrixComponent implements 
         if (empty($updateFields)) {
             return ['success' => false, 'error' => 'Нет данных для обновления'];
         }
+
+
+
+        $userObject = $this->getUserData($userId);
+        if( isset($userObject['UF_B24_USER_ID']) && !empty($userObject['UF_B24_USER_ID']) ){
+            sendRequestB24("crm.contact.update", [
+                "id" => $this->getUserData($userId)['UF_B24_USER_ID'],
+                "fields" => [
+                    'NAME' => $fields['NAME'],
+                    'LAST_NAME' => $fields['LAST_NAME'],
+                    'POST' => $fields['WORK_POSITION'],
+                    'PHONE' => [[
+                        "VALUE" => $fields['PERSONAL_PHONE'],
+                        "VALUE_TYPE" => "WORK"
+                    ]],
+                    'EMAIL' => [ [
+                        "VALUE" => $fields['EMAIL'],
+                        "VALUE_TYPE" => "WORK"
+                    ]]
+                ]
+            ]);
+        }
         
         // Обновляем поля пользователя
         $user = new CUser;
         $result = $user->Update($userId, $updateFields);
-        
+
         if ($result) {
             return ['success' => true, 'message' => 'Профиль успешно обновлен'];
         } else {
