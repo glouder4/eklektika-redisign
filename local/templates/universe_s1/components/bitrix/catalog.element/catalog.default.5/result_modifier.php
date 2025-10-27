@@ -42,6 +42,7 @@ $arParams = ArrayHelper::merge([
     'PROPERTY_ARTICLE' => null,
     'PROPERTY_BRAND' => null,
     'PROPERTY_MARKS_HIT' => null,
+    'PROPERTY_MARKS_SALE' => null,
     'PROPERTY_MARKS_NEW' => null,
     'PROPERTY_MARKS_RECOMMEND' => null,
     'PROPERTY_PICTURES' => null,
@@ -578,6 +579,7 @@ if ($arVisual['GALLERY']['VIDEO']['USE'])
 
 if (empty($arResult['GALLERY_VIDEO']['PRODUCT']) && empty($arResult['GALLERY_VIDEO']['OFFERS']))
     $arVisual['GALLERY']['VIDEO']['USE'] = false;
+
 
 if (empty($arResult['DISPLAY_PROPERTIES'])) {
     $arVisual['PROPERTIES']['PREVIEW']['SHOW'] = false;

@@ -25,6 +25,7 @@ $arFields = [
     'MARKS' => [
         'SHOW' => false,
         'HIT' => 'N',
+        'SALE' => 'N',
         'NEW' => 'N',
         'RECOMMEND' => 'N'
     ],
@@ -207,10 +208,10 @@ if (!empty($arParams['PROPERTY_DOCUMENTS'])) {
 /** Метки товара */
 $arProperties = [
     'HIT',
+    'SALE',
     'NEW',
     'RECOMMEND'
 ];
-
 foreach ($arProperties as $sProperty) {
     if (!empty($arParams['PROPERTY_MARKS_'.$sProperty])) {
         $arProperty = ArrayHelper::getValue($arResult, [

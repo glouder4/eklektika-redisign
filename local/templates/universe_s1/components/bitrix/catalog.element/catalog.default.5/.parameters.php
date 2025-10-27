@@ -127,6 +127,7 @@ if (!empty($arCurrentValues['IBLOCK_ID'])) {
     $arPropertyLinkedSingle = $arProperties->asArray($hPropertyLinkedSingle);
     $arPropertyLinkedMultiple = $arProperties->asArray($hPropertyLinkedMultiple);
     $arPropertyCheckboxSingle = $arProperties->asArray($hPropertyCheckboxSingle);
+
     $arPropertyFileAll = $arProperties->asArray($hPropertyFileAll);
 
     $arTemplateParameters['PROPERTY_ARTICLE'] = [
@@ -147,7 +148,15 @@ if (!empty($arCurrentValues['IBLOCK_ID'])) {
     ];
     $arTemplateParameters['PROPERTY_MARKS_HIT'] = [
         'PARENT' => 'DATA_SOURCE',
-        'NAME' => Loc::getMessage('C_CATALOG_ELEMENT_DEFAULT_5_PROPERTY_MARKS_HIT'),
+        'NAME' => Loc::getMessage('C_CATALOG_ELEMENT_DEFAULT_5_PROPERTY_MARKS_SALE'),
+        'TYPE' => 'LIST',
+        'VALUES' => $arPropertyCheckboxSingle,
+        'ADDITIONAL_VALUES' => 'Y',
+        'REFRESH' => 'Y'
+    ];
+    $arTemplateParameters['PROPERTY_MARKS_SALE'] = [
+        'PARENT' => 'DATA_SOURCE',
+        'NAME' => Loc::getMessage('C_CATALOG_ELEMENT_DEFAULT_5_PROPERTY_MARKS_SALE'),
         'TYPE' => 'LIST',
         'VALUES' => $arPropertyCheckboxSingle,
         'ADDITIONAL_VALUES' => 'Y',

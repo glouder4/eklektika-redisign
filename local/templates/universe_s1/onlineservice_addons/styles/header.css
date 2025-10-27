@@ -25,6 +25,11 @@
     justify-content: space-between;
     height: 64px;
 }
+@media(max-width: 375px){
+    .header__top {
+        padding: 0px 20px 0 18px;
+    }
+}
 
 .header__logo {
     height: 27.80425453186035px;

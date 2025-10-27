@@ -58,11 +58,19 @@ a:active,
         display: none!important;
     }
 }
+@media(max-width: 375px){
+    .container>.container,
+    .page__title-wrapper{
+        padding: 0px 20px 0 18px;
+    }
+}
 @media(min-width: 375px){
     .container{
         max-width: 375px;
         margin: auto;
-        padding: 0px 20px 0 18px;
+    }
+    .container>.container{
+        padding: 0;
     }
     #mobileMenu>.container{
         width: 339px;

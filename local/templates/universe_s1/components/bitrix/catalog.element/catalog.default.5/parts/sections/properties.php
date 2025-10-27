@@ -59,6 +59,80 @@ $iPropertyIndex = 0;
                         </div>
                     </div>
                 <?php } ?>
+
+                <?php
+                    if( isset($arResult['PRODUCT']['WEIGHT']) && $arResult['PRODUCT']['WEIGHT'] > 0):
+                ?>
+                    <div class="catalog-element-properties-detail-item">
+                        <div class="intec-grid intec-grid-a-v-center intec-grid-i-4 intec-grid-500-wrap">
+                            <div class="intec-grid-item-2 intec-grid-item-500-1">
+                                <div class="catalog-element-properties-detail-item-name">
+                                    Вес:
+                                </div>
+                            </div>
+                            <div class="intec-grid-item-2 intec-grid-item-500-1">
+                                <div class="catalog-element-properties-detail-item-value">
+                                    <?=$arResult['PRODUCT']['WEIGHT'];?> гр.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif; ?>
+
+                <?php
+                if( isset($arResult['PRODUCT']['WIDTH']) && $arResult['PRODUCT']['WIDTH'] > 0):
+                ?>
+                    <div class="catalog-element-properties-detail-item">
+                        <div class="intec-grid intec-grid-a-v-center intec-grid-i-4 intec-grid-500-wrap">
+                            <div class="intec-grid-item-2 intec-grid-item-500-1">
+                                <div class="catalog-element-properties-detail-item-name">
+                                    Ширина:
+                                </div>
+                            </div>
+                            <div class="intec-grid-item-2 intec-grid-item-500-1">
+                                <div class="catalog-element-properties-detail-item-value">
+                                    <?=$arResult['PRODUCT']['WIDTH'];?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                <?php
+                if( isset($arResult['PRODUCT']['LENGTH']) && $arResult['PRODUCT']['LENGTH'] > 0):
+                    ?>
+                    <div class="catalog-element-properties-detail-item">
+                        <div class="intec-grid intec-grid-a-v-center intec-grid-i-4 intec-grid-500-wrap">
+                            <div class="intec-grid-item-2 intec-grid-item-500-1">
+                                <div class="catalog-element-properties-detail-item-name">
+                                    Длина:
+                                </div>
+                            </div>
+                            <div class="intec-grid-item-2 intec-grid-item-500-1">
+                                <div class="catalog-element-properties-detail-item-value">
+                                    <?=$arResult['PRODUCT']['LENGTH'];?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                <?php
+                if( isset($arResult['PRODUCT']['HEIGHT']) && $arResult['PRODUCT']['HEIGHT'] > 0):
+                    ?>
+                    <div class="catalog-element-properties-detail-item">
+                        <div class="intec-grid intec-grid-a-v-center intec-grid-i-4 intec-grid-500-wrap">
+                            <div class="intec-grid-item-2 intec-grid-item-500-1">
+                                <div class="catalog-element-properties-detail-item-name">
+                                    Длина:
+                                </div>
+                            </div>
+                            <div class="intec-grid-item-2 intec-grid-item-500-1">
+                                <div class="catalog-element-properties-detail-item-value">
+                                    <?=$arResult['PRODUCT']['HEIGHT'];?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif; ?>
             </div>
         <?php } ?>
     <?php } ?>

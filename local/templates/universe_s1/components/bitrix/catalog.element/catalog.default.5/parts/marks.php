@@ -5,13 +5,13 @@
  * @var CMain $APPLICATION
  * @var CBitrixComponent $component
  */
-
 ?>
 <div class="catalog-element-marks">
     <?php $APPLICATION->IncludeComponent(
         'intec.universe:main.markers',
         'template.2', [
             'HIT' => $arFields['MARKS']['VALUES']['HIT'],
+            'SALE' => $arFields['MARKS']['VALUES']['SALE'],
             'NEW' => $arFields['MARKS']['VALUES']['NEW'],
             'RECOMMEND' => $arFields['MARKS']['VALUES']['RECOMMEND'],
             'ORIENTATION' => 'horizontal'

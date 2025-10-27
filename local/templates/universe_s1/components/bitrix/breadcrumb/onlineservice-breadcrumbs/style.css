@@ -1,5 +1,4 @@
 .breadcrumbs{
-  padding-left: 20px;
 }
 .breadcrumbs__list{
   display: flex;
@@ -49,7 +48,6 @@
   color: #EF4A85;
 }
 .page__title-wrapper{
-  padding-left: 20px;
   margin-top: 8px;
 }
 .page__title-wrapper-title{

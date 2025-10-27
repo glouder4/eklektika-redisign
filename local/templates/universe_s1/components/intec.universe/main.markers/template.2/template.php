@@ -14,7 +14,8 @@ $arVisual = $arResult['VISUAL'];
 if (
     !$arResult['RECOMMEND'] &&
     !$arResult['NEW'] &&
-    !$arResult['HIT']
+    !$arResult['HIT'] &&
+    !$arResult['SALE']
 ) return;
 
 ?>
@@ -22,6 +23,13 @@ if (
     <?php if ($arResult['HIT']) { ?>
         <div class="widget-markers-wrap">
             <?= Html::tag('div', Loc::getMessage('C_MAIN_MARKERS_TEMP2_HIT'), [
+                'class' => 'widget-markers widget-markers-hit'
+            ]) ?>
+        </div>
+    <?php } ?>
+    <?php if ($arResult['SALE']) { ?>
+        <div class="widget-markers-wrap">
+            <?= Html::tag('div', Loc::getMessage('C_MAIN_MARKERS_TEMP2_SALE'), [
                 'class' => 'widget-markers widget-markers-hit'
             ]) ?>
         </div>

@@ -5,13 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a53d02d7-d404-452c-a903-dd81636134fa" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/local/components/intec.universe/main.markers/.description.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/local/components/intec.universe/main.markers/.parameters.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/local/components/intec.universe/main.markers/component.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/local/components/intec.universe/main.markers/images/news_top_count.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/local/components/intec.universe/main.markers/lang/ru/.description.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/local/components/intec.universe/main.markers/lang/ru/.parameters.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/local/components/intec.universe/main.markers/templates/.default/lang/ru/template.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/local/components/intec.universe/main.markers/templates/.default/template.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bitrix/templates/universe_s1/components/intec.universe/main.header/template.1/.presets.php" beforeDir="false" afterPath="$PROJECT_DIR$/bitrix/templates/universe_s1/components/intec.universe/main.header/template.1/.presets.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/layout/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/layout/header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/classes/site/Company.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/classes/site/Company.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/intec.universe/main.header/template.1.custom/.presets.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/intec.universe/main.header/template.1.custom/.presets.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/intec.universe/main.header/template.1/.presets.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/intec.universe/main.header/template.1/.presets.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/parts/custom/body.start.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/parts/custom/body.start.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catalog/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/catalog/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/components/breadcrumbs/styles/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/components/breadcrumbs/styles/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/components/dostavka/styles/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/components/dostavka/styles/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/breadcrumb/onlineservice-breadcrumbs/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/breadcrumb/onlineservice-breadcrumbs/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/.parameters.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/.parameters.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/lang/ru/.parameters.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/lang/ru/.parameters.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/modifiers/fields.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/modifiers/fields.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/parts/marks.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/parts/marks.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/parts/sections/properties.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/parts/sections/properties.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/result_modifier.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/result_modifier.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/intec.universe/main.footer/template.1.custom/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/intec.universe/main.footer/template.1.custom/template.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/intec.universe/main.markers/template.1/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/intec.universe/main.markers/template.1/template.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/intec.universe/main.markers/template.2/lang/ru/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/intec.universe/main.markers/template.2/lang/ru/template.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/intec.universe/main.markers/template.2/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/intec.universe/main.markers/template.2/template.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/onlineservice_addons/styles/header.css" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/onlineservice_addons/styles/header.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/onlineservice_addons/styles/template.css" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/onlineservice_addons/styles/template.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,31 +50,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.highlight.mappings&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.highlight.symlinks&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.show.date&quot;: &quot;false&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.show.permissions&quot;: &quot;false&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.show.size&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Git_projects/student-plus&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "true",
+    "WebServerToolWindowPanel.toolwindow.highlight.mappings": "true",
+    "WebServerToolWindowPanel.toolwindow.highlight.symlinks": "true",
+    "WebServerToolWindowPanel.toolwindow.show.date": "false",
+    "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
+    "WebServerToolWindowPanel.toolwindow.show.size": "false",
+    "last_opened_file_path": "C:/Git_projects/eklektika-beget/local/components/intec.universe",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Git_projects\eklektika-beget\local\components\intec.universe" />
       <recent name="C:\Git_projects\eklektika-beget\local\templates\universe_s1\components\bitrix\news.detail" />
       <recent name="C:\Git_projects\eklektika-beget\local\templates\universe_s1\components\intec\main.register" />
       <recent name="C:\Git_projects\eklektika-beget\local\templates\universe_s1\components\bitrix" />
       <recent name="C:\Git_projects\eklektika-beget\local\templates\universe_s1\components\intec.universe\main.header\template.1.custom\bitrix" />
-      <recent name="C:\Git_projects\eklektika-beget\local\components\bitrix" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Git_projects\eklektika-beget\local\templates\universe_s1\components\bitrix\news.detail" />
@@ -165,7 +183,12 @@
       <workItem from="1760629601743" duration="4255000" />
       <workItem from="1760636477228" duration="31000" />
       <workItem from="1760696004422" duration="1869000" />
-      <workItem from="1760953354265" duration="5770000" />
+      <workItem from="1760953354265" duration="6004000" />
+      <workItem from="1761052671059" duration="2302000" />
+      <workItem from="1761123731091" duration="5000" />
+      <workItem from="1761312491913" duration="1670000" />
+      <workItem from="1761317697984" duration="3000" />
+      <workItem from="1761550093045" duration="4767000" />
     </task>
     <servers />
   </component>
