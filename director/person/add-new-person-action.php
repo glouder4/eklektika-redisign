@@ -324,8 +324,8 @@ class AddNewPersonHandler extends Request
         return [
             'UF_MANAGER_ID' => $managerId,
             'UF_MANAGER2_ID' => $manager2Id,
-            'UF_MANAGER' => $this->getManagerCode($managerId),
-            'UF_MANAGER2' => $this->getManagerCode($manager2Id)
+            'UF_MANAGER' => !is_null($managerId) ? $this->getManagerCode($managerId) : null,
+            'UF_MANAGER2' => !is_null($manager2Id) ? $this->getManagerCode($manager2Id) : null
         ];
     }
     
