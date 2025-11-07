@@ -200,6 +200,7 @@ if ($arVisual['OFFERS']['USE'] && $arVisual['OFFERS']['VIEW'] === 'extended')
                                     'template.1', [
                                         'HIT' => $arItem['DATA']['MARKS']['VALUES']['HIT'],
                                         'NEW' => $arItem['DATA']['MARKS']['VALUES']['NEW'],
+                                        'SALE' => $arItem['DATA']['MARKS']['VALUES']['SALE'],
                                         'RECOMMEND' => $arItem['DATA']['MARKS']['VALUES']['RECOMMEND'],
                                         'ORIENTATION' => $arVisual['MARKS']['ORIENTATION']
                                     ],

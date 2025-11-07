@@ -37,7 +37,7 @@ if (isset($_GET["parse"]) && $_GET["parse"] == "Y") {
 	foreach ($arResult["OFFERS"] as $arOffer) {
 		if ($arOffer["ID"] == $idOffer) {
 			$arProductData["price"] = $arOffer["MIN_PRICE"]["DISCOUNT_VALUE"];
-			$arProductData["article"] = $arOffer["PROPERTIES"]["CML2_ARTICLE"]["VALUE"];
+			$arProductData["article"] = $arOffer["PROPERTIES"]["ARTIKUL_POSTAVSHCHIKA"]["VALUE"];
 			$arProductData["size"] = $arOffer["PROPERTIES"]["RAZMER"]["~VALUE"] != "<>" ? $arOffer["PROPERTIES"]["RAZMER"]["~VALUE"] : "";
 			$arProductData["color"] = $arOffer["PROPERTIES"]["TSVET"]["VALUE"];
 			$arProductData["image"] = $arOffer["PREVIEW_PICTURE"]["SRC"];

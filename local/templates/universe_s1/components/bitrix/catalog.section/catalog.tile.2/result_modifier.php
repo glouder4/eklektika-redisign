@@ -30,6 +30,7 @@ $bSeo = Loader::includeModule('intec.seo');
 $arParams = ArrayHelper::merge([
     'PROPERTY_MARKS_HIT' => null,
     'PROPERTY_MARKS_NEW' => null,
+    'PROPERTY_MARKS_SALE' => 'SALE',
     'PROPERTY_MARKS_RECOMMEND' => null,
     'PROPERTY_ORDER_USE' => null,
     'PROPERTY_REQUEST_USE' => null,
@@ -91,6 +92,7 @@ $arCodes = [
     'MARKS' => [
         'HIT' => $arParams['PROPERTY_MARKS_HIT'],
         'NEW' => $arParams['PROPERTY_MARKS_NEW'],
+        'SALE' => $arParams['PROPERTY_MARKS_SALE'],
         'RECOMMEND' => $arParams['PROPERTY_MARKS_RECOMMEND']
     ],
     'PICTURES' => $arParams['PROPERTY_PICTURES'],
@@ -126,7 +128,7 @@ $arVisual = [
         ]
     ],
     'MARKS' => [
-        'SHOW' => $arParams['MARKS_SHOW'] === 'Y' && (!empty($arCodes['MARKS']['HIT']) || !empty($arCodes['MARKS']['NEW']) || !empty($arCodes['MARKS']['RECOMMEND'])),
+        'SHOW' => $arParams['MARKS_SHOW'] === 'Y' && (!empty($arCodes['MARKS']['HIT']) || !empty($arCodes['MARKS']['NEW']) || !empty($arCodes['MARKS']['RECOMMEND']) || !empty($arCodes['MARKS']['SALE'])),
         'ORIENTATION' => ArrayHelper::fromRange(['horizontal', 'vertical'], $arParams['MARKS_ORIENTATION'])
     ],
     'COMPARE' => [
@@ -350,6 +352,10 @@ foreach ($arResult['ITEMS'] as &$arItem) {
                     $arCodes['MARKS']['HIT'],
                     'VALUE'
                 ])),
+                'SALE' => !empty(ArrayHelper::getValue($arItem['PROPERTIES'], [
+                    $arCodes['MARKS']['SALE'],
+                    'VALUE'
+                ])),
             ]
         ],
         'DELAY' => [
@@ -374,7 +380,7 @@ foreach ($arResult['ITEMS'] as &$arItem) {
 
     $arData = &$arItem['DATA'];
 
-    if ($arData['MARKS']['VALUES']['RECOMMEND'] || $arData['MARKS']['VALUES']['NEW'] || $arData['MARKS']['VALUES']['HIT'])
+    if ($arData['MARKS']['VALUES']['RECOMMEND'] || $arData['MARKS']['VALUES']['NEW'] || $arData['MARKS']['VALUES']['HIT'] || $arData['MARKS']['VALUES']['SALE'])
         $arData['MARKS']['SHOW'] = true;
 
     if ($arData['ACTION'] !== 'none') {

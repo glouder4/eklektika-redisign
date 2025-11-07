@@ -26,6 +26,13 @@ if (
             ]) ?>
         </div>
     <?php } ?>
+    <?php if ($arResult['SALE']) { ?>
+        <div class="widget-markers-wrap">
+            <?= Html::tag('div', Loc::getMessage('C_MAIN_MARKERS_TEMP1_SALE'), [
+                'class' => 'widget-markers widget-markers-hit'
+            ]) ?>
+        </div>
+    <?php } ?>
     <?php if ($arResult['NEW']) { ?>
         <div class="widget-markers-wrap">
             <?= Html::tag('div', Loc::getMessage('C_MAIN_MARKERS_TEMP1_NEW'), [

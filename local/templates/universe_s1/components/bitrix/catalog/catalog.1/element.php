@@ -63,7 +63,8 @@ if ($arColumns['SHOW']) {
     <?php } ?>
 	<?php  $arElement['PARAMETERS']["COMPATIBLE_MODE"] = "Y";?>
     <?php if ($arElement['SHOW']) { ?>
-        <?php $arElement['ID'] = $APPLICATION->IncludeComponent(
+        <?php
+        $arElement['ID'] = $APPLICATION->IncludeComponent(
             'bitrix:catalog.element',
             $arElement['TEMPLATE'],
             $arElement['PARAMETERS'],

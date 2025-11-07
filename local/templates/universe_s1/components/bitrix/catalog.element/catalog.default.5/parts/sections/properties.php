@@ -38,6 +38,13 @@ $iPropertyIndex = 0;
         ?>
             <div class="catalog-element-properties-detail-offer-container" data-offer="<?= $sKey ?>" data-role="offers.properties">
                 <?php foreach ($arOffer as $arProperty) {
+                    if ($arProperty['ID'] == 354) {
+                        continue; 
+                    }
+                    if ($arProperty['ID'] == 616) {
+                        $date = new DateTime($arProperty['VALUE']);
+                        $arProperty['VALUE'] = $date->format('d.m.Y');
+                    }
                     $iPropertyOfferIndex++;
                 ?>
                     <div class="catalog-element-properties-detail-item" data-code="<?= ($iPropertyOfferIndex % 2 == 0) ? 'even' : 'odd' ?>">
