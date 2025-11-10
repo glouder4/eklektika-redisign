@@ -194,10 +194,54 @@ if ($arVisual['OFFERS']['USE'] && $arVisual['OFFERS']['VIEW'] === 'extended')
                                 </div>
                             <?php } ?>
                             <!--noindex-->
-                            <div class="catalog-section-item-marks">
+                            <style>
+                                /* УБЕРУ ПОЗЖЕ */
+                                .marker-flex{display: flex;flex-direction: row;justify-content: space-between;align-items: center;}
+                                .ns-bitrix.c-catalog-section.c-catalog-section-catalog-tile-2 .catalog-section-item-marks {
+                                    width: 112%;
+                                }
+                                .c-markers.c-markers-template-1[data-orientation=horizontal] .widget-markers-wrap{
+                                    margin: 0px !important;
+                                }
+                                .heart-marker{
+                                    width: 100%;
+                                    display: flex;
+                                    justify-content: flex-end;
+                                }
+                                .heart-marker svg{
+                                    pointer-events: all;
+                                    cursor: pointer;
+                                }
+                                .tag-flex-markers{
+                                    display: flex;
+                                    gap: 5px;
+                                }
+                                .articule-style{
+                                    font-size: 16px;
+                                    
+                                    color: #858585;
+                                }
+                                .section-item-name-style-cust{
+                                    font-size: 20px !important;
+                                    font-weight: 500 !important;
+                                }
+                            </style>
+                            <div class="catalog-section-item-marks marker-flex">
                                 <?php $APPLICATION->includeComponent(
                                     'intec.universe:main.markers',
                                     'template.1', [
+                                        'HIT' => $arItem['DATA']['MARKS']['VALUES']['HIT'],
+                                        'NEW' => $arItem['DATA']['MARKS']['VALUES']['NEW'],
+                                        'SALE' => $arItem['DATA']['MARKS']['VALUES']['SALE'],
+                                        'RECOMMEND' => $arItem['DATA']['MARKS']['VALUES']['RECOMMEND'],
+                                        'ORIENTATION' => $arVisual['MARKS']['ORIENTATION']
+                                    ],
+                                    $component,
+                                    ['HIDE_ICONS' => 'Y']
+                                ) ?>
+                                <?php $APPLICATION->includeComponent(
+                                    'intec.universe:main.markers',
+                                    'template.3', [
                                         'HIT' => $arItem['DATA']['MARKS']['VALUES']['HIT'],
                                         'NEW' => $arItem['DATA']['MARKS']['VALUES']['NEW'],
                                         'SALE' => $arItem['DATA']['MARKS']['VALUES']['SALE'],
@@ -244,11 +288,17 @@ if ($arVisual['OFFERS']['USE'] && $arVisual['OFFERS']['VIEW'] === 'extended')
                                 ) ?>
                             </div>
                         <?php } ?>
-                        <?php if ($arItem['DATA']['QUANTITY']['SHOW']) { ?>
+                        <?php if ($arItem['PROPERTIES']['CML2_ARTICLE']['VALUE']) { ?>
+                            <? $articule = $arItem['PROPERTIES']['CML2_ARTICLE']['VALUE']; ?>
+                            <div class="catalog-section-item-quantity-wrap articule-style">
+                                Артикул: <?= $articule ?>
+                            </div>
+                        <?php } ?>
+                        <?/*php if ($arItem['DATA']['QUANTITY']['SHOW']) { ?>
                             <div class="catalog-section-item-quantity-wrap">
                                 <?php $vQuantity($arItem) ?>
                             </div>
-                        <?php } ?>
+                        <?php } */?>
                         <!--/noindex-->
                         <?php if ($arVisual['NAME']['POSITION'] == 'middle') { ?>
                             <div class="catalog-section-item-name" data-align="<?= $arVisual['NAME']['ALIGN'] ?>">
@@ -256,6 +306,7 @@ if ($arVisual['OFFERS']['USE'] && $arVisual['OFFERS']['VIEW'] === 'extended')
                                     'class' => [
                                         'intec-cl-text-hover',
                                         'section-item-name',
+                                        'section-item-name-style-cust',
                                     ],
                                     'href' => !$arResult['QUICK_VIEW']['DETAIL'] ? $arItem['DETAIL_PAGE_URL'] : null,
                                     'data' => [
