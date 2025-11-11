@@ -196,6 +196,7 @@ if ($arVisual['OFFERS']['USE'] && $arVisual['OFFERS']['VIEW'] === 'extended')
                             <!--noindex-->
                             <style>
                                 /* УБЕРУ ПОЗЖЕ */
+                                /* 10.11.2025 */
                                 .marker-flex{display: flex;flex-direction: row;justify-content: space-between;align-items: center;}
                                 .ns-bitrix.c-catalog-section.c-catalog-section-catalog-tile-2 .catalog-section-item-marks {
                                     width: 112%;
@@ -224,6 +225,23 @@ if ($arVisual['OFFERS']['USE'] && $arVisual['OFFERS']['VIEW'] === 'extended')
                                 .section-item-name-style-cust{
                                     font-size: 20px !important;
                                     font-weight: 500 !important;
+                                }
+                                /* 11.11.2025 */
+                                .catalog-section-item-wrapper .catalog-section-item-price{
+                                    display: flex;
+                                    gap: 20px;
+                                }
+                                .catalog-element-price-code:nth-child(1) .catalog-element-price-name, .catalog-element-price-code:nth-child(2) .catalog-element-price-name{
+                                    font-size: 16px;
+                                }
+                                .catalog-element-price-code[data-value="Оптовая цена"] [data-role="item.price.discount"], .catalog-element-price-code[data-value="Рекламная цена"] [data-role="item.price.discount"] {
+                                    font-size: 24px;
+                                }
+                                .catalog-element-price-code:nth-child(1) .catalog-element-price-name, .catalog-element-price-code[data-value="Оптовая цена"] [data-role="item.price.discount"] {
+                                    color: #222222 !important;
+                                }
+                                .catalog-element-price-code:nth-child(2) .catalog-element-price-name, .catalog-element-price-code[data-value="Рекламная цена"] [data-role="item.price.discount"] {
+                                    color: #858585 !important; 
                                 }
                             </style>
                             <div class="catalog-section-item-marks marker-flex">
@@ -324,19 +342,58 @@ if ($arVisual['OFFERS']['USE'] && $arVisual['OFFERS']['VIEW'] === 'extended')
 
                             $vPrice($arPrice);
                         } ?>
-			<?php $codeProps = ["CML2_ARTICLE", "MATERIAL",  "APPLICATION_TYPES"];?>
-			<?php foreach ($codeProps as $prop) {
-				if ($arItem["PROPERTIES"][$prop]["VALUE"]) {?>
-					<div class="catalog-section-item-prop">
-						<div class="catalog-section-item-prop-name">
-							<?=$arItem["PROPERTIES"][$prop]["NAME"];?>:
-						</div>
-						<div class="catalog-section-item-prop-value">
-							<?=is_array($arItem["PROPERTIES"][$prop]["VALUE"])?implode(", ",$arItem["PROPERTIES"][$prop]["VALUE"]) : $arItem["PROPERTIES"][$prop]["VALUE"];?>
-						</div>
-					</div>
-				<?php }
-			}?>
+                        <?php if($arItem['OFFERS'][0]['PROPERTIES']['POSTAVSHCHIK']['VALUE'] || $arItem['OFFERS'][0]['PROPERTIES']['OSTATOK_V_PUTI']['VALUE']) { ?>
+                            <? if ($arItem['OFFERS'][0]['PROPERTIES']['POSTAVSHCHIK']['VALUE']) {?>
+                                <? $sklad = $arItem['OFFERS'][0]['PROPERTIES']['POSTAVSHCHIK']['VALUE']; ?>
+                                <div class="catalog-section-item-prop">
+                                    <div class="catalog-section-item-prop-name">
+                                        Склад:
+                                    </div>
+                                    <div class="catalog-section-item-prop-value">
+                                        <?=$sklad?>
+                                    </div>
+                                </div>
+                            <? } ?>
+                            <? if ($arItem['OFFERS'][0]['PROPERTIES']['OSTATOK_V_PUTI']['VALUE']) {?>
+                                <? $time_puti = $arItem['OFFERS'][0]['PROPERTIES']['OSTATOK_V_PUTI']['VALUE']; ?>
+                                <div class="catalog-section-item-prop">
+                                    <div class="catalog-section-item-prop-name">
+                                        В пути:
+                                    </div>
+                                    <div class="catalog-section-item-prop-value">
+                                        <?=$time_puti?>
+                                    </div>
+                                </div>
+                            <? } ?>
+                        <? } ?>
+                        
+                        <?/*php $codeProps = ["CML2_ARTICLE", "MATERIAL",  "APPLICATION_TYPES"];?>
+                        <?php foreach ($codeProps as $prop) {
+                            /*
+                            echo'<pre>';
+                            print_r($arItem['OFFERS']);
+                            echo'</pre>';
+                            */
+                            
+                            /*
+                            echo'<pre>';
+                            print_r($arItem['OFFERS'][0]['PROPERTIES']['POSTAVSHCHIK']['VALUE']);
+                            echo'<br><br>';
+                            print_r($arItem['OFFERS'][0]['PROPERTIES']['OSTATOK_V_PUTI']['VALUE']);
+                            echo'</pre>';
+                            *//*
+                            if ($arItem["PROPERTIES"][$prop]["VALUE"]) {?>
+                            
+                                <div class="catalog-section-item-prop">
+                                    <div class="catalog-section-item-prop-name">
+                                        <?=$arItem["PROPERTIES"][$prop]["NAME"];?>:
+                                    </div>
+                                    <div class="catalog-section-item-prop-value">
+                                        <?=is_array($arItem["PROPERTIES"][$prop]["VALUE"])?implode(", ",$arItem["PROPERTIES"][$prop]["VALUE"]) : $arItem["PROPERTIES"][$prop]["VALUE"];?>
+                                    </div>
+                                </div>
+                            <?php }
+                        }*/?>
                         <?php if ($arItem['DATA']['TIMER']['SHOW']) { ?>
                             <div class="catalog-section-item-timer">
                                 <?php include(__DIR__ . '/parts/timer.php'); ?>
