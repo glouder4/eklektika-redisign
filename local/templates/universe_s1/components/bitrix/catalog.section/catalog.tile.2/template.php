@@ -342,30 +342,10 @@ if ($arVisual['OFFERS']['USE'] && $arVisual['OFFERS']['VIEW'] === 'extended')
 
                             $vPrice($arPrice);
                         } ?>
-                        <?php if($arItem['OFFERS'][0]['PROPERTIES']['POSTAVSHCHIK']['VALUE'] || $arItem['OFFERS'][0]['PROPERTIES']['OSTATOK_V_PUTI']['VALUE']) { ?>
-                            <? if ($arItem['OFFERS'][0]['PROPERTIES']['POSTAVSHCHIK']['VALUE']) {?>
-                                <? $sklad = $arItem['OFFERS'][0]['PROPERTIES']['POSTAVSHCHIK']['VALUE']; ?>
-                                <div class="catalog-section-item-prop">
-                                    <div class="catalog-section-item-prop-name">
-                                        Склад:
-                                    </div>
-                                    <div class="catalog-section-item-prop-value">
-                                        <?=$sklad?>
-                                    </div>
-                                </div>
-                            <? } ?>
-                            <? if ($arItem['OFFERS'][0]['PROPERTIES']['OSTATOK_V_PUTI']['VALUE']) {?>
-                                <? $time_puti = $arItem['OFFERS'][0]['PROPERTIES']['OSTATOK_V_PUTI']['VALUE']; ?>
-                                <div class="catalog-section-item-prop">
-                                    <div class="catalog-section-item-prop-name">
-                                        В пути:
-                                    </div>
-                                    <div class="catalog-section-item-prop-value">
-                                        <?=$time_puti?>
-                                    </div>
-                                </div>
-                            <? } ?>
-                        <? } ?>
+                        
+                        <? /* Склад: \ В пути: */ ?>
+                        <?php include(__DIR__ . '/parts/store_time-puti.php'); ?>
+                        <? /* */ ?>
                         
                         <?/*php $codeProps = ["CML2_ARTICLE", "MATERIAL",  "APPLICATION_TYPES"];?>
                         <?php foreach ($codeProps as $prop) {
