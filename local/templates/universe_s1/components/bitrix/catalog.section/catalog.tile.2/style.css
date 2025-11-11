@@ -1168,3 +1168,163 @@
 	color: gray; margin-right: 5px;
 }
 /*# sourceMappingURL=style.css.map */
+
+
+
+
+/* custom style card onlineservice ---------------------------------------------------------------------------------------------------------*/
+/* 10.11.2025 */
+
+.marker-flex{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;}
+.ns-bitrix.c-catalog-section.c-catalog-section-catalog-tile-2 .catalog-section-item-marks {
+    width: 112%;
+}
+.c-markers.c-markers-template-1[data-orientation=horizontal] .widget-markers-wrap{
+    margin: 0px !important;
+}
+.heart-marker{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+.heart-marker svg{
+    pointer-events: all;
+    cursor: pointer;
+}
+.tag-flex-markers{
+    display: flex;
+    gap: 5px;
+}
+.articule-style{
+    color: #858585;
+}
+.section-item-name-style-cust{
+    font-weight: 500 !important;
+}
+
+/* 11.11.2025 */
+
+.catalog-section-item-wrapper .catalog-section-item-price{
+    display: flex;
+    gap: 20px;
+}
+.catalog-element-price-code{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: flex-start;
+}
+
+/* font-size */
+.articule-style, .catalog-section-item-prop div, .catalog-element-price-code:nth-child(1) .catalog-element-price-name, .catalog-element-price-code:nth-child(2) .catalog-element-price-name{
+    font-size: 16px;
+}
+.section-item-name-style-cust{
+    font-size: 20px !important;
+}
+.catalog-element-price-code[data-value="Оптовая цена"] [data-role="item.price.discount"], .catalog-element-price-code[data-value="Рекламная цена"] [data-role="item.price.discount"] {
+    font-size: 24px;
+}
+/* end font-size */
+
+.catalog-element-price-code:nth-child(1) .catalog-element-price-name, .catalog-element-price-code[data-value="Оптовая цена"] [data-role="item.price.discount"] {
+    color: #222222 !important;
+}
+.catalog-element-price-code:nth-child(2) .catalog-element-price-name, .catalog-element-price-code[data-value="Рекламная цена"] [data-role="item.price.discount"] {
+    color: #858585 !important; 
+}
+.ns-bitrix.c-catalog-section.c-catalog-section-catalog-tile-2 .catalog-section-item-quantity-wrap, .ns-bitrix.c-catalog-section.c-catalog-section-catalog-tile-2 .catalog-section-item-name, .catalog-section-item-price, .offer-dynamic-info {
+    margin-top: 0px !important;
+    margin-bottom: 18px !important;
+}
+.ns-bitrix.c-catalog-section.c-catalog-section-catalog-tile-2 .catalog-section-item-offers-property-value-image, .ns-bitrix.c-catalog-section.c-catalog-section-catalog-tile-2 .catalog-section-item-offers-property-value {
+    -webkit-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+    border-radius: 0px !important;
+}
+.ns-bitrix.c-catalog-section.c-catalog-section-catalog-tile-2 .catalog-section-item-offers-property-value-image {
+    height: 50px !important;
+    width: 50px !important;
+}
+.ns-bitrix.c-catalog-section.c-catalog-section-catalog-tile-2 .catalog-section-item-offers-property-value {
+    border: 1px solid #858585 !important;
+}
+.ns-bitrix.c-catalog-section.c-catalog-section-catalog-tile-2 .catalog-section-item-purchase-container {
+    display: block !important;
+}
+.ns-bitrix.c-catalog-section.c-catalog-section-catalog-tile-2 .catalog-section-item-counter, .ns-bitrix.c-catalog-section.c-catalog-section-catalog-tile-2 [data-align=left].catalog-section-item-offers-property-title, .catalog-element-price-code .catalog-section-item-price-wrapper .intec-grid-item {
+    display: none !important; 
+}
+.ns-bitrix.c-catalog-section.c-catalog-section-catalog-tile-2 .catalog-section-item-base {
+    padding-bottom: 10px !important;
+}
+@media (max-width:1361px){
+    .articule-style, .catalog-section-item-prop div, .catalog-element-price-code:nth-child(1) .catalog-element-price-name, .catalog-element-price-code:nth-child(2) .catalog-element-price-name{
+        font-size: 14px;
+    }
+    .section-item-name-style-cust{
+        font-size: 18px !important;
+    }
+    .catalog-element-price-code[data-value="Оптовая цена"] [data-role="item.price.discount"], .catalog-element-price-code[data-value="Рекламная цена"] [data-role="item.price.discount"] {
+        font-size: 22px;
+    }
+}
+@media (max-width:1124px){
+    .section-item-name-style-cust{
+        font-size: 18px !important;
+    }
+    .catalog-element-price-code[data-value="Оптовая цена"] [data-role="item.price.discount"], .catalog-element-price-code[data-value="Рекламная цена"] [data-role="item.price.discount"] {
+        font-size: 22px;
+    }
+    .ns-bitrix.c-catalog-section.c-catalog-section-catalog-tile-2 .catalog-section-item-wrapper {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+}
+@media (max-width: 720px) {
+    .ns-bitrix.c-catalog-section.c-catalog-section-catalog-tile-2 .catalog-section-item-purchase-desktop .catalog-section-item-purchase-button {
+        margin-left: 5px !important;
+        margin-right: 5px !important;
+    }
+}
+@media (max-width: 600px) {
+    .catalog-section-item-purchase-mobile .catalog-section-item-purchase-buttons .catalog-section-item-purchase-button-add{
+        background-color: #744A9E !important;
+        fill: #744A9E !important;
+        height: 46px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-transform: none !important;
+        font-size: 12px !important;
+        color: #FFFFFF !important;
+    }
+}
+@media (max-width:500px){
+    .ns-bitrix.c-catalog-section.c-catalog-section-catalog-tile-2[data-columns-mobile="2"] .catalog-section-item-purchase-buttons:not([data-offer=false]) {
+        display: block !important; 
+    }
+    .ns-bitrix.c-catalog-section.c-catalog-section-catalog-tile-2[data-columns-mobile="2"] .catalog-section-item-purchase-mobile .catalog-section-item-purchase-buttons:not(:first-of-type) {
+        display: none !important;
+    }
+    .ns-bitrix.c-catalog-section.c-catalog-section-catalog-tile-2 .catalog-section-item-advanced .catalog-section-item-purchase-mobile {
+        padding: 0 5px !important;
+    }
+    .ns-bitrix.c-catalog-section.c-catalog-section-catalog-tile-2[data-columns-mobile="2"] .catalog-section-item-marks{
+        display: flex !important;
+    }
+    .articule-style, .catalog-section-item-prop div, .catalog-element-price-code:nth-child(1) .catalog-element-price-name, .catalog-element-price-code:nth-child(2) .catalog-element-price-name{
+        font-size: 10px;
+    }
+    .section-item-name-style-cust{
+        font-size: 12px !important;
+    }
+    .catalog-element-price-code[data-value="Оптовая цена"] [data-role="item.price.discount"], .catalog-element-price-code[data-value="Рекламная цена"] [data-role="item.price.discount"] {
+        font-size: 14px;
+    }
+}
+/* end custom style card onlineservice -----------------------------------------------------------------------------------------------------*/

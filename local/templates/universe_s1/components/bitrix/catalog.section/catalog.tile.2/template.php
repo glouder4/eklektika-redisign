@@ -194,56 +194,6 @@ if ($arVisual['OFFERS']['USE'] && $arVisual['OFFERS']['VIEW'] === 'extended')
                                 </div>
                             <?php } ?>
                             <!--noindex-->
-                            <style>
-                                /* УБЕРУ ПОЗЖЕ */
-                                /* 10.11.2025 */
-                                .marker-flex{display: flex;flex-direction: row;justify-content: space-between;align-items: center;}
-                                .ns-bitrix.c-catalog-section.c-catalog-section-catalog-tile-2 .catalog-section-item-marks {
-                                    width: 112%;
-                                }
-                                .c-markers.c-markers-template-1[data-orientation=horizontal] .widget-markers-wrap{
-                                    margin: 0px !important;
-                                }
-                                .heart-marker{
-                                    width: 100%;
-                                    display: flex;
-                                    justify-content: flex-end;
-                                }
-                                .heart-marker svg{
-                                    pointer-events: all;
-                                    cursor: pointer;
-                                }
-                                .tag-flex-markers{
-                                    display: flex;
-                                    gap: 5px;
-                                }
-                                .articule-style{
-                                    font-size: 16px;
-                                    
-                                    color: #858585;
-                                }
-                                .section-item-name-style-cust{
-                                    font-size: 20px !important;
-                                    font-weight: 500 !important;
-                                }
-                                /* 11.11.2025 */
-                                .catalog-section-item-wrapper .catalog-section-item-price{
-                                    display: flex;
-                                    gap: 20px;
-                                }
-                                .catalog-element-price-code:nth-child(1) .catalog-element-price-name, .catalog-element-price-code:nth-child(2) .catalog-element-price-name{
-                                    font-size: 16px;
-                                }
-                                .catalog-element-price-code[data-value="Оптовая цена"] [data-role="item.price.discount"], .catalog-element-price-code[data-value="Рекламная цена"] [data-role="item.price.discount"] {
-                                    font-size: 24px;
-                                }
-                                .catalog-element-price-code:nth-child(1) .catalog-element-price-name, .catalog-element-price-code[data-value="Оптовая цена"] [data-role="item.price.discount"] {
-                                    color: #222222 !important;
-                                }
-                                .catalog-element-price-code:nth-child(2) .catalog-element-price-name, .catalog-element-price-code[data-value="Рекламная цена"] [data-role="item.price.discount"] {
-                                    color: #858585 !important; 
-                                }
-                            </style>
                             <div class="catalog-section-item-marks marker-flex">
                                 <?php $APPLICATION->includeComponent(
                                     'intec.universe:main.markers',
@@ -444,3 +394,9 @@ if ($arVisual['OFFERS']['USE'] && $arVisual['OFFERS']['VIEW'] === 'extended')
     <?php } ?>
     <?php include(__DIR__.'/parts/script.php') ?>
 <?= Html::endTag('div') ?>
+<style>
+.intec-cl-background {
+    background-color: #744A9E !important;
+    fill: #744A9E !important;
+}
+</style>
