@@ -6,15 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="a53d02d7-d404-452c-a903-dd81636134fa" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/catalog/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/catalog/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/parts/sections/properties.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/parts/sections/properties.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/template.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.section/catalog.tile.2/result_modifier.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.section/catalog.tile.2/result_modifier.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.section/catalog.tile.2/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.section/catalog.tile.2/template.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog/catalog.1/element.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog/catalog.1/element.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog/catalog.1/section.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog/catalog.1/section.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/intec.universe/main.markers/template.1/lang/ru/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/intec.universe/main.markers/template.1/lang/ru/template.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/intec.universe/main.markers/template.1/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/intec.universe/main.markers/template.1/template.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/director/person/add-new-person-action.php" beforeDir="false" afterPath="$PROJECT_DIR$/director/person/add-new-person-action.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/features/b24_integration.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/features/b24_integration.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/features/company_system.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/features/company_system.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/features/user_company_methods.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/features/user_company_methods.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/classes/b24/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/classes/b24/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/php_interface/init.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/php_interface/init.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/catalog.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/onlineservice-custom-template/catalog.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/intec/main.register/template.2/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/intec/main.register/template.2/template.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,7 +178,8 @@
       <workItem from="1761735010421" duration="82000" />
       <workItem from="1761826119650" duration="1057000" />
       <workItem from="1761913510809" duration="13000" />
-      <workItem from="1762512102920" duration="1323000" />
+      <workItem from="1762512102920" duration="1925000" />
+      <workItem from="1762851930239" duration="7114000" />
     </task>
     <servers />
   </component>

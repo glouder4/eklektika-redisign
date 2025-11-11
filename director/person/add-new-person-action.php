@@ -77,10 +77,10 @@ class AddNewPersonHandler extends Request
      * @return bool
      */
     private function checkUserAccessToCompany(int $userId, int $companyId): bool {
-        $b24User = new B24User($userId);
-        $userCompany = $b24User->getUserCompany($userId, 'boss');
-        
-        return $userCompany && $userCompany['ID'] == $companyId;
+        $b24User = new B24User();
+        $b24User->userId = $userId;
+
+        return $b24User->getUserCompany($userId, 'boss', $companyId) !== false;
     }
     
     /**
@@ -445,7 +445,7 @@ class AddNewPersonHandler extends Request
             if (!$this->checkUserAccessToCompany($USER->GetID(), $this->requestData['head_company_element_id'])) {
                 $this->jsonResponse([
                     'success' => false,
-                    'message' => 'У вас нет прав для добавления сотрудников в эту компанию'
+                    'message' => $USER->GetID().'У вас нет прав для добавления сотрудников в эту компанию'
                 ]);
             }
             

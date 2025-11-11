@@ -598,7 +598,7 @@
          * @param string $userRole Роль пользователя: 'boss' - руководитель, 'user' - обычный пользователь
          * @return array|false Данные компании или false если не найдена
          */
-        public function getUserCompany($userId = null, $userRole = 'boss') {
+        public function getUserCompany($userId = null, $userRole = 'boss', $companyId = null) {
             if ($userId === null) {
                 $userId = $this->userId;
             }
@@ -618,6 +618,16 @@
                 $filter['PROPERTY_OS_COMPANY_BOSS'] = $userId;
             } else {
                 $filter['PROPERTY_OS_COMPANY_USERS'] = $userId;
+            }
+
+            if (!is_null($companyId)) {
+                $companyId = (int)$companyId;
+
+                if ($companyId <= 0) {
+                    return false;
+                }
+
+                $filter['ID'] = $companyId;
             }
 
             // Получаем компанию пользователя
