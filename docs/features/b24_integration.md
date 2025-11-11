@@ -346,7 +346,7 @@ public function getUserIDByB24ID($b24_id) {
 }
 
 // Получить компанию пользователя
-public function getUserCompany($userId = null, $userRole = 'boss') {
+public function getUserCompany($userId = null, $userRole = 'boss', $companyId = null) {
     // Определяем фильтр в зависимости от роли
     $filter = [
         'IBLOCK_ID' => 57,
@@ -372,12 +372,12 @@ public function getUserCompany($userId = null, $userRole = 'boss') {
 
 // Проверить, является ли пользователь руководителем компании
 public function isCompanyBoss($userId = null) {
-    return $this->getUserCompany($userId, 'boss') !== false;
+    return $this->getUserCompany($userId, 'boss', $companyId) !== false;
 }
 
 // Получить ID головной компании холдинга
 public function getHeadCompanyId($userId = null) {
-    $company = $this->getUserCompany($userId, 'boss');
+    $company = $this->getUserCompany($userId, 'boss', $companyId);
     if (!$company) return false;
 
     // Логика определения головной компании холдинга

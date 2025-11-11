@@ -1,4 +1,4 @@
-    <?php
+<?php
 $APPLICATION->SetTitle("Купить");
 
 $asset->addCss("/local/templates/onlineservice-custom-template/components/catalog/styles/styles.css");
@@ -9,6 +9,13 @@ $GLOBALS["OS_BREADCRUMBS"] = [
         "LINK" => "/catalog/",
     ]
 ];
+
+\Bitrix\Main\Loader::includeModule('iblock');
+
+$pageSettings = getPageEditorSettings(124484,60);
+if( !$pageSettings )
+    return;
+
 ?>
 <div class="container">
     <?$APPLICATION->IncludeComponent(

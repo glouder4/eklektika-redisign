@@ -222,7 +222,7 @@ if ($userCompany) {
 #### Получение компании пользователя:
 ```php
 // Получить компанию пользователя
-public function getUserCompany($userId = null, $userRole = 'boss') {
+public function getUserCompany($userId = null, $userRole = 'boss', $companyId = null) {
     if ($userId === null) {
         $userId = $this->userId;
     }
@@ -270,7 +270,7 @@ public function isCompanyBoss($userId = null) {
 
 // Получить ID головной компании холдинга для пользователя
 public function getHeadCompanyId($userId = null) {
-    $company = $this->getUserCompany($userId, 'boss');
+    $company = $this->getUserCompany($userId, 'boss', $companyId);
     
     if (!$company) {
         return false;
