@@ -43,10 +43,14 @@ if ($arResult['OFFERS']) {
 		            <span class="catalog-element-price-current-value" data-role="price.discount">
 		                <?= !empty($arPrice) ? $arPrice['PRINT_PRICE'] : null ?>
 		            </span>
-		            <span class="catalog-element-price-current-separator">/</span>
+		            <?
+					/* НЕ НУЖНО
+					<span class="catalog-element-price-current-separator">/</span>
 		            <span class="catalog-element-price-current-measure" data-role="price.measure">
 		                <?= !empty($arResult['CATALOG_MEASURE_NAME']) ? $arResult['CATALOG_MEASURE_NAME'] : null ?>
 		            </span>
+					*/
+					?>
 		        </div>
 		        <?php if ($arVisual['PRICE']['DISCOUNT']['OLD']) { ?>
 		            <div class="catalog-element-price-discount catalog-element-price-part" data-role="price.base">

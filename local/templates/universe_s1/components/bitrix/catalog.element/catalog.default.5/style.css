@@ -2862,3 +2862,69 @@
 }
 
 /*# sourceMappingURL=style.css.map */
+
+
+
+/* custom style detail-card onlineservice ---------------------------------------------------------------------------------------------------------*/
+/* 12.11.2025 */
+
+/* font-size */
+.ns-bitrix.c-catalog-element.c-catalog-element-catalog-default-5 .catalog-element-article, .catalog-element-price-name {
+    font-size: 16px !important;
+}
+.ns-bitrix.c-catalog-element.c-catalog-element-catalog-default-5 .catalog-element-price-current {
+    font-size: 36px !important;
+}
+.catalog-element-price-code:nth-child(1) .catalog-element-price-name{
+    font-weight: 600;
+}
+.ns-bitrix.c-catalog-element.c-catalog-element-catalog-default-5 .catalog-element-article, .catalog-element-price-code:nth-child(2) .catalog-element-price-name{
+    font-weight: 500;
+}
+/* end font-size */
+
+.gap-flex-custom{
+    gap: 250px;
+}
+.catalog-element-purchase-block{
+    display: flex;
+    gap: 30px;
+}
+.catalog-element-price-code{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.ns-bitrix.c-catalog-element.c-catalog-element-catalog-default-5 .catalog-element-article {
+    color: #858585 !important;
+}
+.ns-bitrix.c-catalog-element.c-catalog-element-catalog-default-5 .catalog-element-article-container {
+    text-align: left !important;
+}
+.ns-bitrix.c-catalog-element.c-catalog-element-catalog-default-5 .catalog-element-offers-property-value-picture {
+    width: 60px;
+    height: 60px;
+}
+.catalog-element-main-container .intec-grid {
+    justify-content: space-between;
+}
+.catalog-element-main-flex-left-custom, .catalog-element-main-flex-right-custom {
+    flex: 1 !important;
+}
+.catalog-element-main-flex-right-custom {
+    max-width: 516px !important;
+}
+.catalog-element-main-flex-left-custom{
+    max-width: 100% !important;
+}
+.catalog-element-price-code:nth-child(1) .catalog-element-price-name,
+.catalog-element-price-code:nth-child(1) .catalog-element-price-current-value {
+    color: #744A9E !important; 
+}
+.catalog-element-price-code:nth-child(2) .catalog-element-price-name{
+    color: #858585;
+}
+.catalog-element-price-code:nth-child(2) .catalog-element-price-current-value {
+    color: #222222;
+}
+/* end custom style detail-card onlineservice ---------------------------------------------------------------------------------------------------------*/

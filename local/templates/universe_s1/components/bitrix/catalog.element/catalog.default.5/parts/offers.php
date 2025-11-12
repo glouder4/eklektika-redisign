@@ -22,12 +22,16 @@ if (($bBase && empty($arResult['OFFERS_PROP'])) || empty($arResult['SKU_PROPS'])
                 'property' => $arProperty['code']
             ]
         ]) ?>
+            <? 
+            /* ПОКА НЕ НУЖНО
             <div class="catalog-element-offers-property-name">
                 <span class="catalog-element-offers-property-name-value">
                     <?= $arProperty['name'] ?>
                 </span>
                 <span class="catalog-element-offers-property-name-selected" data-role="property.selected"></span>
             </div>
+            */
+            ?>
             <div class="catalog-element-offers-property-value-container">
                 <?php foreach ($arProperty['values'] as $arValue) { ?>
                     <?= Html::beginTag('div', [

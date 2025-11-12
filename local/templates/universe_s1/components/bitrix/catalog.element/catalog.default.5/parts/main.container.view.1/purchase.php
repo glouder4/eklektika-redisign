@@ -11,7 +11,25 @@ use intec\core\helpers\Html;
  * @var bool $bSkuDynamic
  * @var bool $bRecalculation
  */
+?>
 
+<? if ($arFields['ARTICLE']['SHOW']) { ?>
+    <div class="intec-grid-item">
+        <?php include(__DIR__.'/../article.php') ?>
+    </div>
+<? } ?>
+
+<?php if ($arResult['SHARES']['SHOW']) {
+    include(__DIR__ . '/../shares.php');
+} ?>
+<?php if ($arResult['SIZES']['SHOW'])
+    include(__DIR__.'/../sizes.php');
+?>
+<? if (!empty($arResult['OFFERS']) && $arResult['SKU']['VIEW'] === 'dynamic')
+    include(__DIR__.'/../offers.php');
+?>
+<?php if ($arVisual['PROPERTIES']['PREVIEW']['SHOW'])
+    include(__DIR__.'/../properties.preview.php')
 ?>
 <div class="catalog-element-purchase-container catalog-element-purchase-container-1" data-sticky="top" data-role="purchase">
     <div class="catalog-element-purchase">
@@ -22,6 +40,9 @@ use intec\core\helpers\Html;
             <?php if (!$bOffers || $bSkuDynamic) { ?>
                 <?php if ($arVisual['PRICE']['SHOW'])
                     include(__DIR__.'/../purchase/price.php');
+                ?>
+                <?php if ($arVisual['PRICE']['SHOW'])
+                    include(__DIR__.'/../purchase/table.offer.php');
                 ?>
                 <?php if ($arVisual['MEASURES']['USE'] && $arVisual['MEASURES']['POSITION'] === 'top')
                     include(__DIR__.'/../purchase/measures.php');
