@@ -11,7 +11,25 @@ use intec\core\helpers\Html;
  * @var bool $bSkuDynamic
  * @var bool $bRecalculation
  */
+?>
 
+<? if ($arFields['ARTICLE']['SHOW']) { ?>
+    <div class="intec-grid-item">
+        <?php include(__DIR__.'/../article.php') ?>
+    </div>
+<? } ?>
+
+<?php if ($arResult['SHARES']['SHOW']) {
+    include(__DIR__ . '/../shares.php');
+} ?>
+<?php if ($arResult['SIZES']['SHOW'])
+    include(__DIR__.'/../sizes.php');
+?>
+<? if (!empty($arResult['OFFERS']) && $arResult['SKU']['VIEW'] === 'dynamic')
+    include(__DIR__.'/../offers.php');
+?>
+<?php if ($arVisual['PROPERTIES']['PREVIEW']['SHOW'])
+    include(__DIR__.'/../properties.preview.php')
 ?>
 <div class="catalog-element-purchase-container catalog-element-purchase-container-1" data-sticky="top" data-role="purchase">
     <div class="catalog-element-purchase">
@@ -22,6 +40,9 @@ use intec\core\helpers\Html;
             <?php if (!$bOffers || $bSkuDynamic) { ?>
                 <?php if ($arVisual['PRICE']['SHOW'])
                     include(__DIR__.'/../purchase/price.php');
+                ?>
+                <?php if ($arVisual['PRICE']['SHOW'])
+                    include(__DIR__.'/../purchase/table.offer.php');
                 ?>
                 <?php if ($arVisual['MEASURES']['USE'] && $arVisual['MEASURES']['POSITION'] === 'top')
                     include(__DIR__.'/../purchase/measures.php');
@@ -37,7 +58,9 @@ use intec\core\helpers\Html;
                 <?php if ($arVisual['CREDIT']['SHOW'] && !$bSkuList) {
                     include(__DIR__.'/../purchase/credit.php');
                 } ?>
-                <?php if ($arVisual['QUANTITY']['SHOW'] || $arResult['FORM']['CHEAPER']['SHOW']) { ?>
+                <?php
+                /* НЕ НУЖНО
+                if ($arVisual['QUANTITY']['SHOW'] || $arResult['FORM']['CHEAPER']['SHOW']) { ?>
                     <div class="catalog-element-purchase-block">
                         <div class="intec-grid intec-grid-wrap intec-grid-i-h-12 intec-grid-i-v-6">
                             <?php if ($arVisual['QUANTITY']['SHOW']) { ?>
@@ -55,7 +78,9 @@ use intec\core\helpers\Html;
                             <?php } ?>
                         </div>
                     </div>
-                <?php } ?>
+                <?php } 
+                */
+                ?>
                 <?php if ($arResult['DELIVERY_CALCULATION']['USE']) { ?>
                     <div class="catalog-element-purchase-block">
                         <?php include(__DIR__.'/../purchase/delivery.calculation.php') ?>

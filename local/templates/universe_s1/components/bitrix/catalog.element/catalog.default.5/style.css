@@ -2862,3 +2862,152 @@
 }
 
 /*# sourceMappingURL=style.css.map */
+
+
+
+/* custom style detail-card onlineservice ---------------------------------------------------------------------------------------------------------*/
+/* 12.11.2025 */
+
+/* font-size */
+.ns-bitrix.c-catalog-element.c-catalog-element-catalog-default-5 .catalog-element-article, .catalog-element-price-name {
+    font-size: 16px !important;
+}
+.ns-bitrix.c-catalog-element.c-catalog-element-catalog-default-5 .catalog-element-price-current {
+    font-size: 36px !important;
+}
+.tooltip{
+  font-size: 14px;
+}
+.catalog-element-price-code:nth-child(1) .catalog-element-price-name{
+    font-weight: 600;
+}
+.ns-bitrix.c-catalog-element.c-catalog-element-catalog-default-5 .catalog-element-article, .catalog-element-price-code:nth-child(2) .catalog-element-price-name{
+    font-weight: 500;
+}
+/* end font-size */
+
+.gap-flex-custom{
+    gap: 250px;
+}
+.catalog-element-purchase-block{
+    display: flex;
+    gap: 30px;
+}
+.catalog-element-price-code{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.ns-bitrix.c-catalog-element.c-catalog-element-catalog-default-5 .catalog-element-article {
+    color: #858585 !important;
+}
+.ns-bitrix.c-catalog-element.c-catalog-element-catalog-default-5 .catalog-element-article-container {
+    text-align: left !important;
+}
+.ns-bitrix.c-catalog-element.c-catalog-element-catalog-default-5 .catalog-element-offers-property-value-picture {
+    width: 60px;
+    height: 60px;
+}
+.catalog-element-main-container .intec-grid {
+    justify-content: space-between;
+}
+.catalog-element-main-flex-left-custom, .catalog-element-main-flex-right-custom {
+    flex: 1 !important;
+}
+.catalog-element-main-flex-right-custom {
+    max-width: 516px !important;
+}
+.catalog-element-main-flex-left-custom{
+    max-width: 100% !important;
+}
+.catalog-element-price-code:nth-child(1) .catalog-element-price-name,
+.catalog-element-price-code:nth-child(1) .catalog-element-price-current-value {
+    color: #744A9E !important; 
+}
+.catalog-element-price-code:nth-child(2) .catalog-element-price-name{
+    color: #858585;
+}
+.catalog-element-price-code:nth-child(2) .catalog-element-price-current-value {
+    color: #222222;
+}
+.ns-bitrix.c-catalog-element.c-catalog-element-catalog-default-5 .catalog-element-purchase, .ns-bitrix.c-catalog-element.c-catalog-element-catalog-default-5 .catalog-element-purchase-container-1 .catalog-element-purchase-wrapper {
+    padding: 0 !important;
+}
+.ns-bitrix.c-catalog-element.c-catalog-element-catalog-default-5 .catalog-element-purchase {
+    background-color: unset !important;
+    -webkit-box-shadow: unset !important;
+    -moz-box-shadow: unset !important;
+    box-shadow: unset !important;
+}
+.catalog-element-purchase-container-ostatok{
+    max-width: max-content;
+}
+.catalog-element-ostatok{
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    padding: 10px;
+    border-bottom: 1px solid #C8C8C8;
+    width: 100%;
+}
+.catalog-element-ostatok-name{
+
+}
+.catalog-element-ostatok-number{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.ns-bitrix.c-catalog-element.c-catalog-element-catalog-default-5 .catalog-element-purchase-container-1 .catalog-element-purchase-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.catalog-element-ostatok-number {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+.catalog-element-ostatok-number, .tooltip-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.tooltip-wrapper {
+    position: relative;
+    display: flex;
+}
+
+.tooltip-wrapper svg {
+    cursor: pointer;
+}
+
+.tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    color: #858585;
+    padding: 12px 16px;
+    border-radius: 4px;
+    white-space: nowrap;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+    margin-bottom: 8px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    white-space: normal;
+    width: 233px;
+}
+
+.tooltip-wrapper:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+}
+/* end custom style detail-card onlineservice ---------------------------------------------------------------------------------------------------------*/
