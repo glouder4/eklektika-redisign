@@ -58,7 +58,9 @@ use intec\core\helpers\Html;
                 <?php if ($arVisual['CREDIT']['SHOW'] && !$bSkuList) {
                     include(__DIR__.'/../purchase/credit.php');
                 } ?>
-                <?php if ($arVisual['QUANTITY']['SHOW'] || $arResult['FORM']['CHEAPER']['SHOW']) { ?>
+                <?php
+                /* НЕ НУЖНО
+                if ($arVisual['QUANTITY']['SHOW'] || $arResult['FORM']['CHEAPER']['SHOW']) { ?>
                     <div class="catalog-element-purchase-block">
                         <div class="intec-grid intec-grid-wrap intec-grid-i-h-12 intec-grid-i-v-6">
                             <?php if ($arVisual['QUANTITY']['SHOW']) { ?>
@@ -76,7 +78,9 @@ use intec\core\helpers\Html;
                             <?php } ?>
                         </div>
                     </div>
-                <?php } ?>
+                <?php } 
+                */
+                ?>
                 <?php if ($arResult['DELIVERY_CALCULATION']['USE']) { ?>
                     <div class="catalog-element-purchase-block">
                         <?php include(__DIR__.'/../purchase/delivery.calculation.php') ?>
