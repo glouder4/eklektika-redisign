@@ -2,6 +2,7 @@
 <?php
 
 use Bitrix\Main\Localization\Loc;
+use Bitrix\Main\Loader;
 use intec\core\bitrix\Component;
 use intec\core\helpers\Html;
 use intec\core\helpers\JavaScript;
@@ -25,6 +26,47 @@ $arSvg = [
     'HIDE_PASSWORD' => FileHelper::getFileData(__DIR__.'/svg/eye_close.svg')
 ];
 $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
+
+$branchCompanySuggestions = [];
+
+if (Loader::includeModule('iblock')) {
+    $companiesResult = \CIBlockElement::GetList(
+        ['NAME' => 'ASC'],
+        [
+            'IBLOCK_ID' => 57,
+            'ACTIVE' => 'Y'
+        ],
+        false,
+        false,
+        ['ID', 'NAME', 'PROPERTY_OS_COMPANY_INN', 'PROPERTY_OS_COMPANY_NAME']
+    );
+
+    $usedInnMap = [];
+
+    while ($company = $companiesResult->Fetch()) {
+        $inn = trim((string)$company['PROPERTY_OS_COMPANY_INN_VALUE']);
+
+        if ($inn === '' || isset($usedInnMap[$inn])) {
+            continue;
+        }
+
+        $usedInnMap[$inn] = true;
+
+        $companyTitle = trim((string)$company['PROPERTY_OS_COMPANY_NAME_VALUE']);
+
+        if ($companyTitle === '') {
+            $companyTitle = $company['NAME'];
+        }
+
+        $branchCompanySuggestions[] = [
+            'name' => $company['NAME'],
+            'inn' => $inn,
+            'companyName' => $companyTitle
+        ];
+    }
+
+    unset($companiesResult, $company, $inn, $companyTitle);
+}
 
 ?>
 <div class="notification-overlay" id="notificationOverlay">
@@ -210,6 +252,52 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
             });
         </script>
     <?php } else { ?>
+        <style>
+            .os-inn-autocomplete {
+                position: relative;
+            }
+
+            .os-inn-autocomplete__dropdown {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                z-index: 15;
+                max-height: 240px;
+                overflow-y: auto;
+                margin-top: 4px;
+                background-color: #ffffff;
+                border: 1px solid #dcdfe6;
+                border-radius: 6px;
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            }
+
+            .os-inn-autocomplete__dropdown.os-inn-autocomplete__dropdown--hidden {
+                display: none;
+            }
+
+            .os-inn-autocomplete__item {
+                padding: 10px 12px;
+                cursor: default;
+                line-height: 1.35;
+                transition: background-color 0.15s;
+            }
+
+            .os-inn-autocomplete__item:hover {
+                background-color: #f5f8ff;
+            }
+
+            .os-inn-autocomplete__item-name {
+                font-size: 14px;
+                color: #212121;
+                font-weight: 500;
+            }
+
+            .os-inn-autocomplete__item-inn {
+                font-size: 12px;
+                color: #757575;
+            }
+        </style>
         <form class="main-register-form intec-ui-form" method="post" action="<?= $arParams['FORM_ACTION']; ?>" name="regform" enctype="multipart/form-data" id="registrationForm">
             <?php $valueType =  $arResult["VALUES"]["UF_TYPE"] ?? null;
             ?>
@@ -247,7 +335,7 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
                             <?php
                             foreach ($FIELDS_BLOCK as $FIELD => $arUserField){
                                 if (substr($FIELD, 0, 3) === 'UF_'){
-                                    ?>
+                                    ?> 
 
                                     <?php if ($arUserField["USER_TYPE_ID"] == "file") {?>
                                         <div class="parent--wrapper intec-ui-form-field <?= $arResult['REQUIRED_FIELDS_FLAGS'][$FIELD] == 'Y' || ( isset($arUserField["MANDATORY"]) && $arUserField["MANDATORY"] == "Y" )    ? 'os_required' : '' ?> <?= $arResult['REQUIRED_FIELDS_FLAGS'][$FIELD] == 'Y' ? 'intec-ui-form-field-required' : '' ?>" data-name="<?=$arUserField["FIELD_NAME"]?>">
@@ -273,6 +361,28 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
                                             <span class="intec-ui-part-selector"></span>
                                             <span class="intec-ui-part-content"><?= $arUserField["EDIT_FORM_LABEL"] ?></span>
                                         </label>
+                                    <?php } elseif ($arUserField["FIELD_NAME"] == "UF_INN") { ?>
+                                        <div class="parent--wrapper intec-ui-form-field <?= $arResult['REQUIRED_FIELDS_FLAGS'][$FIELD] == 'Y' || ( isset($arUserField["MANDATORY"]) && $arUserField["MANDATORY"] == "Y" )    ? 'os_required' : '' ?> <?= $arResult['REQUIRED_FIELDS_FLAGS'][$FIELD] == 'Y' ? 'intec-ui-form-field-required' : '' ?>" data-name="<?=$arUserField["FIELD_NAME"]?>">
+                                            <label class="intec-ui-form-field-title" for="REGISTER_<?=$arUserField["FIELD_NAME"]?>">
+                                                <?= $arUserField["EDIT_FORM_LABEL"] ?>:
+                                                <?php if ($arUserField["MANDATORY"] == "Y") {?>
+                                                    <span class="starrequired">*</span>
+                                                <?php } ?>
+                                            </label>
+                                            <div class="intec-ui-form-field-content os-inn-autocomplete" data-role="inn-autocomplete">
+                                                <input
+                                                        type="text"
+                                                        id="REGISTER_<?=$arUserField["FIELD_NAME"]?>"
+                                                        class="intec-ui intec-ui-control-input intec-ui-mod-block intec-ui-size-4"
+                                                        name="<?=$arUserField["FIELD_NAME"]?>"
+                                                        value="<?=$arResult["VALUES"][$arUserField["FIELD_NAME"]]?>"
+                                                        data-role="input"
+                                                        autocomplete="off"
+                                                        data-inn-role="inn-input">
+                                                <div class="os-inn-autocomplete__dropdown os-inn-autocomplete__dropdown--hidden" data-role="inn-dropdown"></div>
+                                            </div>
+                                            <div class="ui-error-message" style="display: none;"><span>Поле обязательно для заполнения</span></div>
+                                        </div>
                                     <?php } else {?>
                                         <div class="parent--wrapper intec-ui-form-field <?= $arResult['REQUIRED_FIELDS_FLAGS'][$FIELD] == 'Y' || ( isset($arUserField["MANDATORY"]) && $arUserField["MANDATORY"] == "Y" )    ? 'os_required' : '' ?> <?= $arResult['REQUIRED_FIELDS_FLAGS'][$FIELD] == 'Y' ? 'intec-ui-form-field-required' : '' ?>" data-name="<?=$arUserField["FIELD_NAME"]?>">
                                             <label class="intec-ui-form-field-title" for="REGISTER_<?=$arUserField["FIELD_NAME"]?>">
@@ -353,7 +463,7 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
                                                     ],
                                                     'disabled' => !isset($_REQUEST['REGISTER']['TIME_ZONE']) ? 'disabled' : null,
                                                     'id' => 'REGISTER_TIME_ZONE'
-                                                ]) ?>
+                                                ]) ?> 
                                                 <?php foreach ($arResult['TIME_ZONE_LIST'] as $tz => $tz_name) { ?>
                                                     <?= Html::tag('option', htmlspecialcharsbx($tz_name), [
                                                         'value' => htmlspecialcharsbx($tz),
@@ -697,12 +807,99 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
 </div>
 <script>
 
+    var branchCompanySuggestions = <?= JavaScript::toObject($branchCompanySuggestions) ?>;
+
     template.load(function (data) {
         var $ = this.getLibrary('$');
         var root = data.nodes;
         var inputs = $('[data-role="input"]', root);
         var update;
         var buttonPasswordChange = $('[data-role="password.change"]', root);
+
+        if (!Array.isArray(branchCompanySuggestions)) {
+            branchCompanySuggestions = [];
+        }
+
+        if (branchCompanySuggestions.length > 0) {
+            var dropdownHiddenClass = 'os-inn-autocomplete__dropdown--hidden';
+            var suggestionsLimit = 12;
+
+            $('[data-role="inn-autocomplete"]', root).each(function () {
+                var wrapper = $(this);
+                var input = $('[data-inn-role="inn-input"]', wrapper);
+                var dropdown = $('[data-role="inn-dropdown"]', wrapper);
+
+                if (!input.length || !dropdown.length || wrapper.data('autocompleteInitialized')) {
+                    return;
+                }
+
+                wrapper.data('autocompleteInitialized', true);
+
+                var normalise = function (value) {
+                    return value ? value.toString().toLowerCase() : '';
+                };
+
+                var filterCompanies = function (query) {
+                    var normalisedQuery = normalise(query);
+
+                    if (normalisedQuery.length === 0) {
+                        return [];
+                    }
+
+                    return branchCompanySuggestions.filter(function (company) {
+                        return normalise(company.inn).indexOf(normalisedQuery) !== -1 ||
+                            normalise(company.companyName).indexOf(normalisedQuery) !== -1 ||
+                            normalise(company.name).indexOf(normalisedQuery) !== -1;
+                    }).slice(0, suggestionsLimit);
+                };
+
+                var renderSuggestions = function (companies) {
+                    dropdown.empty();
+
+                    if (!companies.length) {
+                        dropdown.addClass(dropdownHiddenClass);
+                        return;
+                    }
+
+                    companies.forEach(function (company) {
+                        var item = $('<div>', {
+                            'class': 'os-inn-autocomplete__item'
+                        });
+
+                        $('<div>', {
+                            'class': 'os-inn-autocomplete__item-name'
+                        }).text(company.companyName || company.name).appendTo(item);
+
+                        $('<div>', {
+                            'class': 'os-inn-autocomplete__item-inn'
+                        }).text(company.inn).appendTo(item);
+
+                        item.on('mousedown', function (event) {
+                            event.preventDefault();
+                            dropdown.addClass(dropdownHiddenClass);
+                        });
+
+                        dropdown.append(item);
+                    });
+
+                    dropdown.removeClass(dropdownHiddenClass);
+                };
+
+                input.on('input', function () {
+                    renderSuggestions(filterCompanies($(this).val()));
+                });
+
+                input.on('focus', function () {
+                    renderSuggestions(filterCompanies($(this).val()));
+                });
+
+                input.on('blur', function () {
+                    window.setTimeout(function () {
+                        dropdown.addClass(dropdownHiddenClass);
+                    }, 120);
+                });
+            });
+        }
 		$("[name='REGISTER[EMAIL]").on("input", function() {
 			$("[name='REGISTER[LOGIN]").val($(this).val());
 		});
@@ -1016,11 +1213,17 @@ $sPrefix = 'C_MAIN_REGISTER_TEMPLATE_2_TEMPLATE_';
             }
         };
 
-        $.mask.definitions['h'] = "[0|1|3|4|5|6|7|9]";
-        $('input[name="REGISTER[PERSONAL_PHONE]"]').click(function(){
-            $(this).setCursorPosition(1);
-        }).mask('+9 (h99) 999-99-99');
-        $('input[name="REGISTER[PERSONAL_BIRTHDAY]"]').mask('99.99.9999');
+        if (typeof $.fn !== 'undefined' && typeof $.fn.mask === 'function') {
+            if (typeof $.mask !== 'undefined' && $.mask.definitions) {
+                $.mask.definitions['h'] = "[0|1|3|4|5|6|7|9]";
+            }
+
+            $('input[name="REGISTER[PERSONAL_PHONE]"]').click(function(){
+                $(this).setCursorPosition(1);
+            }).mask('+9 (h99) 999-99-99');
+
+            $('input[name="REGISTER[PERSONAL_BIRTHDAY]"]').mask('99.99.9999');
+        }
     })
 </script>
 
