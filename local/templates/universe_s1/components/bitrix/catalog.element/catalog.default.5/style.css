@@ -3067,6 +3067,26 @@
     justify-content: flex-start;
     align-items: center;
 }
+.ns-bitrix.c-catalog-element.c-catalog-element-catalog-default-5 .catalog-element-sections-tab[data-active=true] {
+    color: #222222 !important;
+}
+.catalog-element-sections-tab .intec-cl-background .intec-cl-background-light-hover .intec-cl-border .intec-cl-border-light-hover{
+
+}
+.ns-bitrix.c-catalog-element.c-catalog-element-catalog-default-5 .catalog-element-sections-tab {
+    background-color: transparent !important;
+    border-color: unset !important;
+    border: 0px !important;
+    border-radius: 0px !important;
+    text-transform: unset !important;
+    letter-spacing: 0 !important;
+}
+.ns-bitrix.c-catalog-element.c-catalog-element-catalog-default-5 .catalog-element-sections-tab[data-active="true"] {
+    border-bottom: 2px solid #80E0A7 !important; 
+}
+.owl-stage-outer{
+  border-bottom: 1px solid #C8C8C8;
+}
 @media (max-width: 1519px) {
   .ns-bitrix.c-catalog-element.c-catalog-element-catalog-default-5 .catalog-element-purchase-container-1 .catalog-element-purchase-action{
     gap: 10px !important;

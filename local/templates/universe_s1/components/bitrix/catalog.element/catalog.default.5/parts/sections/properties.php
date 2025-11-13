@@ -38,8 +38,9 @@ $iPropertyIndex = 0;
         ?>
             <div class="catalog-element-properties-detail-offer-container" data-offer="<?= $sKey ?>" data-role="offers.properties">
                 <?php foreach ($arOffer as $arProperty) {
-                    if ($arProperty['ID'] == 354) {
-                        continue; 
+                    $excludedIds = [354, 617];
+                    if (in_array($arProperty['ID'], $excludedIds)) {
+                        continue;
                     }
                     if ($arProperty['ID'] == 616) {
                         $date = new DateTime($arProperty['VALUE']);
