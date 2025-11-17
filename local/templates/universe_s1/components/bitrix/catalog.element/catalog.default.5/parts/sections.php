@@ -109,7 +109,7 @@ if ($arVisual['DESCRIPTION']['DETAIL']['SHOW']) {
         $arSections['DESCRIPTION']['VALUE'] = &$arResult['PREVIEW_TEXT'];
 
     if (!empty($arSections['DESCRIPTION']['VALUE']))
-        $arSections['DESCRIPTION']['SHOW'] = true;
+        $arSections['DESCRIPTION']['SHOW'] = false;
 }
 
 if ($arSections['PROPERTIES']['SHOW']) {
@@ -255,4 +255,18 @@ if ($arSections['SHIPMENT']['SHOW']) {
 
         </div>
     </div>
+</div>
+
+<div class="catalog-element-description catalog-element-additional-block">
+    <div class="catalog-element-description-wrapper">
+        <div class="catalog-element-additional-block-name desc-detail-name">
+            <?= $arSections['DESCRIPTION']['NAME'] ?>
+        </div>
+        <div class="catalog-element-additional-block-content-text desc-detail-text">
+            <?= $arSections['DESCRIPTION']['VALUE'] ?>
+        </div>
+    </div>
+</div>
+<div class="warning-text-cust">
+    Компания YO!merch оставляет за собой право без предварительных уведомлений менять технические параметры и потребительские характеристики представленных товаров и их упаковки
 </div>

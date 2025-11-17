@@ -10,19 +10,27 @@ use intec\core\helpers\Html;
  * @var array $arSvg
  */
 ?>
+
+<div class="container-btn-add-an-applocation-and-btn-create-kp">
+    <div class="container-btn-add-an-applocation">
+        <div class="btn-add-an-applocation">
+            Добавить нанесение 
+            <span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="7" viewBox="0 0 12 7" fill="none">
+                    <path d="M1 0.999822L6 5.18164L11 0.999823" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </span>
+        </div>
+    </div>
+    <div class="container-btn-create-kp">
+        <div class="btn-create-kp">
+            Создать КП
+        </div>
+    </div>
+</div>
 <?/*
 global $USER;
 if ($USER->IsAuthorized() && $USER->IsAdmin()): 
-*/?>
+?>
 
-<div class="container-btn-add-an-applocation">
-    <div class="btn-add-an-applocation">
-        Добавить нанесение 
-        <span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="7" viewBox="0 0 12 7" fill="none">
-                <path d="M1 0.999822L6 5.18164L11 0.999823" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-        </span>
-    </div>
-</div>
-<?/* endif; */?>
+<? endif; */?>
