@@ -396,3 +396,7 @@
 #diler-registration-fields>.intec-grid.intec-grid-i-18{
 	margin: 0;
 }
+.breadcrumbs{
+    white-space: nowrap;
+    overflow: auto;
+}

@@ -194,38 +194,6 @@ if ($arVisual['OFFERS']['USE'] && $arVisual['OFFERS']['VIEW'] === 'extended')
                                 </div>
                             <?php } ?>
                             <!--noindex-->
-                            <style>
-                                /* УБЕРУ ПОЗЖЕ */
-                                .marker-flex{display: flex;flex-direction: row;justify-content: space-between;align-items: center;}
-                                .ns-bitrix.c-catalog-section.c-catalog-section-catalog-tile-2 .catalog-section-item-marks {
-                                    width: 112%;
-                                }
-                                .c-markers.c-markers-template-1[data-orientation=horizontal] .widget-markers-wrap{
-                                    margin: 0px !important;
-                                }
-                                .heart-marker{
-                                    width: 100%;
-                                    display: flex;
-                                    justify-content: flex-end;
-                                }
-                                .heart-marker svg{
-                                    pointer-events: all;
-                                    cursor: pointer;
-                                }
-                                .tag-flex-markers{
-                                    display: flex;
-                                    gap: 5px;
-                                }
-                                .articule-style{
-                                    font-size: 16px;
-                                    
-                                    color: #858585;
-                                }
-                                .section-item-name-style-cust{
-                                    font-size: 20px !important;
-                                    font-weight: 500 !important;
-                                }
-                            </style>
                             <div class="catalog-section-item-marks marker-flex">
                                 <?php $APPLICATION->includeComponent(
                                     'intec.universe:main.markers',
@@ -324,19 +292,38 @@ if ($arVisual['OFFERS']['USE'] && $arVisual['OFFERS']['VIEW'] === 'extended')
 
                             $vPrice($arPrice);
                         } ?>
-			<?php $codeProps = ["CML2_ARTICLE", "MATERIAL",  "APPLICATION_TYPES"];?>
-			<?php foreach ($codeProps as $prop) {
-				if ($arItem["PROPERTIES"][$prop]["VALUE"]) {?>
-					<div class="catalog-section-item-prop">
-						<div class="catalog-section-item-prop-name">
-							<?=$arItem["PROPERTIES"][$prop]["NAME"];?>:
-						</div>
-						<div class="catalog-section-item-prop-value">
-							<?=is_array($arItem["PROPERTIES"][$prop]["VALUE"])?implode(", ",$arItem["PROPERTIES"][$prop]["VALUE"]) : $arItem["PROPERTIES"][$prop]["VALUE"];?>
-						</div>
-					</div>
-				<?php }
-			}?>
+                        
+                        <? /* Склад: \ В пути: */ ?>
+                        <?php include(__DIR__ . '/parts/store_time-puti.php'); ?>
+                        <? /* */ ?>
+                        
+                        <?/*php $codeProps = ["CML2_ARTICLE", "MATERIAL",  "APPLICATION_TYPES"];?>
+                        <?php foreach ($codeProps as $prop) {
+                            /*
+                            echo'<pre>';
+                            print_r($arItem['OFFERS']);
+                            echo'</pre>';
+                            */
+                            
+                            /*
+                            echo'<pre>';
+                            print_r($arItem['OFFERS'][0]['PROPERTIES']['POSTAVSHCHIK']['VALUE']);
+                            echo'<br><br>';
+                            print_r($arItem['OFFERS'][0]['PROPERTIES']['OSTATOK_V_PUTI']['VALUE']);
+                            echo'</pre>';
+                            *//*
+                            if ($arItem["PROPERTIES"][$prop]["VALUE"]) {?>
+                            
+                                <div class="catalog-section-item-prop">
+                                    <div class="catalog-section-item-prop-name">
+                                        <?=$arItem["PROPERTIES"][$prop]["NAME"];?>:
+                                    </div>
+                                    <div class="catalog-section-item-prop-value">
+                                        <?=is_array($arItem["PROPERTIES"][$prop]["VALUE"])?implode(", ",$arItem["PROPERTIES"][$prop]["VALUE"]) : $arItem["PROPERTIES"][$prop]["VALUE"];?>
+                                    </div>
+                                </div>
+                            <?php }
+                        }*/?>
                         <?php if ($arItem['DATA']['TIMER']['SHOW']) { ?>
                             <div class="catalog-section-item-timer">
                                 <?php include(__DIR__ . '/parts/timer.php'); ?>
@@ -407,3 +394,9 @@ if ($arVisual['OFFERS']['USE'] && $arVisual['OFFERS']['VIEW'] === 'extended')
     <?php } ?>
     <?php include(__DIR__.'/parts/script.php') ?>
 <?= Html::endTag('div') ?>
+<style>
+.intec-cl-background {
+    background-color: #744A9E !important;
+    fill: #744A9E !important;
+}
+</style>
