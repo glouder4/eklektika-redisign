@@ -15,8 +15,12 @@ $arMinPrice = [];
 $arMaxPrice = [];
 $sAvailability = 'OutOfStock';
 
-if (!empty($arResult['GALLERY']['VALUES']))
+if (!empty($arResult['GALLERY']['VALUES'])){
     $sPicture = $arResult['GALLERY']['VALUES'][0]['SRC'];
+}
+elseif (!empty($arResult['OFFERS'])){
+    $sPicture = $arResult['OFFERS'][0]['DETAIL_PICTURE']['SRC'];
+}
 else
     $sPicture = SITE_TEMPLATE_PATH.'/images/picture.missing.png';
 
@@ -75,9 +79,13 @@ if (empty($sDescription))
             <meta itemprop="highPrice" content="<?= $arMaxPrice['PRICE'] ?>" />
             <meta itemprop="offerCount" content="<?= $iOffersCount ?>" />
             <meta itemprop="priceCurrency" content="<?= $arResult['ITEM_PRICES'][0]['CURRENCY'] ?>" />
-            <?php foreach ($arResult['OFFERS'] as &$arOffer) { ?>
+            <?php foreach ($arResult['OFFERS'] as &$arOffer) {
+
+                ?>
                 <div itemscope itemprop="offers" itemtype="http://schema.org/Offer">
+                    <meta itemprop="image" content="<?= $arOffer['DETAIL_PICTURE']['SRC'];?>" />
                     <meta itemprop="price" content="<?= $arOffer['ITEM_PRICES'][0]['PRICE'] ?>" />
+                    <meta itemprop="sku" content="<?= $arOffer['PROPERTIES']['ARTIKUL_POSTAVSHCHIKA']['VALUE'] ?>" />
                     <meta itemprop="hasMeasurement" content="<?= $arOffer['CATALOG_MEASURE_NAME'] ?>" />
                 </div>
             <?php }
