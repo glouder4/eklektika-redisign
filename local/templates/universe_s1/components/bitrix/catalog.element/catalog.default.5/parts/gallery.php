@@ -317,12 +317,39 @@ use Bitrix\Main\Localization\Loc;
  * @var array $arVisual
  * @var bool $bSkuDynamic
  */
-
-
-
 /*
+// Генерируем HTML маркеров для основного товара
+$sMarkersHtml = '';
+
+// global $USER;
+// if ($USER->IsAuthorized() && $USER->IsAdmin()):
+// echo '<pre>';
+// print_r($arResult['MARKS']['VALUES']);
+// echo'</pre>';
+// endif;
+if (!empty($arResult['MARKS']['VALUES'])) {
+    $sMarkersHtml = '
+        <div class="catalog-element-gallery-marks">
+            <div class="catalog-element-marks">
+                '.$APPLICATION->IncludeComponent(
+                    'intec.universe:main.markers',
+                    'template.2', [
+                        'HIT' => $arResult['MARKS']['VALUES']['HIT'] ?? null,
+                        'SALE' => $arResult['MARKS']['VALUES']['SALE'] ?? null,
+                        'NEW' => $arResult['MARKS']['VALUES']['NEW'] ?? null,
+                        'RECOMMEND' => $arResult['MARKS']['VALUES']['RECOMMEND'] ?? null,
+                        'ORIENTATION' => 'horizontal'
+                    ],
+                    $component,
+                    ['HIDE_ICONS' => 'Y']
+                ).'
+            </div>
+        </div>
+    ';
+}
 ?>
-<?php $vGallery = function (&$arItem, $bOffer = false) use (&$arVisual, &$arResult, &$arSvg) {
+
+<?php $vGallery = function (&$arItem, $bOffer = false) use (&$arVisual, &$arResult, &$arSvg, &$sMarkersHtml) {
     if ($bOffer) {
         $arVideos = $arResult['GALLERY_VIDEO']['OFFERS'][$arItem['ID']];
 
@@ -461,11 +488,12 @@ use Bitrix\Main\Localization\Loc;
                 <?= Html::beginTag('div', [
                     'class' => Html::cssClassFromArray([
                         'catalog-element-gallery-pictures-slider' => true,
-                        'owl-carousel' => true // Всегда включаем owl-carousel для точек
+                        'owl-carousel' => true
                     ], true),
                     'data-role' => 'gallery.pictures.slider'
                 ]) ?>
                     <?php if (!empty($arItem['GALLERY']['VALUES']) || ($arVisual['GALLERY']['VIDEO']['USE'] && !empty($arVideos))) { ?>
+                        <?php $bFirstSlide = true; ?>
                         <?php foreach ($arItem['GALLERY']['VALUES'] as $arPicture) {
                             $bImageIsGif = $arPicture['CONTENT_TYPE'] == 'image/gif';
                             $arPictureResize['src'] = $arPicture['SRC'];
@@ -502,9 +530,17 @@ use Bitrix\Main\Localization\Loc;
                                             'original' => $arVisual['LAZYLOAD']['USE'] ? $arPictureResize['src'] : null
                                         ]
                                     ]) ?>
+                                    
+                                    <!-- Вывод маркеров на первом слайде основного товара -->
+                                    <?php if ($bFirstSlide && !$bOffer && !empty($sMarkersHtml)): ?>
+                                        <?= $sMarkersHtml ?>
+                                    <?php endif; ?>
+                                    
                                 <?= Html::endTag($arVisual['GALLERY']['ACTION'] === 'source' ? 'a' : 'div') ?>
                             </div>
+                            <?php $bFirstSlide = false; ?>
                         <?php } ?>
+                        
                         <?php foreach ($arVideos as $sKeyVideo => $arVideo) { ?>
                             <?php if (!empty($arVideo['LINK'])) {
                                 $arVideoInfo = youtube_video($arVideo['LINK']);
@@ -528,9 +564,15 @@ use Bitrix\Main\Localization\Loc;
                                                 'original' => $arVisual['LAZYLOAD']['USE'] ? $sVideoPreview : null
                                             ],
                                             'style' => [
-                                                'background-image' => $arVisual['LAZYLOAD']['USE'] ? $arVisual['LAZYLOAD']['STUB'] : $sVideoPreview
+                                                'background-image' => 'url(\''.($arVisual['LAZYLOAD']['USE'] ? $arVisual['LAZYLOAD']['STUB'] : $sVideoPreview).'\')'
                                             ]
                                         ]) ?>
+                                        
+                                        <!-- Вывод маркеров на первом видео-слайде, если нет изображений -->
+                                        <?php if ($bFirstSlide && !$bOffer && !empty($sMarkersHtml)): ?>
+                                            <?= $sMarkersHtml ?>
+                                        <?php endif; ?>
+                                        
                                     <?= Html::endTag('div') ?>
                                 </div>
                             <?php } else { ?>
@@ -576,9 +618,16 @@ use Bitrix\Main\Localization\Loc;
                                             <?= Html::endTag('video') ?>
                                             <?= $arSvg['PLAY'] ?>
                                         <?= Html::endTag('div') ?>
+                                        
+                                        <!-- Вывод маркеров на первом видео-слайде, если нет изображений -->
+                                        <?php if ($bFirstSlide && !$bOffer && !empty($sMarkersHtml)): ?>
+                                            <?= $sMarkersHtml ?>
+                                        <?php endif; ?>
+                                        
                                     <?= Html::endTag('div') ?>
                                 </div>
                             <?php } ?>
+                            <?php $bFirstSlide = false; ?>
                         <?php } ?>
                     <?php } else { ?>
                         <div class="catalog-element-gallery-pictures-slider-item">
@@ -590,6 +639,12 @@ use Bitrix\Main\Localization\Loc;
                                     'data-lazyload-use' => $arVisual['LAZYLOAD']['USE'] ? 'true' : 'false',
                                     'data-original' => $arVisual['LAZYLOAD']['USE'] ? SITE_TEMPLATE_PATH.'/images/picture.missing.png' : null
                                 ]) ?>
+                                
+                                <!-- Вывод маркеров на заглушке для основного товара -->
+                                <?php if (!$bOffer && !empty($sMarkersHtml)): ?>
+                                    <?= $sMarkersHtml ?>
+                                <?php endif; ?>
+                                
                             </div>
                         </div>
                     <?php } ?>
@@ -598,6 +653,7 @@ use Bitrix\Main\Localization\Loc;
         </div>
     <?= Html::endTag('div') ?>
 <?php } ?>
+
 <div class="catalog-element-gallery-container catalog-element-main-block">
     <?php $vGallery($arResult);
 
@@ -610,6 +666,39 @@ use Bitrix\Main\Localization\Loc;
 </div>
 <?php unset($vGallery, $iVideoCounter, $iVideoPreviewCounter) ?>
 <style>
+
+.catalog-element-gallery-pictures-slider-item {
+    position: relative;
+}
+
+.catalog-element-gallery-pictures-slider-item-picture,
+.catalog-element-gallery-pictures-slider-item-video {
+    position: relative;
+}
+
+.catalog-element-gallery-marks {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.catalog-element-gallery-marks .catalog-element-marks {
+    display: inline-block;
+}
+
+@media (max-width: 768px) {
+    .catalog-element-gallery-marks {
+        top: 5px;
+        left: 5px;
+    }
+    
+    .catalog-element-gallery-marks .widget.c-markers {
+        transform: scale(0.8);
+        transform-origin: left top;
+    }
+}
 
 .catalog-element-gallery-layout {
     display: flex;
@@ -664,6 +753,7 @@ use Bitrix\Main\Localization\Loc;
 .catalog-element-gallery-preview-vertical-slider .owl-stage-outer .owl-stage{
     display: flex;
     flex-direction: column;
+    gap: 15px;
 }
 .catalog-element-gallery-preview-vertical-slider .owl-stage {
     transform: none !important;
@@ -673,7 +763,6 @@ use Bitrix\Main\Localization\Loc;
 .catalog-element-gallery-preview-vertical-slider.owl-carousel {
     height: auto !important;
 }
-
 
 @media (max-width: 767px) {
     .catalog-element-gallery-preview-vertical {
@@ -814,6 +903,26 @@ use Bitrix\Main\Localization\Loc;
 .catalog-element-gallery-preview-vertical-slider-item-picture img {
     padding: 5px;
 }
+.catalog-element-gallery-preview-vertical-slider .owl-stage-outer {
+    border-bottom: 0px solid #C8C8C8 !important;
+}
+.catalog-element-gallery-preview-vertical-slider-item[data-active="false"] {
+    position: relative;
+}
+
+.catalog-element-gallery-preview-vertical-slider-item[data-active="false"]::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgb(255 255 255 / 60%);
+    z-index: 1;
+}
+.gap-flex-custom {
+    gap: 150px !important;
+}
 </style>
 <script>
 $(document).ready(function() {
@@ -867,6 +976,4 @@ $(document).ready(function() {
     });
 });
 </script>
-
-
 */?>

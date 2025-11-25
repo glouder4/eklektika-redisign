@@ -115,8 +115,8 @@
 .ns-bitrix.c-catalog-section.c-catalog-section-catalog-tile-2 .catalog-section-item-marks {
   position: absolute;
   top: -15px;
-  left: -15px;
-  right: 20px;
+  left: 0px;
+  right: 0px;
   pointer-events: none;
   z-index: 2;
 }
@@ -1181,7 +1181,7 @@
     justify-content: space-between;
     align-items: center;}
 .ns-bitrix.c-catalog-section.c-catalog-section-catalog-tile-2 .catalog-section-item-marks {
-    width: 112%;
+    width: 100%;
 }
 .c-markers.c-markers-template-1[data-orientation=horizontal] .widget-markers-wrap{
     margin: 0px !important;
