@@ -6,8 +6,34 @@
  */
 
 ?>
+<style>
+    .catalog-element-panel-mobile-content.intec-grid.intec-grid-a-v-center{
+        justify-content: center;
+        gap: 10px;
+        max-height: 70px;
+        height: 70px;
+    }
+    .ns-bitrix.c-catalog-element.c-catalog-element-catalog-default-5 .catalog-element-panel-mobile-buy-button {
+        width: max-content;
+        display: flex;
+        align-items: center;
+        height: 50px;
+    }
+    .ns-bitrix.c-catalog-element.c-catalog-element-catalog-default-5 .catalog-element-panel-mobile-button {
+        width: max-content;
+        flex: 0;
+        max-width: unset;
+    }
+    .catalog-element-panel-mobile-content.intec-grid.intec-grid-a-v-center .container-btn-order-sample{
+        display: flex;
+        height: 50px !important;
+        padding: 14px 18px !important;
+    }
+</style>
 <div class="catalog-element-panel-mobile" data-role="panel.mobile">
     <div class="catalog-element-panel-mobile-content intec-grid intec-grid-a-v-center">
+        <? 
+        /* ПОКА НЕ НУЖНО
         <div class="intec-grid-item intec-grid-item-450-2 intec-grid-item-shrink-1">
             <div class="catalog-element-panel-mobile-base">
                 <div class="catalog-element-panel-mobile-name" title="<?= $arResult['NAME'] ?>">
@@ -15,6 +41,8 @@
                 </div>
             </div>
         </div>
+        */
+        ?>
         <div class="catalog-element-panel-mobile-button intec-grid-item-auto intec-grid-item-450-2">
             <?php if ($arResult['ACTION'] !== 'none') { ?>
                 <div class="catalog-element-panel-mobile-purchase">
@@ -22,5 +50,30 @@
                 </div>
             <?php } ?>
         </div>
+        <div class="container-btn-order-sample">
+            <div class="btn-order-sample">
+                Заказать образец
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 20.5C16.9705 20.5 21 16.339 21 13.5C21 10.661 16.9705 6.5 12 6.5C7.0295 6.5 3 10.664 3 13.5C3 16.336 7.0295 20.5 12 20.5Z" stroke="#222222" stroke-width="1.5" stroke-linejoin="round"></path>
+                        <path d="M12 16.5C12.7956 16.5 13.5587 16.1839 14.1213 15.6213C14.6839 15.0587 15 14.2956 15 13.5C15 12.7044 14.6839 11.9413 14.1213 11.3787C13.5587 10.8161 12.7956 10.5 12 10.5C11.2044 10.5 10.4413 10.8161 9.87868 11.3787C9.31607 11.9413 9 12.7044 9 13.5C9 14.2956 9.31607 15.0587 9.87868 15.6213C10.4413 16.1839 11.2044 16.5 12 16.5Z" stroke="#222222" stroke-width="1.5" stroke-linejoin="round"></path>
+                        <path d="M6.63281 5.633L7.92981 7.443M17.8133 5.855L16.5158 7.665M12.0053 3.5V6.5" stroke="#222222" stroke-width="1.5" stroke-linecap="round"></path>
+                    </svg>
+                </span>
+            </div>
+        </div>
+        <div class="heart-marker">
+            <?/* ПУСТОЕ СЕРДЦЕ */?>
+            <svg xmlns="http://www.w3.org/2000/svg" width="27" height="23" viewBox="0 0 27 23" fill="none">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M23.6478 11.0796C24.679 10.0425 25.2518 8.64226 25.2403 7.18691C25.2288 5.73156 24.634 4.34034 23.5866 3.3193C23.0679 2.81373 22.4538 2.41426 21.7793 2.1437C21.1048 1.87313 20.383 1.73677 19.6553 1.7424C18.1855 1.75378 16.7805 2.34282 15.7493 3.37995C15.4693 3.65721 15.1135 3.99752 14.6818 4.4009L13.4816 5.52004L12.2814 4.4009C11.8487 3.99656 11.4924 3.65625 11.2124 3.37995C10.1731 2.35087 8.76354 1.77273 7.29377 1.77273C5.82401 1.77273 4.41444 2.35087 3.37516 3.37995C1.23429 5.50126 1.2095 8.93089 3.29641 11.0623L13.4816 21.1476L23.6478 11.0796ZM2.13701 2.15539C2.81414 1.48473 3.61807 0.952715 4.50288 0.589743C5.38768 0.226772 6.33604 0.0399508 7.29377 0.0399508C8.25151 0.0399508 9.19986 0.226772 10.0847 0.589743C10.9695 0.952715 11.7734 1.48473 12.4505 2.15539C12.716 2.41917 13.0596 2.74745 13.4816 3.14024C13.9016 2.74745 14.2453 2.41869 14.5127 2.15395C15.8697 0.789557 17.7185 0.0148347 19.6524 0.00021083C21.5863 -0.014413 23.4468 0.732259 24.8247 2.07597C26.2026 3.41968 26.985 5.25036 26.9998 7.16527C27.0146 9.08019 26.2605 10.9225 24.9035 12.2869L14.5127 22.5772C14.2392 22.8479 13.8683 23 13.4816 23C13.0949 23 12.724 22.8479 12.4505 22.5772L2.0568 12.2854C0.72392 10.9243 -0.0147832 9.09859 0.000224273 7.20269C0.0152318 5.30679 0.782746 3.49281 2.13701 2.1525V2.15539Z" fill="#222222"/>
+            </svg>
+        </div>
+
+
+        <?/* ЗАПОЛНЕНОЕ СЕРДЦЕ 
+        <svg xmlns="http://www.w3.org/2000/svg" width="27" height="23" viewBox="0 0 27 23" fill="none">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M2.11605 2.15539C2.78654 1.48473 3.58258 0.952715 4.45871 0.589744C5.33483 0.226772 6.27388 0.0399508 7.22222 0.0399508C8.17056 0.0399508 9.10961 0.226772 9.98574 0.589744C10.8619 0.952715 11.6579 1.48473 12.3284 2.15539C12.5912 2.41917 12.9315 2.74745 13.3493 3.14024C13.7652 2.74745 14.1055 2.41869 14.3703 2.15395C15.714 0.789558 17.5447 0.0148347 19.4596 0.00021083C21.3745 -0.014413 23.2168 0.732259 24.5812 2.07597C25.9456 3.41968 26.7203 5.25036 26.7349 7.16527C26.7496 9.08019 26.0029 10.9225 24.6592 12.2869L14.3703 22.5772C14.0995 22.8479 13.7323 23 13.3493 23C12.9664 23 12.5992 22.8479 12.3284 22.5772L2.03663 12.2854C0.716819 10.9243 -0.0146382 9.09859 0.000222073 7.20269C0.0150823 5.30679 0.775067 3.49281 2.11605 2.1525V2.15539Z" fill="#EF4A85"/>
+        </svg>
+        */?>
     </div>
 </div>
