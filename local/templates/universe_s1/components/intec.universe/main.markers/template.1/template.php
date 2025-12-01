@@ -18,33 +18,36 @@ if (
     !$arResult['SALE']
 ) return;
 ?>
-
 <style>
-    .c-markers.c-markers-template-1 .widget-markers {
-        background: transparent !important;
-        border-radius: 0px !important;
-        font-size: 12px !important;
-        letter-spacing: 0 !important;
-        text-transform: uppercase !important;
-        font-weight: 600 !important;
-        line-height: 100% !important;
-        padding: 9px 13px !important;
+.c-markers.c-markers-template-1 .widget-markers, .widget-markers {
+    background: transparent !important;
+    border-radius: 0px !important;
+    font-size: 12px !important;
+    letter-spacing: 0 !important;
+    text-transform: uppercase !important;
+    font-weight: 600 !important;
+    line-height: 100% !important;
+    padding: 9px 13px !important;
+}
+.c-markers.c-markers-template-1 .widget-markers-new, .widget-markers-new {
+    color: #80E0A7 !important;
+    border: 1px solid #80E0A7 !important;
+}
+.c-markers.c-markers-template-1 .widget-markers-sale, .widget-markers-sale {
+    color: #EF4A85 !important;
+    border: 1px solid #EF4A85 !important;
+}
+.c-markers.c-markers-template-1 .widget-markers-hit, .widget-markers-hit {
+    color: #744A9E !important;
+    border: 1px solid #744A9E !important;
+}
+@media (max-width:500px){
+
+    .figma-tag svg{
+        width: 26px;
+        height: 26px;
     }
-    .c-markers.c-markers-template-1 .widget-markers-new {
-        color: #EF4A85 !important;
-        border: 1px solid #EF4A85 !important;
-    }
-    .c-markers.c-markers-template-1 .widget-markers-hit {
-        color: #744A9E !important;
-        border: 1px solid #744A9E !important;
-    }
-    @media (max-width:500px){
-        .c-markers.c-markers-template-1 .widget-markers {
-            font-size: 10px !important;
-            padding: 7px 10px !important;
-        }
-    }
-    
+}
 </style>
 
 <div class="widget c-markers c-markers-template-1 tag-flex-markers" data-orientation="<?= $arVisual['ORIENTATION'] ?>" style="margin-bottom:20px; argin-left: -15px;flex-wrap: wrap;">
@@ -58,7 +61,7 @@ if (
     <?php if ($arResult['SALE']) { ?>
         <div class="widget-markers-wrap">
             <?= Html::tag('div', Loc::getMessage('C_MAIN_MARKERS_TEMP1_SALE'), [
-                'class' => 'widget-markers widget-markers-hit'
+                'class' => 'widget-markers widget-markers-sale'
             ]) ?>
         </div>
     <?php } ?>

@@ -7,7 +7,7 @@ use intec\core\helpers\Type;
  */
 
 // ID свойств, которые нужно пропустить
-$excludedIds = [354, 617];
+$excludedIds = [354, 617, 675];
 
 // Собираем все элементы для вывода в одном массиве
 $allProperties = [];
