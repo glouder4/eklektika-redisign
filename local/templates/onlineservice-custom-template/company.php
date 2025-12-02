@@ -10,6 +10,66 @@ $APPLICATION->SetTitle("О компании");
     );?>
 </div>
 <main class="main-content">
+    <div class="container-comp">
+        <div class="header">
+            <h1>Привет! Мы — Yo!merch.</h1>
+            <p>Поставщик корпоративных подарков для тех, кому надоел шаблонный мерч.</p>
+        </div>
+
+        <div class="intro">
+            Мы открылись в 2025-м, чтобы показать то, чего все давно ждали: свежий взгляд, живые эмоции и тот самый вау-эффект в каждой вещи.
+        </div>
+
+        <div class="highlight">
+            Время дарить эмоции, а не просто «что-то с логотипом».
+        </div>
+
+        <div class="image-container">
+            <img src="/local/templates/universe_s1/components/bitrix/form.result.new/onlineservice-feedback-form-type-2/assets/1.jpg" alt="Креативный мерч">
+        </div>
+
+        <div class="mission-statement">
+            <h2>Российский мерч может быть крутым</h2>
+            <p>— и это наша принципиальная позиция. Мерч, созданный в России, должен ассоциироваться не с унылой формальностью, а со стилем, качеством и современностью.</p>
+        </div>
+
+        <div class="goals">
+            <div class="goal-card">
+                <h3>Наша цель — показать бизнес-подарки с новой стороны:</h3>
+                <p>без серости и тоски, но с душой и современным дизайном. И чтобы партнеры из других стран смотрели и говорили: «А что, так можно было?»</p>
+            </div>
+            <div class="goal-card">
+                <h3>Ассортимент постоянно растет:</h3>
+                <p>добавляются новые категории, усиливается производство, тестируются материалы. Все это для того, чтобы получилось именно то, что сделает <strong>ваш бренд по-настоящему заметным</strong>.</p>
+            </div>
+        </div>
+
+        <div class="advantages">
+            <h3>С нами работают, потому что здесь:</h3>
+            <ul>
+                <li>свой склад в Москве с отгрузкой за 24 часа;</li>
+                <li>шоурум с видом на Останкино и моментальной выдачей образцов;</li>
+                <li>персональный менеджер, который говорит с вами на одном языке;</li>
+                <li>стильный ассортимент без случайных позиций.</li>
+            </ul>
+            <p>За всем этим стоит команда специалистов с многолетним опытом в отрасли, которую собрал <strong>Аркадий Алышев</strong>.</p>
+        </div>
+
+        <div class="quote-section">
+            <div class="quote-text">
+                Мы переосмыслили язык сувенирной продукции и создали для вас новый каталог мерча с таким ассортиментом, которым сами хотели бы пользоваться.
+            </div>
+            <div class="quote-image circular">
+                <img src="/local/templates/universe_s1/components/bitrix/form.result.new/onlineservice-feedback-form-type-2/assets/2.jpg" alt="Команда Yo!merch" style="object-position: 50% 30%;">
+            </div>
+        </div>
+
+        <div class="closing">
+            <p>Мы только начинаем путь и точно знаем, куда идем.</p>
+            <p>Рады, что вы решили пройти его вместе с нами.</p>
+        </div>
+    </div>
+    <?/*
     <div class="container">
         <div class="page__title-wrapper">
             <h1 class="page__title-wrapper-title">
@@ -40,7 +100,7 @@ $APPLICATION->SetTitle("О компании");
                     <div class="border-left"></div>
                     <div class="border-bottom"></div>
                 </div>
-                <p><span style="color: #EF4A85;">Yoliba</span> — это <span style="color: #EF4A85;">Y</span>our <span style="color: #EF4A85;">Li</span>fe <span style="color: #EF4A85;">Ba</span>lance<br/>Баланс твоей жизни</p>
+                <p><span style="color: #80E0A7;">Yoliba</span> — это <span style="color: #80E0A7;">Y</span>our <span style="color: #80E0A7;">Li</span>fe <span style="color: #80E0A7;">Ba</span>lance<br/>Баланс твоей жизни</p>
             </div>
             <img class="bg-image" src="/local/templates/onlineservice-custom-template/components/company/assets/background-element.png" alt="">
         </div>
@@ -298,7 +358,7 @@ $APPLICATION->SetTitle("О компании");
                 <div class="service--item">
                     <div class="service--item--icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" fill="none">
-                            <circle cx="40" cy="40" r="40" fill="#EF4A85"/>
+                            <circle cx="40" cy="40" r="40" fill="#80E0A7"/>
                             <path d="M25.1445 31.0854C25.1445 29.5093 25.7707 27.9977 26.8852 26.8832C27.9997 25.7687 29.5112 25.1426 31.0874 25.1426C32.6635 25.1426 34.1751 25.7687 35.2896 26.8832C36.4041 27.9977 37.0302 29.5093 37.0302 31.0854V48.914C37.0302 50.4901 36.4041 52.0017 35.2896 53.1162C34.1751 54.2307 32.6635 54.8569 31.0874 54.8569C29.5112 54.8569 27.9997 54.2307 26.8852 53.1162C25.7707 52.0017 25.1445 50.4901 25.1445 48.914V31.0854Z" stroke="white" stroke-width="2"/>
                             <path d="M37.0311 34.4182L41.9533 29.4946C43.0678 28.38 44.5794 27.7539 46.1556 27.7539C47.7318 27.7539 49.2434 28.38 50.3579 29.4946C51.4725 30.6091 52.0986 32.1207 52.0986 33.6969C52.0986 35.2731 51.4725 36.7847 50.3579 37.8993L36 52.2572" stroke="white" stroke-width="2"/>
                             <path d="M31.0834 54.8564H48.9119C50.4881 54.8564 51.9997 54.2303 53.1142 53.1158C54.2287 52.0013 54.8548 50.4897 54.8548 48.9136C54.8548 47.3374 54.2287 45.8258 53.1142 44.7113C51.9997 43.5968 50.4881 42.9707 48.9119 42.9707H45.1977M32.5691 48.9136C32.5691 49.3076 32.4126 49.6855 32.1339 49.9641C31.8553 50.2427 31.4774 50.3993 31.0834 50.3993C30.6893 50.3993 30.3114 50.2427 30.0328 49.9641C29.7542 49.6855 29.5977 49.3076 29.5977 48.9136C29.5977 48.5195 29.7542 48.1416 30.0328 47.863C30.3114 47.5844 30.6893 47.4278 31.0834 47.4278C31.4774 47.4278 31.8553 47.5844 32.1339 47.863C32.4126 48.1416 32.5691 48.5195 32.5691 48.9136Z" stroke="white" stroke-width="2"/>
@@ -416,6 +476,7 @@ $APPLICATION->SetTitle("О компании");
             </div>
         </div>
     </div>
+    */?>
     <?$APPLICATION->IncludeComponent(
         "bitrix:form.result.new",
         "onlineservice-feedback-form-type-2",

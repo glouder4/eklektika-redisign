@@ -16,7 +16,7 @@ $customPages = [
     '/informacziya-dlya-dilerov/', //Программа лояльности +1
     '/services/', // Услуги
     '/oplata/', // Способы оплаты
-    //'/company/', //О компании
+    '/company/', //О компании
     '/vidy-naneseniy/', //Виды нанесений
     '/nanesenie/', //Виды нанесений
     '/services/s_dtf_pechat/',
@@ -434,9 +434,9 @@ if (in_array($APPLICATION->GetCurPage(), $customPages)) {
             case '/oplata/':
                 include($_SERVER['DOCUMENT_ROOT'].'/local/templates/onlineservice-custom-template/oplata.php');
                 break;
-            /*case '/company/':
+            case '/company/':
                 include($_SERVER['DOCUMENT_ROOT'].'/local/templates/onlineservice-custom-template/company.php');
-                break;*/
+                break;
             case '/vidy-naneseniy/':
                 include($_SERVER['DOCUMENT_ROOT'].'/local/templates/onlineservice-custom-template/vidy-naneseniy.php');
                 break;
