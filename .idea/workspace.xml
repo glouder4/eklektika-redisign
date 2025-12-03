@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="a53d02d7-d404-452c-a903-dd81636134fa" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catalog/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/catalog/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/breadcrumb/onlineservice-breadcrumbs/result.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/breadcrumb/onlineservice-breadcrumbs/result.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/parts/microdata.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/parts/microdata.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -36,7 +38,7 @@
     &quot;WebServerToolWindowPanel.toolwindow.show.date&quot;: &quot;false&quot;,
     &quot;WebServerToolWindowPanel.toolwindow.show.permissions&quot;: &quot;false&quot;,
     &quot;WebServerToolWindowPanel.toolwindow.show.size&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Git_projects/golfstream&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Git_projects/eklektika-beget/upload/acrit.exportfile&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -47,11 +49,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Git_projects\eklektika-beget\upload\acrit.exportfile" />
       <recent name="C:\Git_projects\eklektika-beget\local\components\intec.universe" />
       <recent name="C:\Git_projects\eklektika-beget\local\templates\universe_s1\components\bitrix\news.detail" />
       <recent name="C:\Git_projects\eklektika-beget\local\templates\universe_s1\components\intec\main.register" />
       <recent name="C:\Git_projects\eklektika-beget\local\templates\universe_s1\components\bitrix" />
-      <recent name="C:\Git_projects\eklektika-beget\local\templates\universe_s1\components\intec.universe\main.header\template.1.custom\bitrix" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Git_projects\eklektika-beget\local\templates\universe_s1\components\bitrix\news.detail" />
@@ -178,6 +180,15 @@
       <workItem from="1762932711103" duration="123000" />
       <workItem from="1763733029477" duration="3582000" />
       <workItem from="1763740068165" duration="5000" />
+      <workItem from="1763971865150" duration="4000" />
+      <workItem from="1764325028963" duration="2392000" />
+      <workItem from="1764334771354" duration="64000" />
+      <workItem from="1764334846544" duration="696000" />
+      <workItem from="1764353264095" duration="150000" />
+      <workItem from="1764581845456" duration="792000" />
+      <workItem from="1764673925657" duration="5000" />
+      <workItem from="1764674007419" duration="554000" />
+      <workItem from="1764767095127" duration="6337000" />
     </task>
     <servers />
   </component>
