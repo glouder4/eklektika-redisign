@@ -150,14 +150,14 @@ window.productOffersById = <?= $all_offers_json ?>;
                     }
                     ?>
                     <div class="catalog-element-properties-detail-item" <?= $dataAttr ?>>
-                        <div class="intec-grid intec-grid-a-v-center intec-grid-i-4 intec-grid-500-wrap flex-justify-content-between">
+                        <div itemscope itemprop="additionalProperty" itemtype="http://schema.org/PropertyValue" class="intec-grid intec-grid-a-v-center intec-grid-i-4 intec-grid-500-wrap flex-justify-content-between">
                             <div class="intec-grid-item-2 intec-grid-item-500-1">
-                                <div class="catalog-element-properties-detail-item-name">
+                                <div itemprop="name" class="catalog-element-properties-detail-item-name">
                                     <?= htmlspecialchars($item['name']) ?>
                                 </div>
                             </div>
                             <div class="intec-grid-item-2 intec-grid-item-500-1">
-                                <div class="catalog-element-properties-detail-item-value">
+                                <div  itemprop="value" class="catalog-element-properties-detail-item-value">
                                     <?= htmlspecialchars($item['value']) ?>
                                 </div>
                             </div>
@@ -173,14 +173,14 @@ window.productOffersById = <?= $all_offers_json ?>;
             <?php foreach ($two_column as $item): ?>
                 <?php if (!empty($item['name']) && !empty($item['value'])): ?>
                     <div class="catalog-element-properties-detail-item">
-                        <div class="intec-grid intec-grid-a-v-center intec-grid-i-4 intec-grid-500-wrap flex-justify-content-between">
-                            <div class="intec-grid-item-2 intec-grid-item-500-1">
+                        <div itemscope itemprop="additionalProperty" itemtype="http://schema.org/PropertyValue" class="intec-grid intec-grid-a-v-center intec-grid-i-4 intec-grid-500-wrap flex-justify-content-between">
+                            <div itemprop="name" class="intec-grid-item-2 intec-grid-item-500-1">
                                 <div class="catalog-element-properties-detail-item-name">
                                     <?= htmlspecialchars($item['name']) ?>
                                 </div>
                             </div>
                             <div class="intec-grid-item-2 intec-grid-item-500-1">
-                                <div class="catalog-element-properties-detail-item-value">
+                                <div itemprop="value" class="catalog-element-properties-detail-item-value">
                                     <?= htmlspecialchars($item['value']) ?>
                                 </div>
                             </div>
