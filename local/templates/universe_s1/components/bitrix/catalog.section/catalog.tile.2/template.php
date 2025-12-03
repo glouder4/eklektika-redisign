@@ -376,12 +376,38 @@ if ($arVisual['OFFERS']['USE'] && $arVisual['OFFERS']['VIEW'] === 'extended')
                             ['HIDE_ICONS' => 'Y']
                         ) ?>
                         <? /* Общий блок после фотки */ ?>
-                        <?php if ($arItem['PROPERTIES']['CML2_ARTICLE']['VALUE']) { ?>
-                            <? $articule = $arItem['PROPERTIES']['CML2_ARTICLE']['VALUE']; ?>
-                            <div class="catalog-section-item-quantity-wrap articule-style">
-                                Артикул: <?= $articule ?>
+                        <?php
+                        // Вывод артикула по умолчанию — из первого оффера или из основного товара
+                        $defaultArtikul = null;
+
+                        if (!empty($arItem['OFFERS'])) {
+                            $firstOffer = $arItem['OFFERS'][0];
+                            $defaultArtikul = $firstOffer['PROPERTIES']['ARTIKUL_POSTAVSHCHIKA']['VALUE'] ?: null;
+                        } else {
+                            $defaultArtikul = $arItem['PROPERTIES']['CML2_ARTICLE']['VALUE'] ?? null;
+                        }
+                        ?>
+
+                        <?php if ($defaultArtikul): ?>
+                            <div class="catalog-section-item-quantity-wrap articule-style" id="articul-display-<?= $arItem['ID'] ?>">
+                                Артикул: <?= htmlspecialchars($defaultArtikul) ?>
                             </div>
-                        <?php } ?>
+                        <?php endif; ?>
+
+                        <!-- Скрытые данные всех артикулов по цветам -->
+                        <?php if (!empty($arItem['OFFERS'])): ?>
+                            <div id="all-offers-artikuls-<?= $arItem['ID'] ?>" style="display:none;">
+                                <?php foreach ($arItem['OFFERS'] as $offer): 
+                                    $colorId = $offer['PROPERTIES']['TSVET']['VALUE_ENUM_ID'] ?? '';
+                                    if (!$colorId) continue;
+                                    $artikul = $offer['PROPERTIES']['ARTIKUL_POSTAVSHCHIKA']['VALUE'] ?? '';
+                                ?>
+                                    <div class="offer-artikul"
+                                        data-color-id="<?= htmlspecialchars($colorId) ?>"
+                                        data-artikul="<?= htmlspecialchars($artikul) ?>"></div>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php endif; ?>
                         <?/*php if ($arItem['DATA']['QUANTITY']['SHOW']) { ?>
                             <div class="catalog-section-item-quantity-wrap">
                                 <?php $vQuantity($arItem) ?>

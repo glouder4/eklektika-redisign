@@ -156,6 +156,21 @@ if (!function_exists('calculateOfferStock')) {
                     html += '</div>';
                 }
             }
+            // Обновление артикула
+            var articulDisplay = document.getElementById('articul-display-' + itemId);
+            var allArtikulsData = document.getElementById('all-offers-artikuls-' + itemId);
+
+            if (articulDisplay && allArtikulsData) {
+                var artikulElement = allArtikulsData.querySelector('.offer-artikul[data-color-id="' + colorId + '"]');
+                var newArtikul = artikulElement ? artikulElement.getAttribute('data-artikul') : '';
+                
+                if (newArtikul) {
+                    articulDisplay.innerHTML = 'Артикул: ' + newArtikul;
+                    articulDisplay.style.display = 'block';
+                } else {
+                    articulDisplay.style.display = 'none';
+                }
+            }
             
             container.innerHTML = html;
         }
