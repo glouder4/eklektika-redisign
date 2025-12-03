@@ -113,9 +113,9 @@ use intec\core\helpers\Html;
         ]) ?>
             <div class="catalog-element-main-block-container" data-sticky="top">
                 <?php include(__DIR__.'/gallery.php') ?>
-                <?php if ($arVisual['DESCRIPTION']['PREVIEW']['SHOW']) { ?>
+                <?/*php if ($arVisual['DESCRIPTION']['PREVIEW']['SHOW']) { ?>
                     <? include(__DIR__ . '/description.preview.php'); ?>
-                <?php } ?>
+                <?php } */?>
             </div>
         <?= Html::endTag('div') ?>
         <?/*php if ($bSkuDynamic || $arVisual['PROPERTIES']['PREVIEW']['SHOW'] || $arResult['SIZES']['SHOW']) { ?>

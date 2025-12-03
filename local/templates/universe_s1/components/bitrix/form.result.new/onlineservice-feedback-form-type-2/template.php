@@ -20,20 +20,20 @@ if (!Loader::includeModule('intec.core'))
 $sTemplateId = Html::getUniqueId(null, Component::getUniqueId($this));
 
 ?>
-<div style="background-color: #D6C2F3; position: relative;">
+<div style="background-color: #F5AAC1; position: relative;">
     <div class="feedback__form--background__elements">
         <div class="feedback__form--background__element">
-            <img src="/local/templates/universe_s1/components/bitrix/form.result.new/onlineservice-feedback-form-type-3/assets/bg-item-mobile.png" alt="">
+            <img src="/local/templates/universe_s1/components/bitrix/form.result.new/onlineservice-feedback-form-type-2/assets/bg-item-mobile-new.png" alt="">
         </div>
         <div class="feedback__form--background__element desktop">
-            <img src="/local/templates/universe_s1/components/bitrix/form.result.new/onlineservice-feedback-form-type-3/assets/bg-item.png" alt="">
+            <img src="/local/templates/universe_s1/components/bitrix/form.result.new/onlineservice-feedback-form-type-2/assets/bg-item-new.png" alt="">
         </div>
     </div>
     <div class="container">
         <div class="feedback__form">
             <div class="feedback__form--form_wrapper">
                 <div class="feedback__form--form_title">
-                    <span>Закажите подробную<br/>консультацию</span>
+                    <span>Оставьте заявку<br/>и мы с вами свяжемся</span>
                 </div>
                 <form class="feedback__form--form" id="feedback__form--form">
                     <?=bitrix_sessid_post()?>
@@ -52,7 +52,7 @@ $sTemplateId = Html::getUniqueId(null, Component::getUniqueId($this));
                     </div>
 
                     <div class="feedback__form--form--action_item">
-                        <button type="submit" id="feedback__form-SendForm" class="feedback__form--form--action_item--send_form">Заказать консультацию</button>
+                        <button type="submit" id="feedback__form-SendForm" class="feedback__form--form--action_item--send_form">Оставить заявку</button>
                     </div>
                 </form>
             </div>

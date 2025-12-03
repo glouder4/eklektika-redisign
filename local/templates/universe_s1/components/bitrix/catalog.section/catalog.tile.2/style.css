@@ -115,8 +115,8 @@
 .ns-bitrix.c-catalog-section.c-catalog-section-catalog-tile-2 .catalog-section-item-marks {
   position: absolute;
   top: -15px;
-  left: -15px;
-  right: 20px;
+  left: 0px;
+  right: 0px;
   pointer-events: none;
   z-index: 2;
 }
@@ -1181,7 +1181,7 @@
     justify-content: space-between;
     align-items: center;}
 .ns-bitrix.c-catalog-section.c-catalog-section-catalog-tile-2 .catalog-section-item-marks {
-    width: 112%;
+    width: 100%;
 }
 .c-markers.c-markers-template-1[data-orientation=horizontal] .widget-markers-wrap{
     margin: 0px !important;
@@ -1285,18 +1285,34 @@
         padding-right: 15px !important;
     }
 }
+
 @media (max-width: 720px) {
     .ns-bitrix.c-catalog-section.c-catalog-section-catalog-tile-2 .catalog-section-item-purchase-desktop .catalog-section-item-purchase-button {
         margin-left: 5px !important;
         margin-right: 5px !important;
     }
+    .ns-bitrix.c-catalog-section.c-catalog-section-catalog-tile-2 .catalog-section-item-quantity-wrap, .ns-bitrix.c-catalog-section.c-catalog-section-catalog-tile-2 .catalog-section-item-name, .catalog-section-item-price, .offer-dynamic-info {
+        margin-bottom: 10px !important;
+    }
 }
 @media (max-width: 600px) {
+    .intec-ui-control-basket-button[data-basket-state="added"] {
+        display: none !important;
+    }
+    .ns-bitrix.c-catalog-section.c-catalog-section-catalog-tile-2 .catalog-section-item-purchase-button-added[data-basket-state=added]{
+        height: 46px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .ns-bitrix.c-catalog-section.c-catalog-section-catalog-tile-2 .catalog-section-item-purchase-button-add {
+        display: flex;
+    }
     .catalog-section-item-purchase-mobile .catalog-section-item-purchase-buttons .catalog-section-item-purchase-button-add{
         background-color: #744A9E !important;
         fill: #744A9E !important;
         height: 46px !important;
-        display: flex !important;
+        display: flex;
         align-items: center !important;
         justify-content: center !important;
         text-transform: none !important;
