@@ -75,6 +75,13 @@ $arSections = [
         'NAME' => $arResult['REVIEWS']['NAME'],
         'VALUE' => __DIR__.'/sections/reviews.php'
     ],
+    /*'ADDITIONAL_PROPERTIES' => [
+        'ID' => 'additional_properties',
+        'SHOW' => true, // Можно настроить условие показа
+        'TYPE' => 'file',
+        'NAME' => 'Дополнительные характеристики', // Название таба
+        'VALUE' => __DIR__.'/sections/additional_properties.php'
+    ],*/
     'BUY' => [
         'ID' => 'buy',
         'SHOW' => $arVisual['INFORMATION']['BUY']['SHOW'],
