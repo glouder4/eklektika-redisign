@@ -1003,7 +1003,7 @@
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.header {
+.container-comp .header {
     text-align: center;
     margin-bottom: 40px;
     padding-bottom: 30px;
@@ -1011,25 +1011,24 @@
     position: relative;
 }
 
-.header h1 {
+.container-comp .header h1 {
     font-size: 3.8rem;
-    background: linear-gradient(90deg, #EF4A85, #744A9E, #57B0EA, #4BD783, #FF5B36);
+    color: #7B4FA3;
     -webkit-background-clip: text;
     background-clip: text;
-    color: transparent;
     margin-bottom: 15px;
     font-weight: 900;
     letter-spacing: -0.5px;
 }
 
-.header p {
+.container-comp .header p {
     font-size: 1.5rem;
     color: #666;
     max-width: 800px;
     margin: 0 auto;
 }
 
-.intro {
+.container-comp .intro {
     font-size: 1.4rem;
     background: #f8fafc;
     padding: 25px;
@@ -1039,7 +1038,7 @@
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
 }
 
-.highlight {
+.container-comp .highlight {
     font-size: 1.7rem;
     text-align: center;
     font-style: italic;
@@ -1051,27 +1050,30 @@
     font-weight: 600;
 }
 
-.image-container {
+.container-comp .image-container {
     width: 100%;
     overflow: hidden;
-    border-radius: 20px;
     margin: 30px 0;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
     position: relative;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0px;
 }
 
-.image-container img {
+.container-comp .image-container img {
     width: 100%;
     height: auto;
     object-fit: cover;
     transition: transform 0.5s ease;
+    border-radius: 20px;
+    max-width: 1200px;
 }
 
-.image-container:hover img {
+.container-comp .image-container:hover img {
     transform: scale(1.03);
 }
 
-.photo-note {
+.container-comp .photo-note {
     text-align: center;
     font-size: 1rem;
     color: #777;
@@ -1079,19 +1081,19 @@
     margin-bottom: 30px;
 }
 
-.photo-note a {
+.container-comp .photo-note a {
     color: #744A9E;
     text-decoration: none;
     border-bottom: 1px dashed #744A9E;
 }
 
-.photo-note a:hover {
+.container-comp .photo-note a:hover {
     color: #EF4A85;
     border-bottom: 1px solid #EF4A85;
 }
 
-.mission-statement {
-    background: linear-gradient(135deg, #2d3436, #636e72);
+.container-comp .mission-statement {
+    background: linear-gradient(135deg, #744A9E, #472e61);
     color: white;
     padding: 35px;
     border-radius: 20px;
@@ -1101,7 +1103,7 @@
     overflow: hidden;
 }
 
-.mission-statement::before {
+.container-comp .mission-statement::before {
     content: '';
     position: absolute;
     top: -50%;
@@ -1114,7 +1116,7 @@
     z-index: 0;
 }
 
-.mission-statement h2 {
+.container-comp .mission-statement h2 {
     font-size: 2.5rem;
     margin-bottom: 20px;
     position: relative;
@@ -1123,75 +1125,68 @@
     font-weight: 700;
 }
 
-.mission-statement p {
+.container-comp .mission-statement p {
     font-size: 1.4rem;
     position: relative;
     z-index: 1;
     opacity: 0.95;
 }
 
-.goals {
+.container-comp .goals {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 25px;
     margin: 40px 0;
 }
 
-.goal-card {
+.container-comp .goal-card {
     background: white;
     padding: 25px;
     border-radius: 16px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-    border-top: 5px solid #EF4A85;
+    border-top: 5px solid #744A9E;
     transition: all 0.3s ease;
 }
 
-.goal-card:nth-child(2) {
-    border-top-color: #57B0EA;
-}
 
-.goal-card:nth-child(3) {
-    border-top-color: #4BD783;
-}
-
-.goal-card:hover {
+.container-comp .goal-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
 }
 
-.goal-card h3 {
+.container-comp .goal-card h3 {
     font-size: 1.7rem;
     margin-bottom: 15px;
     color: #2d3436;
     font-weight: 600;
 }
 
-.goal-card p {
+.container-comp .goal-card p {
     font-size: 1.2rem;
     color: #555;
 }
 
-.advantages {
-    background: #f1f8ff;
+.container-comp .advantages {
+    background: rgb(128 224 167 / 10%);;
     padding: 30px;
     border-radius: 18px;
     margin: 40px 0;
-    border-left: 6px solid #57B0EA;
+    border-left: 6px solid rgb(128, 224, 167);
 }
 
-.advantages h3 {
+.container-comp .advantages h3 {
     font-size: 2rem;
     margin-bottom: 20px;
     color: #2d3436;
     font-weight: 600;
 }
 
-.advantages ul {
+.container-comp .advantages ul {
     list-style: none;
     padding-left: 0;
 }
 
-.advantages li {
+.container-comp .advantages li {
     padding: 12px 0;
     padding-left: 35px;
     position: relative;
@@ -1199,7 +1194,7 @@
     color: #444;
 }
 
-.advantages li::before {
+.container-comp .advantages li::before {
     content: '✓';
     position: absolute;
     left: 0;
@@ -1208,7 +1203,7 @@
     font-size: 1.5rem;
 }
 
-.quote-section {
+.container-comp .quote-section {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -1221,7 +1216,7 @@
     border: 1px solid #ffeaa7;
 }
 
-.quote-text {
+.container-comp .quote-text {
     flex: 1;
     min-width: 300px;
     font-size: 1.6rem;
@@ -1233,27 +1228,27 @@
     max-width: 1000px;
 }
 
-.quote-text::before,
-.quote-text::after {
+.container-comp .quote-text::before,
+.container-comp .quote-text::after {
     font-size: 4rem;
     color: #FF5B36;
     position: absolute;
     opacity: 0.5;
 }
 
-.quote-text::before {
+.container-comp .quote-text::before {
     content: '“';
     top: -20px;
     left: -10px;
 }
 
-.quote-text::after {
+.container-comp .quote-text::after {
     content: '”';
-    bottom: -40px;
-    right: -10px;
+    bottom: -50px;
+    right: 45px;
 }
 
-.quote-image.circular {
+.container-comp .quote-image.circular {
     width: 200px;
     height: 200px;
     border-radius: 50%;
@@ -1264,18 +1259,18 @@
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
-.quote-image.circular img {
+.container-comp .quote-image.circular img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
 }
 
-.quote-image.circular:hover img {
+.container-comp .quote-image.circular:hover img {
     transform: scale(1.05);
 }
 
-.founder {
+.container-comp .founder {
     text-align: right;
     margin-top: 10px;
     font-weight: bold;
@@ -1283,45 +1278,54 @@
     color: #555;
 }
 
-.closing {
+.container-comp .closing {
     text-align: center;
     padding: 40px 20px;
     margin-top: 50px;
     border-top: 2px dashed #e0e6ef;
 }
 
-.closing p {
+.container-comp .closing p {
     font-size: 1.5rem;
     margin-bottom: 15px;
     color: #444;
     
 }
 
-.closing p:last-child {
+.container-comp .closing p:last-child {
     font-size: 1.7rem;
-    color: #EF4A85;
+    color: #744A9E;
     font-weight: bold;
     font-style: italic;
 }
 
 @media (max-width: 768px) {
-    .container {
+    .container-comp {
         padding: 20px;
     }
-    
-    .header h1 {
+    .container-comp .header h1 {
         font-size: 2.8rem;
     }
     
-    .mission-statement {
+    .container-comp .mission-statement {
         padding: 25px;
     }
     
-    .quote-section {
+    .container-comp .quote-section {
         flex-direction: column;
     }
     
-    .quote-image {
+    .container-comp .quote-image {
         max-width: 100%;
+    }
+    .container-comp .image-container:hover img {
+        transform: unset;
+    }
+    .container-comp .quote-section {
+        padding: 15px;
+    }
+    .container-comp .quote-text {
+        font-size: 1.3rem;
+        min-width: 150px;
     }
 }
