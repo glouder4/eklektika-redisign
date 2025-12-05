@@ -9,6 +9,25 @@ use intec\core\helpers\Html;
  * @var array $arVisual
  * @var array arFields
  */
+
+// Сначала определяем, есть ли дополнительные свойства
+$additionalPropertiesIds = [312, 318, 319, 321, 322, 323, 325, 326, 327, 328];
+$hasAdditionalProperties = false;
+
+// Проверяем наличие значений в указанных свойствах
+if (isset($arResult['PROPERTIES'])) {
+    foreach ($arResult['PROPERTIES'] as $propertyCode => $property) {
+        if (isset($property['ID']) && in_array($property['ID'], $additionalPropertiesIds)) {
+            // Проверяем, не пустое ли значение
+            $value = $property['VALUE'] ?? null;
+            if (!empty($value) || (isset($value) && $value !== false && $value !== '')) {
+                $hasAdditionalProperties = true;
+                break;
+            }
+        }
+    }
+}
+
 $arSections = [
     'DESCRIPTION' => [
         'ID' => 'description',
@@ -21,7 +40,7 @@ $arSections = [
         'ID' => 'properties',
         'SHOW' => $arVisual['PROPERTIES']['DETAIL']['SHOW'],
         'TYPE' => 'file',
-        'NAME' => 'Описание'/*$arVisual['PROPERTIES']['DETAIL']['NAME']*/,
+        'NAME' => 'Описание',
         'VALUE' => __DIR__.'/sections/properties.php'
     ],
     'ACCESSORIES' => [
@@ -47,7 +66,7 @@ $arSections = [
         'NAME' => $arVisual['DOCUMENTS']['NAME'],
         'VALUE' => __DIR__.'/sections/documents.php'
     ],
-	'DOC_DOCUMENTS' => [
+    'DOC_DOCUMENTS' => [
         'ID' => 'doc_documents',
         'SHOW' => $arResult['PROPERTIES']['PROD_LIST_DOCS']['VALUE'],
         'TYPE' => 'file',
@@ -70,18 +89,18 @@ $arSections = [
     ],
     'REVIEWS' => [
         'ID' => 'reviews',
-        'SHOW' => $arResult['REVIEWS']['SHOW'],
+        'SHOW' => false/*$arResult['REVIEWS']['SHOW']*/,
         'TYPE' => 'file',
         'NAME' => $arResult['REVIEWS']['NAME'],
         'VALUE' => __DIR__.'/sections/reviews.php'
     ],
-    /*'ADDITIONAL_PROPERTIES' => [
+    'ADDITIONAL_PROPERTIES' => [
         'ID' => 'additional_properties',
-        'SHOW' => true, // Можно настроить условие показа
+        'SHOW' => $hasAdditionalProperties, // Используем результат проверки
         'TYPE' => 'file',
-        'NAME' => 'Дополнительные характеристики', // Название таба
+        'NAME' => 'Дополнительные характеристики',
         'VALUE' => __DIR__.'/sections/additional_properties.php'
-    ],*/
+    ],
     'BUY' => [
         'ID' => 'buy',
         'SHOW' => $arVisual['INFORMATION']['BUY']['SHOW'],
@@ -96,14 +115,6 @@ $arSections = [
         'NAME' => $arVisual['INFORMATION']['PAYMENT']['NAME'],
         'VALUE' => __DIR__.'/sections/information.payment.php'
     ],
-
-    /*'SHIPMENT' => [
-        'ID' => 'shipment',
-        'SHOW' => $arVisual['INFORMATION']['SHIPMENT']['SHOW'],
-        'TYPE' => 'file',
-        'NAME' => $arVisual['INFORMATION']['SHIPMENT']['NAME'],
-        'VALUE' => __DIR__.'/sections/information.shipment.php'
-    ]*/
 ];
 
 if ($arVisual['DESCRIPTION']['DETAIL']['SHOW']) {
@@ -118,7 +129,6 @@ if ($arVisual['DESCRIPTION']['DETAIL']['SHOW']) {
     if (!empty($arSections['DESCRIPTION']['VALUE']))
         $arSections['DESCRIPTION']['SHOW'] = false;
 }
-
 if ($arSections['PROPERTIES']['SHOW']) {
     if (empty($arSections['PROPERTIES']['NAME']))
         $arSections['PROPERTIES']['NAME'] = Loc::getMessage('C_CATALOG_ELEMENT_DEFAULT_5_TEMPLATE_PROPERTIES_DETAIL_NAME_DEFAULT');
@@ -171,11 +181,6 @@ if ($arSections['PAYMENT']['SHOW']) {
         $arSections['PAYMENT']['NAME'] = Loc::getMessage('C_CATALOG_ELEMENT_DEFAULT_5_TEMPLATE_ADDITIONAL_PAYMENT');
 }
 
-if ($arSections['SHIPMENT']['SHOW']) {
-    if (empty($arSections['SHIPMENT']['NAME']))
-        $arSections['SHIPMENT']['NAME'] = Loc::getMessage('C_CATALOG_ELEMENT_DEFAULT_5_TEMPLATE_ADDITIONAL_SHIPMENT');
-}
-
 ?>
 <div class="catalog-element-sections-container catalog-element-additional-block" data-role="section">
     <div class="catalog-element-sections">
@@ -192,11 +197,11 @@ if ($arSections['SHIPMENT']['SHOW']) {
                 <?php $bFirst = true ?>
                 <?php foreach ($arSections as $arSection) {
 
-                    if (!$arSection['SHOW'] || $arSection['ID'] == "reviews")
+                    if (!$arSection['SHOW'])
                         continue;
 
                 ?>
-                    <?php if ($arSection['VIEW'] === 'link') { ?>
+                    <?php if (isset($arSection['VIEW']) && $arSection['VIEW'] === 'link') { ?>
                         <?= Html::tag('a', $arSection['NAME'], [
                             'class' => Html::cssClassFromArray([
                                 'catalog-element-sections-tab' => true,
@@ -236,7 +241,7 @@ if ($arSections['SHIPMENT']['SHOW']) {
             <?php $bFirst = true ?>
             <?php foreach ($arSections as $arSection) {
 
-                if (!$arSection['SHOW'] || $arSection['VIEW'] === 'link')
+                if (!$arSection['SHOW'] || (isset($arSection['VIEW']) && $arSection['VIEW'] === 'link'))
                     continue;
 
             ?>
@@ -340,6 +345,7 @@ if (!empty($arResult['PROPERTIES']['DESCRIPTION_PLUS']['VALUE'])) {
     }
 }
 ?>
+
 <div class="warning-text-cust">
     Компания YO!merch оставляет за собой право без предварительных уведомлений менять технические параметры и потребительские характеристики представленных товаров и их упаковки
 </div>
