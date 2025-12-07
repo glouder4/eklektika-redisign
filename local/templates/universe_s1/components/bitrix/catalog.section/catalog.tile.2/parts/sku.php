@@ -34,7 +34,9 @@ use intec\core\helpers\Html;
                     <?= $arProperty['name'] ?>
                 </div>
                 <div class="catalog-section-item-offers-property-values" data-align="<?= $arVisual['OFFERS']['ALIGN'] ?>">
-                    <?php foreach ($arProperty['values'] as $arValue) { ?>
+                    <?php
+                    foreach ($arProperty['values'] as $arValue) {
+                        ?>
                         <?= Html::beginTag('div', [
                             'class' => [
                                 'catalog-section-item-offers-property-value',

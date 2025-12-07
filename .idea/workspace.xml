@@ -5,90 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a53d02d7-d404-452c-a903-dd81636134fa" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/.description.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/.parameters.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/component.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/images/search_title.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/lang/de/.parameters.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/lang/de/component.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/lang/en/.description.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/lang/en/.parameters.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/lang/en/component.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/lang/ru/.description.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/lang/ru/.parameters.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/lang/ru/component.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/script.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/script.map.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/script.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/.default/.parameters.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/.default/ajax.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/.default/images/default.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/.default/images/fader.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/.default/images/intranet_user.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/.default/lang/de/.parameters.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/.default/lang/en/.parameters.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/.default/lang/en/template.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/.default/lang/ru/.parameters.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/.default/lang/ru/template.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/.default/result_modifier.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/.default/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/.default/template.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/bootstrap_v4/.parameters.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/bootstrap_v4/ajax.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/bootstrap_v4/images/fader.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/bootstrap_v4/images/icon-search.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/bootstrap_v4/images/search_lupe.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/bootstrap_v4/lang/de/.parameters.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/bootstrap_v4/lang/en/.parameters.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/bootstrap_v4/lang/en/template.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/bootstrap_v4/lang/ru/.parameters.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/bootstrap_v4/lang/ru/template.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/bootstrap_v4/result_modifier.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/bootstrap_v4/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/bootstrap_v4/style.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/bootstrap_v4/template.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/catalog/.parameters.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/catalog/ajax.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/catalog/images/fader.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/catalog/lang/de/.parameters.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/catalog/lang/en/.parameters.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/catalog/lang/en/template.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/catalog/lang/ru/.parameters.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/catalog/lang/ru/template.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/catalog/result_modifier.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/catalog/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/catalog/template.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/visual/.parameters.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/visual/ajax.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/visual/images/fader.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/visual/images/search_lupe.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/visual/lang/de/.parameters.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/visual/lang/en/.parameters.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/visual/lang/en/template.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/visual/lang/ru/.parameters.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/visual/lang/ru/template.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/visual/result_modifier.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/visual/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/visual/style.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/visual/template.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/visual_old/.parameters.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/visual_old/ajax.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/visual_old/images/fader.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/visual_old/images/search_lupe.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/visual_old/lang/en/.parameters.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/visual_old/lang/en/template.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/visual_old/lang/ru/.parameters.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/visual_old/lang/ru/template.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/visual_old/result_modifier.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/visual_old/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/components/bitrix/search.title/templates/visual_old/template.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/php_interface/classes/handlers/search/stemming.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/classes/requires.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/classes/requires.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/php_interface/init.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/php_interface/init.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog/catalog.1/bitrix/catalog.search/.default/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog/catalog.1/bitrix/catalog.search/.default/template.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1/ajax.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1/ajax.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1/lang/ru/ajax.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/search.title/onlineservice.input.1/lang/ru/ajax.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/catalog/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/catalog/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/components/bitrix/search.page/component.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/components/bitrix/search.page/component.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/php_interface/classes/handlers/search/stemming.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/php_interface/classes/handlers/search/stemming.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.section/catalog.tile.2/modifiers/base/catalog.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.section/catalog.tile.2/modifiers/base/catalog.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.section/catalog.tile.2/parts/sku.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.section/catalog.tile.2/parts/sku.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.section/catalog.tile.2/result_modifier.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.section/catalog.tile.2/result_modifier.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.section/catalog.tile.2/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.section/catalog.tile.2/template.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -271,7 +195,7 @@
       <workItem from="1764767095127" duration="10490000" />
       <workItem from="1764925725344" duration="680000" />
       <workItem from="1764930580970" duration="5000" />
-      <workItem from="1765111117878" duration="4402000" />
+      <workItem from="1765111117878" duration="11717000" />
     </task>
     <servers />
   </component>

@@ -69,6 +69,38 @@ class Stemming
         return implode(' ', $variants);
     }
 
+    /**
+     * Заменяет только самые проблемные кириллические буквы на латинские
+     * Заменяет только С/с и О/о, которые визуально неотличимы от C/c и O/o
+     *
+     * ВАЖНО: Используется для добавления ДОПОЛНИТЕЛЬНОГО варианта в индекс,
+     * а не для замены оригинала!
+     *
+     * @param string $text Исходный текст
+     * @return string Текст с замененными буквами
+     */
+    protected static function replaceCyrillicWithLatin($text)
+    {
+        if (empty($text)) {
+            return '';
+        }
+
+        // Заменяем только самые проблемные буквы, которые визуально неотличимы
+        $replacements = [
+            'С' => 'C',  // Кириллическая С → латинская C (неотличимы визуально)
+            'с' => 'c',  // Кириллическая с → латинская c
+            'О' => 'O',  // Кириллическая О → латинская O (неотличимы визуально)
+            'о' => 'o',  // Кириллическая о → латинская o
+        ];
+
+        $result = $text;
+        foreach ($replacements as $cyrillic => $latin) {
+            $result = str_replace($cyrillic, $latin, $result);
+        }
+
+        return $result;
+    }
+
     public static function BeforeIndexHandler($arFields)
     {
         if (
@@ -87,11 +119,40 @@ class Stemming
                     if( isset($arProps['ARTIKUL_POSTAVSHCHIKA']) && !empty($arProps['ARTIKUL_POSTAVSHCHIKA']['VALUE']) ){
                         $val = $arProps['ARTIKUL_POSTAVSHCHIKA']['VALUE'];
 
+                        $arFields["BODY"] .= " ";
+                        $arFields["BODY"] .= $arFields['TITLE']; // Оригинальный текст остается
+
                         // Генерируем все варианты написания артикула для поиска
                         $searchVariants = self::generateArticleSearchVariants($val);
-                        
+
                         $arFields["BODY"] .= " ";
                         $arFields["BODY"] .= $searchVariants;
+
+                        // Добавляем ДОПОЛНИТЕЛЬНЫЙ вариант TITLE с замененными буквами
+                        // Это не заменяет оригинал, а добавляет еще один вариант для поиска
+                        $transliteratedTitle = self::replaceCyrillicWithLatin($arFields['TITLE']);
+                        if ($transliteratedTitle !== $arFields['TITLE']) {
+                            $arFields["BODY"] .= " ";
+                            $arFields["BODY"] .= $transliteratedTitle; // Добавляем вариант с латинскими буквами
+                        }
+
+                        // Сохраняем существующие теги, если они есть
+                        $existingTags = [];
+                        if (!empty($arFields["TAGS"]) && is_string($arFields["TAGS"])) {
+                            $existingTags = array_filter(array_map('trim', explode(',', $arFields["TAGS"])));
+                        }
+
+                        // Добавляем наш тег
+                        $existingTags[] = "ARTIKUL_POSTAVSHCHIKA:".$val;
+
+                        // Устанавливаем теги (очищаем старые и добавляем новые)
+                        $arFields["TAGS"] = implode(',', array_unique($existingTags));
+
+                        // Устанавливаем TAGS_FORMATED напрямую с правильным значением
+                        if (!isset($arFields["TAGS_FORMATED"]) || !is_array($arFields["TAGS_FORMATED"])) {
+                            $arFields["TAGS_FORMATED"] = [];
+                        }
+                        $arFields["TAGS_FORMATED"]["ARTIKUL_POSTAVSHCHIKA"] = $val;
                     }
                 }
             }

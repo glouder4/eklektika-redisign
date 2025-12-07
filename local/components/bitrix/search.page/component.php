@@ -396,6 +396,18 @@ if($this->InitComponentTemplate($templatePage))
 			$arResult["TAGS_CHAIN"][] = $result;
 		}
 
+		$GLOBALS['OS_SEARCH_RESULT'] = [];
+		foreach ($arResult['SEARCH'] as $search_result_item){
+			if( $search_result_item['PARAM2'] == 44 ){
+				$GLOBALS['OS_SEARCH_RESULT'][] = $search_result_item;
+			}
+		}
+
+		// Сохраняем поисковый запрос для использования в сортировке
+		if (!empty($arResult["REQUEST"]["~QUERY"])) {
+			$GLOBALS['OS_SEARCH_QUERY'] = mb_strtolower(trim($arResult["REQUEST"]["~QUERY"]));
+		}
+
 		$this->ShowComponentTemplate();
 	}
 }

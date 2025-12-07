@@ -334,6 +334,7 @@ if ($arResult['LITE'])
     include(__DIR__.'/modifiers/lite/catalog.php');
 
 foreach ($arResult['ITEMS'] as &$arItem) {
+
     $arItem['DATA'] = [
         'OFFER' => !empty($arItem['OFFERS']),
         'ACTION' => $arResult['ACTION'],

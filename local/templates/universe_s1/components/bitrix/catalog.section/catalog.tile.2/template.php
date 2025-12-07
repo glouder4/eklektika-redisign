@@ -479,8 +479,9 @@ if ($arVisual['OFFERS']['USE'] && $arVisual['OFFERS']['VIEW'] === 'extended')
                     </div>
                     <!--noindex-->
                     <div class="catalog-section-item-advanced">
-                        <?php if ($arVisual['OFFERS']['USE'] && $arItem['DATA']['OFFER'] && !empty($arSkuProps))
+                        <?php if ($arVisual['OFFERS']['USE'] && $arItem['DATA']['OFFER'] && !empty($arSkuProps)){
                             $vSku($arSkuProps);
+                        }
                         ?>
                         <?php if ($arItem['ACTION'] !== 'none') { ?>
                             <div class="catalog-section-item-purchase-container intec-grid intec-grid-a-v-center">
