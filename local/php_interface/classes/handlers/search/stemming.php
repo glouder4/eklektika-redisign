@@ -100,6 +100,43 @@ class Stemming
 
         return $result;
     }
+    /**
+     * Извлекает отдельные слова из названия, разбивая по дефисам и другим разделителям
+     * Это помогает находить товары по ключевым словам из составных названий
+     * Например: "Сумка-шоппер" → ["Сумка", "шоппер"]
+     *
+     * @param string $title Название товара
+     * @return string Строка с отдельными словами для индексации
+     */
+    protected static function extractWordsFromTitle($title)
+    {
+        if (empty($title)) {
+            return '';
+        }
+
+        // Разбиваем по дефисам, пробелам и другим разделителям
+        $words = preg_split('/[\s\-_]+/u', $title);
+
+        // Фильтруем пустые значения и слишком короткие слова (меньше 2 символов)
+        $words = array_filter($words, function($word) {
+            $word = trim($word);
+            return mb_strlen($word) >= 2;
+        });
+
+        // Убираем кавычки и другие знаки препинания из слов
+        $words = array_map(function($word) {
+            // Убираем кавычки, скобки и другие знаки в начале и конце слова
+            $word = trim($word, ' "\'()[]{}«»„"');
+            return $word;
+        }, $words);
+
+        // Убираем пустые значения после очистки
+        $words = array_filter($words, function($word) {
+            return mb_strlen(trim($word)) >= 2;
+        });
+
+        return implode(' ', $words);
+    }
 
     public static function BeforeIndexHandler($arFields)
     {
@@ -122,6 +159,14 @@ class Stemming
                         $arFields["BODY"] .= " ";
                         $arFields["BODY"] .= $arFields['TITLE']; // Оригинальный текст остается
 
+                        // Извлекаем отдельные слова из названия для лучшего поиска
+                        // Например: "Сумка-шоппер" → "Сумка шоппер"
+                        $titleWords = self::extractWordsFromTitle($arFields['TITLE']);
+                        if (!empty($titleWords)) {
+                            $arFields["BODY"] .= " ";
+                            $arFields["BODY"] .= $titleWords;
+                        }
+
                         // Генерируем все варианты написания артикула для поиска
                         $searchVariants = self::generateArticleSearchVariants($val);
 
@@ -134,6 +179,13 @@ class Stemming
                         if ($transliteratedTitle !== $arFields['TITLE']) {
                             $arFields["BODY"] .= " ";
                             $arFields["BODY"] .= $transliteratedTitle; // Добавляем вариант с латинскими буквами
+                        }
+
+                        // Также добавляем отдельные слова из транслитерированного названия
+                        $transliteratedWords = self::extractWordsFromTitle($transliteratedTitle);
+                        if (!empty($transliteratedWords) && $transliteratedWords !== $titleWords) {
+                            $arFields["BODY"] .= " ";
+                            $arFields["BODY"] .= $transliteratedWords;
                         }
 
                         // Сохраняем существующие теги, если они есть
@@ -154,6 +206,10 @@ class Stemming
                         }
                         $arFields["TAGS_FORMATED"]["ARTIKUL_POSTAVSHCHIKA"] = $val;
                     }
+                    /*if($arFields['ITEM_ID'] == 123907){
+                        pre($arFields);
+                        die();
+                    } */
                 }
             }
 
