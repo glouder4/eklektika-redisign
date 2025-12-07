@@ -1,237 +1,300 @@
-<?php if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
+<? if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
 
-use intec\core\helpers\Type;
+// ID свойств, которые нужно пропустить
+$excludedIds = [354, 617, 675, 312, 318, 319, 321, 322, 323, 325, 326, 327, 328];
 
-/**
- * @var array $arResult
- */
+// Порядок свойств для левого столбца
+$leftColumnIds = [348, 315, 275, 278, 359];
 
+// Порядок свойств для правого столбца  
+$rightColumnIds = [277, 280, 281, 282, 466];
 
-global $USER;
+// Подготавливаем массивы для свойств
+$leftColumnProperties = [];
+$rightColumnProperties = [];
 
-if (!$USER->IsAuthorized() || !$USER->IsAdmin()) {
-    return;
-}
-
-$prop = $arResult['PROPERTIES'] ?? [];
-
-// Собираем все торговые предложения по ID
-$offersById = [];
-foreach ($arResult['OFFERS'] ?? [] as $offer) {
-    $offersById[$offer['ID']] = [
-        'TSVET' => $offer['PROPERTIES']['TSVET']['VALUE'] ?? '',
-        'RAZMER' => $offer['PROPERTIES']['RAZMER']['VALUE'] ?? '',
-        'ARTIKUL' => $offer['PROPERTIES']['ARTIKUL_POSTAVSHCHIKA']['VALUE'] ?? ''
+// Собираем основные свойства
+$displayPropertiesById = [];
+foreach ($arResult['DISPLAY_PROPERTIES'] as $arProperty) {
+    // Пропускаем исключенные ID
+    if (in_array($arProperty['ID'], $excludedIds)) {
+        continue;
+    }
+    $displayPropertiesById[$arProperty['ID']] = [
+        'type' => 'property',
+        'data' => $arProperty
     ];
 }
 
-// Определяем "текущее" предложение для начального отображения — используем первое
-$currentOffer = null;
-if (!empty($arResult['OFFERS'])) {
-    $firstOffer = reset($arResult['OFFERS']);
-    $currentOffer = $offersById[$firstOffer['ID']] ?? [];
+// Собираем свойства офферов (если они есть)
+$offerPropertiesById = [];
+if ($arVisual['OFFERS']['PROPERTIES']['SHOW'] && !empty($arResult['FIELDS']['OFFERS'])) {
+    foreach ($arResult['FIELDS']['OFFERS'] as $sKey => $arOffer) {
+        foreach ($arOffer as $arProperty) {
+            // Пропускаем исключенные ID
+            if (in_array($arProperty['ID'], $excludedIds)) {
+                continue;
+            }
+            
+            // Форматируем дату для ID 616 (если нужно)
+            if ($arProperty['ID'] == 616 && !empty($arProperty['VALUE'])) {
+                try {
+                    $date = new DateTime($arProperty['VALUE']);
+                    $arProperty['VALUE'] = $date->format('d.m.Y');
+                    if (isset($arProperty['DISPLAY_VALUE'])) {
+                        $arProperty['DISPLAY_VALUE'] = $date->format('d.m.Y');
+                    }
+                } catch (Exception $e) {
+                    // Оставляем значение как есть в случае ошибки
+                }
+            }
+            
+            // Сохраняем свойство оффера
+            if (!isset($offerPropertiesById[$arProperty['ID']])) {
+                $offerPropertiesById[$arProperty['ID']] = [];
+            }
+            
+            $offerPropertiesById[$arProperty['ID']][$sKey] = [
+                'type' => 'offer',
+                'offer_key' => $sKey,
+                'data' => $arProperty
+            ];
+        }
+    }
 }
 
-// Значения по умолчанию (из текущего/первого предложения)
-$TSVET = $currentOffer['TSVET'] ?? '';
-$RAZMER = $currentOffer['RAZMER'] ?? '';
-$current_artikul = $currentOffer['ARTIKUL'] ?? '';
-
-// Статические свойства товара (не зависят от предложения)
-$PANTONE = $prop['PANTONE']['VALUE'] ?? '';
-$VES_KG = $prop['VES_KG']['VALUE'] ?? '';
-$MATERIAL = $prop['MATERIAL']['VALUE'] ?? '';
-$OBEM = $prop['OBEM_SM3']['VALUE'] ?? '';
-$VID_NANESENIA = $prop['APPLICATION_TYPES']['VALUE'] ?? '';
-
-// Упаковка
-$UPAKOVKA = $prop['UPAKOVKA']['VALUE'] ?? '';
-$VES_BRUTTO_KG_T = $prop['VES_BRUTTO_KG_T']['VALUE'] ?? '';
-$OBEM_M3_T = $prop['OBEM_M3_T']['VALUE'] ?? '';
-$KOLICHESTVO_V_UP_SHT_T = $prop['KOLICHESTVO_V_UP_SHT_T']['VALUE'] ?? '';
-$RAZMERY_UPAKOVKI_SM_T = $prop['RAZMERY_UPAKOVKI_SM_T']['VALUE'] ?? '';
-
-// Формируем левый столбец
-$one_column = [];
-if ($TSVET !== '') {
-    $one_column[] = [
-        'value' => $TSVET,
-        'name' => 'Цвет',
-        'data_offer_property' => 'TSVET'
-    ];
-}
-if ($PANTONE !== '') {
-    $one_column[] = [
-        'value' => $PANTONE,
-        'name' => $prop['PANTONE']['NAME'] ?? 'Pantone'
-    ];
-}
-if ($VES_KG !== '') {
-    $one_column[] = [
-        'value' => $VES_KG,
-        'name' => $prop['VES_KG']['NAME'] ?? 'Вес, кг'
-    ];
-}
-if ($MATERIAL !== '') {
-    $one_column[] = [
-        'value' => $MATERIAL,
-        'name' => $prop['MATERIAL']['NAME'] ?? 'Материал'
-    ];
-}
-if ($OBEM !== '') {
-    $one_column[] = [
-        'value' => $OBEM,
-        'name' => $prop['OBEM_SM3']['NAME'] ?? 'Объём, см³'
-    ];
-}
-if ($VID_NANESENIA !== '') {
-    $one_column[] = [
-        'value' => $VID_NANESENIA,
-        'name' => $prop['APPLICATION_TYPES']['NAME'] ?? 'Вид нанесения'
-    ];
+// РАСПРЕДЕЛЕНИЕ СВОЙСТВ ПО ЛЕВОМУ СТОЛБЦУ
+foreach ($leftColumnIds as $propertyId) {
+    // 1. Проверяем основные свойства
+    if (isset($displayPropertiesById[$propertyId])) {
+        $leftColumnProperties[] = $displayPropertiesById[$propertyId];
+        unset($displayPropertiesById[$propertyId]);
+    }
+    
+    // 2. Проверяем свойства офферов
+    if (isset($offerPropertiesById[$propertyId])) {
+        foreach ($offerPropertiesById[$propertyId] as $offerProperty) {
+            $leftColumnProperties[] = $offerProperty;
+        }
+        unset($offerPropertiesById[$propertyId]);
+    }
 }
 
-// Правый столбец
-$two_column = [];
-if ($UPAKOVKA !== '') {
-    $two_column[] = [
-        'value' => $UPAKOVKA,
-        'name' => $prop['UPAKOVKA']['NAME'] ?? 'Упаковка'
-    ];
-}
-if ($VES_BRUTTO_KG_T !== '') {
-    $two_column[] = [
-        'value' => $VES_BRUTTO_KG_T,
-        'name' => $prop['VES_BRUTTO_KG_T']['NAME'] ?? 'Вес брутто, кг'
-    ];
-}
-if ($OBEM_M3_T !== '') {
-    $two_column[] = [
-        'value' => $OBEM_M3_T,
-        'name' => $prop['OBEM_M3_T']['NAME'] ?? 'Объём, м³'
-    ];
-}
-if ($KOLICHESTVO_V_UP_SHT_T !== '') {
-    $two_column[] = [
-        'value' => $KOLICHESTVO_V_UP_SHT_T,
-        'name' => $prop['KOLICHESTVO_V_UP_SHT_T']['NAME'] ?? 'Кол-во в упаковке, шт'
-    ];
-}
-if ($RAZMERY_UPAKOVKI_SM_T !== '') {
-    $two_column[] = [
-        'value' => $RAZMERY_UPAKOVKI_SM_T,
-        'name' => $prop['RAZMERY_UPAKOVKI_SM_T']['NAME'] ?? 'Размеры упаковки, см'
-    ];
+// РАСПРЕДЕЛЕНИЕ СВОЙСТВ ПО ПРАВОМУ СТОЛБЦУ
+foreach ($rightColumnIds as $propertyId) {
+    // 1. Проверяем основные свойства
+    if (isset($displayPropertiesById[$propertyId])) {
+        $rightColumnProperties[] = $displayPropertiesById[$propertyId];
+        unset($displayPropertiesById[$propertyId]);
+    }
+    
+    // 2. Проверяем свойства офферов
+    if (isset($offerPropertiesById[$propertyId])) {
+        foreach ($offerPropertiesById[$propertyId] as $offerProperty) {
+            $rightColumnProperties[] = $offerProperty;
+        }
+        unset($offerPropertiesById[$propertyId]);
+    }
 }
 
-// Преобразуем в JSON для JavaScript
-$all_offers_json = !empty($offersById) ? json_encode($offersById, JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP) : '{}';
+// ОСТАВШИЕСЯ СВОЙСТВА - распределяем равномерно
+// Основные свойства
+$remainingProperties = array_values($displayPropertiesById);
+foreach ($remainingProperties as $index => $property) {
+    if ($index % 2 === 0) {
+        $leftColumnProperties[] = $property;
+    } else {
+        $rightColumnProperties[] = $property;
+    }
+}
 
-if (empty($one_column) && empty($two_column)) {
-    return;
+// Свойства офферов (которые не вошли в списки)
+foreach ($offerPropertiesById as $propertyId => $offerProperties) {
+    foreach ($offerProperties as $offerProperty) {
+        if (count($leftColumnProperties) <= count($rightColumnProperties)) {
+            $leftColumnProperties[] = $offerProperty;
+        } else {
+            $rightColumnProperties[] = $offerProperty;
+        }
+    }
+}
+
+// ДОБАВЛЯЕМ ДОПОЛНИТЕЛЬНЫЕ СВОЙСТВА (Вес, габариты и т.д.)
+if ($arVisual['OFFERS']['PROPERTIES']['SHOW'] && !empty($arResult['FIELDS']['OFFERS'])) {
+    foreach ($arResult['FIELDS']['OFFERS'] as $sKey => $arOffer) {
+        // Вес
+        if (isset($arResult['PRODUCT']['WEIGHT']) && $arResult['PRODUCT']['WEIGHT'] > 0) {
+            $additionalProperty = [
+                'type' => 'additional',
+                'offer_key' => $sKey,
+                'data' => [
+                    'NAME' => 'Вес',
+                    'VALUE' => $arResult['PRODUCT']['WEIGHT'] . ' гр.',
+                    'DISPLAY_VALUE' => $arResult['PRODUCT']['WEIGHT'] . ' гр.'
+                ]
+            ];
+            
+            // Распределяем в столбец с меньшим количеством свойств
+            if (count($leftColumnProperties) <= count($rightColumnProperties)) {
+                $leftColumnProperties[] = $additionalProperty;
+            } else {
+                $rightColumnProperties[] = $additionalProperty;
+            }
+        }
+        
+        // Ширина
+        if (isset($arResult['PRODUCT']['WIDTH']) && $arResult['PRODUCT']['WIDTH'] > 0) {
+            $additionalProperty = [
+                'type' => 'additional',
+                'offer_key' => $sKey,
+                'data' => [
+                    'NAME' => 'Ширина',
+                    'VALUE' => $arResult['PRODUCT']['WIDTH'],
+                    'DISPLAY_VALUE' => $arResult['PRODUCT']['WIDTH']
+                ]
+            ];
+            
+            if (count($leftColumnProperties) <= count($rightColumnProperties)) {
+                $leftColumnProperties[] = $additionalProperty;
+            } else {
+                $rightColumnProperties[] = $additionalProperty;
+            }
+        }
+        
+        // Длина
+        if (isset($arResult['PRODUCT']['LENGTH']) && $arResult['PRODUCT']['LENGTH'] > 0) {
+            $additionalProperty = [
+                'type' => 'additional',
+                'offer_key' => $sKey,
+                'data' => [
+                    'NAME' => 'Длина',
+                    'VALUE' => $arResult['PRODUCT']['LENGTH'],
+                    'DISPLAY_VALUE' => $arResult['PRODUCT']['LENGTH']
+                ]
+            ];
+            
+            if (count($leftColumnProperties) <= count($rightColumnProperties)) {
+                $leftColumnProperties[] = $additionalProperty;
+            } else {
+                $rightColumnProperties[] = $additionalProperty;
+            }
+        }
+        
+        // Высота
+        if (isset($arResult['PRODUCT']['HEIGHT']) && $arResult['PRODUCT']['HEIGHT'] > 0) {
+            $additionalProperty = [
+                'type' => 'additional',
+                'offer_key' => $sKey,
+                'data' => [
+                    'NAME' => 'Высота',
+                    'VALUE' => $arResult['PRODUCT']['HEIGHT'],
+                    'DISPLAY_VALUE' => $arResult['PRODUCT']['HEIGHT']
+                ]
+            ];
+            
+            if (count($leftColumnProperties) <= count($rightColumnProperties)) {
+                $leftColumnProperties[] = $additionalProperty;
+            } else {
+                $rightColumnProperties[] = $additionalProperty;
+            }
+        }
+    }
 }
 ?>
 
-<script>
-window.productOffersById = <?= $all_offers_json ?>;
-</script>
-
-<div class="catalog-element-properties-detail" id="catalog-properties-detail">
+<div class="catalog-element-properties-detail">
     <div class="catalog-element-properties-container">
-
-        <?php if (!empty($one_column)): ?>
+        <!-- ЛЕВЫЙ СТОЛБЕЦ -->
         <div class="catalog-element-properties-column catalog-element-properties-column-left">
-            <?php foreach ($one_column as $item): ?>
-                <?php if (!empty($item['name']) && !empty($item['value'])): ?>
-                    <?php
-                    $dataAttr = '';
-                    if (!empty($item['data_offer_property'])) {
-                        $dataAttr = 'data-offer-property="' . htmlspecialchars($item['data_offer_property']) . '"';
-                    }
-                    ?>
-                    <div class="catalog-element-properties-detail-item" <?= $dataAttr ?>>
-                        <div itemscope itemprop="additionalProperty" itemtype="http://schema.org/PropertyValue" class="intec-grid intec-grid-a-v-center intec-grid-i-4 intec-grid-500-wrap flex-justify-content-between">
-                            <div class="intec-grid-item-2 intec-grid-item-500-1">
-                                <div itemprop="name" class="catalog-element-properties-detail-item-name">
-                                    <?= htmlspecialchars($item['name']) ?>
-                                </div>
+            <?php foreach ($leftColumnProperties as $item): ?>
+                <?php 
+                $arProperty = $item['data'];
+                // Получаем значение для отображения
+                $value = isset($arProperty['DISPLAY_VALUE']) ? $arProperty['DISPLAY_VALUE'] : 
+                        (isset($arProperty['VALUE']) ? $arProperty['VALUE'] : '');
+                $displayValue = '';
+                
+                if (is_array($value)) {
+                    $displayValue = implode(', ', $value);
+                } else {
+                    $displayValue = $value;
+                }
+                ?>
+                <div class="catalog-element-properties-detail-item" 
+                     data-type="<?= htmlspecialcharsbx($item['type']) ?>" 
+                     <?php if (isset($item['offer_key'])): ?>
+                        data-offer="<?= htmlspecialcharsbx($item['offer_key']) ?>"
+                     <?php endif; ?>>
+                    <div class="intec-grid intec-grid-a-v-center intec-grid-i-4 intec-grid-500-wrap flex-justify-content-between">
+                        <div class="intec-grid-item-2 intec-grid-item-500-1">
+                            <div class="catalog-element-properties-detail-item-name">
+                                <?= htmlspecialcharsbx($arProperty['NAME']) ?>
                             </div>
-                            <div class="intec-grid-item-2 intec-grid-item-500-1">
-                                <div  itemprop="value" class="catalog-element-properties-detail-item-value">
-                                    <?= htmlspecialchars($item['value']) ?>
-                                </div>
+                        </div>
+                        <div class="intec-grid-item-2 intec-grid-item-500-1">
+                            <div class="catalog-element-properties-detail-item-value">
+                                <?= htmlspecialcharsbx($displayValue) ?>
                             </div>
                         </div>
                     </div>
-                <?php endif; ?>
+                </div>
             <?php endforeach; ?>
         </div>
-        <?php endif; ?>
-
-        <?php if (!empty($two_column)): ?>
+        
+        <!-- ПРАВЫЙ СТОЛБЕЦ -->
         <div class="catalog-element-properties-column catalog-element-properties-column-right">
-            <?php foreach ($two_column as $item): ?>
-                <?php if (!empty($item['name']) && !empty($item['value'])): ?>
-                    <div class="catalog-element-properties-detail-item">
-                        <div itemscope itemprop="additionalProperty" itemtype="http://schema.org/PropertyValue" class="intec-grid intec-grid-a-v-center intec-grid-i-4 intec-grid-500-wrap flex-justify-content-between">
-                            <div itemprop="name" class="intec-grid-item-2 intec-grid-item-500-1">
-                                <div class="catalog-element-properties-detail-item-name">
-                                    <?= htmlspecialchars($item['name']) ?>
-                                </div>
+            <?php foreach ($rightColumnProperties as $item): ?>
+                <?php 
+                $arProperty = $item['data'];
+                // Получаем значение для отображения
+                $value = isset($arProperty['DISPLAY_VALUE']) ? $arProperty['DISPLAY_VALUE'] : 
+                        (isset($arProperty['VALUE']) ? $arProperty['VALUE'] : '');
+                $displayValue = '';
+                
+                if (is_array($value)) {
+                    $displayValue = implode(', ', $value);
+                } else {
+                    $displayValue = $value;
+                }
+                ?>
+                <div class="catalog-element-properties-detail-item" 
+                     data-type="<?= htmlspecialcharsbx($item['type']) ?>" 
+                     <?php if (isset($item['offer_key'])): ?>
+                        data-offer="<?= htmlspecialcharsbx($item['offer_key']) ?>"
+                     <?php endif; ?>>
+                    <div class="intec-grid intec-grid-a-v-center intec-grid-i-4 intec-grid-500-wrap flex-justify-content-between">
+                        <div class="intec-grid-item-2 intec-grid-item-500-1">
+                            <div class="catalog-element-properties-detail-item-name">
+                                <?= htmlspecialcharsbx($arProperty['NAME']) ?>
                             </div>
-                            <div class="intec-grid-item-2 intec-grid-item-500-1">
-                                <div itemprop="value" class="catalog-element-properties-detail-item-value">
-                                    <?= htmlspecialchars($item['value']) ?>
-                                </div>
+                        </div>
+                        <div class="intec-grid-item-2 intec-grid-item-500-1">
+                            <div class="catalog-element-properties-detail-item-value">
+                                <?= htmlspecialcharsbx($displayValue) ?>
                             </div>
                         </div>
                     </div>
-                <?php endif; ?>
+                </div>
             <?php endforeach; ?>
         </div>
-        <?php endif; ?>
-
     </div>
 </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    function updateOfferProperties(offer) {
-        if (!offer || typeof offer !== 'object') return;
-
-        // Обновляем свойства, зависящие от предложения
-        const dynamicProps = document.querySelectorAll('[data-offer-property]');
-        dynamicProps.forEach(function(el) {
-            const propKey = el.getAttribute('data-offer-property');
-            const valueEl = el.querySelector('.catalog-element-properties-detail-item-value');
-            if (valueEl) {
-                valueEl.textContent = offer[propKey] || '—';
-            }
-        });
-
-        // Обновляем артикул
-        const articleValueEl = document.querySelector('[data-role="article.value"]');
-        if (articleValueEl) {
-            articleValueEl.textContent = offer.ARTIKUL || '—';
-        }
-    }
-
-    // Слушаем событие смены торгового предложения от Bitrix
-    if (typeof BX !== 'undefined' && typeof BX.addCustomEvent === 'function') {
-        BX.addCustomEvent('onCatalogElementChangeOffer', function(offerId) {
-            const offer = window.productOffersById && window.productOffersById[offerId];
-            if (offer) {
-                updateOfferProperties(offer);
-            }
-        });
-    }
-});
-</script>
-
-
-
+<?php unset(
+    $arProperty, 
+    $sKey, 
+    $arOffer, 
+    $item, 
+    $value, 
+    $displayValue,
+    $displayPropertiesById,
+    $offerPropertiesById,
+    $remainingProperties,
+    $leftColumnProperties,
+    $rightColumnProperties,
+    $additionalProperty
+); ?>
 <?
-
 /*
 // ID свойств, которые нужно пропустить
 $excludedIds = [354, 617, 675];
@@ -390,5 +453,4 @@ if ($arVisual['OFFERS']['PROPERTIES']['SHOW'] && !empty($arResult['FIELDS']['OFF
         </div>
     </div>
 </div>
-<?php unset($arProperty, $sKey, $arOffer) ?>
-*/?>
+<?php unset($arProperty, $sKey, $arOffer) */?>
