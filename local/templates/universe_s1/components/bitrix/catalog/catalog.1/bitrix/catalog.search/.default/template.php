@@ -384,13 +384,15 @@ $arFilter = $arParams['FILTER'];
                         </div>
                     <?php } ?>
                     <?php $GLOBALS[$sFilterName]['ID'] = $arElements['ID']; ?>
-                    <?php $APPLICATION->IncludeComponent(
+                    <?php
+                    $APPLICATION->IncludeComponent(
                         'bitrix:catalog.section',
                         $arElements['TEMPLATE'],
                         $arElements['PARAMETERS'],
                         $component,
                         ['HIDE_ICONS' => 'Y']
                     ) ?>
+                </div>
             <?php if ($arColumns['SHOW']) { ?>
                     </div>
                 </div>

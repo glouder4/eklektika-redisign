@@ -49,6 +49,32 @@ if (!empty($arResult['CATEGORIES']['all']) && !empty($arResult['CATEGORIES']['al
                     <?php } ?>
                     <?php unset($arCategory) ?>
                 </div>
+
+                <div class="search-title-category">
+                    <div class="search-title-category-title">
+                        <?= Loc::getMessage('C_SEARCH_TITLE_INPUT_1_CATEGORIES_RESULTS_TITLE_OFFERS') ?>
+                    </div>
+                    <div class="search-title-category-items">
+                        <?php foreach ($arResult['CATEGORIES'] as $sKey => &$arCategory) { ?>
+                            <?php foreach ($arCategory['OFFERS'] as &$arItem) { ?>
+                                <?php if ($sKey === 'all' || empty($arItem['ITEM_ID'])) continue; ?>
+                                <div class="search-title-category-item">
+                                    <?= Html::beginTag('a', [
+                                        'class' => [
+                                            'search-title-category-item-link',
+                                            'intec-cl-text-hover'
+                                        ],
+                                        'href' => $arItem['URL']
+                                    ]) ?>
+                                    <?= $arItem['NAME'] ?>
+                                    <?= Html::endTag('a') ?>
+                                </div>
+                            <?php } ?>
+                            <?php unset($arItem) ?>
+                        <?php } ?>
+                        <?php unset($arCategory) ?>
+                    </div>
+                </div>
             </div>
         <?php } ?>
         <?php if ($arVisual['SECTIONS']['SHOW']) { ?>
