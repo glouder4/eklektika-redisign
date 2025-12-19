@@ -87,19 +87,36 @@ use intec\core\helpers\Json;
                         ],
                         $component
                     )*/ ?>
-		    <?= Html::beginTag('div', [
-           			 'class' => 'catalog-element-buy-container',
-			            'data-offer' => $bOffer ? $arItem['ID'] : 'false'
-			        ]) ?>
-			            <?= Html::tag('div', $arVisual['BUTTONS']['ORDER']['TEXT'], [
-			                'class' => [
-			                    'catalog-element-buy-button',
-			                    'intec-cl-background',
-			                    'intec-cl-background-light-hover'
-			                ],
-			                'data-role' => 'order'
-	]) ?>
-        <?= Html::endTag('div') ?>
+                 
+                        <?php
+                        global $USER;
+                        if ($USER->IsAuthorized()) {
+                            $userId = $USER->GetID();
+                            $rsUser = CUser::GetByID($userId);
+                            if ($arUser = $rsUser->Fetch()) {
+                        ?>
+                        <?/* if ($USER->IsAuthorized() && $USER->IsAdmin()):?>
+                        <pre>
+                            <? print_r($arUser); ?>
+                        </pre>
+                       <? endif; */?>
+                                <? if ($arUser['UF_ADVERSTERING_AGENT'] == 1) { ?>
+                                    <?= Html::beginTag('div', [
+                                        'class' => 'catalog-element-buy-container',
+                                        'data-offer' => $bOffer ? $arItem['ID'] : 'false'
+                                    ]) ?>
+                                        <?= Html::tag('div', $arVisual['BUTTONS']['ORDER']['TEXT'], [
+                                            'class' => [
+                                                'catalog-element-buy-button',
+                                                'intec-cl-background',
+                                                'intec-cl-background-light-hover'
+                                            ],
+                                            'data-role' => 'order'
+                                        ]) ?>
+                                    <?= Html::endTag('div') ?>
+                                <? } ?>
+                            <? } ?>
+                        <? } ?>
                 <?php } else { ?>
                     <?= Html::tag('div', Loc::getMessage('C_CATALOG_ELEMENT_DEFAULT_5_TEMPLATE_BUY_BUTTON_UNAVAILABLE'), [
                         'class' => [

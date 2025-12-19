@@ -1363,27 +1363,147 @@ $arEcommerce = [
 
         <?php //if ($arResult['FORM']['ORDER']['SHOW']) { 
         ?>
-        dynamic.order = $('[data-role="order"]', dynamic);
+                dynamic.order = $('[data-role="order"]', dynamic);
         dynamic.order.on('click', function() {
             var options = <?= JavaScript::toObject([
-                                'id' => $arResult['FORM']['ORDER']['ID'],
-                                'template' => $arResult['FORM']['ORDER']['TEMPLATE'],
-                                'parameters' => [
-                                    'AJAX_OPTION_ADDITIONAL' => $sTemplateId . '-form',
-                                    'CONSENT_URL' => $arResult['URL']['CONSENT']
-                                ],
-                                'settings' => [
-                                    'title' => Loc::getMessage('C_CATALOG_ELEMENT_DEFAULT_5_TEMPLATE_BUY_BUTTON_ORDER_FORM_TITLE')
-                                ]
-                            ]) ?>;
+                'id' => $arResult['FORM']['ORDER']['ID'],
+                'template' => $arResult['FORM']['ORDER']['TEMPLATE'],
+                'parameters' => [
+                    'AJAX_OPTION_ADDITIONAL' => $sTemplateId . '-form',
+                    'CONSENT_URL' => $arResult['URL']['CONSENT']
+                ],
+                'settings' => [
+                    'title' => Loc::getMessage('C_CATALOG_ELEMENT_DEFAULT_5_TEMPLATE_BUY_BUTTON_ORDER_FORM_TITLE')
+                ]
+            ]) ?>;
 
             options.fields = {};
 
             <?php if (!empty($arResult['FORM']['ORDER']['PROPERTIES']['PRODUCT'])) { ?>
-                options.fields[<?= JavaScript::toObject($arResult['FORM']['ORDER']['PROPERTIES']['PRODUCT']) ?>] = dataItem.name;
+                var productName = dataItem.name;
+                var formattedName = 'Предзаказ на ' + productName;
+                var colorName = '';
+                var articleValue = '';
+                
+                // 1. Находим видимое торговое предложение
+                var visibleOffer = $('[data-type="offer"]').filter(function() {
+                    var style = $(this).attr('style') || '';
+                    return style.includes('display: block') || style.includes('display:block');
+                }).first();
+                
+                if (visibleOffer.length) {
+                    var offerId = visibleOffer.data('offer');
+                    
+                    // 2. Ищем цвет в этом предложении
+                    var colorElement = visibleOffer.find('.catalog-element-properties-detail-item-name:contains("Цвет")');
+                    if (colorElement.length) {
+                        var colorValueElement = colorElement.closest('.catalog-element-properties-detail-item')
+                            .find('.catalog-element-properties-detail-item-value');
+                        
+                        if (colorValueElement.length) {
+                            colorName = colorValueElement.text().trim();
+                            colorName = colorName.replace(/;/g, ', ');
+                        }
+                    }
+                    
+                    // 3. Получаем артикул
+                    articleValue = $('[data-role="article.value"]').text().trim();
+                    
+                    // Если не нашли на странице, пробуем из данных
+                    if (!articleValue && dataItem.offers && dataItem.offers[offerId]) {
+                        articleValue = dataItem.offers[offerId].article || '';
+                    }
+                }
+                
+                // 4. Формируем итоговую строку
+                if (colorName) {
+                    formattedName += '. Цвет: ' + colorName;
+                }
+                
+                if (articleValue) {
+                    formattedName += '. Артикул поставщика: ' + articleValue;
+                }
+                
+                options.fields[<?= JavaScript::toObject($arResult['FORM']['ORDER']['PROPERTIES']['PRODUCT']) ?>] = formattedName;
             <?php } ?>
 
+            <?php
+            global $USER;
+
+            $fullName = '';
+            $email = '';
+            $phone = '';
+
+            if ($USER->IsAuthorized()) {
+                $email = trim($USER->GetEmail());
+
+                $rsUser = CUser::GetByID($USER->GetID());
+                if ($arUser = $rsUser->Fetch()) {
+                    $lastName   = trim($arUser['LAST_NAME'] ?? '');
+                    $firstName  = trim($arUser['NAME'] ?? '');
+                    $secondName = trim($arUser['SECOND_NAME'] ?? ''); 
+
+                    $fullNameParts = array_filter([$lastName, $firstName, $secondName]);
+                    $fullName = implode(' ', $fullNameParts);
+
+                    if (empty($fullName)) {
+                        $fullName = trim($arUser['LOGIN'] ?? '');
+                    }
+
+                    $phone = trim(
+                        $arUser['PERSONAL_PHONE'] ??
+                        $arUser['PERSONAL_MOBILE'] ??
+                        $arUser['WORK_PHONE'] ??
+                        $arUser['UF_PHONE'] ??  
+                        ''
+                    );
+                }
+            }
+            ?>
+
+            <?php if ($USER->IsAuthorized()) { ?>
+                // Заполняем поля данными пользователя
+                <?php if (!empty($fullName)) { ?>
+                    options.fields['form_text_22'] = <?= JavaScript::toObject($fullName) ?>;
+                <?php } ?>
+                <?php if (!empty($email)) { ?>
+                    options.fields['form_email_23'] = <?= JavaScript::toObject($email) ?>;
+                <?php } ?>
+                <?php if (!empty($phone)) { ?>
+                    options.fields['form_text_24'] = <?= JavaScript::toObject($phone) ?>;
+                <?php } ?>
+            <?php } ?>
+
+            // Показываем форму
             app.api.forms.show(options);
+            
+            // Скрываем заполненные поля через 0.5 секунды
+            <?php if ($USER->IsAuthorized()) { ?>
+                setTimeout(function() {
+                    // Проверяем каждое поле и скрываем если оно заполнено
+                    <?php if (!empty($fullName)): ?>
+                        var nameField = $('[name="form_text_22"]');
+                        if (nameField.length) {
+                            nameField.closest('.form-result-new-field').css('display', 'none');
+                        }
+                    <?php endif; ?>
+                    
+                    <?php if (!empty($email)): ?>
+                        var emailField = $('[name="form_email_23"]');
+                        if (emailField.length) {
+                            emailField.closest('.form-result-new-field').css('display', 'none');
+                        }
+                    <?php endif; ?>
+                    
+                    <?php if (!empty($phone)): ?>
+                        var phoneField = $('[name="form_text_24"]');
+                        if (phoneField.length) {
+                            phoneField.closest('.form-result-new-field').css('display', 'none');
+                        }
+                    <?php endif; ?>
+                }, 500);
+            <?php } ?>
+            
             app.metrika.reachGoal('forms.open');
             app.metrika.reachGoal(<?= JavaScript::toObject('forms.' . $arResult['FORM']['ORDER']['ID'] . '.open') ?>);
         });
