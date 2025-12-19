@@ -213,7 +213,7 @@ $arData = [
                         </a>
                     </li>-->
                     <li class="footer__main-categories__columns-column--list_item">
-                        <a href="#/shares/" class="footer__main-categories__columns-column--list_item_link">
+                        <a href="/shares/" class="footer__main-categories__columns-column--list_item_link">
                             Акции и Скидки
                         </a>
                     </li>

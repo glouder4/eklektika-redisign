@@ -2,8 +2,142 @@
 
 $APPLICATION->SetTitle("Акции");
 
+$elementCode = $_REQUEST["ELEMENT_CODE"];
+$foundIblockId = null;
+
+$arFilter1 = array(
+    "IBLOCK_ID" => 23,
+    "CODE" => $elementCode,
+    "ACTIVE" => "Y",
+);
+$arSelect1 = array("ID", "IBLOCK_ID");
+$rsElement1 = CIBlockElement::GetList(array(), $arFilter1, false, false, $arSelect1);
+if ($arElement1 = $rsElement1->Fetch()) {
+    $foundIblockId = 23;
+    $elementId = $arElement1["ID"];
+}
+
+if (!$foundIblockId) {
+    $arFilter2 = array(
+        "IBLOCK_ID" => 24,
+        "CODE" => $elementCode,
+        "ACTIVE" => "Y",
+    );
+    $arSelect2 = array("ID", "IBLOCK_ID");
+    $rsElement2 = CIBlockElement::GetList(array(), $arFilter2, false, false, $arSelect2);
+    if ($arElement2 = $rsElement2->Fetch()) {
+        $foundIblockId = 24;
+        $elementId = $arElement2["ID"];
+    }
+}
+
+if (!$foundIblockId) {
+    echo "Элемент не найден";
+    require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");
+    exit;
+}
 ?>
-<?php $APPLICATION->IncludeComponent(
+
+<?$APPLICATION->IncludeComponent(
+	"bitrix:news.detail",
+	"shares.default.1",
+	Array(
+		"ACTIVE_DATE_FORMAT" => "d.m.Y",
+		"ADD_ELEMENT_CHAIN" => "Y",
+		"ADD_SECTIONS_CHAIN" => "N",
+		"AJAX_MODE" => "N",
+		"AJAX_OPTION_ADDITIONAL" => "",
+		"AJAX_OPTION_HISTORY" => "N",
+		"AJAX_OPTION_JUMP" => "N",
+		"AJAX_OPTION_STYLE" => "Y",
+		"BANNER_HEIGHT" => "400px",
+		"BANNER_WIDE" => "N",
+		"BROWSER_TITLE" => "-",
+		"CACHE_GROUPS" => "Y",
+		"CACHE_TIME" => "36000000",
+		"CACHE_TYPE" => "A",
+		"CHECK_DATES" => "Y",
+		"CONDITIONS_COLUMNS" => "5",
+		"CONDITIONS_HEADER" => "Условия акции",
+		"CONDITIONS_HEADER_POSITION" => "left",
+		"CONDITIONS_IBLOCK_ID" => "",
+		"CONDITIONS_IBLOCK_TYPE" => "",
+		"CONDITIONS_PROPERTY_ELEMENTS" => "",
+		"DESCRIPTION_PROPERTY_DURATION" => "",
+		"DETAIL_URL" => "",
+		"DISPLAY_BOTTOM_PAGER" => "Y",
+		"DISPLAY_TOP_PAGER" => "N",
+		"ELEMENT_CODE" => $elementCode,
+		"ELEMENT_ID" => $elementId,
+		"FIELD_CODE" => array("", ""),
+		"FORM_SHOW" => "N",
+		"GALLERY_HEADER" => "Фотографии",
+		"GALLERY_HEADER_POSITION" => "left",
+		"GALLERY_IBLOCK_ID" => "",
+		"GALLERY_IBLOCK_TYPE" => "",
+		"GALLERY_LINE_COUNT" => "6",
+		"GALLERY_PROPERTY_ELEMENTS" => "",
+		"GALLERY_WIDE" => "Y",
+		"IBLOCK_ID" => $foundIblockId,
+		"IBLOCK_TYPE" => "content",
+		"IBLOCK_URL" => "",
+		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+		"LAZYLOAD_USE" => "N",
+		"LINKS_BUTTON" => "Посмотреть все акции",
+		"LINKS_SOCIAL_SHOW" => "N",
+		"MESSAGE_404" => "",
+		"META_DESCRIPTION" => "-",
+		"META_KEYWORDS" => "-",
+		"PAGER_BASE_LINK_ENABLE" => "N",
+		"PAGER_SHOW_ALL" => "N",
+		"PAGER_TEMPLATE" => ".default",
+		"PAGER_TITLE" => "Страница",
+		"PRODUCTS_COMPARE_NAME" => "compare",
+		"PRODUCTS_HEADER" => "Товары по акции",
+		"PRODUCTS_HEADER_POSITION" => "left",
+		"PRODUCTS_PROPERTY_ELEMENTS" => "",
+		"PRODUCTS_TEMPLATE" => "",
+		"PRODUCTS_USE_COMPARE" => "N",
+		"PROMO_IBLOCK_ID" => "",
+		"PROMO_IBLOCK_TYPE" => "",
+		"PROMO_PROPERTY_ELEMENTS" => "",
+		"PROPERTY_CODE" => array("", ""),
+		"SECTIONS_HEADER" => "Разделы каталога",
+		"SECTIONS_HEADER_POSITION" => "left",
+		"SECTIONS_IBLOCK_ID" => "",
+		"SECTIONS_IBLOCK_TYPE" => "",
+		"SECTIONS_LINE_COUNT" => "5",
+		"SECTIONS_PROPERTY_SECTIONS" => "",
+		"SERVICES_COLUMNS" => "2",
+		"SERVICES_DESCRIPTION_USE" => "N",
+		"SERVICES_FOOTER_SHOW" => "N",
+		"SERVICES_HEADER" => "Услуги по акции",
+		"SERVICES_HEADER_POSITION" => "left",
+		"SERVICES_IBLOCK_ID" => "",
+		"SERVICES_IBLOCK_TYPE" => "",
+		"SERVICES_INDENT_IMAGE_USE" => "N",
+		"SERVICES_LINK_USE" => "N",
+		"SERVICES_PROPERTY_ELEMENTS" => "",
+		"SET_BROWSER_TITLE" => "Y",
+		"SET_CANONICAL_URL" => "N",
+		"SET_LAST_MODIFIED" => "N",
+		"SET_META_DESCRIPTION" => "Y",
+		"SET_META_KEYWORDS" => "Y", 
+		"SET_STATUS_404" => "N",
+		"SET_TITLE" => "Y",
+		"SHOW_404" => "N",
+		"STRICT_SECTION_CHECK" => "N",
+		"USE_PERMISSIONS" => "N",
+		"VIDEOS_COLUMNS" => "3",
+		"VIDEOS_HEADER" => "Обзоры",
+		"VIDEOS_HEADER_POSITION" => "left",
+		"VIDEOS_IBLOCK_ID" => "",
+		"VIDEOS_IBLOCK_TYPE" => "",
+		"VIDEOS_PROPERTY_ELEMENTS" => "",
+		"VIDEOS_PROPERTY_URL" => ""
+	)
+);?>
+<?/*php $APPLICATION->IncludeComponent(
 	"bitrix:news", 
 	"shares.1", 
 	array(
@@ -75,7 +209,7 @@ $APPLICATION->SetTitle("Акции");
 		"PAGER_SHOW_ALL" => "N",
 		"PAGER_BASE_LINK_ENABLE" => "N",
 		"SET_STATUS_404" => "Y",
-		"SHOW_404" => "Y",
+		"SHOW_404" => "N",
 		"FILE_404" => "/404.php",
 		"DETAIL_SET_CANONICAL_URL" => "N",
 		"DETAIL_ACTIVE_DATE_FORMAT" => "d.m.Y",
@@ -585,5 +719,5 @@ $APPLICATION->SetTitle("Акции");
 		)
 	),
 	false
-); ?>
+); */?>
 <?php require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php") ?>

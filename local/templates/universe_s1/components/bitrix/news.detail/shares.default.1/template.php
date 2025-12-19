@@ -22,6 +22,12 @@ $arVisual = $arResult['VISUAL'];
 Loc::loadMessages(__FILE__);
 
 ?>
+<?/*
+<pre>
+    <? print_r($arResult); ?> 
+</pre>
+*/?>
+<p>Скоро тут появится информация!</p>
 <div id="<?= $sTemplateId ?>" class="ns-bitrix c-news-detail c-news-detail-shares-default-1">
     <?php include(__DIR__.'/parts/blocks.php') ?>
 </div>
