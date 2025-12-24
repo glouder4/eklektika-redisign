@@ -111,27 +111,258 @@ $sSignedParameters = $oSigner->sign(base64_encode(serialize($arResult['ORIGINAL_
                 });
             <?php } ?>
         <?php } ?>
-
         <?php if ($arResult['FORMS']['ORDER']['SHOW']) { ?>
             order = function(dataItem) {
                 var options = <?= JavaScript::toObject([
-                                    'id' => $arResult['FORMS']['ORDER']['ID'],
-                                    'template' => $arResult['FORMS']['ORDER']['TEMPLATE'],
-                                    'parameters' => [
-                                        'AJAX_OPTION_ADDITIONAL' => $sTemplateId . '-form',
-                                        'CONSENT_URL' => $arResult['URL']['CONSENT']
-                                    ],
-                                    'settings' => [
-                                        'title' => Loc::getMessage('C_CATALOG_SECTION_CATALOG_TILE_2_ORDER')
-                                    ]
-                                ]) ?>;
-
+                    'id' => $arResult['FORMS']['ORDER']['ID'],
+                    'template' => $arResult['FORMS']['ORDER']['TEMPLATE'],
+                    'parameters' => [
+                        'AJAX_OPTION_ADDITIONAL' => $sTemplateId . '-form',
+                        'CONSENT_URL' => $arResult['URL']['CONSENT']
+                    ],
+                    'settings' => [
+                        'title' => Loc::getMessage('C_CATALOG_SECTION_CATALOG_TILE_2_ORDER')
+                    ]
+                ]) ?>;
                 options.fields = {};
-
                 <?php if (!empty($arResult['FORMS']['ORDER']['PROPERTIES']['PRODUCT'])) { ?>
-                    options.fields[<?= JavaScript::toObject($arResult['FORMS']['ORDER']['PROPERTIES']['PRODUCT']) ?>] = dataItem.name;
+                    var productName = dataItem.name;
+                    var formattedName = 'Предзаказ на ' + productName;
+                    var colorValue = '';
+                    var colorName = '';
+                    var articleValue = '';
+                    
+                    // 1. Находим контейнер текущего товара
+                    var productContainer = $(this).closest('[data-entity="items-row"], .catalog-section-item, [data-id]');
+                
+                    if (productContainer.length) {
+                        // 2. Берем артикул из элемента внутри текущего товара
+                        var articleElement = productContainer.find('.catalog-section-item-quantity-wrap.articule-style');
+                        if (articleElement.length) {
+                            var articleText = articleElement.text().trim();
+                            articleValue = articleText.replace('Артикул:', '').trim();
+                        }
+                    
+                        // 3. Берем значение цвета (ID) из data-value
+                        var colorElement = productContainer.find('.catalog-section-item-offers-property-value[data-state="selected"]');
+                        if (colorElement.length) {
+                            colorValue = colorElement.attr('data-value');
+                            
+                            // 4. Находим название цвета по ID в данных товара
+                            try {
+                                // Пробуем получить данные из data-properties атрибута
+                                var propertiesData = productContainer.attr('data-properties');
+                                
+                                if (propertiesData) {
+                                    // Убираем HTML entities
+                                    var cleanData = propertiesData
+                                        .replace(/&quot;/g, '"')
+                                        .replace(/&amp;/g, '&');
+                                    
+                                    // Парсим JSON
+                                    var properties = JSON.parse(cleanData);
+                                    
+                                    // Ищем свойство "Цвет" (может быть P_TSVET или "Цвет")
+                                    var colorProperty = null;
+                                    for (var i = 0; i < properties.length; i++) {
+                                        var prop = properties[i];
+                                        if (prop.code === 'P_TSVET' || prop.name === 'Цвет') {
+                                            colorProperty = prop;
+                                            break;
+                                        }
+                                    }
+                                    
+                                    if (colorProperty && colorProperty.values) {
+                                        // Ищем значение цвета по ID
+                                        var searchId = parseInt(colorValue);
+                                        for (var j = 0; j < colorProperty.values.length; j++) {
+                                            var val = colorProperty.values[j];
+                                            var valId = parseInt(val.id);
+                                            
+                                            if (valId === searchId) {
+                                                colorName = val.name;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+                                
+                                // Если не нашли через data-properties, пробуем другой способ
+                                if (!colorName) {
+                                    // Пробуем найти через data-data
+                                    var itemData = productContainer.attr('data-data');
+                                    if (itemData) {
+                                        var cleanItemData = itemData
+                                            .replace(/&quot;/g, '"')
+                                            .replace(/&amp;/g, '&');
+                                        
+                                        var data = JSON.parse(cleanItemData);
+                                        
+                                        // Ищем текущий выбранный оффер
+                                        if (data.offers && Array.isArray(data.offers)) {
+                                            for (var k = 0; k < data.offers.length; k++) {
+                                                var offer = data.offers[k];
+                                                if (offer.values && offer.values.P_TSVET == colorValue) {
+                                                    // Нашли оффер с этим цветом
+                                                    // Теперь нужно найти название цвета
+                                                    // Можем попробовать поискать в других местах или использовать ID
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                
+                                // Если все еще не нашли название, пробуем получить из атрибута title элемента
+                                if (!colorName) {
+                                    var title = colorElement.attr('title');
+                                    if (title && title.trim() !== '') {
+                                        colorName = title.trim();
+                                    }
+                                }
+                                
+                                // Если совсем не нашли, оставляем ID
+                                if (!colorName) {
+                                    colorName = colorValue;
+                                }
+                                
+                            } catch(e) {
+                                console.error('Ошибка при поиске названия цвета:', e);
+                                // Если возникла ошибка, используем ID цвета
+                                colorName = colorValue;
+                            }
+                        }
+                    } else {
+                        // Альтернативный вариант для кейса, если не нашли контейнер
+                        var articleElement = $('.catalog-section-item-quantity-wrap.articule-style:first');
+                        if (articleElement.length) {
+                            var articleText = articleElement.text().trim();
+                            articleValue = articleText.replace('Артикул:', '').trim();
+                        }
+                    
+                        var colorElement = $('.catalog-section-item-offers-property-value[data-state="selected"]:first');
+                        if (colorElement.length) {
+                            colorValue = colorElement.attr('data-value');
+                            colorName = colorValue; // Используем ID как запасной вариант
+                            
+                            // Пробуем найти через первый товар на странице
+                            var firstProduct = $('[data-properties]').first();
+                            if (firstProduct.length) {
+                                try {
+                                    var propertiesData = firstProduct.attr('data-properties');
+                                    if (propertiesData) {
+                                        var cleanData = propertiesData
+                                            .replace(/&quot;/g, '"')
+                                            .replace(/&amp;/g, '&');
+                                        
+                                        var properties = JSON.parse(cleanData);
+                                        var colorProperty = null;
+                                        
+                                        for (var i = 0; i < properties.length; i++) {
+                                            var prop = properties[i];
+                                            if (prop.code === 'P_TSVET' || prop.name === 'Цвет') {
+                                                colorProperty = prop;
+                                                break;
+                                            }
+                                        }
+                                        
+                                        if (colorProperty && colorProperty.values) {
+                                            var searchId = parseInt(colorValue);
+                                            for (var j = 0; j < colorProperty.values.length; j++) {
+                                                var val = colorProperty.values[j];
+                                                var valId = parseInt(val.id);
+                                                
+                                                if (valId === searchId) {
+                                                    colorName = val.name;
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                    }
+                                } catch(e) {
+                                    console.error('Ошибка при поиске названия цвета для первого товара:', e);
+                                }
+                            }
+                        }
+                    }
+                    
+                    // 5. Формируем итоговую строку
+                    if (colorName && colorName !== '' && colorName !== '0' && colorName !== '-') {
+                        formattedName += '. Цвет: ' + colorName;
+                    } else if (colorValue && colorValue !== '' && colorValue !== '0') {
+                        formattedName += '. Цвет: ' + colorValue;
+                    }
+                    
+                    if (articleValue) {
+                        formattedName += '. Артикул: ' + articleValue;
+                    }
+                    
+                    options.fields[<?= JavaScript::toObject($arResult['FORMS']['ORDER']['PROPERTIES']['PRODUCT']) ?>] = formattedName;
                 <?php } ?>
-
+                
+                <?php
+                global $USER;
+                $fullName = '';
+                $email = '';
+                $phone = '';
+                if ($USER->IsAuthorized()) {
+                    $email = trim($USER->GetEmail());
+                    $rsUser = CUser::GetByID($USER->GetID());
+                    if ($arUser = $rsUser->Fetch()) {
+                        $lastName = trim($arUser['LAST_NAME'] ?? '');
+                        $firstName = trim($arUser['NAME'] ?? '');
+                        $secondName = trim($arUser['SECOND_NAME'] ?? '');
+                        $fullNameParts = array_filter([$lastName, $firstName, $secondName]);
+                        $fullName = implode(' ', $fullNameParts);
+                        if (empty($fullName)) {
+                            $fullName = trim($arUser['LOGIN'] ?? '');
+                        }
+                        $phone = trim(
+                            $arUser['PERSONAL_PHONE'] ??
+                            $arUser['PERSONAL_MOBILE'] ??
+                            $arUser['WORK_PHONE'] ??
+                            $arUser['UF_PHONE'] ?? ''
+                        );
+                    }
+                }
+                ?>
+                
+                <?php if ($USER->IsAuthorized()) { ?>
+                    // Заполняем поля авторизованного пользователя
+                    <?php if (!empty($fullName)) { ?>
+                        options.fields['form_text_22'] = <?= JavaScript::toObject($fullName) ?>;
+                    <?php } ?>
+                    <?php if (!empty($email)) { ?>
+                        options.fields['form_email_23'] = <?= JavaScript::toObject($email) ?>;
+                    <?php } ?>
+                    <?php if (!empty($phone)) { ?>
+                        options.fields['form_text_24'] = <?= JavaScript::toObject($phone) ?>;
+                    <?php } ?>
+                    
+                    // Скрываем заполненные поля после открытия формы
+                    setTimeout(function() {
+                        <?php if (!empty($fullName)): ?>
+                            var nameField = $('[name="form_text_22"]');
+                            if (nameField.length) {
+                                nameField.closest('.form-result-new-field').css('display', 'none');
+                            }
+                        <?php endif; ?>
+                        <?php if (!empty($email)): ?>
+                            var emailField = $('[name="form_email_23"]');
+                            if (emailField.length) {
+                                emailField.closest('.form-result-new-field').css('display', 'none');
+                            }
+                        <?php endif; ?>
+                        <?php if (!empty($phone)): ?>
+                            var phoneField = $('[name="form_text_24"]');
+                            if (phoneField.length) {
+                                phoneField.closest('.form-result-new-field').css('display', 'none');
+                            }
+                        <?php endif; ?>
+                    }, 500);
+                <?php } ?>
+                
+                // Показываем форму
                 app.api.forms.show(options);
                 app.metrika.reachGoal('forms.open');
                 app.metrika.reachGoal(<?= JavaScript::toObject('forms.' . $arResult['FORMS']['ORDER']['ID'] . '.open') ?>);

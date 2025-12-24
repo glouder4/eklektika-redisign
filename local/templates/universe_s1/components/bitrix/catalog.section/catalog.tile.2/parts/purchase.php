@@ -101,20 +101,36 @@ use intec\core\helpers\Html;
                         ) ?>
                     <?= Html::endTag('div')*/ ?>
 					<div class="catalog-section-item-purchase-order">
-						<?= Html::beginTag('div', [
-							'class' => [
-								'catalog-section-item-purchase-button',
-								$bMobile ? 'intec-cl-border' : 'intec-cl-background',
-								$bMobile ? 'intec-cl-text' : 'intec-cl-background-light-hover'
-							],
-							'style' => "display:none",
-							'data-role' => 'item.order',
-							'data-offer' => $bOffer ? $arItem['ID'] : 'false'
-						]) ?>
-							<span>
-								<?= $arVisual['BUTTONS']['ORDER']['TEXT'] ?>
-							</span>
-						<?= Html::endTag('div') ?>
+                        <?php
+                        global $USER;
+                        if ($USER->IsAuthorized()) {
+                            $userId = $USER->GetID();
+                            $rsUser = CUser::GetByID($userId);
+                            if ($arUser = $rsUser->Fetch()) {
+                        ?>
+                                <? if ($arUser['UF_ADVERSTERING_AGENT'] == 1) { ?>
+                                    <?/* if ($USER->IsAdmin()):?>
+                                        <pre>
+                                            <? print_r($arItem); ?>
+                                        </pre>
+                                    <? endif; */?>
+                                    <?= Html::beginTag('div', [
+                                        'class' => [
+                                            'catalog-section-item-purchase-button',
+                                            $bMobile ? 'intec-cl-border' : 'intec-cl-background',
+                                            $bMobile ? 'intec-cl-text' : 'intec-cl-background-light-hover'
+                                        ],
+                                        'style' => "display:none",
+                                        'data-role' => 'item.order',
+                                        'data-offer' => $bOffer ? $arItem['ID'] : 'false'
+                                    ]) ?>
+                                        <span>
+                                            <?= $arVisual['BUTTONS']['ORDER']['TEXT'] ?>
+                                        </span>
+                                    <?= Html::endTag('div') ?>
+                                <? } ?>
+                            <? } ?>
+                        <? } ?>
 					</div>
                 <?php } else { ?>
                     <?= Html::beginTag('div', [
