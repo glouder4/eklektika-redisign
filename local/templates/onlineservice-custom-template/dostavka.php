@@ -17,6 +17,7 @@ $GLOBALS["OS_BREADCRUMBS"] = [
     );?>
 </div>
 <main class="main-content">
+    <?/*
     <div class="container">
         <div class="page__title-wrapper">
             <h1 class="page__title-wrapper-title">
@@ -24,8 +25,10 @@ $GLOBALS["OS_BREADCRUMBS"] = [
             </h1>
         </div>
     </div>
+    */?>
     <div class="container">
         <div class="delivery-variants-list">
+
             <div class="delivery-variants--card">
                 <div class="delivery-variants--card_icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" fill="none">
@@ -34,15 +37,16 @@ $GLOBALS["OS_BREADCRUMBS"] = [
                     </svg>
                 </div>
                 <div class="delivery-variants--card_title">
-                    <h3 class="title">Самовывоз собственным транспортом</h3>
+                    <h3 class="title">Самовывоз</h3>
                 </div>
                 <div class="delivery-variants--card_description">
-                    <p>Доставка транспортом покупателя</p>
+                    <p>Доставка транспортом покупателя.</p>
                 </div>
                 <div class="delivery-variants--card_action">
                     <a data-fancybox href="#dostavka-modal-1" rel="nofollow" class="delivery-variants--card_action--btn">Подробнее</a>
                 </div>
             </div>
+
             <div class="delivery-variants--card">
                 <div class="delivery-variants--card_icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" fill="none">
@@ -52,15 +56,16 @@ $GLOBALS["OS_BREADCRUMBS"] = [
                     </svg>
                 </div>
                 <div class="delivery-variants--card_title">
-                    <h3 class="title">Транспортом компании<br/>ЙОкаталог</h3>
+                    <h3 class="title">Доставка транспортом<br/>YO!merch</h3>
                 </div>
                 <div class="delivery-variants--card_description">
-                    <p>По Москве и Московской области</p>
+                    <p>Доступна по Москве и Московской области.</p>
                 </div>
                 <div class="delivery-variants--card_action">
                     <a data-fancybox href="#dostavka-modal-2" rel="nofollow" class="delivery-variants--card_action--btn">Подробнее</a>
                 </div>
             </div>
+
             <div class="delivery-variants--card">
                 <div class="delivery-variants--card_icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" fill="none">
@@ -70,29 +75,34 @@ $GLOBALS["OS_BREADCRUMBS"] = [
                     </svg>
                 </div>
                 <div class="delivery-variants--card_title">
-                    <h3 class="title">Транспортом<br/>компаний-партнеров </h3>
+                    <h3 class="title">Доставка<br/>партнерскими службами</h3>
                 </div>
                 <div class="delivery-variants--card_description">
-                    <p>Для регионов России</p>
+                    <p>Для отправок в регионы России.</p>
                 </div>
                 <div class="delivery-variants--card_action">
                     <a data-fancybox href="#dostavka-modal-3" rel="nofollow" class="delivery-variants--card_action--btn">Подробнее</a>
                 </div>
             </div>
+
         </div>
     </div>
     <div class="container">
         <div class="alert-section">
             <div class="alert-card">
-                <p>Уважаемые клиенты! Обращаем ваше внимание, что&nbsp;отгрузка товара осуществляется строго при&nbsp;предъявлении оригинала доверенности на&nbsp;получателя груза или&nbsp;при&nbsp;наличии печати при&nbsp;получении(для&nbsp;отметки на&nbsp;накладной). При&nbsp;заказе услуг Яндекс-доставки или&nbsp;иных подрядчиков, оригинал доверенности так&nbsp;же&nbsp;требуется на&nbsp;курьера, забирающего груз.</p>
+                <p>
+                    Важная информация!<br>
+                    Отгрузка производится <strong>только при предъявлении оригинала доверенности</strong> на получателя или при наличии печати покупателя (для отметки на накладной).<br><br>
+                    Если вы оформляете доставку через Яндекс или других подрядчиков, оригинал доверенности требуется передать курьеру, который будет забирать груз. 
+                </p>
             </div>
             <div class="alert-additional-list">
                 <ul>
                     <li>
-                        Услуги по сборке и погрузке товара при любом способе доставки осуществляет компания-поставщик (Компания ЙОкаталог) бесплатно
+                        Сборка и погрузка товара при любом способе доставки выполняются поставщиком (YO!merch) <Strong>бесплатно</Strong>.
                     </li>
                     <li>
-                        Разгрузка заказов при любом способе доставки осуществляется силами покупателя
+                        Разгрузка товара на месте осуществляется покупателем.
                     </li>
                 </ul>
             </div>
