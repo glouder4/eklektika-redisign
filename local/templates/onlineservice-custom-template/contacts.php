@@ -23,17 +23,20 @@ $APPLICATION->SetTitle("Контакты");
             <div class="contacts--map-section">
                 <div class="contacts--map-wrapper">
                     <div class="contacts--map">
-                        <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A9eab549a631244de717c5b8ef78a30cbf20b612ff5b95de83f7e00dd73bc1e29&amp;width=100%25&amp;height=100%&amp;lang=ru_RU&amp;scroll=true"></script>
+                        <script type="text/javascript" charset="utf-8" async 
+                                src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A75845e6e7a3f4aa073f4d5d82c13608ceeb491173d115ce59578b1f286e2a610&amp;width=100%25&amp;height=100%&amp;lang=ru_RU&amp;scroll=true"></script>
                     </div>
                 </div>
                 <div class="contacts--map_data-wrapper">
                     <div class="contacts--map_data--item">
                         <div class="contacts--map_data--item_title">
-                            <span>Офис и Пункт выдачи образцов</span>
+                            <span>Офис и выдача образцов</span>
                         </div>
                         <div class="contacts--map_data--item_description">
-                            <p>127254, г.Москва, Огородный пр-д, д.16/1, стр. 4, 1005</p>
-                            <p><a href="tel:+74951614100">+7 (495) 161-41-00</a></p>
+                            <p><strong>Адрес:</strong> 127254, Москва, Огородный проезд, д. 16/1, стр. 4, офис 1005</p>
+                            <p><strong>Время работы</strong> 09:30–18:00 (понедельник–пятница)</p>
+                            <p><strong>Телефон:</strong> <a href="tel:+74951614100">+7 (495) 161-41-00</a></p>
+                            <p><strong>E-mail:</strong> <a href="mailto:office@yomerch.ru">office@yomerch.ru</a>
                         </div>
                     </div>
                     <div class="contacts--map_data--item">
@@ -41,7 +44,8 @@ $APPLICATION->SetTitle("Контакты");
                             <span>Склад и Производство</span>
                         </div>
                         <div class="contacts--map_data--item_description">
-                            <p>109428, г. Москва, Рязанский проспект, дом 16, стр. 3</p>
+                            <p><strong>Адрес:</strong> 109428, г. Москва, Рязанский проспект, дом 16, стр. 3</p>
+                            <p><strong>Время работы</strong> 09:30–18:00 (понедельник–пятница)</p>
                         </div>
                     </div>
                     <!--<div class="contacts--map_data--item">
@@ -68,12 +72,14 @@ $APPLICATION->SetTitle("Контакты");
                             <span>9:30 - 18:00 (кроме сб.,вс.)</span>
                         </div>
                     </div>
+                    <?/*
                     <div class="contacts--map_data--item">
                         <div class="contacts--map_data--item--actions">
                             <button type="button" data-action="onlineservice-action.forms.call.open" class="contacts--map_data--item--action">Заказать звонок</button>
                             <a href="#feedback__form--form" class="contacts--map_data--item--action">Отправить сообщение</a>
                         </div>
                     </div>
+                    */?>
                 </div>
             </div>
         </div>
