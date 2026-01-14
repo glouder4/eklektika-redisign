@@ -184,7 +184,7 @@ $arData = [
                     </li>
                 </ul>
                 <div class="footer__main-categories__columns-column--title">
-                    <span>Поставщикам</span>
+                    <span><a href="/suppliers/">Поставщикам</a></span>
                 </div>
             </div>
             <div class="footer__main-categories__columns-column-3">
@@ -215,6 +215,11 @@ $arData = [
                     <li class="footer__main-categories__columns-column--list_item">
                         <a href="/shares/" class="footer__main-categories__columns-column--list_item_link">
                             Акции и Скидки
+                        </a>
+                    </li>
+                    <li class="footer__main-categories__columns-column--list_item">
+                        <a href="/company/jobs/" class="footer__main-categories__columns-column--list_item_link">
+                            Вакансии
                         </a>
                     </li>
                     <li class="footer__main-categories__columns-column--list_item">
