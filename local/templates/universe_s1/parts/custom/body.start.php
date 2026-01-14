@@ -26,7 +26,8 @@ $customPages = [
     '/services/s_tisnenie/',
     '/services/s_sublimacionnaya_pechat/',
     '/services/s_shelkografiya/',
-    '/services/e_nanesenie-logotipov-na-ezhednevniki/'
+    '/services/e_nanesenie-logotipov-na-ezhednevniki/',
+	'/company/jobs/'
 ];
 
 
@@ -442,6 +443,9 @@ if (in_array($APPLICATION->GetCurPage(), $customPages)) {
                 break;
             case '/nanesenie/':
                 include($_SERVER['DOCUMENT_ROOT'].'/local/templates/onlineservice-custom-template/vidy-naneseniy.php');
+                break;
+			case '/company/jobs/':
+                include($_SERVER['DOCUMENT_ROOT'].'/local/templates/onlineservice-custom-template/jobs.php');
                 break;
         }
 
