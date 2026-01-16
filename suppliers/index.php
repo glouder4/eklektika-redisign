@@ -1,5 +1,6 @@
+<?php require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");?>
 <?php
-$APPLICATION->SetTitle("Поставщикам Yo!merch");
+$APPLICATION->SetTitle("YO!merch расширяет каталог");
 ?>
 <div class="container">
     <?$APPLICATION->IncludeComponent(
@@ -12,7 +13,7 @@ $APPLICATION->SetTitle("Поставщикам Yo!merch");
 <main class="main-content">
     <div class="container">
         <div class="page__title-wrapper">
-            <h1 class="page__title-wrapper-title">
+            <h1 class="page__title-wrapper-title" style="background: unset; -webkit-text-fill-color: #7B4FA3;">
                 <?$APPLICATION->ShowTitle(false);?>
             </h1>
         </div>
@@ -34,15 +35,13 @@ $APPLICATION->SetTitle("Поставщикам Yo!merch");
                     </p>
 
                     <div class="cta-section">
-                        <p>Если вам близок наш подход и вы хотите попасть в каталог,</p>
+                        <p>Если вам близок наш подход и вы хотите попасть в каталог, напишите нам на почту info@yomerch.ru. Мы изучим вашу продукцию и свяжемся для дальнейшего обсуждения.</p>
                         <a href="mailto:info@yomerch.ru" class="email-button">
-                            напишите нам на почту info@yomerch.ru
+                            info@yomerch.ru
                         </a>
-                        <p class="after">
-                            Мы изучим вашу продукцию и свяжемся для дальнейшего обсуждения.
-                        </p>
                         </div>
                     </div>
+                   
                     <?/*
                     <div class="examples">
                         <div class="example-grid">
@@ -60,12 +59,12 @@ $APPLICATION->SetTitle("Поставщикам Yo!merch");
                 position: relative;
                 margin: 40px auto;
                 padding: 60px 40px;
-                background: #0d001a;
-                color: white;
+                color: #000;
                 border-radius: 28px;
                 overflow: hidden;
                 font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
                 box-shadow: 0 20px 70px rgba(80, 0, 150, 0.35);
+                background: linear-gradient(135deg, #f8f9ff 0%, #f0f2ff 100%);
                 }
 
                 .gradient-bg {
@@ -79,7 +78,7 @@ $APPLICATION->SetTitle("Поставщикам Yo!merch");
                 .content-wrapper {
                 position: relative;
                 z-index: 2;
-                text-align: center;
+                text-align: left;
                 }
 
                 h1 {
@@ -96,7 +95,6 @@ $APPLICATION->SetTitle("Поставщикам Yo!merch");
                 font-size: 1.6rem;
                 font-weight: 600;
                 margin: 0 0 32px;
-                color: #e9d5ff;
                 line-height: 1.4;
                 }
 
@@ -104,8 +102,6 @@ $APPLICATION->SetTitle("Поставщикам Yo!merch");
                 font-size: 1.32rem;
                 line-height: 1.65;
                 max-width: 780px;
-                margin: 0 auto 50px;
-                color: #d1d5ff;
                 opacity: 0.95;
                 }
 
@@ -116,7 +112,6 @@ $APPLICATION->SetTitle("Поставщикам Yo!merch");
                 .cta-section > p {
                 font-size: 1.38rem;
                 margin: 0 0 24px;
-                color: #e0bbff;
                 }
 
                 .email-button {
@@ -124,7 +119,7 @@ $APPLICATION->SetTitle("Поставщикам Yo!merch");
                 font-size: 2rem;
                 font-weight: 800;
                 color: white;
-                background: linear-gradient(90deg, #9333ea, #ec4899);
+                background: #7B4FA3; 
                 padding: 18px 56px;
                 border-radius: 999px;
                 text-decoration: none;
@@ -201,3 +196,5 @@ $APPLICATION->SetTitle("Поставщикам Yo!merch");
         )
     );?>
 </main>
+
+<?php require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php") ?>
