@@ -1232,7 +1232,7 @@
 /* end font-size */
 
 .catalog-element-price-code:nth-child(1) .catalog-element-price-name, .catalog-element-price-code[data-value="Оптовая цена"] [data-role="item.price.discount"] {
-    color: #222222 !important;
+    color: #744a9e !important;
 }
 .catalog-element-price-code:nth-child(2) .catalog-element-price-name, .catalog-element-price-code[data-value="Рекламная цена"] [data-role="item.price.discount"] {
     color: #858585 !important; 

@@ -547,4 +547,11 @@ if ($arVisual['OFFERS']['USE'] && $arVisual['OFFERS']['VIEW'] === 'extended')
     background-color: #744A9E !important;
     fill: #744A9E !important;
 }
+.intec-cl-background-light-hover:hover {
+    background-color: #644188 !important;
+}
+.intec-cl-background-light {
+    background-color: #644188 !important;
+    fill: #644188 !important;
+}
 </style>

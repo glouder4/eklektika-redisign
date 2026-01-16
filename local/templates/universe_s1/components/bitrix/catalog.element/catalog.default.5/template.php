@@ -279,3 +279,14 @@ if ($bBase && $arVisual['PRICE']['RECALCULATION'])
     <?= Html::endTag('div') ?>
     <?php include(__DIR__.'/parts/script.php') ?>
 <?= Html::endTag('div') ?>
+<style>
+    .lg-backdrop {
+        background-color: #ffffff !important;
+    }
+    .lg-outer .lg-thumb-outer {
+        background-color: #ffffff;
+    }
+    .intec-cl-background-light-hover:hover {
+        background-color: #644188 !important;
+    }
+</style>
