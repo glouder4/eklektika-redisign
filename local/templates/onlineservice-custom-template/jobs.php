@@ -1,5 +1,5 @@
 <?php
-$APPLICATION->SetTitle("Вакансии компании  Yo!merch");
+$APPLICATION->SetTitle("Работа у нас");
 ?>
 <div class="container">
     <?$APPLICATION->IncludeComponent(
@@ -12,7 +12,7 @@ $APPLICATION->SetTitle("Вакансии компании  Yo!merch");
 <main class="main-content">
     <div class="container">
         <div class="page__title-wrapper">
-            <h1 class="page__title-wrapper-title">
+            <h1 class="page__title-wrapper-title" style="background: unset; -webkit-text-fill-color: #7B4FA3;">
                 <?$APPLICATION->ShowTitle(false);?>
             </h1>
         </div>
@@ -21,17 +21,20 @@ $APPLICATION->SetTitle("Вакансии компании  Yo!merch");
         <div class="container">
             <div class="team-invite-card">
                 <div class="intro">
-                    <h1>Пока только старт,<br>но курс уже задан</h1>
+                    <h1>
+                        Пока еще мы только на старте своего пути,<br>
+                        но уже точно знаем, куда идем.
+                    </h1>
                     <p class="lead">
-                    Скорость, амбиции и целое море планов — вот наше текущее состояние.
+                        Скорость, амбиции и море планов — вот наше текущее состояние.
                     </p>
                 </div>
 
                 <div class="vibe">
                     <p>
-                    Наша команда — это место, где «коллежки» не просто слово, а настоящий стиль общения.<br>
-                    Здесь можно хаханьки-хаханьки над мемами, а уже через минуту выручать друг друга по проекту<br>
-                    и строить вместе что-то действительно крутое.
+                        Наша команда — это место, где «коллежки» не просто слово, а стиль общения.<br>
+                        Здесь можно хаханьки-хаханьки над мемами, а в следующую минуту выручать друг друга по проекту<br>
+                        и строить что-то крутое вместе.
                     </p>
                 </div>
 
@@ -39,70 +42,69 @@ $APPLICATION->SetTitle("Вакансии компании  Yo!merch");
                     <p class="big-text">Кажется, для полной картины не хватает именно тебя.</p>
                     <p class="join-us">Давай знакомиться! 🔥</p>
                 </div>
-
-                <div class="vacancies">
-                    <div class="vacancy">
-                    <h2>Аккаунт-менеджер</h2>
-                    <p class="subtitle">
-                        Если у вас на примете есть классный активный веденец с опытом в b2b, или может вы сами таким являетесь — велком, будем рады встрече!
-                    </p>
-
-                    <div class="duties">
-                        <h3>Что делать:</h3>
-                        <ul>
-                        <li>Консультация и помощь в выборе товаров</li>
-                        <li>Полное ведение заказов: от расчёта до контроля отгрузки</li>
-                        <li>Информирование об акциях и новинках</li>
-                        <li>Работа с CRM и документооборотом</li>
-                        </ul>
-                    </div>
-
-                    <div class="offers">
-                        <h3>Что предлагаем:</h3>
-                        <ul>
-                        <li>Официальное оформление + белая з/п по ТК РФ</li>
-                        <li>Стильный новый офис на Бутырской</li>
-                        <li>Обучение, наставничество и реальный рост</li>
-                        </ul>
-                    </div>
-
-                    <p class="send-cv">
-                        Резюме с пометкой <strong>"Кандидат на вакансию аккаунт-менеджера"</strong><br>
-                        присылай на почту HR — очень внимательно всё смотрим и обязательно свяжемся при мэтче ✌️
-                    </p>
-                    </div>
-
-                    <div class="vacancy">
-                    <h2>Менеджер по развитию (B2B)</h2>
-                    <p class="subtitle">
-                        Делаешь презентации, от которых клиент говорит «хочу!» и умеешь строить долгосрочные отношения?
-                    </p>
-
-                    <div class="duties">
-                        <h3>Что делать:</h3>
-                        <ul>
-                        <li>Увеличение прибыли от существующей базы</li>
-                        <li>Развитие и углубление партнёрских отношений</li>
-                        <li>Аналитика продаж и поиск точек роста</li>
-                        <li>Эмпатия, коммуникабельность, вовлечённость (must have)</li>
-                        </ul>
-                    </div>
-
-                    <div class="offers">
-                        <h3>Что предлагаем:</h3>
-                        <ul>
-                        <li>Официальное оформление + белая з/п по ТК РФ</li>
-                        <li>Стильный новый офис на Бутырской</li>
-                        <li>Обучение, наставничество и реальный рост</li>
-                        </ul>
-                    </div>
-
-                    <p class="send-cv">
-                        Резюме с пометкой <strong>"Кандидат на вакансию менеджер по развитию"</strong><br>
-                        присылай на почту HR — очень внимательно всё смотрим и обязательно свяжемся при мэтче ✌️
-                    </p>
-                    </div>
-                </div>
+                
+                <?$APPLICATION->IncludeComponent(
+                    "bitrix:news.list",
+                    "vacancies_custom",
+                    Array(
+                        "ACTIVE_DATE_FORMAT" => "d.m.Y",
+                        "ADD_SECTIONS_CHAIN" => "N",
+                        "AJAX_MODE" => "N",
+                        "AJAX_OPTION_ADDITIONAL" => "",
+                        "AJAX_OPTION_HISTORY" => "N",
+                        "AJAX_OPTION_JUMP" => "N",
+                        "AJAX_OPTION_STYLE" => "Y",
+                        "CACHE_FILTER" => "N",
+                        "CACHE_GROUPS" => "Y",
+                        "CACHE_TIME" => "36000000",
+                        "CACHE_TYPE" => "A",
+                        "CHECK_DATES" => "Y",
+                        "DETAIL_URL" => "",
+                        "DISPLAY_BOTTOM_PAGER" => "Y",
+                        "DISPLAY_DATE" => "Y",
+                        "DISPLAY_NAME" => "Y",
+                        "DISPLAY_PICTURE" => "Y",
+                        "DISPLAY_PREVIEW_TEXT" => "Y",
+                        "DISPLAY_TOP_PAGER" => "N",
+                        "FIELD_CODE" => array("", ""),
+                        "FILTER_NAME" => "",
+                        "HIDE_LINK_WHEN_NO_DETAIL" => "N",
+                        "IBLOCK_ID" => "28",
+                        "IBLOCK_TYPE" => "content",
+                        "INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+                        "INCLUDE_SUBSECTIONS" => "N",
+                        "MESSAGE_404" => "",
+                        "NEWS_COUNT" => "20",
+                        "PAGER_BASE_LINK_ENABLE" => "N",
+                        "PAGER_DESC_NUMBERING" => "N",
+                        "PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
+                        "PAGER_SHOW_ALL" => "N",
+                        "PAGER_SHOW_ALWAYS" => "N",
+                        "PAGER_TEMPLATE" => ".default",
+                        "PAGER_TITLE" => "Новости",
+                        "PARENT_SECTION" => "",
+                        "PARENT_SECTION_CODE" => "",
+                        "PREVIEW_TRUNCATE_LEN" => "",
+                        "PROPERTY_CODE" => array(
+                            "SUBTITLE1",
+                            "SUBTITLE2", 
+                            "CHTO_VHODIT",
+                            "PREDLAGAEM"
+                        ),
+                        "SET_BROWSER_TITLE" => "N",
+                        "SET_LAST_MODIFIED" => "N",
+                        "SET_META_DESCRIPTION" => "N",
+                        "SET_META_KEYWORDS" => "N",
+                        "SET_STATUS_404" => "N",
+                        "SET_TITLE" => "N",
+                        "SHOW_404" => "N",
+                        "SORT_BY1" => "ACTIVE_FROM",
+                        "SORT_BY2" => "SORT",
+                        "SORT_ORDER1" => "DESC",
+                        "SORT_ORDER2" => "ASC",
+                        "STRICT_SECTION_CHECK" => "N"
+                    )
+                );?>
             </div>
 
             <style>
@@ -159,7 +161,7 @@ $APPLICATION->SetTitle("Вакансии компании  Yo!merch");
 
             .vacancies {
                 display: grid;
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: 1fr;
                 gap: 40px;
             }
 
