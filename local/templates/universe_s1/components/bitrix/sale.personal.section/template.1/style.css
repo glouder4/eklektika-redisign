@@ -381,3 +381,13 @@
   flex-direction: row;
   gap: 23px;
 }
+
+/* custom-onlineservice */
+
+.menu-desktop-link {
+  border: 3px solid #744A9E !important;
+}
+.menu-desktop-link.active {
+  background-color: #744A9E !important;
+}
+/* end custom-onlineservice */
