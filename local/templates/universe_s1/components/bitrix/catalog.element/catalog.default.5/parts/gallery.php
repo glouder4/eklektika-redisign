@@ -62,7 +62,9 @@ if (!empty($arResult['MARKS']['VALUES'])) {
         $arPictureSizes = ['width' => 1200, 'height' => 1200];
     }
 ?>
-
+<link rel="stylesheet" 
+      href="https://cdn.jsdelivr.net/npm/lightgallery@2.8.3/css/lightgallery-bundle.min.css" 
+      crossorigin="anonymous" />
 <?= Html::beginTag('div', [
     'class' => 'catalog-element-gallery',
     'data' => [
@@ -298,9 +300,9 @@ $(document).ready(function() {
     $mainSlider.owlCarousel({
         items: 1,
         margin: 0,
-        nav: true,                  // ← ВКЛЮЧАЕМ СТРЕЛКИ
-        dots: true,                 // точки внизу
-        loop: false,                // или true — если хочешь зациклить
+        nav: true,
+        dots: true,
+        loop: true,                // бесконечная прокрутка — оставляем
         mouseDrag: true,
         touchDrag: true,
         pullDrag: true,
@@ -310,7 +312,7 @@ $(document).ready(function() {
             '<div class="owl-next-custom"><svg width="24" height="44" viewBox="0 0 24 44" fill="none"><path d="M2 42L22 22L2 2" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>'
         ],
         responsive: {
-            0:    { nav: false },   // на мобилках стрелки можно скрыть
+            0:    { nav: false },
             768:  { nav: true }
         }
     });
@@ -330,11 +332,11 @@ $(document).ready(function() {
         } else {
             if (!$preview.data('owl.carousel')) {
                 $preview.owlCarousel({
-                    items: 5,           // сколько видно миниатюр
+                    items: 5,
                     margin: 12,
                     nav: true,
                     dots: false,
-                    vertical: true,     // ← вертикальное направление
+                    vertical: true,
                     mouseDrag: true,
                     touchDrag: true,
                     navText: [
@@ -353,24 +355,37 @@ $(document).ready(function() {
     // 3. Синхронизация: клик по миниатюре → меняем основной слайд
     // =============================================================
     $('.catalog-element-gallery-preview-vertical-slider-item').on('click', function() {
-        var index = $(this).index(); // номер миниатюры
-        $mainSlider.trigger('to.owl.carousel', [index, 300]); // переключаем основной слайдер
+        var index = $(this).index(); // реальный индекс в DOM (без клонов)
+        $mainSlider.trigger('to.owl.carousel', [index, 300]);
     });
 
     // =============================================================
     // 4. При смене слайда в основном → выделяем активную миниатюру
+    //    (исправленная версия с учётом loop и клонов)
     // =============================================================
     $mainSlider.on('changed.owl.carousel', function(event) {
-        var currentIndex = event.item.index;
+        let realIndex = event.item.index;
+
+        // Если loop включён — получаем настоящий индекс без клонов
+        if (event.relatedTarget.options.loop && event.relatedTarget._clones) {
+            const clonesPerSide = event.relatedTarget._clones.length / 2;
+            realIndex = realIndex - clonesPerSide;
+
+            // Приводим к диапазону 0 ... (кол-во слайдов - 1)
+            realIndex = (realIndex + event.item.count) % event.item.count;
+
+            // На всякий случай защита
+            if (realIndex < 0) realIndex = 0;
+        }
 
         // Убираем active со всех миниатюр
         $('.catalog-element-gallery-preview-vertical-slider-item')
             .removeClass('active')
             .attr('data-active', 'false');
 
-        // Добавляем active нужной миниатюре
+        // Активируем нужную миниатюру по реальному индексу
         $('.catalog-element-gallery-preview-vertical-slider-item')
-            .eq(currentIndex)
+            .eq(realIndex)
             .addClass('active')
             .attr('data-active', 'true');
     });
@@ -459,8 +474,8 @@ $(document).ready(function() {
 }
 .ns-bitrix.c-catalog-element.c-catalog-element-catalog-default-5 .catalog-element-gallery-container {
     max-width: 100%;
-    /* margin-left: auto; */
-    /* margin-right: auto; */
-    /* margin-bottom: 24px; */
+}
+.lg-hide-sub-html .lg-sub-html, .lg-next, .lg-pager-outer, .lg-prev, .lg-toolbar {
+    opacity: 1 !important;
 }
 </style>
