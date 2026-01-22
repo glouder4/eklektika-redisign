@@ -49,7 +49,11 @@ function showReservedInfo($offer) {
     $OSTATOK_VMESTE_S_REZERVOM = $OSTATOK_BEZ_REZERVA + $reserved;
     $article = $offer['DISPLAY_PROPERTIES']['ARTIKUL_POSTAVSHCHIKA']['DISPLAY_VALUE'];
     $tooltip_1 = 'Всего на складе, без учета резервов';
-    $tooltip_2 = 'Дата поставки 11.11.11 г';
+    $SROK_POSTAVKI = $offer['PROPERTIES']['SROK_POSTAVKI']['VALUE'];
+    // echo'<pre>';
+    // print_r($offer['PROPERTIES']['SROK_POSTAVKI']);
+    // echo'</pre>';
+    $tooltip_2 = 'Дата поставки '.$SROK_POSTAVKI.' г';
     $tooltip_3 = 'Свободный остаток с учетом резервов';
 ?>
     <div class="catalog-element-purchase-container-ostatok offer-stock-info" data-article="<?=$article?>" style="display: none;">
