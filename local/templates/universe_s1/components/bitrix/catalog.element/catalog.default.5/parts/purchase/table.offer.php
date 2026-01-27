@@ -50,10 +50,12 @@ function showReservedInfo($offer) {
     $article = $offer['DISPLAY_PROPERTIES']['ARTIKUL_POSTAVSHCHIKA']['DISPLAY_VALUE'];
     $tooltip_1 = 'Всего на складе, без учета резервов';
     $SROK_POSTAVKI = $offer['PROPERTIES']['SROK_POSTAVKI']['VALUE'];
+    $date = new DateTime($SROK_POSTAVKI);
+    $formattedDate = $date->format('d.m.Y');
     // echo'<pre>';
     // print_r($offer['PROPERTIES']['SROK_POSTAVKI']);
     // echo'</pre>';
-    $tooltip_2 = 'Дата поставки '.$SROK_POSTAVKI.' г';
+    $tooltip_2 = 'Дата поставки '.$formattedDate.' г';
     $tooltip_3 = 'Свободный остаток с учетом резервов';
 ?>
     <div class="catalog-element-purchase-container-ostatok offer-stock-info" data-article="<?=$article?>" style="display: none;">
