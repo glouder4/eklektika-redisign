@@ -94,6 +94,7 @@ $arSections = [
         'NAME' => $arResult['REVIEWS']['NAME'],
         'VALUE' => __DIR__.'/sections/reviews.php'
     ],
+    /*
     'ADDITIONAL_PROPERTIES' => [
         'ID' => 'additional_properties',
         'SHOW' => $hasAdditionalProperties, // Используем результат проверки
@@ -101,6 +102,7 @@ $arSections = [
         'NAME' => 'Дополнительные характеристики',
         'VALUE' => __DIR__.'/sections/additional_properties.php'
     ],
+    */
     'BUY' => [
         'ID' => 'buy',
         'SHOW' => $arVisual['INFORMATION']['BUY']['SHOW'],
