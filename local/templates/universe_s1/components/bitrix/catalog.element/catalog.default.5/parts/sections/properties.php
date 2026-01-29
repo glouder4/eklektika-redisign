@@ -136,7 +136,24 @@ if ($arVisual['OFFERS']['PROPERTIES']['SHOW'] && !empty($arResult['FIELDS']['OFF
                 ]
             ];
 
-            $leftColumnProperties[] = $additionalProperty;
+            $insertPosition = null;
+            
+            foreach ($leftColumnProperties as $index => $property) {
+                if (isset($property['data']['ID']) && $property['data']['ID'] == 464) {
+                    $insertPosition = $index + 1; // Вставляем ПОСЛЕ 464
+                    break;
+                }
+            }
+            
+            // Если не нашли ID 464, вставляем на 4-ю позицию по умолчанию
+            if ($insertPosition === null) {
+                $insertPosition = 3; // 4-я позиция (индекс 3)
+            }
+            
+            // Вставляем свойство
+            array_splice($leftColumnProperties, $insertPosition, 0, [$additionalProperty]);
+            
+            break; // Добавляем только один раз
             // Распределяем в столбец с меньшим количеством свойств
             /*if (count($leftColumnProperties) <= count($rightColumnProperties)) {
                 $leftColumnProperties[] = $additionalProperty;
