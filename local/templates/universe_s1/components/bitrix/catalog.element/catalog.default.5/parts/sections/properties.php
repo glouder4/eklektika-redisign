@@ -4,7 +4,7 @@
 $excludedIds = [354, 617, 675, 312, 318, 319, 321, 322, 323, 325, 326, 327, 328];
 
 // Порядок свойств для левого столбца
-$leftColumnIds = [348, 315, 275, 278, 359];
+$leftColumnIds = [348, 679, 464, 275, 278, 359];
 
 // Порядок свойств для правого столбца  
 $rightColumnIds = [277, 280, 281, 282, 466];
@@ -15,6 +15,7 @@ $rightColumnProperties = [];
 
 // Собираем основные свойства
 $displayPropertiesById = [];
+
 foreach ($arResult['DISPLAY_PROPERTIES'] as $arProperty) {
     // Пропускаем исключенные ID
     if (in_array($arProperty['ID'], $excludedIds)) {
@@ -28,6 +29,7 @@ foreach ($arResult['DISPLAY_PROPERTIES'] as $arProperty) {
 
 // Собираем свойства офферов (если они есть)
 $offerPropertiesById = [];
+
 if ($arVisual['OFFERS']['PROPERTIES']['SHOW'] && !empty($arResult['FIELDS']['OFFERS'])) {
     foreach ($arResult['FIELDS']['OFFERS'] as $sKey => $arOffer) {
         foreach ($arOffer as $arProperty) {
@@ -128,20 +130,21 @@ if ($arVisual['OFFERS']['PROPERTIES']['SHOW'] && !empty($arResult['FIELDS']['OFF
                 'type' => 'additional',
                 'offer_key' => $sKey,
                 'data' => [
-                    'NAME' => 'Вес',
+                    'NAME' => 'Вес брутто',
                     'VALUE' => $arResult['PRODUCT']['WEIGHT'] . ' гр.',
                     'DISPLAY_VALUE' => $arResult['PRODUCT']['WEIGHT'] . ' гр.'
                 ]
             ];
-            
+
+            $leftColumnProperties[] = $additionalProperty;
             // Распределяем в столбец с меньшим количеством свойств
-            if (count($leftColumnProperties) <= count($rightColumnProperties)) {
+            /*if (count($leftColumnProperties) <= count($rightColumnProperties)) {
                 $leftColumnProperties[] = $additionalProperty;
             } else {
                 $rightColumnProperties[] = $additionalProperty;
-            }
+            }*/
         }
-        
+        /*
         // Ширина
         if (isset($arResult['PRODUCT']['WIDTH']) && $arResult['PRODUCT']['WIDTH'] > 0) {
             $additionalProperty = [
@@ -198,6 +201,7 @@ if ($arVisual['OFFERS']['PROPERTIES']['SHOW'] && !empty($arResult['FIELDS']['OFF
                 $rightColumnProperties[] = $additionalProperty;
             }
         }
+        */
     }
 }
 ?>
@@ -207,11 +211,27 @@ if ($arVisual['OFFERS']['PROPERTIES']['SHOW'] && !empty($arResult['FIELDS']['OFF
         <!-- ЛЕВЫЙ СТОЛБЕЦ -->
         <div class="catalog-element-properties-column catalog-element-properties-column-left">
             <?php foreach ($leftColumnProperties as $item): ?>
+                <? 
+                if ($item['data']['VALUE'] === 0) {
+                    continue;
+                } 
+                ?>
                 <?php 
                 $arProperty = $item['data'];
                 // Получаем значение для отображения
                 $value = isset($arProperty['DISPLAY_VALUE']) ? $arProperty['DISPLAY_VALUE'] : 
                         (isset($arProperty['VALUE']) ? $arProperty['VALUE'] : '');
+
+                // Пропускаем пустые значения, 0, null и false
+                if (empty($value) && $value !== '0' && $value !== 0) {
+                    continue;
+                }
+                
+                // Также пропускаем, если это строка "0" без других символов
+                if ($value === '0' || $value === 0) {
+                    continue;
+                }
+
                 $displayValue = '';
                 
                 if (is_array($value)) {
@@ -249,6 +269,17 @@ if ($arVisual['OFFERS']['PROPERTIES']['SHOW'] && !empty($arResult['FIELDS']['OFF
                 // Получаем значение для отображения
                 $value = isset($arProperty['DISPLAY_VALUE']) ? $arProperty['DISPLAY_VALUE'] : 
                         (isset($arProperty['VALUE']) ? $arProperty['VALUE'] : '');
+              
+                // Пропускаем пустые значения, 0, null и false
+                if (empty($value) && $value !== '0' && $value !== 0) {
+                    continue;
+                }
+                
+                // Также пропускаем, если это строка "0" без других символов
+                if ($value === '0' || $value === 0) {
+                    continue;
+                }
+
                 $displayValue = '';
                 
                 if (is_array($value)) {
