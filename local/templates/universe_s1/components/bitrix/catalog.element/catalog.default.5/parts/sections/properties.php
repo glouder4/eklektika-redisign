@@ -130,7 +130,7 @@ if ($arVisual['OFFERS']['PROPERTIES']['SHOW'] && !empty($arResult['FIELDS']['OFF
                 'type' => 'additional',
                 'offer_key' => $sKey,
                 'data' => [
-                    'NAME' => 'Вес брутто',
+                    'NAME' => 'Вес нетто',
                     'VALUE' => $arResult['PRODUCT']['WEIGHT'] . ' гр.',
                     'DISPLAY_VALUE' => $arResult['PRODUCT']['WEIGHT'] . ' гр.'
                 ]
