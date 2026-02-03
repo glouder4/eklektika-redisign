@@ -181,7 +181,7 @@ $arData = [
                         </a>
                     </li>
                     <li class="footer__main-categories__columns-column--list_item">
-                        <a href="#/dostavka/" class="footer__main-categories__columns-column--list_item_link">
+                        <a href="/dealers/" class="footer__main-categories__columns-column--list_item_link">
                             Наши Дилеры
                         </a>
                     </li>

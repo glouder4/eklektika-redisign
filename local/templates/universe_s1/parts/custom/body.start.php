@@ -28,7 +28,8 @@ $customPages = [
     '/services/s_shelkografiya/',
     '/services/e_nanesenie-logotipov-na-ezhednevniki/',
 	'/company/jobs/',
-	'/suppliers/'
+	'/suppliers/',
+	'/dealers/'
 ];
 
 
@@ -450,6 +451,9 @@ if (in_array($APPLICATION->GetCurPage(), $customPages)) {
                 break;
 			case '/suppliers/':
                 include($_SERVER['DOCUMENT_ROOT'].'/local/templates/onlineservice-custom-template/suppliers.php');
+                break;
+			case '/dealers/':
+                include($_SERVER['DOCUMENT_ROOT'].'/local/templates/onlineservice-custom-template/dealers.php');
                 break;
         }
 
