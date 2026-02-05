@@ -328,55 +328,47 @@ print_r($arMenu);
         <div class="mobile-menu__content">
             <ul class="mobile-menu__main">
                 <li><a href="/company/">О компании</a></li>
-                <li>Услуги
-                    <span class="mobile-menu__arrow">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12" fill="none">
-                                <path d="M1 1L6 6L1 11" stroke="#FBB040" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </span>
-                </li>
+                <li><a href="/catalog/">Каталог</a></li>
+                <?/*
+                <span class="mobile-menu__arrow">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12" fill="none">
+                        <path d="M1 1L6 6L1 11" stroke="#FBB040" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+                */?>
                 <li><a href="<?=isAuthorized() ? '/catalog/' : '/buy/'; ?>">Купить</a></li>
-                
+                <li><a href="/personal/profile/registration.php">Стать дилером</a></li>
                 <li><a href="/contacts/">Контакты</a></li>
             </ul>
             <ul class="mobile-menu__sub">
-                <li>Виды нанесения
-                    <span class="mobile-menu__arrow">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12" fill="none">
-                                <path d="M1 1L6 6L1 11" stroke="#FBB040" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </span>
-                </li>
-                <li><a href="#">Программа привилегий и бонусов для дилеров</a></li>
-                <li><a href="#">Гибкая система оплаты</a></li>
-                <li><a href="#">Разработка дизайна сувенирной продукции</a></li>
-                <li><a href="#">Товар на складе в Москве</a></li>
+                <li><a href="/nanesenie/">Нанесение</a></li>
                 <li><a href="/dostavka/">Доставка</a></li>
                 <li><a href="/company/news/">Новости</a></li>
-                <!-- <li><a href="/help/brands/">Бренды</a></li> -->
-                <li><a href="#">Новинки</a></li>
                 <li><a href="/shares/">Акции и Скидки</a></li>
-                <!-- <li><a href="#">Как проехать</a></li> -->
+                <li><a href="/suppliers/">Поставщикам</a></li>
             </ul>
+            <div class="mobile-menu__btn-block">
+                <? if( $USER->IsAuthorized() ){ ?>
+                    <a href="/logout.php" rel="nofollow" class="mobile-menu__btn">
+                        Выйти
+                    </a>
+                <? } else { ?>
+                    <a href="/personal/profile/" rel="nofollow" class="mobile-menu__btn">
+                        Войти
+                    </a>
+                <? } ?>
+                <a href="/personal/profile/registration.php" class="mobile-menu__btn">
+                    Стать дилером 
+                </a>
+            </div>
             <button class="mobile-menu__call-btn" data-action="forms.call.open">Заказать звонок</button>
-            <?php
-            if( $USER->IsAuthorized() ){ ?>
-            <a href="<?=$arResult['PROFILE_URL'];?>" rel="nofollow" class="mobile-menu__call-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
-                        <polyline points="10,17 15,12 10,7"/>
-                        <line x1="15" y1="12" x2="3" y2="12"/>
-                    </svg>
-                    Выйти
-            </a>
-            <?php
-                }
-            ?>
+            
 
             <div class="mobile-menu__footer">
                 <div class="mobile-menu__support">
                     Служба поддержки<br>
-                    <a href="tel:+78007075211">+7 (800) 707-52-11</a>
+                    <a href="tel:+78007075211">+7 (800) 600-84-61</a>
+                    <a href="mailto:info@yomerch.ru">info@yomerch.ru</a>
                 </div>
                 <div class="mobile-menu__socials">
                     <?/*
@@ -387,10 +379,10 @@ print_r($arMenu);
                     </span>
                     */?>
                     <span class="icon-tg">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="19" viewBox="0 0 21 19" fill="none">
-                            <path d="M20.9329 2.2972L17.7514 17.905C17.5141 19.0042 16.9051 19.2518 16.0252 18.7556L11.253 15.0673L8.91674 17.4077C8.68049 17.6564 8.44319 17.905 7.9014 17.905L8.27415 12.7611L17.176 4.28435C17.5477 3.89374 17.0742 3.7518 16.6006 4.07199L5.5326 11.378L0.759313 9.85299C-0.289635 9.4987 -0.289635 8.75269 0.996612 8.25755L19.5448 0.701758C20.4583 0.417879 21.2374 0.915217 20.9329 2.2972Z" fill="white"/>
-                        </svg>
-                    </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="19" viewBox="0 0 21 19" fill="none">
+                                <path d="M20.9329 2.2972L17.7514 17.905C17.5141 19.0042 16.9051 19.2518 16.0252 18.7556L11.253 15.0673L8.91674 17.4077C8.68049 17.6564 8.44319 17.905 7.9014 17.905L8.27415 12.7611L17.176 4.28435C17.5477 3.89374 17.0742 3.7518 16.6006 4.07199L5.5326 11.378L0.759313 9.85299C-0.289635 9.4987 -0.289635 8.75269 0.996612 8.25755L19.5448 0.701758C20.4583 0.417879 21.2374 0.915217 20.9329 2.2972Z" fill="white"/>
+                            </svg>
+                        </span>
                 </div>
             </div>
         </div>
@@ -428,3 +420,46 @@ print_r($arMenu);
 <?php }
 
 ?>
+<? if( $USER->IsAuthorized() ){ ?>
+    <script>
+    // Функция для обновления состояния data-in
+    function updatePanelDataIn() {
+        const mobileMenu = document.getElementById('mobileMenu');
+        const panel = document.getElementById('i-3-intec-universe-main-panel-template-1-jQWE3mrLp0O2');
+        
+        if (mobileMenu && panel) {
+            if (mobileMenu.classList.contains('open')) {
+                panel.setAttribute('data-in', 'true');
+            } else {
+                panel.removeAttribute('data-in');
+                // или если нужно false:
+                // panel.setAttribute('data-in', 'false');
+            }
+        }
+    }
+
+    // Запускаем при загрузке страницы
+    document.addEventListener('DOMContentLoaded', updatePanelDataIn);
+
+    // Можно также отслеживать изменения класса у меню
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.attributeName === 'class') {
+                updatePanelDataIn();
+            }
+        });
+    });
+
+    // Начинаем наблюдение за меню
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (mobileMenu) {
+        observer.observe(mobileMenu, {
+            attributes: true,
+            attributeFilter: ['class']
+        });
+    }
+
+    // Если меню открывается/закрывается через JS события
+    document.addEventListener('menuToggle', updatePanelDataIn);
+    </script>
+<? } ?>
