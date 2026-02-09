@@ -338,7 +338,7 @@ print_r($arMenu);
                 */?>
                 <li><a href="<?=isAuthorized() ? '/catalog/' : '/buy/'; ?>">Купить</a></li>
                 <li><a href="/personal/profile/registration.php">Стать дилером</a></li>
-                <li><a href="/contacts/">Контакты</a></li>
+                <li><a href="/company/contacts/">Контакты</a></li>
             </ul>
             <ul class="mobile-menu__sub">
                 <li><a href="/nanesenie/">Нанесение</a></li>
