@@ -3,6 +3,15 @@
 $APPLICATION->SetTitle("Каталог товаров");
 
 ?>
+<style>
+.intec-cl-background-light-hover:hover {
+    background-color: #633f86 !important;
+}
+.intec-cl-background:hover {
+    background-color: #633f86 !important;
+    fill: #633f86 !important;
+}
+</style>
 <? $APPLICATION->IncludeComponent(
 	"bitrix:catalog", 
 	"catalog.1", 
