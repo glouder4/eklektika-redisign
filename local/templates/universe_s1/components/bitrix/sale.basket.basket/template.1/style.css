@@ -1678,3 +1678,6 @@
 }
 
 /*# sourceMappingURL=style.css.map */
+.basket-total-container .intec-grid.intec-grid-a-h-between {
+    justify-content: end !important;
+}
