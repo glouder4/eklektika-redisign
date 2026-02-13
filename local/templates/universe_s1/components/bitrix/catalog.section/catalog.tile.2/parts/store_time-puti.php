@@ -1,7 +1,9 @@
 <?
+use Bitrix\Catalog\StoreProductTable;
+/*
 global $USER;
 if ($USER->IsAuthorized() && $USER->IsAdmin()):
-
+*/
 // Объявляем функцию только если она еще не существует
 if (!function_exists('universalReservedSearch')) {
     function universalReservedSearch($productId) {
@@ -34,29 +36,34 @@ if (!function_exists('universalReservedSearch')) {
 
 if (!function_exists('calculateOfferStock')) {
     function calculateOfferStock($offer) {
-        $result = [
-            'sklad_moscow' => 0,
-            'v_puti' => 0,
-            'ostatok_bez_rezerva' => 0,
-            'vsego_s_rezervom' => 0
-        ];
-        
         // Получаем зарезервированное количество
         $reserved = universalReservedSearch($offer['ID']);
         
-        // Остаток без резерва
-        $ostatok_bez_rezerva = $offer['PRODUCT']['QUANTITY'] ?? 0;
-        
-        // Всего с учетом резерва
-        $vsego_s_rezervom = $ostatok_bez_rezerva + $reserved;
+        // Получаем количество на складе Москва (ID = 7)
+        $skladMoscow = 0;
+        if (CModule::IncludeModule("catalog")) {
+            $result = StoreProductTable::getList([
+                'select' => ['AMOUNT'],
+                'filter' => [
+                    '=PRODUCT_ID' => $offer['ID'],
+                    '=STORE_ID' => 7
+                ]
+            ]);
+            if ($row = $result->fetch()) {
+                $skladMoscow = (float)$row['AMOUNT'];
+            }
+        }
         
         // Остаток в пути
         $v_puti = $offer['PROPERTIES']['OSTATOK_V_PUTI']['VALUE'] ?? 0;
         
+        // Всего с учетом резерва
+        $vsego_s_rezervom = $skladMoscow + $reserved;
+        
         $result = [
-            'sklad_moscow' => $ostatok_bez_rezerva,
+            'sklad_moscow' => $skladMoscow,  // теперь тут реальное значение со склада
             'v_puti' => $v_puti,
-            'ostatok_bez_rezerva' => $ostatok_bez_rezerva,
+            'ostatok_bez_rezerva' => $skladMoscow, // тоже заменили на склад
             'vsego_s_rezervom' => $vsego_s_rezervom
         ];
         
@@ -242,9 +249,9 @@ if (!function_exists('calculateOfferStock')) {
     });
     </script>
 <?php } ?>
-<?
+<?/*
 endif;
-?>
+*/?>
 <?/*
 global $USER;
 if ($USER->IsAuthorized() && $USER->IsAdmin()):
