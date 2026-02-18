@@ -66,15 +66,30 @@ function showReservedInfo($offer) {
     $OSTATOK_BEZ_REZERVA = $offer['PRODUCT']['QUANTITY'];
     $OSTATOK_VMESTE_S_REZERVOM = $OSTATOK_BEZ_REZERVA + $reserved;
     $article = $offer['DISPLAY_PROPERTIES']['ARTIKUL_POSTAVSHCHIKA']['DISPLAY_VALUE'];
+    $commet_avtosuvenir =  $offer['PROPERTIES']['BRENDY_DLYA_WEB']['VALUE']; 
+
+
     $tooltip_1 = 'Всего на складе, без учета резервов';
     $SROK_POSTAVKI = $offer['PROPERTIES']['SROK_POSTAVKI']['VALUE'];
-    $date = new DateTime($SROK_POSTAVKI);
-    $formattedDate = $date->format('d.m.Y');
+    if (!empty($SROK_POSTAVKI)) {
+        $date = new DateTime($SROK_POSTAVKI);
+        $formattedDate = $date->format('d.m.Y');
+    } else {
+        $formattedDate = date('d.m.Y'); // текущая дата
+    }
     // echo'<pre>';
     // print_r($offer['PROPERTIES']['SROK_POSTAVKI']);
     // echo'</pre>';
-    $tooltip_2 = 'Дата поставки '.$formattedDate.' г';
-    $tooltip_3 = 'Свободный остаток с учетом резервов';
+    if (!empty($SROK_POSTAVKI)) { 
+        $tooltip_2 = 'Дата поставки '.$formattedDate.' г';
+    } else {
+        $tooltip_2 = 'Срок поставки уточняется';
+    }
+    if ($commet_avtosuvenir == 'Автосувенир') { 
+        $tooltip_3 = 'Свободный остаток уточняйте остаток у менеджера';
+    } else {
+        $tooltip_3 = 'Свободный остаток с учетом резервов';
+    }
 ?>
     <div class="catalog-element-purchase-container-ostatok offer-stock-info" data-article="<?=$article?>" style="display: none;">
         <div class="catalog-element-ostatok">
