@@ -12,7 +12,7 @@ $APPLICATION->SetTitle("О компании");
 <main class="main-content">
     <div class="container-comp">
         <div class="header">
-            <h1>Привет! Мы — Yo!merch.</h1>
+            <h1>Привет! Мы — ЙО!каталог.</h1>
             <p>Поставщик корпоративных подарков для тех, кому надоел шаблонный мерч.</p>
         </div>
 
@@ -45,7 +45,7 @@ $APPLICATION->SetTitle("О компании");
         </div>
 
         <div class="advantages">
-            <h3>Yo!merch это:</h3>
+            <h3>ЙО!каталог это:</h3>
             <ul>
                 <li>стильный ассортимент без случайных позиций.</li>
                 <li>свой склад в Москве с отгрузкой за 24 часа;</li>
@@ -61,7 +61,7 @@ $APPLICATION->SetTitle("О компании");
                 Мы переосмыслили язык сувенирной продукции и создали для вас новый каталог мерча с таким ассортиментом, которым сами хотели бы пользоваться.
             </div>
             <div class="quote-image circular">
-                <img src="/local/templates/universe_s1/components/bitrix/form.result.new/onlineservice-feedback-form-type-2/assets/2.jpg" alt="Команда Yo!merch" style="object-position: 50% 30%;">
+                <img src="/local/templates/universe_s1/components/bitrix/form.result.new/onlineservice-feedback-form-type-2/assets/2.jpg" alt="Команда ЙО!каталог" style="object-position: 50% 30%;">
             </div>
         </div>
 
