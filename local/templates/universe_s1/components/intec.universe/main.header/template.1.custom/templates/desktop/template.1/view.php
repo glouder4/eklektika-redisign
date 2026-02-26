@@ -97,7 +97,8 @@ if ($arResult['CONTACTS']['SHOW']) {
         <div class="container">
             <div class="header__top">
                 <a href="/" rel="nofollow" class="header__logo--link">
-                    <img src="/local/templates/universe_s1/onlineservice_addons/assets/logo.svg" alt="yoliba logo" class="header__logo">
+                    <?/*<img src="/local/templates/universe_s1/onlineservice_addons/assets/logo.svg" alt="yoliba logo" class="header__logo">*/?>
+                    <img src="/local/templates/universe_s1/onlineservice_addons/assets/white.png" alt="yoliba logo" class="header__logo" style="width: auto;">
                 </a>
                 <div class="header__brand-description">
                     <span>Откройте для себя</span>

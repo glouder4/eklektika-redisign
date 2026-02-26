@@ -23,7 +23,7 @@ $asset->addCss("/local/templates/onlineservice-custom-template/components/mainpa
 $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpage/slider/scripts/owl.carousel.min.js", true);
 $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpage/categories-slider/scripts/scripts.js", true);
 
-$APPLICATION->SetTitle('YO!merch');
+$APPLICATION->SetTitle('ЙО!каталог');
 ?>
 
 <main class="main-content">

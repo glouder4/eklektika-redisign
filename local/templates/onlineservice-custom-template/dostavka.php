@@ -56,7 +56,7 @@ $GLOBALS["OS_BREADCRUMBS"] = [
                     </svg>
                 </div>
                 <div class="delivery-variants--card_title">
-                    <h3 class="title">Доставка транспортом<br/>YO!merch</h3>
+                    <h3 class="title">Доставка транспортом<br/>ЙО!каталог</h3>
                 </div>
                 <div class="delivery-variants--card_description">
                     <p>Доступна по Москве и Московской области.</p>
@@ -99,7 +99,7 @@ $GLOBALS["OS_BREADCRUMBS"] = [
             <div class="alert-additional-list">
                 <ul>
                     <li>
-                        Сборка и погрузка товара при любом способе доставки выполняются поставщиком (YO!merch) <Strong>бесплатно</Strong>.
+                        Сборка и погрузка товара при любом способе доставки выполняются поставщиком (ЙО!каталог) <Strong>бесплатно</Strong>.
                     </li>
                     <li>
                         Разгрузка товара на месте осуществляется покупателем.
