@@ -310,7 +310,7 @@ $arData = [
             <div class="dostavka-modal-body">
                 <?/*
                 <div class="dostavka-modal-title">
-                    <div class="title">Транспортом компании ЙОкаталог</div>
+                    <div class="title">Транспортом компании ЙО!каталог</div>
                 </div>
                 */?>
                 <div class="dostavka-modal-description">
