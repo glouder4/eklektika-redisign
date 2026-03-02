@@ -1,5 +1,5 @@
 <?php
-$APPLICATION->SetTitle("YO!merch расширяет каталог");
+$APPLICATION->SetTitle("ЙО!каталог расширяет каталог");
 ?>
 <div class="container">
     <?$APPLICATION->IncludeComponent(
@@ -23,10 +23,10 @@ $APPLICATION->SetTitle("YO!merch расширяет каталог");
                 <div class="gradient-bg"></div>
                 
                 <div class="content-wrapper">
-                    <h1>YO!merch расширяет каталог</h1>
+                    <h1>ЙО!каталог расширяет каталог</h1>
                     
                     <p class="lead">
-                    YO!merch расширяет каталог и рассматривает производителей, которые делают стильные и качественные вещи.
+                    ЙО!каталог расширяет каталог и рассматривает производителей, которые делают стильные и качественные вещи.
                     </p>
 
                     <p class="main-text">
