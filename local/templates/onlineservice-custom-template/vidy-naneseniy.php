@@ -481,7 +481,7 @@ $asset->addJs("/local/templates/onlineservice-custom-template/components/mainpag
         </div>
         <div class="container">
             <div class="actions">
-                <a href="/upload/yomerch_Прайс_нанесение.pdf" target="_blank">Скачать Прайс-лист на услуги производства</a>
+                <a href="/upload/ЙО!каталог_Прайс_нанесение.pdf" target="_blank">Скачать Прайс-лист на услуги производства</a>
             </div>
         </div>
     </section>
