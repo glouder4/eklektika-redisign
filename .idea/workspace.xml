@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a53d02d7-d404-452c-a903-dd81636134fa" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/modifiers/catalog.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/modifiers/catalog.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,6 +189,9 @@
       <workItem from="1764925725344" duration="680000" />
       <workItem from="1764930580970" duration="5000" />
       <workItem from="1765111117878" duration="12141000" />
+      <workItem from="1770291186452" duration="1244000" />
+      <workItem from="1772445535817" duration="3681000" />
+      <workItem from="1772529386666" duration="621000" />
     </task>
     <servers />
   </component>
