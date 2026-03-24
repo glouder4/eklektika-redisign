@@ -244,60 +244,62 @@ if ($arResult['CONTACTS']['SHOW']) {
         </div>
     </div>
     <div class="container">
-        <div class="header__search-row">
-            <?php
+        <div class="header__search-row header__search-row-custom">
+            <div class="header__navigation-catalog-menu-custom" >
+                <?php
 
-            $arSearchParams = !empty($arSearchParams) ? $arSearchParams : [];
+                $arSearchParams = !empty($arSearchParams) ? $arSearchParams : [];
 
-            $sPrefix = 'SEARCH_';
-            $arParameters = [];
+                $sPrefix = 'SEARCH_';
+                $arParameters = [];
 
-            foreach ($arParams as $sKey => $sValue)
-                if (StringHelper::startsWith($sKey, $sPrefix)) {
-                    $sKey = StringHelper::cut($sKey, StringHelper::length($sPrefix));
-                    $arParameters[$sKey] = $sValue;
-                }
+                foreach ($arParams as $sKey => $sValue)
+                    if (StringHelper::startsWith($sKey, $sPrefix)) {
+                        $sKey = StringHelper::cut($sKey, StringHelper::length($sPrefix));
+                        $arParameters[$sKey] = $sValue;
+                    }
 
-            $arParameters = ArrayHelper::merge($arParameters, $arSearchParams);
-            $arParameters['PAGE'] = $arResult['SEARCH']['MODE'] === 'site' ? $arResult['URL']['SEARCH'] : $arResult['URL']['CATALOG'];
-            $arParameters['INPUT_ID'] = $arParameters['INPUT_ID'].'-input-1';
-print_r($arMenu);
-            $arMenu = $arResult['MENU']['MAIN'];
-            $arMenuParams = !empty($arMenuParams) ? $arMenuParams : [];
+                $arParameters = ArrayHelper::merge($arParameters, $arSearchParams);
+                $arParameters['PAGE'] = $arResult['SEARCH']['MODE'] === 'site' ? $arResult['URL']['SEARCH'] : $arResult['URL']['CATALOG'];
+                $arParameters['INPUT_ID'] = $arParameters['INPUT_ID'].'-input-1';
+    //print_r($arMenu);
+                $arMenu = $arResult['MENU']['MAIN'];
+                $arMenuParams = !empty($arMenuParams) ? $arMenuParams : [];
 
-            $sPrefixCatalog = 'MENU_MAIN_';
-            $arParametersCatalog = [];
+                $sPrefixCatalog = 'MENU_MAIN_';
+                $arParametersCatalog = [];
 
-            foreach ($arParams as $sKey => $sValue)
-                if (StringHelper::startsWith($sKey, $sPrefixCatalog)) {
-                    $sKey = StringHelper::cut($sKey, StringHelper::length($sPrefixCatalog));
-                    $arParametersCatalog[$sKey] = $sValue;
-                }
+                foreach ($arParams as $sKey => $sValue)
+                    if (StringHelper::startsWith($sKey, $sPrefixCatalog)) {
+                        $sKey = StringHelper::cut($sKey, StringHelper::length($sPrefixCatalog));
+                        $arParametersCatalog[$sKey] = $sValue;
+                    }
 
-            $arParametersCatalog['TRANSPARENT'] = $arResult['VISUAL']['TRANSPARENCY'] ? 'Y' : 'N';
-            $arParametersCatalog = ArrayHelper::merge($arParametersCatalog, $arMenuParams, [
-                'ROOT_MENU_TYPE' => $arMenu['ROOT'],
-                'CHILD_MENU_TYPE' => $arMenu['CHILD'],
-                'MAX_LEVEL' => $arMenu['LEVEL'],
-                'MENU_CACHE_TYPE' => 'N',
-                'USE_EXT' => 'Y',
-                'DELAY' => 'N',
-                'ALLOW_MULTI_SELECT' => 'N'
-            ]);
+                $arParametersCatalog['TRANSPARENT'] = $arResult['VISUAL']['TRANSPARENCY'] ? 'Y' : 'N';
+                $arParametersCatalog = ArrayHelper::merge($arParametersCatalog, $arMenuParams, [
+                    'ROOT_MENU_TYPE' => $arMenu['ROOT'],
+                    'CHILD_MENU_TYPE' => $arMenu['CHILD'],
+                    'MAX_LEVEL' => $arMenu['LEVEL'],
+                    'MENU_CACHE_TYPE' => 'N',
+                    'USE_EXT' => 'Y',
+                    'DELAY' => 'N',
+                    'ALLOW_MULTI_SELECT' => 'N'
+                ]);
 
-            ?>
-            <?php $APPLICATION->IncludeComponent(
-                'bitrix:menu',
-                'onlineservice.horizontal.1.custom',
-                $arParametersCatalog,
-                $this->getComponent()
-            ); ?>
-            <?php $APPLICATION->IncludeComponent(
-                "bitrix:search.title",
-                "onlineservice.input.1",
-                $arParameters,
-                $this->getComponent()
-            ) ?>
+                ?>
+                <?php $APPLICATION->IncludeComponent(
+                    'bitrix:menu',
+                    'onlineservice.horizontal.1.custom',
+                    $arParametersCatalog,
+                    $this->getComponent()
+                ); ?>
+                <?php $APPLICATION->IncludeComponent(
+                    "bitrix:search.title",
+                    "onlineservice.input.1",
+                    $arParameters,
+                    $this->getComponent()
+                ) ?>
+            </div>
             <div class="header__navigation">
                 <ul class="header__navigation-list">
                     <!--<li class="header__navigation-list--item">

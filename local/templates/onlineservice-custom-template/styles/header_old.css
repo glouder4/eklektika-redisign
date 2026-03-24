@@ -548,12 +548,12 @@ a.mobile-menu__call-btn{
 }
 @media(min-width: 375px){
     .header__search{
-        width: 206px;
+        /*width: 206px;*/
     }
 }
 @media(min-width: 576px){
     .header__search{
-        width: 407px;
+       /* width: 407px;*/
     }
     .header__icon{
         /*display: -webkit-box;
@@ -651,7 +651,7 @@ a.mobile-menu__call-btn{
 }
 @media (min-width: 768px) {
     .header__search {
-        width: 600px;
+        /*width: 600px;*/
     }
     .header__brand-description{
         display: -webkit-box;
@@ -792,7 +792,7 @@ a.mobile-menu__call-btn{
         background: unset;
     }
     .header__search {
-        width: 330px;
+        /*width: 330px;*/
     }
     .header__navigation{
         display: block;
@@ -835,7 +835,7 @@ a.mobile-menu__call-btn{
 }
 @media (min-width: 1300px) {
     .header__search {
-        width: 430px;
+       /* width: 430px;*/
     }
     .header__brand-description {
         margin-left: 52px;
@@ -914,8 +914,8 @@ a.mobile-menu__call-btn{
         gap: 41px;
     }
     .header__search{
-        width: 678px;
-        height: 55px;
+       /* width: 678px;
+        height: 55px;*/
     }
     .header__catalog-btn{
         position: relative;

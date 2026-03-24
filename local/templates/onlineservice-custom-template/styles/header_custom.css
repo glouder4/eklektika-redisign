@@ -1,4 +1,3 @@
-
 .header__icon {
     /*width: 28px;
     height: 28px;
@@ -32,7 +31,7 @@
     padding: 0;
 }
 
-.header__icon{
+.header__icon {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -40,18 +39,19 @@
     justify-content: space-between;
 }
 
-#profileBtns{
+#profileBtns {
     display: flex;
     gap: 28px;
     position: relative;
     /*top: 8px;*/
 }
 
-.header__top .header__icon > svg {
+.header__top .header__icon>svg {
     max-height: 30px;
 }
 
-.header__top .header__icon.header__icon--bag , .header__top .header__icon.header__icon--user {
+.header__top .header__icon.header__icon--bag,
+.header__top .header__icon.header__icon--user {
     max-height: 49px;
 }
 
@@ -59,11 +59,11 @@
 .header__social-links,
 .header__callback-btn,
 .header__brand-description,
-.header__navigation{
+.header__navigation {
     display: none;
 }
 
-.header__icon-title{
+.header__icon-title {
 
     font-family: Manrope;
     font-weight: 400;
@@ -75,7 +75,7 @@
 }
 
 
-.header__top .header__icon > svg {
+.header__top .header__icon>svg {
     height: 30px;
     width: 30px;
 }
@@ -90,7 +90,7 @@
 
 
 
-.header__icon--user .header__icon-title{
+.header__icon--user .header__icon-title {
     white-space: nowrap;
     width: 100%;
 }
@@ -98,8 +98,8 @@
 
 .header__navigation-list--item-link:hover,
 .header__navigation-list--item-link:focus,
-.header__navigation-list--item-link:active{
-    color: #858585!important;
+.header__navigation-list--item-link:active {
+    color: #858585 !important;
     list-style: none;
     text-decoration: unset;
 }
@@ -112,7 +112,8 @@
         width: 83px;
     }
 
-    .header__top, .header__search-row {
+    .header__top,
+    .header__search-row {
         padding-left: 10px;
         padding-right: 10px;
     }
@@ -136,7 +137,9 @@
     .header__icons .sale-basket-small-items {
         margin-right: 20px;
     }
-    .header__icons, .header__icons .sale-basket-small-items {
+
+    .header__icons,
+    .header__icons .sale-basket-small-items {
         gap: 0px;
     }
 
@@ -144,11 +147,12 @@
 
 
 
-    .header__icon-title{
+    .header__icon-title {
         display: none;
     }
 
-    .header__icon--user, .header__icon--bag{
+    .header__icon--user,
+    .header__icon--bag {
         height: 20px;
     }
 
@@ -156,15 +160,18 @@
 }
 
 @media(min-width: 400px) {
-    .header__top, .header__search-row {
+
+    .header__top,
+    .header__search-row {
         padding-left: 0px;
         padding-right: 0px;
     }
 }
 
-@media(min-width: 576px){
+@media(min-width: 576px) {
 
-    .header__top, .header__search-row {
+    .header__top,
+    .header__search-row {
         padding-left: 10px;
         padding-right: 10px;
     }
@@ -183,35 +190,40 @@
 
 
 
-    .header__icon-title{
+    .header__icon-title {
         display: block;
     }
 
 
-    .header__icons, .header__icons .sale-basket-small-items {
+    .header__icons,
+    .header__icons .sale-basket-small-items {
         gap: 12px;
     }
-    .header__icon-title{
+
+    .header__icon-title {
         font-size: 10px;
         margin-top: 4px;
     }
-    .header__icon--user, .header__icon--bag{
+
+    .header__icon--user,
+    .header__icon--bag {
         height: 30px;
     }
 
 
 }
 
-@media(min-width: 650px){
+@media(min-width: 650px) {
 
-    .header__top, .header__search-row {
+    .header__top,
+    .header__search-row {
         padding-left: 10px;
         padding-right: 10px;
     }
 }
 
 
-@media (min-width: 768px){
+@media (min-width: 768px) {
 
     .header__logo {
         height: 40px;
@@ -224,58 +236,66 @@
         gap: 5px;
         margin-top: 10px;
     }
+
     .header__brand-description {
         margin-left: -30px;
     }
 
 
-    .header__icons, .header__icons .sale-basket-small-items {
+    .header__icons,
+    .header__icons .sale-basket-small-items {
         gap: 12px;
     }
 
 
-    .header__icon-title{
+    .header__icon-title {
         font-size: 10px;
         margin-top: 4px;
     }
-    .header__icon--user, .header__icon--bag{
+
+    .header__icon--user,
+    .header__icon--bag {
         height: 30px;
     }
 
 
 }
 
-@media (min-width: 768px) and (max-width: 1199px){
-    #top_header-auth_reg-btns--wrapper a.top_header-btn{
+@media (min-width: 768px) and (max-width: 1199px) {
+    #top_header-auth_reg-btns--wrapper a.top_header-btn {
         padding-right: 20px;
         padding-left: 20px;
     }
 }
 
 
-@media (min-width: 991px){
+@media (min-width: 991px) {
 
     .header__brand-description {
         margin-left: 15px;
     }
 
 
-    .header__icons, .header__icons .sale-basket-small-items {
+    .header__icons,
+    .header__icons .sale-basket-small-items {
         gap: 20px;
     }
 
 
     .header__icon--user {
-        margin-right:18px;
+        margin-right: 18px;
     }
 
-    .header__icon-title{
+    .header__icon-title {
         font-size: 12px;
     }
-    .header__icon--user, .header__icon--bag{
+
+    .header__icon--user,
+    .header__icon--bag {
         height: 49px;
     }
-    .header__top .header__icon > svg {
+
+    .header__top .header__icon>svg {
         height: 30px;
         width: 30px;
     }
@@ -283,9 +303,10 @@
 
 }
 
-@media (min-width: 1000px){
+@media (min-width: 1000px) {
 
-    .header__top, .header__search-row {
+    .header__top,
+    .header__search-row {
         padding-left: 0px;
         padding-right: 0px;
     }
@@ -293,36 +314,32 @@
 }
 
 
-@media (min-width: 1200px){
+@media (min-width: 1200px) {
 
 
-    .header__navigation{
+    .header__navigation {
         display: block;
     }
 
     .header__search {
-        width: 330px;
+        /* width: 330px;*/
     }
 
 
 }
 
-@media(min-width: 1520px)  {
+@media(min-width: 1520px) {
 
-    .header__top .header__icon > svg {
-
-    }
+    .header__top .header__icon>svg {}
 
 
     .header__brand-description {
         margin-left: 40px;
     }
-    .header__icon.header__icon--user >svg{
 
-    }
+    .header__icon.header__icon--user>svg {}
 
-    .header__icon--bag .header__icon-title {
-    }
+    .header__icon--bag .header__icon-title {}
 
     .header__icon--user .header__icon-title {
         font-size: 13px;
@@ -332,73 +349,52 @@
         font-size: 13px;
     }
 
-    .header__icon.header__icon--bag > svg{
-
-    }
+    .header__icon.header__icon--bag>svg {}
 
 
 }
 
-.ns-intec-universe.c-sale-basket-small.c-sale-basket-small-icons-1 .sale-basket-small-popup{
+.ns-intec-universe.c-sale-basket-small.c-sale-basket-small-icons-1 .sale-basket-small-popup {
     top: calc(100% + 11px) !important;
 }
 
 
 
-
-/*
-
-#profile_fields--wrapper {
-    position: absolute;
-    top: calc(100% + 35.5px);
-    right: 2%;
-    background: #fff;
-    border-radius: 0px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-    border: 1px solid #e5e7eb;
-    min-width: 280px;
-    z-index: 1000;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    margin-top: 8px;
-}
-
-#top_header-auth_reg-btns--wrapper{
+/*FIX*/
+.header__search-row-custom {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    gap: 35px;
 }
 
-#top_header-auth_reg-btns--wrapper a.top_header-btn{
-    position: relative;
-    left: -3px;
-    top: -2px;
-
-    height: 49px;
-
-    border-width: 1px;
-    padding-top: 15px;
-    padding-right: 40px;
-    padding-bottom: 15px;
-    padding-left: 40px;
-
-    border: 1px solid #FFFFFF;
-
-    font-family: Manrope;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 100%;
-    letter-spacing: 0;
-
-    color: #FFFFFF;
+.header__navigation-catalog-menu-custom {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: row;
+    gap: 35px;
+    flex: 1;
 }
-#top_header-auth_reg-btns--wrapper a.top_header-btn.reg{
-    position: relative;
-    left: 0px;
-    top: -2px;
+
+
+[id^="i-7-bitrix-search-title-onlineservice-input-1-custom-"] {
+    display: contents;
 }
-*/
+
+
+.search-title-form.header__search {
+    flex: 1;
+    width: 100%;
+
+}
+
+@media (min-width: 1200px) {
+    .search-title-form.header__search {
+        height: 55px;
+    }
+}
+
+@media (max-width: 576px) {
+    .header__navigation-catalog-menu-custom {
+        gap: 15px;
+    }
+}
