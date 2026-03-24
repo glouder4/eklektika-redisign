@@ -376,7 +376,7 @@
 }
 
 
-[id^="i-7-bitrix-search-title-onlineservice-input-1-custom-"] {
+[id*="-bitrix-search-title-onlineservice-input-1-custom-"] {
     display: contents;
 }
 
