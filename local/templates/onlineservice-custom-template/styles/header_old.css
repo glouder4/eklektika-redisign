@@ -1075,8 +1075,9 @@ a.mobile-menu__call-btn{
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     /*margin-top: 8px;*/
 }
-#profile_fields--wrapper.profile-hover._hoverable,
-#profileBtns a.header__icon.header__icon--user:hover +#profile_fields--wrapper._hoverable{
+#profile_fields--wrapper.profile-hover._hoverable
+/*#profileBtns a.header__icon.header__icon--user:hover +#profile_fields--wrapper._hoverable*/
+{
     right: 270px;
 }
 
