@@ -5,7 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a53d02d7-d404-452c-a903-dd81636134fa" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitrix/templates/universe_s1/classes/Marking.php" beforeDir="false" afterPath="$PROJECT_DIR$/bitrix/templates/universe_s1/classes/Marking.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bitrix/templates/universe_s1/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/bitrix/templates/universe_s1/header.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/classes/Marking.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/classes/Marking.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/intec.universe/main.header/template.1.custom/templates/desktop/template.1/view.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/intec.universe/main.header/template.1.custom/templates/desktop/template.1/view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/header.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -192,6 +198,11 @@
       <workItem from="1770291186452" duration="1244000" />
       <workItem from="1772445535817" duration="3681000" />
       <workItem from="1772529386666" duration="621000" />
+      <workItem from="1773829337336" duration="149000" />
+      <workItem from="1773829503935" duration="230000" />
+      <workItem from="1773829757865" duration="826000" />
+      <workItem from="1774010682270" duration="4743000" />
+      <workItem from="1774105727554" duration="16000" />
     </task>
     <servers />
   </component>
