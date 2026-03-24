@@ -1,7 +1,13 @@
 <?php
     use Bitrix\Main\Page\Asset;
     Asset::getInstance()->addCss("/local/templates/universe_s1/onlineservice_addons/styles/template.css");
-    Asset::getInstance()->addCss("/local/templates/universe_s1/onlineservice_addons/styles/header.css");
+    
+
+    Asset::getInstance()->addCss("/local/templates/onlineservice-custom-template/styles/header_old.css");
+    Asset::getInstance()->addCss("/local/templates/onlineservice-custom-template/styles/header_custom.css");    
+
+    //Asset::getInstance()->addCss("/local/templates/universe_s1/onlineservice_addons/styles/header.css");
+
 
     Asset::getInstance()->addCss("/local/templates/universe_s1/onlineservice_addons/styles/jquery.fancybox.css");
 

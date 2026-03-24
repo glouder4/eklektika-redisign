@@ -7,7 +7,12 @@ use Bitrix\Main\Page\Asset;
 // Подключаем стили и скрипты кастомного шаблона
 $asset = Asset::getInstance();
 $asset->addCss("/local/templates/onlineservice-custom-template/styles/template.css");
-$asset->addCss("/local/templates/onlineservice-custom-template/styles/header.css");
+
+
+$asset->addCss("/local/templates/onlineservice-custom-template/styles/header_old.css");
+$asset->addCss("/local/templates/onlineservice-custom-template/styles/header_custom.css");
+
+
 $asset->addCss("/local/templates/onlineservice-custom-template/styles/footer.css");
 
 $asset->addJs("/local/templates/onlineservice-custom-template/scripts/jquery.min.js", false);
