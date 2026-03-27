@@ -550,7 +550,17 @@ $APPLICATION->SetTitle('ЙО!каталог');
             "STRICT_SECTION_CHECK" => "N"
         )
     );*/?>
-
+    <?$APPLICATION->IncludeComponent(
+        "bitrix:main.include",
+        "",
+        Array(
+            "AREA_FILE_SHOW" => "file",
+            "AREA_FILE_SUFFIX" => "inc",
+            "EDIT_TEMPLATE" => "",
+            "PATH" => "/include/footer/banner.php"
+        )
+    );?>
+    <?/*
     <?$APPLICATION->IncludeComponent(
         "bitrix:form.result.new",
         "onlineservice-feedback-form-type-1",
@@ -573,4 +583,5 @@ $APPLICATION->SetTitle('ЙО!каталог');
             "WEB_FORM_ID" => "1"
         )
     );?>
+    */?>
 </main>

@@ -96,6 +96,17 @@ $APPLICATION->SetTitle("Наши дилеры");
         </div>
     </section>
     <?$APPLICATION->IncludeComponent(
+        "bitrix:main.include",
+        "",
+        Array(
+            "AREA_FILE_SHOW" => "file",
+            "AREA_FILE_SUFFIX" => "inc",
+            "EDIT_TEMPLATE" => "",
+            "PATH" => "/include/footer/banner.php"
+        )
+    );?>
+    <?/*
+    <?$APPLICATION->IncludeComponent(
         "bitrix:form.result.new",
         "onlineservice-feedback-form-type-2",
         Array(
@@ -117,6 +128,7 @@ $APPLICATION->SetTitle("Наши дилеры");
             "WEB_FORM_ID" => "2"
         )
     );?>
+    */?>
 </main>
 <style>
     @media(max-width:767px){
