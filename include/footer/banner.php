@@ -4,4 +4,6 @@
         height: auto;
     }
 </style>
-<img src="/include/footer/banner.jpg" class="banner-footer">
+<div class="container">
+    <img src="/include/footer/banner.jpg" class="banner-footer">
+</div>
