@@ -27,11 +27,11 @@
 }
 
 .header__logo {
-    height: 27.80425453186035px;
-    width: 83.41276550292969px;
+    /*height: 27.80425453186035px;
+    width: 83.41276550292969px;*/
     position: relative;
-    top: -2px;
-    left: 1px;
+   /* top: -2px;
+    left: 1px;*/
 }
 .header__logo--link{
     /*height: 27.80425453186035px;*/
@@ -284,7 +284,10 @@
 
 .mobile-menu {
     position: fixed;
-    top: 64px; left: 0; right: 0; bottom: 0;
+    top: 64px;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background: #7B4FA3;
     z-index: 1000;
     -webkit-transform: translateX(100%);
@@ -519,7 +522,7 @@ a.mobile-menu__call-btn{
     background-color: unset!important;
 }
 .header__icon--user>svg{
-    
+
 }
 .header__icon--user .header__icon-title{
     white-space: nowrap;    /* Запрещает перенос текста на новую строку */
@@ -553,7 +556,7 @@ a.mobile-menu__call-btn{
 }
 @media(min-width: 576px){
     .header__search{
-       /* width: 407px;*/
+        /* width: 407px;*/
     }
     .header__icon{
         /*display: -webkit-box;
@@ -587,13 +590,13 @@ a.mobile-menu__call-btn{
         color: #FFFFFF;*/
     }
     .header__icon--heart .header__icon-title{
-        
+
     }
     .header__icon--bag  .header__icon-title{
-       
+
     }
     .header__icon--user  .header__icon-title{
-       
+
     }
     .header__social-links{
         display: -webkit-box;
@@ -639,14 +642,14 @@ a.mobile-menu__call-btn{
         height: 100%;
     }
     .header__top{
-       /* -webkit-box-pack: start;
-        -ms-flex-pack: start;
-        justify-content: flex-start;*/
+        /* -webkit-box-pack: start;
+         -ms-flex-pack: start;
+         justify-content: flex-start;*/
     }
 }
 @media(max-width: 1200px){
     .header__icon--user  .header__icon-title{
-        
+
     }
 }
 @media (min-width: 768px) {
@@ -703,7 +706,7 @@ a.mobile-menu__call-btn{
         display: none;
     }
     .header__top{
-       /* height: 85px;*/
+        /* height: 85px;*/
     }
     .header__icons,
     .header__icons .sale-basket-small-items{
@@ -716,19 +719,19 @@ a.mobile-menu__call-btn{
         width: 74px;
     }
     .header__icon--bag{
-       
+
     }
     .header__icon--user{
-        
+
     }
     .header__icon>svg{
-   
+
     }
     .header__top .header__icon>svg{
- 
+
     }
     .header__icon-title{
-        
+
     }
     .header__badge{
         top: -17px;
@@ -744,10 +747,10 @@ a.mobile-menu__call-btn{
     .header__social-links-phone{
         font-size: 16px;
         position: relative;
-        top: 3px;
+        /*top: 3px;*/
     }
     .header__social-links{
-        gap: 39px;
+        gap: 20px;
     }
     .header__brand-description>span{
         font-size: 14px;
@@ -757,20 +760,20 @@ a.mobile-menu__call-btn{
         height: 54px;
     }
     .header__logo--link{
-       /* height: 54px;*/
+        /* height: 54px;*/
     }
     .header__brand-description{
         margin-left: 52px;
     }
     .header__icon-title,
     .header__icon--heart .header__icon-title{
-       
+
     }
     .header__icon--bag .header__icon-title{
-        
+
     }
     .header__icon--user .header__icon-title{
-      
+
     }
     .header__social-links-icons{
         gap: 20px;
@@ -835,7 +838,7 @@ a.mobile-menu__call-btn{
 }
 @media (min-width: 1300px) {
     .header__search {
-       /* width: 430px;*/
+        /* width: 430px;*/
     }
     .header__brand-description {
         margin-left: 52px;
@@ -853,7 +856,7 @@ a.mobile-menu__call-btn{
         position: relative;
     }
     .header__social-links {
-        margin-right: 66px;
+        margin-right: 35px;
         margin-left: auto;
     }
     .header__icons,
@@ -861,13 +864,13 @@ a.mobile-menu__call-btn{
         gap: 38px;
     }
     .header__icon--user{
-        
+
     }
     .header__icon--user .header__icon-title {
-        
+
     }
     .header__icon>svg{
-     
+
     }
     .header__search-btn>span{
         position: relative;
@@ -879,22 +882,22 @@ a.mobile-menu__call-btn{
         transform: scale(1);
     }
     .header__icon--bag {
-   
+
     }
     .header__icon--heart{
-      
+
     }
     .header__icon--bag .header__icon-title {
-        
+
     }
     .header__icon--heart .header__icon-title{
-        
+
     }
     .header__icon--dice{
-       
+
     }
     .header__icon--dice .header__icon-title{
-        
+
     }
     .header__search-row{
         padding-left: 0;
@@ -908,14 +911,14 @@ a.mobile-menu__call-btn{
         margin-left: auto;
     }
     .header__navigation{
-        margin-left: 24px;
+        /*margin-left: 24px;*/
     }
     .header__navigation-list{
         gap: 41px;
     }
     .header__search{
-       /* width: 678px;
-        height: 55px;*/
+        /* width: 678px;
+         height: 55px;*/
     }
     .header__catalog-btn{
         position: relative;
@@ -925,7 +928,7 @@ a.mobile-menu__call-btn{
 
 @media(min-width: 991px){
     #profileBtns{
-       /* top: 8px;*/
+        /* top: 8px;*/
     }
 }
 .ns-intec-universe.c-sale-basket-small.c-sale-basket-small-icons-1 .sale-basket-small-tab-counter{
@@ -939,8 +942,8 @@ a.mobile-menu__call-btn{
 
 #top_header-auth_reg-btns--wrapper{
     display: flex;
-    flex-direction: row;
     gap: 5px;
+    align-items: center;
 
     /*position: relative;
     top: -7px;*/
@@ -955,10 +958,10 @@ a.mobile-menu__call-btn{
 }
 #top_header-auth_reg-btns--wrapper a.top_header-btn{
     position: relative;
-    left: -3px;
-    top: -2px;
+    /*left: -3px;
+    top: -2px;*/
 
-    height: 49px;
+    height: 40px;
 
     border-width: 1px;
     padding-top: 15px;
@@ -981,8 +984,8 @@ a.mobile-menu__call-btn{
 }
 #top_header-auth_reg-btns--wrapper a.top_header-btn.reg{
     position: relative;
-    left: 0px;
-    top: -2px;
+    /*left: 0px;
+    top: -2px;*/
 }
 #profile_fields--wrapper{
     position: absolute;
@@ -1061,7 +1064,7 @@ a.mobile-menu__call-btn{
 /* Стили для выпадающего меню профиля */
 #profile_fields--wrapper {
     position: absolute;
-    top: calc(100% + 35.5px);
+    top: calc(100% + 40.3px);
     right: 0px;
     background: #fff;
     border-radius: 0px;
@@ -1177,13 +1180,27 @@ a.mobile-menu__call-btn{
     animation: slideInRight 0.3s ease forwards;
 }
 
-#profile_fields--wrapper .widget:nth-child(1) { animation-delay: 0.05s; }
-#profile_fields--wrapper .widget:nth-child(2) { animation-delay: 0.1s; }
-#profile_fields--wrapper .widget:nth-child(3) { animation-delay: 0.15s; }
-#profile_fields--wrapper .widget:nth-child(4) { animation-delay: 0.2s; }
-#profile_fields--wrapper .widget:nth-child(5) { animation-delay: 0.25s; }
-#profile_fields--wrapper .widget:nth-child(6) { animation-delay: 0.3s; }
-#profile_fields--wrapper .widget:nth-child(7) { animation-delay: 0.35s; }
+#profile_fields--wrapper .widget:nth-child(1) {
+    animation-delay: 0.05s;
+}
+#profile_fields--wrapper .widget:nth-child(2) {
+    animation-delay: 0.1s;
+}
+#profile_fields--wrapper .widget:nth-child(3) {
+    animation-delay: 0.15s;
+}
+#profile_fields--wrapper .widget:nth-child(4) {
+    animation-delay: 0.2s;
+}
+#profile_fields--wrapper .widget:nth-child(5) {
+    animation-delay: 0.25s;
+}
+#profile_fields--wrapper .widget:nth-child(6) {
+    animation-delay: 0.3s;
+}
+#profile_fields--wrapper .widget:nth-child(7) {
+    animation-delay: 0.35s;
+}
 
 @keyframes slideInRight {
     to {
