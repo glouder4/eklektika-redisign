@@ -1,0 +1,13 @@
+.our-dealers--list{
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+.our-dealers--list--column,
+.our-dealers-section{
+    display: flex;
+    flex-direction: column;
+}
+.our-dealers-section{
+    gap: 25px;
+}

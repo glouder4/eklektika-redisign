@@ -448,85 +448,38 @@ class OnlineServiceUserProfileEditComponent extends CBitrixComponent implements 
         if (empty($updateFields)) {
             return ['success' => false, 'error' => 'Нет данных для обновления'];
         }
+
+
+
+        $userObject = $this->getUserData($userId);
+        if( isset($userObject['UF_B24_USER_ID']) && !empty($userObject['UF_B24_USER_ID']) ){
+            sendRequestB24("crm.contact.update", [
+                "id" => $this->getUserData($userId)['UF_B24_USER_ID'],
+                "fields" => [
+                    'NAME' => $fields['NAME'],
+                    'LAST_NAME' => $fields['LAST_NAME'],
+                    'POST' => $fields['WORK_POSITION'],
+                    'PHONE' => [[
+                        "VALUE" => $fields['PERSONAL_PHONE'],
+                        "VALUE_TYPE" => "WORK"
+                    ]],
+                    'EMAIL' => [ [
+                        "VALUE" => $fields['EMAIL'],
+                        "VALUE_TYPE" => "WORK"
+                    ]]
+                ]
+            ]);
+        }
         
-        // Обновляем поля пользователя в Битрикс
+        // Обновляем поля пользователя
         $user = new CUser;
         $result = $user->Update($userId, $updateFields);
-        
-        if (!$result) {
+
+        if ($result) {
+            return ['success' => true, 'message' => 'Профиль успешно обновлен'];
+        } else {
             return ['success' => false, 'error' => $user->LAST_ERROR ?: 'Ошибка при сохранении'];
         }
-
-        // Синхронизация с B24 (только если у пользователя есть связь с B24)
-        $userObject = $this->getUserData($userId);
-        if (isset($userObject['UF_B24_USER_ID']) && !empty($userObject['UF_B24_USER_ID'])) {
-            $b24Fields = [];
-            
-            // Формируем только те поля, которые были изменены
-            if (isset($fields['NAME'])) {
-                $b24Fields['NAME'] = $fields['NAME'];
-            }
-            if (isset($fields['LAST_NAME'])) {
-                $b24Fields['LAST_NAME'] = $fields['LAST_NAME'];
-            }
-            if (isset($fields['WORK_POSITION'])) {
-                $b24Fields['POST'] = $fields['WORK_POSITION'];
-            }
-            
-            // Телефоны - собираем все доступные
-            $phones = [];
-            if (isset($fields['PERSONAL_PHONE']) && !empty($fields['PERSONAL_PHONE'])) {
-                $phones[] = [
-                    "VALUE" => $fields['PERSONAL_PHONE'],
-                    "VALUE_TYPE" => "MOBILE"
-                ];
-            }
-            if (isset($fields['WORK_PHONE']) && !empty($fields['WORK_PHONE'])) {
-                $phones[] = [
-                    "VALUE" => $fields['WORK_PHONE'],
-                    "VALUE_TYPE" => "WORK"
-                ];
-            }
-            if (isset($fields['PERSONAL_MOBILE']) && !empty($fields['PERSONAL_MOBILE'])) {
-                $phones[] = [
-                    "VALUE" => $fields['PERSONAL_MOBILE'],
-                    "VALUE_TYPE" => "MOBILE"
-                ];
-            }
-            if (!empty($phones)) {
-                $b24Fields['PHONE'] = $phones;
-            }
-            
-            // Email
-            if (isset($fields['EMAIL']) && !empty($fields['EMAIL'])) {
-                $b24Fields['EMAIL'] = [[
-                    "VALUE" => $fields['EMAIL'],
-                    "VALUE_TYPE" => "WORK"
-                ]];
-            }
-            
-            // Отправляем в B24 только если есть что обновлять
-            if (!empty($b24Fields)) {
-                try {
-                    $b24Response = sendRequestB24("crm.contact.update", [
-                        "id" => $userObject['UF_B24_USER_ID'],
-                        "fields" => $b24Fields
-                    ]);
-                    
-                    // Логируем результат (опционально)
-                    if (isset($b24Response['error'])) {
-                        // Ошибка синхронизации с B24, но данные на сайте уже сохранены
-                        // Можно залогировать для мониторинга
-                        error_log("B24 sync error for user {$userId}: " . print_r($b24Response['error'], true));
-                    }
-                } catch (\Exception $e) {
-                    // Ошибка не критична - данные уже сохранены на сайте
-                    error_log("B24 sync exception for user {$userId}: " . $e->getMessage());
-                }
-            }
-        }
-
-        return ['success' => true, 'message' => 'Профиль успешно обновлен'];
     }
 
     /**

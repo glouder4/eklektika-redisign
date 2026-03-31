@@ -166,6 +166,10 @@ a:active,
 
     border: 3px solid #57B0EA
 }
+.menu-desktop-link[disabled]{
+    opacity: 0.6;
+    background: #f1f1f1;
+}
 .menu-desktop-link:hover,
 .menu-desktop-link:focus,
 .menu-desktop-link:active{

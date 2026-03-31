@@ -65,6 +65,7 @@ $APPLICATION->SetTitle("Контакты");
                             <a href="tel:+&nbsp;7 (495) 129-53-72" class="contacts--map_data--item_description-phone">+&nbsp;7 (495) 129-53-72</a>
                         </div>
                     </div>-->
+
                     <!-- <div class="contacts--map_data--item">
                         <div class="contacts--map_data--item--additional_info">
                             <a href="mailto:office@yomerch.ru" class="contacts--map_data--item_description-email">office@yomerch.ru</a>
@@ -72,6 +73,7 @@ $APPLICATION->SetTitle("Контакты");
                             <span>9:30 - 18:00 (кроме сб.,вс.)</span>
                         </div>
                     </div> -->
+
                     <?/*
                     <div class="contacts--map_data--item">
                         <div class="contacts--map_data--item--actions">
@@ -244,7 +246,17 @@ $APPLICATION->SetTitle("Контакты");
             </div>
         </div>
     </div>
-
+    <?$APPLICATION->IncludeComponent(
+        "bitrix:main.include",
+        "",
+        Array(
+            "AREA_FILE_SHOW" => "file",
+            "AREA_FILE_SUFFIX" => "inc",
+            "EDIT_TEMPLATE" => "",
+            "PATH" => "/include/footer/banner.php"
+        )
+    );?>
+    <?/*
     <?$APPLICATION->IncludeComponent(
         "bitrix:form.result.new",
         "onlineservice-feedback-form-type-3",
@@ -267,4 +279,5 @@ $APPLICATION->SetTitle("Контакты");
             "WEB_FORM_ID" => "2"
         )
     );?>
+    */?>
 </main>

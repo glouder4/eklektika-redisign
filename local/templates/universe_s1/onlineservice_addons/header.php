@@ -1,32 +1,37 @@
 <?php
-    use Bitrix\Main\Page\Asset;
-    Asset::getInstance()->addCss("/local/templates/universe_s1/onlineservice_addons/styles/template.css");
-    
 
+use Bitrix\Main\Page\Asset;
+
+Asset::getInstance()->addCss("/local/templates/universe_s1/onlineservice_addons/styles/template.css");
+
+//if ($_REQUEST['css'] == 'y') {
     Asset::getInstance()->addCss("/local/templates/onlineservice-custom-template/styles/header_old.css");
     Asset::getInstance()->addCss("/local/templates/onlineservice-custom-template/styles/header_custom.css");    
+//} else {
+//    Asset::getInstance()->addCss("/local/templates/universe_s1/onlineservice_addons/styles/header.css");
+//}
+global $USER;
+if ($USER->IsAuthorized()) {
+    $asset->addCss("/local/templates/onlineservice-custom-template/styles/header_more.css");
+}    
+    
 
-    //Asset::getInstance()->addCss("/local/templates/universe_s1/onlineservice_addons/styles/header.css");
+Asset::getInstance()->addCss("/local/templates/universe_s1/onlineservice_addons/styles/jquery.fancybox.css");
 
+Asset::getInstance()->addCss("/local/templates/universe_s1/onlineservice_addons/styles/footer.css");
 
-    Asset::getInstance()->addCss("/local/templates/universe_s1/onlineservice_addons/styles/jquery.fancybox.css");
+Asset::getInstance()->addJs("/local/templates/universe_s1/onlineservice_addons/scripts/template.js", true);
+Asset::getInstance()->addJs("/local/templates/universe_s1/onlineservice_addons/scripts/header.js", true);
 
-
-    Asset::getInstance()->addCss("/local/templates/universe_s1/onlineservice_addons/styles/footer.css");
-
-    Asset::getInstance()->addJs("/local/templates/universe_s1/onlineservice_addons/scripts/template.js",true);
-    Asset::getInstance()->addJs("/local/templates/universe_s1/onlineservice_addons/scripts/header.js",true);
-
-    Asset::getInstance()->addJs("/local/templates/universe_s1/onlineservice_addons/scripts/jquery.fancybox.min.js",true);
-
+Asset::getInstance()->addJs("/local/templates/universe_s1/onlineservice_addons/scripts/jquery.fancybox.min.js", true);
 
 if ($APPLICATION->GetCurPage(false) === '/'):
     Asset::getInstance()->addCss("/local/templates/universe_s1/onlineservice_addons/components/mainpage/slider/styles/owl.carousel.min.css");
     Asset::getInstance()->addCss("/local/templates/universe_s1/onlineservice_addons/components/mainpage/slider/styles/styles.css");
 //<link rel="stylesheet" href="./components/mainpage/slider/styles/owl.carousel.min.css">
 //    <link rel="stylesheet" href="./components/mainpage/slider/styles/styles.css">
-    Asset::getInstance()->addJs("/local/templates/universe_s1/onlineservice_addons/components/mainpage/slider/scripts/owl.carousel.min.js",true);
-    Asset::getInstance()->addJs("/local/templates/universe_s1/onlineservice_addons/components/mainpage/slider/scripts/scripts.js",true);
+    Asset::getInstance()->addJs("/local/templates/universe_s1/onlineservice_addons/components/mainpage/slider/scripts/owl.carousel.min.js", true);
+    Asset::getInstance()->addJs("/local/templates/universe_s1/onlineservice_addons/components/mainpage/slider/scripts/scripts.js", true);
 
 endif;
 if ($APPLICATION->GetCurPage(false) === '/help/brands/'):
@@ -41,7 +46,7 @@ if ($APPLICATION->GetCurPage(false) === '/company/contacts/'):
     Asset::getInstance()->addCss("/local/templates/onlineservice-custom-template/components/contacts/accordion/styles/styles.css");
     Asset::getInstance()->addCss("/local/templates/onlineservice-custom-template/components/contacts/requisites/styles/styles.css");
 
-    Asset::getInstance()->addJs("/local/templates/onlineservice-custom-template/components/contacts/accordion/scripts/script.js",true);
+    Asset::getInstance()->addJs("/local/templates/onlineservice-custom-template/components/contacts/accordion/scripts/script.js", true);
 endif;
 if ($APPLICATION->GetCurPage(false) === '/dostavka/'):
     Asset::getInstance()->addCss("/local/templates/onlineservice-custom-template/components/dostavka/styles/styles.css");
@@ -65,7 +70,6 @@ endif;
 if ($APPLICATION->GetCurPage(false) === '/personal/profile/registration.php'):
     Asset::getInstance()->addCss("/local/templates/onlineservice-custom-template/components/diler-registration/styles/styles.css");
 
-    Asset::getInstance()->addJs("/local/templates/onlineservice-custom-template/scripts/jquery.maskedinput.min.js",true);
+    Asset::getInstance()->addJs("/local/templates/onlineservice-custom-template/scripts/jquery.maskedinput.min.js", true);
 endif;
-
 ?>
