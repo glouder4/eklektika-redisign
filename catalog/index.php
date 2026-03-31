@@ -143,7 +143,7 @@ $APPLICATION->SetTitle("Каталог товаров");
 		"COMPARE_ELEMENT_SORT_ORDER" => "asc",
 		"PRICE_CODE" => array(
 			0 => "Оптовая цена",
-			1 => "Рекламная цена",
+			1 => "Рекламная цена", 
 		),
 		"USE_PRICE_COUNT" => "Y",
 		"SHOW_PRICE_COUNT" => "1",

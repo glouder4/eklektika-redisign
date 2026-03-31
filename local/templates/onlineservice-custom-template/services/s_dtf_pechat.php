@@ -472,10 +472,10 @@ $GLOBALS["OS_BREADCRUMBS"] = [
     );?>
     <?/*
     <?$APPLICATION->IncludeComponent(
-        "bitrix:form.result.new",
-        "onlineservice-feedback-form-type-3",
-        Array(
-            "IMAGE" => 2,
+        "bitrix:form.result.new", 
+        "onlineservice-feedback-form-type-2", 
+        array(
+            "IMAGE" => "2",
             "CACHE_TIME" => "3600",
             "CACHE_TYPE" => "A",
             "CHAIN_ITEM_LINK" => "",
@@ -487,12 +487,14 @@ $GLOBALS["OS_BREADCRUMBS"] = [
             "SEF_MODE" => "N",
             "SUCCESS_URL" => "",
             "USE_EXTENDED_ERRORS" => "N",
-            "VARIABLE_ALIASES" => Array(
+            "WEB_FORM_ID" => "2",
+            "COMPONENT_TEMPLATE" => "onlineservice-feedback-form-type-2",
+            "VARIABLE_ALIASES" => array(
+                "WEB_FORM_ID" => "WEB_FORM_ID",
                 "RESULT_ID" => "RESULT_ID",
-                "WEB_FORM_ID" => "WEB_FORM_ID"
-            ),
-            "WEB_FORM_ID" => "2"
-        )
+            )
+        ),
+        false
     );?>
     */?>
 </main>

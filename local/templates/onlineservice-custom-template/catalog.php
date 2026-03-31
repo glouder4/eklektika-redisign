@@ -72,11 +72,11 @@ if( !$pageSettings )
                             <p>Приобретаете продукцию для&nbsp;своей компании?<br/>Обратитесь к&nbsp;одному из&nbsp;наших дилеров!</p>
                         </div>
                         <div class="cards-list-item--action">
-                            <a href="/buy/our-dealers/" class="cards-list-item--action_btn" style="background-color: #80E0A7;">Наши дилеры</a>
+                            <a href="/dealers/" class="cards-list-item--action_btn" style="background-color: #80E0A7;">Наши дилеры</a>
                         </div>
                     </div>
                 </div>
-                <div class="cards-list-item--wrapper">
+                <!--<div class="cards-list-item--wrapper">
                     <div class="cards-list-item">
                         <div class="cards-list-item--title">
                             <h4 class="title">  Хочу купить для себя</h4>
@@ -88,7 +88,7 @@ if( !$pageSettings )
                             <a href="/to-purchase/" class="cards-list-item--action_btn" style="background-color: #80E0A7;">К покупкам</a>
                         </div>
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
     </div>

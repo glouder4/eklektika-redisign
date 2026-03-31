@@ -50,8 +50,14 @@
     text-decoration: none;
     display: block;
 }
-.element-name:hover {
+.element-name:hover,
+.element-name:focus,
+.element-name:active{
     color: #222222 !important;
+}
+.element-name.hoverable:hover{
+    color: #744A9E !important;
+    text-decoration: underline;
 }
 .element-preview {
     font-size: 14px;

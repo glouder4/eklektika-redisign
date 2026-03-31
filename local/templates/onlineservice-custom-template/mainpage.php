@@ -1,17 +1,32 @@
 <?php
-if(!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
+if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true)
     die();
 
 use Bitrix\Main\Page\Asset;
 
 // Подключаем стили и скрипты кастомного шаблона
 $asset = Asset::getInstance();
+
 $asset->addCss("/local/templates/onlineservice-custom-template/styles/template.css");
-$asset->addCss("/local/templates/onlineservice-custom-template/styles/header.css");
+
+//global $USER;
+//if ($_REQUEST['css'] == 'y') {
+$asset->addCss("/local/templates/onlineservice-custom-template/styles/header_old.css");
+$asset->addCss("/local/templates/onlineservice-custom-template/styles/header_custom.css");
+//} else {
+//    $asset->addCss("/local/templates/onlineservice-custom-template/styles/header.css");
+//}
+
+global $USER;
+if ($USER->IsAuthorized()) {
+    $asset->addCss("/local/templates/onlineservice-custom-template/styles/header_more.css");
+}
+
 $asset->addCss("/local/templates/onlineservice-custom-template/styles/footer.css");
 
 $asset->addJs("/local/templates/onlineservice-custom-template/scripts/jquery.min.js", false);
 $asset->addJs("/local/templates/onlineservice-custom-template/scripts/template.js", true);
+
 $asset->addJs("/local/templates/onlineservice-custom-template/scripts/header.js", true);
 
 $asset->addCss("/local/templates/onlineservice-custom-template/components/mainpage/slider/styles/owl.carousel.min.css");
@@ -27,140 +42,147 @@ $APPLICATION->SetTitle('ЙО!каталог');
 ?>
 
 <main class="main-content">
-    <?$APPLICATION->IncludeComponent(
-        "intec.universe:main.slider",
-        "onlineservice-template.1.custom",
-        Array(
-            "ADDITIONAL_SHOW" => "N",
-            "BUTTONS_BACK_SHOW" => "N",
-            "BUTTON_SHOW" => "Y",
-            "BUTTON_VIEW" => "1",
-            "CACHE_TIME" => "0",
-            "CACHE_TYPE" => "A",
-            "DESCRIPTION_SHOW" => "Y",
-            "DESCRIPTION_VIEW" => "1",
-            "ELEMENTS_COUNT" => "5",
-            "HEADER_H1" => "N",
-            "HEADER_OVER_SHOW" => "N",
-            "HEADER_SHOW" => "Y",
-            "HEADER_VIEW" => "1",
-            "HEIGHT" => "600",
-            "IBLOCK_ID" => "1",
-            "IBLOCK_TYPE" => "content",
-            "LAZYLOAD_USE" => "N",
-            "MOBILE_BLOCK_SEPARATED" => "N",
-            "MOBILE_PICTURE_USE" => "Y",
-            "ORDER_BY" => "ASC",
-            "ORDER_SHOW" => "N",
-            "PICTURE_SHOW" => "N",
-            "PRODUCT_USE" => "N",
-            "PROPERTY_ADDITIONAL" => "ADDITIONAL",
-            "PROPERTY_BUTTON_SHOW" => "BUTTON_SHOW",
-            "PROPERTY_BUTTON_TEXT" => "BUTTON_TEXT",
-            "PROPERTY_DESCRIPTION" => "DESCRIPTION",
-            "PROPERTY_FADE" => "BACKGROUND_FADE",
-            "PROPERTY_HEADER" => "TITLE",
-            "PROPERTY_HEADER_OVER" => "HEADER_OVER",
-            "PROPERTY_LINK" => "LINK",
-            "PROPERTY_LINK_BLANK" => "LINK_BLANK",
-            "PROPERTY_MOBILE_PICTURE" => "PICTURE_MOBILE",
-            "PROPERTY_PICTURE" => "PICTURE",
-            "PROPERTY_PICTURE_ALIGN_VERTICAL" => "PICTURE_ALIGN_VERTICAL",
-            "PROPERTY_SCHEME" => "TEXT_DARK",
-            "PROPERTY_TEXT_ALIGN" => "TEXT_ALIGN",
-            "PROPERTY_TEXT_HALF" => "TEXT_HALF",
-            "PROPERTY_TEXT_POSITION" => "TEXT_POSITION",
-            "PROPERTY_VIDEO" => "BACKGROUND_VIDEO",
-            "PROPERTY_VIDEO_FILE_MP4" => "BACKGROUND_VIDEO_FILE_MP4",
-            "PROPERTY_VIDEO_FILE_OGV" => "BACKGROUND_VIDEO_FILE_OGV",
-            "PROPERTY_VIDEO_FILE_WEBM" => "BACKGROUND_VIDEO_FILE_WEBM",
-            "SECTIONS" => array("", ""),
-            "SECTIONS_MODE" => "id",
-            "SLIDER_AUTO_HOVER" => "Y",
-            "SLIDER_AUTO_TIME" => "3000",
-            "SLIDER_AUTO_USE" => "Y",
-            "SLIDER_DOTS_SHOW" => "Y",
-            "SLIDER_DOTS_VIEW" => "1",
-            "SLIDER_LOOP" => "Y",
-            "SLIDER_NAV_SHOW" => "Y",
-            "SLIDER_NAV_VIEW" => "1",
-            "SORT_BY" => "SORT",
-            "VIDEO_SHOW" => "N"
-        )
-    );?>
+    <?
+    $APPLICATION->IncludeComponent(
+            "intec.universe:main.slider",
+            "onlineservice-template.1.custom",
+            array(
+                "ADDITIONAL_SHOW" => "N",
+                "BUTTONS_BACK_SHOW" => "N",
+                "BUTTON_SHOW" => "Y",
+                "BUTTON_VIEW" => "1",
+                "CACHE_TIME" => "0",
+                "CACHE_TYPE" => "A",
+                "DESCRIPTION_SHOW" => "Y",
+                "DESCRIPTION_VIEW" => "1",
+                "ELEMENTS_COUNT" => "5",
+                "HEADER_H1" => "N",
+                "HEADER_OVER_SHOW" => "N",
+                "HEADER_SHOW" => "Y",
+                "HEADER_VIEW" => "1",
+                "HEIGHT" => "600",
+                "IBLOCK_ID" => "1",
+                "IBLOCK_TYPE" => "content",
+                "LAZYLOAD_USE" => "N",
+                "MOBILE_BLOCK_SEPARATED" => "N",
+                "MOBILE_PICTURE_USE" => "Y",
+                "ORDER_BY" => "ASC",
+                "ORDER_SHOW" => "N",
+                "PICTURE_SHOW" => "N",
+                "PRODUCT_USE" => "N",
+                "PROPERTY_ADDITIONAL" => "ADDITIONAL",
+                "PROPERTY_BUTTON_SHOW" => "BUTTON_SHOW",
+                "PROPERTY_BUTTON_TEXT" => "BUTTON_TEXT",
+                "PROPERTY_DESCRIPTION" => "DESCRIPTION",
+                "PROPERTY_FADE" => "BACKGROUND_FADE",
+                "PROPERTY_HEADER" => "TITLE",
+                "PROPERTY_HEADER_OVER" => "HEADER_OVER",
+                "PROPERTY_LINK" => "LINK",
+                "PROPERTY_LINK_BLANK" => "LINK_BLANK",
+                "PROPERTY_MOBILE_PICTURE" => "PICTURE_MOBILE",
+                "PROPERTY_PICTURE" => "PICTURE",
+                "PROPERTY_PICTURE_ALIGN_VERTICAL" => "PICTURE_ALIGN_VERTICAL",
+                "PROPERTY_SCHEME" => "TEXT_DARK",
+                "PROPERTY_TEXT_ALIGN" => "TEXT_ALIGN",
+                "PROPERTY_TEXT_HALF" => "TEXT_HALF",
+                "PROPERTY_TEXT_POSITION" => "TEXT_POSITION",
+                "PROPERTY_VIDEO" => "BACKGROUND_VIDEO",
+                "PROPERTY_VIDEO_FILE_MP4" => "BACKGROUND_VIDEO_FILE_MP4",
+                "PROPERTY_VIDEO_FILE_OGV" => "BACKGROUND_VIDEO_FILE_OGV",
+                "PROPERTY_VIDEO_FILE_WEBM" => "BACKGROUND_VIDEO_FILE_WEBM",
+                "SECTIONS" => array(
+                    0 => "",
+                    1 => "",
+                ),
+                "SECTIONS_MODE" => "id",
+                "SLIDER_AUTO_HOVER" => "Y",
+                "SLIDER_AUTO_TIME" => "5000",
+                "SLIDER_AUTO_USE" => "Y",
+                "SLIDER_DOTS_SHOW" => "Y",
+                "SLIDER_DOTS_VIEW" => "1",
+                "SLIDER_LOOP" => "Y",
+                "SLIDER_NAV_SHOW" => "Y",
+                "SLIDER_NAV_VIEW" => "1",
+                "SORT_BY" => "SORT",
+                "VIDEO_SHOW" => "N",
+                "COMPONENT_TEMPLATE" => "onlineservice-template.1.custom"
+            ),
+            false
+    );
+    ?>
 
-    <?/*$APPLICATION->IncludeComponent(
-        "bitrix:news.list",
-        "onlineservice-undersliderpromo.news.list",
-        array(
-            "ACTIVE_DATE_FORMAT" => "d.m.Y",
-            "ADD_SECTIONS_CHAIN" => "N",
-            "AJAX_MODE" => "N",
-            "AJAX_OPTION_ADDITIONAL" => "",
-            "AJAX_OPTION_HISTORY" => "N",
-            "AJAX_OPTION_JUMP" => "N",
-            "AJAX_OPTION_STYLE" => "Y",
-            "CACHE_FILTER" => "N",
-            "CACHE_GROUPS" => "Y",
-            "CACHE_TIME" => "36000000",
-            "CACHE_TYPE" => "A",
-            "CHECK_DATES" => "Y",
-            "DETAIL_URL" => "",
-            "DISPLAY_BOTTOM_PAGER" => "Y",
-            "DISPLAY_DATE" => "N",
-            "DISPLAY_NAME" => "Y",
-            "DISPLAY_PICTURE" => "Y",
-            "DISPLAY_PREVIEW_TEXT" => "Y",
-            "DISPLAY_TOP_PAGER" => "N",
-            "FIELD_CODE" => array(
-                0 => "",
-                1 => "",
-            ),
-            "FILTER_NAME" => "",
-            "HIDE_LINK_WHEN_NO_DETAIL" => "N",
-            "IBLOCK_ID" => "22",
-            "IBLOCK_TYPE" => "content",
-            "INCLUDE_IBLOCK_INTO_CHAIN" => "N",
-            "INCLUDE_SUBSECTIONS" => "N",
-            "MESSAGE_404" => "",
-            "NEWS_COUNT" => "4",
-            "PAGER_BASE_LINK_ENABLE" => "N",
-            "PAGER_DESC_NUMBERING" => "N",
-            "PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
-            "PAGER_SHOW_ALL" => "N",
-            "PAGER_SHOW_ALWAYS" => "N",
-            "PAGER_TEMPLATE" => ".default",
-            "PAGER_TITLE" => "Новости",
-            "PARENT_SECTION" => "",
-            "PARENT_SECTION_CODE" => "",
-            "PREVIEW_TRUNCATE_LEN" => "",
-            "PROPERTY_CODE" => array(
-                0 => "MOBILE_BANNER",
-                1 => "",
-            ),
-            "SET_BROWSER_TITLE" => "N",
-            "SET_LAST_MODIFIED" => "N",
-            "SET_META_DESCRIPTION" => "N",
-            "SET_META_KEYWORDS" => "N",
-            "SET_STATUS_404" => "N",
-            "SET_TITLE" => "N",
-            "SHOW_404" => "N",
-            "SORT_BY1" => "SORT",
-            "SORT_BY2" => "ID",
-            "SORT_ORDER1" => "ASC",
-            "SORT_ORDER2" => "ASC",
-            "STRICT_SECTION_CHECK" => "N",
-            "COMPONENT_TEMPLATE" => "onlineservice-undersliderpromo.news.list",
-            "LAZYLOAD_USE" => "N",
-            "PROPERTY_TAGS" => "",
-            "LINK_BLANK" => "N",
-            "DELIMITER_SHOW" => "N",
-            "IMAGE_SHOW" => "N",
-            "PREVIEW_SHOW" => "N",
-            "DATE_SHOW" => "N"
-        ),
-        false
-    );*/?>
+    <? /* $APPLICATION->IncludeComponent(
+      "bitrix:news.list",
+      "onlineservice-undersliderpromo.news.list",
+      array(
+      "ACTIVE_DATE_FORMAT" => "d.m.Y",
+      "ADD_SECTIONS_CHAIN" => "N",
+      "AJAX_MODE" => "N",
+      "AJAX_OPTION_ADDITIONAL" => "",
+      "AJAX_OPTION_HISTORY" => "N",
+      "AJAX_OPTION_JUMP" => "N",
+      "AJAX_OPTION_STYLE" => "Y",
+      "CACHE_FILTER" => "N",
+      "CACHE_GROUPS" => "Y",
+      "CACHE_TIME" => "36000000",
+      "CACHE_TYPE" => "A",
+      "CHECK_DATES" => "Y",
+      "DETAIL_URL" => "",
+      "DISPLAY_BOTTOM_PAGER" => "Y",
+      "DISPLAY_DATE" => "N",
+      "DISPLAY_NAME" => "Y",
+      "DISPLAY_PICTURE" => "Y",
+      "DISPLAY_PREVIEW_TEXT" => "Y",
+      "DISPLAY_TOP_PAGER" => "N",
+      "FIELD_CODE" => array(
+      0 => "",
+      1 => "",
+      ),
+      "FILTER_NAME" => "",
+      "HIDE_LINK_WHEN_NO_DETAIL" => "N",
+      "IBLOCK_ID" => "22",
+      "IBLOCK_TYPE" => "content",
+      "INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+      "INCLUDE_SUBSECTIONS" => "N",
+      "MESSAGE_404" => "",
+      "NEWS_COUNT" => "4",
+      "PAGER_BASE_LINK_ENABLE" => "N",
+      "PAGER_DESC_NUMBERING" => "N",
+      "PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
+      "PAGER_SHOW_ALL" => "N",
+      "PAGER_SHOW_ALWAYS" => "N",
+      "PAGER_TEMPLATE" => ".default",
+      "PAGER_TITLE" => "Новости",
+      "PARENT_SECTION" => "",
+      "PARENT_SECTION_CODE" => "",
+      "PREVIEW_TRUNCATE_LEN" => "",
+      "PROPERTY_CODE" => array(
+      0 => "MOBILE_BANNER",
+      1 => "",
+      ),
+      "SET_BROWSER_TITLE" => "N",
+      "SET_LAST_MODIFIED" => "N",
+      "SET_META_DESCRIPTION" => "N",
+      "SET_META_KEYWORDS" => "N",
+      "SET_STATUS_404" => "N",
+      "SET_TITLE" => "N",
+      "SHOW_404" => "N",
+      "SORT_BY1" => "SORT",
+      "SORT_BY2" => "ID",
+      "SORT_ORDER1" => "ASC",
+      "SORT_ORDER2" => "ASC",
+      "STRICT_SECTION_CHECK" => "N",
+      "COMPONENT_TEMPLATE" => "onlineservice-undersliderpromo.news.list",
+      "LAZYLOAD_USE" => "N",
+      "PROPERTY_TAGS" => "",
+      "LINK_BLANK" => "N",
+      "DELIMITER_SHOW" => "N",
+      "IMAGE_SHOW" => "N",
+      "PREVIEW_SHOW" => "N",
+      "DATE_SHOW" => "N"
+      ),
+      false
+      ); */ ?>
 
     <div class="container">
         <div class="categories-slider--container-title">
@@ -168,121 +190,120 @@ $APPLICATION->SetTitle('ЙО!каталог');
         </div>
         <div class="categories-slider owl-carousel owl-theme" id="categoriesSlider">
             <?php
-                $arFilter = array(
-                    'IBLOCK_ID' => 43,
-                    'ACTIVE' => 'Y',
-                    'GLOBAL_ACTIVE' => 'Y',
-                    'SECTION_ID' => 0
-                );
-                $arSelect = array(
-                    'ID',
-                    'NAME',
-                    'PICTURE',
-                    'DETAIL_PICTURE',
-                    'SECTION_PAGE_URL',
-                    'UF_SVG',
-                    'UF_IMAGE',
-                    'UF_HOVER_TEMPLATE'
-                );
-                $rsSections = CIBlockSection::GetList(
-                    array('SORT' => 'ASC'),
-                    $arFilter,
-                    false,
-                    $arSelect
-                );
-                $counter = 0;
-                $keyCounter = 1;
-                $columnCounter = 0;
-                while ($arSection = $rsSections->GetNext()) {
-                    $sectionSvg = ( !empty($arSection['UF_SVG']) ) ? CFile::GetPath($arSection['UF_SVG']) : null;
-                    $hoverImage = ( !empty($arSection['UF_IMAGE']) ) ? CFile::GetPath($arSection['UF_IMAGE']) : null;
+            $arFilter = array(
+                'IBLOCK_ID' => 43,
+                'ACTIVE' => 'Y',
+                'GLOBAL_ACTIVE' => 'Y',
+                'SECTION_ID' => 0
+            );
+            $arSelect = array(
+                'ID',
+                'NAME',
+                'PICTURE',
+                'DETAIL_PICTURE',
+                'SECTION_PAGE_URL',
+                'UF_SVG',
+                'UF_IMAGE',
+                'UF_HOVER_TEMPLATE'
+            );
+            $rsSections = CIBlockSection::GetList(
+                            array('SORT' => 'ASC'),
+                            $arFilter,
+                            false,
+                            $arSelect
+            );
+            $counter = 0;
+            $keyCounter = 1;
+            $columnCounter = 0;
+            while ($arSection = $rsSections->GetNext()) {
+                $sectionSvg = (!empty($arSection['UF_SVG']) ) ? CFile::GetPath($arSection['UF_SVG']) : null;
+                $hoverImage = (!empty($arSection['UF_IMAGE']) ) ? CFile::GetPath($arSection['UF_IMAGE']) : null;
 
-                    // Получаем URL изображения раздела
-                    $sectionImage = CFile::GetPath($arSection['PICTURE']);
-                    if (empty($sectionImage)) {
-                        $sectionImage = CFile::GetPath($arSection['DETAIL_PICTURE']);
-                    }
-                    
-                    if ($counter % 3 == 0) {
-                        if ($counter > 0) echo '</div>';
-                        echo '<div class="categories-slider--item">';
-                        $columnCounter++;
-                    }
+                // Получаем URL изображения раздела
+                $sectionImage = CFile::GetPath($arSection['PICTURE']);
+                if (empty($sectionImage)) {
+                    $sectionImage = CFile::GetPath($arSection['DETAIL_PICTURE']);
+                }
 
-                    $isEmptyPicture = false;
-                    if (empty($sectionImage)){
-                        $isEmptyPicture = true;
-                        $sectionImage = SITE_TEMPLATE_PATH.'/images/picture.missing.png';
-                    }
-                    if( empty($sectionSvg) ){
-                        $isEmptyPicture = true;
-                    }
+                if ($counter % 3 == 0) {
+                    if ($counter > 0)
+                        echo '</div>';
+                    echo '<div class="categories-slider--item">';
+                    $columnCounter++;
+                }
+
+                $isEmptyPicture = false;
+                if (empty($sectionImage)) {
+                    $isEmptyPicture = true;
+                    $sectionImage = SITE_TEMPLATE_PATH . '/images/picture.missing.png';
+                }
+                if (empty($sectionSvg)) {
+                    $isEmptyPicture = true;
+                }
+                ?>
+                <?php
+                if ($isEmptyPicture) {
                     ?>
-                    <?php
-                        if ($isEmptyPicture){
-                    ?>
-                        <style>
-                            #categoriesSlider .owl-item:nth-child(<?=$columnCounter;?>) .categories-slider--item_category:nth-of-type(<?=$keyCounter;?>)::before{
-                                content: "<?= str_replace('"', '\\"', html_entity_decode($arSection['NAME'])) ?>";
+                    <style>
+                        #categoriesSlider .owl-item:nth-child(<?= $columnCounter; ?>) .categories-slider--item_category:nth-of-type(<?= $keyCounter; ?>)::before{
+                            content: "<?= str_replace('"', '\\"', html_entity_decode($arSection['NAME'])) ?>";
+                        }
+                        <?php if (strlen($arSection['NAME']) / 2 > 11) { ?>
+                            #categoriesSlider .owl-item:nth-child(<?= $columnCounter; ?>) .categories-slider--item_category:nth-of-type(<?= $keyCounter; ?>)::before{
+                                font-size: 16px;
+                                text-align: center;
                             }
-                            <?php
-                                if( strlen($arSection['NAME'])/2 > 11 ){ ?>
-                                    #categoriesSlider .owl-item:nth-child(<?=$columnCounter;?>) .categories-slider--item_category:nth-of-type(<?=$keyCounter;?>)::before{
-                                        font-size: 16px;
-                                        text-align: center;
-                                    }
-                                    @media(min-width: 1520px){
-                                        #categoriesSlider .owl-item:nth-child(<?=$columnCounter;?>) .categories-slider--item_category:nth-of-type(<?=$keyCounter;?>)::before{
-                                            font-size: 26px;
-                                        }
-                                    }
-                                <?php }
-                            ?>
-                        <?php
-                            if( strlen($arSection['NAME'])/2 > 18 ){ ?>
-                                #categoriesSlider .owl-item:nth-child(<?=$columnCounter;?>) .categories-slider--item_category:nth-of-type(<?=$keyCounter;?>) .categories-slider--item_category-title{
-                                    top: 109px!important;
+                            @media(min-width: 1520px){
+                                #categoriesSlider .owl-item:nth-child(<?= $columnCounter; ?>) .categories-slider--item_category:nth-of-type(<?= $keyCounter; ?>)::before{
+                                    font-size: 26px;
                                 }
+                            }
                         <?php }
                         ?>
-                        </style>
+                        <?php if (strlen($arSection['NAME']) / 2 > 18) { ?>
+                            #categoriesSlider .owl-item:nth-child(<?= $columnCounter; ?>) .categories-slider--item_category:nth-of-type(<?= $keyCounter; ?>) .categories-slider--item_category-title{
+                                top: 109px!important;
+                            }
+                        <?php }
+                        ?>
+                    </style>
                     <?php
-                        }
-
-                        $additional_class = null;
-                        if($isEmptyPicture || $arSection == 7 || empty($sectionSvg)){
-                            $additional_class = "transition-style-alternative-1";
-                        }
-                        if(!$isEmptyPicture && $arSection == 8){
-                            $additional_class = "transition-style-alternative-2";
-                        }
-
-                        if(empty($sectionSvg))
-                            $sectionSvg = $sectionImage;
-
-                        if(empty($hoverImage))
-                            $hoverImage = $sectionImage;
-                    ?>
-                    <a href="<?= $arSection['SECTION_PAGE_URL'] ?>"
-                       class="categories-slider--item_category <?=$additional_class;?>"
-                       style="background-image: url('<?= $hoverImage ?>')"
-                    >
-                        <div class="categories-slider--item_category-image">
-                            <img src="<?= $sectionSvg ?>" alt="<?= $arSection['NAME'] ?>">
-                        </div>
-                        <div class="categories-slider--item_category-title">
-                            <span><?= $arSection['NAME'] ?></span>
-                        </div>
-                    </a>
-                    <?php
-                    $counter++;
-                    $keyCounter++;
-                    if($keyCounter == 4)
-                        $keyCounter = 1;
                 }
-                if ($counter > 0) {
-                    echo '</div>';
+
+                $additional_class = null;
+                if ($isEmptyPicture || $arSection == 7 || empty($sectionSvg)) {
+                    $additional_class = "transition-style-alternative-1";
                 }
+                if (!$isEmptyPicture && $arSection == 8) {
+                    $additional_class = "transition-style-alternative-2";
+                }
+
+                if (empty($sectionSvg))
+                    $sectionSvg = $sectionImage;
+
+                if (empty($hoverImage))
+                    $hoverImage = $sectionImage;
+                ?>
+                <a href="<?= $arSection['SECTION_PAGE_URL'] ?>"
+                   class="categories-slider--item_category <?= $additional_class; ?>"
+                   style="background-image: url('<?= $hoverImage ?>')"
+                   >
+                    <div class="categories-slider--item_category-image">
+                        <img src="<?= $sectionSvg ?>" alt="<?= $arSection['NAME'] ?>">
+                    </div>
+                    <div class="categories-slider--item_category-title">
+                        <span><?= $arSection['NAME'] ?></span>
+                    </div>
+                </a>
+                <?php
+                $counter++;
+                $keyCounter++;
+                if ($keyCounter == 4)
+                    $keyCounter = 1;
+            }
+            if ($counter > 0) {
+                echo '</div>';
+            }
             ?>
         </div>
     </div>
@@ -492,96 +513,100 @@ $APPLICATION->SetTitle('ЙО!каталог');
         </div>
     </div>
 
-    <?/*$APPLICATION->IncludeComponent(
-        "bitrix:news.list",
-        "onlineservice-brands-news.list",
-        Array(
-            "ACTIVE_DATE_FORMAT" => "d.m.Y",
-            "ADD_SECTIONS_CHAIN" => "Y",
-            "AJAX_MODE" => "N",
-            "AJAX_OPTION_ADDITIONAL" => "",
-            "AJAX_OPTION_HISTORY" => "N",
-            "AJAX_OPTION_JUMP" => "N",
-            "AJAX_OPTION_STYLE" => "Y",
-            "CACHE_FILTER" => "N",
-            "CACHE_GROUPS" => "Y",
-            "CACHE_NOTES" => "",
-            "CACHE_TIME" => "36000000",
-            "CACHE_TYPE" => "A",
-            "CHECK_DATES" => "Y",
-            "DETAIL_URL" => "",
-            "DISPLAY_BOTTOM_PAGER" => "N",
-            "DISPLAY_DATE" => "N",
-            "DISPLAY_NAME" => "Y",
-            "DISPLAY_PICTURE" => "Y",
-            "DISPLAY_PREVIEW_TEXT" => "Y",
-            "DISPLAY_TOP_PAGER" => "N",
-            "FIELD_CODE" => array("DETAIL_PICTURE"),
-            "FILTER_NAME" => "",
-            "HIDE_LINK_WHEN_NO_DETAIL" => "N",
-            "IBLOCK_ID" => "39",
-            "IBLOCK_TYPE" => "content",
-            "INCLUDE_IBLOCK_INTO_CHAIN" => "Y",
-            "INCLUDE_SUBSECTIONS" => "N",
-            "MESSAGE_404" => "",
-            "NEWS_COUNT" => "0",
-            "PAGER_BASE_LINK_ENABLE" => "N",
-            "PAGER_DESC_NUMBERING" => "N",
-            "PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
-            "PAGER_SHOW_ALL" => "N",
-            "PAGER_SHOW_ALWAYS" => "N",
-            "PAGER_TEMPLATE" => "onlineservice-brands-news.list",
-            "PAGER_TITLE" => "Новости",
-            "PARENT_SECTION" => "",
-            "PARENT_SECTION_CODE" => "",
-            "PREVIEW_TRUNCATE_LEN" => "",
-            "PROPERTY_CODE" => array("", ""),
-            "SET_BROWSER_TITLE" => "Y",
-            "SET_LAST_MODIFIED" => "N",
-            "SET_META_DESCRIPTION" => "Y",
-            "SET_META_KEYWORDS" => "Y",
-            "SET_STATUS_404" => "N",
-            "SET_TITLE" => "N",
-            "SHOW_404" => "N",
-            "SORT_BY1" => "SORT",
-            "SORT_BY2" => "SORT",
-            "SORT_ORDER1" => "ASC",
-            "SORT_ORDER2" => "ASC",
-            "STRICT_SECTION_CHECK" => "N"
-        )
-    );*/?>
-    <?$APPLICATION->IncludeComponent(
-        "bitrix:main.include",
-        "",
-        Array(
-            "AREA_FILE_SHOW" => "file",
-            "AREA_FILE_SUFFIX" => "inc",
-            "EDIT_TEMPLATE" => "",
-            "PATH" => "/include/footer/banner.php"
-        )
-    );?>
-    <?/*
-    <?$APPLICATION->IncludeComponent(
-        "bitrix:form.result.new",
-        "onlineservice-feedback-form-type-1",
-        Array(
-            "CACHE_TIME" => "3600",
-            "CACHE_TYPE" => "A",
-            "CHAIN_ITEM_LINK" => "",
-            "CHAIN_ITEM_TEXT" => "",
-            "CONSENT_URL" => "",
-            "EDIT_URL" => "result_edit.php",
-            "IGNORE_CUSTOM_TEMPLATE" => "N",
-            "LIST_URL" => "result_list.php",
-            "SEF_MODE" => "N",
-            "SUCCESS_URL" => "",
-            "USE_EXTENDED_ERRORS" => "N",
-            "VARIABLE_ALIASES" => Array(
-                "RESULT_ID" => "RESULT_ID",
-                "WEB_FORM_ID" => "WEB_FORM_ID"
-            ),
-            "WEB_FORM_ID" => "1"
-        )
-    );?>
-    */?>
+    <? /* $APPLICATION->IncludeComponent(
+      "bitrix:news.list",
+      "onlineservice-brands-news.list",
+      Array(
+      "ACTIVE_DATE_FORMAT" => "d.m.Y",
+      "ADD_SECTIONS_CHAIN" => "Y",
+      "AJAX_MODE" => "N",
+      "AJAX_OPTION_ADDITIONAL" => "",
+      "AJAX_OPTION_HISTORY" => "N",
+      "AJAX_OPTION_JUMP" => "N",
+      "AJAX_OPTION_STYLE" => "Y",
+      "CACHE_FILTER" => "N",
+      "CACHE_GROUPS" => "Y",
+      "CACHE_NOTES" => "",
+      "CACHE_TIME" => "36000000",
+      "CACHE_TYPE" => "A",
+      "CHECK_DATES" => "Y",
+      "DETAIL_URL" => "",
+      "DISPLAY_BOTTOM_PAGER" => "N",
+      "DISPLAY_DATE" => "N",
+      "DISPLAY_NAME" => "Y",
+      "DISPLAY_PICTURE" => "Y",
+      "DISPLAY_PREVIEW_TEXT" => "Y",
+      "DISPLAY_TOP_PAGER" => "N",
+      "FIELD_CODE" => array("DETAIL_PICTURE"),
+      "FILTER_NAME" => "",
+      "HIDE_LINK_WHEN_NO_DETAIL" => "N",
+      "IBLOCK_ID" => "39",
+      "IBLOCK_TYPE" => "content",
+      "INCLUDE_IBLOCK_INTO_CHAIN" => "Y",
+      "INCLUDE_SUBSECTIONS" => "N",
+      "MESSAGE_404" => "",
+      "NEWS_COUNT" => "0",
+      "PAGER_BASE_LINK_ENABLE" => "N",
+      "PAGER_DESC_NUMBERING" => "N",
+      "PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
+      "PAGER_SHOW_ALL" => "N",
+      "PAGER_SHOW_ALWAYS" => "N",
+      "PAGER_TEMPLATE" => "onlineservice-brands-news.list",
+      "PAGER_TITLE" => "Новости",
+      "PARENT_SECTION" => "",
+      "PARENT_SECTION_CODE" => "",
+      "PREVIEW_TRUNCATE_LEN" => "",
+      "PROPERTY_CODE" => array("", ""),
+      "SET_BROWSER_TITLE" => "Y",
+      "SET_LAST_MODIFIED" => "N",
+      "SET_META_DESCRIPTION" => "Y",
+      "SET_META_KEYWORDS" => "Y",
+      "SET_STATUS_404" => "N",
+      "SET_TITLE" => "N",
+      "SHOW_404" => "N",
+      "SORT_BY1" => "SORT",
+      "SORT_BY2" => "SORT",
+      "SORT_ORDER1" => "ASC",
+      "SORT_ORDER2" => "ASC",
+      "STRICT_SECTION_CHECK" => "N"
+      )
+      ); */ ?>
+    <?
+    $APPLICATION->IncludeComponent(
+            "bitrix:main.include",
+            "",
+            Array(
+                "AREA_FILE_SHOW" => "file",
+                "AREA_FILE_SUFFIX" => "inc",
+                "EDIT_TEMPLATE" => "",
+                "PATH" => "/include/footer/banner.php"
+            )
+    );
+    ?>
+    <? /*
+      <?
+      $APPLICATION->IncludeComponent(
+      "bitrix:form.result.new",
+      "onlineservice-feedback-form-type-1",
+      Array(
+      "CACHE_TIME" => "3600",
+      "CACHE_TYPE" => "A",
+      "CHAIN_ITEM_LINK" => "",
+      "CHAIN_ITEM_TEXT" => "",
+      "CONSENT_URL" => "",
+      "EDIT_URL" => "result_edit.php",
+      "IGNORE_CUSTOM_TEMPLATE" => "N",
+      "LIST_URL" => "result_list.php",
+      "SEF_MODE" => "N",
+      "SUCCESS_URL" => "",
+      "USE_EXTENDED_ERRORS" => "N",
+      "VARIABLE_ALIASES" => Array(
+      "RESULT_ID" => "RESULT_ID",
+      "WEB_FORM_ID" => "WEB_FORM_ID"
+      ),
+      "WEB_FORM_ID" => "1"
+      )
+      );
+      ?>
+     */ ?>    
 </main>

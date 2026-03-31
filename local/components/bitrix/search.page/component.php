@@ -403,11 +403,6 @@ if($this->InitComponentTemplate($templatePage))
 			}
 		}
 
-		// Сохраняем поисковый запрос для использования в сортировке
-		if (!empty($arResult["REQUEST"]["~QUERY"])) {
-			$GLOBALS['OS_SEARCH_QUERY'] = mb_strtolower(trim($arResult["REQUEST"]["~QUERY"]));
-		}
-
 		$this->ShowComponentTemplate();
 	}
 }
