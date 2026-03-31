@@ -121,7 +121,7 @@ while ($section = $res->GetNext()) {
                                         }
                                         ?>
                                         <li class="element-item" id="<?=$this->GetEditAreaId($arItem['ID']);?>">
-                                            <a href="<?=$link ? $link : "javascript::void(0);"?>" <?=($link) ? "target='_blank'" : "";?> rel="noindex, nofollow" class="element-name">
+                                            <a href="<?=$link ? $link : "javascript::void(0);"?>" <?=($link) ? "target='_blank'" : "";?> rel="noindex, nofollow" class="element-name <?=$link ? "hoverable" : null;?>">
                                                 <?= htmlspecialcharsbx($element['NAME']) ?>
                                             </a>
                                         </li>

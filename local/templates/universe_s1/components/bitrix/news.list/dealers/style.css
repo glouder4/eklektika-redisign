@@ -55,6 +55,10 @@
 .element-name:active{
     color: #222222 !important;
 }
+.element-name.hoverable:hover{
+    color: #744A9E !important;
+    text-decoration: underline;
+}
 .element-preview {
     font-size: 14px;
     color: #6c757d;
