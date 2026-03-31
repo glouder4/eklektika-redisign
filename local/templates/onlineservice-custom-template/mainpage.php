@@ -9,13 +9,9 @@ $asset = Asset::getInstance();
 
 $asset->addCss("/local/templates/onlineservice-custom-template/styles/template.css");
 
-//global $USER;
-//if ($_REQUEST['css'] == 'y') {
 $asset->addCss("/local/templates/onlineservice-custom-template/styles/header_old.css");
 $asset->addCss("/local/templates/onlineservice-custom-template/styles/header_custom.css");
-//} else {
-//    $asset->addCss("/local/templates/onlineservice-custom-template/styles/header.css");
-//}
+
 
 global $USER;
 if ($USER->IsAuthorized()) {

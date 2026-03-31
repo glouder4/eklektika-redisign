@@ -1,1 +1,14 @@
 
+@media (min-width: 1200px) {
+    .header__social-links {
+        margin-right: 182px;
+    }
+}
+
+@media (min-width: 1520px) {
+    .header__social-links {
+        margin-right: 225px;
+        margin-left: auto;
+    }
+}
+
