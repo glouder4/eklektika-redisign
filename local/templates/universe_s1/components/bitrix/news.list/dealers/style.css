@@ -50,7 +50,9 @@
     text-decoration: none;
     display: block;
 }
-.element-name:hover {
+.element-name:hover,
+.element-name:focus,
+.element-name:active{
     color: #222222 !important;
 }
 .element-preview {

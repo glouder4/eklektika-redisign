@@ -72,11 +72,11 @@ if( !$pageSettings )
                             <p>Приобретаете продукцию для&nbsp;своей компании?<br/>Обратитесь к&nbsp;одному из&nbsp;наших дилеров!</p>
                         </div>
                         <div class="cards-list-item--action">
-                            <a href="/buy/our-dealers/" class="cards-list-item--action_btn" style="background-color: #80E0A7;">Наши дилеры</a>
+                            <a href="/dealers/" class="cards-list-item--action_btn" style="background-color: #80E0A7;">Наши дилеры</a>
                         </div>
                     </div>
                 </div>
-                <div class="cards-list-item--wrapper">
+                <!--<div class="cards-list-item--wrapper">
                     <div class="cards-list-item">
                         <div class="cards-list-item--title">
                             <h4 class="title">  Хочу купить для себя</h4>
@@ -88,11 +88,21 @@ if( !$pageSettings )
                             <a href="/to-purchase/" class="cards-list-item--action_btn" style="background-color: #80E0A7;">К покупкам</a>
                         </div>
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
     </div>
-
+    <?$APPLICATION->IncludeComponent(
+        "bitrix:main.include",
+        "",
+        Array(
+            "AREA_FILE_SHOW" => "file",
+            "AREA_FILE_SUFFIX" => "inc",
+            "EDIT_TEMPLATE" => "",
+            "PATH" => "/include/footer/banner.php"
+        )
+    );?>
+    <?/*
     <?$APPLICATION->IncludeComponent(
         "bitrix:form.result.new",
         "onlineservice-feedback-form-type-2",
@@ -115,4 +125,5 @@ if( !$pageSettings )
             "WEB_FORM_ID" => "2"
         )
     );?>
+    */?>
 </main>

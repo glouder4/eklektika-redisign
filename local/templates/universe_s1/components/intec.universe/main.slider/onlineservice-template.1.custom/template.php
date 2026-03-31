@@ -61,7 +61,7 @@ die();*/
         $view_type = $arItem['PROPERTIES']['BANNER_VIEW_TYPE']['VALUE_XML_ID'] ?? "VIEW_1";
 
         ?>
-        <div class="fullscreen-slider--slide">\
+        <div class="fullscreen-slider--slide">
             <?php
                 if( $arItem['PROPERTIES']['IS_BANNER_LINK']['VALUE_XML_ID'] == "YES" ){
                     $targetBlack = $arData['LINK']['BLANK'] ? "target='_blank'" : null;

@@ -15,7 +15,6 @@ use intec\core\helpers\StringHelper;
  * @var array $arData
  * @var InnerTemplate $this
  */
-
 $sTemplateId = $arData['id'];
 $sTemplateType = $arData['type'];
 $bPanelShow = false;
@@ -30,10 +29,9 @@ foreach (['AUTHORIZATION', 'ADDRESS', 'EMAIL'] as $sBlock)
 if ($arMenuInfo['SHOW'])
     $bPanelShow = true;
 
-$bContactsShow =
-    $arResult['ADDRESS']['SHOW']['DESKTOP'] ||
-    $arResult['REGIONALITY']['USE'] ||
-    $arResult['EMAIL']['SHOW']['DESKTOP'];
+$bContactsShow = $arResult['ADDRESS']['SHOW']['DESKTOP'] ||
+        $arResult['REGIONALITY']['USE'] ||
+        $arResult['EMAIL']['SHOW']['DESKTOP'];
 
 if ($bContactsShow)
     $bPanelShow = true;
@@ -41,10 +39,9 @@ if ($bContactsShow)
 foreach (['LOGOTYPE', 'TAGLINE', 'CONTACTS', 'BASKET', 'DELAY', 'COMPARE'] as $sBlock)
     $bContainerShow = $bContainerShow || $arResult[$sBlock]['SHOW']['DESKTOP'];
 
-$bBasketShow =
-    $arResult['BASKET']['SHOW']['DESKTOP'] ||
-    $arResult['DELAY']['SHOW']['DESKTOP'] ||
-    $arResult['COMPARE']['SHOW']['DESKTOP'];
+$bBasketShow = $arResult['BASKET']['SHOW']['DESKTOP'] ||
+        $arResult['DELAY']['SHOW']['DESKTOP'] ||
+        $arResult['COMPARE']['SHOW']['DESKTOP'];
 
 $sMenuPosition = false;
 $sSearchPosition = false;
@@ -89,7 +86,6 @@ if ($arResult['CONTACTS']['SHOW']) {
     $arContacts = $arResult['CONTACTS']['VALUES'];
     $arContact = $arResult['CONTACTS']['SELECTED'];
 }
-
 ?>
 
 <header class="header">
@@ -97,7 +93,7 @@ if ($arResult['CONTACTS']['SHOW']) {
         <div class="container">
             <div class="header__top">
                 <a href="/" rel="nofollow" class="header__logo--link">
-                    <?/*<img src="/local/templates/universe_s1/onlineservice_addons/assets/logo.svg" alt="yoliba logo" class="header__logo">*/?>
+<? /* <img src="/local/templates/universe_s1/onlineservice_addons/assets/logo.svg" alt="yoliba logo" class="header__logo"> */ ?>
                     <img src="/local/templates/universe_s1/onlineservice_addons/assets/white.png" alt="yoliba logo" class="header__logo" style="width: auto;">
                 </a>
                 <div class="header__brand-description">
@@ -111,86 +107,87 @@ if ($arResult['CONTACTS']['SHOW']) {
                                 <div class="intec-grid-item-auto">
                                     <div class="widget-container-phone">
                                         <div class="widget-container-phone-content">
-                                            <?php if ($arResult['CONTACTS']['ADVANCED']) { ?>
-                                                <?php foreach ($arContact as $arContactItem) { ?>
+<?php if ($arResult['CONTACTS']['ADVANCED']) { ?>
+    <?php foreach ($arContact as $arContactItem) { ?>
                                                     <a href="tel:<?= $arContactItem['PHONE']['VALUE'] ?>" class="tel header__social-links-phone" data-block-action="popup.open">
                                                         <span class="value"><?= $arContactItem['PHONE']['DISPLAY'] ?></span>
                                                     </a>
                                                 <?php } ?>
-                                            <?php } else { ?>
-                                                <?php foreach ($arContact as $arContactItem) { ?>
+<?php } else { ?>
+    <?php foreach ($arContact as $arContactItem) { ?>
                                                     <a href="tel:<?= $arContactItem['VALUE'] ?>" class="tel header__social-links-phone" data-block-action="popup.open">
                                                         <span class="value"><?= $arContactItem['DISPLAY'] ?></span>
                                                     </a>
                                                 <?php } ?>
-                                            <?php } ?>
-                                            <?php if (!empty($arContacts)) {
-                                                // Раскомментировать, если нужно штатное выпадающее окно с номерами
-                                                ?>
+<?php } ?>
+<?php
+if (!empty($arContacts)) {
+    // Раскомментировать, если нужно штатное выпадающее окно с номерами
+    ?>
                                                 <!--<div class="widget-container-phone-popup" data-block-element="popup">
                                                     <div class="widget-container-phone-popup-wrapper scrollbar-inner">
-                                                        <?php /*if ($arResult['CONTACTS']['ADVANCED']) {
-                                                            $sScheduleString = '';
-                                                            */?>
-                                                            <?php /*foreach ($arContacts as $arContact) { */?>
+                                                <?php /* if ($arResult['CONTACTS']['ADVANCED']) {
+                                                  $sScheduleString = '';
+                                                 */ ?>
+                                                <?php /* foreach ($arContacts as $arContact) { */ ?>
                                                                 <div class="widget-container-phone-popup-contacts">
-                                                                    <?php /*if (!empty($arContact['PHONE'])) { */?>
-                                                                        <a href="tel:<?php /*= $arContact['PHONE']['VALUE'] */?>" class="tel widget-container-phone-popup-contact phone intec-cl-text-hover">
-                                                                            <span class="value"><?php /*= $arContact['PHONE']['DISPLAY'] */?></span>
+                                                <?php /* if (!empty($arContact['PHONE'])) { */ ?>
+                                                                        <a href="tel:<?php /* = $arContact['PHONE']['VALUE'] */ ?>" class="tel widget-container-phone-popup-contact phone intec-cl-text-hover">
+                                                                            <span class="value"><?php /* = $arContact['PHONE']['DISPLAY'] */ ?></span>
                                                                         </a>
-                                                                    <?php /*} */?>
-                                                                    <?php /*if (!empty($arContact['ADDRESS'])) { */?>
+    <?php /* } */ ?>
+    <?php /* if (!empty($arContact['ADDRESS'])) { */ ?>
                                                                         <div class="widget-container-phone-popup-contact address adr">
-                                                                            <?php /*if (Type::isArray($arContact['ADDRESS'])) { */?>
-                                                                                <?php /*foreach ($arContact['ADDRESS'] as $sValue) { */?>
-                                                                                    <div class="locality"><?php /*= $sValue */?></div>
-                                                                                <?php /*} */?>
-                                                                            <?php /*} else { */?>
-                                                                                <span class="locality"><?php /*= $arContact['ADDRESS'] */?></span>
-                                                                            <?php /*} */?>
+                                                <?php /* if (Type::isArray($arContact['ADDRESS'])) { */ ?>
+                                                <?php /* foreach ($arContact['ADDRESS'] as $sValue) { */ ?>
+                                                                                    <div class="locality"><?php /* = $sValue */ ?></div>
+                                                <?php /* } */ ?>
+                                                <?php /* } else { */ ?>
+                                                                                <span class="locality"><?php /* = $arContact['ADDRESS'] */ ?></span>
+                                                <?php /* } */ ?>
                                                                         </div>
-                                                                    <?php /*} */?>
-                                                                    <?php /*if (!empty($arContact['SCHEDULE'])) { */?>
+                                                <?php /* } */ ?>
+                                                <?php /* if (!empty($arContact['SCHEDULE'])) { */ ?>
                                                                         <div  class="widget-container-phone-popup-contact schedule">
-                                                                            <?php /*if (Type::isArray($arContact['SCHEDULE'])) { */?>
-                                                                                <?php /*foreach ($arContact['SCHEDULE'] as $sValue) { */?>
-                                                                                    <?php /*= $sValue */?>
-                                                                                    <?php /*$sScheduleString .= $sValue.', '; */?>
-                                                                                <?php /*} */?>
-                                                                            <?php /*} else { */?>
-                                                                                <?php /*= $arContact['SCHEDULE'] */?>
-                                                                                <?php /*$sScheduleString .= $arContact['SCHEDULE'].', '; */?>
-                                                                            <?php /*} */?>
+                                                <?php /* if (Type::isArray($arContact['SCHEDULE'])) { */ ?>
+                                                <?php /* foreach ($arContact['SCHEDULE'] as $sValue) { */ ?>
+                                                <?php /* = $sValue */ ?>
+                                                <?php /* $sScheduleString .= $sValue.', '; */ ?>
+                                                <?php /* } */ ?>
+                                                <?php /* } else { */ ?>
+                                                <?php /* = $arContact['SCHEDULE'] */ ?>
+                                                <?php /* $sScheduleString .= $arContact['SCHEDULE'].', '; */ ?>
+                                                <?php /* } */ ?>
                                                                         </div>
-                                                                    <?php /*} */?>
-                                                                    <?php /*if (!empty($arContact['EMAIL'])) { */?>
-                                                                        <a href="mailto:<?php /*= $arContact['EMAIL'] */?>" class="widget-container-phone-popup-contact email intec-cl-text-hover">
-                                                                            <span class="value"><?php /*= $arContact['EMAIL'] */?></span>
+                                                <?php /* } */ ?>
+                                                <?php /* if (!empty($arContact['EMAIL'])) { */ ?>
+                                                                        <a href="mailto:<?php /* = $arContact['EMAIL'] */ ?>" class="widget-container-phone-popup-contact email intec-cl-text-hover">
+                                                                            <span class="value"><?php /* = $arContact['EMAIL'] */ ?></span>
                                                                         </a>
-                                                                    <?php /*} */?>
+    <?php /* } */ ?>
                                                                 </div>
-                                                            <?php /*}
-                                                            $sScheduleString = substr($sScheduleString, 0, (strlen($sScheduleString) - 2));
-                                                            */?>
+                                                <?php /* }
+                                                  $sScheduleString = substr($sScheduleString, 0, (strlen($sScheduleString) - 2));
+                                                 */ ?>
                                                             <span class="workhours">
-                                                                            <span class="value-title" title="<?php /*=$sScheduleString*/?>"></span>
+                                                                            <span class="value-title" title="<?php /* =$sScheduleString */ ?>"></span>
                                                                         </span>
-                                                            <?php
-/*                                                            unset($sScheduleString);
-                                                        } else { */?>
-                                                            <?php /*foreach ($arContacts as $arContact) { */?>
-                                                                <a href="tel:<?php /*= $arContact['VALUE'] */?>" class="tel widget-container-phone-popup-item intec-cl-text-hover">
-                                                                    <?php /*= $arContact['DISPLAY'] */?>
+    <?php /*                                                            unset($sScheduleString);
+      } else { */ ?>
+                                                <?php /* foreach ($arContacts as $arContact) { */ ?>
+                                                                <a href="tel:<?php /* = $arContact['VALUE'] */ ?>" class="tel widget-container-phone-popup-item intec-cl-text-hover">
+                                                <?php /* = $arContact['DISPLAY'] */ ?>
                                                                 </a>
-                                                            <?php /*} */?>
-                                                        <?php /*} */?>
+                                                <?php /* } */ ?>
+                                                <?php /* } */ ?>
                                                     </div>
                                                 </div>-->
                                             <?php } ?>
                                         </div>
-                                        <?php if (!empty($arContacts)) {
-                                            // Раскомментировать, если нужно штатное выпадающее окно с номерами
-                                            ?>
+<?php
+if (!empty($arContacts)) {
+    // Раскомментировать, если нужно штатное выпадающее окно с номерами
+    ?>
                                             <!--<div class="widget-container-phone-arrow far fa-chevron-down" data-block-action="popup.open"></div>-->
                                         <?php } ?>
                                     </div>
@@ -199,13 +196,13 @@ if ($arResult['CONTACTS']['SHOW']) {
                         </div>
                     </div>
                     <div class="header__social-links-icons">
-                        <?/*
-                        <a rel="nofollow" href="#" class="header__social-link">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
-                                <path d="M11 0C17.0753 0 22 4.9247 22 11C22 17.0753 17.0753 22 11 22C9.19604 22.0031 7.42152 21.5603 5.83335 20.7138C5.59655 20.5876 5.32119 20.5493 5.06233 20.6199L1.69186 21.5396C0.945572 21.7432 0.260591 21.0587 0.463725 20.3122L1.38154 16.9397C1.45195 16.6809 1.4135 16.4058 1.28732 16.1691C0.440073 14.5803 -0.00314471 12.8049 1.67955e-05 11C1.67955e-05 4.9247 4.92471 0 11 0ZM7.25121 5.83L7.03121 5.8388C6.88897 5.8486 6.74999 5.88596 6.62201 5.9488C6.50274 6.01646 6.39383 6.10092 6.29861 6.1996C6.16661 6.3239 6.09181 6.43169 6.01151 6.5362C5.60465 7.06519 5.38558 7.71464 5.38891 8.38199C5.39111 8.92099 5.53191 9.44569 5.75191 9.93629C6.20181 10.9285 6.94211 11.979 7.91891 12.9525C8.15431 13.1868 8.38531 13.4222 8.63391 13.6411C9.84768 14.7096 11.294 15.4803 12.8579 15.8917L13.4827 15.9874C13.6862 15.9984 13.8897 15.983 14.0943 15.9731C14.4146 15.9562 14.7273 15.8695 15.0106 15.719C15.1501 15.6468 15.2865 15.5687 15.4194 15.4849C15.4277 15.4796 15.436 15.4742 15.4441 15.4686C15.4634 15.4552 15.5054 15.4255 15.5694 15.378C15.7179 15.268 15.8092 15.1899 15.9324 15.0612C16.0248 14.9659 16.1018 14.8551 16.1634 14.729C16.2492 14.5497 16.335 14.2076 16.3702 13.9227C16.3966 13.7049 16.3889 13.5861 16.3856 13.5124C16.3812 13.3947 16.2833 13.2726 16.1766 13.2209L15.5413 12.936C15.538 12.9345 15.5353 12.9333 15.532 12.9319C15.4613 12.9011 14.5563 12.5064 13.9942 12.2507C13.9329 12.224 13.8673 12.2087 13.8006 12.2056C13.7253 12.1977 13.6493 12.2061 13.5775 12.2302C13.4467 12.2742 13.3216 12.4056 13.231 12.5098C13.1099 12.6491 12.8942 12.9043 12.5103 13.3694C12.4647 13.4307 12.4018 13.4771 12.3297 13.5026C12.2576 13.528 12.1796 13.5314 12.1055 13.5124C12.0338 13.4933 11.9636 13.469 11.8954 13.4398C11.759 13.3826 11.7117 13.3606 11.6182 13.321C10.9867 13.0459 10.4021 12.6736 9.88571 12.2177C9.74711 12.0967 9.61841 11.9647 9.48641 11.8371C9.05368 11.4226 8.67654 10.9538 8.36441 10.4423L8.29951 10.3378C8.2536 10.2672 8.21595 10.1915 8.18731 10.1123C8.15448 9.98528 8.21463 9.87794 8.24194 9.83774C8.24984 9.82611 8.25901 9.81576 8.26846 9.80536C8.3251 9.74299 8.53877 9.50645 8.64601 9.36979C8.76701 9.21579 8.86931 9.06619 8.93531 8.95949C9.06511 8.75049 9.10581 8.53599 9.03761 8.36989C8.72961 7.61749 8.41134 6.86913 8.08281 6.1248C8.01791 5.9774 7.82541 5.8718 7.65051 5.8509C7.59111 5.84356 7.53171 5.8377 7.47231 5.8333C7.32461 5.82482 7.17651 5.82629 7.02901 5.8377L7.25121 5.83Z" fill="white"/>
-                            </svg>
-                        </a>
-                        */?>
+<? /*
+  <a rel="nofollow" href="#" class="header__social-link">
+  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+  <path d="M11 0C17.0753 0 22 4.9247 22 11C22 17.0753 17.0753 22 11 22C9.19604 22.0031 7.42152 21.5603 5.83335 20.7138C5.59655 20.5876 5.32119 20.5493 5.06233 20.6199L1.69186 21.5396C0.945572 21.7432 0.260591 21.0587 0.463725 20.3122L1.38154 16.9397C1.45195 16.6809 1.4135 16.4058 1.28732 16.1691C0.440073 14.5803 -0.00314471 12.8049 1.67955e-05 11C1.67955e-05 4.9247 4.92471 0 11 0ZM7.25121 5.83L7.03121 5.8388C6.88897 5.8486 6.74999 5.88596 6.62201 5.9488C6.50274 6.01646 6.39383 6.10092 6.29861 6.1996C6.16661 6.3239 6.09181 6.43169 6.01151 6.5362C5.60465 7.06519 5.38558 7.71464 5.38891 8.38199C5.39111 8.92099 5.53191 9.44569 5.75191 9.93629C6.20181 10.9285 6.94211 11.979 7.91891 12.9525C8.15431 13.1868 8.38531 13.4222 8.63391 13.6411C9.84768 14.7096 11.294 15.4803 12.8579 15.8917L13.4827 15.9874C13.6862 15.9984 13.8897 15.983 14.0943 15.9731C14.4146 15.9562 14.7273 15.8695 15.0106 15.719C15.1501 15.6468 15.2865 15.5687 15.4194 15.4849C15.4277 15.4796 15.436 15.4742 15.4441 15.4686C15.4634 15.4552 15.5054 15.4255 15.5694 15.378C15.7179 15.268 15.8092 15.1899 15.9324 15.0612C16.0248 14.9659 16.1018 14.8551 16.1634 14.729C16.2492 14.5497 16.335 14.2076 16.3702 13.9227C16.3966 13.7049 16.3889 13.5861 16.3856 13.5124C16.3812 13.3947 16.2833 13.2726 16.1766 13.2209L15.5413 12.936C15.538 12.9345 15.5353 12.9333 15.532 12.9319C15.4613 12.9011 14.5563 12.5064 13.9942 12.2507C13.9329 12.224 13.8673 12.2087 13.8006 12.2056C13.7253 12.1977 13.6493 12.2061 13.5775 12.2302C13.4467 12.2742 13.3216 12.4056 13.231 12.5098C13.1099 12.6491 12.8942 12.9043 12.5103 13.3694C12.4647 13.4307 12.4018 13.4771 12.3297 13.5026C12.2576 13.528 12.1796 13.5314 12.1055 13.5124C12.0338 13.4933 11.9636 13.469 11.8954 13.4398C11.759 13.3826 11.7117 13.3606 11.6182 13.321C10.9867 13.0459 10.4021 12.6736 9.88571 12.2177C9.74711 12.0967 9.61841 11.9647 9.48641 11.8371C9.05368 11.4226 8.67654 10.9538 8.36441 10.4423L8.29951 10.3378C8.2536 10.2672 8.21595 10.1915 8.18731 10.1123C8.15448 9.98528 8.21463 9.87794 8.24194 9.83774C8.24984 9.82611 8.25901 9.81576 8.26846 9.80536C8.3251 9.74299 8.53877 9.50645 8.64601 9.36979C8.76701 9.21579 8.86931 9.06619 8.93531 8.95949C9.06511 8.75049 9.10581 8.53599 9.03761 8.36989C8.72961 7.61749 8.41134 6.86913 8.08281 6.1248C8.01791 5.9774 7.82541 5.8718 7.65051 5.8509C7.59111 5.84356 7.53171 5.8377 7.47231 5.8333C7.32461 5.82482 7.17651 5.82629 7.02901 5.8377L7.25121 5.83Z" fill="white"/>
+  </svg>
+  </a>
+ */ ?>
                         <a rel="nofollow" href="https://t.me/yomerch_ru"  target="_blank" class="header__social-link">
                             <svg xmlns="http://www.w3.org/2000/svg" width="21" height="19" viewBox="0 0 21 19" fill="none">
                                 <path d="M20.9329 2.2972L17.7514 17.905C17.5141 19.0042 16.9051 19.2518 16.0252 18.7556L11.253 15.0673L8.91674 17.4077C8.68049 17.6564 8.44319 17.905 7.9014 17.905L8.27415 12.7611L17.176 4.28435C17.5477 3.89374 17.0742 3.7518 16.6006 4.07199L5.5326 11.378L0.759313 9.85299C-0.289635 9.4987 -0.289635 8.75269 0.996612 8.25755L19.5448 0.701758C20.4583 0.417879 21.2374 0.915217 20.9329 2.2972Z" fill="white"/>
@@ -221,16 +218,18 @@ if ($arResult['CONTACTS']['SHOW']) {
                         </svg>
                         <span class="header__icon-title">Рассчет</span>
                     </a>-->
-                    <?php include(__DIR__.'/../../../parts/onlineservice-basket.php') ?>
+<?php include(__DIR__ . '/../../../parts/onlineservice-basket.php') ?>
 
                     <!-- Авторизация -->
-                    <?php if (
-                        $arResult['AUTHORIZATION']['SHOW']['DESKTOP'] ||
-                        $sSearchPosition === 'top'
-                    ) { ?>
+                    <?php
+                    if (
+                            $arResult['AUTHORIZATION']['SHOW']['DESKTOP'] ||
+                            $sSearchPosition === 'top'
+                    ) {
+                        ?>
                         <div class="widget-panel-buttons-wrap intec-grid-item-auto" id="profileBtns">
                             <?php if ($arResult['AUTHORIZATION']['SHOW']['DESKTOP']) { ?>
-                                <?php include(__DIR__.'/../../../parts/auth/onlineservice-panel.1.php') ?>
+                                <?php include(__DIR__ . '/../../../parts/auth/onlineservice-panel.1.php') ?>
                             <?php } ?>
                         </div>
                     <?php } ?>
@@ -247,7 +246,6 @@ if ($arResult['CONTACTS']['SHOW']) {
         <div class="header__search-row header__search-row-custom">
             <div class="header__navigation-catalog-menu-custom" >
                 <?php
-
                 $arSearchParams = !empty($arSearchParams) ? $arSearchParams : [];
 
                 $sPrefix = 'SEARCH_';
@@ -261,8 +259,8 @@ if ($arResult['CONTACTS']['SHOW']) {
 
                 $arParameters = ArrayHelper::merge($arParameters, $arSearchParams);
                 $arParameters['PAGE'] = $arResult['SEARCH']['MODE'] === 'site' ? $arResult['URL']['SEARCH'] : $arResult['URL']['CATALOG'];
-                $arParameters['INPUT_ID'] = $arParameters['INPUT_ID'].'-input-1';
-    //print_r($arMenu);
+                $arParameters['INPUT_ID'] = $arParameters['INPUT_ID'] . '-input-1';
+//print_r($arMenu);
                 $arMenu = $arResult['MENU']['MAIN'];
                 $arMenuParams = !empty($arMenuParams) ? $arMenuParams : [];
 
@@ -277,28 +275,31 @@ if ($arResult['CONTACTS']['SHOW']) {
 
                 $arParametersCatalog['TRANSPARENT'] = $arResult['VISUAL']['TRANSPARENCY'] ? 'Y' : 'N';
                 $arParametersCatalog = ArrayHelper::merge($arParametersCatalog, $arMenuParams, [
-                    'ROOT_MENU_TYPE' => $arMenu['ROOT'],
-                    'CHILD_MENU_TYPE' => $arMenu['CHILD'],
-                    'MAX_LEVEL' => $arMenu['LEVEL'],
-                    'MENU_CACHE_TYPE' => 'N',
-                    'USE_EXT' => 'Y',
-                    'DELAY' => 'N',
-                    'ALLOW_MULTI_SELECT' => 'N'
+                            'ROOT_MENU_TYPE' => $arMenu['ROOT'],
+                            'CHILD_MENU_TYPE' => $arMenu['CHILD'],
+                            'MAX_LEVEL' => $arMenu['LEVEL'],
+                            'MENU_CACHE_TYPE' => 'N',
+                            'USE_EXT' => 'Y',
+                            'DELAY' => 'N',
+                            'ALLOW_MULTI_SELECT' => 'N'
                 ]);
-
                 ?>
-                <?php $APPLICATION->IncludeComponent(
-                    'bitrix:menu',
-                    'onlineservice.horizontal.1.custom',
-                    $arParametersCatalog,
-                    $this->getComponent()
-                ); ?>
-                <?php $APPLICATION->IncludeComponent(
-                    "bitrix:search.title",
-                    "onlineservice.input.1",
-                    $arParameters,
-                    $this->getComponent()
-                ) ?>
+                <?php
+                $APPLICATION->IncludeComponent(
+                        'bitrix:menu',
+                        'onlineservice.horizontal.1.custom',
+                        $arParametersCatalog,
+                        $this->getComponent()
+                );
+                ?>
+                <?php
+                $APPLICATION->IncludeComponent(
+                        "bitrix:search.title",
+                        "onlineservice.input.1",
+                        $arParameters,
+                        $this->getComponent()
+                )
+                ?>
             </div>
             <div class="header__navigation">
                 <ul class="header__navigation-list">
@@ -309,7 +310,7 @@ if ($arResult['CONTACTS']['SHOW']) {
                         <a class="header__navigation-list--item-link" href="/nanesenie/">Производство</a>
                     </li>
                     <li class="header__navigation-list--item">
-                        <a class="header__navigation-list--item-link" href="<?=isAuthorized() ? '/catalog/' : '/buy/'?>">Купить</a> 
+                        <a class="header__navigation-list--item-link" href="<?= isAuthorized() ? '/buy/' : '/buy/' ?>">Купить</a>
                     </li>
                     <li class="header__navigation-list--item">
                         <a class="header__navigation-list--item-link" href="/personal/profile/registration.php">Стать дилером</a>
@@ -322,7 +323,7 @@ if ($arResult['CONTACTS']['SHOW']) {
             <button style="display: none" href="#" class="header__callback-btn" data-action="forms.call.open">
                 Заказать звонок
             </button>
-            <?php include(__DIR__.'/../../../parts/forms/call.php') ?>
+<?php include(__DIR__ . '/../../../parts/forms/call.php') ?>
         </div>
     </div>
 </header>
@@ -332,14 +333,14 @@ if ($arResult['CONTACTS']['SHOW']) {
             <ul class="mobile-menu__main">
                 <li><a href="/company/">О компании</a></li>
                 <li><a href="/catalog/">Каталог</a></li>
-                <?/*
-                <span class="mobile-menu__arrow">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12" fill="none">
-                        <path d="M1 1L6 6L1 11" stroke="#FBB040" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </span>
-                */?>
-                <li><a href="<?=isAuthorized() ? '/catalog/' : '/buy/'; ?>">Купить</a></li>
+                <? /*
+                  <span class="mobile-menu__arrow">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="7" height="12" viewBox="0 0 7 12" fill="none">
+                  <path d="M1 1L6 6L1 11" stroke="#FBB040" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  </span>
+                 */ ?>
+                <li><a href="<?= isAuthorized() ? '/catalog/' : '/buy/'; ?>">Купить</a></li>
                 <li><a href="/personal/profile/registration.php">Стать дилером</a></li>
                 <li><a href="/company/contacts/">Контакты</a></li>
             </ul>
@@ -351,41 +352,41 @@ if ($arResult['CONTACTS']['SHOW']) {
                 <li><a href="/suppliers/">Поставщикам</a></li>
             </ul>
             <div class="mobile-menu__btn-block">
-                <? if( $USER->IsAuthorized() ){ ?>
+<? if ($USER->IsAuthorized()) { ?>
                     <a href="/logout.php" rel="nofollow" class="mobile-menu__btn">
                         Выйти
                     </a>
-                <? } else { ?>
+<? } else { ?>
                     <a href="/personal/profile/" rel="nofollow" class="mobile-menu__btn">
                         Войти
                     </a>
-                <? } ?>
+<? } ?>
                 <a href="/personal/profile/registration.php" class="mobile-menu__btn">
                     Стать дилером 
                 </a>
             </div>
             <button class="mobile-menu__call-btn" data-action="forms.call.open">Заказать звонок</button>
-            
+
 
             <div class="mobile-menu__footer">
                 <div class="mobile-menu__support">
                     Служба поддержки<br>
-                    <a href="tel:+78007075211">+7 (800) 600-84-61</a>
-                    <a href="mailto:info@yomerch.ru">info@yomerch.ru</a>
+                        <a href="tel:+78007075211">+7 (800) 600-84-61</a>
+                        <a href="mailto:info@yomerch.ru">info@yomerch.ru</a>
                 </div>
                 <div class="mobile-menu__socials">
-                    <?/*
-                    <span class="icon-wa">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
-                            <path d="M11 0C17.0753 0 22 4.9247 22 11C22 17.0753 17.0753 22 11 22C9.19604 22.0031 7.42152 21.5603 5.83335 20.7138C5.59655 20.5876 5.32119 20.5493 5.06233 20.6199L1.69186 21.5396C0.945572 21.7432 0.260591 21.0587 0.463725 20.3122L1.38154 16.9397C1.45195 16.6809 1.4135 16.4058 1.28732 16.1691C0.440073 14.5803 -0.00314471 12.8049 1.67955e-05 11C1.67955e-05 4.9247 4.92471 0 11 0ZM7.25121 5.83L7.03121 5.8388C6.88897 5.8486 6.74999 5.88596 6.62201 5.9488C6.50274 6.01646 6.39383 6.10092 6.29861 6.1996C6.16661 6.3239 6.09181 6.43169 6.01151 6.5362C5.60465 7.06519 5.38558 7.71464 5.38891 8.38199C5.39111 8.92099 5.53191 9.44569 5.75191 9.93629C6.20181 10.9285 6.94211 11.979 7.91891 12.9525C8.15431 13.1868 8.38531 13.4222 8.63391 13.6411C9.84768 14.7096 11.294 15.4803 12.8579 15.8917L13.4827 15.9874C13.6862 15.9984 13.8897 15.983 14.0943 15.9731C14.4146 15.9562 14.7273 15.8695 15.0106 15.719C15.1501 15.6468 15.2865 15.5687 15.4194 15.4849C15.4277 15.4796 15.436 15.4742 15.4441 15.4686C15.4634 15.4552 15.5054 15.4255 15.5694 15.378C15.7179 15.268 15.8092 15.1899 15.9324 15.0612C16.0248 14.9659 16.1018 14.8551 16.1634 14.729C16.2492 14.5497 16.335 14.2076 16.3702 13.9227C16.3966 13.7049 16.3889 13.5861 16.3856 13.5124C16.3812 13.3947 16.2833 13.2726 16.1766 13.2209L15.5413 12.936C15.538 12.9345 15.5353 12.9333 15.532 12.9319C15.4613 12.9011 14.5563 12.5064 13.9942 12.2507C13.9329 12.224 13.8673 12.2087 13.8006 12.2056C13.7253 12.1977 13.6493 12.2061 13.5775 12.2302C13.4467 12.2742 13.3216 12.4056 13.231 12.5098C13.1099 12.6491 12.8942 12.9043 12.5103 13.3694C12.4647 13.4307 12.4018 13.4771 12.3297 13.5026C12.2576 13.528 12.1796 13.5314 12.1055 13.5124C12.0338 13.4933 11.9636 13.469 11.8954 13.4398C11.759 13.3826 11.7117 13.3606 11.6182 13.321C10.9867 13.0459 10.4021 12.6736 9.88571 12.2177C9.74711 12.0967 9.61841 11.9647 9.48641 11.8371C9.05368 11.4226 8.67654 10.9538 8.36441 10.4423L8.29951 10.3378C8.2536 10.2672 8.21595 10.1915 8.18731 10.1123C8.15448 9.98528 8.21463 9.87794 8.24194 9.83774C8.24984 9.82611 8.25901 9.81576 8.26846 9.80536C8.3251 9.74299 8.53877 9.50645 8.64601 9.36979C8.76701 9.21579 8.86931 9.06619 8.93531 8.95949C9.06511 8.75049 9.10581 8.53599 9.03761 8.36989C8.72961 7.61749 8.41134 6.86913 8.08281 6.1248C8.01791 5.9774 7.82541 5.8718 7.65051 5.8509C7.59111 5.84356 7.53171 5.8377 7.47231 5.8333C7.32461 5.82482 7.17651 5.82629 7.02901 5.8377L7.25121 5.83Z" fill="white"/>
+                    <? /*
+                      <span class="icon-wa">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+                      <path d="M11 0C17.0753 0 22 4.9247 22 11C22 17.0753 17.0753 22 11 22C9.19604 22.0031 7.42152 21.5603 5.83335 20.7138C5.59655 20.5876 5.32119 20.5493 5.06233 20.6199L1.69186 21.5396C0.945572 21.7432 0.260591 21.0587 0.463725 20.3122L1.38154 16.9397C1.45195 16.6809 1.4135 16.4058 1.28732 16.1691C0.440073 14.5803 -0.00314471 12.8049 1.67955e-05 11C1.67955e-05 4.9247 4.92471 0 11 0ZM7.25121 5.83L7.03121 5.8388C6.88897 5.8486 6.74999 5.88596 6.62201 5.9488C6.50274 6.01646 6.39383 6.10092 6.29861 6.1996C6.16661 6.3239 6.09181 6.43169 6.01151 6.5362C5.60465 7.06519 5.38558 7.71464 5.38891 8.38199C5.39111 8.92099 5.53191 9.44569 5.75191 9.93629C6.20181 10.9285 6.94211 11.979 7.91891 12.9525C8.15431 13.1868 8.38531 13.4222 8.63391 13.6411C9.84768 14.7096 11.294 15.4803 12.8579 15.8917L13.4827 15.9874C13.6862 15.9984 13.8897 15.983 14.0943 15.9731C14.4146 15.9562 14.7273 15.8695 15.0106 15.719C15.1501 15.6468 15.2865 15.5687 15.4194 15.4849C15.4277 15.4796 15.436 15.4742 15.4441 15.4686C15.4634 15.4552 15.5054 15.4255 15.5694 15.378C15.7179 15.268 15.8092 15.1899 15.9324 15.0612C16.0248 14.9659 16.1018 14.8551 16.1634 14.729C16.2492 14.5497 16.335 14.2076 16.3702 13.9227C16.3966 13.7049 16.3889 13.5861 16.3856 13.5124C16.3812 13.3947 16.2833 13.2726 16.1766 13.2209L15.5413 12.936C15.538 12.9345 15.5353 12.9333 15.532 12.9319C15.4613 12.9011 14.5563 12.5064 13.9942 12.2507C13.9329 12.224 13.8673 12.2087 13.8006 12.2056C13.7253 12.1977 13.6493 12.2061 13.5775 12.2302C13.4467 12.2742 13.3216 12.4056 13.231 12.5098C13.1099 12.6491 12.8942 12.9043 12.5103 13.3694C12.4647 13.4307 12.4018 13.4771 12.3297 13.5026C12.2576 13.528 12.1796 13.5314 12.1055 13.5124C12.0338 13.4933 11.9636 13.469 11.8954 13.4398C11.759 13.3826 11.7117 13.3606 11.6182 13.321C10.9867 13.0459 10.4021 12.6736 9.88571 12.2177C9.74711 12.0967 9.61841 11.9647 9.48641 11.8371C9.05368 11.4226 8.67654 10.9538 8.36441 10.4423L8.29951 10.3378C8.2536 10.2672 8.21595 10.1915 8.18731 10.1123C8.15448 9.98528 8.21463 9.87794 8.24194 9.83774C8.24984 9.82611 8.25901 9.81576 8.26846 9.80536C8.3251 9.74299 8.53877 9.50645 8.64601 9.36979C8.76701 9.21579 8.86931 9.06619 8.93531 8.95949C9.06511 8.75049 9.10581 8.53599 9.03761 8.36989C8.72961 7.61749 8.41134 6.86913 8.08281 6.1248C8.01791 5.9774 7.82541 5.8718 7.65051 5.8509C7.59111 5.84356 7.53171 5.8377 7.47231 5.8333C7.32461 5.82482 7.17651 5.82629 7.02901 5.8377L7.25121 5.83Z" fill="white"/>
+                      </svg>
+                      </span>
+                     */ ?>
+                    <span class="icon-tg">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="19" viewBox="0 0 21 19" fill="none">
+                            <path d="M20.9329 2.2972L17.7514 17.905C17.5141 19.0042 16.9051 19.2518 16.0252 18.7556L11.253 15.0673L8.91674 17.4077C8.68049 17.6564 8.44319 17.905 7.9014 17.905L8.27415 12.7611L17.176 4.28435C17.5477 3.89374 17.0742 3.7518 16.6006 4.07199L5.5326 11.378L0.759313 9.85299C-0.289635 9.4987 -0.289635 8.75269 0.996612 8.25755L19.5448 0.701758C20.4583 0.417879 21.2374 0.915217 20.9329 2.2972Z" fill="white"/>
                         </svg>
                     </span>
-                    */?>
-                    <span class="icon-tg">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="19" viewBox="0 0 21 19" fill="none">
-                                <path d="M20.9329 2.2972L17.7514 17.905C17.5141 19.0042 16.9051 19.2518 16.0252 18.7556L11.253 15.0673L8.91674 17.4077C8.68049 17.6564 8.44319 17.905 7.9014 17.905L8.27415 12.7611L17.176 4.28435C17.5477 3.89374 17.0742 3.7518 16.6006 4.07199L5.5326 11.378L0.759313 9.85299C-0.289635 9.4987 -0.289635 8.75269 0.996612 8.25755L19.5448 0.701758C20.4583 0.417879 21.2374 0.915217 20.9329 2.2972Z" fill="white"/>
-                            </svg>
-                        </span>
                 </div>
             </div>
         </div>
@@ -414,55 +415,54 @@ if ($arResult['CONTACTS']['SHOW']) {
             scrollContacts.scrollbar();
         }, {
             'name': '[Component] intec.universe:main.header (template.1) > desktop (template.1) > phone.expand',
-            'nodes': <?= JavaScript::toObject('#'.$sTemplateId) ?>,
+            'nodes': <?= JavaScript::toObject('#' . $sTemplateId) ?>,
             'loader': {
                 'name': 'lazy'
             }
         });
     </script>
 <?php }
-
 ?>
-<? if( $USER->IsAuthorized() ){ ?>
+<? if ($USER->IsAuthorized()) { ?>
     <script>
-    // Функция для обновления состояния data-in
-    function updatePanelDataIn() {
-        const mobileMenu = document.getElementById('mobileMenu');
-        const panel = document.getElementById('i-3-intec-universe-main-panel-template-1-jQWE3mrLp0O2');
-        
-        if (mobileMenu && panel) {
-            if (mobileMenu.classList.contains('open')) {
-                panel.setAttribute('data-in', 'true');
-            } else {
-                panel.removeAttribute('data-in');
-                // или если нужно false:
-                // panel.setAttribute('data-in', 'false');
+        // Функция для обновления состояния data-in
+        function updatePanelDataIn() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const panel = document.getElementById('i-3-intec-universe-main-panel-template-1-jQWE3mrLp0O2');
+
+            if (mobileMenu && panel) {
+                if (mobileMenu.classList.contains('open')) {
+                    panel.setAttribute('data-in', 'true');
+                } else {
+                    panel.removeAttribute('data-in');
+                    // или если нужно false:
+                    // panel.setAttribute('data-in', 'false');
+                }
             }
         }
-    }
 
-    // Запускаем при загрузке страницы
-    document.addEventListener('DOMContentLoaded', updatePanelDataIn);
+        // Запускаем при загрузке страницы
+        document.addEventListener('DOMContentLoaded', updatePanelDataIn);
 
-    // Можно также отслеживать изменения класса у меню
-    const observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutation) {
-            if (mutation.attributeName === 'class') {
-                updatePanelDataIn();
-            }
+        // Можно также отслеживать изменения класса у меню
+        const observer = new MutationObserver(function (mutations) {
+            mutations.forEach(function (mutation) {
+                if (mutation.attributeName === 'class') {
+                    updatePanelDataIn();
+                }
+            });
         });
-    });
 
-    // Начинаем наблюдение за меню
-    const mobileMenu = document.getElementById('mobileMenu');
-    if (mobileMenu) {
-        observer.observe(mobileMenu, {
-            attributes: true,
-            attributeFilter: ['class']
-        });
-    }
+        // Начинаем наблюдение за меню
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (mobileMenu) {
+            observer.observe(mobileMenu, {
+                attributes: true,
+                attributeFilter: ['class']
+            });
+        }
 
-    // Если меню открывается/закрывается через JS события
-    document.addEventListener('menuToggle', updatePanelDataIn);
+        // Если меню открывается/закрывается через JS события
+        document.addEventListener('menuToggle', updatePanelDataIn);
     </script>
 <? } ?>

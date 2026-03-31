@@ -63,7 +63,7 @@ while ($section = $res->GetNext()) {
             ],
             false,
             false,
-            ['ID', 'NAME', 'CODE', 'PREVIEW_TEXT']
+            ['ID', 'NAME', 'CODE', 'PREVIEW_TEXT','PROPERTY_DEALER_LINK']
         );
         
         while ($element = $elementRes->GetNext()) {
@@ -114,9 +114,14 @@ while ($section = $res->GetNext()) {
                                         <?
                                         $this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));
                                         $this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM')));
+
+                                        $link = false;
+                                        if( isset($element['PROPERTY_DEALER_LINK_VALUE']) && !empty(($element['PROPERTY_DEALER_LINK_VALUE'])) && ($element['PROPERTY_DEALER_LINK_VALUE']) != "" && ($element['PROPERTY_DEALER_LINK_VALUE']) != " " ){
+                                            $link = $element['PROPERTY_DEALER_LINK_VALUE'];
+                                        }
                                         ?>
                                         <li class="element-item" id="<?=$this->GetEditAreaId($arItem['ID']);?>">
-                                            <a href="#" class="element-name">
+                                            <a href="<?=$link ? $link : "javascript::void(0);"?>" <?=($link) ? "target='_blank'" : "";?> rel="noindex, nofollow" class="element-name">
                                                 <?= htmlspecialcharsbx($element['NAME']) ?>
                                             </a>
                                         </li>

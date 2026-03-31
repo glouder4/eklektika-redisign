@@ -1,0 +1,276 @@
+
+.breadcrumbs{
+    white-space: nowrap;
+    overflow: auto;
+}
+.block-hellow-cub{
+    border: 4px solid #80E0A7;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    padding: 30px;
+}
+.header-hellow{
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 100%;
+    letter-spacing: 2%;
+    color: #80E0A7;
+}
+.description-hellow{
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #222222;
+}
+.text-hellow{
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #222222;
+    text-align: center;
+}   
+
+/* Основные стили контейнера */
+.mission-container {
+    background: linear-gradient(to top right, #FBB040, #EAC234);
+    display: flex;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    margin: 40px auto;
+    max-width: 1200px;
+    min-height: 500px;
+    position: relative;
+}
+
+/* Левая часть с текстом */
+.mission-content {
+    flex: 1;
+    padding: 50px 40px;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* Заголовок миссии */
+.mission-header {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 25px;
+    color: #2c3e50;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.mission-header:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: #2c3e50;
+    border-radius: 2px;
+}
+
+/* Описание миссии */
+.mission-description {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    color: #34495e;
+    font-weight: 500;
+}
+
+/* Текст миссии */
+.mission-text {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: #2c3e50;
+    font-style: italic;
+    padding-left: 20px;
+    border-left: 3px solid rgba(44, 62, 80, 0.2);
+}
+
+/* Правая часть с изображением */
+.mission-image-block {
+    flex: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    min-height: 500px;
+}
+
+/* Слоган */
+.mission-slogan {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Обертка для изображения */
+.mission-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Само изображение */
+.mission-image {
+    max-width: 100%;
+    max-height: 350px;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
+    transition: transform 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.mission-image:hover {
+    transform: scale(1.05);
+}
+
+/* Декоративные элементы (опционально) */
+.mission-container:before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 200px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+}
+
+.mission-container:after {
+    content: '';
+    position: absolute;
+    bottom: -30px;
+    left: -30px;
+    width: 150px;
+    height: 150px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+}
+
+/* Адаптивность */
+@media (max-width: 992px) {
+    .mission-container {
+        flex-direction: column;
+        min-height: auto;
+    }
+    
+    .mission-content {
+        padding: 40px 30px;
+    }
+    
+    .mission-image-block {
+        padding: 30px;
+        min-height: 400px;
+    }
+    
+    .mission-header {
+        font-size: 2rem;
+    }
+    
+    .mission-slogan {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .mission-container {
+        margin: 20px;
+        border-radius: 15px;
+    }
+    
+    .mission-content {
+        padding: 30px 20px;
+    }
+    
+    .mission-image-block {
+        padding: 20px;
+        min-height: 300px;
+    }
+    
+    .mission-header {
+        font-size: 1.8rem;
+    }
+    
+    .mission-description {
+        font-size: 1.1rem;
+    }
+    
+    .mission-text {
+        font-size: 1rem;
+    }
+    
+    .mission-slogan {
+        font-size: 1.1rem;
+        padding: 15px;
+    }
+}
+
+/* Анимация появления */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.mission-content > * {
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+}
+
+.mission-header {
+    animation-delay: 0.1s;
+}
+
+.mission-description {
+    animation-delay: 0.3s;
+}
+
+.mission-text {
+    animation-delay: 0.5s;
+}
+
+@media(min-width: 991px){
+    .page__title-wrapper{
+        padding-left: 0;
+    }
+    .breadcrumbs{
+        padding-left: 0;
+    }
+}

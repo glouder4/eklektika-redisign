@@ -55,7 +55,14 @@
     letter-spacing: 0;
     color: #222222;
 }
-
+@media(min-width: 991px){
+    .page__title-wrapper{
+        padding-left: 0;
+    }
+    .breadcrumbs{
+        padding-left: 0;
+    }
+}
 @media(min-width: 1520px){
     .breadcrumbs{
         padding-left: 0;

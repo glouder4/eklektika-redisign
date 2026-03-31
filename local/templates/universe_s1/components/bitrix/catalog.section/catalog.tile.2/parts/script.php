@@ -111,6 +111,7 @@ $sSignedParameters = $oSigner->sign(base64_encode(serialize($arResult['ORIGINAL_
                 });
             <?php } ?>
         <?php } ?>
+
         <?php if ($arResult['FORMS']['ORDER']['SHOW']) { ?>
             order = function(dataItem) {
                 var options = <?= JavaScript::toObject([
