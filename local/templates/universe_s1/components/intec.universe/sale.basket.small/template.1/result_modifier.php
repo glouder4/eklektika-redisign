@@ -100,6 +100,11 @@ if (empty($arResult['URL']['COMPARE']))
     $arResult['COMPARE']['SHOW'] = false;
 
 if (Loader::includeModule('catalog') && Loader::includeModule('sale')) {
+    if (class_exists(\OnlineService\Site\CatalogPriceFloor::class)
+        && \OnlineService\Site\CatalogPriceFloor::isPricingOverrideActive()
+        && method_exists(\OnlineService\Site\CatalogPriceFloor::class, 'syncSaleBasketSmallDisplay')) {
+        \OnlineService\Site\CatalogPriceFloor::syncSaleBasketSmallDisplay($arResult);
+    }
     $iEconomy = $arResult['BASKET']['SUM']['BASE']['VALUE'] - $arResult['BASKET']['SUM']['DISCOUNT']['VALUE'];
     $arResult['BASKET']['SUM']['ECONOMY']['VALUE'] = $iEconomy;
     $arResult['BASKET']['SUM']['ECONOMY']['DISPLAY'] = CCurrencyLang::CurrencyFormat($iEconomy, $arResult['CURRENCY']['CODE'] );

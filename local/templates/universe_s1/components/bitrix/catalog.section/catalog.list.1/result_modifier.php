@@ -407,6 +407,11 @@ if ($bBase) {
 if ($bBase || $bLite)
     include(__DIR__.'/modifiers/catalog.php');
 
+if ($bBase && class_exists(\OnlineService\Site\CatalogPriceFloor::class)
+    && \OnlineService\Site\CatalogPriceFloor::isPricingOverrideActive()) {
+    \OnlineService\Site\CatalogPriceFloor::syncCatalogSectionItemsDisplayFromOptimal($arResult);
+}
+
 if ($arVisual['TIMER']['SHOW'])
     include(__DIR__.'/modifiers/timer.php');
 

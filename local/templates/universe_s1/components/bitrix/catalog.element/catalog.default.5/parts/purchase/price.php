@@ -8,18 +8,40 @@ use intec\core\helpers\Html;
  * @var array $arResult
  * @var array $arVisual
  * @var array $arSvg
+ * @var array $arParams
  */
 
 $arPrice = [];
+$arPrices = [];
 
-
-if (!empty($arResult['ITEM_PRICES']))
-
+if (!empty($arResult['ITEM_PRICES'])) {
     $arPrice = ArrayHelper::getFirstValue($arResult['ITEM_PRICES']);
+}
 
-if ($arResult['OFFERS']) {
-	$arOffer = ArrayHelper::getFirstValue($arResult['OFFERS']);
-	$arPrices = $arOffer["PRICES"];
+if (!empty($arResult['OFFERS'])) {
+    $offerParamName = !empty($arParams['OFFERS_VARIABLE_SELECT'])
+        ? trim((string)$arParams['OFFERS_VARIABLE_SELECT'])
+        : 'offer';
+    $selectedOfferId = ($offerParamName !== '' && isset($_GET[$offerParamName]))
+        ? (int)$_GET[$offerParamName]
+        : 0;
+    $arOffer = null;
+    if ($selectedOfferId > 0) {
+        foreach ($arResult['OFFERS'] as $offerRow) {
+            if ((int)($offerRow['ID'] ?? 0) === $selectedOfferId) {
+                $arOffer = $offerRow;
+                break;
+            }
+        }
+    }
+    if ($arOffer === null) {
+        $arOffer = ArrayHelper::getFirstValue($arResult['OFFERS']);
+    }
+    $arPrices = $arOffer['PRICES'] ?? [];
+    // Цены строки и data-discount — с выбранного ТП (CatalogPriceFloor синхронизирует по offer), не с минимальной ценой по всем ТП
+    if (!empty($arOffer['ITEM_PRICES'])) {
+        $arPrice = ArrayHelper::getFirstValue($arOffer['ITEM_PRICES']);
+    }
 }
 
 ?>

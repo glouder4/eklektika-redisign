@@ -8,12 +8,41 @@ use intec\core\helpers\Html;
  * @var array $arResult
  * @var array $arVisual
  * @var array $arSvg
+ * @var array $arParams
  */
 
 $arPrice = [];
+$arPrices = [];
 
-if (!empty($arResult['ITEM_PRICES']))
+if (!empty($arResult['ITEM_PRICES'])) {
     $arPrice = ArrayHelper::getFirstValue($arResult['ITEM_PRICES']);
+}
+
+if (!empty($arResult['OFFERS'])) {
+    $offerParamName = !empty($arParams['OFFERS_VARIABLE_SELECT'])
+        ? trim((string)$arParams['OFFERS_VARIABLE_SELECT'])
+        : 'offer';
+    $selectedOfferId = ($offerParamName !== '' && isset($_GET[$offerParamName]))
+        ? (int)$_GET[$offerParamName]
+        : 0;
+    $arOffer = null;
+    if ($selectedOfferId > 0) {
+        foreach ($arResult['OFFERS'] as $offerRow) {
+            if ((int)($offerRow['ID'] ?? 0) === $selectedOfferId) {
+                $arOffer = $offerRow;
+                break;
+            }
+        }
+    }
+    if ($arOffer === null) {
+        $arOffer = ArrayHelper::getFirstValue($arResult['OFFERS']);
+    }
+    $arPrices = $arOffer['PRICES'] ?? [];
+    // Цены строки и data-discount — с выбранного ТП (CatalogPriceFloor синхронизирует по offer), не с минимальной ценой по всем ТП
+    if (!empty($arOffer['ITEM_PRICES'])) {
+        $arPrice = ArrayHelper::getFirstValue($arOffer['ITEM_PRICES']);
+    }
+}
 
 ?>
 <?= Html::beginTag('div', [
@@ -28,38 +57,48 @@ if (!empty($arResult['ITEM_PRICES']))
         'measure' => !empty($arResult['CATALOG_MEASURE_NAME']) ? 'true' : 'false'
     ]
 ]) ?>
-    <div class="catalog-element-price">
-        <div class="catalog-element-price-current catalog-element-price-part">
-            <span class="catalog-element-price-current-value" data-role="price.discount">
-                <?= !empty($arPrice) ? $arPrice['PRINT_PRICE'] : null ?>
-            </span>
-            <span class="catalog-element-price-current-separator">/</span>
-            <span class="catalog-element-price-current-measure" data-role="price.measure">
-                <?= !empty($arResult['CATALOG_MEASURE_NAME']) ? $arResult['CATALOG_MEASURE_NAME'] : null ?>
-            </span>
-        </div>
-        <?php if ($arVisual['PRICE']['DISCOUNT']['OLD']) { ?>
-            <div class="catalog-element-price-discount catalog-element-price-part" data-role="price.base">
-                <?= !empty($arPrice) ? $arPrice['PRINT_BASE_PRICE'] : null ?>
-            </div>
-        <?php } ?>
-    </div>
-    <?php if ($arVisual['PRICE']['DISCOUNT']['PERCENT']) { ?>
-        <div class="catalog-element-price-percent-container">
-            <div class="catalog-element-price-percent">
-                <div class="catalog-element-price-percent-value" data-role="price.percent">
-                    <?= '-'.$arPrice['PERCENT'].'%' ?>
-                </div>
-                <?php if ($arVisual['PRICE']['DISCOUNT']['ECONOMY']) { ?>
-                    <div class="catalog-element-price-percent-difference" data-role="price.difference">
-                        <?= $arPrice['PRINT_DISCOUNT'] ?>
-                    </div>
-                    <div class="catalog-element-price-percent-decoration">
-                        <?= $arSvg['PRICE']['DIFFERENCE'] ?>
-                    </div>
-                <?php } ?>
-            </div>
-        </div>
-    <?php } ?>
+	<?foreach ($arPrices as $codePrice => $arPrice) {?>
+		<div class="catalog-element-price-code" data-role="price.code" data-value="<?=$codePrice?>">
+		    <div class="catalog-element-price-name"><?=$arPrice["TITLE"]?>:</div>
+		    <div class="catalog-element-price">
+		        <div class="catalog-element-price-current catalog-element-price-part">
+		            <span class="catalog-element-price-current-value" data-role="price.discount">
+		                <?= !empty($arPrice) ? $arPrice['PRINT_PRICE'] : null ?>
+		            </span>
+		            <?
+					/* НЕ НУЖНО
+					<span class="catalog-element-price-current-separator">/</span>
+		            <span class="catalog-element-price-current-measure" data-role="price.measure">
+		                <?= !empty($arResult['CATALOG_MEASURE_NAME']) ? $arResult['CATALOG_MEASURE_NAME'] : null ?>
+		            </span>
+					*/
+					?>
+		        </div>
+		        <?php if ($arVisual['PRICE']['DISCOUNT']['OLD']) { ?>
+		            <div class="catalog-element-price-discount catalog-element-price-part" data-role="price.base">
+		                <?= !empty($arPrice) ? $arPrice['PRINT_BASE_PRICE'] : null ?>
+		            </div>
+		        <?php } ?>
+		    </div>
+		    <?php if ($arVisual['PRICE']['DISCOUNT']['PERCENT']) { ?>
+		        <div class="catalog-element-price-percent-container">
+		            <div class="catalog-element-price-percent">
+		                <div class="catalog-element-price-percent-value" data-role="price.percent">
+		                    <?= '-'.$arPrice['PERCENT'].'%' ?>
+		                </div>
+		                <?php if ($arVisual['PRICE']['DISCOUNT']['ECONOMY']) { ?>
+		                    <div class="catalog-element-price-percent-difference" data-role="price.difference">
+		                        <?= $arPrice['PRINT_DISCOUNT'] ?>
+		                    </div>
+		                    <div class="catalog-element-price-percent-decoration">
+		                        <?= $arSvg['PRICE']['DIFFERENCE'] ?>
+		                    </div>
+		                <?php } ?>
+		            </div>
+		        </div>
+		    <?php } ?>
+		</div>
+	<?php }?>
+
 <?= Html::endTag('div') ?>
 <?php unset($arPrice) ?>

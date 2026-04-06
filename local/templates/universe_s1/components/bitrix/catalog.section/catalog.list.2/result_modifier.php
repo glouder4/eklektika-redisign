@@ -414,4 +414,9 @@ if ($arResult['BASE']) {
 if ($arResult['BASE'] || $arResult['LITE'])
     include(__DIR__.'/modifiers/catalog.php');
 
+if ($arResult['BASE'] && class_exists(\OnlineService\Site\CatalogPriceFloor::class)
+    && \OnlineService\Site\CatalogPriceFloor::isPricingOverrideActive()) {
+    \OnlineService\Site\CatalogPriceFloor::syncCatalogSectionItemsDisplayFromOptimal($arResult);
+}
+
 $arResult['VISUAL'] = $arVisual;

@@ -282,6 +282,8 @@ class RegisterUserCompany extends Request{
                 $arFields['UF_ADVERSTERING_AGENT'] = "";
                 return $arFields;
             }
+            $APPLICATION->ThrowException('Указанные пароли не совпадают.');
+            return false;
         }
         else{
             // Определяем какое поле использовать для сообщения об ошибке

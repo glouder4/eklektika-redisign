@@ -5,9 +5,14 @@
     require_once __DIR__.'/site/UserGroups.php';
     require_once __DIR__.'/site/Company.php';
     require_once __DIR__.'/site/Manager.php';
+    require_once __DIR__.'/site/CatalogPriceFloor.php';
     require_once __DIR__.'/events.php';
 
+\OnlineService\Site\CatalogPriceFloor::markCompositeNonCacheableForAuthorizedCatalog();
+
 $GLOBALS["OS_BREADCRUMBS_ADD_CONTAINER"] = "Y";
+
+// Ограничение цены по закупке: CatalogPriceFloor::bootstrap() в local/php_interface/init.php
 
 // Модификация индексирования
 \Bitrix\Main\EventManager::getInstance()->addEventHandler('search', 'BeforeIndex',

@@ -391,3 +391,275 @@
   background-color: #744A9E !important;
 }
 /* end custom-onlineservice */
+
+
+/* Виджеты личного кабинета (план, кредит, скидка, оборот) */
+.personal-widgets {
+  border-radius: 12px;
+  padding: 0px;
+  margin: 0;
+}
+
+.personal-widgets__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  align-items: stretch;
+}
+
+.personal-widgets__card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  padding: 18px 20px;
+  min-height: 0;
+}
+
+.personal-widgets__card--discount {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}
+
+.personal-widgets__discount-badge {
+  position: relative;
+  flex-shrink: 0;
+  width: 58px;
+  aspect-ratio: 101 / 106;
+  filter: drop-shadow(0 3px 10px rgba(116, 74, 158, 0.35));
+}
+
+.personal-widgets__discount-badge-shape {
+  display: block;
+  width: 100%;
+  height: auto;
+  vertical-align: top;
+}
+
+.personal-widgets__discount-badge-text {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-weight: 800;
+  font-size: 12px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.personal-widgets__discount-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a1a;
+  line-height: 1.25;
+}
+
+.personal-widgets__metric-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 88px;
+}
+
+.personal-widgets__metric-text {
+  min-width: 0;
+  flex: 1;
+}
+
+.personal-widgets__label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #9a9a9a;
+  line-height: 1.3;
+}
+
+.personal-widgets__label--turnover {
+  margin-bottom: 2px;
+}
+
+.personal-widgets__value {
+  font-family: "Roboto Condensed", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.35rem, 2.5vw, 1.65rem);
+  line-height: 1.1;
+  color: #111;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-top: 8px;
+}
+
+.personal-widgets__ring-wrap {
+  position: relative;
+  width: 88px;
+  height: 88px;
+  flex-shrink: 0;
+}
+
+.personal-widgets__ring {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.personal-widgets__ring-bg {
+  stroke: #ddeedd;
+}
+
+.personal-widgets__ring-progress {
+  stroke: #6cc070;
+  stroke-linecap: round;
+}
+
+.personal-widgets__ring-label {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 15px;
+  font-weight: 600;
+  color: #5cb85c;
+  white-space: nowrap;
+}
+
+.personal-widgets__card--turnover {
+  grid-column: 2 / -1;
+  display: flex;
+  flex-direction: column;
+}
+
+.personal-widgets__turnover-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  flex: 1;
+  margin-top: 12px;
+  min-height: 64px;
+}
+
+.personal-widgets__turnover-cell {
+  text-align: center;
+  font-family: "Roboto Condensed", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.25rem, 2.2vw, 1.5rem);
+  line-height: 1.15;
+  color: #111;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  padding: 8px 6px;
+  border-left: 1px solid #e8e8e8;
+}
+
+.personal-widgets__turnover-cell:first-child {
+  border-left: none;
+}
+
+@media (max-width: 992px) {
+  .personal-widgets__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .personal-widgets__card--turnover {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 520px) {
+  .personal-widgets {
+    padding: 10px;
+  }
+
+  .personal-widgets__grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .personal-widgets__card--turnover {
+    grid-column: 1;
+  }
+
+  .personal-widgets__card {
+    padding: 14px 16px;
+  }
+
+  .personal-widgets__metric-row {
+    min-height: 80px;
+  }
+
+  .personal-widgets__ring-wrap {
+    width: 76px;
+    height: 76px;
+  }
+}
+
+.personal__sections-blocks{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+@media(min-width: 1920px){
+  #pagetitle {
+    font-family: Manrope;
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 100%;
+    letter-spacing: 0;
+  }
+  #personal-profile-menu-desktop{
+    margin-top: 36px;
+  }
+  .personal__sections-blocks{
+    flex-direction: row;
+  }
+  .personal__sections-column{
+    width: 70%;
+  }
+  .personal__managers-column{
+    width: 30%;
+  }
+  .personal__managers-column{
+    border-left: 1px solid #C3C3C3;
+    padding-left: 65px;
+    display: flex;
+    align-items: center;
+  }
+  .personal-widgets__card{
+    height: 145px;
+  }
+  .personal-widgets__discount-badge{
+    width: 98px;
+  }
+  .personal-widgets__discount-title{
+    font-family: Manrope;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 122%;
+    letter-spacing: 0;
+  }
+  .personal-widgets__discount-badge-text{
+    font-family: Manrope;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 125%;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+  .personal-widgets__discount-badge-text>percent{
+    font-family: Manrope;
+    font-weight: 700;
+    font-size: 23px;
+    line-height: 125%;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    position: relative;
+    top: -8px;
+  }
+  .personal-widgets__card--discount{
+    gap: 27px;
+  }
+}

@@ -516,6 +516,11 @@ if ($bBase) {
 if ($bBase || $bLite)
     include(__DIR__.'/modifiers/catalog.php');
 
+if ($bBase && class_exists(\OnlineService\Site\CatalogPriceFloor::class)
+    && \OnlineService\Site\CatalogPriceFloor::isPricingOverrideActive()) {
+    \OnlineService\Site\CatalogPriceFloor::syncCatalogSectionItemsDisplayFromOptimal($arResult);
+}
+
 $arResult['BLOCKS'] = $arBlocks;
 $arResult['VISUAL'] = $arVisual;
 $arResult['MODE'] = $arParams['MODE'];

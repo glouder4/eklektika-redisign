@@ -68,3 +68,10 @@ if (!Loader::includeModule('catalog') || !Loader::includeModule('sale'))
 
 if (empty($arResult['URL']['COMPARE']))
     $arResult['COMPARE']['SHOW'] = false;
+
+if (Loader::includeModule('catalog') && Loader::includeModule('sale')
+    && class_exists(\OnlineService\Site\CatalogPriceFloor::class)
+    && \OnlineService\Site\CatalogPriceFloor::isPricingOverrideActive()
+    && method_exists(\OnlineService\Site\CatalogPriceFloor::class, 'syncSaleBasketSmallDisplay')) {
+    \OnlineService\Site\CatalogPriceFloor::syncSaleBasketSmallDisplay($arResult);
+}

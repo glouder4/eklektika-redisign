@@ -448,17 +448,32 @@ foreach ($this->basketItems as $row) {
 
     $rowData['COLUMN_LIST_SHOW'] = !empty($rowData['COLUMN_LIST']);
 
+	if (class_exists(\OnlineService\Site\CatalogPriceFloor::class)
+		&& \OnlineService\Site\CatalogPriceFloor::isPricingOverrideActive()) {
+		\OnlineService\Site\CatalogPriceFloor::applyFloorToBasketRowRenderData($rowData);
+	}
+
 	$result['BASKET_ITEM_RENDER_DATA'][] = $rowData;
 }
 
-unset($arElements, $arSkuElements);
+if (class_exists(\OnlineService\Site\CatalogPriceFloor::class)
+	&& \OnlineService\Site\CatalogPriceFloor::isPricingOverrideActive()) {
+	\OnlineService\Site\CatalogPriceFloor::recalculateBasketResultTotalsAfterFloor($result);
+}
 
+unset($arElements, $arSkuElements);
+$minSummMustache = null;
+$minSummOrder = $this->arParams['MIN_SUMM'];
+if ($result['allSum'] < (int)$minSummOrder) {
+	$minSummMustache = $minSummOrder;
+}
 $totalData = [
 	'DISABLE_CHECKOUT' => (int)$result['ORDERABLE_BASKET_ITEMS_COUNT'] === 0,
 	'PRICE' => $result['allSum'],
 	'PRICE_FORMATED' => $result['allSum_FORMATED'],
 	'PRICE_WITHOUT_DISCOUNT_FORMATED' => $result['PRICE_WITHOUT_DISCOUNT'],
-	'CURRENCY' => $result['CURRENCY']
+	'CURRENCY' => $result['CURRENCY'],
+	'MIN_SUMM' => $minSummMustache
 ];
 
 if ($result['DISCOUNT_PRICE_ALL'] > 0) {

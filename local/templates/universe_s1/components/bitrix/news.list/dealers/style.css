@@ -43,12 +43,22 @@
     margin-bottom: 0px;
 }
 
-.element-name {
+.element-item,
+.element-name{
     font-size: 16px;
     font-weight: 400;
     color: #222222;
     text-decoration: none;
     display: block;
+}
+.element-name.hoverable{
+    text-decoration: underline;
+}
+.element-name:hover{
+    cursor: default;
+}
+.element-name.hoverable:hover{
+    cursor: pointer;
 }
 .element-name:hover,
 .element-name:focus,

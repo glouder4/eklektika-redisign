@@ -448,10 +448,21 @@ foreach ($this->basketItems as $row) {
 
     $rowData['COLUMN_LIST_SHOW'] = !empty($rowData['COLUMN_LIST']);
 
+	if (class_exists(\OnlineService\Site\CatalogPriceFloor::class)
+		&& \OnlineService\Site\CatalogPriceFloor::isPricingOverrideActive()) {
+		\OnlineService\Site\CatalogPriceFloor::applyFloorToBasketRowRenderData($rowData);
+	}
+
 	$result['BASKET_ITEM_RENDER_DATA'][] = $rowData;
 }
 
+if (class_exists(\OnlineService\Site\CatalogPriceFloor::class)
+	&& \OnlineService\Site\CatalogPriceFloor::isPricingOverrideActive()) {
+	\OnlineService\Site\CatalogPriceFloor::recalculateBasketResultTotalsAfterFloor($result);
+}
+
 unset($arElements, $arSkuElements);
+$minSummMustache = null;
 $minSummOrder = $this->arParams['MIN_SUMM'];
 if ($result['allSum'] < (int)$minSummOrder) {
 	$minSummMustache = $minSummOrder;

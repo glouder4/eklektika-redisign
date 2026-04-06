@@ -20,9 +20,151 @@
             'OS_COMPANY_CITY',
             'OS_IS_MARKETING_AGENT',
             "OS_IS_COMPANY_DISABLED",
-            "OS_COMPANY_STATUS",
+            "OS_COMPANY_DISCOUNT_VALUE",
             'OS_REQUSITES_FILE'
         ];
+
+        /**
+         * Маппинг ID группы статуса (после UserGroups::searchGroup) → ID группы для присвоения пользователю.
+         * Ключ и значение — целочисленные ID групп на сайте.
+         *
+         * @var array<int, int>
+         */
+        private static $companyStatusGroupIdMap = [
+            890 => 476, // 20%
+            891 => 477, // 25%
+            892 => 478, // 30%
+            893 => 475, // 32%
+            894 => 479, // 35%
+            895 => 480, // 37%
+            896 => 481, // 38%
+            897 => 482, // 40%
+        ];
+
+        /**
+         * ID группы пользователя (после mapCompanyStatusGroupId) → процент скидки от оптовой базы на витрине.
+         * Ключи должны совпадать со значениями {@see self::$companyStatusGroupIdMap}.
+         *
+         * @var array<int, float>
+         */
+        private static array $companyDiscountPercentByAssignedGroupId = [
+            476 => 20.0,
+            477 => 25.0,
+            478 => 30.0,
+            475 => 32.0,
+            479 => 35.0,
+            480 => 37.0,
+            481 => 38.0,
+            482 => 40.0,
+        ];
+
+        /**
+         * Максимальный процент скидки по группам компании (пользователь в одной из b_group из маппинга статуса).
+         *
+         * @param array<int|string> $userGroupIds
+         */
+        public static function getMaxCompanyDiscountPercentForUserGroups(array $userGroupIds): float
+        {
+            if ($userGroupIds === []) {
+                return 0.0;
+            }
+            $set = [];
+            foreach ($userGroupIds as $g) {
+                $ig = (int)$g;
+                if ($ig > 0) {
+                    $set[$ig] = true;
+                }
+            }
+            $max = 0.0;
+            foreach (self::$companyDiscountPercentByAssignedGroupId as $gid => $pct) {
+                if (isset($set[(int)$gid])) {
+                    $max = \max($max, (float)$pct);
+                }
+            }
+
+            return $max;
+        }
+
+        /**
+         * @param int|string|null $groupId ID группы после разрешения через searchGroup
+         * @return int|string|null
+         */
+        private static function mapCompanyStatusGroupId($groupId)
+        {
+            if ($groupId === null || $groupId === '' || $groupId === false) {
+                return $groupId;
+            }
+            $id = (int)$groupId;
+
+            return self::$companyStatusGroupIdMap[$id] ?? $groupId;
+        }
+
+        /**
+         * Руководитель (UF_IS_DIRECTOR) должен наследовать группу скидки только от головной компании холдинга,
+         * а не от последней обновлённой дочерней (несколько компаний у одного пользователя).
+         *
+         * @param array<string, mixed> $companyUpdateParams параметры UPDATE_COMPANY / updateCompanyElement
+         */
+        private static function shouldApplyCompanyDiscountGroupForUser(int $userId, array $companyUpdateParams): bool
+        {
+            if (!self::isSiteUserDirector($userId)) {
+                return true;
+            }
+
+            return self::isHeadOfHoldingFromCompanyParams($companyUpdateParams);
+        }
+
+        private static function isSiteUserDirector(int $userId): bool
+        {
+            if ($userId <= 0) {
+                return false;
+            }
+            $rs = \CUser::GetByID($userId);
+            if (!$u = $rs->Fetch()) {
+                return false;
+            }
+            $v = $u['UF_IS_DIRECTOR'] ?? null;
+            if ($v === null || $v === '' || $v === false) {
+                return false;
+            }
+            if ($v === true || $v === 1 || $v === '1') {
+                return true;
+            }
+            if (\is_string($v)) {
+                $s = \strtoupper(\trim($v));
+
+                return \in_array($s, ['Y', 'YES', 'TRUE', '1'], true);
+            }
+
+            return (bool)(int)$v;
+        }
+
+        /**
+         * @param array<string, mixed> $companyUpdateParams
+         */
+        private static function isHeadOfHoldingFromCompanyParams(array $companyUpdateParams): bool
+        {
+            $v = $companyUpdateParams['OS_COMPANY_IS_HEAD_OF_HOLDING'] ?? null;
+            if ($v === null || $v === '' || $v === false) {
+                return false;
+            }
+            if (\is_array($v)) {
+                $v = $v['VALUE'] ?? $v['~VALUE'] ?? null;
+            }
+            if ($v === null || $v === '' || $v === false) {
+                return false;
+            }
+            if ($v === true || $v === 1 || $v === '1') {
+                return true;
+            }
+            if (\is_string($v)) {
+                $s = \strtoupper(\trim($v));
+
+                return \in_array($s, ['Y', 'YES', 'TRUE', '1'], true);
+            }
+
+            return (bool)(int)$v;
+        }
 
         /**
          * Получить ID инфоблока компаний
@@ -106,7 +248,7 @@
          *   - OS_COMPANY_B24_ID (string|int) — ID компании в B24 (обязательный)
          *   - OS_COMPANY_NAME (string) — Название компании
          *   - OS_COMPANY_IS_HEAD_OF_HOLDING (boolean) — Головная компания
-         *   - OS_COMPANY_STATUS (string|int) — Статус компании
+         *   - OS_COMPANY_DISCOUNT_VALUE (string|int) — Скидка компании
          *   - OS_COMPANY_USERS (array|int) — ID связанных контактов
          *   - OS_COMPANY_INN (string) — ИНН компании
          *   - OS_COMPANY_CITY (string) — Город компании
@@ -126,9 +268,9 @@
                 // Компания найдена - обновляем
                 $companyId = $company['ID'];
                 
-                if (!empty($params['OS_COMPANY_STATUS'])) {
-                    $params['OS_COMPANY_STATUS'] = (new UserGroups([]))->searchGroup($params['OS_COMPANY_STATUS'])['ID'];
-                }
+                /*if (!empty($params['OS_COMPANY_DISCOUNT_VALUE'])) {
+                    $params['OS_COMPANY_DISCOUNT_VALUE'] = (new UserGroups([]))->searchGroup($params['OS_COMPANY_DISCOUNT_VALUE'])['ID'];
+                }*/
 
                 if( $params['OS_COMPANY_USERS'] ){
                     foreach ($params['OS_COMPANY_USERS'] as $key => $b24_id){
@@ -142,8 +284,10 @@
                             if( $params['OS_IS_MARKETING_AGENT']['VALUE'] ){
                                 $groups[] = $user->getMarketingGroupId();
                             }
-                            if ($params['OS_COMPANY_STATUS']){
-                                $groups[] = $params['OS_COMPANY_STATUS'];
+                            if ($params['OS_COMPANY_DISCOUNT_VALUE']
+                                && self::shouldApplyCompanyDiscountGroupForUser((int)$userId, $params)
+                            ) {
+                                $groups[] = self::mapCompanyStatusGroupId($params['OS_COMPANY_DISCOUNT_VALUE']);
                             }
 
                             $user->addUserToGroups($userId,$groups);
@@ -248,10 +392,12 @@
                         if (!empty($params['OS_IS_MARKETING_AGENT']['VALUE'])) {
                             $groups[] = $user->getMarketingGroupId();
                         }
-                        if (!empty($params['OS_COMPANY_STATUS'])) {
-                            $statusId = (new UserGroups([]))->searchGroup($params['OS_COMPANY_STATUS'])['ID'];
+                        if (!empty($params['OS_COMPANY_DISCOUNT_VALUE'])
+                            && self::shouldApplyCompanyDiscountGroupForUser((int)$userId, $params)
+                        ) {
+                            $statusId = (new UserGroups([]))->searchGroup($params['OS_COMPANY_DISCOUNT_VALUE'])['ID'];
                             if ($statusId) {
-                                $groups[] = $statusId;
+                                $groups[] = self::mapCompanyStatusGroupId($statusId);
                             }
                         }
                         

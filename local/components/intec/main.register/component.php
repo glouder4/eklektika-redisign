@@ -190,12 +190,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_REQUEST["register_submit_button"] 
 		{
 			$result = ExecuteModuleEventEx($arEvent, array(&$arResult['VALUES']));
 
-			// Проверяем исключение независимо от результата
-			if($err = $APPLICATION->GetException()){
-                $arResult['ERRORS'][] = $err->GetString();
-                $bOk = false;
-                break;
-            }
+			// Только при отмене регистрации (false) читаем исключение — иначе подхватывается
+			// «чужое» исключение $APPLICATION (например, после неудачного Login() в другом месте страницы).
+			if ($result === false)
+			{
+				if ($err = $APPLICATION->GetException())
+				{
+					$arResult['ERRORS'][] = $err->GetString();
+					$APPLICATION->ResetException();
+				}
+				$bOk = false;
+				break;
+			}
 		}
 
 		$ID = 0;

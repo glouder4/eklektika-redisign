@@ -18,7 +18,17 @@ if (!Loader::includeModule('iblock'))
 if (!Loader::includeModule('intec.core'))
     return;
 
-$this->setFrameMode(true);
+// Карточка товара: родительский фрейм композита кеширует HTML целиком — result_modifier дочернего catalog.element
+// не «пробивает» кеш; без query (os_price_debug) отдаётся старая витрина. Для авторизованных отключаем фрейм и помечаем страницу динамической.
+$bPricingUser = \class_exists(\OnlineService\Site\CatalogPriceFloor::class)
+    && \OnlineService\Site\CatalogPriceFloor::isPricingOverrideActive();
+$this->setFrameMode(!$bPricingUser);
+if ($bPricingUser && \class_exists(\Bitrix\Main\Composite\Page::class)) {
+    try {
+        \Bitrix\Main\Composite\Page::getInstance()->markNonCacheable();
+    } catch (\Throwable $e) {
+    }
+}
 
 $bSeo = Loader::includeModule('intec.seo');
 

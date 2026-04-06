@@ -1,4 +1,4 @@
-<?php if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die(); ?>
+    <?php if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die(); ?>
 <?php
 
 use Bitrix\Main\Loader;
@@ -565,6 +565,15 @@ if ($bBase)
 
 if ($bBase || $bLite)
     include(__DIR__.'/modifiers/catalog.php');
+
+if ($bBase && class_exists(\OnlineService\Site\CatalogPriceFloor::class)
+    && \OnlineService\Site\CatalogPriceFloor::isPricingOverrideActive()) {
+    \OnlineService\Site\CatalogPriceFloor::syncCatalogElementDisplayFromOptimal($arResult);
+    // Не кешировать шаблон в композитном фрейме — иначе статика без актуального merge цен.
+    if (\method_exists($this, 'setFrameMode')) {
+        $this->setFrameMode(false);
+    }
+}
 
 if ($arVisual['MEASURES']['USE'])
     include(__DIR__.'/modifiers/measures.php');

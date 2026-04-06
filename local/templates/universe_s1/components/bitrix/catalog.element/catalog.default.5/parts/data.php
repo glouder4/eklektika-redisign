@@ -84,6 +84,14 @@ $hData = function (&$arItem, $bOffer = false) use (&$arResult, &$bBase, &$bLite)
 	unset($arPrice);
 	}*/
 	foreach ($arItem['PRICES'] as $code => &$arPrice) {
+	        // CatalogPriceFloor и др. правят PRICE / PRINT_PRICE / BASE_PRICE; ядро для JSON ещё даёт VALUE_VAT / PRINT_VALUE_VAT.
+	        // script.php перерисовывает блок цен из этого JSON — без согласования ключей получается 360 вместо 261 после merge.
+	        $baseValue = $arPrice['BASE_PRICE'] ?? $arPrice['VALUE_VAT'] ?? null;
+	        $baseDisplay = $arPrice['PRINT_BASE_PRICE'] ?? $arPrice['PRINT_VALUE_VAT'] ?? '';
+	        $sellValue = $arPrice['PRICE'] ?? $arPrice['DISCOUNT_VALUE'] ?? null;
+	        $sellDisplay = $arPrice['PRINT_PRICE'] ?? $arPrice['PRINT_DISCOUNT_VALUE'] ?? '';
+	        $pct = isset($arPrice['PERCENT']) ? (float)$arPrice['PERCENT'] : (float)($arPrice['DISCOUNT_DIFF_PERCENT'] ?? 0);
+	        $discAmt = isset($arPrice['DISCOUNT']) ? (float)$arPrice['DISCOUNT'] : null;
 	        $arData['prices'][$code] = [
 	            'title' => !empty($arPrice['TITLE']) ? $arPrice['TITLE'] : $arPrice['CODE'],
 	            'id' => $arPrice['PRICE_ID'],
@@ -92,15 +100,17 @@ $hData = function (&$arItem, $bOffer = false) use (&$arResult, &$bBase, &$bLite)
 	                'to' => $arPrice['QUANTITY_TO'] !== null ? Type::toFloat($arPrice['QUANTITY_TO']) : null
 	            ],
 	            'base' => [
-	                'value' => $arPrice['VALUE_VAT'],
-	                'display' => $arPrice['PRINT_VALUE_VAT']
+	                'value' => $baseValue,
+	                'display' => $baseDisplay
 	            ],
 	            'discount' => [
-	                'use' => $arPrice['DISCOUNT_DIFF_PERCENT'] > 0,
-	                'percent' => $arPrice['PERCENT'],
-	                'value' => $arPrice['DISCOUNT_VALUE'],
-	                'display' => $arPrice['PRINT_DISCOUNT_VALUE'],
-	                'difference' => $arPrice['PRINT_DISCOUNT_DIFF']
+	                'use' => $pct > 0.00001
+	                    || ($discAmt !== null && $discAmt > 0)
+	                    || (float)($arPrice['DISCOUNT_DIFF_PERCENT'] ?? 0) > 0,
+	                'percent' => isset($arPrice['PERCENT']) ? $arPrice['PERCENT'] : ($arPrice['DISCOUNT_DIFF_PERCENT'] ?? 0),
+	                'value' => $sellValue,
+	                'display' => $sellDisplay,
+	                'difference' => $arPrice['PRINT_DISCOUNT'] ?? $arPrice['PRINT_DISCOUNT_DIFF'] ?? ''
 	            ],
 	            'currency' => Loader::includeModule('currency') ? CCurrencyLang::GetFormatDescription($arPrice['CURRENCY']) : null,
 				'code' => $code

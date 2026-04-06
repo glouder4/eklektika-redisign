@@ -46,7 +46,7 @@ $hData = function (&$arItem, $bOffer = false) use (&$arResult, &$bBase, &$bLite)
             'base' => null,
             'selected' => null,
             'items' => $arItem['MEASURES'],
-            'use' => count($arItem['MEASURES']) > 1 ? 'true' : 'false'
+            'use' => is_array($arItem['MEASURES']) && count($arItem['MEASURES']) > 1 ? 'true' : 'false'
         ]
     ];
     if (!empty($arItem['MEASURES']))
@@ -60,8 +60,8 @@ $hData = function (&$arItem, $bOffer = false) use (&$arResult, &$bBase, &$bLite)
     if (!$bOffer)
         $arData['name'] = $arItem['~NAME'];
 
-    foreach ($arItem['ITEM_PRICES'] as &$arPrice) {
-        $arData['prices'][] = [
+    /*foreach ($arItem['ITEM_PRICES'] as &$arPrice) {
+	$arData['prices'][] = [
             'title' => !empty($arPrice['TITLE']) ? $arPrice['TITLE'] : $arPrice['CODE'],
             'id' => $arPrice['PRICE_TYPE_ID'],
             'quantity' => [
@@ -81,8 +81,43 @@ $hData = function (&$arItem, $bOffer = false) use (&$arResult, &$bBase, &$bLite)
             ],
             'currency' => Loader::includeModule('currency') ? CCurrencyLang::GetFormatDescription($arPrice['CURRENCY']) : null
         ];
+	unset($arPrice);
+	}*/
+	foreach ($arItem['PRICES'] as $code => &$arPrice) {
+	        // CatalogPriceFloor и др. правят PRICE / PRINT_PRICE / BASE_PRICE; ядро для JSON ещё даёт VALUE_VAT / PRINT_VALUE_VAT.
+	        // script.php перерисовывает блок цен из этого JSON — без согласования ключей получается 360 вместо 261 после merge.
+	        $baseValue = $arPrice['BASE_PRICE'] ?? $arPrice['VALUE_VAT'] ?? null;
+	        $baseDisplay = $arPrice['PRINT_BASE_PRICE'] ?? $arPrice['PRINT_VALUE_VAT'] ?? '';
+	        $sellValue = $arPrice['PRICE'] ?? $arPrice['DISCOUNT_VALUE'] ?? null;
+	        $sellDisplay = $arPrice['PRINT_PRICE'] ?? $arPrice['PRINT_DISCOUNT_VALUE'] ?? '';
+	        $pct = isset($arPrice['PERCENT']) ? (float)$arPrice['PERCENT'] : (float)($arPrice['DISCOUNT_DIFF_PERCENT'] ?? 0);
+	        $discAmt = isset($arPrice['DISCOUNT']) ? (float)$arPrice['DISCOUNT'] : null;
+	        $arData['prices'][$code] = [
+	            'title' => !empty($arPrice['TITLE']) ? $arPrice['TITLE'] : $arPrice['CODE'],
+	            'id' => $arPrice['PRICE_ID'],
+	            'quantity' => [
+	                'from' => $arPrice['QUANTITY_FROM'] !== null ? Type::toFloat($arPrice['QUANTITY_FROM']) : null,
+	                'to' => $arPrice['QUANTITY_TO'] !== null ? Type::toFloat($arPrice['QUANTITY_TO']) : null
+	            ],
+	            'base' => [
+	                'value' => $baseValue,
+	                'display' => $baseDisplay
+	            ],
+	            'discount' => [
+	                'use' => $pct > 0.00001
+	                    || ($discAmt !== null && $discAmt > 0)
+	                    || (float)($arPrice['DISCOUNT_DIFF_PERCENT'] ?? 0) > 0,
+	                'percent' => isset($arPrice['PERCENT']) ? $arPrice['PERCENT'] : ($arPrice['DISCOUNT_DIFF_PERCENT'] ?? 0),
+	                'value' => $sellValue,
+	                'display' => $sellDisplay,
+	                'difference' => $arPrice['PRINT_DISCOUNT'] ?? $arPrice['PRINT_DISCOUNT_DIFF'] ?? ''
+	            ],
+	            'currency' => Loader::includeModule('currency') ? CCurrencyLang::GetFormatDescription($arPrice['CURRENCY']) : null,
+				'code' => $code
+	        ];
 
-        unset($arPrice);
+        	unset($arPrice);
+   	
     }
 
     if ($bOffer) {

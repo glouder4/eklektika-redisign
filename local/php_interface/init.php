@@ -12,7 +12,8 @@ use intec\eklectika\advertising_agent\Company;
 CModule::IncludeModule("intec.eklectika");
 
 define('IBLOCK_ID_1C', 45);
-define('URL_B24', 'https://bitrix.yomerch.ru/');
+$is_test_server = true;
+define('URL_B24', ($is_test_server) ? 'https://testbitrix.yomerch.ru/' : 'https://bitrix.yomerch.ru/');
 define("EXLUDED_ORDER_KEYS",["KO","UD","KP",'SD']);
 define("EXLUDED_RESERVE_KEYS",["RO", "RC", "R"]);
 define("EXLUDED_SAMPLE_KEYS",["OB","SS", "SO", "SC","OG"]);

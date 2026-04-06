@@ -4,7 +4,7 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 
 use Bitrix\Main\ModuleManager;
 
-$APPLICATION->SetTitle("Личный кабинет пользователя");
+$APPLICATION->SetTitle("Личный кабинет");
 CModule::IncludeModule("intec.eklectika");
 
 
