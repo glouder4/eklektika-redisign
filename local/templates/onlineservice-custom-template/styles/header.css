@@ -1078,10 +1078,12 @@ a.mobile-menu__call-btn{
 
 #profile_fields--wrapper:hover,
 #profileBtns a.header__icon.header__icon--user:hover +#profile_fields--wrapper,
+#profileBtns>.header__icon--user:hover +#profile_fields--wrapper,
 #profile_fields--wrapper.hover{
     visibility: visible;
     opacity: 1;
 }
+
 
 
 /* Стили для выпадающего меню профиля */

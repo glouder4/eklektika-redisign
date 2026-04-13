@@ -81,6 +81,13 @@ final class CatalogPriceFloor
         if (self::$handlersRegistered) {
             return;
         }
+
+        if (self::isAdminSection()) {
+            self::$handlersRegistered = true;
+
+            return;
+        }
+
         self::$handlersRegistered = true;
 
         if (!\function_exists('AddEventHandler')) {
@@ -107,10 +114,22 @@ final class CatalogPriceFloor
     }
 
     /**
+     * Раздел администрирования: не подменяем цены/скидки (редактирование заказа, каталог в админке и т.д.).
+     */
+    private static function isAdminSection(): bool
+    {
+        return \defined('ADMIN_SECTION') && ADMIN_SECTION === true;
+    }
+
+    /**
      * Кастомная логика цен (пол, витрина, мини-корзина, обработчики каталога) — только для авторизованных пользователей.
      */
     public static function isPricingOverrideActive(): bool
     {
+        if (self::isAdminSection()) {
+            return false;
+        }
+
         global $USER;
         if (!\is_object($USER) || !\method_exists($USER, 'IsAuthorized')) {
             return false;
@@ -2483,6 +2502,36 @@ final class CatalogPriceFloor
             return;
         }
 
+        // Для оформления/сохранения заказа применяем ту же маркетинговую цену, что и в витрине/корзине.
+        // Иначе в заказ может уйти "оптовая" цена без скидки при корректном визуальном отображении.
+        $groups = self::getCurrentUserGroupArrayForPricing();
+        $siteId = \defined('SITE_ID') ? SITE_ID : null;
+        $calc = self::computeAdvertisingWholesaleMarketingBreakdown($productId, $groups, 'N', $siteId, false, $currency);
+
+        if ($calc !== null && (float)($calc['base'] ?? 0) > 0) {
+            $newUnit = (float)($calc['final'] ?? 0);
+            if ($newUnit > 0) {
+                $fullUnit = (($calc['discount_source'] ?? '') === 'catalog_advertising_list')
+                    ? $newUnit
+                    : \max((float)($calc['base'] ?? 0), $newUnit);
+
+                self::debugLog('basket: применяем marketing/floor цену', [
+                    'productId' => $productId,
+                    'basketId' => $item->getId(),
+                    'oldPrice' => (float)$item->getField('PRICE'),
+                    'newPrice' => $newUnit,
+                    'newBase' => $fullUnit,
+                    'discountSource' => $calc['discount_source'] ?? null,
+                ]);
+
+                $item->setField('CUSTOM_PRICE', 'Y');
+                $item->setField('PRICE', $newUnit);
+                $item->setField('BASE_PRICE', $fullUnit);
+
+                return;
+            }
+        }
+
         $floor = self::getPurchaseFloorForProductOrParent($productId, $currency);
         if ($floor === null) {
             self::debugLog('basket: пол не задан', ['productId' => $productId, 'currency' => $currency]);
@@ -2557,17 +2606,18 @@ final class CatalogPriceFloor
         $rowData['DISCOUNT_PRICE_FORMATED'] = self::currencyFormatForDisplay($discUnit, $currency);
 
         if ($fullUnit > 0.00001) {
-            $rowData['DISCOUNT_PRICE_PERCENT'] = \round(100 * (1 - $newUnit / $fullUnit), 2);
+            $pctRaw = 100 * (1 - $newUnit / $fullUnit);
+            $rowData['DISCOUNT_PRICE_PERCENT'] = \round($pctRaw, 2);
         } else {
+            $pctRaw = 0.0;
             $rowData['DISCOUNT_PRICE_PERCENT'] = 0.0;
         }
         $pct = (float)$rowData['DISCOUNT_PRICE_PERCENT'];
         if ($pct <= 0.00001) {
             $rowData['DISCOUNT_PRICE_PERCENT_FORMATED'] = '0%';
         } else {
-            $pctStr = \number_format($pct, 2, '.', '');
-            $pctStr = \rtrim(\rtrim($pctStr, '0'), '.');
-            $rowData['DISCOUNT_PRICE_PERCENT_FORMATED'] = $pctStr . '%';
+            // Только визуал: цены не меняем, округляем процент для стикера/колонки «Скидка».
+            $rowData['DISCOUNT_PRICE_PERCENT_FORMATED'] = (string)(int)\round($pctRaw) . '%';
         }
 
         $sumLine = \Bitrix\Sale\PriceMaths::roundPrecision($newUnit * $qty);

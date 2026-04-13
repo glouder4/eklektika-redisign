@@ -1,6 +1,7 @@
 <? if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
 
 use Bitrix\Main\Localization\Loc;
+use Bitrix\Main\Loader;
 
 /**
  * @var array $arParams
@@ -10,6 +11,178 @@ use Bitrix\Main\Localization\Loc;
 
 $component = $this->__component;
 $component::scaleImages($arResult['JS_DATA'], $arParams['SERVICES_IMAGES_SCALING']);
+
+// В checkout данные корзины приходят в JS_DATA.GRID.ROWS/TOTAL.
+// Применяем тот же post-processing цен, что и в мини-корзине/корзине.
+if (class_exists(\OnlineService\Site\CatalogPriceFloor::class)
+    && \OnlineService\Site\CatalogPriceFloor::isPricingOverrideActive()
+    && !empty($arResult['JS_DATA']['GRID']['ROWS'])
+    && is_array($arResult['JS_DATA']['GRID']['ROWS'])) {
+    $basketProductMap = [];
+    $needBasketResolve = false;
+    foreach ($arResult['JS_DATA']['GRID']['ROWS'] as $rowProbe) {
+        if (!is_array($rowProbe)) {
+            continue;
+        }
+        $rowDataProbe = (isset($rowProbe['data']) && is_array($rowProbe['data'])) ? $rowProbe['data'] : [];
+        $basketIdProbe = (int)($rowDataProbe['ID'] ?? 0);
+        $productIdProbe = (int)($rowDataProbe['PRODUCT_ID'] ?? 0);
+
+        if ($productIdProbe <= 0 && $basketIdProbe > 0) {
+            $needBasketResolve = true;
+            break;
+        }
+    }
+
+    if ($needBasketResolve && Loader::includeModule('sale') && class_exists(\Bitrix\Sale\Internals\BasketTable::class)) {
+        $basketIds = [];
+
+        foreach ($arResult['JS_DATA']['GRID']['ROWS'] as $rowProbe) {
+            if (!is_array($rowProbe)) {
+                continue;
+            }
+            $rowDataProbe = (isset($rowProbe['data']) && is_array($rowProbe['data'])) ? $rowProbe['data'] : [];
+            $basketId = (int)($rowDataProbe['ID'] ?? 0);
+            if ($basketId > 0) {
+                $basketIds[] = $basketId;
+            }
+        }
+
+        $basketIds = array_values(array_unique($basketIds));
+
+        if (!empty($basketIds)) {
+            $rsBasket = \Bitrix\Sale\Internals\BasketTable::getList([
+                'filter' => ['@ID' => $basketIds],
+                'select' => ['ID', 'PRODUCT_ID'],
+            ]);
+
+            while ($basketRow = $rsBasket->fetch()) {
+                $basketProductMap[(int)$basketRow['ID']] = (int)$basketRow['PRODUCT_ID'];
+            }
+        }
+    }
+
+    $sumDiscount = 0.0;
+    $sumBase = 0.0;
+
+    foreach ($arResult['JS_DATA']['GRID']['ROWS'] as &$row) {
+        if (!is_array($row) || !isset($row['data']) || !is_array($row['data'])) {
+            continue;
+        }
+        $rowData =& $row['data'];
+
+        if ((int)($rowData['PRODUCT_ID'] ?? 0) <= 0) {
+            $basketId = (int)($rowData['ID'] ?? 0);
+            if ($basketId > 0 && isset($basketProductMap[$basketId]) && $basketProductMap[$basketId] > 0) {
+                $rowData['PRODUCT_ID'] = $basketProductMap[$basketId];
+            }
+        }
+
+        // Нормализуем структуру строки под applyFloorToBasketRowRenderData.
+        if (!isset($rowData['CURRENCY']) || $rowData['CURRENCY'] === '') {
+            $rowData['CURRENCY'] = (string)($arResult['JS_DATA']['CURRENCY'] ?? '');
+        }
+        if (!isset($rowData['FULL_PRICE']) && isset($rowData['BASE_PRICE'])) {
+            $rowData['FULL_PRICE'] = (float)$rowData['BASE_PRICE'];
+        }
+
+        \OnlineService\Site\CatalogPriceFloor::applyFloorToBasketRowRenderData($rowData);
+
+        // Синхронизация полей, которые читает JS checkout.
+        if (isset($rowData['SUM_PRICE_FORMATED'])) {
+            $rowData['SUM'] = $rowData['SUM_PRICE_FORMATED'];
+            if (isset($row['columns']) && is_array($row['columns'])) {
+                $row['columns']['SUM'] = $rowData['SUM_PRICE_FORMATED'];
+            }
+        }
+        if (isset($rowData['PRICE_FORMATED']) && isset($row['columns']) && is_array($row['columns'])) {
+            $row['columns']['PRICE_FORMATED'] = $rowData['PRICE_FORMATED'];
+        }
+        if (isset($rowData['DISCOUNT_PRICE_PERCENT_FORMATED']) && isset($row['columns']) && is_array($row['columns'])) {
+            $row['columns']['DISCOUNT_PRICE_PERCENT_FORMATED'] = $rowData['DISCOUNT_PRICE_PERCENT_FORMATED'];
+        }
+        if (isset($rowData['SUM_FULL_PRICE_FORMATED']) && isset($row['columns']) && is_array($row['columns'])) {
+            $rowData['SUM_BASE_FORMATED'] = $rowData['SUM_FULL_PRICE_FORMATED'];
+        }
+
+        $sumDiscount += (float)($rowData['SUM_PRICE'] ?? $rowData['SUM_NUM'] ?? 0);
+        $sumBase += (float)($rowData['SUM_FULL_PRICE'] ?? $rowData['SUM_BASE'] ?? 0);
+    }
+    unset($row);
+
+    if (!empty($arResult['JS_DATA']['TOTAL']) && is_array($arResult['JS_DATA']['TOTAL'])) {
+        $total =& $arResult['JS_DATA']['TOTAL'];
+        $currency = (string)($arResult['JS_DATA']['CURRENCY'] ?? '');
+
+        if ($currency === '' && !empty($arResult['JS_DATA']['GRID']['ROWS'][0]['data']['CURRENCY'])) {
+            $currency = (string)$arResult['JS_DATA']['GRID']['ROWS'][0]['data']['CURRENCY'];
+        }
+        if ($currency === '') {
+            $currency = (string)($arResult['BASE_LANG_CURRENCY'] ?? '');
+        }
+        if ($currency === '' && defined('DEFAULT_CURRENCY')) {
+            $currency = (string)DEFAULT_CURRENCY;
+        }
+        if ($currency === '') {
+            $currency = 'RUB';
+        }
+
+        $formatMoney = static function (float $value) use ($currency): string {
+            if (function_exists('SaleFormatCurrency')) {
+                return SaleFormatCurrency($value, $currency);
+            }
+            if (class_exists(\CCurrencyLang::class)) {
+                return \CCurrencyLang::CurrencyFormat($value, $currency, true);
+            }
+
+            return (string)$value;
+        };
+
+        $round = static function (float $value): float {
+            if (class_exists(\Bitrix\Sale\PriceMaths::class)) {
+                return \Bitrix\Sale\PriceMaths::roundPrecision($value);
+            }
+
+            return round($value, 2);
+        };
+
+        $newOrderPrice = $round($sumDiscount);
+        $newBasePrice = $round($sumBase);
+        $oldOrderPrice = (float)($total['ORDER_PRICE'] ?? $newOrderPrice);
+        $oldBasePrice = (float)($total['PRICE_WITHOUT_DISCOUNT_VALUE'] ?? $newBasePrice);
+        $oldBasketDiff = max(0.0, $round($oldBasePrice - $oldOrderPrice));
+        $oldTotalDiscount = (float)($total['DISCOUNT_PRICE'] ?? 0);
+        $coreOrderDiscount = max(0.0, $round($oldTotalDiscount - $oldBasketDiff));
+        $newBasketDiff = max(0.0, $round($newBasePrice - $newOrderPrice));
+        $newDiscount = $round($coreOrderDiscount + $newBasketDiff);
+        $delta = $newOrderPrice - $oldOrderPrice;
+
+        $total['ORDER_PRICE'] = $newOrderPrice;
+        $total['ORDER_PRICE_FORMATED'] = $formatMoney($newOrderPrice);
+
+        $total['PRICE_WITHOUT_DISCOUNT_VALUE'] = $newBasePrice;
+        $total['PRICE_WITHOUT_DISCOUNT'] = $formatMoney($newBasePrice);
+        $total['BASKET_PRICE_DISCOUNT_DIFF_VALUE'] = $newBasketDiff;
+        $total['BASKET_PRICE_DISCOUNT_DIFF'] = $formatMoney($newBasketDiff);
+
+        $total['DISCOUNT_PRICE'] = $newDiscount;
+        $total['DISCOUNT_PRICE_FORMATED'] = $formatMoney($newDiscount);
+
+        $pctDiscount = $newBasePrice > 0 ? 100 * $newDiscount / $newBasePrice : 0.0;
+        $total['DISCOUNT_PERCENT'] = round($pctDiscount, 2);
+        $total['DISCOUNT_PERCENT_FORMATED'] = (string)(int)round($pctDiscount);
+
+        if (isset($total['ORDER_TOTAL_PRICE'])) {
+            $total['ORDER_TOTAL_PRICE'] = $round((float)$total['ORDER_TOTAL_PRICE'] + $delta);
+            $total['ORDER_TOTAL_PRICE_FORMATED'] = $formatMoney((float)$total['ORDER_TOTAL_PRICE']);
+        }
+
+        if (array_key_exists('ORDER_TOTAL_LEFT_TO_PAY', $total) && $total['ORDER_TOTAL_LEFT_TO_PAY'] !== null) {
+            $total['ORDER_TOTAL_LEFT_TO_PAY'] = $round((float)$total['ORDER_TOTAL_LEFT_TO_PAY'] + $delta);
+            $total['ORDER_TOTAL_LEFT_TO_PAY_FORMATED'] = $formatMoney((float)$total['ORDER_TOTAL_LEFT_TO_PAY']);
+        }
+    }
+}
 
 $arParams['ALLOW_USER_PROFILES'] = $arParams['ALLOW_USER_PROFILES'] === 'Y' ? 'Y' : 'N';
 $arParams['SKIP_USELESS_BLOCK'] = $arParams['SKIP_USELESS_BLOCK'] === 'N' ? 'N' : 'Y';

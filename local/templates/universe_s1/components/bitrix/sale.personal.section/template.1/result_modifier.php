@@ -176,7 +176,7 @@ if ($arParams['SHOW_ACCOUNT_PAGE'] === 'Y') {
 }*/
 $arResult['ITEMS']['KP'] = [
     'PATH' => isset($arParams['PATH_TO_KP']) ? $arParams['PATH_TO_KP'] : $arResult['SEF_FOLDER'].'?SECTION=kp',
-    'NAME' => 'Комерческие предложения',
+    'NAME' => 'Коммерческие предложения',
     'ICON' => '<i class="fa fa-handshake"></i>',
     'ACTIVE' => empty($sPageSection) ? $sPageUrl == $arParams['PATH_TO_KP'] : $sPageSection == 'kp'
 ];
@@ -219,7 +219,7 @@ if ($arParams['SHOW_BASKET_PAGE'] === 'Y') {
 /*if (isAgent()) {
 	$arResult['ITEMS']['KP'] = [
 	        'PATH' => isset($arParams['PATH_TO_KP']) ? $arParams['PATH_TO_KP'] : $arResult['SEF_FOLDER'].'?SECTION=kp',
-	        'NAME' => 'Комерческие предложения',
+	        'NAME' => 'Коммерческие предложения',
 	        'ICON' => '<i class="fa fa-handshake"></i>',
 	        'ACTIVE' => empty($sPageSection) ? $sPageUrl == $arParams['PATH_TO_KP'] : $sPageSection == 'kp'
 	    ];

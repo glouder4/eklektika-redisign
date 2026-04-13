@@ -8708,7 +8708,11 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 			{
 				discText = this.params.MESS_ECONOMY;
 				if (total.DISCOUNT_PERCENT_FORMATED && parseFloat(total.DISCOUNT_PERCENT_FORMATED) > 0)
-					discText += total.DISCOUNT_PERCENT_FORMATED;
+				{
+					var discPct = Math.round(parseFloat(total.DISCOUNT_PERCENT_FORMATED));
+					if (discPct > 0)
+						discText += ' ' + discPct + '%';
+				}
 
 				this.totalInfoBlockNode.appendChild(this.createTotalUnit(discText + ':', total.DISCOUNT_PRICE_FORMATED, {highlighted: true}));
 			}

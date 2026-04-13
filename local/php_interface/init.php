@@ -12,7 +12,7 @@ use intec\eklectika\advertising_agent\Company;
 CModule::IncludeModule("intec.eklectika");
 
 define('IBLOCK_ID_1C', 45);
-$is_test_server = true;
+$is_test_server = false;
 define('URL_B24', ($is_test_server) ? 'https://testbitrix.yomerch.ru/' : 'https://bitrix.yomerch.ru/');
 define("EXLUDED_ORDER_KEYS",["KO","UD","KP",'SD']);
 define("EXLUDED_RESERVE_KEYS",["RO", "RC", "R"]);
@@ -20,6 +20,9 @@ define("EXLUDED_SAMPLE_KEYS",["OB","SS", "SO", "SC","OG"]);
 
 require_once __DIR__.'/../classes/requires.php'; // Подключение кастомных обработчиков
 
+if (class_exists(\OnlineService\Site\CatalogPriceFloor::class)) {
+    \OnlineService\Site\CatalogPriceFloor::bootstrap();
+}
 
 function pre($o) {
 
