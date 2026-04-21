@@ -16,6 +16,7 @@
 
 ### 🗺️ Архитектура и сопровождение кода
 - **[Сегменты `local/classes` и модули `eklektika.*`](./local_classes_segments_and_modules.md)** ✅ — Карта доменных сегментов, bootstrap (`init.php`, `requires.php`, модули `eklektika.*`), инвентаризация legacy-глобалей и матрица `allowed dependencies` (ST-09/ST-10), связь с Bitrix24; постобработка обмена с 1С — **`eklektika.catalog.import`** (`OnlineService\Catalog\Import1c\*`).
+- **[Debug-контракт pricing](./catalog_pricing_debug_contract.md)** ✅ — Безопасные runtime-флаги отладки (`os_price_debug`, `os_price_debug_breakdown`, `os_price_debug_product`) для `eklektika.catalog.pricing`.
 
 ### 🛒 Система заказов (в разработке)
 - **Кастомные поля заказов** - Дополнительные поля для заказов
@@ -82,6 +83,7 @@
 - ✅ **Интеграция с Bitrix24** - Полностью задокументировано
 - ✅ **Методы работы с компаниями пользователей** - Полностью задокументировано
 - ✅ **Карта сегментов local/classes (модули eklektika.\*)** — Сегменты и границы модулей (ST-01)
+- ✅ **Debug-контракт pricing** — Runtime-отладка `CatalogPriceFloor` без `pre()/die()`
 - 📋 **Система заказов** - Планируется к документированию
 - 📋 **Файловая система** - Планируется к документированию
 

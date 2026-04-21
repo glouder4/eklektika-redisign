@@ -231,6 +231,36 @@ final class CatalogPriceFloor
         @\file_put_contents($path, $line, FILE_APPEND | LOCK_EX);
     }
 
+    private static function isDebugFlagEnabled(string $name): bool
+    {
+        return isset($_GET[$name]) && (string)$_GET[$name] === '1';
+    }
+
+    private static function getDebugProductFilter(): int
+    {
+        return isset($_GET['os_price_debug_product']) ? (int)$_GET['os_price_debug_product'] : 0;
+    }
+
+    private static function isDebugEnabledForProduct(int $productId): bool
+    {
+        if (!self::isDebugFlagEnabled('os_price_debug')) {
+            return false;
+        }
+        $debugProductFilter = self::getDebugProductFilter();
+
+        return $debugProductFilter <= 0 || $productId === $debugProductFilter;
+    }
+
+    private static function isDebugBreakdownEnabledForProduct(int $productId): bool
+    {
+        if (!self::isDebugFlagEnabled('os_price_debug_breakdown')) {
+            return false;
+        }
+        $debugProductFilter = self::getDebugProductFilter();
+
+        return $debugProductFilter <= 0 || $productId === $debugProductFilter;
+    }
+
     /**
      * Округление денежной суммы по правилам валюты (как в Bitrix Sale: {@see \Bitrix\Sale\PriceMaths::roundByFormatCurrency}).
      */
@@ -919,31 +949,21 @@ final class CatalogPriceFloor
     }
 
     /**
-     * Отладка расчёта «опт + маркетинг/группа + пол»: pre()+die().
-     * URL: ?os_price_debug_breakdown=1; при необходимости &os_price_debug_product=ID_ТП.
+     * Совместимость вызовов debug-хука: активная отладочная остановка отключена.
      *
      * @param array<string, mixed> $breakdown результат computeAdvertisingWholesaleMarketingBreakdown
      * @param array<string, mixed> $extra
      */
     private static function maybeDebugBreakdownDie(int $productId, string $label, array $breakdown, array $extra = []): void
     {
-        if (!isset($_GET['os_price_debug_breakdown']) || (string)$_GET['os_price_debug_breakdown'] !== '1') {
+        if (!self::isDebugBreakdownEnabledForProduct($productId)) {
             return;
         }
-        $filter = isset($_GET['os_price_debug_product']) ? (int)$_GET['os_price_debug_product'] : 0;
-        if ($filter > 0 && $productId !== $filter) {
-            return;
-        }
-        if (!\function_exists('pre')) {
-            return;
-        }
-        \pre(\array_merge([
-            'os_price_debug_breakdown' => $label,
+        self::debugLog('os_price_debug_breakdown: ' . $label, [
             'productId' => $productId,
-            '_GET' => $_GET,
             'breakdown' => $breakdown,
-        ], $extra));
-        die();
+            'extra' => $extra,
+        ]);
     }
 
     /**
@@ -2569,6 +2589,51 @@ final class CatalogPriceFloor
     }
 
     /**
+     * Публичный фасад для получения процента скидки компании по группам пользователя.
+     * Fail-safe: любые проблемы контракта Company приводят к 0.0 без фатала.
+     *
+     * @param array<int|string> $userGroupIds
+     */
+    public static function getCompanyDiscountPercentForUserGroups(array $userGroupIds): float
+    {
+        if ($userGroupIds === []) {
+            return 0.0;
+        }
+
+        if (!\class_exists(Company::class)) {
+            return 0.0;
+        }
+
+        try {
+            $percent = (float) Company::getMaxCompanyDiscountPercentForUserGroups($userGroupIds);
+        } catch (\Throwable $e) {
+            self::debugLog('company discount percent fallback: Company contract unavailable', [
+                'error' => $e->getMessage(),
+            ]);
+
+            return 0.0;
+        }
+
+        if (!\is_finite($percent) || $percent <= 0.0) {
+            return 0.0;
+        }
+
+        return $percent;
+    }
+
+    /**
+     * Публичный фасад для текущего авторизованного пользователя.
+     */
+    public static function getCurrentUserCompanyDiscountPercent(): float
+    {
+        if (!self::isCatalogPricingUserAuthorized()) {
+            return 0.0;
+        }
+
+        return self::getCompanyDiscountPercentForUserGroups(self::getCurrentUserGroupArrayForPricing());
+    }
+
+    /**
      * @return list<int|string>
      */
     private static function getCurrentUserGroupArrayForPricing(): array
@@ -3094,13 +3159,7 @@ final class CatalogPriceFloor
             return;
         }
 
-        $priceDebug = isset($_GET['os_price_debug']) && (string)$_GET['os_price_debug'] === '1';
-        $debugProductFilter = isset($_GET['os_price_debug_product'])
-            ? (int)$_GET['os_price_debug_product']
-            : 0;
-        if ($priceDebug && $debugProductFilter > 0 && $productId !== $debugProductFilter) {
-            $priceDebug = false;
-        }
+        $priceDebug = self::isDebugEnabledForProduct($productId);
 
         $debugBefore = null;
         if ($priceDebug) {
@@ -3200,7 +3259,7 @@ final class CatalogPriceFloor
 
         self::clampAdvertisingCatalogPriceRows($productId, $offer, $optimalMerged);
 
-        if ($priceDebug && \function_exists('pre')) {
+        if ($priceDebug) {
             $currency = '';
             if (!empty($offer['ITEM_PRICES']) && \is_array($offer['ITEM_PRICES'])) {
                 $currency = (string)($offer['ITEM_PRICES'][0]['CURRENCY'] ?? '');
@@ -3262,32 +3321,30 @@ final class CatalogPriceFloor
                     }
                 }
             }
-            pre([
-                '_GET' => $_GET,
+            self::debugLog('os_price_debug: syncCatalogSkuOfferDisplayFromOptimal', [
                 'productId' => $productId,
                 'currency' => $currency,
-                'before_sync' => $debugBefore,
-                'GetOptimalPrice_merged' => $optimalMerged,
-                'opt_RESULT_PRICE' => ($opt !== false && !empty($opt['RESULT_PRICE'])) ? $opt['RESULT_PRICE'] : ($opt === false ? 'false' : 'no RESULT_PRICE'),
-                'optovaya_type_2_on_sku' => $baseOptovaya2,
-                'bitrix_BASE_type_1_on_sku' => $baseBitrix1,
-                'BASE_resolved_orParent_2_then_1' => $baseResolved,
-                'PURCHASE_floor_type_4' => $floor4,
-                'if_20_percent_from_resolved_BASE' => $baseResolved !== null ? \round($baseResolved * 0.8, 4) : null,
-                'if_20_percent_from_360' => \round(360 * 0.8, 4),
-                'ITEM_PRICE_type_3_after' => $type3After,
-                'MIN_PRICE_after' => $offer['MIN_PRICE'] ?? null,
-                'PRICES_debug_after_sync' => self::debugExtractAdvertisingPricesRowsSnapshot($offer),
-                'rp_for_advertising_merge' => $rpForAdvertisingMerge,
-                'debug_catalog_discount' => $debugCatalogDiscount,
-                'debug_wholesale_plus_type3_marketing' => ($currency !== '')
-                    ? self::computeAdvertisingWholesaleMarketingBreakdown($productId, $groups, 'N', $siteId, false, $currency)
-                    : null,
-                'debug_native_gop_bypass_probe' => self::debugProbeNativeAdvertisingGetOptimalPrice($productId, $groups, 'N', $siteId, false),
-                'debug_bitrix_discount_options' => self::debugBitrixDiscountModeOptions(),
-                'hint' => 'Скидка в «Маркетинге» по типу цены попадает в GOP, если не включён режим «только скидки магазина» (см. debug_bitrix_discount_options). Только breakdown: ?os_price_debug_breakdown=1&os_price_debug_product=ID_ТП. Полный дамп: ?os_price_debug=1. ',
+                'debug_before' => $debugBefore,
+                'debug_after' => [
+                    'MIN_PRICE' => $offer['MIN_PRICE'] ?? null,
+                    'ITEM_PRICE_type_3' => $type3After,
+                    'PRICES_snapshot_after_sync' => self::debugExtractAdvertisingPricesRowsSnapshot($offer),
+                ],
+                'catalog_discount_probe' => $debugCatalogDiscount,
+                'base_resolved' => $baseResolved,
+                'base_optovaya_type_2' => $baseOptovaya2,
+                'base_fallback_type_1' => $baseBitrix1,
+                'purchase_floor_type_4' => $floor4,
+                'optimal_merged' => $optimalMerged,
+                'native_gop_probe' => self::debugProbeNativeAdvertisingGetOptimalPrice(
+                    $productId,
+                    $groups,
+                    'N',
+                    $siteId,
+                    false
+                ),
+                'bitrix_discount_mode' => self::debugBitrixDiscountModeOptions(),
             ]);
-            die();
         }
     }
 

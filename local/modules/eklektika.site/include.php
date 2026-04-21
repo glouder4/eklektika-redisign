@@ -8,10 +8,10 @@ use Bitrix\Main\Loader;
  * Контент сайта: настройки страницы (Page editor), поисковый bootstrap.
  * Зависимости: ядро Bitrix, iblock (в рантайме внутри PageSettings).
  */
-Loader::registerAutoLoadClasses('eklektika.site', [
-    \OnlineService\Site\PageSettings::class => 'lib/PageSettings.php',
-    \OnlineService\Site\SearchIndexingBootstrap::class => 'lib/SearchIndexingBootstrap.php',
-    \OnlineService\Site\Config\SiteModuleConfig::class => 'lib/Config/SiteModuleConfig.php',
+Loader::registerAutoLoadClasses(null, [
+    \OnlineService\Site\PageSettings::class => '/local/modules/eklektika.site/lib/PageSettings.php',
+    \OnlineService\Site\SearchIndexingBootstrap::class => '/local/modules/eklektika.site/lib/SearchIndexingBootstrap.php',
+    \OnlineService\Site\Config\SiteModuleConfig::class => '/local/modules/eklektika.site/lib/Config/SiteModuleConfig.php',
 ]);
 
 require_once __DIR__ . '/lib/PageEditorGlobalFunctions.php';

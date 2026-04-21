@@ -124,13 +124,6 @@ final class RestClient
 
         \curl_close($curl);
 
-        if ($debug && \function_exists('pre')) {
-            \pre('=== CURL GET (kit) ===');
-            \pre('URL: ' . $queryUrl);
-            \pre('HTTP Code: ' . $httpCode);
-            \pre('Raw Response: ' . $result);
-        }
-
         if ($curlErrno) {
             return [
                 'success' => 0,
@@ -187,21 +180,7 @@ final class RestClient
 
         \curl_close($curl);
 
-        if ($debug && \function_exists('pre')) {
-            \pre('=== CURL Request Details ===');
-            \pre('URL: ' . $queryUrl);
-            \pre('Params: ' . \print_r($params, true));
-            \pre('HTTP Code: ' . $httpCode);
-            \pre('CURL Error: ' . $curlError);
-            \pre('CURL Errno: ' . $curlErrno);
-            \pre('Raw Response: ' . $result);
-        }
-
         if ($curlErrno) {
-            if (\function_exists('pre')) {
-                \pre('CURL Error occurred: ' . $curlError);
-            }
-
             return [
                 'success' => 0,
                 'error' => 'CURL Error: ' . $curlError,
@@ -210,10 +189,6 @@ final class RestClient
         }
 
         if ($httpCode !== 200) {
-            if ($debug && \function_exists('pre')) {
-                \pre('HTTP Error: ' . $httpCode);
-            }
-
             return [
                 'success' => 0,
                 'error' => 'HTTP Error: ' . $httpCode,
@@ -224,22 +199,11 @@ final class RestClient
         $decodedResult = \json_decode($result, true);
 
         if (\json_last_error() !== JSON_ERROR_NONE) {
-            if ($debug && \function_exists('pre')) {
-                \pre('JSON Parse Error: ' . \json_last_error_msg());
-                \pre('Raw response that failed to parse: ' . $result);
-            }
-
             return [
                 'success' => 0,
                 'error' => 'JSON Parse Error: ' . \json_last_error_msg(),
                 'raw_response' => $result,
             ];
-        }
-
-        if ($debug && \function_exists('pre')) {
-            \pre('=== Parsed Response ===');
-            \pre($decodedResult);
-            \die();
         }
 
         return $decodedResult;

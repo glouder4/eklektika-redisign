@@ -74,7 +74,6 @@
          */
         public function getUserIDByB24ID($b24ContactId){
             if (empty($b24ContactId)) {
-                pre("Error: B24 Contact ID is required");
                 return false;
             }
 
@@ -89,7 +88,6 @@
             if ($userObject = $rsUser->Fetch()) {
                 return $userObject['ID'];
             } else {
-                //pre("User not found for B24 contact ID: " . $b24ContactId);
                 return false;
             }
         }
@@ -137,7 +135,6 @@
          */
         public function updateContact($contactId){
             if (empty($contactId)) {
-                pre("Error: Contact ID is required");
                 return false;
             }
 
@@ -150,10 +147,8 @@
             /*$response = $this->sendRequest($arFields);
 
             if ($response['success'] == 1) {
-                pre("Contact data retrieved from B24: " . print_r($response['data'], true));
                 return $response['data'];
             } else {
-                pre("Error getting contact data from B24: " . print_r($response, true));
                 return false;
             }*/
         }
@@ -227,7 +222,6 @@
             
             // Проверяем, не добавлен ли пользователь уже в эту группу
             if (in_array($groupId, $userGroups)) {
-                pre("Пользователь ID " . $userId . " уже находится в группе " . $groupId);
                 return true;
             }
             
@@ -373,7 +367,6 @@
             $userData = $rsUser->Fetch();
             
             if (!$userData) {
-                pre("Пользователь ID " . $userId . " не найден");
                 return false;
             }
             
@@ -394,10 +387,8 @@
             $result = $user->Update($userId, $arFields);
             
             if ($result) {
-                //pre("Пользователь ID " . $userId . " удален из группы " . $groupId);
                 return true;
             } else {
-                //pre("Ошибка удаления пользователя ID " . $userId . " из группы " . $groupId . ": " . $user->LAST_ERROR);
                 return false;
             }
         }
@@ -412,7 +403,6 @@
             }
             
             if (!$groupData) {
-                pre("Ошибка: группа рекламных агентов не найдена");
                 return false;
             }
             
@@ -477,7 +467,6 @@
         public function update($fields){
             // Проверяем обязательные поля
             if (empty($fields['B24_ID'])) {
-                pre("Error: B24 Contact ID is required for user update");
                 return false;
             }
 
@@ -491,7 +480,6 @@
             $fields['UF_MANAGER2'] = $this->getManagerID($fields['SECOND_MANAGER']);
             
             if (!$this->userId) {
-                pre("Error: User not found for B24 contact ID: " . $b24ID);
                 return false;
             }
 
@@ -585,7 +573,6 @@
                 if (!in_array($this->DIRECTOR_GROUP_ID, $userGroups)) {
                     $userGroups[] = $this->DIRECTOR_GROUP_ID;
                     \CUser::SetUserGroup($this->userId, $userGroups);
-                    pre("User ID " . $this->userId . " added to Directors group (ID: " . $this->DIRECTOR_GROUP_ID . ")");
                 }
             } else if (!$fields['UF_IS_DIRECTOR'] && $fields['ACTION'] == "UPDATE_CONTACT") {
                 // Убираем пользователя из группы руководителей при снятии галочки
@@ -593,17 +580,14 @@
                 if (($key = array_search($this->DIRECTOR_GROUP_ID, $userGroups)) !== false) {
                     unset($userGroups[$key]);
                     \CUser::SetUserGroup($this->userId, $userGroups);
-                    pre("User ID " . $this->userId . " removed from Directors group (ID: " . $this->DIRECTOR_GROUP_ID . ")");
                 }
             }
 
             $result = $user->Update($this->userId, $fields);
 
             if ($result) {
-                pre("User updated successfully on site");
                 return true;
             } else {
-                pre("Error updating user on site: " . $user->LAST_ERROR);
                 return false;
             }
         }
@@ -611,7 +595,6 @@
         public function updateBatch($fields){
             // Проверяем обязательные поля
             if (empty($fields['CONTACT_IDS'])) {
-                pre("Error: CONTACT_IDS is required for user update");
                 return false;
             }
 
@@ -647,7 +630,6 @@
             }
 
             if (empty($userId)) {
-                pre("Error: User ID is required");
                 return false;
             }
 
@@ -695,7 +677,6 @@
             }
 
             if (empty($userId)) {
-                pre("Error: User ID is required");
                 return false;
             }
 

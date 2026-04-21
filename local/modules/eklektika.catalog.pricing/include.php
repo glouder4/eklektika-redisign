@@ -8,7 +8,7 @@ use Bitrix\Main\Loader;
  * Пол цены, оптовая база, нижняя граница закупки; узкая связь с компанией через
  * OnlineService\Site\Company::getMaxCompanyDiscountPercentForUserGroups (модуль eklektika.company).
  */
-Loader::registerAutoLoadClasses('eklektika.catalog.pricing', [
-    \OnlineService\Site\CatalogPriceFloor::class => 'lib/CatalogPriceFloor.php',
-    \OnlineService\Site\Config\CatalogPricingConfig::class => 'lib/Config/CatalogPricingConfig.php',
+Loader::registerAutoLoadClasses(null, [
+    \OnlineService\Site\CatalogPriceFloor::class => '/local/modules/eklektika.catalog.pricing/lib/CatalogPriceFloor.php',
+    \OnlineService\Site\Config\CatalogPricingConfig::class => '/local/modules/eklektika.catalog.pricing/lib/Config/CatalogPricingConfig.php',
 ]);

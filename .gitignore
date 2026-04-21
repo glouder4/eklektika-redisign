@@ -124,3 +124,4 @@ update_prices.php
 /.idea
 local/tools/restore_admin_group.php
 /local/php_interface/b24_integration_config.php
+/.idea

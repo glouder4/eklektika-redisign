@@ -18,27 +18,26 @@ $defaultWidgets = [
         'left' => 'ЗНАЧЕНИЕ 1',
         'right' => 'ЗНАЧЕНИЕ 2',
     ],
-];
+]; 
 
 $arWidgets = isset($arResult['PERSONAL_WIDGETS']) && is_array($arResult['PERSONAL_WIDGETS'])
     ? array_replace_recursive($defaultWidgets, $arResult['PERSONAL_WIDGETS'])
     : $defaultWidgets;
 
+$isAuthorized = $USER->IsAuthorized();
+$userId = $isAuthorized ? (int)$USER->GetID() : 0;
+$userGroups = $isAuthorized ? array_map('intval', CUser::GetUserGroup($userId)) : [];
+
 // Процент только из групп скидки компании (см. Company::$companyDiscountPercentByAssignedGroupId).
 $discountPct = 0.0;
-if ($USER->IsAuthorized()) {
-    $companyClass = '\\OnlineService\\Site\\Company';
 
-    // Fail-safe для переходного периода рефакторинга: не роняем рендер ЛК при отсутствии модуля/класса.
-    if (!class_exists($companyClass)) {
-        \Bitrix\Main\Loader::includeModule('eklektika.company');
-    }
-
-    if (class_exists($companyClass)) {
-        $discountPct = (float)$companyClass::getMaxCompanyDiscountPercentForUserGroups(
-            CUser::GetUserGroup($USER->GetID())
-        );
-    }
+if (
+    $isAuthorized
+    && class_exists(\OnlineService\Site\Company::class)
+) {
+    $discountPct = (float)\OnlineService\Site\Company::getMaxCompanyDiscountPercentForUserGroups(
+        $userGroups
+    );
 }
 
 $discountLabel = '-' . (int)round($discountPct);
@@ -91,7 +90,7 @@ $renderRing = static function (float $percent) use ($ringR, $ringC) {
     <?php
 };
 
-?> 
+?>
 <div class="personal-widgets">
     <div class="personal-widgets__grid">
         <div class="personal-widgets__card personal-widgets__card--discount">

@@ -4,9 +4,9 @@
     use OnlineService\B24\RestClient;
     use OnlineService\B24\User;
     use OnlineService\Site\Config\CompanyB24Config;
+    use OnlineService\Site\Config\CompanyModuleConfig;
 
     class Company{
-        private int $iblock_id = 57;
         private static $codeProps = [
             "OS_COMPANY_IS_HEAD_OF_HOLDING",
             "OS_COMPANY_BOSS",
@@ -27,40 +27,6 @@
         ];
 
         /**
-         * Маппинг ID группы статуса (после UserGroups::searchGroup) → ID группы для присвоения пользователю.
-         * Ключ и значение — целочисленные ID групп на сайте.
-         *
-         * @var array<int, int>
-         */
-        private static $companyStatusGroupIdMap = [
-            1014 => 94, // 20%
-            1015 => 93, // 25%
-            1016 => 70, // 30%
-            1017 => 1047, // 32%
-            1018 => 1048, // 35%
-            1019 => 1049, // 37%
-            1020 => 1050, // 38%
-            1021 => 1051, // 40%
-        ];
-
-        /**
-         * ID группы пользователя (после mapCompanyStatusGroupId) → процент скидки от оптовой базы на витрине.
-         * Ключи должны совпадать со значениями {@see self::$companyStatusGroupIdMap}.
-         *
-         * @var array<int, float>
-         */
-        private static array $companyDiscountPercentByAssignedGroupId = [
-            94 => 20.0,
-            93 => 25.0,
-            70 => 30.0,
-            1047 => 32.0,
-            1048 => 35.0,
-            1049 => 37.0,
-            1050 => 38.0,
-            1051 => 40.0,
-        ];
-
-        /**
          * Максимальный процент скидки по группам компании (пользователь в одной из b_group из маппинга статуса).
          *
          * @param array<int|string> $userGroupIds
@@ -77,8 +43,9 @@
                     $set[$ig] = true;
                 }
             }
+
             $max = 0.0;
-            foreach (self::$companyDiscountPercentByAssignedGroupId as $gid => $pct) {
+            foreach (CompanyModuleConfig::getCompanyDiscountPercentByAssignedGroupId() as $gid => $pct) {
                 if (isset($set[(int)$gid])) {
                     $max = \max($max, (float)$pct);
                 }
@@ -98,7 +65,9 @@
             }
             $id = (int)$groupId;
 
-            return self::$companyStatusGroupIdMap[$id] ?? $groupId;
+            $statusGroupIdMap = CompanyModuleConfig::getCompanyStatusGroupIdMap();
+
+            return $statusGroupIdMap[$id] ?? $groupId;
         }
 
         /**
@@ -108,7 +77,7 @@
          */
         private static function getCompanyDiscountAssignedGroupIds(): array
         {
-            return array_values(array_unique(array_map('intval', array_values(self::$companyStatusGroupIdMap))));
+            return array_values(array_unique(array_map('intval', array_values(CompanyModuleConfig::getCompanyStatusGroupIdMap()))));
         }
 
         /**
@@ -210,7 +179,7 @@
          * @return int
          */
         public function getIblockId(): int {
-            return $this->iblock_id;
+            return CompanyModuleConfig::COMPANY_IBLOCK_ID;
         }
 
         private static function callB24Method(string $method, array $params, bool $debug = false)
@@ -252,7 +221,7 @@
                 // Обновляем свойство OS_COMPANY_USERS
                 \CIBlockElement::SetPropertyValues(
                     $companyId,
-                    $this->iblock_id,
+                    CompanyModuleConfig::COMPANY_IBLOCK_ID,
                     $currentUsers,
                     'OS_COMPANY_USERS'
                 );
@@ -268,7 +237,7 @@
                 $arLoadProductArray = [
                     "IBLOCK_SECTION_ID" => false,
                     "IBLOCK_TYPE" => 'personal',
-                    "IBLOCK_ID" => $this->iblock_id,
+                    "IBLOCK_ID" => CompanyModuleConfig::COMPANY_IBLOCK_ID,
                     "PROPERTY_VALUES" => $params,
                     "NAME" => $params["OS_COMPANY_NAME"],
                     "ACTIVE" => "N",
@@ -282,8 +251,6 @@
                 return false;
             }
         }
-
-        protected array $orderCustomFieldIds = [8 => "OS_COMPANY_NAME",10 => "OS_COMPANY_INN",12 => "USER_NAME__USER_LASTNAME",13 => "OS_COMPANY_EMAIL",14 => "OS_COMPANY_PHONE"];
 
         /**
          * Обновляет элемент компании в инфоблоке по B24_ID.
@@ -358,7 +325,7 @@
                 $currentProps = [];
                 foreach (self::$codeProps as $code) {
                     $propertyValues = \CIBlockElement::GetProperty(
-                        $this->iblock_id,
+                        CompanyModuleConfig::COMPANY_IBLOCK_ID,
                         $companyId,
                         [],
                         ["CODE" => $code]
@@ -480,7 +447,7 @@
             }
             
             $arFields = [
-                'IBLOCK_ID' => $this->iblock_id,
+                'IBLOCK_ID' => CompanyModuleConfig::COMPANY_IBLOCK_ID,
                 'IBLOCK_TYPE' => 'personal',
                 'NAME' => $params['OS_COMPANY_NAME'] ?? 'Новая компания',
                 'CODE' => $params['OS_COMPANY_B24_ID'],
@@ -592,7 +559,7 @@
 
             $response = [];
 
-            foreach ($this->orderCustomFieldIds as $id => $fieldName){
+            foreach (CompanyModuleConfig::ORDER_CUSTOM_FIELD_IDS as $id => $fieldName){
                 $response[$id] = $company[$fieldName];
             }
             $response[12] = $user['NAME'].' '.$user['LAST_NAME'];
@@ -616,7 +583,7 @@
                 // Загружаем свойства через GetPropertyValues для каждого свойства отдельно
                 foreach (self::$codeProps as $code) {
                     $propertyValues = \CIBlockElement::GetProperty(
-                        $this->iblock_id,
+                        CompanyModuleConfig::COMPANY_IBLOCK_ID,
                         $arFields["ID"],
                         [],
                         ["CODE" => $code]
@@ -672,20 +639,8 @@
 
             curl_close($curl);
 
-            if( $debug ){
-                // Логируем детали запроса
-                pre("=== CURL Request Details ===");
-                pre("URL: " . $queryUrl);
-                pre("Params: " . print_r($params, true));
-                pre("HTTP Code: " . $httpCode);
-                pre("CURL Error: " . $curlError);
-                pre("CURL Errno: " . $curlErrno);
-                pre("Raw Response: " . $result);
-            }
-
             // Обработка ошибок CURL
             if ($curlErrno) {
-                pre("CURL Error occurred: " . $curlError);
                 return [
                     'success' => 0,
                     'error' => 'CURL Error: ' . $curlError,
@@ -695,9 +650,6 @@
 
             // Обработка HTTP ошибок
             if ($httpCode !== 200) {
-                if( $debug )
-                    pre("HTTP Error: " . $httpCode);
-
                 return [
                     'success' => 0,
                     'error' => 'HTTP Error: ' . $httpCode,
@@ -709,19 +661,11 @@
             $decodedResult = json_decode($result, true);
 
             if (json_last_error() !== JSON_ERROR_NONE) {
-                if( $debug ) {
-                    pre("JSON Parse Error: " . json_last_error_msg());
-                    pre("Raw response that failed to parse: " . $result);
-                }
                 return [
                     'success' => 0,
                     'error' => 'JSON Parse Error: ' . json_last_error_msg(),
                     'raw_response' => $result
                 ];
-            }
-            if( $debug ) {
-                pre("=== Parsed Response ===");
-                pre($decodedResult);
             }
 
             return $decodedResult;
@@ -828,7 +772,7 @@
             $rsCompanies = \CIBlockElement::GetList(
                 [],
                 [
-                    'IBLOCK_ID' => $this->iblock_id,
+                    'IBLOCK_ID' => CompanyModuleConfig::COMPANY_IBLOCK_ID,
                     'PROPERTY_OS_HOLDING_OF' => $headCompanyId,
                     'ACTIVE' => 'Y'
                 ],
@@ -863,7 +807,7 @@
                 });
 
                 // Обновляем свойство OS_COMPANY_BOSS
-                \CIBlockElement::SetPropertyValues($companyId, $this->iblock_id, $managers, 'OS_COMPANY_BOSS');
+                \CIBlockElement::SetPropertyValues($companyId, CompanyModuleConfig::COMPANY_IBLOCK_ID, $managers, 'OS_COMPANY_BOSS');
 
                 return true;
             } catch (Exception $e) {
@@ -1436,7 +1380,7 @@
             if (!empty($headCompanyManagers)) {
                 \CIBlockElement::SetPropertyValues(
                     $newCompanyId, 
-                    $this->iblock_id, 
+                    CompanyModuleConfig::COMPANY_IBLOCK_ID, 
                     $headCompanyManagers, 
                     'OS_COMPANY_BOSS'
                 );

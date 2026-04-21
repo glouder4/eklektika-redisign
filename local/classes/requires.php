@@ -1,30 +1,32 @@
 <?php
 
-use Bitrix\Main\Loader;
-
 /**
  * ST-09/ST-10: единая и безопасная цепочка bootstrap для eklektika.* модулей.
  * Порядок загрузки зафиксирован по зависимостям:
  * b24.rest -> company -> catalog.pricing -> site -> catalog.import -> orders.applications -> b24.usersync
  */
-function includeEklektikaModule(string $moduleId): bool
+function requireEklektikaModuleInclude(string $moduleId): bool
 {
-    $included = Loader::includeModule($moduleId);
-    if (!$included) {
-        // Не прерываем bootstrap, чтобы сохранить поведение легаси.
-        trigger_error('Failed to include module: ' . $moduleId, E_USER_WARNING);
+    $moduleIncludePath = $_SERVER['DOCUMENT_ROOT'] . '/local/modules/' . $moduleId . '/include.php';
+
+    if (is_file($moduleIncludePath)) {
+        require_once $moduleIncludePath;
+        return true;
     }
 
-    return $included;
+    // Не прерываем bootstrap, чтобы сохранить поведение легаси.
+    trigger_error('Failed to include module include.php: ' . $moduleId, E_USER_WARNING);
+
+    return false;
 }
 
-includeEklektikaModule('eklektika.b24.rest');
-includeEklektikaModule('eklektika.company');
-includeEklektikaModule('eklektika.catalog.pricing');
-includeEklektikaModule('eklektika.site');
-includeEklektikaModule('eklektika.catalog.import');
-includeEklektikaModule('eklektika.orders.applications');
-includeEklektikaModule('eklektika.b24.usersync');
+requireEklektikaModuleInclude('eklektika.b24.rest');
+requireEklektikaModuleInclude('eklektika.company');
+requireEklektikaModuleInclude('eklektika.catalog.pricing');
+requireEklektikaModuleInclude('eklektika.site');
+requireEklektikaModuleInclude('eklektika.catalog.import');
+requireEklektikaModuleInclude('eklektika.orders.applications');
+requireEklektikaModuleInclude('eklektika.b24.usersync');
 
 if (class_exists(\OnlineService\Site\CatalogPriceFloor::class)) {
     \OnlineService\Site\CatalogPriceFloor::markCompositeNonCacheableForAuthorizedCatalog();

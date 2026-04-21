@@ -5,38 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a53d02d7-d404-452c-a903-dd81636134fa" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.cursor/rules/arch-rules.mdc" beforeDir="false" afterPath="$PROJECT_DIR$/.cursor/rules/arch-rules.mdc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/features/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/features/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/features/b24_integration.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/features/b24_integration.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/features/company_system.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/features/company_system.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/features/local_classes_segments_and_modules.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/features/local_classes_segments_and_modules.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/features/uf_advertising_agent.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/features/uf_advertising_agent.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/features/user_company_methods.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/features/user_company_methods.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/features/user_groups_system.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/features/user_groups_system.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/refactoring/b24_company_sync_integration.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/refactoring/b24_company_sync_integration.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/tasks/2026-04-21-refactor-local-classes-segmentation/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/tasks/2026-04-21-refactor-local-classes-segmentation/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/tasks/2026-04-21-refactor-local-classes-segmentation/subtasks/02-b24-http-layer-and-config.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/tasks/2026-04-21-refactor-local-classes-segmentation/subtasks/02-b24-http-layer-and-config.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/tasks/2026-04-21-refactor-local-classes-segmentation/subtasks/03-segment-user-registration-crm-sync.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/tasks/2026-04-21-refactor-local-classes-segmentation/subtasks/03-segment-user-registration-crm-sync.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/tasks/2026-04-21-refactor-local-classes-segmentation/subtasks/04-segment-company-holding-manager.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/tasks/2026-04-21-refactor-local-classes-segmentation/subtasks/04-segment-company-holding-manager.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/tasks/2026-04-21-refactor-local-classes-segmentation/subtasks/05-segment-catalog-pricing-discount.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/tasks/2026-04-21-refactor-local-classes-segmentation/subtasks/05-segment-catalog-pricing-discount.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/tasks/2026-04-21-refactor-local-classes-segmentation/subtasks/06-segment-catalog-1c-import-hooks.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/tasks/2026-04-21-refactor-local-classes-segmentation/subtasks/06-segment-catalog-1c-import-hooks.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/tasks/2026-04-21-refactor-local-classes-segmentation/subtasks/07-segment-orders-deal-applications.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/tasks/2026-04-21-refactor-local-classes-segmentation/subtasks/07-segment-orders-deal-applications.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/tasks/2026-04-21-refactor-local-classes-segmentation/subtasks/08-refactor-init-php-bootstrap.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/tasks/2026-04-21-refactor-local-classes-segmentation/subtasks/08-refactor-init-php-bootstrap.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/tasks/2026-04-21-refactor-local-classes-segmentation/subtasks/09-modules-eklektika-scaffold-and-migration.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/tasks/2026-04-21-refactor-local-classes-segmentation/subtasks/09-modules-eklektika-scaffold-and-migration.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/classes/ajax.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/classes/ajax.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/classes/b24/RegisterUserCompany.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/classes/b24/Request.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/classes/b24/User.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/classes/events.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/local/classes/requires.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/classes/requires.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/classes/site/CatalogPriceFloor.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/classes/site/Company.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/classes/site/Manager.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/classes/site/UserGroups.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.b24.rest/include.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/eklektika.b24.rest/include.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.b24.rest/lib/RestClient.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/eklektika.b24.rest/lib/RestClient.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.b24.usersync/include.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/eklektika.b24.usersync/include.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.b24.usersync/lib/RegisterUserCompany.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/eklektika.b24.usersync/lib/RegisterUserCompany.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.b24.usersync/lib/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/eklektika.b24.usersync/lib/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.catalog.import/include.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/eklektika.catalog.import/include.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.catalog.pricing/include.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/eklektika.catalog.pricing/include.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.catalog.pricing/lib/CatalogPriceFloor.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/eklektika.catalog.pricing/lib/CatalogPriceFloor.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.company/include.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/eklektika.company/include.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.company/lib/Company.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/eklektika.company/lib/Company.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.orders.applications/include.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/eklektika.orders.applications/include.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.site/include.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/eklektika.site/include.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/php_interface/b24_integration_config.example.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/php_interface/b24_integration_config.example.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local/php_interface/init.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/php_interface/init.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/sale.personal.section/template.1/parts/personal-widgets.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/sale.personal.section/template.1/parts/personal-widgets.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/intec.universe/main.header/template.1.custom/templates/desktop/template.1/view.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/intec.universe/main.header/template.1.custom/templates/desktop/template.1/view.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -253,7 +243,7 @@
       <workItem from="1776162305797" duration="3992000" />
       <workItem from="1776698178130" duration="40000" />
       <workItem from="1776770848513" duration="5678000" />
-      <workItem from="1776797658638" duration="1917000" />
+      <workItem from="1776797658638" duration="6742000" />
     </task>
     <servers />
   </component>

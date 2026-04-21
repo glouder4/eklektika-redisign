@@ -46,6 +46,8 @@ Legacy-глобали **`sendRequestB24`** и **`sendRequest`** сохранен
 - `sendRequestB24()` и `sendRequest()` оставлены как `@deprecated`-функции совместимости в `eklektika.b24.rest/lib/LegacyGlobalB24.php`.
 - Целевой путь для нового кода: прямой вызов `\OnlineService\B24\RestClient`.
 - В `local/classes/requires.php` модуль `eklektika.b24.rest` загружается первым в полной цепочке bootstrap: `eklektika.b24.rest` → `eklektika.company` → `eklektika.catalog.pricing` → `eklektika.site` → `eklektika.catalog.import` → `eklektika.orders.applications` → `eklektika.b24.usersync`; это стабилизирует доступность транспортных helper-функций для legacy-кода.
+- Контракт загрузки модулей в bootstrap: используется `require_once $_SERVER['DOCUMENT_ROOT'] . '/local/modules/<module_id>/include.php'`; при отсутствии `include.php` фиксируется `E_USER_WARNING`, bootstrap продолжается (fail-safe, без фатала).
+- Контракт автозагрузки внутри `local/modules/eklektika.*/include.php`: `Loader::registerAutoLoadClasses(null, [...])` + абсолютные пути `/local/modules/<module_id>/lib/...`; использование `module_id` как первого аргумента для local-only модулей не допускается, чтобы исключить ошибочный префикс `/bitrix/modules/<module_id>/`.
 
 #### Правила зависимостей (ST-10)
 

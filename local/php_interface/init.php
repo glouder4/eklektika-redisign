@@ -73,6 +73,7 @@ CModule::IncludeModule("intec.eklectika");
 
 $b24ConfigPath = __DIR__ . '/b24_integration_config.php';
 $b24IntegrationConfig = [
+    'use_test_portal' => false,
     'base_url' => '',
     'rest_webhook_main' => '',
     'rest_webhook_kit' => '',
@@ -86,6 +87,7 @@ if (file_exists($b24ConfigPath)) {
     }
 }
 
+define('B24_USE_TEST_PORTAL', (bool) $b24IntegrationConfig['use_test_portal']);
 define('URL_B24', (string) $b24IntegrationConfig['base_url']);
 define('B24_REST_WEBHOOK_MAIN', (string) $b24IntegrationConfig['rest_webhook_main']);
 define('B24_REST_WEBHOOK_KIT', (string) $b24IntegrationConfig['rest_webhook_kit']);

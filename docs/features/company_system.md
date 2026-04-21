@@ -14,7 +14,7 @@
 
 ### 1. Основной класс Company
 **Файл**: `local/modules/eklektika.company/lib/Company.php`  
-**Модуль**: `eklektika.company`; bootstrap: в [`local/classes/requires.php`](../../local/classes/requires.php) порядок **`Loader::includeModule`: `eklektika.b24.rest` → `eklektika.company` → `eklektika.catalog.pricing` → `eklektika.site` → `eklektika.catalog.import` → `eklektika.orders.applications` → `eklektika.b24.usersync`**, затем ранний вызов **`CatalogPriceFloor::markCompositeNonCacheableForAuthorizedCatalog()`**. Namespace класса **`OnlineService\Site\Company`** без изменений до ST-09.
+**Модуль**: `eklektika.company`; bootstrap: в [`local/classes/requires.php`](../../local/classes/requires.php) порядок `require_once` для `include.php` модулей сохраняется: `eklektika.b24.rest` → `eklektika.company` → `eklektika.catalog.pricing` → `eklektika.site` → `eklektika.catalog.import` → `eklektika.orders.applications` → `eklektika.b24.usersync`; при отсутствии `include.php` срабатывает `E_USER_WARNING` (без фатала), затем ранний вызов **`CatalogPriceFloor::markCompositeNonCacheableForAuthorizedCatalog()`**. Namespace класса **`OnlineService\Site\Company`** без изменений до ST-09.
 
 CRM-транспорт и field-mapping для сценариев компании централизованы:
 - вызовы B24 выполняются через `\OnlineService\B24\RestClient::callRestMethod()` (через локальный адаптер в `Company`);
@@ -23,7 +23,7 @@ CRM-транспорт и field-mapping для сценариев компани
 
 Контракт для ценообразования: статический метод **`Company::getMaxCompanyDiscountPercentForUserGroups(array $userGroupIds): float`** — узкая точка зависимости модуля **`eklektika.catalog.pricing`** (`CatalogPriceFloor`) от домена компании.
 
-Fail-safe для шаблонов ЛК в период миграции в `eklektika.*`: `local/templates/universe_s1/components/bitrix/sale.personal.section/template.1/parts/personal-widgets.php` вызывает контракт скидки только после мягкой попытки `Loader::includeModule('eklektika.company')` и `class_exists('\OnlineService\Site\Company')`; при недоступности модуля/класса используется безопасный fallback `0%` без остановки рендера.
+Fail-safe для шаблонов ЛК в период миграции в `eklektika.*`: `local/templates/universe_s1/components/bitrix/sale.personal.section/template.1/parts/personal-widgets.php` использует единый guard-поток `authorized && class_exists('\OnlineService\Site\Company')` перед вызовом контракта скидки; при недоступности класса сохраняется безопасный fallback `0%` без остановки рендера. Инвариант архитектуры: шаблоны не выполняют прямой `require/include` модульных `include.php`.
 
 #### Свойства компаний:
 ```php

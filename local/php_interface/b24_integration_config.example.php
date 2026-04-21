@@ -6,6 +6,7 @@
 $useTestPortal = false;
 
 return [
+    'use_test_portal' => $useTestPortal,
     'base_url' => $useTestPortal
         ? 'https://test-portal.example.com/'
         : 'https://prod-portal.example.com/',

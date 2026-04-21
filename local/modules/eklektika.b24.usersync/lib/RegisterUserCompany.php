@@ -154,8 +154,7 @@ class RegisterUserCompany extends Request{
                 // найти реквизит по ИНН
                 $dataRequisite = $this->callB24Method("crm.requisite.list", $dataRequisite, false);
 
-                if (!empty($dataRequisite)) {			
-					//pre($dataRequisite);
+                if (!empty($dataRequisite)) {
                     $dataContact['fields']['COMPANY_ID'] = $dataRequisite[0]['ENTITY_ID'];
                     $companyId = $dataRequisite[0]['ENTITY_ID'];
 
