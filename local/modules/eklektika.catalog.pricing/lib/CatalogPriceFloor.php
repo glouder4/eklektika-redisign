@@ -4,6 +4,7 @@ namespace OnlineService\Site;
 
 use Bitrix\Main\Event;
 use Bitrix\Main\Loader;
+use OnlineService\Site\Config\CatalogPricingConfig;
 
 /**
  * База для скидок — оптовая цена (CATALOG_GROUP_ID = 2); если у позиции нет типа 2 — резервно тип 1 (BASE в Битрикс).
@@ -14,18 +15,18 @@ use Bitrix\Main\Loader;
  */
 final class CatalogPriceFloor
 {
-    public const ADVERTISING_PRICE_TYPE_ID = 3;
-    public const PURCHASE_PRICE_TYPE_ID = 4;
+    public const ADVERTISING_PRICE_TYPE_ID = CatalogPricingConfig::ADVERTISING_PRICE_TYPE_ID;
+    public const PURCHASE_PRICE_TYPE_ID = CatalogPricingConfig::PURCHASE_PRICE_TYPE_ID;
 
     /**
      * Оптовая цена (ID 2) — основная «базовая» цена проекта для расчёта скидок и зачёркнутой суммы.
      */
-    public const BASE_PRICE_TYPE_ID = 2;
+    public const BASE_PRICE_TYPE_ID = CatalogPricingConfig::BASE_PRICE_TYPE_ID;
 
     /**
      * Резерв: BASE (ID 1 в каталоге Битрикс), если оптовой цены нет.
      */
-    public const BASE_PRICE_FALLBACK_TYPE_ID = 1;
+    public const BASE_PRICE_FALLBACK_TYPE_ID = CatalogPricingConfig::BASE_PRICE_FALLBACK_TYPE_ID;
 
     /**
      * Порядок типов цен для базы скидок и для подстановки в GetOptimalPrice.
@@ -40,12 +41,12 @@ final class CatalogPriceFloor
     /**
      * Включить запись в лог. Выключаем только по явной просьбе после решения проблемы.
      */
-    public const DEBUG_LOG_ENABLED = true;
+    public const DEBUG_LOG_ENABLED = CatalogPricingConfig::DEBUG_LOG_ENABLED;
 
     /**
      * Доп. трассировка цепочки скидок (много строк на страницу).
      */
-    public const DEBUG_TRACE_COUNT_PRICE = true;
+    public const DEBUG_TRACE_COUNT_PRICE = CatalogPricingConfig::DEBUG_TRACE_COUNT_PRICE;
 
     /** @var string|null Путь к файлу лога (кешируется) */
     private static ?string $debugLogPath = null;

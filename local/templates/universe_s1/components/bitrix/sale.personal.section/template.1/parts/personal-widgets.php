@@ -2,7 +2,6 @@
 <?php
 
 use intec\core\helpers\Html;
-use OnlineService\Site\Company;
 
 /**
  * @var array $arResult
@@ -28,7 +27,18 @@ $arWidgets = isset($arResult['PERSONAL_WIDGETS']) && is_array($arResult['PERSONA
 // Процент только из групп скидки компании (см. Company::$companyDiscountPercentByAssignedGroupId).
 $discountPct = 0.0;
 if ($USER->IsAuthorized()) {
-    $discountPct = Company::getMaxCompanyDiscountPercentForUserGroups(CUser::GetUserGroup($USER->GetID()));
+    $companyClass = '\\OnlineService\\Site\\Company';
+
+    // Fail-safe для переходного периода рефакторинга: не роняем рендер ЛК при отсутствии модуля/класса.
+    if (!class_exists($companyClass)) {
+        \Bitrix\Main\Loader::includeModule('eklektika.company');
+    }
+
+    if (class_exists($companyClass)) {
+        $discountPct = (float)$companyClass::getMaxCompanyDiscountPercentForUserGroups(
+            CUser::GetUserGroup($USER->GetID())
+        );
+    }
 }
 
 $discountLabel = '-' . (int)round($discountPct);
@@ -81,7 +91,7 @@ $renderRing = static function (float $percent) use ($ringR, $ringC) {
     <?php
 };
 
-?>
+?> 
 <div class="personal-widgets">
     <div class="personal-widgets__grid">
         <div class="personal-widgets__card personal-widgets__card--discount">

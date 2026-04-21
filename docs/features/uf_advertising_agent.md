@@ -12,7 +12,7 @@
 ## Места использования и реализации
 
 ### 1. Основная логика в классе User
-**Файл**: `local/classes/b24/User.php`
+**Файл**: `local/modules/eklektika.b24.usersync/lib/User.php`
 
 #### Обработчик обновления пользователя:
 ```php
@@ -44,7 +44,7 @@ public int $MARKETING_AGENT_GROUP_ID = 12;
 ```
 
 ### 2. Регистрация пользователей
-**Файл**: `local/classes/b24/RegisterUserCompany.php`
+**Файл**: `local/modules/eklektika.b24.usersync/lib/RegisterUserCompany.php`
 
 #### Обработка рекламных агентов при регистрации:
 ```php
@@ -84,7 +84,7 @@ break;
 ```
 
 ### 4. Связь с компаниями
-**Файл**: `local/classes/site/Company.php`
+**Файл**: `local/modules/eklektika.company/lib/Company.php`
 
 #### Поле в компании:
 ```php

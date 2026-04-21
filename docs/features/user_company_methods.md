@@ -164,7 +164,7 @@ $headCompanyId = $user->getHeadCompanyId();
 
 ## Связанные файлы
 
-- `local/classes/b24/User.php` - основной класс с методами
+- `local/modules/eklektika.b24.usersync/lib/User.php` - основной класс с методами
 - `director/add_new_branch-action.php` - пример использования
 - `docs/features/company_system.md` - документация системы компаний
 - `docs/features/b24_integration.md` - документация интеграции с B24

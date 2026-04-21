@@ -4,7 +4,7 @@
 Комплексная интеграция сайта с Bitrix24 CRM, включающая синхронизацию контактов, компаний, пользователей, веб-хуки и двусторонний обмен данными.
 
 ## Основные характеристики
-- **URL Bitrix24**: `https://bitrix.yomerch.ru/`
+- **URL Bitrix24**: задаётся в `local/php_interface/b24_integration_config.php` (константа `URL_B24` в `init.php`)
 - **REST API**: Использование REST методов для взаимодействия
 - **Веб-хуки**: Обработка событий CRM в реальном времени
 - **Двусторонняя синхронизация**: Данные передаются в обе стороны
@@ -12,96 +12,62 @@
 
 ## Места использования и реализации
 
-### 1. Основные константы и настройки
-**Файл**: `local/php_interface/init.php`
+### 1. Конфигурация URL и вебхуков Bitrix24
 
-#### Константы:
-```php
-define('URL_B24', 'https://bitrix.yomerch.ru/');
-```
+**Файл конфигурации**: `local/php_interface/b24_integration_config.php`
 
-#### Функция отправки запросов к B24:
-```php
-function sendRequestB24($method, $params, $debug = false) {
-    $queryUrl = URL_B24.'rest/1/oak1tjz71elzz2xt/'.$method.'.json';
+Возвращает массив с полями:
 
-    $curl = curl_init();
-    $queryData = http_build_query($params);
+- **`base_url`** — базовый URL портала Bitrix24 (со слешем на конце), для теста и прода задаются разными значениями через флаг **`$useTestPortal`** в том же файле.
+- **`rest_webhook_main`** — токен входящего вебхука для основных REST-вызовов (`crm.*`, `user.get` и т.д.), подставляется в путь `…/rest/1/{token}/{method}.json`.
+- **`rest_webhook_kit`** — токен вебхука для методов `kit.productapplications.*` (заявки из сделки).
 
-    curl_setopt_array($curl, array(
-        CURLOPT_SSL_VERIFYPEER => 0,
-        CURLOPT_SSL_VERIFYHOST => FALSE,
-        CURLOPT_POST => 1,
-        CURLOPT_HEADER => 0,
-        CURLOPT_RETURNTRANSFER => 1,
-        CURLOPT_URL => $queryUrl,
-        CURLOPT_POSTFIELDS => $queryData,
-        CURLOPT_TIMEOUT => 30,
-        CURLOPT_CONNECTTIMEOUT => 10,
-    ));
+В **`local/php_interface/init.php`** после подключения конфига определяются константы:
 
-    $result = curl_exec($curl);
-    $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-    $curlError = curl_error($curl);
-    $curlErrno = curl_errno($curl);
+- `URL_B24` — копия `base_url` (обратная совместимость со всем кодом, использующим константу).
+- `B24_REST_WEBHOOK_MAIN`, `B24_REST_WEBHOOK_KIT` — токены из конфига.
 
-    curl_close($curl);
+**Шаблон без секретов** для нового стенда: `local/php_interface/b24_integration_config.example.php`.
 
-    // Обработка ошибок и логирование
-    if ($curlErrno) {
-        return [
-            'success' => 0,
-            'error' => 'CURL Error: ' . $curlError,
-            'errno' => $curlErrno
-        ];
-    }
+**Транспортный слой**: класс `OnlineService\B24\RestClient` в модуле **`eklektika.b24.rest`**: `local/modules/eklektika.b24.rest/lib/RestClient.php`
 
-    if ($httpCode !== 200) {
-        return [
-            'success' => 0,
-            'error' => 'HTTP Error: ' . $httpCode,
-            'response' => $result
-        ];
-    }
+- `callRestMethod($method, $params, $debug)` — POST на основной REST-вебхук; при успехе возвращает **`$response['result']`** (как прежняя функция `sendRequestB24`).
+- `postAjaxProxy($params, $debug)` — POST на `/local/classes/ajax.php`, возвращает **полный** декодированный JSON (как `sendRequest()`).
+- `postSiteRequestsHandler($params, $debug)` — POST на `site_requests_handler.php` (базовый класс `Request`).
+- `getKitWebhookPrefix()` — префикс URL для `kit.productapplications.*`.
+- Транспортные параметры и URL-мэппинг централизованы в `local/modules/eklektika.b24.rest/lib/Config/RestTransportConfig.php` (timeouts, пути прокси, построение webhook URL), бизнес-логика модулей не меняется.
 
-    $decodedResult = json_decode($result, true);
-    return $decodedResult;
-}
-```
+Legacy-глобали **`sendRequestB24`** и **`sendRequest`** сохранены в `local/modules/eklektika.b24.rest/lib/LegacyGlobalB24.php` и помечены **`@deprecated`**; они делегируют вызовы в `RestClient`. В `init.php` эти функции не являются целевой точкой размещения.
+
+**Контракт ответов:** при ошибках транспорта (CURL, HTTP≠200, невалидный JSON) возвращается массив с **`success`** = 0 (как в legacy). При успешном разборе JSON метод **`callRestMethod`** возвращает только значение **`result`** из ответа Bitrix24. Ошибки REST API внутри JSON при HTTP 200 по-прежнему не нормализуются отдельно (наследие **sendRequestB24**).
+
+#### Legacy-глобали и статус миграции
+
+- `sendRequestB24()` и `sendRequest()` оставлены как `@deprecated`-функции совместимости в `eklektika.b24.rest/lib/LegacyGlobalB24.php`.
+- Целевой путь для нового кода: прямой вызов `\OnlineService\B24\RestClient`.
+- В `local/classes/requires.php` модуль `eklektika.b24.rest` загружается первым в полной цепочке bootstrap: `eklektika.b24.rest` → `eklektika.company` → `eklektika.catalog.pricing` → `eklektika.site` → `eklektika.catalog.import` → `eklektika.orders.applications` → `eklektika.b24.usersync`; это стабилизирует доступность транспортных helper-функций для legacy-кода.
+
+#### Правила зависимостей (ST-10)
+
+- `eklektika.b24.rest` — единственный общий транспортный модуль; здесь не размещается доменная логика usersync/company/pricing/orders.
+- Доменные модули могут зависеть от `eklektika.b24.rest`, но не друг от друга напрямую, кроме документированных исключений в `local_classes_segments_and_modules.md`.
+- `eklektika.orders.applications` использует только транспортный API (`RestClient::callKitRestGet`) и runtime-подключение Bitrix `sale/iblock`.
+- Для временного исключения `usersync -> company` используется implement-ready follow-up `FU-ST11-USERSYNC-COMPANY-GATEWAY` (owner/deadline/criteria синхронизированы в ST-10/ST-11 и `local_classes_segments_and_modules.md`).
 
 ### 2. Базовый класс для запросов
-**Файл**: `local/classes/b24/Request.php`
+**Файл**: `local/modules/eklektika.b24.rest/lib/Request.php`
 
-#### Базовый класс:
-```php
-namespace OnlineService\B24;
+Защищённый метод `sendRequest` делегирует выполнение в **`OnlineService\B24\RestClient::postSiteRequestsHandler()`** (единая обработка CURL/HTTP/JSON с классом `RestClient`).
 
-class Request {
-    protected function sendRequest($params, $debug = false) {
-        $queryUrl = URL_B24.'local/classes/site_requests_handler.php';
-        $curl = \curl_init();
-        $queryData = \http_build_query($params);
-        
-        \curl_setopt_array($curl, array(
-            CURLOPT_SSL_VERIFYPEER => 0,
-            CURLOPT_SSL_VERIFYHOST => FALSE,
-            CURLOPT_POST => 1,
-            CURLOPT_HEADER => 0,
-            CURLOPT_RETURNTRANSFER => 1,
-            CURLOPT_URL => $queryUrl,
-            CURLOPT_POSTFIELDS => $queryData,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_CONNECTTIMEOUT => 10,
-        ));
-        
-        $result = curl_exec($curl);
-        // ... обработка ответа аналогично sendRequestB24()
-    }
-}
-```
+**AJAX и контакт CRM:** экшены `UPDATE_CONTACT`, `UPDATE_BATCH_USERS`, `DELETE_CONTACT` в **`local/classes/ajax.php`** вызывают только **`OnlineService\B24\UserSync\ContactAjaxFacade`** (модуль **`eklektika.b24.usersync`**, файл `local/modules/eklektika.b24.usersync/lib/ContactAjaxFacade.php`), который делегирует в доменный класс **`OnlineService\B24\User`** без изменения контракта ответа для фронта.
 
 ### 3. Регистрация пользователей и компаний
-**Файл**: `local/classes/b24/RegisterUserCompany.php`
+**Файл**: `local/modules/eklektika.b24.usersync/lib/RegisterUserCompany.php` (см. [MODULE-LAYOUT](../tasks/2026-04-21-refactor-local-classes-segmentation/MODULE-LAYOUT.md))
+
+**Актуальный транспорт и конфигурация (ST-11):**
+- CRM-вызовы внутри `RegisterUserCompany` выполняются через `\OnlineService\B24\RestClient::callRestMethod()` (через локальный адаптер класса), без прямых `sendRequestB24()/sendB24Request`.
+- Маппинг CRM/UF-полей и константы сценария регистрации вынесены в модульный конфиг `local/modules/eklektika.b24.usersync/lib/Config/RegisterUserCompanyConfig.php`; групповые ID usersync централизованы в `lib/Config/UserSyncConfig.php`.
+- Бизнес-поведение сценариев `OnBeforeUserRegisterHandler`, `OnAfterUserRegisterHandler`, `createB24Company`, `deleteStaffB24` сохранено; изменён только источник настроек и транспортный вызов.
 
 #### Основная логика:
 ```php
@@ -332,7 +298,7 @@ if ($_REQUEST['event'] == 'ONCRMREQUISITEUPDATE') {
 ```
 
 ### 5. Синхронизация пользователей
-**Файл**: `local/classes/b24/User.php`
+**Файл**: `local/modules/eklektika.b24.usersync/lib/User.php`
 
 #### Основные методы:
 ```php
@@ -462,7 +428,7 @@ public function syncUserCompanies($userId) {
 ```
 
 ### 6. Файловая интеграция
-**Файл**: `local/classes/site/Company.php`
+**Файл**: `local/modules/eklektika.company/lib/Company.php` (модуль `eklektika.company`)
 
 #### Скачивание и обработка файлов:
 ```php
@@ -516,9 +482,9 @@ if ($params['OS_REQUSITES_FILE'] && !empty($params['OS_REQUSITES_FILE'])) {
 
 #### Отправка данных в B24:
 ```php
-// Функция отправки webhook в B24
+// Функция отправки webhook в B24 (префикс URL из конфига — см. RestClient::getKitWebhookPrefix())
 function sendWebhookToB24($method, $dealId, $data = []) {
-    $webhook = URL_B24."/rest/1/w8i2ce68y3wwps17/";
+    $webhook = \OnlineService\B24\RestClient::getKitWebhookPrefix();
     
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $webhook . $method . $dealId);
@@ -641,8 +607,8 @@ function sendWebhookToB24($method, $dealId, $data = []) {
 
 **Решение:**
 Текущая реализация безопасна, т.к.:
-- Веб-хук в `script/crm/rest/contact.php` использует сторонний модуль `intec.eklectika`
-- Модуль проверяет изменения перед обновлением
+- Веб-хук в `script/crm/rest/contact.php` обрабатывается отдельным сценарием (вне зоны правок собственных классов в `local/classes/`)
+- Перед обновлением проверяются изменения
 - Если данные не изменились, обновление не происходит
 - **Рекомендация**: При активной работе с двусторонней синхронизацией добавить флаг `SKIP_WEBHOOK=1` в метаданные обновления для пропуска веб-хука
 
@@ -660,10 +626,22 @@ function sendWebhookToB24($method, $dealId, $data = []) {
 5. **Логирование** - подробные логи всех операций для отладки
 
 ### Настройки:
-- URL B24: `https://bitrix.yomerch.ru/`
-- REST токен: `oak1tjz71elzz2xt` (для чтения)
-- Webhook токен: `w8i2ce68y3wwps17` (для записи)
-- Таймауты: 30 сек для запросов, 10 сек для подключения
+- Базовый URL портала и токены входящих вебхуков задаются только в **`local/php_interface/b24_integration_config.php`** (шаблон без секретов: **`b24_integration_config.example.php`**). Реальные значения **не** дублируются в этой документации.
+- Переключение тестового/боевого портала: флаг **`$useTestPortal`** в том же файле конфигурации.
+- Таймауты HTTP-транспорта (`RestClient`): 30 с на запрос, 10 с на соединение.
+
+### Deployment и secrets (ST-11 hardening):
+
+1. В репозитории хранится только шаблон **`local/php_interface/b24_integration_config.example.php`**.
+2. Рабочий секретный файл **`local/php_interface/b24_integration_config.php`** создаётся на сервере деплоя из шаблона и не является обязательным git-артефактом.
+3. Bootstrap в **`local/php_interface/init.php`** использует безопасный контракт:
+   - сначала проверяется наличие файла через `file_exists`;
+   - при отсутствии файла применяется controlled fallback (пустые значения `URL_B24`, `B24_REST_WEBHOOK_MAIN`, `B24_REST_WEBHOOK_KIT`);
+   - константы остаются определёнными всегда, поэтому runtime-контракт для модулей не ломается.
+4. Проверка после выката:
+   - убедиться, что `b24_integration_config.php` присутствует на целевом стенде и содержит реальные значения;
+   - если файл временно отсутствует, сайт не падает фатально, а B24 REST-вызовы ожидаемо становятся no-op/ошибочными по месту вызова;
+   - убедиться, что секреты не попали в git (`git status`/`git check-ignore local/php_interface/b24_integration_config.php`).
 
 ### Мониторинг:
 - Лог-файлы в `script/crm/logs/`

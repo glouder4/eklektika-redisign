@@ -15,7 +15,7 @@
 - **[Методы работы с компаниями пользователей](./user_company_methods.md)** ✅ - API для получения компаний пользователей
 
 ### 🗺️ Архитектура и сопровождение кода
-- **[Сегменты `local/classes` и модули `eklektika.*`](./local_classes_segments_and_modules.md)** ✅ — Карта доменных сегментов, bootstrap (`init.php`, `requires.php`, `events.php`), связь с Bitrix24, предлагаемые модули; **ST-01** (актуализировано 2026-04-21)
+- **[Сегменты `local/classes` и модули `eklektika.*`](./local_classes_segments_and_modules.md)** ✅ — Карта доменных сегментов, bootstrap (`init.php`, `requires.php`, модули `eklektika.*`), инвентаризация legacy-глобалей и матрица `allowed dependencies` (ST-09/ST-10), связь с Bitrix24; постобработка обмена с 1С — **`eklektika.catalog.import`** (`OnlineService\Catalog\Import1c\*`).
 
 ### 🛒 Система заказов (в разработке)
 - **Кастомные поля заказов** - Дополнительные поля для заказов
@@ -91,4 +91,4 @@
 
 ---
 
-*Последнее обновление: 21.04.2026*
+*Последнее обновление: 22.04.2026*

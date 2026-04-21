@@ -1,5 +1,6 @@
 <?php
     namespace OnlineService\B24;
+    use OnlineService\B24\UserSync\Config\UserSyncConfig;
     use OnlineService\B24\Request;
     class User extends Request{
         public ?int $contactId = null;
@@ -8,9 +9,9 @@
         
         // Константы для ID групп
         /** Администраторы сайта — при любом обновлении групп сохраняем членство, если оно было */
-        public int $ADMINISTRATORS_GROUP_ID = 1;
-        public int $MARKETING_AGENT_GROUP_ID = 12;
-        public int $DIRECTOR_GROUP_ID = 432;
+        public int $ADMINISTRATORS_GROUP_ID = UserSyncConfig::ADMINISTRATORS_GROUP_ID;
+        public int $MARKETING_AGENT_GROUP_ID = UserSyncConfig::MARKETING_AGENT_GROUP_ID;
+        public int $DIRECTOR_GROUP_ID = UserSyncConfig::DIRECTOR_GROUP_ID;
         public function __construct()
         {
         }

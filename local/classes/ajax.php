@@ -1,7 +1,7 @@
 <?php
     require_once($_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_before.php");
     use OnlineService\Site\UserGroups;
-    use OnlineService\B24\User;
+    use OnlineService\B24\UserSync\ContactAjaxFacade;
 
     if( $_REQUEST['ACTION'] == "UPDATE_GROUP" ){
         $group = new UserGroups($_REQUEST);
@@ -9,17 +9,14 @@
     }
 
     if( $_REQUEST['ACTION'] == "UPDATE_CONTACT" ){
-        $user = new User($_REQUEST);
-        echo $user->update($_REQUEST);
+        echo ContactAjaxFacade::updateContact($_REQUEST);
     }
 
     if( $_REQUEST['ACTION'] == "UPDATE_BATCH_USERS" ){
-        $user = new User($_REQUEST);
-        echo $user->updateBatch($_REQUEST);
+        echo ContactAjaxFacade::updateBatchUsers($_REQUEST);
     }
     if( $_REQUEST['ACTION'] == "DELETE_CONTACT" ){
-        $user = new User($_REQUEST);
-        echo $user->delete($_REQUEST);
+        echo ContactAjaxFacade::deleteContact($_REQUEST);
     }
 
     if( $_REQUEST['ACTION'] == "DELETE_COMPANY" ){

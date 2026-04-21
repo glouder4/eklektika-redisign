@@ -13,7 +13,17 @@
 ## Места использования и реализации
 
 ### 1. Основной класс Company
-**Файл**: `local/classes/site/Company.php`
+**Файл**: `local/modules/eklektika.company/lib/Company.php`  
+**Модуль**: `eklektika.company`; bootstrap: в [`local/classes/requires.php`](../../local/classes/requires.php) порядок **`Loader::includeModule`: `eklektika.b24.rest` → `eklektika.company` → `eklektika.catalog.pricing` → `eklektika.site` → `eklektika.catalog.import` → `eklektika.orders.applications` → `eklektika.b24.usersync`**, затем ранний вызов **`CatalogPriceFloor::markCompositeNonCacheableForAuthorizedCatalog()`**. Namespace класса **`OnlineService\Site\Company`** без изменений до ST-09.
+
+CRM-транспорт и field-mapping для сценариев компании централизованы:
+- вызовы B24 выполняются через `\OnlineService\B24\RestClient::callRestMethod()` (через локальный адаптер в `Company`);
+- CRM/UF-константы вынесены в `local/modules/eklektika.company/lib/Config/CompanyB24Config.php`.
+Это сохраняет BC по бизнес-веткам (`updateCompanyElement`, `updateCompanyProfile`, `createBranchCompany`) и убирает дублирование хардкода полей.
+
+Контракт для ценообразования: статический метод **`Company::getMaxCompanyDiscountPercentForUserGroups(array $userGroupIds): float`** — узкая точка зависимости модуля **`eklektika.catalog.pricing`** (`CatalogPriceFloor`) от домена компании.
+
+Fail-safe для шаблонов ЛК в период миграции в `eklektika.*`: `local/templates/universe_s1/components/bitrix/sale.personal.section/template.1/parts/personal-widgets.php` вызывает контракт скидки только после мягкой попытки `Loader::includeModule('eklektika.company')` и `class_exists('\OnlineService\Site\Company')`; при недоступности модуля/класса используется безопасный fallback `0%` без остановки рендера.
 
 #### Свойства компаний:
 ```php
@@ -217,7 +227,7 @@ if ($userCompany) {
 ```
 
 ### 4. Интеграция с Bitrix24
-**Файл**: `local/classes/b24/User.php`
+**Файл**: `local/modules/eklektika.b24.usersync/lib/User.php`
 
 #### Получение компании пользователя:
 ```php
@@ -327,6 +337,14 @@ public function getHeadCompanyId($userId = null) {
 2. **Назначение руководителя**:
    - Установка поля `OS_COMPANY_BOSS`
    - Автоматическое назначение при создании филиала
+
+## Архитектурные зависимости (ST-10)
+
+- Модуль `eklektika.company` допускает зависимость только на Bitrix core и транспорт `eklektika.b24.rest`.
+- Зависимость `eklektika.catalog.pricing -> eklektika.company` зафиксирована как узкий контракт: `Company::getMaxCompanyDiscountPercentForUserGroups`.
+- Обратная зависимость `eklektika.company -> eklektika.catalog.pricing` запрещена.
+- Временное исключение для совместимости: `eklektika.b24.usersync` обращается к `\OnlineService\Site\Company` при регистрации/синхронизации пользователя (исторический сценарий создания компании на сайте из CRM-данных). Исключение задокументировано до выделения отдельного фасада.
+- Implement-ready follow-up: `FU-ST11-USERSYNC-COMPANY-GATEWAY` (ST-11 stabilization) — owner: architecture/refactoring team (maintainers usersync + company), deadline/condition: до `2026-05-29` или в первый следующий code-touch usersync/company; критерий закрытия: usersync использует только узкий gateway/контракт без прямой зависимости на доменный `Company`.
 
 ## Связанные поля и сущности
 

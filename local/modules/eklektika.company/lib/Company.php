@@ -1,7 +1,9 @@
 <?php
     namespace OnlineService\Site;
 
+    use OnlineService\B24\RestClient;
     use OnlineService\B24\User;
+    use OnlineService\Site\Config\CompanyB24Config;
 
     class Company{
         private int $iblock_id = 57;
@@ -209,6 +211,11 @@
          */
         public function getIblockId(): int {
             return $this->iblock_id;
+        }
+
+        private static function callB24Method(string $method, array $params, bool $debug = false)
+        {
+            return RestClient::callRestMethod($method, $params, $debug);
         }
 
         public function createCompanyElement($params){
@@ -1138,12 +1145,12 @@
             
             // ИНН (UF_CRM_1669208589 - пример, может отличаться)
             if (!empty($data['OS_COMPANY_INN'])) {
-                $b24Fields['UF_CRM_INN'] = $data['OS_COMPANY_INN'];
+                $b24Fields[CompanyB24Config::COMPANY_INN_FIELD] = $data['OS_COMPANY_INN'];
             }
             
             // Город/Адрес
             if (!empty($data['OS_COMPANY_CITY'])) {
-                $b24Fields['UF_CRM_1669208295583'] = $data['OS_COMPANY_CITY']; // Адрес
+                $b24Fields[CompanyB24Config::COMPANY_CITY_FIELD] = $data['OS_COMPANY_CITY']; // Адрес
             }
             
             // Телефон
@@ -1193,7 +1200,7 @@
                         
                         if ($fileContent !== false) {
                             // Кодируем в base64 и передаем в B24 (как в RegisterUserCompany.php)
-                            $b24Fields['UF_CRM_1755643990423'] = [
+                            $b24Fields[CompanyB24Config::REQUISITES_FILE_FIELD] = [
                                 'fileData' => [
                                     $fileInfo['ORIGINAL_NAME'],
                                     base64_encode($fileContent)
@@ -1206,7 +1213,7 @@
 
             // Отправляем запрос в Bitrix24
             try {
-                $result = sendRequestB24('crm.company.update', [
+                $result = self::callB24Method('crm.company.update', [
                     'id'     => $companyId,
                     'fields' => $b24Fields,
                 ], $debug);
@@ -1300,7 +1307,7 @@
                 'filter' => ['RQ_INN' => $data['UF_INN']]
             ];
             
-            $existingRequisite = sendRequestB24("crm.requisite.list", $dataRequisite, false);
+            $existingRequisite = self::callB24Method('crm.requisite.list', $dataRequisite, false);
             
             if (!empty($existingRequisite)) {
                 return [
@@ -1322,7 +1329,7 @@
             }
             
             // Логируем успешное получение
-            error_log('INFO: B24 ID головной компании для UF_CRM_1758028816: ' . $headCompanyB24Id);
+            error_log('INFO: B24 ID головной компании для ' . CompanyB24Config::HEAD_COMPANY_B24_LINK_FIELD . ': ' . $headCompanyB24Id);
             
             // Создаем компанию в Bitrix24
             $b24CompanyFields = [
@@ -1331,10 +1338,10 @@
                     'VALUE' => $data['UF_SITE'] ?? '',
                     'VALUE_TYPE' => 'WORK'
                 ]],
-                'UF_CRM_1618551330657' => $data['UF_CITY'] ?? '',
-                'UF_CRM_1758028816' => $headCompanyB24Id, // ID головной компании в B24
+                CompanyB24Config::BRANCH_CITY_FIELD => $data['UF_CITY'] ?? '',
+                CompanyB24Config::HEAD_COMPANY_B24_LINK_FIELD => $headCompanyB24Id, // ID головной компании в B24
                 'COMPANY_TYPE' => 'CUSTOMER',
-                'ASSIGNED_BY_ID' => 3036,
+                'ASSIGNED_BY_ID' => CompanyB24Config::ASSIGNED_BY_ID,
             ];
 
             // Логируем данные отправки в B24 для отладки
@@ -1342,11 +1349,11 @@
 
             // Добавляем файл реквизитов если есть
             if ($fileDataB24) {
-                $b24CompanyFields['UF_CRM_1755643990423'] = $fileDataB24;
+                $b24CompanyFields[CompanyB24Config::REQUISITES_FILE_FIELD] = $fileDataB24;
             }
 
             // Создаем компанию в B24
-            $companyB24Id = sendRequestB24("crm.company.add", ['fields' => $b24CompanyFields]);
+            $companyB24Id = self::callB24Method('crm.company.add', ['fields' => $b24CompanyFields]);
             
             if (empty($companyB24Id)) {
                 return [
@@ -1356,7 +1363,7 @@
             }
 
             // Получаем данные созданной компании из B24
-            $dataCompany = sendRequestB24("crm.company.get", ['id' => $companyB24Id]);
+            $dataCompany = self::callB24Method('crm.company.get', ['id' => $companyB24Id]);
 
             // Привязываем текущего пользователя (руководителя) к созданной компании в B24
             global $USER;
@@ -1370,7 +1377,7 @@
                     'fields' => ['COMPANY_ID' => $dataCompany['ID']],
                     'id' => $contactId
                 ];
-                sendRequestB24("crm.contact.company.add", $qrCompanyAddContact);
+                self::callB24Method('crm.contact.company.add', $qrCompanyAddContact);
                 
                 error_log('INFO: Контакт руководителя привязан к новой компании. Contact ID: ' . $contactId . ', Company ID: ' . $dataCompany['ID']);
             } else {
@@ -1378,7 +1385,7 @@
             }
 
             // Добавляем реквизит к компании в B24
-            $requisiteId = sendRequestB24("crm.requisite.add", [
+            $requisiteId = self::callB24Method('crm.requisite.add', [
                 'fields' => [
                     'ENTITY_ID' => $dataCompany['ID'],
                     'ENTITY_TYPE_ID' => '4',
@@ -1389,7 +1396,7 @@
 
             // Обновляем реквизиты компании
             if ($requisiteId) {
-                sendRequestB24("crm.requisite.update", [
+                self::callB24Method('crm.requisite.update', [
                     'id' => $requisiteId,
                     'fields' => [
                         'ENTITY_ID' => $dataCompany['ENTITY_ID'],

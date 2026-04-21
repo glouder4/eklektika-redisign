@@ -203,7 +203,7 @@ if (!empty($arContacts)) {
   </svg>
   </a>
  */ ?>
-                        <a rel="nofollow" href="https://t.me/yomerch_ru"  target="_blank" class="header__social-link">
+                        <a rel="nofollow" href="https://t.me/yomerch_contact"  target="_blank" class="header__social-link">
                             <svg xmlns="http://www.w3.org/2000/svg" width="21" height="19" viewBox="0 0 21 19" fill="none">
                                 <path d="M20.9329 2.2972L17.7514 17.905C17.5141 19.0042 16.9051 19.2518 16.0252 18.7556L11.253 15.0673L8.91674 17.4077C8.68049 17.6564 8.44319 17.905 7.9014 17.905L8.27415 12.7611L17.176 4.28435C17.5477 3.89374 17.0742 3.7518 16.6006 4.07199L5.5326 11.378L0.759313 9.85299C-0.289635 9.4987 -0.289635 8.75269 0.996612 8.25755L19.5448 0.701758C20.4583 0.417879 21.2374 0.915217 20.9329 2.2972Z" fill="white"/>
                             </svg>

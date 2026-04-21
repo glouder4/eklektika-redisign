@@ -1,6 +1,7 @@
 <?php
 namespace OnlineService\B24;
 use intec\eklectika\advertising_agent\Company;
+use OnlineService\B24\UserSync\Config\RegisterUserCompanyConfig;
 use OnlineService\B24\User;
 use OnlineService\B24\Request;
 class RegisterUserCompany extends Request{
@@ -25,6 +26,16 @@ class RegisterUserCompany extends Request{
     private function createCompanyElement($params){
         $company = new \OnlineService\Site\Company();
         $company->createCompanyElement($params);
+    }
+
+    private function callB24Method($method, array $params, $debug = false)
+    {
+        return \OnlineService\B24\RestClient::callRestMethod($method, $params, (bool) $debug);
+    }
+
+    private function getConfiguredFieldValue(array $arFields, $fieldName)
+    {
+        return $arFields[$fieldName] ?? null;
     }
 
     private function createB24Company($arFields){
@@ -55,7 +66,7 @@ class RegisterUserCompany extends Request{
                     ];
 
                     // Передаём в поле Bitrix24
-                    $arFields['UF_CRM_1755643990423'] = [
+                    $arFields[RegisterUserCompanyConfig::getRequisitesFileField()] = [
                         'fileData' => $fileData
                     ];
                 }
@@ -103,8 +114,8 @@ class RegisterUserCompany extends Request{
                 'POST' => $arFields['WORK_POSITION'],
                 'BIRTHDATE' => $arFields['PERSONAL_BIRTHDAY'],
                 'OPENED' => 'Y',
-                'ASSIGNED_BY_ID' => 3036,
-                'UF_CRM_3804624445810' => $arFields['UF_CITY'],
+                'ASSIGNED_BY_ID' => RegisterUserCompanyConfig::ASSIGNED_BY_ID,
+                RegisterUserCompanyConfig::CRM_CONTACT_CITY_FIELD => $arFields['UF_CITY'],
                 'PHONE' => [[
                     "VALUE" => $arFields['PERSONAL_PHONE'],
                     "VALUE_TYPE" => "WORK"
@@ -126,7 +137,7 @@ class RegisterUserCompany extends Request{
             } else {
                 // если это рекламный агент
                 if ($arFields['UF_ADVERSTERING_AGENT'] == 'on') {
-                    $dataContact['fields']['UF_CRM_1701839165901'] = "Пользователь зарегистрировался как рекламный агент";
+                    $dataContact['fields'][RegisterUserCompanyConfig::CRM_CONTACT_NOTE_FIELD] = RegisterUserCompanyConfig::REGISTRATION_NOTE_AD_AGENT;
                 }
                 $dataRequisite = [
                     'fields' => [],
@@ -141,7 +152,7 @@ class RegisterUserCompany extends Request{
                     ]
                 ];
                 // найти реквизит по ИНН
-                $dataRequisite = sendRequestB24("crm.requisite.list", $dataRequisite,false);
+                $dataRequisite = $this->callB24Method("crm.requisite.list", $dataRequisite, false);
 
                 if (!empty($dataRequisite)) {			
 					//pre($dataRequisite);
@@ -156,11 +167,11 @@ class RegisterUserCompany extends Request{
                         'OS_COMPANY_PHONE' => $arFields['PERSONAL_PHONE'],
                         'OS_COMPANY_B24_ID' => $companyId,
                         'OS_COMPANY_CITY' => $arFields['UF_CITY'],
-                        'OS_REQUSITES_FILE' => $arFields['UF_CRM_1755643990423']
+                        'OS_REQUSITES_FILE' => $this->getConfiguredFieldValue($arFields, RegisterUserCompanyConfig::getRequisitesFileField())
                     ];
                     if( isset($arFields['USER_ID']) ){
                         $companyElementParamss['USER_ID'] = $arFields['USER_ID'];
-                        $dataContact['fields']['UF_CRM_3804624445748'] = $arFields['USER_ID'];
+                        $dataContact['fields'][RegisterUserCompanyConfig::CRM_CONTACT_SITE_USER_ID_FIELD] = $arFields['USER_ID'];
                     }
 
                     $this->createCompanyElement($companyElementParamss);
@@ -181,20 +192,20 @@ class RegisterUserCompany extends Request{
                                 'VALUE' => $arFields['UF_SITE'],
                                 "VALUE_TYPE" => "WORK"
                             ]],
-                            'UF_CRM_1669208000616' => $arFields['UF_SPERE'],
-                            'UF_CRM_1669208295583' => $arFields['UF_JUR_ADDRESS'],
-                            'UF_CRM_1618551330657' => $arFields['UF_CITY'],
-                            'UF_CRM_1755643990423' => $arFields['UF_CRM_1755643990423'],
+                            RegisterUserCompanyConfig::CRM_COMPANY_SPHERE_FIELD => $arFields['UF_SPERE'],
+                            RegisterUserCompanyConfig::CRM_COMPANY_JUR_ADDRESS_FIELD => $arFields['UF_JUR_ADDRESS'],
+                            RegisterUserCompanyConfig::CRM_COMPANY_CITY_FIELD => $arFields['UF_CITY'],
+                            RegisterUserCompanyConfig::CRM_REQUISITES_FILE_FIELD => $this->getConfiguredFieldValue($arFields, RegisterUserCompanyConfig::getRequisitesFileField()),
                             'COMPANY_TYPE' => 'CUSTOMER',
-                            'ASSIGNED_BY_ID' => 3036,
+                            'ASSIGNED_BY_ID' => RegisterUserCompanyConfig::ASSIGNED_BY_ID,
                         ]
                     ];
 
-                    $companyId = sendRequestB24("crm.company.add", $qrCompanyInfo);
+                    $companyId = $this->callB24Method("crm.company.add", $qrCompanyInfo);
 					
                     if (!empty($companyId)) {
                         $qrCompany['id'] = $companyId;
-                        $dataCompany = sendRequestB24("crm.company.get", $qrCompany);
+                        $dataCompany = $this->callB24Method("crm.company.get", $qrCompany);
 
                         /*Добавление реквизита к компании*/
                         $qrRequisite = [
@@ -205,7 +216,7 @@ class RegisterUserCompany extends Request{
                                 'PRESET_ID' => 1
                             ]
                         ];
-                        $requisiteId = sendRequestB24("crm.requisite.add", $qrRequisite);
+                        $requisiteId = $this->callB24Method("crm.requisite.add", $qrRequisite);
 
                         /*Обновление реквизитов у компании*/
                         $qrRequisites = array(
@@ -218,7 +229,7 @@ class RegisterUserCompany extends Request{
                                 'RQ_COMPANY_FULL_NAME' => $arFields['UF_NAME_COMPANY']
                             ]
                         );
-                        sendRequestB24("crm.requisite.update", $qrRequisites);
+                        $this->callB24Method("crm.requisite.update", $qrRequisites);
 
                         $companyElementParamss = [
                             'OS_COMPANY_INN' => $arFields['UF_INN'],
@@ -228,11 +239,11 @@ class RegisterUserCompany extends Request{
                             'OS_COMPANY_PHONE' => $arFields['PERSONAL_PHONE'],
                             'OS_COMPANY_B24_ID' => $dataCompany['ID'],
                             'OS_COMPANY_CITY' => $arFields['UF_CITY'],
-                            'OS_REQUSITES_FILE' => $arFields['UF_CRM_1755643990423']
+                            'OS_REQUSITES_FILE' => $this->getConfiguredFieldValue($arFields, RegisterUserCompanyConfig::getRequisitesFileField())
                         ];
                         if( isset($arFields['USER_ID']) ){
                             $companyElementParamss['USER_ID'] = $arFields['USER_ID'];
-                            $dataContact['fields']['UF_CRM_3804624445748'] = $arFields['USER_ID'];
+                            $dataContact['fields'][RegisterUserCompanyConfig::CRM_CONTACT_SITE_USER_ID_FIELD] = $arFields['USER_ID'];
                         }
                         $dataContact['fields']['COMPANY_ID'] = $dataCompany['ID'];
 
@@ -248,7 +259,7 @@ class RegisterUserCompany extends Request{
             }
         }
 
-        $contactId = sendRequestB24("crm.contact.add", $dataContact);
+        $contactId = $this->callB24Method("crm.contact.add", $dataContact);
 
         if (!empty($companyId) && !empty($contactId)) {
             // добавить контакт в компанию
@@ -256,7 +267,7 @@ class RegisterUserCompany extends Request{
                 'fields' => ['COMPANY_ID' => $companyId],
                 'id' => $contactId
             ];
-            sendRequestB24("crm.contact.company.add", $qrCompanyAddContact);
+            $this->callB24Method("crm.contact.company.add", $qrCompanyAddContact);
         }
 
         return true;
@@ -338,20 +349,20 @@ class RegisterUserCompany extends Request{
             'select' => [],
             'filter' => ["EMAIL" => $arUser["EMAIL"]]
         ];
-        $arResult = $this->sendB24Request("crm.contact.list", $qrList);
+        $arResult = $this->callB24Method("crm.contact.list", $qrList);
 
         if ($arResult['ID']) {
             // убрать рекламную агентность		
-            sendRequestB24("crm.contact.update", [
+            $this->callB24Method("crm.contact.update", [
                 "id" => $arResult['ID'],
                 "fields" => [
-                    'UF_CRM_1698752707853' => ''
+                    RegisterUserCompanyConfig::CRM_CONTACT_AD_AGENT_FIELD => ''
                 ]
             ]);
             intec\eklectika\advertising_agent\Client::eraseStatusRA($arUser["ID"], $idCompanySite);
 
             // уволить его!		
-            sendRequestB24("crm.contact.company.delete", [
+            $this->callB24Method("crm.contact.company.delete", [
                 'id' => $arResult['ID'],
                 'fields' => array('COMPANY_ID' => $companyId),
             ]);

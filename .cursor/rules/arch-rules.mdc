@@ -25,15 +25,23 @@ alwaysApply: true
 - Любые файлы, использующие `intec\eklectika\` namespace
 
 ### Фокусируйся только на:
-- `local/classes/` - собственные классы
+- `local/classes/` - собственные классы (переходный перенос в `local/modules/eklektika.*/lib/` — см. `docs/tasks/.../MODULE-LAYOUT.md`)
+- `local/modules/eklektika.*/` - модули собственной разработки; **транспорт REST к B24** — `eklektika.b24.rest` (`lib/RestClient`, `lib/Request`)
 - `local/templates/` - шаблоны и компоненты
 - `local/components/` - собственные компоненты
 
 ## ✅ РАЗРЕШЕНО: Работа с собственными разработками
 
 ### Основные директории:
-- `local/classes/site/` - бизнес-логика сайта
-- `local/classes/b24/` - интеграция с Bitrix24
+- `local/classes/site/` - переходный остаток (`StatusDiscounter` и др., пока не вынесены по MODULE-LAYOUT); домен компании и пол цен — в **`eklektika.company`** и **`eklektika.catalog.pricing`**
+- `local/modules/eklektika.b24.rest/lib/` - HTTP/REST-транспорт к Bitrix24 (без доменной логики CRM)
+- `local/modules/eklektika.b24.usersync/lib/` - синхронизация пользователя сайта с контактом CRM
+- `local/modules/eklektika.company/lib/` - компании, менеджеры, пользовательские группы (`OnlineService\Site\*` до ST-09)
+- `local/modules/eklektika.catalog.pricing/lib/` - пол цены витрины (`CatalogPriceFloor`; узкий контракт с компанией)
+- `local/modules/eklektika.catalog.import/lib/` - постобработка каталога после обмена с 1С (`OnlineService\Catalog\Import1c\*`)
+- `local/modules/eklektika.orders.applications/lib/` - заявки по строкам сделки B24 в каталог и корзину Sale (`OnlineService\Orders\Applications\*`)
+- `local/modules/eklektika.site/lib/` - настройки страницы (Page editor), bootstrap поиска (`OnlineService\Site\PageSettings`, `SearchIndexingBootstrap`)
+- `local/classes/b24/` - устаревшая папка; новый код не размещать (см. MODULE-LAYOUT)
 - `director/` - функционал для руководителей
 - `personal/` - личный кабинет
 

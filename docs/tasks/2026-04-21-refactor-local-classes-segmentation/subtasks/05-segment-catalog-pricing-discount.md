@@ -8,38 +8,60 @@
 
 ## Цель подзадачи
 
-Выделить домен ценообразования ([`local/classes/site/CatalogPriceFloor.php`](../../../local/classes/site/CatalogPriceFloor.php)) в отдельный сегмент с минимальными зависимостями от CRM-транспорта и чёткой зависимостью от контракта «скидка компании», описанного в ST-04.
+Выделить домен ценообразования (класс в [`local/modules/eklektika.catalog.pricing/lib/CatalogPriceFloor.php`](../../../local/modules/eklektika.catalog.pricing/lib/CatalogPriceFloor.php)) в модуле **`eklektika.catalog.pricing`** с кодом в **`local/modules/eklektika.catalog.pricing/lib/`** с минимальными зависимостями от CRM-транспорта и чёткой зависимостью от контракта «скидка компании», описанного в ST-04 ([MODULE-LAYOUT.md](../MODULE-LAYOUT.md), [ST-10](./10-architecture-segment-independence-and-core-boundary.md)).
 
-## Описание работ
+## Описание работ (согласованный план исполнителя)
 
-1. Перенести класс и связанные константы/хелперы в структуру папок сегмента (например, `local/classes/catalog/pricing/` или модуль `eklektika.catalog.pricing` на этапе ST-09).
-2. Заменить прямые обращения к `Company` внутри ценообразования на узкий интерфейс/статический фасад из ST-04 (`getMaxCompanyDiscountPercentForUserGroups` или аналог).
-3. Сохранить регистрацию событий `catalog`/`sale` из [`CatalogPriceFloor::bootstrap()`](../../../local/classes/site/CatalogPriceFloor.php) и вызов из [`local/php_interface/init.php`](../../../local/php_interface/init.php); перенести регистрацию в bootstrap сегмента.
-4. Инвентаризация всех использований в шаблонах ([`local/templates/universe_s1/`](../../../local/templates/universe_s1/), дубликаты в `bitrix/templates/`) — обновить namespace только при необходимости; составить чек-лист регрессии витрины и корзины.
+1. **Модуль `eklektika.catalog.pricing`:** **`local/modules/eklektika.catalog.pricing/`** с минимальным **`include.php`**: **`Loader::registerAutoLoadClasses`** для класса **`OnlineService\Site\CatalogPriceFloor`** → **`lib/CatalogPriceFloor.php`** (перенесено из **`local/classes/site/`**; без смены namespace до [ST-09](./09-modules-eklektika-scaffold-and-migration.md)).
+2. **`requires.php` (после ST-04):** дополнить порядок подключения — **`Loader::includeModule('eklektika.catalog.pricing')`** сразу после **`eklektika.company`** и **до** **`eklektika.b24.usersync`** (итого: **`rest` → `company` → `catalog.pricing` → `usersync`**); **убрать** **`require_once`** на старый **`CatalogPriceFloor.php`**; **сохранить** вызов **`CatalogPriceFloor::markCompositeNonCacheableForAuthorizedCatalog()`** после загрузки модуля pricing (класс доступен через автозагрузку модуля).
+3. **`init.php`:** оставить **`CatalogPriceFloor::bootstrap()`** после подключения [`requires.php`](../../../local/classes/requires.php); порядок **сохранить**: сначала эффекты из **`requires`** (**`markCompositeNonCacheable…`** при загрузке страницы через цепочку requires), затем **`bootstrap()`** там, где он уже вызывается в **`init.php`** — без перестановки относительно текущего поведения.
+4. **Зависимость от домена компании:** только узкий контракт ST-04 — **`Company::getMaxCompanyDiscountPercentForUserGroups`**; не подтягивать прочие методы **`Company`** и не вводить зависимости **`catalog.pricing` → `b24.usersync`**.
+5. Шаблоны: при **`namespace`** без изменений правки вызовов не требуются; инвентаризация **`class_exists` / use** в [`local/templates/`](../../../local/templates/) на предмет регрессий — по чек-листу проверки.
 
 ## Технические детали
 
 - Компоненты/модули:
-  - [`local/classes/site/CatalogPriceFloor.php`](../../../local/classes/site/CatalogPriceFloor.php)
-  - [`local/php_interface/init.php`](../../../local/php_interface/init.php) — `CatalogPriceFloor::bootstrap()`
-  - шаблоны каталога/корзины с `class_exists(\OnlineService\Site\CatalogPriceFloor::class)`
+  - **Новые:** `local/modules/eklektika.catalog.pricing/include.php`, `lib/CatalogPriceFloor.php`
+  - **Источник переноса:** ~~`local/classes/site/CatalogPriceFloor.php`~~ — удалён после переноса
+  - [`local/classes/requires.php`](../../../local/classes/requires.php) — порядок модулей + отказ от ручного `require` класса пола цен
+  - [`local/php_interface/init.php`](../../../local/php_interface/init.php) — только подтверждение порядка **`…::bootstrap()`** после requires
+  - [`local/modules/eklektika.company/lib/Company.php`](../../../local/modules/eklektika.company/lib/Company.php) — контракт **`getMaxCompanyDiscountPercentForUserGroups`** для **`CatalogPriceFloor`**
 - Изменяемые файлы/области:
-  - `local/classes/` (новая подпапка сегмента)
-  - `local/php_interface/init.php`
-  - при смене имени класса — шаблоны в `local/templates/`
+  - `local/modules/eklektika.catalog.pricing/` (новый модуль)
+  - `local/classes/requires.php`
+  - при необходимости — шаблоны только если меняется имя класса или namespace (в ST-05 не планируется)
 
 ## Зависимости
 
 - Блокируется:
-  - ST-04 (контракт скидки)
+  - ST-04 (контракт **`getMaxCompanyDiscountPercentForUserGroups`**)
 - Блокирует:
-  - нет (высокий риск — выполнять после стабилизации зависимостей)
+  - нет прямого; следующий спринт **[ST-06](./06-segment-catalog-1c-import-hooks.md)** (постобработка 1С) логически следует после стабилизации bootstrap и таблицы модулей — в [README](../README.md) после закрытия ST-05 переносится фокус на ST-06
 
 ## Критерии приёмки
 
-- [ ] Цены на карточке товара, списке и в корзине совпадают с эталоном на выборке товаров (ручная сверка до/после)
-- [ ] Скидка, зависящая от групп компании, применяется как раньше
-- [ ] Нет циклических зависимостей между сегментом pricing и CRM user-sync
+**Код и загрузка**
+
+- [x] Создан модуль **`eklektika.catalog.pricing`** с **`include.php`** и **`Loader::registerAutoLoadClasses`** для **`OnlineService\Site\CatalogPriceFloor`** → **`lib/CatalogPriceFloor.php`**
+- [x] В [`requires.php`](../../../local/classes/requires.php) порядок: **`eklektika.b24.rest` → `eklektika.company` → `eklektika.catalog.pricing` → `eklektika.b24.usersync`**; **нет** `require_once` старого пути **`site/CatalogPriceFloor.php`**
+- [x] После подключения **`eklektika.catalog.pricing`** выполняется **`CatalogPriceFloor::markCompositeNonCacheableForAuthorizedCatalog()`** (как сейчас по смыслу раннего побочного эффекта при загрузке requires)
+- [x] В **`init.php`** сохранён вызов **`CatalogPriceFloor::bootstrap()`** после requires; относительный порядок от **`markComposite…`** к **`bootstrap()`** не ломает прежнее поведение
+
+**Домен и зависимости**
+
+- [x] Получение «скидки компании» для расчёта пола цен идёт только через **`Company::getMaxCompanyDiscountPercentForUserGroups`** (или вызов этого метода без обходных прямых зависимостей на остальной **`Company`**)
+- [x] Нет циклических и лишних зависимостей: **`catalog.pricing`** не тянет **`eklektika.b24.usersync`**; связь с компанией — только через контракт ST-04
+
+**Поведение и регрессии**
+
+- [ ] Цены на карточке товара, в списке и в корзине на выборке товаров/пользователей совпадают с эталоном до изменений (ручная сверка)
+- [ ] Скидка по группам компании применяется как до рефакторинга
+
+**Документация (закрытие ST-05)**
+
+- [x] Обновлён [`docs/features/local_classes_segments_and_modules.md`](../../../features/local_classes_segments_and_modules.md): модуль **`eklektika.catalog.pricing`**, путь к **`CatalogPriceFloor`**, цепочка **`requires`** с четырьмя модулями
+- [x] При необходимости уточнён [`docs/features/company_system.md`](../../../features/company_system.md): связь **`CatalogPriceFloor`** с компанией только через **`getMaxCompanyDiscountPercentForUserGroups`**; убрано/обновлено упоминание переходного **`require`** **`CatalogPriceFloor`** из **`requires.php`**
+- [x] Обновлены [MODULE-LAYOUT.md](../MODULE-LAYOUT.md) (§ миграция/bootstrap после ST-05) и карточка [README задачи](../README.md): текущий фокус — **следующий спринт ST-06** ([постобработка 1С](./06-segment-catalog-1c-import-hooks.md))
 
 ## Проверка
 
@@ -51,13 +73,17 @@
 ## Документация
 
 - Изученные документы:
-  - `docs/features/company_system.md` (связь скидки и компании)
+  - [`docs/features/company_system.md`](../../../features/company_system.md)
+  - [`docs/features/local_classes_segments_and_modules.md`](../../../features/local_classes_segments_and_modules.md)
+  - [MODULE-LAYOUT.md](../MODULE-LAYOUT.md)
 - Что обновить:
-  - новый раздел в `docs/features/local_classes_segments_and_modules.md` про ценообразование
-  - при необходимости — отдельный файл `docs/features/catalog_pricing_floor.md` (если решено выделить объёмную документацию)
+  - **`local_classes_segments_and_modules.md`** — строка сегмента ценообразования, таблица bootstrap **`requires.php`**, при необходимости блок про глобальные REST-хелперы (убрать «остаток site/CatalogPriceFloor до ST-05» после выноса)
+  - **`company_system.md`** — секция про переходный `require` **`CatalogPriceFloor`** заменена на указание модуля **`eklektika.catalog.pricing`** и контракта скидки
+  - **MODULE-LAYOUT.md** — пункт про bootstrap post-ST-05 (четыре модуля, без ручного require pricing)
+  - **README задачи** — статус ST-05, фокус на ST-06
 - Что создать (если нужно):
-  - `docs/features/catalog_pricing_floor.md` — по решению исполнителя при росте объёма
+  - отдельный `docs/features/catalog_pricing_floor.md` — не требуется, пока объём не вырос (по усмотрению после ST-06+)
 
 ## Статус
 
-- planned
+- done (ожидает ручной сверки цен и корпоративной скидки на стенде)

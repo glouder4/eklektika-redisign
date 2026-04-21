@@ -2,7 +2,7 @@
 
 **Дата:** 20 октября 2025  
 **Файлы:** 
-- `local/classes/site/Company.php` (метод `sendToBitrix24()`)
+- `local/modules/eklektika.company/lib/Company.php` (метод `sendToBitrix24()`)
 - `local/components/online-service/company.profile.edit/ajax.php`
 
 ## 🎯 Цель интеграции
