@@ -5,27 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a53d02d7-d404-452c-a903-dd81636134fa" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/features/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/features/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/features/b24_integration.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/features/b24_integration.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/features/company_system.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/features/company_system.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/features/local_classes_segments_and_modules.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/features/local_classes_segments_and_modules.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/classes/requires.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/classes/requires.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.b24.rest/include.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/eklektika.b24.rest/include.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.b24.rest/lib/RestClient.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/eklektika.b24.rest/lib/RestClient.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.b24.usersync/include.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/eklektika.b24.usersync/include.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.b24.usersync/lib/RegisterUserCompany.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/eklektika.b24.usersync/lib/RegisterUserCompany.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/features/uf_advertising_agent.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/features/uf_advertising_agent.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/features/user_groups_system.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/features/user_groups_system.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local/modules/eklektika.b24.usersync/lib/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/eklektika.b24.usersync/lib/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.catalog.import/include.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/eklektika.catalog.import/include.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.catalog.pricing/include.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/eklektika.catalog.pricing/include.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.catalog.pricing/lib/CatalogPriceFloor.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/eklektika.catalog.pricing/lib/CatalogPriceFloor.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.company/include.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/eklektika.company/include.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local/modules/eklektika.company/lib/Company.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/eklektika.company/lib/Company.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.orders.applications/include.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/eklektika.orders.applications/include.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.site/include.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/eklektika.site/include.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/php_interface/b24_integration_config.example.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/php_interface/b24_integration_config.example.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/php_interface/init.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/php_interface/init.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/sale.personal.section/template.1/parts/personal-widgets.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/sale.personal.section/template.1/parts/personal-widgets.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -243,7 +230,7 @@
       <workItem from="1776162305797" duration="3992000" />
       <workItem from="1776698178130" duration="40000" />
       <workItem from="1776770848513" duration="5678000" />
-      <workItem from="1776797658638" duration="6742000" />
+      <workItem from="1776797658638" duration="8697000" />
     </task>
     <servers />
   </component>

@@ -81,8 +81,10 @@
         }
 
         /**
-         * Синхронизация групп пользователя из UPDATE_COMPANY: снять все скидочные группы компании,
+         * Синхронизация групп пользователя из UPDATE_COMPANY: при наличии в payload ключа
+         * `OS_COMPANY_DISCOUNT_VALUE` — снять все скидочные группы компании,
          * затем выставить маркетинг (если есть в params) и не более одной скидочной ($discountMappedGroupId).
+         * Если ключа скидки в payload нет — скидочные группы пользователя не меняются (частичные апдейты).
          * Администраторы и прочие группы не трогаем (кроме скидочных из маппинга).
          */
         private static function applyB24CompanyGroupsToUser(User $user, int $userId, array $params, ?int $discountMappedGroupId): void
@@ -92,13 +94,19 @@
                 return;
             }
 
-            $user->removeUserFromGroupsByIds($userId, self::getCompanyDiscountAssignedGroupIds());
+            // Скидочные группы трогаем только если в payload явно передан OS_COMPANY_DISCOUNT_VALUE
+            // (частичный UPDATE_COMPANY / цепочка после UPDATE_CONTACT не должна сбрасывать скидку).
+            $touchDiscountGroups = array_key_exists('OS_COMPANY_DISCOUNT_VALUE', $params);
+
+            if ($touchDiscountGroups) {
+                $user->removeUserFromGroupsByIds($userId, self::getCompanyDiscountAssignedGroupIds());
+            }
 
             $groups = [];
             if (!empty($params['OS_IS_MARKETING_AGENT']['VALUE'])) {
                 $groups[] = $user->getMarketingGroupId();
             }
-            if ($discountMappedGroupId !== null && $discountMappedGroupId > 0) {
+            if ($touchDiscountGroups && $discountMappedGroupId !== null && $discountMappedGroupId > 0) {
                 $groups[] = $discountMappedGroupId;
             }
 

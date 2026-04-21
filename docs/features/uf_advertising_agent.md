@@ -17,26 +17,16 @@
 #### Обработчик обновления пользователя:
 ```php
 public function OnAfterUserUpdateHandler($arFields){
+    $userObject = $this->getUserObject($arFields['ID']);
     if( isset($arFields['UF_ADVERSTERING_AGENT']) )
         $this->updateMarketingAgentPriceType($arFields['UF_ADVERSTERING_AGENT']);
+
     return true;
 }
 ```
 
-#### Обновление типа цены для маркетинговых агентов:
-```php
-private function updateMarketingAgentPriceType($status, $userId = null){
-    // Получаем группу рекламных агентов (ID = 12)
-    $rsGroup = \CGroup::GetByID($this->MARKETING_AGENT_GROUP_ID);
-    
-    // Добавляем или удаляем пользователя из группы в зависимости от статуса
-    if ($shouldBeInGroup && !$isUserInGroup) {
-        return $this->addUserToGroup($userId, $this->MARKETING_AGENT_GROUP_ID);
-    } elseif (!$shouldBeInGroup && $isUserInGroup) {
-        return $this->removeUserFromGroup($userId, $this->MARKETING_AGENT_GROUP_ID);
-    }
-}
-```
+#### Синхронизация группы агента и поля (`updateMarketingAgentPriceType`):
+При **назначении** агента вызывается **`addUserToGroup()`**: группа **12** добавляется через **`CUser::SetUserGroup`** по полному списку из **`CUser::GetUserGroup`** (не через `GetByID`/`GROUPS_ID`), затем **`CUser::Update`** только с **`UF_ADVERSTERING_AGENT`** и **`ACTIVE`**, **без** полей групп — так не теряются скидочные и прочие группы. При **снятии**: **`removeUserFromGroupsByIds($userId, [MARKETING_AGENT_GROUP_ID])`**, затем **`(new CUser)->Update($userId, ['ACTIVE' => 'N', 'UF_ADVERSTERING_AGENT' => 0])`** без `GROUP_ID` / `GROUPS_ID`; **`removeUserFromGroup()`** для этого сценария не используется.
 
 #### Константа группы:
 ```php
@@ -135,9 +125,9 @@ $arProps["ADVERSTERING_AGENT"] = [
 4. Активируется личный кабинет с расширенными правами
 
 ### Деактивация рекламного агента:
-1. Устанавливается `UF_ADVERSTERING_AGENT = 0`
-2. Пользователь удаляется из группы 12
-3. Тип пользователя меняется на 4 (физическое лицо) или 5 (юридическое лицо)
+1. Снимается только группа рекламных агентов (`MARKETING_AGENT_GROUP_ID`) через **`removeUserFromGroupsByIds`**
+2. Отдельным обновлением пользователя: **`ACTIVE = 'N'`**, **`UF_ADVERSTERING_AGENT = 0`** (без полей групп в массиве обновления)
+3. Смена **`UF_TYPE`** на 4/5 в этом потоке не выполняется — только группа агента и деактивация учётной записи на сайте
 
 ## Влияние на функциональность
 

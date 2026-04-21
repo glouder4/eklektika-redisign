@@ -18,7 +18,7 @@ $defaultWidgets = [
         'left' => 'ЗНАЧЕНИЕ 1',
         'right' => 'ЗНАЧЕНИЕ 2',
     ],
-]; 
+];
 
 $arWidgets = isset($arResult['PERSONAL_WIDGETS']) && is_array($arResult['PERSONAL_WIDGETS'])
     ? array_replace_recursive($defaultWidgets, $arResult['PERSONAL_WIDGETS'])

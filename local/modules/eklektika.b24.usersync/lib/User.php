@@ -2,6 +2,7 @@
     namespace OnlineService\B24;
     use OnlineService\B24\UserSync\Config\UserSyncConfig;
     use OnlineService\B24\Request;
+    use OnlineService\Site\Config\CompanyModuleConfig;
     class User extends Request{
         public ?int $contactId = null;
 
@@ -193,20 +194,23 @@
          * @return array Массив ID групп пользователя
          */
         public function getUserGroups($userId){
-            $groupIds = array();
-            
-            // Получаем данные пользователя
-            $rsUser = \CUser::GetByID($userId);
-            $userData = $rsUser->Fetch();
-            
-            if ($userData && !empty($userData['GROUPS_ID'])) {
-                $groupIds = $userData['GROUPS_ID'];
-                if (!is_array($groupIds)) {
-                    $groupIds = array($groupIds);
-                }
+            $userId = (int)$userId;
+            if ($userId <= 0) {
+                return [];
             }
-            
-            return $groupIds;
+
+            // Важно: поле GROUPS_ID из CUser::GetByID не гарантирует полный список членства;
+            // источник истины — CUser::GetUserGroup (как в addUserToGroups / removeUserFromGroupsByIds).
+            $ids = \CUser::GetUserGroup($userId);
+            if (!is_array($ids)) {
+                $ids = $ids !== null && $ids !== '' && $ids !== false
+                    ? [(int)$ids]
+                    : [];
+            } else {
+                $ids = array_map('intval', $ids);
+            }
+
+            return $this->normalizeUserGroupIds($ids);
         }
 
         /**
@@ -216,31 +220,32 @@
          * @return bool Результат операции
          */
         public function addUserToGroup($userId, $groupId){
-            $user = (new \CUser);
-            // Получаем текущие группы пользователя
-            $userGroups = $this->getUserGroups($userId);
-            
-            // Проверяем, не добавлен ли пользователь уже в эту группу
-            if (in_array($groupId, $userGroups)) {
-                return true;
-            }
-            
-            // Добавляем новую группу к существующим группам
-            $userGroups[] = $groupId;
-            
-            $arFields = array(
-                'GROUP_ID' => $userGroups,
-                'UF_ADVERSTERING_AGENT' => 1,
-                'ACTIVE' => 'Y'
-            );
-            
-            $result = (new \CUser)->Update($userId, $arFields);
-            
-            if ($result) {
-                return true;
-            } else {
+            $userId = (int)$userId;
+            $groupId = (int)$groupId;
+            if ($userId <= 0 || $groupId <= 0) {
                 return false;
             }
+
+            $cur = $this->normalizeUserGroupIds(\CUser::GetUserGroup($userId));
+            if (in_array($groupId, $cur, true)) {
+                return (bool)(new \CUser())->Update($userId, [
+                    'UF_ADVERSTERING_AGENT' => 1,
+                    'ACTIVE' => 'Y',
+                ]);
+            }
+
+            $hadAdministratorsGroup = in_array($this->ADMINISTRATORS_GROUP_ID, $cur, true);
+            $new = $this->normalizeUserGroupIds(array_merge($cur, [$groupId]));
+            if ($hadAdministratorsGroup && !in_array($this->ADMINISTRATORS_GROUP_ID, $new, true)) {
+                $new[] = $this->ADMINISTRATORS_GROUP_ID;
+            }
+
+            \CUser::SetUserGroup($userId, $new);
+
+            return (bool)(new \CUser())->Update($userId, [
+                'UF_ADVERSTERING_AGENT' => 1,
+                'ACTIVE' => 'Y',
+            ]);
         }
         public function addUserToGroups($userId, $groupIds, $userObj = null){
             $userId = (int)$userId;
@@ -418,8 +423,16 @@
                 return $this->addUserToGroup($userId, $this->MARKETING_AGENT_GROUP_ID);
                 
             } elseif (!$shouldBeInGroup && $isUserInGroup) {
-                // Удаляем пользователя из группы
-                return $this->removeUserFromGroup($userId, $this->MARKETING_AGENT_GROUP_ID);
+                // Снятие агента: только группа агента через SetUserGroup; затем отдельно UF/ACTIVE без GROUP_ID
+                // (не removeUserFromGroup — там смешаны группы и поля в одном CUser::Update).
+                if (!$this->removeUserFromGroupsByIds((int)$userId, [$this->MARKETING_AGENT_GROUP_ID])) {
+                    return false;
+                }
+                $u = new \CUser();
+                return (bool)$u->Update((int)$userId, [
+                    'ACTIVE' => 'N',
+                    'UF_ADVERSTERING_AGENT' => 0,
+                ]);
                 
             } else {
                 return true;
@@ -486,7 +499,8 @@
             // Обновляем пользователя на сайте
             $user = new \CUser();
 
-            if( $fields['UF_IS_DIRECTOR'] && $fields['ACTION'] == "UPDATE_CONTACT" ){
+            if (($fields['ACTION'] ?? '') === 'UPDATE_CONTACT' && array_key_exists('UF_IS_DIRECTOR', $fields)) {
+                if ($this->isCrmDirectorFlagOn($fields['UF_IS_DIRECTOR'])) {
                 // Получаем компанию пользователя
                 $rsCompany = \CIBlockElement::GetList(
                     [],
@@ -520,7 +534,7 @@
                             false,
                             false,
                             ['ID']
-                        );
+                        );  
 
                         while ($holdingCompany = $rsHoldingCompanies->GetNext()) {
                             $companyIds[] = $holdingCompany['ID'];
@@ -569,19 +583,23 @@
                 }
                 
                 // Добавляем пользователя в группу руководителей (ID: 432)
-                $userGroups = \CUser::GetUserGroup($this->userId);
-                if (!in_array($this->DIRECTOR_GROUP_ID, $userGroups)) {
-                    $userGroups[] = $this->DIRECTOR_GROUP_ID;
-                    \CUser::SetUserGroup($this->userId, $userGroups);
+                $cur = $this->normalizeUserGroupIds(\CUser::GetUserGroup($this->userId));
+                if (!in_array($this->DIRECTOR_GROUP_ID, $cur, true)) {
+                    \CUser::SetUserGroup($this->userId, $this->normalizeUserGroupIds(array_merge($cur, [$this->DIRECTOR_GROUP_ID])));
                 }
-            } else if (!$fields['UF_IS_DIRECTOR'] && $fields['ACTION'] == "UPDATE_CONTACT") {
-                // Убираем пользователя из группы руководителей при снятии галочки
-                $userGroups = \CUser::GetUserGroup($this->userId);
-                if (($key = array_search($this->DIRECTOR_GROUP_ID, $userGroups)) !== false) {
-                    unset($userGroups[$key]);
-                    \CUser::SetUserGroup($this->userId, $userGroups);
+                } else {
+                // Убираем из группы руководителей только если CRM явно прислала UF_IS_DIRECTOR (частичный payload без ключа не трогает 432).
+                $cur = $this->normalizeUserGroupIds(\CUser::GetUserGroup($this->userId));
+                if (in_array($this->DIRECTOR_GROUP_ID, $cur, true)) {
+                    $new = array_values(array_diff($cur, [$this->DIRECTOR_GROUP_ID]));
+                    $new = $this->ensureCompanyDiscountGroupsPreserved($cur, $new);
+                    \CUser::SetUserGroup($this->userId, $new);
+                }
                 }
             }
+
+            // Внешний payload (B24 → ajax) не должен перезаписывать членство в группах напрямую.
+            unset($fields['GROUP_ID'], $fields['GROUPS_ID']);
 
             $result = $user->Update($this->userId, $fields);
 
@@ -764,5 +782,58 @@
 
             // Если нет связей с холдингом - возвращаем ID самой компании
             return $company['PROPERTY_OS_COMPANY_B24_ID_VALUE'];
+        }
+
+        /**
+         * Трактовка UF_IS_DIRECTOR из CRM (как у рекламного агента): не использовать «PHP truthy» для строк вроде 'N'.
+         */
+        private function isCrmDirectorFlagOn(mixed $v): bool
+        {
+            return $v === true || $v === 1 || $v === '1' || $v === 'Y' || $v === 'y' || $v === 'Да';
+        }
+
+        /**
+         * @param array<int|string|mixed> $ids
+         * @return list<int>
+         */
+        private function normalizeUserGroupIds(array $ids): array
+        {
+            $out = [];
+            foreach ($ids as $id) {
+                $id = (int)$id;
+                if ($id > 0) {
+                    $out[$id] = $id;
+                }
+            }
+
+            return array_values($out);
+        }
+
+        /**
+         * Не терять скидочные группы компании (ID из CompanyModuleConfig) при пересборке списка для SetUserGroup.
+         *
+         * @param list<int> $before
+         * @param list<int> $after
+         * @return list<int>
+         */
+        private function ensureCompanyDiscountGroupsPreserved(array $before, array $after): array
+        {
+            $discountIds = array_keys(CompanyModuleConfig::getCompanyDiscountPercentByAssignedGroupId());
+            if ($discountIds === []) {
+                return $this->normalizeUserGroupIds($after);
+            }
+
+            $afterMap = array_fill_keys($this->normalizeUserGroupIds($after), true);
+            foreach ($this->normalizeUserGroupIds($before) as $gid) {
+                if (!in_array($gid, $discountIds, true)) {
+                    continue;
+                }
+                if (!isset($afterMap[$gid])) {
+                    $after[] = $gid;
+                    $afterMap[$gid] = true;
+                }
+            }
+
+            return $this->normalizeUserGroupIds($after);
         }
     }

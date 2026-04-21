@@ -56,6 +56,18 @@ Legacy-глобали **`sendRequestB24`** и **`sendRequest`** сохранен
 - `eklektika.orders.applications` использует только транспортный API (`RestClient::callKitRestGet`) и runtime-подключение Bitrix `sale/iblock`.
 - Для временного исключения `usersync -> company` используется implement-ready follow-up `FU-ST11-USERSYNC-COMPANY-GATEWAY` (owner/deadline/criteria синхронизированы в ST-10/ST-11 и `local_classes_segments_and_modules.md`).
 
+### 1.1 Поведение `UPDATE_CONTACT` (группы и активность)
+
+Экшен **`UPDATE_CONTACT`** в `local/classes/ajax.php` делегирует в **`OnlineService\B24\User::update()`**.
+
+Инварианты (защита от регрессий при переключении только `UF_ADVERSTERING_AGENT` / рекламного агента):
+
+- **`User::update()`** перед `CUser::Update` сбрасывает из полей внешнего запроса ключи **`GROUP_ID`** и **`GROUPS_ID`**, чтобы членство в группах не применялось «как пришло» из транспорта.
+- Любая пересборка групп в **`eklektika.b24.usersync`** (в т.ч. **`addUserToGroup`**, ветки руководителя) опирается на **`CUser::GetUserGroup`** + нормализацию ID или на **`CUser::SetUserGroup`** с полным merge; **`CUser::GetByID` → `GROUPS_ID`** не используется как единственный источник списка перед записью — иначе возможна потеря групп (скидочных, 432 и др.) при CRM-синхронизации.
+- **`UF_IS_DIRECTOR` и группа руководителей (432):** назначение/снятие группы **432** выполняется **только если** в payload присутствует ключ **`UF_IS_DIRECTOR`** (частичный `UPDATE_CONTACT` без этого ключа **не** трактуется как «сняли руководителя» и **не** вызывает пересборку групп по этой ветке). При снятии 432 список групп нормализуется перед **`SetUserGroup`**, скидочные группы из матрицы **`CompanyModuleConfig::getCompanyDiscountPercentByAssignedGroupId()`** (prod/test по `B24_USE_TEST_PORTAL`) не должны теряться при этой операции.
+- Снятие статуса рекламного агента в **`updateMarketingAgentPriceType()`** (ветка «был в группе агента, не должен быть»): (1) **`removeUserFromGroupsByIds($userId, [MARKETING_AGENT_GROUP_ID])`** — меняется только членство, снимается **только** группа агента; (2) отдельный **`CUser::Update($userId, ['ACTIVE' => 'N', 'UF_ADVERSTERING_AGENT' => 0])`** **без** `GROUP_ID` / `GROUPS_ID`. Метод **`removeUserFromGroup()`** для этого сценария **не** используется.
+- Скидочные группы по компании настраиваются только в потоке **`Company::updateCompanyElement`** и **только если в payload компании явно передан** `OS_COMPANY_DISCOUNT_VALUE` (см. `docs/features/company_system.md`); иначе скидочные группы пользователя не трогаются.
+
 ### 2. Базовый класс для запросов
 **Файл**: `local/modules/eklektika.b24.rest/lib/Request.php`
 

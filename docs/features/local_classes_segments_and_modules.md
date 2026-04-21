@@ -73,12 +73,12 @@
 | `eklektika.site` | Bitrix core, собственные классы модуля | прямые зависимости на usersync/company/pricing/orders/import |
 | `eklektika.catalog.import` | Bitrix core, собственные классы модуля | зависимости на company/pricing/usersync/orders |
 | `eklektika.orders.applications` | Bitrix core (`sale`, `iblock`), `eklektika.b24.rest` | зависимости на usersync/company/pricing/import |
-| `eklektika.b24.usersync` | Bitrix core, `eklektika.b24.rest` | прямые зависимости на pricing/orders/import |
+| `eklektika.b24.usersync` | Bitrix core, `eklektika.b24.rest`, read-only **`OnlineService\Site\Config\CompanyModuleConfig`** (см. п.2 исключений) | прямые зависимости на pricing/orders/import |
 
 ### Временные исключения (зафиксированы для BC)
 
 1. `eklektika.catalog.pricing -> eklektika.company`: допустимо только через контракт скидки `Company::getMaxCompanyDiscountPercentForUserGroups`.
-2. `eklektika.b24.usersync -> eklektika.company`: историческая связь в `RegisterUserCompany` (создание/обновление элемента компании после CRM-операций). Сохраняется до отдельного шага выделения фасада `CompanyGateway` в рамках follow-up без изменения бизнес-поведения.
+2. `eklektika.b24.usersync -> eklektika.company`: историческая связь в `RegisterUserCompany` (создание/обновление элемента компании после CRM-операций); дополнительно **только чтение** `CompanyModuleConfig` из `User::update()` (инвариант скидочных групп при снятии `UF_IS_DIRECTOR` / группа **432**). Сохраняется до отдельного шага выделения фасада `CompanyGateway` в рамках follow-up без изменения бизнес-поведения.
 
    - Follow-up ID: `FU-ST11-USERSYNC-COMPANY-GATEWAY`.
    - Owner: Eklektika architecture and refactoring team (module maintainers: usersync + company).
