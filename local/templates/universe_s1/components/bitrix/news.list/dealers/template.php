@@ -16,6 +16,41 @@ $this->setFrameMode(true);
 // Получаем ID инфоблока
 $iblockId = $arParams['IBLOCK_ID'];
 
+/**
+ * Раскладывает города по N колонкам, стараясь уравнять «высоту» по числу дилеров.
+ * Важно: входной $blocks уже отсортирован по SORT — обход идёт в этом порядке.
+ *
+ * @param array<int, array{SECTION: array, ELEMENTS: array}> $blocks
+ * @return array<int, array<int, array{SECTION: array, ELEMENTS: array}>>
+ */
+function dealersDistributeCityBlocksToColumns(array $blocks, int $columnCount = 4): array
+{
+    $columns = [];
+    for ($i = 0; $i < $columnCount; $i++) {
+        $columns[$i] = [];
+    }
+
+    $loads = array_fill(0, $columnCount, 0);
+
+    foreach ($blocks as $block) {
+        $weight = 3 + count($block['ELEMENTS']);
+
+        $bestCol = 0;
+        $bestLoad = $loads[0];
+        for ($c = 1; $c < $columnCount; $c++) {
+            if ($loads[$c] < $bestLoad) {
+                $bestLoad = $loads[$c];
+                $bestCol = $c;
+            }
+        }
+
+        $columns[$bestCol][] = $block;
+        $loads[$bestCol] += $weight;
+    }
+
+    return $columns;
+}
+
 // Получаем разделы первого уровня
 $sections = [];
 $sectionFilter = [
@@ -24,11 +59,12 @@ $sectionFilter = [
     'DEPTH_LEVEL' => 1, // Только первого уровня
 ];
 
+// Порядок стран, городов и дилеров — по полю SORT инфоблока (см. первый аргумент GetList).
 $res = CIBlockSection::GetList(
     ['SORT' => 'ASC'],
     $sectionFilter,
     false,
-    ['ID', 'NAME', 'CODE', 'DEPTH_LEVEL']
+    ['ID', 'NAME', 'CODE', 'DEPTH_LEVEL', 'SORT']
 );
 
 while ($section = $res->GetNext()) {
@@ -45,7 +81,7 @@ while ($section = $res->GetNext()) {
             'DEPTH_LEVEL' => 2
         ],
         false,
-        ['ID', 'NAME', 'CODE']
+        ['ID', 'NAME', 'CODE', 'SORT']
     );
     
     while ($subSection = $subSectionRes->GetNext()) {
@@ -63,13 +99,18 @@ while ($section = $res->GetNext()) {
             ],
             false,
             false,
-            ['ID', 'NAME', 'CODE', 'PREVIEW_TEXT','PROPERTY_DEALER_LINK']
+            ['ID', 'NAME', 'CODE', 'SORT', 'PREVIEW_TEXT','PROPERTY_DEALER_LINK']
         );
         
         while ($element = $elementRes->GetNext()) {
             $elements[] = $element;
         }
-        
+
+        $subSectionName = trim((string)$subSection['NAME']);
+        if ($subSectionName === '' || empty($elements)) {
+            continue;
+        }
+
         $subSections[] = [
             'SECTION' => $subSection,
             'ELEMENTS' => $elements
@@ -81,67 +122,109 @@ while ($section = $res->GetNext()) {
         'SUBSECTIONS' => $subSections
     ];
 }
+
+$countryGroups = [];
+$singleCityBuffer = [];
+
+foreach ($sections as $sectionData) {
+    $subSectionsCount = count($sectionData['SUBSECTIONS']);
+
+    if ($subSectionsCount <= 1) {
+        $singleCityBuffer[] = $sectionData;
+        continue;
+    }
+
+    while (!empty($singleCityBuffer)) {
+        $countryGroups[] = [
+            'TYPE' => 'single_row',
+            'COUNTRIES' => array_splice($singleCityBuffer, 0, 2)
+        ];
+    }
+
+    $countryGroups[] = [
+        'TYPE' => 'regular',
+        'COUNTRIES' => [$sectionData]
+    ];
+}
+
+while (!empty($singleCityBuffer)) {
+    $countryGroups[] = [
+        'TYPE' => 'single_row',
+        'COUNTRIES' => array_splice($singleCityBuffer, 0, 2)
+    ];
+}
 ?>
 
-<div class="three-columns-container">
-    <?php
-    // Разделяем массив на три примерно равные части
-    $chunks = array_chunk($sections, ceil(count($sections) / 3));
-    
-    foreach ($chunks as $columnSections): ?>
-        <div class="column">
-            <?php foreach ($columnSections as $sectionData): 
+<div class="countries-container">
+    <?php foreach ($countryGroups as $group):
+        $isCompactRow = $group['TYPE'] === 'single_row';
+    ?>
+        <div class="countries-row <?= $isCompactRow ? 'compact-countries-row' : '' ?>">
+            <?php foreach ($group['COUNTRIES'] as $sectionData):
                 $mainSection = $sectionData['SECTION'];
                 $subSections = $sectionData['SUBSECTIONS'];
             ?>
-                <div class="main-section">
-                    <?= htmlspecialcharsbx($mainSection['NAME']) ?>
-                </div>
-                
-                <?php if (!empty($subSections)): ?>
-                    <?php foreach ($subSections as $subSectionData): 
-                        $subSection = $subSectionData['SECTION'];
-                        $elements = $subSectionData['ELEMENTS'];
-                    ?>
-                        <div class="sub-section">
-                            <div class="sub-section-title">
-                                <?= htmlspecialcharsbx($subSection['NAME']) ?>
-                            </div>
-                            
-                            <?php if (!empty($elements)): ?>
-                                <ul class="elements-list">
-                                    <?php foreach ($elements as $element): ?>
-                                        <?
-                                        $this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));
-                                        $this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM')));
+                <div class="country-block <?= $isCompactRow ? 'country-block-compact' : '' ?>">
+                    <div class="main-section">
+                        <?= htmlspecialcharsbx($mainSection['NAME']) ?>
+                    </div>
 
-                                        $link = false;
-                                        if( isset($element['PROPERTY_DEALER_LINK_VALUE']) && !empty(($element['PROPERTY_DEALER_LINK_VALUE'])) && ($element['PROPERTY_DEALER_LINK_VALUE']) != "" && ($element['PROPERTY_DEALER_LINK_VALUE']) != " " ){
-                                            $link = $element['PROPERTY_DEALER_LINK_VALUE'];
-                                        }
-                                        ?>
-                                        <li class="element-item" id="<?=$this->GetEditAreaId($arItem['ID']);?>">
-                                            <?php
-                                                if($link){ ?>
-                                                    <a href="<?=$link ? $link : "javascript::void(0);"?>" <?=($link) ? "target='_blank'" : "";?> rel="noindex, nofollow" class="element-name <?=$link ? "hoverable" : null;?>">
-                                                        <?= htmlspecialcharsbx($element['NAME']) ?>
-                                                    </a>
-                                                <?php }
-                                                else{?>
-                                                    <?= htmlspecialcharsbx($element['NAME']) ?>
-                                                    <?php }
-                                            ?>
-                                        </li>
+                    <?php if (!empty($subSections)): ?>
+                        <?php
+                        $cityBlocks = [];
+                        foreach ($subSections as $subSectionData) {
+                            $subSection = $subSectionData['SECTION'];
+                            $elements = $subSectionData['ELEMENTS'];
+                            if (empty($subSection['NAME']) || empty($elements)) {
+                                continue;
+                            }
+                            $cityBlocks[] = [
+                                'SECTION' => $subSection,
+                                'ELEMENTS' => $elements,
+                            ];
+                        }
+                        $cityColumns = dealersDistributeCityBlocksToColumns($cityBlocks, 4);
+                        ?>
+                        <div class="cities-row">
+                            <?php for ($col = 0; $col < 4; $col++): ?>
+                                <div class="cities-column cities-column-<?= $col + 1 ?>">
+                                    <?php foreach ($cityColumns[$col] as $subSectionData):
+                                        $subSection = $subSectionData['SECTION'];
+                                        $elements = $subSectionData['ELEMENTS'];
+                                    ?>
+                                        <div class="sub-section city-block">
+                                            <div class="sub-section-title">
+                                                <?= htmlspecialcharsbx($subSection['NAME']) ?>
+                                            </div>
+
+                                            <ul class="elements-list">
+                                                <?php foreach ($elements as $element): ?>
+                                                    <?php
+                                                    $link = false;
+                                                    if (isset($element['PROPERTY_DEALER_LINK_VALUE']) && !empty($element['PROPERTY_DEALER_LINK_VALUE']) && ($element['PROPERTY_DEALER_LINK_VALUE'] != " ")) {
+                                                        $link = $element['PROPERTY_DEALER_LINK_VALUE'];
+                                                    }
+                                                    ?>
+                                                    <li class="element-item">
+                                                        <?php if ($link): ?>
+                                                            <a href="<?= $link ?>" target="_blank" rel="noindex, nofollow" class="element-name hoverable">
+                                                                <?= htmlspecialcharsbx($element['NAME']) ?>
+                                                            </a>
+                                                        <?php else: ?>
+                                                            <?= htmlspecialcharsbx($element['NAME']) ?>
+                                                        <?php endif; ?>
+                                                    </li>
+                                                <?php endforeach; ?>
+                                            </ul>
+                                        </div>
                                     <?php endforeach; ?>
-                                </ul>
-                            <?php else: ?>
-                                <div class="no-items">Нет элементов</div>
-                            <?php endif; ?>
+                                </div>
+                            <?php endfor; ?>
                         </div>
-                    <?php endforeach; ?>
-                <?php else: ?>
-                    <div class="no-items">Нет подразделов</div>
-                <?php endif; ?>
+                    <?php else: ?>
+                        <div class="no-items">Нет подразделов</div>
+                    <?php endif; ?>
+                </div>
             <?php endforeach; ?>
         </div>
     <?php endforeach; ?>

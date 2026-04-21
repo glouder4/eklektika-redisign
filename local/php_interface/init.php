@@ -3,6 +3,67 @@ if (headers_sent() === false) {
     header_remove('X-Frame-Options');
 }
 
+// В самом начале, после подключения пролога
+if (function_exists('header_remove')) {
+    // Разрешаем показывать Server Timing
+    header_remove('Server-Timing');
+}
+
+// Добавляем измерение времени для разных этапов
+$GLOBALS['BX_TIMINGS'] = [];
+
+// Перехватываем время начала запроса
+$GLOBALS['BX_TIMINGS']['start'] = microtime(true);
+
+// Регистрируем завершение работы ядра Bitrix
+AddEventHandler('main', 'OnEpilog', 'OnEpilogHandler');
+function OnEpilogHandler()
+{
+    $timings = $GLOBALS['BX_TIMINGS'];
+    $total = microtime(true) - $timings['start'];
+
+    // Безопасное получение времени SQL запросов
+    global $DB;
+    $sql_time = 0;
+
+    if (is_object($DB)) {
+        // Пробуем разные варианты названия метода
+        if (method_exists($DB, 'getQueryTime')) {
+            $sql_time = $DB->getQueryTime();
+        } elseif (method_exists($DB, 'GetQueryTime')) {
+            $sql_time = $DB->GetQueryTime();
+        } elseif (method_exists($DB, 'getSqlQueryTime')) {
+            $sql_time = $DB->getSqlQueryTime();
+        } elseif (property_exists($DB, 'sql_time')) {
+            $sql_time = $DB->sql_time;
+        } elseif (defined('BX_SQL_TIME')) {
+            $sql_time = BX_SQL_TIME;
+        }
+    }
+
+    // Формируем заголовок Server-Timing
+    $header = sprintf(
+        'total;dur=%f, sql;dur=%f, php;dur=%f',
+        $total * 1000,
+        $sql_time * 1000,
+        ($total - $sql_time) * 1000
+    );
+
+    header("Server-Timing: $header");
+}
+
+define('BX_SALT', 'site_yomerch');
+ini_set('session.cookie_domain', 'yomerch.ru');
+\Bitrix\Main\Config\Option::set('main', 'cookie_domain', 'yomerch.ru');
+\Bitrix\Main\Config\Option::set('main', 'use_domain_without_dot_for_cookie', 'Y');
+
+session_set_cookie_params([
+    'path' => '/',
+    'domain' => 'yomerch.ru',
+    'secure' => true,
+    'httponly' => true,
+    'samesite' => 'Strict'
+]);
 
 //header("X-Frame-Options: bitrix.yomerch.ru");
 //header('Content-Security-Policy: frame-ancestors https://bitrix.yomerch.ru', true);

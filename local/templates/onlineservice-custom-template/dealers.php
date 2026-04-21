@@ -1,7 +1,7 @@
 <?php
 $APPLICATION->SetTitle("Наши дилеры");
 ?>
-<div class="container">
+<div class="container dealers-page-container">
     <?$APPLICATION->IncludeComponent(
         "bitrix:breadcrumb",
         "onlineservice-breadcrumbs",
@@ -10,7 +10,7 @@ $APPLICATION->SetTitle("Наши дилеры");
     );?>
 </div>
 <main class="main-content">
-    <div class="container">
+    <div class="container dealers-page-container">
         <div class="page__title-wrapper">
             <h1 class="page__title-wrapper-title" style="background: unset; -webkit-text-fill-color: #7B4FA3;">
                 <?$APPLICATION->ShowTitle(false);?>
@@ -18,7 +18,7 @@ $APPLICATION->SetTitle("Наши дилеры");
         </div>
     </div>
     <section class="content-section">
-        <div class="container padd-767">
+        <div class="container dealers-page-container padd-767">
             <div class="dealers-description">
                 <?$APPLICATION->IncludeComponent(
                     "bitrix:main.include",
@@ -134,6 +134,12 @@ $APPLICATION->SetTitle("Наши дилеры");
     @media(max-width:767px){
         .padd-767{
             padding: 0px 20px;
+        }
+    }
+
+    @media (min-width: 1200px) and (max-width: 1439px) {
+        .dealers-page-container {
+            max-width: 1161px;
         }
     }
     

@@ -31,14 +31,14 @@
          * @var array<int, int>
          */
         private static $companyStatusGroupIdMap = [
-            890 => 476, // 20%
-            891 => 477, // 25%
-            892 => 478, // 30%
-            893 => 475, // 32%
-            894 => 479, // 35%
-            895 => 480, // 37%
-            896 => 481, // 38%
-            897 => 482, // 40%
+            1014 => 94, // 20%
+            1015 => 93, // 25%
+            1016 => 70, // 30%
+            1017 => 1047, // 32%
+            1018 => 1048, // 35%
+            1019 => 1049, // 37%
+            1020 => 1050, // 38%
+            1021 => 1051, // 40%
         ];
 
         /**
@@ -48,14 +48,14 @@
          * @var array<int, float>
          */
         private static array $companyDiscountPercentByAssignedGroupId = [
-            476 => 20.0,
-            477 => 25.0,
-            478 => 30.0,
-            475 => 32.0,
-            479 => 35.0,
-            480 => 37.0,
-            481 => 38.0,
-            482 => 40.0,
+            94 => 20.0,
+            93 => 25.0,
+            70 => 30.0,
+            1047 => 32.0,
+            1048 => 35.0,
+            1049 => 37.0,
+            1050 => 38.0,
+            1051 => 40.0,
         ];
 
         /**
@@ -97,6 +97,43 @@
             $id = (int)$groupId;
 
             return self::$companyStatusGroupIdMap[$id] ?? $groupId;
+        }
+
+        /**
+         * ID групп на сайте, соответствующие скидке компании (взаимоисключающие — не более одной на пользователя).
+         *
+         * @return list<int>
+         */
+        private static function getCompanyDiscountAssignedGroupIds(): array
+        {
+            return array_values(array_unique(array_map('intval', array_values(self::$companyStatusGroupIdMap))));
+        }
+
+        /**
+         * Синхронизация групп пользователя из UPDATE_COMPANY: снять все скидочные группы компании,
+         * затем выставить маркетинг (если есть в params) и не более одной скидочной ($discountMappedGroupId).
+         * Администраторы и прочие группы не трогаем (кроме скидочных из маппинга).
+         */
+        private static function applyB24CompanyGroupsToUser(User $user, int $userId, array $params, ?int $discountMappedGroupId): void
+        {
+            $userId = (int)$userId;
+            if ($userId <= 0) {
+                return;
+            }
+
+            $user->removeUserFromGroupsByIds($userId, self::getCompanyDiscountAssignedGroupIds());
+
+            $groups = [];
+            if (!empty($params['OS_IS_MARKETING_AGENT']['VALUE'])) {
+                $groups[] = $user->getMarketingGroupId();
+            }
+            if ($discountMappedGroupId !== null && $discountMappedGroupId > 0) {
+                $groups[] = $discountMappedGroupId;
+            }
+
+            if ($groups !== []) {
+                $user->addUserToGroups($userId, $groups);
+            }
         }
 
         /**
@@ -160,7 +197,7 @@
             if (\is_string($v)) {
                 $s = \strtoupper(\trim($v));
 
-                return \in_array($s, ['Y', 'YES', 'TRUE', '1'], true);
+                return \in_array($s, ['Y', 'YES', 'TRUE', '1', 31520,'31520'], true);
             }
 
             return (bool)(int)$v;
@@ -276,21 +313,25 @@
                     foreach ($params['OS_COMPANY_USERS'] as $key => $b24_id){
                         $user = new User();
                         $userId = $user->getUserIDByB24ID($b24_id);
+                        if( !$userId ){
+                            $userId = $user->getUserIDByB24ID($params['CONTACT_IDS'][$key]);
+                        }
 
                         if( $userId ){
                             $params['OS_COMPANY_USERS'][$key] =  $userId;
 
-                            $groups = [];
-                            if( $params['OS_IS_MARKETING_AGENT']['VALUE'] ){
-                                $groups[] = $user->getMarketingGroupId();
-                            }
-                            if ($params['OS_COMPANY_DISCOUNT_VALUE']
+                            $discountMapped = null;
+                            if (!empty($params['OS_COMPANY_DISCOUNT_VALUE'])
                                 && self::shouldApplyCompanyDiscountGroupForUser((int)$userId, $params)
                             ) {
-                                $groups[] = self::mapCompanyStatusGroupId($params['OS_COMPANY_DISCOUNT_VALUE']);
+                                $mapped = self::mapCompanyStatusGroupId($params['OS_COMPANY_DISCOUNT_VALUE']);
+                                $mappedInt = (int)$mapped;
+                                if ($mappedInt > 0) {
+                                    $discountMapped = $mappedInt;
+                                }
                             }
 
-                            $user->addUserToGroups($userId,$groups);
+                            self::applyB24CompanyGroupsToUser($user, (int)$userId, $params, $discountMapped);
                         }
                     }
                 }
@@ -387,23 +428,22 @@
                     
                     if ($userId) {
                         $params['OS_COMPANY_USERS'][$key] = $userId;
-                        
-                        $groups = [];
-                        if (!empty($params['OS_IS_MARKETING_AGENT']['VALUE'])) {
-                            $groups[] = $user->getMarketingGroupId();
-                        }
+
+                        $discountMapped = null;
                         if (!empty($params['OS_COMPANY_DISCOUNT_VALUE'])
                             && self::shouldApplyCompanyDiscountGroupForUser((int)$userId, $params)
                         ) {
-                            $statusId = (new UserGroups([]))->searchGroup($params['OS_COMPANY_DISCOUNT_VALUE'])['ID'];
+                            $statusId = (new UserGroups([]))->searchGroup($params['OS_COMPANY_DISCOUNT_VALUE'])['ID'] ?? null;
                             if ($statusId) {
-                                $groups[] = self::mapCompanyStatusGroupId($statusId);
+                                $mapped = self::mapCompanyStatusGroupId($statusId);
+                                $mappedInt = (int)$mapped;
+                                if ($mappedInt > 0) {
+                                    $discountMapped = $mappedInt;
+                                }
                             }
                         }
-                        
-                        if (!empty($groups)) {
-                            $user->addUserToGroups($userId, $groups);
-                        }
+
+                        self::applyB24CompanyGroupsToUser($user, (int)$userId, $params, $discountMapped);
                     }
                 }
             }

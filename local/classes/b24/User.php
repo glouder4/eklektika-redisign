@@ -7,6 +7,8 @@
         public int $userId;
         
         // Константы для ID групп
+        /** Администраторы сайта — при любом обновлении групп сохраняем членство, если оно было */
+        public int $ADMINISTRATORS_GROUP_ID = 1;
         public int $MARKETING_AGENT_GROUP_ID = 12;
         public int $DIRECTOR_GROUP_ID = 432;
         public function __construct()
@@ -246,18 +248,46 @@
             }
         }
         public function addUserToGroups($userId, $groupIds, $userObj = null){
-            $user = (new \CUser);
+            $userId = (int)$userId;
+            if ($userId <= 0) {
+                return false;
+            }
 
-            // Получаем текущие группы пользователя
-            $userGroups = $groupIds;
+            $currentGroups = \CUser::GetUserGroup($userId);
+            if (!is_array($currentGroups)) {
+                $currentGroups = $currentGroups !== null && $currentGroups !== '' && $currentGroups !== false
+                    ? [(int)$currentGroups]
+                    : [];
+            } else {
+                $currentGroups = array_map('intval', $currentGroups);
+            }
+
+            $hadAdministratorsGroup = in_array($this->ADMINISTRATORS_GROUP_ID, $currentGroups, true);
+
+            $toAdd = [];
+            foreach ((array)$groupIds as $gid) {
+                $gid = (int)$gid;
+                if ($gid > 0) {
+                    $toAdd[] = $gid;
+                }
+            }
+
+            if ($toAdd === []) {
+                return true;
+            }
+
+            $userGroups = array_values(array_unique(array_merge($currentGroups, $toAdd)));
+            if ($hadAdministratorsGroup && !in_array($this->ADMINISTRATORS_GROUP_ID, $userGroups, true)) {
+                $userGroups[] = $this->ADMINISTRATORS_GROUP_ID;
+            }
 
             $arFields = array(
                 'GROUP_ID' => $userGroups
             );
-            
-            if( in_array($this->MARKETING_AGENT_GROUP_ID,$userGroups) ){
+
+            if (in_array($this->MARKETING_AGENT_GROUP_ID, $userGroups, true)) {
                 $arFields['UF_ADVERSTERING_AGENT'] = 1;
-                $arFields['ACTIVE'] = "Y";
+                $arFields['ACTIVE'] = 'Y';
             }
 
             $result = (new \CUser)->Update($userId, $arFields);
@@ -269,12 +299,72 @@
         }
 
         /**
+         * Убрать пользователя из перечисленных групп (только GROUP_ID), без изменения UF/ACTIVE.
+         * Для снятия скидочных групп компании; не путать с {@see removeUserFromGroup} (там побочные поля).
+         *
+         * @param list<int|mixed> $groupIdsToRemove
+         */
+        public function removeUserFromGroupsByIds(int $userId, array $groupIdsToRemove): bool
+        {
+            $userId = (int)$userId;
+            if ($userId <= 0) {
+                return false;
+            }
+
+            $remove = [];
+            foreach ($groupIdsToRemove as $g) {
+                $g = (int)$g;
+                if ($g > 0) {
+                    $remove[$g] = true;
+                }
+            }
+            unset($remove[$this->ADMINISTRATORS_GROUP_ID]);
+            if ($remove === []) {
+                return true;
+            }
+
+            $current = \CUser::GetUserGroup($userId);
+            if (!is_array($current)) {
+                $current = $current !== null && $current !== '' && $current !== false
+                    ? [(int)$current]
+                    : [];
+            } else {
+                $current = array_map('intval', $current);
+            }
+
+            $hadAdministratorsGroup = in_array($this->ADMINISTRATORS_GROUP_ID, $current, true);
+
+            $new = [];
+            foreach ($current as $g) {
+                if (!isset($remove[$g])) {
+                    $new[] = $g;
+                }
+            }
+
+            if ($hadAdministratorsGroup && !in_array($this->ADMINISTRATORS_GROUP_ID, $new, true)) {
+                $new[] = $this->ADMINISTRATORS_GROUP_ID;
+            }
+
+            if ($new === $current) {
+                return true;
+            }
+
+            \CUser::SetUserGroup($userId, $new);
+
+            return true;
+        }
+
+        /**
          * Удалить пользователя из группы
          * @param int $userId ID пользователя
          * @param int $groupId ID группы
          * @return bool Результат операции
          */
         public function removeUserFromGroup($userId, $groupId){
+            if ((int)$groupId === $this->ADMINISTRATORS_GROUP_ID) {
+                return true;
+            }
+
             $user = new \CUser();
             
             // Получаем текущие группы пользователя

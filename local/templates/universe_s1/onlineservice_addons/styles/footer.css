@@ -76,12 +76,12 @@
     height: 18.658777236938477px;
 }
 .footer__main-brand_info-social-link:nth-child(2){
-    width: 19.866220474243164px;
-    height: 19.866220474243164px;
-}
-.footer__main-brand_info-social-link:nth-child(3){
     width: 21.863353729248047px;
     height: 19.130434036254883px;
+}
+.footer__main-brand_info-social-link:nth-child(3){
+    width: 20px;
+    height: 20px;
 }
 .footer__main-brand_info-social-link>svg{
     width: 100%;
@@ -278,12 +278,12 @@
         height: 25.35897445678711px;
     }
     .footer__main-brand_info-social-link:nth-child(2){
-        width: 27px;
-        height: 27px;
-    }
-    .footer__main-brand_info-social-link:nth-child(3){
         width: 29.714284896850586px;
         height: 26px;
+    }
+    .footer__main-brand_info-social-link:nth-child(3){
+        width: 27px;
+        height: 27px;
     }
     .footer__main-brand_info-social-links--wrapper{
         gap: 31.55px;
