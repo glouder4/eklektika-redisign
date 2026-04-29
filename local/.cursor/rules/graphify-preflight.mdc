@@ -1,0 +1,31 @@
+---
+description: Mandatory Graphify preflight before code work
+alwaysApply: true
+---
+
+# Graphify Preflight (Mandatory)
+
+Before any interaction with project code, the agent must request and review a Graphify graph for the target scope.
+
+## Required order
+
+1. Build or fetch Graphify graph for the relevant area first.
+2. Review graph clusters, dependencies, and entry points.
+3. Only then read, edit, or generate code/docs tied to that area.
+
+## Server binding
+
+- In this repository, Graphify MCP queries must use server `graphify-eklektika-site`.
+
+## Hard requirement for Tech Lead role
+
+If the current role is Tech Lead (or tech-lead orchestrator), Graphify preflight is non-negotiable:
+
+- No architecture decisions without graph context.
+- No ADR/doc updates without graph-backed understanding of module boundaries and flows.
+
+## If Graphify is unavailable
+
+- Stop implementation actions.
+- Report blocker and request Graphify access/run.
+- Continue only after graph context is available.
