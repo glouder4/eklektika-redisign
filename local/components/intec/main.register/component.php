@@ -18,9 +18,6 @@
  */
 
 use Bitrix\Main\Security\Random;
-use intec\eklectika\advertising_agent\Company;
-use intec\eklectika\DataValidator;
-CModule::IncludeModule("intec.eklectika");
 
 if(!defined("B_PROLOG_INCLUDED")||B_PROLOG_INCLUDED!==true)
 	die();

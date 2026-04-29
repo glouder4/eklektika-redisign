@@ -68,9 +68,6 @@ session_set_cookie_params([
 //header("X-Frame-Options: bitrix.yomerch.ru");
 //header('Content-Security-Policy: frame-ancestors https://bitrix.yomerch.ru', true);
 
-use intec\eklectika\advertising_agent\Company;
-CModule::IncludeModule("intec.eklectika");
-
 $b24ConfigPath = __DIR__ . '/b24_integration_config.php';
 $b24IntegrationConfig = [
     'use_test_portal' => false,
@@ -95,7 +92,7 @@ define("EXLUDED_ORDER_KEYS",["KO","UD","KP",'SD']);
 define("EXLUDED_RESERVE_KEYS",["RO", "RC", "R"]);
 define("EXLUDED_SAMPLE_KEYS",["OB","SS", "SO", "SC","OG"]);
 
-require_once __DIR__.'/../classes/requires.php'; // Подключение кастомных обработчиков
+require_once __DIR__ . '/../modules/bootstrap.php'; // Подключение кастомных обработчиков
 
 if (class_exists(\OnlineService\Site\CatalogPriceFloor::class)) {
     \OnlineService\Site\CatalogPriceFloor::bootstrap();
@@ -167,7 +164,7 @@ function getApplication($dl, $ord)
 {
 	if (
 		!class_exists(\OnlineService\Orders\Applications\DealApplicationsService::class)
-		&& !\Bitrix\Main\Loader::includeModule('eklektika.orders.applications')
+		&& !\Bitrix\Main\Loader::includeModule('yomerch.orders.applications')
 	) {
 		return;
 	}
@@ -180,7 +177,7 @@ function addApplication($dl, $ord)
 {
 	if (
 		!class_exists(\OnlineService\Orders\Applications\DealApplicationsService::class)
-		&& !\Bitrix\Main\Loader::includeModule('eklektika.orders.applications')
+		&& !\Bitrix\Main\Loader::includeModule('yomerch.orders.applications')
 	) {
 		return;
 	}

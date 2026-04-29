@@ -373,7 +373,7 @@ function syncCompanyContacts(companyId) {
     icon.style.animation = 'spin 1s linear infinite';
     
     // AJAX запрос
-    fetch('/local/classes/ajax.php', {
+    fetch('/local/modules/yomerch.b24.inbound/endpoint.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
