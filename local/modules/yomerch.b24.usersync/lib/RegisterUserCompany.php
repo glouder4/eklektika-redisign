@@ -375,6 +375,7 @@ class RegisterUserCompany extends Request{
                             RegisterUserCompanyConfig::CRM_COMPANY_SPHERE_FIELD => $arFields['UF_SPERE'],
                             RegisterUserCompanyConfig::CRM_COMPANY_JUR_ADDRESS_FIELD => $arFields['UF_JUR_ADDRESS'],
                             RegisterUserCompanyConfig::CRM_COMPANY_CITY_FIELD => $arFields['UF_CITY'],
+                            RegisterUserCompanyConfig::CRM_COMPANY_EXTRA_FIELD => $this->getConfiguredFieldValue($arFields, RegisterUserCompanyConfig::CRM_COMPANY_EXTRA_FIELD),
                             RegisterUserCompanyConfig::CRM_REQUISITES_FILE_FIELD => $this->getConfiguredFieldValue($arFields, RegisterUserCompanyConfig::getRequisitesFileField()),
                             'COMPANY_TYPE' => 'CUSTOMER',
                             UserSyncConfig::CRM_PRIMARY_MANAGER_FIELD => $outboundManagerFields[UserSyncConfig::CRM_PRIMARY_MANAGER_FIELD],

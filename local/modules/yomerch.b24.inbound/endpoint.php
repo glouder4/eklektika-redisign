@@ -21,6 +21,9 @@ if ($requestId === '') {
 }
 \OnlineService\Sync\SyncTrace::setRequestId($requestId);
 $_REQUEST['_SYNC_REQUEST_ID'] = $requestId;
+if (isset($_REQUEST['ACTION']) && (string)$_REQUEST['ACTION'] === 'UPDATE_STATUS_GROUP') {
+    $_REQUEST['ACTION'] = 'UPDATE_GROUP';
+}
 if (!headers_sent()) {
     header('X-Sync-Request-Id: ' . $requestId);
 }

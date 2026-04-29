@@ -157,7 +157,9 @@ class InboundGateway
                 $ok = (bool)$user->update($request);
                 $reasonCode = $ok ? self::RC_UPDATE_CONTACT_OK : self::RC_UPDATE_CONTACT_FAILED;
                 if (!$ok) {
-                    $lastFailReason = $user->getLastUpdateFailReason();
+                    $lastFailReason = \method_exists($user, 'getLastUpdateFailReason')
+                        ? $user->getLastUpdateFailReason()
+                        : null;
                     if ($lastFailReason !== null && $lastFailReason !== '') {
                         $reasonCode = (string)$lastFailReason;
                     }

@@ -5,6 +5,7 @@
     use OnlineService\Site\Config\CompanyModuleConfig;
     class User extends Request{
         public ?int $contactId = null;
+        private ?string $lastUpdateFailReason = null;
 
         public int $userId;
         
@@ -478,8 +479,10 @@
          * @return bool Результат обновления
          */
         public function update($fields){
+            $this->lastUpdateFailReason = null;
             // Проверяем обязательные поля
             if (empty($fields['B24_ID'])) {
+                $this->lastUpdateFailReason = 'update_contact_missing_b24_id';
                 return false;
             }
 
@@ -502,6 +505,7 @@
             );
             
             if (!$this->userId) {
+                $this->lastUpdateFailReason = 'update_contact_user_not_found';
                 return false;
             }
 
@@ -615,6 +619,7 @@
             if ($result) {
                 return true;
             } else {
+                $this->lastUpdateFailReason = 'update_contact_cuser_update_failed';
                 return false;
             }
         }
@@ -719,6 +724,11 @@
 
         public function getMarketingGroupId(){
             return $this->MARKETING_AGENT_GROUP_ID;
+        }
+
+        public function getLastUpdateFailReason(): ?string
+        {
+            return $this->lastUpdateFailReason;
         }
 
         /**
