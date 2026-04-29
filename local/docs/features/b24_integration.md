@@ -6,6 +6,8 @@
 Официальный передаваемый контракт обмена для стороны B24 вынесен в отдельный документ:
 `docs/features/b24_site_contracts_yomerch.md`.
 
+**Пакет для внешней команды Bitrix24 (одним файлом):** [BITRIX24_EXTERNAL_TEAM_HANDOFF.md](./BITRIX24_EXTERNAL_TEAM_HANDOFF.md).
+
 ## Основные характеристики
 - **URL Bitrix24**: задаётся в `local/php_interface/b24_integration_config.php` (константа `URL_B24` в `init.php`)
 - **REST API**: Использование REST методов для взаимодействия

@@ -1,7 +1,7 @@
 # SBT-01: Inbound contract + security hardening
 
 ## Статус
-- status: in_progress
+- status: verification_pending (стендовый smoke по всем ACTION — после изменений со стороны Bitrix24)
 - owner-role: backend-integrations
 
 ## Зависимости
@@ -19,4 +19,4 @@
 - [ ] Стендовый smoke по всем ACTION
 
 ## Next action
-Завершить кодовые доработки и сформировать внешний handoff-пакет по inbound контракту для команды Bitrix24; стендовый smoke выполнить после их переработки.
+Собрать внешний handoff-пакет по inbound контракту для команды Bitrix24; полный стендовый smoke по всем ACTION — после их переработки.

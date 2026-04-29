@@ -1,7 +1,7 @@
 # SBT-06: Observability and traceability
 
 ## Статус
-- status: in_progress
+- status: partially_done
 - owner-role: backend-integrations + devops
 
 ## Зависимости
@@ -14,8 +14,8 @@
 - [x] Inbound logging санитизирует payload и фиксирует raw body с ограничениями
 - [x] Reject и dispatch-failed логи унифицированы
 - [x] Outcome-логирование унифицировано (`inbound.outcome`) с `reason_code` по основным ACTION
-- [ ] Формализованы SLI/SLO (error-rate, dedup-rate, auth-reject-rate)
-- [ ] Настроены алерты/дашборды по reason_code
+- [x] Формализованы SLI/SLO (error-rate, dedup-hit, auth-reject): `docs/refactoring/inbound_sli_slo.md`
+- [ ] Настроены алерты/дашборды по reason_code (зависит от стека логирования на хостинге)
 
 ## Next action
-Зафиксировать SLI/SLO и подключить мониторинг как gate для release readiness.
+Подключить дашборды/алерты по полям SLI-документа; использовать как gate release readiness после Фазы B.
