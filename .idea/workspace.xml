@@ -5,58 +5,87 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a53d02d7-d404-452c-a903-dd81636134fa" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/local/sync/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/sync/InboundSecurity.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/sync/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/sync/SyncInboundLog.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/sync/SyncPrimitiveBreakpoint.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/sync/SyncTrace.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/sync/bootstrap.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/sync/docs/MIGRATION.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/sync/docs/SYNC_NEW_ENTITY.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/sync/docs/channels.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/sync/docs/functional-contract.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/sync/docs/inventory.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/sync/docs/registration-checklist.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/sync/docs/regression-checklist.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/sync/docs/runbook.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/sync/docs/tasks/2026-04-24/inn-first-registration-hard-gates/subtasks/01-contract-and-doc-sync.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/sync/docs/tasks/2026-04-24/inn-first-registration-hard-gates/subtasks/02-hard-gates-roadmap.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/sync/docs/tasks/2026-04-24/inn-first-registration-hard-gates/task.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/sync/docs/tasks/2026-04-24/registration-inn-first-b24-id-hard-route/subtasks/01-audit-current-registration-chain.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/sync/docs/tasks/2026-04-24/registration-inn-first-b24-id-hard-route/subtasks/02-target-architecture-and-contracts.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/sync/docs/tasks/2026-04-24/registration-inn-first-b24-id-hard-route/subtasks/03-implementation-and-migration-guards.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/sync/docs/tasks/2026-04-24/registration-inn-first-b24-id-hard-route/subtasks/04-test-plan-and-manual-checklist.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/sync/docs/tasks/2026-04-24/registration-inn-first-b24-id-hard-route/subtasks/05-sync-docs-update.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/sync/docs/tasks/2026-04-24/registration-inn-first-b24-id-hard-route/task.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/sync/docs/tasks/2026-04-28/stabilize-inn-resolve-ajax-registration/subtasks/01-baseline-and-logging-contract.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/sync/docs/tasks/2026-04-28/stabilize-inn-resolve-ajax-registration/subtasks/02-resolve-pipeline-fix.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/sync/docs/tasks/2026-04-28/stabilize-inn-resolve-ajax-registration/subtasks/03-noise-events-and-regression-checks.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/sync/docs/tasks/2026-04-28/stabilize-inn-resolve-ajax-registration/task.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/sync/from-crm/CrmInboundUfMap.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/sync/from-crm/InboundGateway.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/sync/from-crm/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/sync/to-crm/OutboundUpdateContactPayload.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/local/sync/to-crm/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.cursor/agents/composite-developer.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.cursor/agents/composite-teamlead.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.cursor/agents/implementation-planner.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.cursor/commands/implement.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.cursor/commands/orchestrate.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.cursor/rules/arch-rules.mdc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.cursor/skills/composite-subagent-workflow/SKILL.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.cursor/skills/implementation-orchestration/SKILL.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/local/modules/yomerch.b24.usersync/lib/SyncEventHandlers.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/classes/ajax.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/classes/ajax.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/classes/requires.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/classes/requires.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.b24.rest/lib/RestClient.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/eklektika.b24.rest/lib/RestClient.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.company/lib/Company.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/eklektika.company/lib/Company.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/sale.personal.section/template.1/parts/manager.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/sale.personal.section/template.1/parts/manager.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/intec.universe/main.footer/template.1.custom/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/intec.universe/main.footer/template.1.custom/template.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/intec.universe/main.header/template.1.custom/templates/desktop/template.1/view.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/intec.universe/main.header/template.1.custom/templates/desktop/template.1/view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/onlineservice_addons/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/onlineservice_addons/footer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/features/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/features/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/features/b24_integration.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/features/b24_integration.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/features/company_system.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/features/company_system.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/features/local_classes_segments_and_modules.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/features/local_classes_segments_and_modules.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/tasks/2026-04-22-refactor-continue-st11-stabilization/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/tasks/2026-04-22-refactor-continue-st11-stabilization/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/tasks/2026-04-22-refactor-continue-st11-stabilization/subtasks/02-bootstrap-chain-doc-sync.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/tasks/2026-04-22-refactor-continue-st11-stabilization/subtasks/02-bootstrap-chain-doc-sync.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/classes/ajax.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/classes/b24/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/classes/requires.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/bootstrap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/classes/site/StatusDiscounter.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/components/intec/main.register/component.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/components/intec/main.register/component.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.b24.rest/include.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.b24.rest/include.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.b24.rest/lib/Config/RestTransportConfig.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.b24.rest/lib/Config/RestTransportConfig.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.b24.rest/lib/LegacyGlobalB24.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.b24.rest/lib/LegacyGlobalB24.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.b24.rest/lib/Request.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.b24.rest/lib/Request.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.b24.rest/lib/RestClient.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.b24.rest/lib/RestClient.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.b24.usersync/include.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.b24.usersync/include.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.b24.usersync/lib/Config/RegisterUserCompanyConfig.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.b24.usersync/lib/Config/RegisterUserCompanyConfig.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.b24.usersync/lib/Config/UserSyncConfig.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.b24.usersync/lib/Config/UserSyncConfig.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.b24.usersync/lib/ContactAjaxFacade.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.b24.usersync/lib/ContactAjaxFacade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.b24.usersync/lib/RegisterUserCompany.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.b24.usersync/lib/RegisterUserCompany.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.b24.usersync/lib/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.b24.usersync/lib/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.b24.usersync/lib/UserSyncBootstrap.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.b24.usersync/lib/UserSyncBootstrap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.catalog.import/include.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.catalog.import/include.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.catalog.import/lib/Config/PostImportConfig.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.catalog.import/lib/Config/PostImportConfig.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.catalog.import/lib/Import1cBootstrap.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.catalog.import/lib/Import1cBootstrap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.catalog.import/lib/PostImportHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.catalog.import/lib/PostImportHandler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.catalog.pricing/include.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.catalog.pricing/include.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.catalog.pricing/lib/CatalogPriceFloor.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.catalog.pricing/lib/CatalogPriceFloor.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.catalog.pricing/lib/Config/CatalogPricingConfig.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.catalog.pricing/lib/Config/CatalogPricingConfig.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.company/include.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.company/include.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.company/lib/Company.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.company/lib/Company.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.company/lib/Config/CompanyB24Config.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.company/lib/Config/CompanyB24Config.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.company/lib/Config/CompanyModuleConfig.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.company/lib/Config/CompanyModuleConfig.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.company/lib/Manager.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.company/lib/Manager.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.company/lib/UserGroups.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.company/lib/UserGroups.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.orders.applications/include.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.orders.applications/include.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.orders.applications/lib/Config/DealApplicationsConfig.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.orders.applications/lib/Config/DealApplicationsConfig.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.orders.applications/lib/DealApplicationsService.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.orders.applications/lib/DealApplicationsService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.site/include.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.site/include.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.site/lib/Config/SiteModuleConfig.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.site/lib/Config/SiteModuleConfig.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.site/lib/PageEditorGlobalFunctions.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.site/lib/PageEditorGlobalFunctions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.site/lib/PageSettings.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.site/lib/PageSettings.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/eklektika.site/lib/SearchIndexingBootstrap.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.site/lib/SearchIndexingBootstrap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/php_interface/init.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/php_interface/init.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/sync/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/sync/InboundSecurity.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.b24.inbound/lib/InboundSecurity.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/sync/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/sync/SyncInboundLog.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.b24.inbound/lib/SyncInboundLog.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/sync/SyncPrimitiveBreakpoint.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.b24.inbound/lib/SyncPrimitiveBreakpoint.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/sync/SyncTrace.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.b24.inbound/lib/SyncTrace.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/sync/bootstrap.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/sync/docs/MIGRATION.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/sync/docs/SYNC_NEW_ENTITY.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/sync/docs/channels.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/sync/docs/functional-contract.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/sync/docs/inventory.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/sync/docs/registration-checklist.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/sync/docs/regression-checklist.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/sync/docs/runbook.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/sync/docs/tasks/2026-04-24/inn-first-registration-hard-gates/subtasks/01-contract-and-doc-sync.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/sync/docs/tasks/2026-04-24/inn-first-registration-hard-gates/subtasks/02-hard-gates-roadmap.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/sync/docs/tasks/2026-04-24/inn-first-registration-hard-gates/task.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/sync/docs/tasks/2026-04-24/registration-inn-first-b24-id-hard-route/subtasks/01-audit-current-registration-chain.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/sync/docs/tasks/2026-04-24/registration-inn-first-b24-id-hard-route/subtasks/02-target-architecture-and-contracts.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/sync/docs/tasks/2026-04-24/registration-inn-first-b24-id-hard-route/subtasks/03-implementation-and-migration-guards.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/sync/docs/tasks/2026-04-24/registration-inn-first-b24-id-hard-route/subtasks/04-test-plan-and-manual-checklist.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/sync/docs/tasks/2026-04-24/registration-inn-first-b24-id-hard-route/subtasks/05-sync-docs-update.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/sync/docs/tasks/2026-04-24/registration-inn-first-b24-id-hard-route/task.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/sync/docs/tasks/2026-04-28/stabilize-inn-resolve-ajax-registration/subtasks/01-baseline-and-logging-contract.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/sync/docs/tasks/2026-04-28/stabilize-inn-resolve-ajax-registration/subtasks/02-resolve-pipeline-fix.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/sync/docs/tasks/2026-04-28/stabilize-inn-resolve-ajax-registration/subtasks/03-noise-events-and-regression-checks.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/sync/docs/tasks/2026-04-28/stabilize-inn-resolve-ajax-registration/task.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/sync/from-crm/CrmInboundUfMap.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.b24.inbound/lib/from-crm/CrmInboundUfMap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/sync/from-crm/InboundGateway.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.b24.inbound/lib/from-crm/InboundGateway.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/sync/from-crm/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/sync/to-crm/OutboundUpdateContactPayload.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.b24.inbound/lib/to-crm/OutboundUpdateContactPayload.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/sync/to-crm/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/news.detail/os-personal-profile/template.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/news.detail/os-personal-profile/template.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -285,7 +314,7 @@
       <workItem from="1777379410899" duration="623000" />
       <workItem from="1777412059416" duration="389000" />
       <workItem from="1777454667785" duration="6630000" />
-      <workItem from="1777464780626" duration="39000" />
+      <workItem from="1777464780626" duration="1320000" />
     </task>
     <servers />
   </component>
