@@ -14,7 +14,7 @@
 
 ### 1. Основной класс Company
 **Файл**: `local/modules/eklektika.company/lib/Company.php`  
-**Модуль**: `eklektika.company`; bootstrap: в [`local/classes/requires.php`](../../local/classes/requires.php) порядок `require_once` для `include.php` модулей сохраняется: `eklektika.b24.rest` → `eklektika.company` → `eklektika.catalog.pricing` → `eklektika.site` → `eklektika.catalog.import` → `eklektika.orders.applications` → `eklektika.b24.usersync`; при отсутствии `include.php` срабатывает `E_USER_WARNING` (без фатала), затем ранний вызов **`CatalogPriceFloor::markCompositeNonCacheableForAuthorizedCatalog()`**. Namespace класса **`OnlineService\Site\Company`** без изменений до ST-09.
+**Модуль**: `eklektika.company`; bootstrap: в [`local/modules/bootstrap.php`](../../local/modules/bootstrap.php) порядок `require_once` для `include.php` модулей сохраняется: `eklektika.b24.rest` → `eklektika.company` → `eklektika.catalog.pricing` → `eklektika.site` → `eklektika.catalog.import` → `eklektika.orders.applications` → `eklektika.b24.usersync`; при отсутствии `include.php` срабатывает `E_USER_WARNING` (без фатала), затем ранний вызов **`CatalogPriceFloor::markCompositeNonCacheableForAuthorizedCatalog()`**. Namespace класса **`OnlineService\Site\Company`** без изменений до ST-09.
 
 CRM-транспорт и field-mapping для сценариев компании централизованы:
 - вызовы B24 выполняются через `\OnlineService\B24\RestClient::callRestMethod()` (через локальный адаптер в `Company`);

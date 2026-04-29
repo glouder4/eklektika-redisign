@@ -13,14 +13,14 @@
 - Доп. контекст: `/orchestrate Продолжи рефакторинг`, `docs/tasks/2026-04-21-refactor-local-classes-segmentation/README.md`, `docs/tasks/2026-04-21-refactor-local-classes-segmentation/SMOKE-REPORT-ST09-ST10.md`
 
 ## Цель
-Минимально-рискованно продолжить принятый рефакторинг без отмены результатов ST-09/ST-10: закрыть верификационный хвост (ручной smoke), синхронизировать документацию bootstrap-цепочки с фактическим `requires.php`, и формализовать follow-up по временному исключению зависимостей `usersync -> company`.
+Минимально-рискованно продолжить принятый рефакторинг без отмены результатов ST-09/ST-10: закрыть верификационный хвост (ручной smoke), синхронизировать документацию bootstrap-цепочки с фактическим `local/modules/bootstrap.php`, и формализовать follow-up по временному исключению зависимостей `usersync -> company`.
 
 Ожидаемый эффект: завершение итерации ST-09/ST-10 до операционно готового состояния (документация + проверка сценариев), снижение риска скрытых регрессий и фиксация следующего узкого технического шага без расширения scope на новые миграции.
 
 ## Границы (Scope)
 - In scope:
   - Ручной smoke ключевых сценариев из ST-09/ST-10 с фиксацией `pass/fail`.
-  - Синхронизация `docs/features/company_system.md` с фактическим порядком bootstrap в `local/classes/requires.php`.
+  - Синхронизация `docs/features/company_system.md` с фактическим порядком bootstrap в `local/modules/bootstrap.php`.
   - Проверка согласованности `docs/features/local_classes_segments_and_modules.md` и `docs/features/b24_integration.md` по bootstrap/legacy-shim.
   - Обновление артефактов `docs/tasks/2026-04-21-refactor-local-classes-segmentation/*` по факту прогона smoke и закрытия хвостов.
   - Подготовка ограниченного follow-up-плана на снятие временной зависимости `eklektika.b24.usersync -> eklektika.company` без изменения бизнес-логики в этом инкременте.
@@ -31,7 +31,7 @@
 
 ## План внедрения
 1. Прогнать ручной smoke по фиксированному чек-листу ST-09/ST-10 и обновить smoke-артефакт.
-2. Синхронизировать описание bootstrap-цепочки в feature-доках с фактическим `requires.php`.
+2. Синхронизировать описание bootstrap-цепочки в feature-доках с фактическим `local/modules/bootstrap.php`.
 3. Сверить и зафиксировать итоговый статус ST-09/ST-10 в task-артефактах прошлого инкремента.
 4. Оформить требования и границы для следующего implement-цикла (узкий follow-up по исключениям зависимостей).
 
@@ -52,11 +52,12 @@
 - [ ] [ST-02: Синхронизация bootstrap-цепочки в docs/features](./subtasks/02-bootstrap-chain-doc-sync.md)
 - [ ] [ST-03: Закрытие ST-09/ST-10 в docs/tasks и traceability](./subtasks/03-closeout-st09-st10-traceability.md)
 - [ ] [ST-04: Follow-up по снятию временной зависимости usersync->company](./subtasks/04-followup-usersync-company-boundary.md)
+- [x] [ST-05: Контрактный пакет Site <=> B24 для yomerch](./subtasks/05-site-b24-contract-package.md)
 
 ## Зависимости и риски
 - Зависимости:
   - Наличие доступа к стенду для ручного smoke (CRM, ЛК, каталог, заявки, page settings).
-  - Актуальное состояние `local/classes/requires.php` как источника истины bootstrap-цепочки.
+  - Актуальное состояние `local/modules/bootstrap.php` как источника истины bootstrap-цепочки.
   - Базовые документы `docs/features/README.md`, `company_system.md`, `b24_integration.md`, `local_classes_segments_and_modules.md`.
 - Риски:
   - Smoke выявит скрытую регрессию и потребует внепланового bugfix.

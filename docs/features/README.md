@@ -12,10 +12,11 @@
 ### 🏢 Система компаний
 - **[Компании и холдинги](./company_system.md)** ✅ - Система управления компаниями-клиентами
 - **[Интеграция с Bitrix24](./b24_integration.md)** ✅ - Синхронизация контактов и компаний с CRM
+- **[Контракты Site <=> B24 (yomerch)](./b24_site_contracts_yomerch.md)** ✅ - Официальный пакет контрактов inbound/outbound для передачи B24-команде
 - **[Методы работы с компаниями пользователей](./user_company_methods.md)** ✅ - API для получения компаний пользователей
 
 ### 🗺️ Архитектура и сопровождение кода
-- **[Сегменты `local/classes` и модули `eklektika.*`](./local_classes_segments_and_modules.md)** ✅ — Карта доменных сегментов, bootstrap (`init.php`, `requires.php`, модули `eklektika.*`), инвентаризация legacy-глобалей и матрица `allowed dependencies` (ST-09/ST-10), связь с Bitrix24; постобработка обмена с 1С — **`eklektika.catalog.import`** (`OnlineService\Catalog\Import1c\*`).
+- **[Legacy-сегменты и модульная карта](./local_classes_segments_and_modules.md)** ✅ — Карта доменных сегментов, bootstrap (`init.php`, `local/modules/bootstrap.php`, модули `yomerch.*`), инвентаризация legacy-глобалей и матрица `allowed dependencies` (ST-09/ST-10), связь с Bitrix24; постобработка обмена с 1С — **`yomerch.catalog.import`** (`OnlineService\Catalog\Import1c\*`).
 - **[Debug-контракт pricing](./catalog_pricing_debug_contract.md)** ✅ — Безопасные runtime-флаги отладки (`os_price_debug`, `os_price_debug_breakdown`, `os_price_debug_product`) для `eklektika.catalog.pricing`.
 
 ### 🛒 Система заказов (в разработке)
@@ -81,15 +82,16 @@
 - ✅ **Редактирование профиля пользователя** - Полностью задокументировано
 - ✅ **Система компаний** - Полностью задокументировано
 - ✅ **Интеграция с Bitrix24** - Полностью задокументировано
+- ✅ **Контракты Site <=> B24 (yomerch)** - Полностью задокументировано
 - ✅ **Методы работы с компаниями пользователей** - Полностью задокументировано
-- ✅ **Карта сегментов local/classes (модули eklektika.\*)** — Сегменты и границы модулей (ST-01)
+- ✅ **Legacy-сегменты и модульные границы** — Сегменты и границы модулей (ST-01)
 - ✅ **Debug-контракт pricing** — Runtime-отладка `CatalogPriceFloor` без `pre()/die()`
 - 📋 **Система заказов** - Планируется к документированию
 - 📋 **Файловая система** - Планируется к документированию
 
 ---
 
-**⚠️ ВАЖНО**: Документация описывает **собственную разработку** проекта (`local/classes/`, `local/php_interface`, `director/`, `personal/` и связанные зоны по смыслу каждого файла). Сторонние модули в `local/modules/`, не относящиеся к собственному префиксу разработки, **не** являются предметом изменений и **не** позиционируются здесь как целевая зона рефакторинга; исключения и запреты — в [`.cursor/rules/arch-rules.mdc`](../../.cursor/rules/arch-rules.mdc).
+**⚠️ ВАЖНО**: Документация описывает **актуальную собственную разработку** проекта (`local/modules/yomerch.*`, `local/php_interface`, `director/`, `personal/` и связанные зоны по смыслу каждого файла). Исторические legacy-зоны рассматриваются только как справочные и не должны использоваться как канонические runtime-пути; исключения и запреты — в [`.cursor/rules/arch-rules.mdc`](../../.cursor/rules/arch-rules.mdc).
 
 ---
 

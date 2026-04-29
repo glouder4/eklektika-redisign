@@ -3,12 +3,22 @@
 ## Описание
 Комплексная интеграция сайта с Bitrix24 CRM, включающая синхронизацию контактов, компаний, пользователей, веб-хуки и двусторонний обмен данными.
 
+Официальный передаваемый контракт обмена для стороны B24 вынесен в отдельный документ:
+`docs/features/b24_site_contracts_yomerch.md`.
+
 ## Основные характеристики
 - **URL Bitrix24**: задаётся в `local/php_interface/b24_integration_config.php` (константа `URL_B24` в `init.php`)
 - **REST API**: Использование REST методов для взаимодействия
 - **Веб-хуки**: Обработка событий CRM в реальном времени
 - **Двусторонняя синхронизация**: Данные передаются в обе стороны
 - **Файловая интеграция**: Загрузка и скачивание документов
+
+## Интеграционные инварианты (актуальный контур)
+- **Inbound CRM -> сайт**: целевая и допустимая точка входа только `local/modules/yomerch.b24.inbound/endpoint.php`.
+- **Outbound сайт -> B24**: целевой транспорт через `local/modules/yomerch.b24.rest/lib/RestClient.php`.
+- **Inbound reject-code**: для отказов авторизации/секрета используется единый код `sync_forbidden` (`HTTP 403`, `{"success":0,"error":"sync_forbidden"}`).
+- **Legacy-обходы** (прямые webhook/curl) должны вноситься в реестр исключений:
+  `docs/refactoring/legacy_integration_exceptions_register.md`.
 
 ## Места использования и реализации
 
@@ -29,58 +39,72 @@
 
 **Шаблон без секретов** для нового стенда: `local/php_interface/b24_integration_config.example.php`.
 
-**Транспортный слой**: класс `OnlineService\B24\RestClient` в модуле **`eklektika.b24.rest`**: `local/modules/eklektika.b24.rest/lib/RestClient.php`
+**Транспортный слой**: класс `OnlineService\B24\RestClient` в модуле **`yomerch.b24.rest`**: `local/modules/yomerch.b24.rest/lib/RestClient.php`
 
 - `callRestMethod($method, $params, $debug)` — POST на основной REST-вебхук; при успехе возвращает **`$response['result']`** (как прежняя функция `sendRequestB24`).
-- `postAjaxProxy($params, $debug)` — POST на `/local/classes/ajax.php`, возвращает **полный** декодированный JSON (как `sendRequest()`).
+- `postAjaxProxy($params, $debug)` — POST на `/local/modules/yomerch.b24.inbound/endpoint.php`, возвращает **полный** декодированный JSON (как `sendRequest()`).
 - `postSiteRequestsHandler($params, $debug)` — POST на `site_requests_handler.php` (базовый класс `Request`).
 - `getKitWebhookPrefix()` — префикс URL для `kit.productapplications.*`.
-- Транспортные параметры и URL-мэппинг централизованы в `local/modules/eklektika.b24.rest/lib/Config/RestTransportConfig.php` (timeouts, пути прокси, построение webhook URL), бизнес-логика модулей не меняется.
+- Транспортные параметры и URL-мэппинг централизованы в `local/modules/yomerch.b24.rest/lib/Config/RestTransportConfig.php` (timeouts, пути прокси, построение webhook URL), бизнес-логика модулей не меняется.
 
-Legacy-глобали **`sendRequestB24`** и **`sendRequest`** сохранены в `local/modules/eklektika.b24.rest/lib/LegacyGlobalB24.php` и помечены **`@deprecated`**; они делегируют вызовы в `RestClient`. В `init.php` эти функции не являются целевой точкой размещения.
+Legacy-глобали **`sendRequestB24`** и **`sendRequest`** сохранены в `local/modules/yomerch.b24.rest/lib/LegacyGlobalB24.php` и помечены **`@deprecated`**; они делегируют вызовы в `RestClient`. В `init.php` эти функции не являются целевой точкой размещения.
 
-**Контракт ответов:** при ошибках транспорта (CURL, HTTP≠200, невалидный JSON) возвращается массив с **`success`** = 0 (как в legacy). При успешном разборе JSON метод **`callRestMethod`** возвращает только значение **`result`** из ответа Bitrix24. Ошибки REST API внутри JSON при HTTP 200 по-прежнему не нормализуются отдельно (наследие **sendRequestB24**).
+**Контракт ответов:** при ошибках транспорта (CURL, HTTP≠200, невалидный JSON) возвращается массив с **`success`** = 0. Для HTTP 200 c B24 `error`/`error_description` возвращается нормализованная ошибка (`success=0`, `error_code`, `error_description`). Для `callRestMethod` отсутствие `result` трактуется как ошибка контракта (`b24_missing_result`), silent-success не допускается.
+
+Каноническая детализация inbound/outbound контрактов и кодов ошибок ведется в:
+`docs/features/b24_site_contracts_yomerch.md`.
 
 #### Legacy-глобали и статус миграции
 
-- `sendRequestB24()` и `sendRequest()` оставлены как `@deprecated`-функции совместимости в `eklektika.b24.rest/lib/LegacyGlobalB24.php`.
+- `sendRequestB24()` и `sendRequest()` оставлены как `@deprecated`-функции совместимости в `yomerch.b24.rest/lib/LegacyGlobalB24.php`.
 - Целевой путь для нового кода: прямой вызов `\OnlineService\B24\RestClient`.
-- В `local/classes/requires.php` модуль `eklektika.b24.rest` загружается первым в полной цепочке bootstrap: `eklektika.b24.rest` → `eklektika.company` → `eklektika.catalog.pricing` → `eklektika.site` → `eklektika.catalog.import` → `eklektika.orders.applications` → `eklektika.b24.usersync`; это стабилизирует доступность транспортных helper-функций для legacy-кода.
+- В `local/modules/bootstrap.php` модуль `yomerch.b24.rest` загружается в цепочке bootstrap до доменных B24-модулей; это стабилизирует доступность транспортных helper-функций для legacy-кода.
 - Контракт загрузки модулей в bootstrap: используется `require_once $_SERVER['DOCUMENT_ROOT'] . '/local/modules/<module_id>/include.php'`; при отсутствии `include.php` фиксируется `E_USER_WARNING`, bootstrap продолжается (fail-safe, без фатала).
-- Контракт автозагрузки внутри `local/modules/eklektika.*/include.php`: `Loader::registerAutoLoadClasses(null, [...])` + абсолютные пути `/local/modules/<module_id>/lib/...`; использование `module_id` как первого аргумента для local-only модулей не допускается, чтобы исключить ошибочный префикс `/bitrix/modules/<module_id>/`.
+- Контракт автозагрузки внутри `local/modules/yomerch.*/include.php`: `Loader::registerAutoLoadClasses(null, [...])` + абсолютные пути `/local/modules/<module_id>/lib/...`; использование `module_id` как первого аргумента для local-only модулей не допускается, чтобы исключить ошибочный префикс `/bitrix/modules/<module_id>/`.
 
 #### Правила зависимостей (ST-10)
 
-- `eklektika.b24.rest` — единственный общий транспортный модуль; здесь не размещается доменная логика usersync/company/pricing/orders.
-- Доменные модули могут зависеть от `eklektika.b24.rest`, но не друг от друга напрямую, кроме документированных исключений в `local_classes_segments_and_modules.md`.
-- `eklektika.orders.applications` использует только транспортный API (`RestClient::callKitRestGet`) и runtime-подключение Bitrix `sale/iblock`.
+- `yomerch.b24.rest` — единственный общий транспортный модуль; здесь не размещается доменная логика usersync/company/pricing/orders.
+- Доменные модули могут зависеть от `yomerch.b24.rest`, но не друг от друга напрямую, кроме документированных исключений в архитектурных задачах.
+- `yomerch.orders.applications` использует только транспортный API (`RestClient::callKitRestGet`) и runtime-подключение Bitrix `sale/iblock`.
 - Для временного исключения `usersync -> company` используется implement-ready follow-up `FU-ST11-USERSYNC-COMPANY-GATEWAY` (owner/deadline/criteria синхронизированы в ST-10/ST-11 и `local_classes_segments_and_modules.md`).
 
 ### 1.1 Поведение `UPDATE_CONTACT` (группы и активность)
 
-Экшен **`UPDATE_CONTACT`** в `local/classes/ajax.php` делегирует в **`OnlineService\B24\User::update()`**.
+Экшен **`UPDATE_CONTACT`** в `local/modules/yomerch.b24.inbound/endpoint.php` делегирует в **`OnlineService\B24\User::update()`**.
 
 Инварианты (защита от регрессий при переключении только `UF_ADVERSTERING_AGENT` / рекламного агента):
 
 - **`User::update()`** перед `CUser::Update` сбрасывает из полей внешнего запроса ключи **`GROUP_ID`** и **`GROUPS_ID`**, чтобы членство в группах не применялось «как пришло» из транспорта.
-- Любая пересборка групп в **`eklektika.b24.usersync`** (в т.ч. **`addUserToGroup`**, ветки руководителя) опирается на **`CUser::GetUserGroup`** + нормализацию ID или на **`CUser::SetUserGroup`** с полным merge; **`CUser::GetByID` → `GROUPS_ID`** не используется как единственный источник списка перед записью — иначе возможна потеря групп (скидочных, 432 и др.) при CRM-синхронизации.
+- Любая пересборка групп в **`yomerch.b24.usersync`** (в т.ч. **`addUserToGroup`**, ветки руководителя) опирается на **`CUser::GetUserGroup`** + нормализацию ID или на **`CUser::SetUserGroup`** с полным merge; **`CUser::GetByID` → `GROUPS_ID`** не используется как единственный источник списка перед записью — иначе возможна потеря групп (скидочных, 432 и др.) при CRM-синхронизации.
 - **`UF_IS_DIRECTOR` и группа руководителей (432):** назначение/снятие группы **432** выполняется **только если** в payload присутствует ключ **`UF_IS_DIRECTOR`** (частичный `UPDATE_CONTACT` без этого ключа **не** трактуется как «сняли руководителя» и **не** вызывает пересборку групп по этой ветке). При снятии 432 список групп нормализуется перед **`SetUserGroup`**, скидочные группы из матрицы **`CompanyModuleConfig::getCompanyDiscountPercentByAssignedGroupId()`** (prod/test по `B24_USE_TEST_PORTAL`) не должны теряться при этой операции.
 - Снятие статуса рекламного агента в **`updateMarketingAgentPriceType()`** (ветка «был в группе агента, не должен быть»): (1) **`removeUserFromGroupsByIds($userId, [MARKETING_AGENT_GROUP_ID])`** — меняется только членство, снимается **только** группа агента; (2) отдельный **`CUser::Update($userId, ['ACTIVE' => 'N', 'UF_ADVERSTERING_AGENT' => 0])`** **без** `GROUP_ID` / `GROUPS_ID`. Метод **`removeUserFromGroup()`** для этого сценария **не** используется.
 - Скидочные группы по компании настраиваются только в потоке **`Company::updateCompanyElement`** и **только если в payload компании явно передан** `OS_COMPANY_DISCOUNT_VALUE` (см. `docs/features/company_system.md`); иначе скидочные группы пользователя не трогаются.
 
+### 1.2 Контракт manager mapping (core usersync)
+
+- **Единый mapping (сайт ↔ CRM):** `UF_MANAGER` ↔ `ASSIGNED_BY_ID`, `UF_MANAGER2` ↔ `UF_CRM_1757682312`.
+- **Inbound dual-read в `User::update()`:**
+  - primary manager: `ASSIGNED_BY_ID`, fallback `ASSIGNED_MANAGER`;
+  - secondary manager: `UF_CRM_1757682312`, fallback `SECOND_MANAGER`.
+- **Safety rule:** если ключей менеджеров нет во входящем payload, `UF_MANAGER`/`UF_MANAGER2` не перезаписываются и не очищаются.
+- **Outbound policy в `RegisterUserCompany`:**
+  - `ASSIGNED_BY_ID` берётся из `UF_MANAGER` (через `IBLOCK_ID=53.XML_ID`) при валидном mapping, иначе fallback `3036`;
+  - `UF_CRM_1757682312` отправляется из `UF_MANAGER2` только при валидном mapping.
+
 ### 2. Базовый класс для запросов
-**Файл**: `local/modules/eklektika.b24.rest/lib/Request.php`
+**Файл**: `local/modules/yomerch.b24.rest/lib/Request.php`
 
 Защищённый метод `sendRequest` делегирует выполнение в **`OnlineService\B24\RestClient::postSiteRequestsHandler()`** (единая обработка CURL/HTTP/JSON с классом `RestClient`).
 
-**AJAX и контакт CRM:** экшены `UPDATE_CONTACT`, `UPDATE_BATCH_USERS`, `DELETE_CONTACT` в **`local/classes/ajax.php`** вызывают только **`OnlineService\B24\UserSync\ContactAjaxFacade`** (модуль **`eklektika.b24.usersync`**, файл `local/modules/eklektika.b24.usersync/lib/ContactAjaxFacade.php`), который делегирует в доменный класс **`OnlineService\B24\User`** без изменения контракта ответа для фронта.
+**Inbound endpoint и контакт CRM:** экшены `UPDATE_CONTACT`, `UPDATE_BATCH_USERS`, `DELETE_CONTACT` в **`local/modules/yomerch.b24.inbound/endpoint.php`** вызывают только **`OnlineService\B24\UserSync\ContactAjaxFacade`** (модуль **`yomerch.b24.usersync`**, файл `local/modules/yomerch.b24.usersync/lib/ContactAjaxFacade.php`), который делегирует в доменный класс **`OnlineService\B24\User`** без изменения контракта ответа для фронта.
 
 ### 3. Регистрация пользователей и компаний
-**Файл**: `local/modules/eklektika.b24.usersync/lib/RegisterUserCompany.php` (см. [MODULE-LAYOUT](../tasks/2026-04-21-refactor-local-classes-segmentation/MODULE-LAYOUT.md))
+**Файл**: `local/modules/yomerch.b24.usersync/lib/RegisterUserCompany.php`
 
 **Актуальный транспорт и конфигурация (ST-11):**
 - CRM-вызовы внутри `RegisterUserCompany` выполняются через `\OnlineService\B24\RestClient::callRestMethod()` (через локальный адаптер класса), без прямых `sendRequestB24()/sendB24Request`.
-- Маппинг CRM/UF-полей и константы сценария регистрации вынесены в модульный конфиг `local/modules/eklektika.b24.usersync/lib/Config/RegisterUserCompanyConfig.php`; групповые ID usersync централизованы в `lib/Config/UserSyncConfig.php`.
+- Маппинг CRM/UF-полей и константы сценария регистрации вынесены в модульный конфиг `local/modules/yomerch.b24.usersync/lib/Config/RegisterUserCompanyConfig.php`; групповые ID usersync централизованы в `lib/Config/UserSyncConfig.php`.
 - Бизнес-поведение сценариев `OnBeforeUserRegisterHandler`, `OnAfterUserRegisterHandler`, `createB24Company`, `deleteStaffB24` сохранено; изменён только источник настроек и транспортный вызов.
 
 #### Основная логика:
@@ -312,7 +336,7 @@ if ($_REQUEST['event'] == 'ONCRMREQUISITEUPDATE') {
 ```
 
 ### 5. Синхронизация пользователей
-**Файл**: `local/modules/eklektika.b24.usersync/lib/User.php`
+**Файл**: `local/modules/yomerch.b24.usersync/lib/User.php`
 
 #### Основные методы:
 ```php
@@ -442,7 +466,7 @@ public function syncUserCompanies($userId) {
 ```
 
 ### 6. Файловая интеграция
-**Файл**: `local/modules/eklektika.company/lib/Company.php` (модуль `eklektika.company`)
+**Файл**: `local/modules/yomerch.company/lib/Company.php` (модуль `yomerch.company`)
 
 #### Скачивание и обработка файлов:
 ```php
@@ -560,6 +584,12 @@ function sendWebhookToB24($method, $dealId, $data = []) {
 - `WORK_PHONE` → `PHONE[WORK]` (Рабочий телефон)
 - `PERSONAL_MOBILE` → `PHONE[MOBILE]` (Мобильный)
 - `EMAIL` → `EMAIL[WORK]` (Email)
+- `UF_MANAGER` → `ASSIGNED_BY_ID` (Основной менеджер CRM)
+- `UF_MANAGER2` → `UF_CRM_1757682312` (Второй менеджер CRM)
+
+Для inbound-потока поддерживаются legacy-ключи совместимости:
+- primary manager: `ASSIGNED_BY_ID` (canonical), fallback `ASSIGNED_MANAGER`
+- secondary manager: `UF_CRM_1757682312` (canonical), fallback `SECOND_MANAGER`
 
 **Особенности реализации:**
 - Синхронизация происходит **после** успешного сохранения на сайте
@@ -598,7 +628,7 @@ function sendWebhookToB24($method, $dealId, $data = []) {
 ## Безопасность и производительность
 
 ### Безопасность:
-- SSL-соединения с отключенной проверкой сертификатов (для разработки)
+- TLS verify включен по умолчанию; insecure-режим допускается только через явный controlled override (`allow_insecure_tls` / `YOMERCH_ALLOW_INSECURE_TLS=1`) для dev.
 - Валидация входящих данных от B24
 - Логирование всех операций для аудита
 - Проверка прав доступа при синхронизации
@@ -621,14 +651,14 @@ function sendWebhookToB24($method, $dealId, $data = []) {
 
 **Решение:**
 Текущая реализация безопасна, т.к.:
-- Веб-хук в `script/crm/rest/contact.php` обрабатывается отдельным сценарием (вне зоны правок собственных классов в `local/classes/`)
+- Веб-хук в `script/crm/rest/contact.php` обрабатывается отдельным сценарием (вне зоны правок текущего inbound-модуля и legacy-контура)
 - Перед обновлением проверяются изменения
 - Если данные не изменились, обновление не происходит
 - **Рекомендация**: При активной работе с двусторонней синхронизацией добавить флаг `SKIP_WEBHOOK=1` в метаданные обновления для пропуска веб-хука
 
 ## См. также
 
-- [Карта сегментов `local/classes` и предлагаемые модули `eklektika.*`](./local_classes_segments_and_modules.md) — где лежит REST-слой, синхронизация пользователя с CRM и границы относительно общего плана рефакторинга (ST-01).
+- [Контракты Site <=> B24 (yomerch)](./b24_site_contracts_yomerch.md) — канонический документ по inbound/outbound контракту и mapping.
 
 ## Примечания
 
