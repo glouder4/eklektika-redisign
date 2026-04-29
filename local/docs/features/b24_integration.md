@@ -200,6 +200,7 @@ class RegisterUserCompany extends Request {
                         'TITLE' => $arFields['UF_NAME_COMPANY'],
                         'UF_CRM_1669208000616' => $arFields['UF_SPERE'],
                         'UF_CRM_1669208295583' => $arFields['UF_JUR_ADDRESS'],
+                        'UF_CRM_3804624439373' => $arFields['UF_CRM_3804624439373'] ?? null,
                         'UF_CRM_1755643990423' => $arFields['UF_CRM_1755643990423'] ?? null,
                     ]
                 ];

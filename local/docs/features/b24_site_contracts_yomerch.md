@@ -64,6 +64,7 @@
 | `fields.UF_CRM_1669208000616` | string | no | yes | Сфера деятельности |
 | `fields.UF_CRM_1669208295583` | string | no | yes | Юридический адрес (в потоке регистрации) |
 | `fields.UF_CRM_1618551330657` | string | no | yes | Город компании |
+| `fields.UF_CRM_3804624439373` | string | no | yes | Дополнительное поле компании (передаётся из формы/интеграционного payload при наличии) |
 | `fields.UF_CRM_1755643990423` | object | no | yes | Файл реквизитов: `{"fileData":[filename, base64]}` |
 | `fields.UF_CRM_1758028816` | int/string | no | yes | B24 ID головной компании (для филиала) |
 

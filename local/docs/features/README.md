@@ -16,6 +16,7 @@
 - **[Поля сайта ↔ UF CRM (B24)](./b24_site_to_crm_uf_field_map.md)** ✅ - Сводные таблицы `UF_CRM_*` и полей пользователя/компании для настройки портала
 - **[Пакет для внешней команды Bitrix24](./BITRIX24_EXTERNAL_TEAM_HANDOFF.md)** ✅ - URL, заголовки, ACTION, ошибки, чеклист и список вложений к передаче
 - **[Папка-снэпшот для команды Bitrix24](../bitrix24-external-developers/README.md)** ✅ — все вложения одним каталогом для архива и передачи
+- **[Tier B — intake-чеклист поставки](../bitrix24-external-developers/TIER_B_DELIVERY_INTAKE_CHECKLIST.md)** — ревизия пакета, состав, changelog, подписи
 - **[Методы работы с компаниями пользователей](./user_company_methods.md)** ✅ - API для получения компаний пользователей
 
 ### 🗺️ Архитектура и сопровождение кода
