@@ -2,7 +2,8 @@
 
 ## Старт для команды Bitrix24 (внешняя передача)
 
-Один файл «что куда слать и что приложить»: **[BITRIX24_EXTERNAL_TEAM_HANDOFF.md](./BITRIX24_EXTERNAL_TEAM_HANDOFF.md)**.
+Один файл «что куда слать и что приложить»: **[BITRIX24_EXTERNAL_TEAM_HANDOFF.md](./BITRIX24_EXTERNAL_TEAM_HANDOFF.md)**.  
+Таблицы **сайт ↔ `UF_CRM_*`** (дублируют и дополняют раздел 3 ниже): **[b24_site_to_crm_uf_field_map.md](./b24_site_to_crm_uf_field_map.md)**.
 
 ## Назначение документа
 Документ фиксирует фактический контракт интеграции для текущей архитектуры модулей `yomerch.*` и предназначен для передачи команде Bitrix24 как рабочая спецификация.

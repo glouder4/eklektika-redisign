@@ -3,7 +3,7 @@
 Перед каждым запуском graphify:
 
 - [ ] Target scope задан как `local/`.
-- [ ] `local/templates/` и `local/components/` исключены.
+- [ ] `templates/` и `components/` исключены (из корня `local/`); при наличии — исключён `modules/intec.eklectika/`.
 - [ ] В команде запуска нет путей вне `local/`.
 - [ ] Подтвержден инвариант inbound: CRM входящие разбираются только через `local/modules/yomerch.b24.inbound/endpoint.php`.
 - [ ] Подтвержден целевой outbound транспорт: `yomerch.b24.rest/RestClient`.

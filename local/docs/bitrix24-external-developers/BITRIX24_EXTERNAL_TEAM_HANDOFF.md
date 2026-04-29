@@ -15,9 +15,10 @@
 |---|------|------------|
 | 1 | **Этот файл** (`BITRIX24_EXTERNAL_TEAM_HANDOFF.md`) | Точка входа, URL, заголовки, коды ответов |
 | 2 | [b24_site_contracts_yomerch.md](./b24_site_contracts_yomerch.md) | Полный контракт inbound/outbound, поля ACTION, исходящие REST-методы |
-| 3 | [generated_inbound_action_contract_map.md](./generated_inbound_action_contract_map.md) | Таблица ACTION → `event` / `reason_code` (генерируется из кода, см. §7) |
-| 4 | (по желанию) [inbound_dedup_storage_policy.md](./inbound_dedup_storage_policy.md) | Политика дедупликации на стороне сайта |
-| 5 | (по желанию) [inbound_sli_slo.md](./inbound_sli_slo.md) | Метрики для мониторинга после включения жёстких режимов |
+| 3 | [b24_site_to_crm_uf_field_map.md](./b24_site_to_crm_uf_field_map.md) | Поля сайта ↔ `UF_CRM_*` и стандартные поля CRM (контакт, компания, менеджеры) |
+| 4 | [generated_inbound_action_contract_map.md](./generated_inbound_action_contract_map.md) | Таблица ACTION → `event` / `reason_code` (генерируется из кода, см. §7) |
+| 5 | (по желанию) [inbound_dedup_storage_policy.md](./inbound_dedup_storage_policy.md) | Политика дедупликации на стороне сайта |
+| 6 | (по желанию) [inbound_sli_slo.md](./inbound_sli_slo.md) | Метрики для мониторинга после включения жёстких режимов |
 
 Внутренние секреты (**токен inbound**, путь к `config.local.php`) в общий пакет **не включать** — передаются отдельным защищённым каналом.
 

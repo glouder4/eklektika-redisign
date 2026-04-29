@@ -6,7 +6,8 @@
 Официальный передаваемый контракт обмена для стороны B24 вынесен в отдельный документ:
 `docs/features/b24_site_contracts_yomerch.md`.
 
-**Пакет для внешней команды Bitrix24 (одним файлом):** [BITRIX24_EXTERNAL_TEAM_HANDOFF.md](./BITRIX24_EXTERNAL_TEAM_HANDOFF.md).
+**Пакет для внешней команды Bitrix24 (одним файлом):** [BITRIX24_EXTERNAL_TEAM_HANDOFF.md](./BITRIX24_EXTERNAL_TEAM_HANDOFF.md).  
+**Поля сайта ↔ UF CRM:** [b24_site_to_crm_uf_field_map.md](./b24_site_to_crm_uf_field_map.md).
 
 ## Основные характеристики
 - **URL Bitrix24**: задаётся в `local/php_interface/b24_integration_config.php` (константа `URL_B24` в `init.php`)

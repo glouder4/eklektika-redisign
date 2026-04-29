@@ -54,7 +54,7 @@
 
 ## Пакет для передачи команде Bitrix24 (готово к отправке)
 
-- Входной документ для внешней команды: `docs/features/BITRIX24_EXTERNAL_TEAM_HANDOFF.md` (список вложений, URL, заголовки, чеклист). Собранная папка для передачи целиком: `docs/bitrix24-external-developers/` (см. `README.md` там).
+- Входной документ для внешней команды: `docs/features/BITRIX24_EXTERNAL_TEAM_HANDOFF.md` (список вложений, URL, заголовки, чеклист); маппинг полей сайта ↔ `UF_CRM_*`: `docs/features/b24_site_to_crm_uf_field_map.md`. Собранная папка для передачи целиком: `docs/bitrix24-external-developers/` (см. `README.md` там).
 - Полный контракт полей: `docs/features/b24_site_contracts_yomerch.md`.
 - Сгенерированная карта ACTION: `docs/refactoring/generated_inbound_action_contract_map.md` (перегенерировать перед релизом: см. раздел «Кодогенерация» ниже).
 
