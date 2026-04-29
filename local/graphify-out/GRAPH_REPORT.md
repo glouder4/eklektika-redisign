@@ -1,7 +1,7 @@
 # Graph Report - .graphify-scope-local  (2026-04-29)
 
 ## Corpus Check
-- 189 files · ~917,120 words
+- 189 files · ~918,583 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
