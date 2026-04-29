@@ -129,3 +129,5 @@ local/tools/restore_admin_group.php
 /local/sync/docs
 /.cursor/
 /.graphify-scope-local
+/local/.graphify-scope-local
+/local/docs
