@@ -67,9 +67,7 @@ class InboundSecurity
      */
     private static function isDevOverrideEnabled(array $cfg): bool
     {
-        return self::boolConfigValue(
-            $cfg['allow_inbound_without_secret'] ?? \getenv('YOMERCH_ALLOW_INBOUND_WITHOUT_SECRET') ?? ''
-        );
+        return self::boolConfigValue($cfg['allow_inbound_without_secret'] ?? false);
     }
 
     /**

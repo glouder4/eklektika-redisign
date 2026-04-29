@@ -10,6 +10,8 @@ return [
     'allow_inbound_without_secret' => false,
     // Optional hardening flags (all disabled by default for backward compatibility).
     'require_post_method' => false,
+    // If true, disable TLS verification in outbound RestClient (dev-only).
+    'allow_insecure_tls' => false,
     // If true, sync token must be in X-SYNC-TOKEN header (request param fallback disabled).
     'inbound_require_header_token' => false,
     // If > 0, validate X-Sync-Timestamp/sync_ts absolute drift in seconds.

@@ -308,7 +308,7 @@ final class RestClient
     private static function isInsecureTlsOverrideEnabled(): bool
     {
         $cfg = $GLOBALS['YOMERCH_SYNC_CONFIG'] ?? $GLOBALS['EKLEKTIKA_SYNC_CONFIG'] ?? [];
-        $raw = $cfg['allow_insecure_tls'] ?? \getenv('YOMERCH_ALLOW_INSECURE_TLS') ?? '';
+        $raw = $cfg['allow_insecure_tls'] ?? false;
         if (\is_bool($raw)) {
             return $raw;
         }
