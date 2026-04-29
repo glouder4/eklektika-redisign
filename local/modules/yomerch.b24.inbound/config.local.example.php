@@ -18,9 +18,10 @@ return [
     'inbound_hmac_secret' => '',
     // If > 0, deduplicate by ACTION + REQUEST_ID (or X-Sync-Request-Id) for TTL window.
     'inbound_dedup_ttl_seconds' => 0,
-    // Optional custom store path for dedup state.
+    // Dedup state: JSON file with LOCK_EX. Production: set inbound_dedup_store_path outside tmp.
+    // Policy: docs/refactoring/inbound_dedup_storage_policy.md
     'inbound_dedup_store_path' => '',
-    // Optional list of blocked ACTION names.
+    // Optional list of blocked ACTION names (register: docs/refactoring/inbound_blocked_actions_register.md).
     'inbound_disabled_actions' => [],
     // Keep true for backward compatibility where some actions return plain scalar.
     // Set false to enforce JSON responses for all actions in InboundGateway.

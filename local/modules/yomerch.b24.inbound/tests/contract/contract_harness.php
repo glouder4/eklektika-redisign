@@ -16,6 +16,7 @@ require_once __DIR__ . '/../../lib/from-crm/InboundPayloadValidator.php';
 /**
  * Lightweight contract harness for implementation-first checks.
  * Run: php local/modules/yomerch.b24.inbound/tests/contract/contract_harness.php
+ * Windows (PHP via WSL or no global php): tools/run_contract_harness.ps1 from repo root.
  */
 final class ContractHarness
 {

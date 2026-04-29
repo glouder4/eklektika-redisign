@@ -1,0 +1,15 @@
+# Contract harness последний прогон (артефакт для SBT-03)
+
+date_utc: 2026-04-29 (генератор: CI/локально обновите при каждом прогоне)
+environment: Windows + WSL (PHP CLI внутри Linux-дистрибутива), PHP 8.2.x
+
+command:
+  wsl bash -c "cd /mnt/c/Git_projects/eklektika-beget && php local/modules/yomerch.b24.inbound/tests/contract/contract_harness.php"
+alternate:
+  pwsh local/modules/yomerch.b24.inbound/tools/run_contract_harness.ps1
+
+exit_code: 0
+
+stdout:
+passed=15 failed=0
+
