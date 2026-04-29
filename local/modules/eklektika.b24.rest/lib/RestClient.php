@@ -10,12 +10,52 @@ use OnlineService\B24\Config\RestTransportConfig;
 final class RestClient
 {
     /**
+     * Ensure B24 constants are defined even when init.php bootstrap was skipped.
+     */
+    private static function ensureB24ConfigLoaded(): void
+    {
+        if (\defined('URL_B24') && \defined('B24_REST_WEBHOOK_MAIN') && \defined('B24_REST_WEBHOOK_KIT')) {
+            return;
+        }
+
+        $b24IntegrationConfig = [
+            'use_test_portal' => false,
+            'base_url' => '',
+            'rest_webhook_main' => '',
+            'rest_webhook_kit' => '',
+        ];
+
+        $configPath = \dirname(__DIR__, 3) . '/php_interface/b24_integration_config.php';
+        if (\file_exists($configPath)) {
+            $loadedB24Config = require $configPath;
+            if (\is_array($loadedB24Config)) {
+                $b24IntegrationConfig = \array_merge($b24IntegrationConfig, $loadedB24Config);
+            }
+        }
+
+        if (!\defined('B24_USE_TEST_PORTAL')) {
+            \define('B24_USE_TEST_PORTAL', (bool) $b24IntegrationConfig['use_test_portal']);
+        }
+        if (!\defined('URL_B24')) {
+            \define('URL_B24', (string) $b24IntegrationConfig['base_url']);
+        }
+        if (!\defined('B24_REST_WEBHOOK_MAIN')) {
+            \define('B24_REST_WEBHOOK_MAIN', (string) $b24IntegrationConfig['rest_webhook_main']);
+        }
+        if (!\defined('B24_REST_WEBHOOK_KIT')) {
+            \define('B24_REST_WEBHOOK_KIT', (string) $b24IntegrationConfig['rest_webhook_kit']);
+        }
+    }
+
+    /**
      * POST на URL вида .../rest/1/{token}/{method}.json; при успехе возвращает $decoded['result'] (как legacy sendRequestB24).
      *
      * @return mixed значение ключа result, либо массив ошибки с ключом success === 0
      */
     public static function callRestMethod(string $method, array $params, bool $debug = false)
     {
+        self::ensureB24ConfigLoaded();
+
         if (!defined('URL_B24') || !defined('B24_REST_WEBHOOK_MAIN')) {
             return [
                 'success' => 0,
@@ -38,6 +78,8 @@ final class RestClient
      */
     public static function postAjaxProxy(array $params, bool $debug = false): array
     {
+        self::ensureB24ConfigLoaded();
+
         if (!defined('URL_B24')) {
             return [
                 'success' => 0,
@@ -55,6 +97,8 @@ final class RestClient
      */
     public static function postSiteRequestsHandler(array $params, bool $debug = false): array
     {
+        self::ensureB24ConfigLoaded();
+
         if (!defined('URL_B24')) {
             return [
                 'success' => 0,
@@ -72,6 +116,8 @@ final class RestClient
      */
     public static function getKitWebhookPrefix(): string
     {
+        self::ensureB24ConfigLoaded();
+
         if (!defined('URL_B24') || !defined('B24_REST_WEBHOOK_KIT')) {
             return '';
         }

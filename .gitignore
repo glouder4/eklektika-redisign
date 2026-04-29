@@ -125,3 +125,6 @@ update_prices.php
 local/tools/restore_admin_group.php
 /local/php_interface/b24_integration_config.php
 /.idea
+/.cursor
+/local/sync/docs
+/.cursor/

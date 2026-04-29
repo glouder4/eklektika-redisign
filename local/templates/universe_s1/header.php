@@ -50,30 +50,32 @@ $part = Constructor::isLite() ? 'lite' : 'base';
 <html lang="<?=LANGUAGE_ID?>">
     <head>
         <?php if (FileHelper::isFile($directory.'/parts/custom/header.start.php')) include($directory.'/parts/custom/header.start.php') ?>
-
-
-        <title><?php $APPLICATION->ShowTitle(); ?></title>
+        <title><?php $APPLICATION->ShowTitle() ?></title>
         <?php $APPLICATION->ShowHead() ?>
         <meta name="viewport" content="initial-scale=1.0, width=device-width">
         <meta name="cmsmagazine" content="79468b886bf88b23144291bf1d99aa1c" />
-        <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+
+        <?php $APPLICATION->ShowMeta('og:type', 'og:type') ?>
+        <?php $APPLICATION->ShowMeta('og:title', 'og:title') ?>
+        <?php $APPLICATION->ShowMeta('og:description', 'og:description') ?>
+        <?php $APPLICATION->ShowMeta('og:image', 'og:image') ?>
+        <?php $APPLICATION->ShowMeta('og:url', 'og:url') ?>
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
         <link rel="apple-touch-icon" href="/favicon.png">
-
         <?php if (!Constructor::isLite()) { ?>
             <style type="text/css"><?= $template->getCss() ?></style>
             <style type="text/css"><?= $template->getLess() ?></style>
             <script type="text/javascript"><?= $template->getJs() ?></script>
         <?php } ?>
-        <?php if (FileHelper::isFile($directory.'/parts/custom/header.end.php')) include($directory.'/parts/custom/header.end.php') ?>
-    </head>
-    <?php
-        /*if( $USER->IsAuthorized() ){
-            pre($APPLICATION->GetPageProperty('description'));
-            die();
 
-        }*/
-    ?>
+        <!-- Копирайт -->
+        <meta name="author" content="Егоров Андрей Валерьевич">
+        <meta name="copyright" content="Егоров Андрей Валерьевич, 2026">
+        <meta name="contact" content="https://ufa.hh.ru/resume/01af2e83ff0441496f0039ed1f537a57514c43">
+        <?php if (FileHelper::isFile($directory.'/parts/custom/header.end.php')) include($directory.'/parts/custom/header.end.php') ?>
+
+    </head>
     <body class="public intec-adaptive">
         <?php if (FileHelper::isFile($directory.'/parts/custom/body.start.php')) include($directory.'/parts/custom/body.start.php') ?>
         <?php $APPLICATION->IncludeComponent(
@@ -106,6 +108,7 @@ $part = Constructor::isLite() ? 'lite' : 'base';
                 )
             ); ?>
         <? } ?>
-        <?php include($directory.'/onlineservice_addons/header.php'); ?>
+			<?php include($directory.'/onlineservice_addons/header.php'); ?>
 
-        <?php include($directory.'/parts/'.$part.'/header.php'); ?>
+			<?php include($directory.'/parts/'.$part.'/header.php'); ?>
+

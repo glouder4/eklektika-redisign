@@ -235,7 +235,8 @@
                 );
                 
                 return $companyId;
-            } else {
+            }
+            else {
                 // Компания не найдена - создаем новую
                 $el = new \CIBlockElement;
 
