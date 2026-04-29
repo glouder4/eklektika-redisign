@@ -16,7 +16,7 @@ trigger: /local-graphify
 
 1. Источник данных для graphify: только `@local`.
 2. Нельзя скармливать graphify весь репозиторий или внешние папки.
-3. Обязательно исключать `@local/templates` и `@local/components`.
+3. Обязательно исключать `@local/templates` и `@local/components` (и при наличии `@local/modules/intec.eklectika`).
 4. Не добавлять в граф ничего, что находится вне `@local`.
 5. Если есть сомнения по пути, остановиться и запросить уточнение до запуска.
 6. Для Graphify MCP в этом проекте использовать сервер `graphify-eklektika-site`.
@@ -25,7 +25,7 @@ trigger: /local-graphify
 
 - Разрешено: `local/classes`, `local/modules/eklektika.*`, `local/php_interface`, `local/sync`, и другие подпапки внутри `local`, кроме исключений.
 - Запрещено: любые пути вне `local`.
-- Явно исключено: `local/templates`, `local/components`.
+- Явно исключено: `local/templates`, `local/components`, `local/modules/intec.eklectika` (сторонний модуль, не должен засорять граф).
 
 ## Чеклист перед запуском graphify
 
@@ -36,9 +36,10 @@ trigger: /local-graphify
 ## Рекомендуемый безопасный запуск (Windows PowerShell)
 
 ```powershell
+if (Test-Path .graphify-scope-local) { Remove-Item -Recurse -Force .graphify-scope-local }
 New-Item -ItemType Directory -Force -Path .graphify-scope-local | Out-Null
-robocopy local .graphify-scope-local /E /XD local\templates local\components > $null
-/graphify .graphify-scope-local
+robocopy . .graphify-scope-local /E /XD templates components modules\intec.eklectika /NFL /NDL /NJH /NJS
+graphify update .graphify-scope-local
 ```
 
 Пояснение:
