@@ -10,7 +10,8 @@
 2. Детали полей и сценариев — **[b24_site_contracts_yomerch.md](./b24_site_contracts_yomerch.md)**.
 3. Карта **ACTION → event / reason_code** — **[generated_inbound_action_contract_map.md](./generated_inbound_action_contract_map.md)** (перед финальной передачей сверьте с владельцем сайта, что версия собрана из актуального кода).
 4. По желанию: **[inbound_dedup_storage_policy.md](./inbound_dedup_storage_policy.md)**, **[inbound_sli_slo.md](./inbound_sli_slo.md)**.
-5. Предметные контракты по полям каждого `ACTION` и разделение **CRM→сайт** / **сайт→CRM**: **[bitrix24-inbound-from-site-contracts/README.md](../bitrix24-inbound-from-site-contracts/README.md)**.
+5. Холдинг: **`UF_CRM_1776426878`** и связь филиала с головой **`UF_CRM_1758028816`** (никакого «весь список компаний» без фильтра) — **[b24_company_holding_group_members_resolve.md](./b24_company_holding_group_members_resolve.md)**.
+6. Предметные контракты по полям каждого `ACTION` и разделение **CRM→сайт** / **сайт→CRM**: **[bitrix24-inbound-from-site-contracts/README.md](../bitrix24-inbound-from-site-contracts/README.md)**.
 
 Секреты (токен inbound, пути к `config.local.php`) в этот архив **не включают** — только отдельным защищённым каналом.
 

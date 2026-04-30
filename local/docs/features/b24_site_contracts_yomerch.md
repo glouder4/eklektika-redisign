@@ -160,7 +160,10 @@ Response JSON: `{"success":1|0,"data":{"batch":true|false}}`.
 #### ACTION=`DELETE_CONTACT`
 | Поле | Тип | Required | Nullable | Примечание |
 |---|---|---|---|---|
-| `ID` | int/string | yes | no | B24 contact ID для удаления site user |
+| `B24_ID` | int/string | no* | yes | Канонический CRM **contact ID** для поиска `b_user.UF_B24_USER_ID` (как у `UPDATE_CONTACT`) |
+| `ID` | int/string | no* | yes | Легаси-алиас contact ID; при наличии обоих — поиск сначала по `B24_ID`, затем по `ID` |
+
+\* Обязателен **хотя бы один** из `B24_ID` / `ID`, непустой и не `"0"`.
 
 Response JSON: `{"success":1|0,"data":{"deleted":bool}}`.
 
@@ -198,7 +201,10 @@ Response: JSON-string от `Company::syncCompanyContacts` (`success`, `message`,
 #### ACTION=`UPDATE_MANAGER`
 | Поле | Тип | Required | Nullable | Примечание |
 |---|---|---|---|---|
-| `ID` | int/string | yes | no | B24 user ID (пишется в `XML_ID` элемента ИБ менеджеров) |
+| `ID` | int/string | no* | yes | B24 user ID → `XML_ID` элемента ИБ менеджеров |
+| `BITRIX24_ID` | int/string | no* | yes | Синоним `ID`; достаточно одного из полей |
+
+\* Обязательно **одно** из `ID` / `BITRIX24_ID`, непустое.
 | `NAME` | string | no | yes | Имя |
 | `LAST_NAME` | string | no | yes | Фамилия |
 | `PHONE` | string | no | yes | Телефон |

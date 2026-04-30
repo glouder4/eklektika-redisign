@@ -33,6 +33,14 @@ Copy-Item -Force .graphify-scope-local\graphify-out\* graphify-out\
 
 **MCP `user-graphify-eklektika-site`:** подхватывает граф на стороне сервера MCP; после локального `graphify update` нужно **заново загрузить/переиндексировать** `graph.json` в конфигурации MCP, иначе `graph_stats` в чате останется от прежней базы.
 
+### Почему в ответах MCP всё ещё фигурирует `intec.eklectika` / PhpSpreadsheet
+
+Если в узлах видно `\.graphify-scope-local\modules\intec.eklectika\...`, а в рабочей копии `local/modules/intec.eklectika` **нет** (и в свежей копии `.graphify-scope-local` его тоже нет) — это **не** текущий локальный `graphify-out`, а **устаревший граф**, который MCP держит в памяти/файле на стороне сервера. Типичный признак: `graph_stats` показывает порядка **10k+** узлов при том, что свежая сборка по runbook даёт **сотни** узлов.
+
+**Что сделать:** обновить путь к `graph.json` в настройках MCP (или перезапустить сервер graphify с актуальным файлом из `.graphify-scope-local\graphify-out\` / скопированного в `graphify-out\`). После переиндексации снова вызвать `graph_stats` — число узлов должно сойтись с последней локальной сборкой.
+
+**Проверка после `robocopy` (PowerShell из `local/`):** `Test-Path .graphify-scope-local\modules\intec.eklectika` должно быть `$false`. Если `$true` — исключение `/XD` не сработало (проверьте имя каталога и что `robocopy` запускается из корня `local/`).
+
 ## Wave 1 include set
 - `local/modules/yomerch.b24.inbound`
 - `local/modules/yomerch.b24.rest`

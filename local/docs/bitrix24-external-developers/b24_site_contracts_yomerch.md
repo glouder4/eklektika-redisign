@@ -14,6 +14,7 @@
 ### 1.1 Канонический транспорт
 - Все исходящие вызовы выполняются через `\OnlineService\B24\RestClient::callRestMethod()`.
 - URL метода строится как `URL_B24/rest/1/{B24_REST_WEBHOOK_MAIN}/{method}.json`.
+- Отдельный контур: POST на `URL_B24` + `…/local/modules/yomerch.b24.inbound/endpoint.php` через `\OnlineService\B24\RestClient::postAjaxProxy()` (например `GET_CONTACT_ID`, `DELETE_CONTACT` из `\OnlineService\B24\User::sendRequest`). Если в параметрах нет непустого `sync_token`, транспорт **подставляет** значение `inbound_secret` из `$GLOBALS['YOMERCH_SYNC_CONFIG']` (или заголовок `X-Sync-Token`, если в конфиге включён `inbound_require_header_token`), чтобы не получать `403 sync_forbidden` на приёмной стороне inbound.
 
 ### 1.2 Сценарии/триггеры и методы B24
 | Сценарий на сайте | Где в коде | Метод B24 | Назначение |
@@ -98,7 +99,10 @@
 
 ### 2.1 Канонический endpoint и базовые требования
 - Endpoint (canonical): `/local/modules/yomerch.b24.inbound/endpoint.php`
-- HTTP method: `POST` (формат `application/x-www-form-urlencoded`; код читает `$_REQUEST`)
+- HTTP method: `POST`.
+- Тело запроса:
+  - канонически — `application/x-www-form-urlencoded` (поля попадают в `$_REQUEST`);
+  - допустимо — JSON-объект в raw body (`{...}`): endpoint мержит его в `$_REQUEST` до проверки токена и dispatch (на случай, если CRM оставляет `Content-Type: application/x-www-form-urlencoded`, но тело всё равно JSON — иначе PHP не распарсит POST и `sync_token` в теле «не существует»).
 - Security:
   - fail-closed: если `inbound_secret` не задан, запрос запрещается (`403`);
   - dev-override на работу без секрета разрешен только через явный флаг `allow_inbound_without_secret=true` (или env `YOMERCH_ALLOW_INBOUND_WITHOUT_SECRET=1`) и по умолчанию выключен;
@@ -132,7 +136,8 @@ Response: plain text (ID группы, не JSON).
 #### ACTION=`UPDATE_CONTACT`
 | Поле | Тип | Required | Nullable | Примечание |
 |---|---|---|---|---|
-| `B24_ID` | int/string | yes | no | Канонический ID контакта B24 для поиска пользователя сайта |
+| `B24_ID` | int/string | yes | no | Канонический ID контакта B24 для поиска пользователя сайта (`getUserIDByB24ID`); см. `docs/bitrix24-inbound-from-site-contracts/actions/UPDATE_CONTACT.md` |
+| `ID` | int/string | no | yes | Легаси-параметр в логах; **не** используется для поиска пользователя в `User::update()` — не путать с `B24_ID` и с ID компании в CRM |
 | `NAME`,`LAST_NAME`,`SECOND_NAME` | string | no | yes | Персональные поля |
 | `EMAIL` | string | no | yes | Email пользователя |
 | `PERSONAL_PHONE` | string | no | yes | Телефон пользователя |
@@ -158,7 +163,10 @@ Response JSON: `{"success":1|0,"data":{"batch":true|false}}`.
 #### ACTION=`DELETE_CONTACT`
 | Поле | Тип | Required | Nullable | Примечание |
 |---|---|---|---|---|
-| `ID` | int/string | yes | no | B24 contact ID для удаления site user |
+| `B24_ID` | int/string | no* | yes | Канонический CRM **contact ID** для поиска `b_user.UF_B24_USER_ID` (как у `UPDATE_CONTACT`) |
+| `ID` | int/string | no* | yes | Легаси-алиас contact ID; если указан вместе с `B24_ID`, поиск идёт **сначала** по `B24_ID`, при отсутствии пользователя — по `ID` |
+
+\* Обязателен **хотя бы один** из `B24_ID` / `ID`, непустой и не `"0"` (см. `InboundPayloadValidator::validateDeleteContact`).
 
 Response JSON: `{"success":1|0,"data":{"deleted":bool}}`.
 
@@ -167,7 +175,8 @@ Response JSON: `{"success":1|0,"data":{"deleted":bool}}`.
 |---|---|---|---|---|
 | `OS_COMPANY_B24_ID` | int/string | yes | no | Ключ связи с элементом компании на сайте |
 | `OS_COMPANY_NAME` | string | yes | no | Имя элемента/компании |
-| `ACTIVE` | string enum | yes | no | Статус элемента компании (`Y`/`N`) |
+| `ACTIVE` | string enum | yes | no | Статус элемента компании (`Y`/`N`); если в запросе есть `UF_CRM_1675675211485`, сайт **перезаписывает** `ACTIVE` (и `OS_IS_MARKETING_AGENT`) по этому UF до обработки |
+| `UF_CRM_1675675211485` | scalar | no | yes | CRM UF «маркетинговый агент» → свойство списка `OS_IS_MARKETING_AGENT` (enum **31519** = «Да») + `ACTIVE` `Y`/`N`; пустое значение = не менять с этой ветки |
 | `OS_COMPANY_USERS` | array<int|string> | no | yes | Список B24 contact IDs (конвертируются в site user IDs) |
 | `CONTACT_IDS` | array<int|string> | no | yes | Fallback-массив при резолве пользователей |
 | `OS_COMPANY_DISCOUNT_VALUE` | int/string | no | yes | Значение статуса/скидки для групп |
@@ -196,7 +205,10 @@ Response: JSON-string от `Company::syncCompanyContacts` (`success`, `message`,
 #### ACTION=`UPDATE_MANAGER`
 | Поле | Тип | Required | Nullable | Примечание |
 |---|---|---|---|---|
-| `ID` | int/string | yes | no | B24 user ID (пишется в `XML_ID` элемента ИБ менеджеров) |
+| `ID` | int/string | no* | yes | B24 user ID → `XML_ID` элемента ИБ менеджеров |
+| `BITRIX24_ID` | int/string | no* | yes | Синоним `ID` (как в типовых интеграциях); достаточно одного из полей |
+
+\* Обязательно **одно** из `ID` / `BITRIX24_ID`, непустое.
 | `NAME` | string | no | yes | Имя |
 | `LAST_NAME` | string | no | yes | Фамилия |
 | `PHONE` | string | no | yes | Телефон |
@@ -288,6 +300,7 @@ Response JSON: `{"success":1|0,"data":{"updated":bool}}`.
 - CURL error -> `{"success":0,"error":"CURL Error: ...","errno":...}`.
 - HTTP != 200 -> `{"success":0,"error":"HTTP Error: ...","response":"..."}`.
 - Невалидный JSON -> `{"success":0,"error":"JSON Parse Error: ...","raw_response":"..."}`.
+- Ответы **`postAjaxProxy` → inbound `endpoint.php`** (HTTP 200, тело с `success` / `reason_code` / `action`) **не** превращаются в `b24_api_error`, даже если в JSON присутствует ключ `error` (в т.ч. пустой) — это не контракт ошибки B24 REST.
 - HTTP 200 с B24 `error`/`error_description` -> нормализованная ошибка:
   `{"success":0,"error":"B24 API error","error_code":"...","error_description":"...","http_code":200,...}`.
 - Для `callRestMethod` отсутствие `result` в HTTP 200 считается ошибкой контракта:

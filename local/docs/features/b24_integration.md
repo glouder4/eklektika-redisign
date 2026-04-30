@@ -18,7 +18,8 @@
 
 ## Интеграционные инварианты (актуальный контур)
 - **Inbound CRM -> сайт**: целевая и допустимая точка входа только `local/modules/yomerch.b24.inbound/endpoint.php`.
-- **Outbound сайт -> B24**: целевой транспорт через `local/modules/yomerch.b24.rest/lib/RestClient.php`.
+- **Outbound сайт → портал (контракт ACTION/METHOD/…)**: POST через `RestClient::postAjaxProxy` на `URL_B24` + `/local/modules/yomerch.b24.inbound/endpoint.php` (класс `OnlineService\B24\Request`).
+- **Outbound сайт → REST CRM по вебхуку** (`crm.company.add` и т.д. без ACTION-обёртки): `RestClient::callRestMethod` — отдельный транспорт (`…/rest/1/{token}/{method}.json`).
 - **Inbound reject-code**: для отказов авторизации/секрета используется единый код `sync_forbidden` (`HTTP 403`, `{"success":0,"error":"sync_forbidden"}`).
 - **Legacy-обходы** (прямые webhook/curl) должны вноситься в реестр исключений:
   `docs/refactoring/legacy_integration_exceptions_register.md`.
@@ -44,15 +45,17 @@
 
 **Транспортный слой**: класс `OnlineService\B24\RestClient` в модуле **`yomerch.b24.rest`**: `local/modules/yomerch.b24.rest/lib/RestClient.php`
 
-- `callRestMethod($method, $params, $debug)` — POST на основной REST-вебхук; при успехе возвращает **`$response['result']`** (как прежняя функция `sendRequestB24`).
-- `postAjaxProxy($params, $debug)` — POST на `/local/modules/yomerch.b24.inbound/endpoint.php`, возвращает **полный** декодированный JSON (как `sendRequest()`).
-- `postSiteRequestsHandler($params, $debug)` — POST на `site_requests_handler.php` (базовый класс `Request`).
+- `callRestMethod($method, $params, $debug)` — штатный REST портала: POST на `…/rest/1/{webhook}/{method}.json`; при успехе возвращает **`$response['result']`** (как `sendRequestB24`).
+- `postAjaxProxy($params, $debug)` — контрактный POST на **`URL_B24` + `/local/modules/yomerch.b24.inbound/endpoint.php`** (ACTION/METHOD/токен); полный декодированный JSON; используется **`OnlineService\B24\Request::sendRequest()`** (например `GET_CONTACT_ID`).
+- `postSiteRequestsHandler($params, $debug)` — устаревший путь `site_requests_handler.php`; **не** целевой транспорт (см. `RestClient`, `@deprecated`).
 - `getKitWebhookPrefix()` — префикс URL для `kit.productapplications.*`.
 - Транспортные параметры и URL-мэппинг централизованы в `local/modules/yomerch.b24.rest/lib/Config/RestTransportConfig.php` (timeouts, пути прокси, построение webhook URL), бизнес-логика модулей не меняется.
 
 Legacy-глобали **`sendRequestB24`** и **`sendRequest`** сохранены в `local/modules/yomerch.b24.rest/lib/LegacyGlobalB24.php` и помечены **`@deprecated`**; они делегируют вызовы в `RestClient`. В `init.php` эти функции не являются целевой точкой размещения.
 
 **Контракт ответов:** при ошибках транспорта (CURL, HTTP≠200, невалидный JSON) возвращается массив с **`success`** = 0. Для HTTP 200 c B24 `error`/`error_description` возвращается нормализованная ошибка (`success=0`, `error_code`, `error_description`). Для `callRestMethod` отсутствие `result` трактуется как ошибка контракта (`b24_missing_result`), silent-success не допускается.
+
+**Лог `[outbound.error]`:** для `transport_http_error` / `transport_curl_error` / `transport_json_error` в JSON строки добавляется **`outbound_detail`**: `url_redacted` (токен в пути `/rest/…/` замаскирован), **`ACTION`**, **`METHOD`**, **`param_keys`**, **`post_body_redacted`** (значения `sync_token` и похожих полей — `***`), **`response_preview`** (обрезка ответа сервера).
 
 Каноническая детализация inbound/outbound контрактов и кодов ошибок ведется в:
 `docs/features/b24_site_contracts_yomerch.md`.
@@ -98,7 +101,7 @@ Legacy-глобали **`sendRequestB24`** и **`sendRequest`** сохранен
 ### 2. Базовый класс для запросов
 **Файл**: `local/modules/yomerch.b24.rest/lib/Request.php`
 
-Защищённый метод `sendRequest` делегирует выполнение в **`OnlineService\B24\RestClient::postSiteRequestsHandler()`** (единая обработка CURL/HTTP/JSON с классом `RestClient`).
+Защищённый метод `sendRequest` делегирует выполнение в **`OnlineService\B24\RestClient::postAjaxProxy()`** — POST на портальный **`…/local/modules/yomerch.b24.inbound/endpoint.php`** (не REST-вебхук и не `site_requests_handler.php`).
 
 **Inbound endpoint и контакт CRM:** экшены `UPDATE_CONTACT`, `UPDATE_BATCH_USERS`, `DELETE_CONTACT` в **`local/modules/yomerch.b24.inbound/endpoint.php`** вызывают только **`OnlineService\B24\UserSync\ContactAjaxFacade`** (модуль **`yomerch.b24.usersync`**, файл `local/modules/yomerch.b24.usersync/lib/ContactAjaxFacade.php`), который делегирует в доменный класс **`OnlineService\B24\User`** без изменения контракта ответа для фронта.
 
