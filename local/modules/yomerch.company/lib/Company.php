@@ -87,6 +87,88 @@
          * Если ключа скидки в payload нет — скидочные группы пользователя не меняются (частичные апдейты).
          * Администраторы и прочие группы не трогаем (кроме скидочных из маппинга).
          */
+        /**
+         * @param array<string, mixed> $params
+         */
+        private static function isMarketingAgentParamOn(array $params): bool
+        {
+            $ma = $params['OS_IS_MARKETING_AGENT'] ?? null;
+            if (\is_array($ma)) {
+                $v = $ma['VALUE'] ?? $ma['~VALUE'] ?? null;
+
+                $pid = CompanyModuleConfig::tryParseInboundMarketingAgentListEnumId($v);
+
+                return $v !== null && $v !== '' && $v !== false
+                    && (($pid !== null && CompanyModuleConfig::inboundOsMarketingAgentValueIdMeansSiteYes($pid))
+                        || (\is_string($v) && \strtoupper(\trim($v)) === 'YES')
+                        || $v === 'Y' || $v === 'y' || $v === 1 || $v === true || $v === 'Да');
+            }
+            if ($ma === null || $ma === false || $ma === '' || $ma === 0 || $ma === '0') {
+                return false;
+            }
+            $pidMa = CompanyModuleConfig::tryParseInboundMarketingAgentListEnumId($ma);
+            if ($pidMa !== null && CompanyModuleConfig::inboundOsMarketingAgentValueIdMeansSiteYes($pidMa)) {
+                return true;
+            }
+
+            return $ma === 'Y' || $ma === 'y' || $ma === 1 || $ma === true || $ma === 'Да'
+                || (\is_string($ma) && \strtoupper(\trim($ma)) === 'YES');
+        }
+
+        /**
+         * Свойство типа «список» (L): для {@see \CIBlockElement::Update} передавать `['VALUE' => ID_enum]`,
+         * иначе значение может не сохраниться. Вход CRM `['VALUE'=>'0']` трактуем как снятие варианта (`false`).
+         *
+         * @param mixed $raw
+         * @return array{VALUE: int}|false
+         */
+        private static function normalizeOsIsMarketingAgentForIblockProperty($raw)
+        {
+            $yes = CompanyModuleConfig::OS_IS_MARKETING_AGENT_ENUM_YES;
+            if ($raw === false) {
+                return false;
+            }
+            if (\is_array($raw)) {
+                $v = $raw['VALUE'] ?? $raw['~VALUE'] ?? null;
+                if ($v === null || $v === '' || $v === false) {
+                    return false;
+                }
+                if ($v === 0 || $v === '0' || $v === 'N' || $v === 'n') {
+                    return false;
+                }
+                $pid = CompanyModuleConfig::tryParseInboundMarketingAgentListEnumId($v);
+                if ($pid !== null && CompanyModuleConfig::inboundOsMarketingAgentValueIdMeansSiteYes($pid)) {
+                    return ['VALUE' => $yes];
+                }
+                if (\is_string($v) && \strtoupper(\trim($v)) === 'YES') {
+                    return ['VALUE' => $yes];
+                }
+                if (\in_array($v, ['Y', 'y', '1', 1, true, 'Да'], true)) {
+                    return ['VALUE' => $yes];
+                }
+
+                return false;
+            }
+            if ($raw === null || $raw === '') {
+                return false;
+            }
+            if ($raw === 0 || $raw === '0') {
+                return false;
+            }
+            $pidRaw = CompanyModuleConfig::tryParseInboundMarketingAgentListEnumId($raw);
+            if ($pidRaw !== null && CompanyModuleConfig::inboundOsMarketingAgentValueIdMeansSiteYes($pidRaw)) {
+                return ['VALUE' => $yes];
+            }
+            if (\is_string($raw) && \strtoupper(\trim($raw)) === 'YES') {
+                return ['VALUE' => $yes];
+            }
+            if (\in_array($raw, ['Y', 'y', '1', 1, true, 'Да'], true)) {
+                return ['VALUE' => $yes];
+            }
+
+            return false;
+        }
+
         private static function applyB24CompanyGroupsToUser(User $user, int $userId, array $params, ?int $discountMappedGroupId): void
         {
             $userId = (int)$userId;
@@ -99,11 +181,11 @@
             $touchDiscountGroups = array_key_exists('OS_COMPANY_DISCOUNT_VALUE', $params);
 
             if ($touchDiscountGroups) {
-                $user->removeUserFromGroupsByIds($userId, self::getCompanyDiscountAssignedGroupIds());
+                $user->removeUserFromGroupsByIds($userId, self::getCompanyDiscountAssignedGroupIds(), true);
             }
 
             $groups = [];
-            if (!empty($params['OS_IS_MARKETING_AGENT']['VALUE'])) {
+            if (self::isMarketingAgentParamOn($params)) {
                 $groups[] = $user->getMarketingGroupId();
             }
             if ($touchDiscountGroups && $discountMappedGroupId !== null && $discountMappedGroupId > 0) {
@@ -113,6 +195,101 @@
             if ($groups !== []) {
                 $user->addUserToGroups($userId, $groups);
             }
+        }
+
+        /**
+         * Только скидочные группы (без маркетинга) — для сотрудников дочерних компаний при скидке головной.
+         */
+        private static function applyInboundDiscountGroupsOnlyToSiteUser(User $user, int $userId, array $params, ?int $discountMappedGroupId): void
+        {
+            $userId = (int)$userId;
+            if ($userId <= 0) {
+                return;
+            }
+            if (!\array_key_exists('OS_COMPANY_DISCOUNT_VALUE', $params)) {
+                return;
+            }
+            $user->removeUserFromGroupsByIds($userId, self::getCompanyDiscountAssignedGroupIds(), true);
+            if ($discountMappedGroupId !== null && $discountMappedGroupId > 0) {
+                $user->addUserToGroups($userId, [$discountMappedGroupId]);
+            }
+        }
+
+        /**
+         * @param array<string, mixed> $params
+         */
+        private static function resolveInboundDiscountMappedForUser(int $userId, array $params): ?int
+        {
+            if (!\array_key_exists('OS_COMPANY_DISCOUNT_VALUE', $params)) {
+                return null;
+            }
+            if (!self::shouldApplyCompanyDiscountGroupForUser($userId, $params)) {
+                return null;
+            }
+            $raw = $params['OS_COMPANY_DISCOUNT_VALUE'];
+            if ($raw === false || $raw === null) {
+                return null;
+            }
+            if (\is_string($raw) && \trim($raw) === '') {
+                return null;
+            }
+            $mapped = self::mapCompanyStatusGroupId($raw);
+            $mappedInt = (int)$mapped;
+
+            return $mappedInt > 0 ? $mappedInt : null;
+        }
+
+        /**
+         * Сопоставить значение из OS_COMPANY_USERS / CONTACT_IDS с ID пользователя на сайте.
+         * Сначала по UF_B24_USER_ID (= CRM CONTACT.ID), затем — если число совпадает с существующим b_user.ID
+         * (в интеграции иногда приходит ID пользователя сайта вместо CRM-контакта).
+         *
+         * @param mixed $ref основное значение (например OS_COMPANY_USERS[$key])
+         * @param mixed $contactIdFallback параллельное значение из CONTACT_IDS[$key], если есть
+         */
+        private static function resolveInboundCompanyUserRefToSiteUserId(User $user, $ref, $contactIdFallback): int|false
+        {
+            $uid = $user->getUserIDByB24ID($ref);
+            if ($uid) {
+                return (int)$uid;
+            }
+            if ($contactIdFallback !== null && $contactIdFallback !== '') {
+                $uid = $user->getUserIDByB24ID($contactIdFallback);
+                if ($uid) {
+                    return (int)$uid;
+                }
+            }
+            foreach ([$ref, $contactIdFallback] as $candidate) {
+                if ($candidate === null || $candidate === '') {
+                    continue;
+                }
+                $try = (int)$candidate;
+                if ($try <= 1) {
+                    continue;
+                }
+                $rs = \CUser::GetByID($try);
+                if ($rs->Fetch()) {
+                    return $try;
+                }
+            }
+
+            return false;
+        }
+
+        /**
+         * Входящий UPDATE_COMPANY: `ACTIVE` элемента компании → тот же флаг у связанных пользователей (`OS_COMPANY_USERS`).
+         */
+        private static function applyInboundCompanyActiveToSiteUser(int $userId, string $active): void
+        {
+            $userId = (int)$userId;
+            if ($userId <= 1) {
+                return;
+            }
+            $active = strtoupper(trim($active));
+            if ($active !== 'Y' && $active !== 'N') {
+                return;
+            }
+            (new \CUser())->Update($userId, ['ACTIVE' => $active]);
         }
 
         /**
@@ -173,10 +350,15 @@
             if ($v === true || $v === 1 || $v === '1') {
                 return true;
             }
+            if ((int)$v === CompanyModuleConfig::OS_COMPANY_IS_HEAD_OF_HOLDING_ENUM_YES) {
+                return true;
+            }
             if (\is_string($v)) {
-                $s = \strtoupper(\trim($v));
+                $t = \trim($v);
+                $s = \strtoupper($t);
 
-                return \in_array($s, ['Y', 'YES', 'TRUE', '1', 31520,'31520'], true);
+                return \in_array($s, ['Y', 'YES', 'TRUE', '1'], true)
+                    || \in_array($t, ['Да', 'да'], true);
             }
 
             return (bool)(int)$v;
@@ -193,6 +375,73 @@
         private static function callB24Method(string $method, array $params, bool $debug = false)
         {
             return RestClient::callRestMethod($method, $params, $debug);
+        }
+
+        /**
+         * Свойства элемента компании из ИБ по списку {@see Company::$codeProps}.
+         *
+         * @return array<string, mixed>
+         */
+        private function loadCompanyCodePropsFromIblock(int $companyElementId): array
+        {
+            $currentProps = [];
+            foreach (self::$codeProps as $code) {
+                $propertyValues = \CIBlockElement::GetProperty(
+                    CompanyModuleConfig::COMPANY_IBLOCK_ID,
+                    $companyElementId,
+                    [],
+                    ['CODE' => $code]
+                );
+
+                $values = [];
+                $isMultiple = false;
+                while ($prop = $propertyValues->GetNext()) {
+                    $values[] = $prop['VALUE'];
+                    if ($prop['MULTIPLE'] === 'Y') {
+                        $isMultiple = true;
+                    }
+                }
+
+                if ($isMultiple) {
+                    $currentProps[$code] = $values;
+                } else {
+                    $currentProps[$code] = count($values) > 0 ? $values[0] : null;
+                }
+            }
+
+            return $currentProps;
+        }
+
+        /**
+         * Уникальные ID пользователей сайта из `OS_COMPANY_USERS` дочерних компаний (по `OS_HOLDING_OF` → головная).
+         *
+         * @return list<int>
+         */
+        private function collectSiteUserIdsFromChildCompaniesForDiscount(int $headElementId): array
+        {
+            $ids = [];
+            foreach ($this->getChildCompanies($headElementId) as $row) {
+                $childId = (int)($row['ID'] ?? 0);
+                if ($childId <= 0) {
+                    continue;
+                }
+                $c = $this->getCompany($childId);
+                if (!$c) {
+                    continue;
+                }
+                $users = $c['OS_COMPANY_USERS'] ?? [];
+                if (!\is_array($users)) {
+                    $users = ($users !== null && $users !== '' && $users !== false) ? [$users] : [];
+                }
+                foreach ($users as $u) {
+                    $uid = (int)$u;
+                    if ($uid > 0) {
+                        $ids[$uid] = true;
+                    }
+                }
+            }
+
+            return array_map('intval', array_keys($ids));
         }
 
         public function createCompanyElement($params){
@@ -242,6 +491,10 @@
 
                 // Устанавливаем пользователя в OS_COMPANY_USERS для новой компании
                 $params['OS_COMPANY_USERS'] = [$params['USER_ID']];
+
+                if (self::isHeadOfHoldingFromCompanyParams($params)) {
+                    unset($params['OS_HOLDING_OF']);
+                }
 
                 $arLoadProductArray = [
                     "IBLOCK_SECTION_ID" => false,
@@ -301,35 +554,62 @@
             if ($company && !empty($company['ID'])) {
                 // Компания найдена - обновляем
                 $companyId = $company['ID'];
-                
-                /*if (!empty($params['OS_COMPANY_DISCOUNT_VALUE'])) {
-                    $params['OS_COMPANY_DISCOUNT_VALUE'] = (new UserGroups([]))->searchGroup($params['OS_COMPANY_DISCOUNT_VALUE'])['ID'];
-                }*/
+
+                if (\array_key_exists('OS_IS_MARKETING_AGENT', $params)) {
+                    $params['OS_IS_MARKETING_AGENT'] = self::normalizeOsIsMarketingAgentForIblockProperty($params['OS_IS_MARKETING_AGENT']);
+                }
+
+                $currentProps = $this->loadCompanyCodePropsFromIblock((int)$companyId);
+                $arPreviewHead = $currentProps;
+                foreach (self::$codeProps as $code) {
+                    if (isset($params[$code])) {
+                        $arPreviewHead[$code] = $params[$code];
+                    }
+                }
+                $effectiveIsHeadForDiscount = self::isHeadOfHoldingFromCompanyParams([
+                    'OS_COMPANY_IS_HEAD_OF_HOLDING' => $arPreviewHead['OS_COMPANY_IS_HEAD_OF_HOLDING'] ?? null,
+                ]);
 
                 if( $params['OS_COMPANY_USERS'] ){
                     foreach ($params['OS_COMPANY_USERS'] as $key => $b24_id){
                         $user = new User();
-                        $userId = $user->getUserIDByB24ID($b24_id);
-                        if( !$userId ){
-                            $userId = $user->getUserIDByB24ID($params['CONTACT_IDS'][$key]);
+                        $contactFallback = $params['CONTACT_IDS'][$key] ?? null;
+                        $userId = self::resolveInboundCompanyUserRefToSiteUserId($user, $b24_id, $contactFallback);
+                        if (!$userId) {
+                            error_log(
+                                'WARNING: UPDATE_COMPANY could not resolve OS_COMPANY_USERS to site user: ref='
+                                . json_encode($b24_id, JSON_UNESCAPED_UNICODE)
+                                . ', contact_fallback=' . json_encode($contactFallback, JSON_UNESCAPED_UNICODE)
+                                . ', company_element_id=' . $companyId
+                            );
                         }
 
                         if( $userId ){
                             $params['OS_COMPANY_USERS'][$key] =  $userId;
 
-                            $discountMapped = null;
-                            if (!empty($params['OS_COMPANY_DISCOUNT_VALUE'])
-                                && self::shouldApplyCompanyDiscountGroupForUser((int)$userId, $params)
-                            ) {
-                                $mapped = self::mapCompanyStatusGroupId($params['OS_COMPANY_DISCOUNT_VALUE']);
-                                $mappedInt = (int)$mapped;
-                                if ($mappedInt > 0) {
-                                    $discountMapped = $mappedInt;
-                                }
-                            }
+                            $discountMapped = self::resolveInboundDiscountMappedForUser((int)$userId, $params);
 
                             self::applyB24CompanyGroupsToUser($user, (int)$userId, $params, $discountMapped);
+                            self::applyInboundCompanyActiveToSiteUser((int)$userId, (string)$params['ACTIVE']);
                         }
+                    }
+                }
+
+                if (!empty($params['CONTACT_IDS']) && \is_array($params['CONTACT_IDS'])) {
+                    $userLookup = new User();
+                    foreach ($params['CONTACT_IDS'] as $crmContactId) {
+                        $linkedUserId = self::resolveInboundCompanyUserRefToSiteUserId($userLookup, $crmContactId, null);
+                        if ($linkedUserId) {
+                            self::applyInboundCompanyActiveToSiteUser((int)$linkedUserId, (string)$params['ACTIVE']);
+                        }
+                    }
+                }
+
+                if (\array_key_exists('OS_COMPANY_DISCOUNT_VALUE', $params) && $effectiveIsHeadForDiscount) {
+                    $userDiscount = new User();
+                    foreach ($this->collectSiteUserIdsFromChildCompaniesForDiscount((int)$companyId) as $childUserId) {
+                        $discountMappedChild = self::resolveInboundDiscountMappedForUser((int)$childUserId, $params);
+                        self::applyInboundDiscountGroupsOnlyToSiteUser($userDiscount, (int)$childUserId, $params, $discountMappedChild);
                     }
                 }
 
@@ -344,31 +624,11 @@
                     $params['OS_HOLDING_OF'] = $this->getCompanyByB24ID($params['OS_HOLDING_OF']);
                 }
 
-                // Получаем текущие значения всех свойств компании
-                $currentProps = [];
-                foreach (self::$codeProps as $code) {
-                    $propertyValues = \CIBlockElement::GetProperty(
-                        CompanyModuleConfig::COMPANY_IBLOCK_ID,
-                        $companyId,
-                        [],
-                        ["CODE" => $code]
-                    );
-                    
-                    $values = [];
-                    $isMultiple = false;
-                    while ($prop = $propertyValues->GetNext()) {
-                        $values[] = $prop["VALUE"];
-                        if ($prop["MULTIPLE"] === "Y") {
-                            $isMultiple = true;
-                        }
-                    }
-                    
-                    if ($isMultiple) {
-                        $currentProps[$code] = $values;
-                    } else {
-                        $currentProps[$code] = count($values) > 0 ? $values[0] : null;
-                    }
-                }
+                // $currentProps загружены выше (до пользовательских циклов).
+
+                $wasHead = self::isHeadOfHoldingFromCompanyParams([
+                    'OS_COMPANY_IS_HEAD_OF_HOLDING' => $currentProps['OS_COMPANY_IS_HEAD_OF_HOLDING'] ?? null,
+                ]);
 
                 // Формируем массив свойств для обновления - объединяем текущие и новые значения
                 $arProps = $currentProps; // Начинаем с текущих значений
@@ -376,6 +636,13 @@
                     if (isset($params[$code])) {
                         $arProps[$code] = $params[$code]; // Перезаписываем только переданные значения
                     }
+                }
+
+                $willBeHead = self::isHeadOfHoldingFromCompanyParams($arProps);
+
+                // Головная компания холдинга: OS_HOLDING_OF не заполняем (только у дочерних).
+                if ($willBeHead) {
+                    $arProps['OS_HOLDING_OF'] = false;
                 }
 
                 $params['OS_COMPANY_B24_ID'] = $company['CODE'];
@@ -388,10 +655,14 @@
 
                 $el = new \CIBlockElement;
                 if ($el->Update($companyId, $arUpdateArray)) {
+                    if ($wasHead && !$willBeHead) {
+                        $this->clearOsHoldingOfOnChildrenWhenHeadDemoted((int)$companyId);
+                    }
+
                     return $companyId;
-                } else {
-                    return false;
                 }
+
+                return false;
             } else {
                 // Компания не найдена - создаем новую
                 $companyId = $this->createCompanyFromUpdate($params);
@@ -416,6 +687,10 @@
             }
 
             $el = new \CIBlockElement;
+
+            if (\array_key_exists('OS_IS_MARKETING_AGENT', $params)) {
+                $params['OS_IS_MARKETING_AGENT'] = self::normalizeOsIsMarketingAgentForIblockProperty($params['OS_IS_MARKETING_AGENT']);
+            }
             
             // Обрабатываем пользователей
             if (!empty($params['OS_COMPANY_USERS'])) {
@@ -426,21 +701,20 @@
                     if ($userId) {
                         $params['OS_COMPANY_USERS'][$key] = $userId;
 
-                        $discountMapped = null;
-                        if (!empty($params['OS_COMPANY_DISCOUNT_VALUE'])
-                            && self::shouldApplyCompanyDiscountGroupForUser((int)$userId, $params)
-                        ) {
-                            $statusId = (new UserGroups([]))->searchGroup($params['OS_COMPANY_DISCOUNT_VALUE'])['ID'] ?? null;
-                            if ($statusId) {
-                                $mapped = self::mapCompanyStatusGroupId($statusId);
-                                $mappedInt = (int)$mapped;
-                                if ($mappedInt > 0) {
-                                    $discountMapped = $mappedInt;
-                                }
-                            }
-                        }
+                        $discountMapped = self::resolveInboundDiscountMappedForUser((int)$userId, $params);
 
                         self::applyB24CompanyGroupsToUser($user, (int)$userId, $params, $discountMapped);
+                        self::applyInboundCompanyActiveToSiteUser((int)$userId, (string)($params['ACTIVE'] ?? 'N'));
+                    }
+                }
+            }
+
+            if (!empty($params['CONTACT_IDS']) && \is_array($params['CONTACT_IDS'])) {
+                $userLookup = new User();
+                foreach ($params['CONTACT_IDS'] as $crmContactId) {
+                    $linkedUserId = $userLookup->getUserIDByB24ID($crmContactId);
+                    if ($linkedUserId) {
+                        self::applyInboundCompanyActiveToSiteUser((int)$linkedUserId, (string)($params['ACTIVE'] ?? 'N'));
                     }
                 }
             }
@@ -467,6 +741,10 @@
                 if (isset($params[$code])) {
                     $arProps[$code] = $params[$code];
                 }
+            }
+
+            if (self::isHeadOfHoldingFromCompanyParams($params)) {
+                unset($arProps['OS_HOLDING_OF']);
             }
             
             $arFields = [
@@ -588,6 +866,38 @@
             $response[12] = $user['NAME'].' '.$user['LAST_NAME'];
 
             return $response;
+        }
+
+        /**
+         * Активный элемент компании в ИБ по ИНН (как при проверке дубликата регистрации).
+         *
+         * @return array|false тот же формат, что {@see getCompany()}, или false
+         */
+        public function getActiveCompanyByInn(string $inn)
+        {
+            $inn = \preg_replace('/\D+/', '', $inn);
+            if ($inn === '') {
+                return false;
+            }
+
+            $rsCompany = \CIBlockElement::GetList(
+                [],
+                [
+                    'IBLOCK_ID' => CompanyModuleConfig::COMPANY_IBLOCK_ID,
+                    'ACTIVE' => 'Y',
+                    'PROPERTY_OS_COMPANY_INN' => $inn,
+                ],
+                false,
+                ['nTopCount' => 1],
+                ['ID']
+            );
+            if ($row = $rsCompany->Fetch()) {
+                $c = $this->getCompany((int)$row['ID']);
+
+                return $c !== [] ? $c : false;
+            }
+
+            return false;
         }
 
         public function getCompanyByB24ID($b24_id){
@@ -760,6 +1070,55 @@
             }
 
             return $childCompanies;
+        }
+
+        /**
+         * Снятие признака головной компании: у всех дочерних элементов убирается привязка
+         * `OS_HOLDING_OF` на этот элемент (в т.ч. множественное свойство — удаляется только эта связь).
+         */
+        private function clearOsHoldingOfOnChildrenWhenHeadDemoted(int $headElementId): void
+        {
+            if ($headElementId <= 0 || !\CModule::IncludeModule('iblock')) {
+                return;
+            }
+
+            $iblockId = CompanyModuleConfig::COMPANY_IBLOCK_ID;
+            $rs = \CIBlockElement::GetList(
+                [],
+                [
+                    'IBLOCK_ID' => $iblockId,
+                    'PROPERTY_OS_HOLDING_OF' => $headElementId,
+                ],
+                false,
+                false,
+                ['ID']
+            );
+
+            while ($row = $rs->Fetch()) {
+                $childId = (int)$row['ID'];
+                $propRes = \CIBlockElement::GetProperty($iblockId, $childId, [], ['CODE' => 'OS_HOLDING_OF']);
+                $kept = [];
+                $multiple = false;
+                while ($p = $propRes->Fetch()) {
+                    if (($p['MULTIPLE'] ?? '') === 'Y') {
+                        $multiple = true;
+                    }
+                    $vid = isset($p['VALUE']) ? (int)$p['VALUE'] : 0;
+                    if ($vid > 0 && $vid !== $headElementId) {
+                        $kept[] = $vid;
+                    }
+                }
+
+                if ($multiple) {
+                    if ($kept === []) {
+                        \CIBlockElement::SetPropertyValueCode($childId, 'OS_HOLDING_OF', false);
+                    } else {
+                        \CIBlockElement::SetPropertyValues($childId, $iblockId, $kept, 'OS_HOLDING_OF');
+                    }
+                } else {
+                    \CIBlockElement::SetPropertyValueCode($childId, 'OS_HOLDING_OF', false);
+                }
+            }
         }
 
         /**

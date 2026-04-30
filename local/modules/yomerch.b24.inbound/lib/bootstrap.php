@@ -14,6 +14,7 @@ $syncConfig = [
     'inbound_disabled_actions' => [],
     'inbound_legacy_plain_responses' => true,
     'sync_debug' => false,
+    'sync_inbound_trace_full_payload' => false,
     'sync_inbound_log' => false,
     'sync_primitive_breakpoint_step' => '',
 ];

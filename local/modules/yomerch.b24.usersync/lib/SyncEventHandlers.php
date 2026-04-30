@@ -40,6 +40,10 @@ final class SyncEventHandlers
         return $registerUserCompany->OnBeforeUserRegisterHandler($arFields);
     }
 
+    /**
+     * После успешного Add() не должно оставаться ThrowException из CRM-синка — иначе UX смешивает ошибки с успешной регистрацией.
+     * Языковые сообщения ядра «пользователь с таким email/login уже существует» при этом всё ещё возможны при **повторной** отправке формы (двойной клик / два параллельных запроса): второй Add законно получает отказ.
+     */
     public static function onAfterUserAdd(&$arFields): void
     {
         if (self::shouldSkipUserSyncEvents()) {

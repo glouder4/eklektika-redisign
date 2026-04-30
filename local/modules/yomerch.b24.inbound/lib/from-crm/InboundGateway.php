@@ -163,6 +163,11 @@ class InboundGateway
                     if ($lastFailReason !== null && $lastFailReason !== '') {
                         $reasonCode = (string)$lastFailReason;
                     }
+                    SyncTrace::add('UPDATE_CONTACT failed', [
+                        'reason_code' => $reasonCode,
+                        'B24_ID' => (string)($request['B24_ID'] ?? ''),
+                        'legacy_ID_param' => (string)($request['ID'] ?? ''),
+                    ]);
                 }
                 self::respondJson(200, self::EVT_UPDATE_CONTACT_RESULT, [
                     'success' => $ok ? 1 : 0,
@@ -179,10 +184,27 @@ class InboundGateway
         if ($action === 'DELETE_CONTACT') {
             if (class_exists(User::class)) {
                 $user = new User();
+                SyncTrace::add('DELETE_CONTACT start', [
+                    'B24_ID' => $request['B24_ID'] ?? null,
+                    'ID' => $request['ID'] ?? null,
+                ]);
                 $ok = (bool)$user->delete($request);
+                $reasonCode = $ok ? self::RC_DELETE_CONTACT_OK : self::RC_DELETE_CONTACT_FAILED;
+                if (!$ok) {
+                    $lastFail = \method_exists($user, 'getLastDeleteFailReason')
+                        ? $user->getLastDeleteFailReason()
+                        : null;
+                    if ($lastFail !== null && $lastFail !== '') {
+                        $reasonCode = (string)$lastFail;
+                    }
+                }
+                SyncTrace::add('DELETE_CONTACT end', [
+                    'ok' => $ok,
+                    'reason_code' => $reasonCode,
+                ]);
                 self::respondJson(200, self::EVT_DELETE_CONTACT_RESULT, [
                     'success' => $ok ? 1 : 0,
-                    'reason_code' => $ok ? self::RC_DELETE_CONTACT_OK : self::RC_DELETE_CONTACT_FAILED,
+                    'reason_code' => $reasonCode,
                     'action' => $action,
                     'data' => ['deleted' => $ok],
                 ]);
@@ -214,6 +236,9 @@ class InboundGateway
                     'ACTION' => $action,
                     'summary' => SyncTrace::summarizeRequest($request),
                 ]);
+                CrmInboundUfMap::applyCompanyInboundCrmUfToSiteProperties($request);
+                CrmInboundUfMap::applyCompanyInboundHeadOfHoldingUfToSiteProperties($request);
+                CrmInboundUfMap::applyCompanyInboundDiscountUfToSiteProperties($request);
                 try {
                     $result = $company->updateCompanyElement($request);
                 } catch (\InvalidArgumentException $e) {
@@ -259,6 +284,11 @@ class InboundGateway
         if ($action === 'UPDATE_MANAGER') {
             if (!class_exists(Manager::class)) {
                 throw new \RuntimeException('No manager handler class found');
+            }
+            $idScalar = isset($request['ID']) && \is_scalar($request['ID']) ? \trim((string)$request['ID']) : '';
+            if ($idScalar === '' && isset($request['BITRIX24_ID']) && \is_scalar($request['BITRIX24_ID'])
+                && \trim((string)$request['BITRIX24_ID']) !== '') {
+                $request['ID'] = $request['BITRIX24_ID'];
             }
             $manager = new Manager();
             $ok = (bool)$manager->update($request);

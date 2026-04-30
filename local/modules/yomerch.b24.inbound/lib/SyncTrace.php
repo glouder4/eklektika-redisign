@@ -12,6 +12,9 @@ namespace OnlineService\Sync;
  * При включении: пишет inbound-лог, `debug_trace` в JSON ответа inbound, и **должен использоваться
  * в других сценариях** (исходящий crm.* из ЛК, точечные pre+stop и т.д.) вместо отдельных флагов.
  *
+ * `summarizeRequest()` всегда добавляет `params_preview` (значения верхнего уровня с маскированием секретов).
+ * Полное дерево `payload_redacted` — при `sync_inbound_trace_full_payload` в sync config.
+ *
  * @see self::enabled()
  */
 final class SyncTrace
@@ -92,12 +95,26 @@ final class SyncTrace
         $keys = \array_keys($request);
         \sort($keys, \SORT_STRING);
 
-        return [
+        $summary = [
             'request_id' => self::getRequestId(),
             'ACTION' => (string)($request['ACTION'] ?? ''),
             'param_keys' => $keys,
             'OS_COMPANY_B24_ID' => $request['OS_COMPANY_B24_ID'] ?? null,
             'ID' => $request['ID'] ?? null,
         ];
+
+        if (\class_exists(InboundRequestLogger::class)) {
+            $summary['params_preview'] = InboundRequestLogger::shallowParamsPreviewForTrace($request);
+        }
+
+        $cfg = $GLOBALS['YOMERCH_SYNC_CONFIG'] ?? $GLOBALS['EKLEKTIKA_SYNC_CONFIG'] ?? [];
+        $full = $cfg['sync_inbound_trace_full_payload'] ?? false;
+        if ($full === true || $full === 1 || $full === '1' || $full === 'on' || $full === 'ON' || $full === 'yes' || $full === 'YES') {
+            if (\class_exists(InboundRequestLogger::class)) {
+                $summary['payload_redacted'] = InboundRequestLogger::redactPayloadAssociative($request);
+            }
+        }
+
+        return $summary;
     }
 }

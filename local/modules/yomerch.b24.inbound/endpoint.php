@@ -7,6 +7,27 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_be
 require_once $_SERVER['DOCUMENT_ROOT'] . '/local/modules/bootstrap.php';
 
 $rawBody = file_get_contents('php://input');
+$rawBodyStr = \is_string($rawBody) ? $rawBody : '';
+// CRM часто шлёт JSON в raw body при заголовке `application/x-www-form-urlencoded`;
+// PHP тогда не заполняет $_POST → `sync_token` и поля ACTION не попадают в $_REQUEST.
+if ($rawBodyStr !== '') {
+    $lead = \ltrim($rawBodyStr);
+    if ($lead !== '' && $lead[0] === '{') {
+        $decoded = \json_decode($rawBodyStr, true);
+        if (\is_array($decoded)) {
+            $keys = \array_keys($decoded);
+            $isIndexedList = $keys !== [] && $keys === \range(0, \count($decoded) - 1);
+            if (!$isIndexedList) {
+                foreach ($decoded as $key => $value) {
+                    if (!\is_string($key) || $key === '') {
+                        continue;
+                    }
+                    $_REQUEST[$key] = $value;
+                }
+            }
+        }
+    }
+}
 \OnlineService\Sync\SyncTrace::reset();
 $requestId = (string)($_SERVER['HTTP_X_SYNC_REQUEST_ID'] ?? '');
 if ($requestId === '') {

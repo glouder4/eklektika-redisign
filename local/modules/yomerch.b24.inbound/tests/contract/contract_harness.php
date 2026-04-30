@@ -45,6 +45,13 @@ final class ContractHarness
 
         $invalidUpdateCompany = InboundPayloadValidator::validate(['ACTION' => 'UPDATE_COMPANY', 'ACTIVE' => 'Y']);
         $this->assert($invalidUpdateCompany['valid'] === false, 'UPDATE_COMPANY requires mandatory fields');
+
+        $deleteMissing = InboundPayloadValidator::validate(['ACTION' => 'DELETE_CONTACT']);
+        $this->assert($deleteMissing['valid'] === false, 'DELETE_CONTACT rejects empty identifiers');
+        $this->assert(($deleteMissing['reason_code'] ?? '') === 'delete_contact_missing_id', 'DELETE_CONTACT missing reason_code');
+
+        $deleteB24Only = InboundPayloadValidator::validate(['ACTION' => 'DELETE_CONTACT', 'B24_ID' => '99']);
+        $this->assert($deleteB24Only['valid'] === true, 'DELETE_CONTACT accepts B24_ID without legacy ID');
     }
 
     private function testSecurityContract(): void

@@ -22,14 +22,15 @@ final class InboundPayloadValidator
             case 'UPDATE_BATCH_USERS':
                 return self::validateUpdateBatchUsers($request);
             case 'DELETE_CONTACT':
+                return self::validateDeleteContact($request);
             case 'DELETE_COMPANY':
-                return self::requireScalarFields($request, ['ID'], \strtolower($action));
+                return self::requireScalarFields($request, ['ID'], 'delete_company');
             case 'UPDATE_COMPANY':
                 return self::validateUpdateCompany($request);
             case 'SYNC_COMPANY_CONTACTS':
                 return self::requireScalarFields($request, ['COMPANY_ID'], 'sync_company_contacts');
             case 'UPDATE_MANAGER':
-                return self::requireScalarFields($request, ['ID'], 'update_manager');
+                return self::validateUpdateManager($request);
             default:
                 return ['valid' => true];
         }
@@ -39,6 +40,21 @@ final class InboundPayloadValidator
      * @param array<string, mixed> $request
      * @return array{valid: bool, reason_code?: string}
      */
+    /**
+     * @param array<string, mixed> $request
+     * @return array{valid: bool, reason_code?: string}
+     */
+    private static function validateDeleteContact(array $request): array
+    {
+        $b24 = self::scalarValue($request['B24_ID'] ?? null);
+        $id = self::scalarValue($request['ID'] ?? null);
+        if ($b24 === '' && $id === '') {
+            return ['valid' => false, 'reason_code' => 'delete_contact_missing_id'];
+        }
+
+        return ['valid' => true];
+    }
+
     private static function validateUpdateGroup(array $request): array
     {
         $required = self::requireScalarFields($request, ['ID', 'ACTIVE', 'C_SORT', 'NAME'], 'update_group');
@@ -70,6 +86,27 @@ final class InboundPayloadValidator
         }
         if (!isset($request['IS_MARKETING_AGENT']) || !\is_scalar($request['IS_MARKETING_AGENT'])) {
             return ['valid' => false, 'reason_code' => 'update_batch_users_missing_marketing_flag'];
+        }
+
+        return ['valid' => true];
+    }
+
+    /**
+     * @param array<string, mixed> $request
+     * @return array{valid: bool, reason_code?: string}
+     */
+    /**
+     * Менеджер в CRM: достаточно непустого `ID` или `BITRIX24_ID`.
+     *
+     * @param array<string, mixed> $request
+     * @return array{valid: bool, reason_code?: string}
+     */
+    private static function validateUpdateManager(array $request): array
+    {
+        $id = self::scalarValue($request['ID'] ?? null);
+        $bitrix = self::scalarValue($request['BITRIX24_ID'] ?? null);
+        if ($id === '' && $bitrix === '') {
+            return ['valid' => false, 'reason_code' => 'update_manager_missing_id'];
         }
 
         return ['valid' => true];

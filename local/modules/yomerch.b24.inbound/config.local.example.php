@@ -29,6 +29,12 @@ return [
     // Set false to enforce JSON responses for all actions in InboundGateway.
     'inbound_legacy_plain_responses' => true,
     'sync_debug' => false,
+    // В summarizeRequest / [trace] request добавить полное дерево payload с редакцией секретов (объёмно).
+    'sync_inbound_trace_full_payload' => false,
     'sync_inbound_log' => false,
     'sync_primitive_breakpoint_step' => '',
+
+    // /local/inbound-test.php: false — только localhost, CLI, или администратор Bitrix (после входа в админку).
+    // true — страница самодиагностики открывается без ?sync_token (не используйте на публичном проде).
+    'inbound_diag_allow_open' => false,
 ];

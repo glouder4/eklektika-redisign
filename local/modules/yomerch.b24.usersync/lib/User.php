@@ -6,6 +6,7 @@
     class User extends Request{
         public ?int $contactId = null;
         private ?string $lastUpdateFailReason = null;
+        private ?string $lastDeleteFailReason = null;
 
         public int $userId;
         
@@ -75,23 +76,38 @@
          * @return int|false ID пользователя на сайте или false если не найден
          */
         public function getUserIDByB24ID($b24ContactId){
-            if (empty($b24ContactId)) {
+            if ($b24ContactId === null || $b24ContactId === false) {
+                return false;
+            }
+            if (\is_string($b24ContactId)) {
+                $b24ContactId = \trim($b24ContactId);
+            }
+            if ($b24ContactId === '' || $b24ContactId === '0' || $b24ContactId === 0) {
                 return false;
             }
 
-            // Ищем пользователя по полю UF_B24_USER_ID
-            $rsUser = \CUser::GetList(
-                array(), 
-                $order = "asc", 
-                array('UF_B24_USER_ID' => $b24ContactId),
-                array('SELECT' => array('ID', 'UF_B24_USER_ID'))
-            );
-
-            if ($userObject = $rsUser->Fetch()) {
-                return $userObject['ID'];
-            } else {
-                return false;
+            // Ищем по UF_B24_USER_ID (= CRM CONTACT.ID); Bitrix иногда хранит как int, запрос — строкой или наоборот.
+            $variants = [$b24ContactId];
+            if (\is_string($b24ContactId) && \ctype_digit($b24ContactId)) {
+                $variants[] = (int)$b24ContactId;
+            } elseif (\is_int($b24ContactId) && $b24ContactId > 0) {
+                $variants[] = (string)$b24ContactId;
             }
+            $variants = \array_values(\array_unique($variants, \SORT_REGULAR));
+
+            foreach ($variants as $v) {
+                $rsUser = \CUser::GetList(
+                    [],
+                    'asc',
+                    ['UF_B24_USER_ID' => $v],
+                    ['SELECT' => ['ID', 'UF_B24_USER_ID']]
+                );
+                if ($userObject = $rsUser->Fetch()) {
+                    return $userObject['ID'];
+                }
+            }
+
+            return false;
         }
         public function getUserObject($userId){
 
@@ -303,9 +319,12 @@
          * Убрать пользователя из перечисленных групп (только GROUP_ID), без изменения UF/ACTIVE.
          * Для снятия скидочных групп компании; не путать с {@see removeUserFromGroup} (там побочные поля).
          *
+         * Группы скидки компании ({@see CompanyModuleConfig::getCompanyDiscountProtectedSiteGroupIds()}) по умолчанию
+         * **не снимаются** — только через {@see \OnlineService\Site\Company::applyB24CompanyGroupsToUser()} ($allowCompanyDiscountGroupRemoval = true).
+         *
          * @param list<int|mixed> $groupIdsToRemove
          */
-        public function removeUserFromGroupsByIds(int $userId, array $groupIdsToRemove): bool
+        public function removeUserFromGroupsByIds(int $userId, array $groupIdsToRemove, bool $allowCompanyDiscountGroupRemoval = false): bool
         {
             $userId = (int)$userId;
             if ($userId <= 0) {
@@ -320,6 +339,11 @@
                 }
             }
             unset($remove[$this->ADMINISTRATORS_GROUP_ID]);
+            if (!$allowCompanyDiscountGroupRemoval) {
+                foreach (CompanyModuleConfig::getCompanyDiscountProtectedSiteGroupIds() as $dg) {
+                    unset($remove[$dg]);
+                }
+            }
             if ($remove === []) {
                 return true;
             }
@@ -715,11 +739,66 @@
         }
 
         public function delete($fields){
-            $this->userId = $this->getUserIDByB24ID($fields['ID']);
+            $this->lastDeleteFailReason = null;
 
-            if( $this->userId )
-                return \CUser::Delete($this->userId);
-            else return false;
+            $candidates = $this->collectInboundDeleteContactLookupCandidates($fields);
+            if ($candidates === []) {
+                $this->lastDeleteFailReason = 'delete_contact_missing_identifier';
+
+                return false;
+            }
+
+            $this->userId = 0;
+            foreach ($candidates as $crmContactId) {
+                $uid = $this->getUserIDByB24ID($crmContactId);
+                if ($uid) {
+                    $this->userId = (int)$uid;
+                    break;
+                }
+            }
+            if ($this->userId <= 0) {
+                $this->lastDeleteFailReason = 'delete_contact_user_not_found';
+
+                return false;
+            }
+
+            $deleted = (bool)\CUser::Delete($this->userId);
+            if (!$deleted) {
+                $this->lastDeleteFailReason = 'delete_contact_cuser_delete_failed';
+            }
+
+            return $deleted;
+        }
+
+        /**
+         * Кандидаты CRM CONTACT.ID для поиска `b_user.UF_B24_USER_ID` при DELETE_CONTACT.
+         * Сначала канонический `B24_ID`, затем легаси `ID` — на сайте в UF может быть
+         * другой из двух идентификаторов, чем тот, что пришёл в приоритетном поле.
+         *
+         * @param array<string, mixed> $fields
+         * @return list<string>
+         */
+        private function collectInboundDeleteContactLookupCandidates(array $fields): array
+        {
+            $out = [];
+            foreach (['B24_ID', 'ID'] as $key) {
+                if (!isset($fields[$key])) {
+                    continue;
+                }
+                $v = $fields[$key];
+                if (!\is_scalar($v)) {
+                    continue;
+                }
+                $s = \trim((string)$v);
+                if ($s === '' || $s === '0') {
+                    continue;
+                }
+                if (!\in_array($s, $out, true)) {
+                    $out[] = $s;
+                }
+            }
+
+            return $out;
         }
 
         public function getMarketingGroupId(){
@@ -729,6 +808,11 @@
         public function getLastUpdateFailReason(): ?string
         {
             return $this->lastUpdateFailReason;
+        }
+
+        public function getLastDeleteFailReason(): ?string
+        {
+            return $this->lastDeleteFailReason;
         }
 
         /**

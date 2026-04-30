@@ -7,6 +7,80 @@ final class CompanyModuleConfig
     public const COMPANY_IBLOCK_ID = 57;
 
     /**
+     * Enum списка `OS_IS_MARKETING_AGENT` на ИБ компаний: вариант «Да».
+     * В админке: XML_ID `YES`, значение «Да» (см. `CIBlockPropertyEnum`).
+     */
+    public const OS_IS_MARKETING_AGENT_ENUM_YES = 31519;
+
+    /** Enum списка `OS_COMPANY_IS_HEAD_OF_HOLDING`: вариант «Да» / головная компания холдинга. */
+    public const OS_COMPANY_IS_HEAD_OF_HOLDING_ENUM_YES = 31520;
+
+    /**
+     * ID варианта того же признака на стороне CRM в `OS_IS_MARKETING_AGENT.VALUE` / UF списка,
+     * которые при сохранении на сайте приводим к {@see OS_IS_MARKETING_AGENT_ENUM_YES}
+     * (ID enum в `b_iblock_property_enum` на сайте другой).
+     *
+     * @var list<int>
+     */
+    public const OS_IS_MARKETING_AGENT_INBOUND_VALUE_IDS_AS_YES = [
+        2076,
+    ];
+
+    public static function inboundOsMarketingAgentValueIdMeansSiteYes(int $id): bool
+    {
+        if ($id <= 0) {
+            return false;
+        }
+        if ($id === self::OS_IS_MARKETING_AGENT_ENUM_YES) {
+            return true;
+        }
+
+        return \in_array($id, self::OS_IS_MARKETING_AGENT_INBOUND_VALUE_IDS_AS_YES, true);
+    }
+
+    /**
+     * Только неотрицательное целое из строки/числа (без «YES» и пр.).
+     *
+     * @return positive-int|null
+     */
+    public static function tryParseInboundMarketingAgentListEnumId(mixed $v): ?int
+    {
+        if (\is_int($v)) {
+            return $v > 0 ? $v : null;
+        }
+        if (\is_string($v)) {
+            $s = \trim($v);
+            if ($s === '' || $s === '0') {
+                return null;
+            }
+            if (\preg_match('/^\d+$/', $s) !== 1) {
+                return null;
+            }
+            $id = (int)$s;
+
+            return $id > 0 ? $id : null;
+        }
+
+        return null;
+    }
+
+    /**
+     * Явный «да» по числовому ID варианта списка CRM во входящем payload (массив `VALUE` или скаляр).
+     */
+    public static function inboundMarketingAgentPayloadMeansYesByListId(mixed $raw): bool
+    {
+        if (\is_array($raw)) {
+            $inner = $raw['VALUE'] ?? $raw['~VALUE'] ?? null;
+            $id = self::tryParseInboundMarketingAgentListEnumId($inner);
+
+            return $id !== null && self::inboundOsMarketingAgentValueIdMeansSiteYes($id);
+        }
+        $id = self::tryParseInboundMarketingAgentListEnumId($raw);
+
+        return $id !== null && self::inboundOsMarketingAgentValueIdMeansSiteYes($id);
+    }
+
+    /**
      * Боевой маппинг: ID группы статуса (после UserGroups::searchGroup) -> ID группы для присвоения пользователю.
      *
      * @var array<int, int>
@@ -101,6 +175,16 @@ final class CompanyModuleConfig
         return self::isTestPortal()
             ? self::TEST_COMPANY_DISCOUNT_PERCENT_BY_ASSIGNED_GROUP_ID
             : self::PROD_COMPANY_DISCOUNT_PERCENT_BY_ASSIGNED_GROUP_ID;
+    }
+
+    /**
+     * ID групп на сайте (скидка компании), управляемых только входящим UF скидки CRM → {@see CrmInboundUfMap::applyCompanyInboundDiscountUfToSiteProperties()}.
+     *
+     * @return list<int>
+     */
+    public static function getCompanyDiscountProtectedSiteGroupIds(): array
+    {
+        return array_map('intval', array_keys(self::getCompanyDiscountPercentByAssignedGroupId()));
     }
 
     private static function isTestPortal(): bool
