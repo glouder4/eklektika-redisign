@@ -46,3 +46,9 @@ graphify update .graphify-scope-local
 - В graphify попадает только копия содержимого `local`.
 - `local/templates` и `local/components` принудительно исключаются.
 - Ничего вне `local` в граф не попадает.
+
+## Рассинхрон с MCP (важно)
+
+Перед доверием `query_graph`: вызовите **`graph_stats`** — для scoped-сборки без intec ожидайте **сотни** узлов, не десятки тысяч.
+
+Если в ответах сервера `graphify-eklektika-site` всё ещё есть узлы вроде `modules\intec.eklectika\...\vendor\...`, а в репозитории этого модуля уже нет и `Test-Path .graphify-scope-local\modules\intec.eklectika` — **false**, значит MCP отдаёт **старый** `graph.json`. Локальный `graphify update` исключение соблюдает; нужно **перепривязать** граф в конфигурации MCP к свежему `graphify-out\graph.json` (см. `docs/refactoring/graphify_runbook_local_scope.md`). До этого `graph_stats` может показывать ~10k узлов вместо сотен.

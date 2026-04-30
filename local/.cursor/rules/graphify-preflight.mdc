@@ -13,6 +13,21 @@ Before any interaction with project code, the agent must request and review a Gr
 2. Review graph clusters, dependencies, and entry points.
 3. Only then read, edit, or generate code/docs tied to that area.
 
+## Stale or wrong-scope graph (mandatory health check)
+
+After `graph_stats` or the first `query_graph` / `get_neighbors` response:
+
+- If **node count is in the low thousands or above** (for this repo a scoped `local/` build without `templates`, `components`, `modules/intec.eklectika` is typically **hundreds** of nodes), treat the MCP index as **stale or mis-pointed** — not as ground truth.
+- If results are dominated by **`modules/intec.eklectika`** or other heavy **vendor** paths under `.graphify-scope-local` while the current runbook excludes that module, same conclusion: **MCP is not serving the current `graphify-out/graph.json`.**
+
+In that case:
+
+- Do **not** base architecture or module-boundary decisions on Graphify output alone.
+- Prefer **reading the repo** (entry files under `local/modules/yomerch.*`, `endpoint.php`, etc.) and **`docs/refactoring/graphify_runbook_local_scope.md`**.
+- Tell the user to **rebind or re-index** the Graphify MCP server to the latest `graphify-out/graph.json` produced by the runbook (then re-check `graph_stats` until the node count matches a fresh scoped build).
+
+See also: `.cursor/skills/local-graphify-guard/SKILL.md` (MCP / intec desync).
+
 ## Server binding
 
 - In this repository, Graphify MCP queries must use server `graphify-eklektika-site`.
