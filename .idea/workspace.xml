@@ -5,33 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a53d02d7-d404-452c-a903-dd81636134fa" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/.cursor/rules/graphify-preflight.mdc" beforeDir="false" afterPath="$PROJECT_DIR$/local/.cursor/rules/graphify-preflight.mdc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/.cursor/skills/local-graphify-guard/SKILL.md" beforeDir="false" afterPath="$PROJECT_DIR$/local/.cursor/skills/local-graphify-guard/SKILL.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/docs/bitrix24-external-developers/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/local/docs/bitrix24-external-developers/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local/docs/bitrix24-external-developers/b24_site_contracts_yomerch.md" beforeDir="false" afterPath="$PROJECT_DIR$/local/docs/bitrix24-external-developers/b24_site_contracts_yomerch.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/docs/features/b24_integration.md" beforeDir="false" afterPath="$PROJECT_DIR$/local/docs/features/b24_integration.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local/docs/features/b24_site_contracts_yomerch.md" beforeDir="false" afterPath="$PROJECT_DIR$/local/docs/features/b24_site_contracts_yomerch.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/docs/refactoring/graphify_runbook_local_scope.md" beforeDir="false" afterPath="$PROJECT_DIR$/local/docs/refactoring/graphify_runbook_local_scope.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/graphify-out/GRAPH_REPORT.md" beforeDir="false" afterPath="$PROJECT_DIR$/local/graphify-out/GRAPH_REPORT.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/graphify-out/graph.html" beforeDir="false" afterPath="$PROJECT_DIR$/local/graphify-out/graph.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/modules/yomerch.b24.inbound/config.local.example.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.b24.inbound/config.local.example.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/modules/yomerch.b24.inbound/endpoint.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.b24.inbound/endpoint.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/modules/yomerch.b24.inbound/lib/InboundRequestLogger.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.b24.inbound/lib/InboundRequestLogger.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/modules/yomerch.b24.inbound/lib/SyncTrace.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.b24.inbound/lib/SyncTrace.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/modules/yomerch.b24.inbound/lib/bootstrap.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.b24.inbound/lib/bootstrap.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local/modules/yomerch.b24.inbound/lib/from-crm/CrmInboundUfMap.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.b24.inbound/lib/from-crm/CrmInboundUfMap.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local/modules/yomerch.b24.inbound/lib/from-crm/InboundGateway.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.b24.inbound/lib/from-crm/InboundGateway.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local/modules/yomerch.b24.inbound/lib/from-crm/InboundPayloadValidator.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.b24.inbound/lib/from-crm/InboundPayloadValidator.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local/modules/yomerch.b24.inbound/tests/contract/contract_harness.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.b24.inbound/tests/contract/contract_harness.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/modules/yomerch.b24.rest/lib/Request.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.b24.rest/lib/Request.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/modules/yomerch.b24.rest/lib/RestClient.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.b24.rest/lib/RestClient.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/modules/yomerch.b24.inbound/tests/contract/contract_harness_last_run.txt" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.b24.inbound/tests/contract/contract_harness_last_run.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local/modules/yomerch.b24.usersync/lib/RegisterUserCompany.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.b24.usersync/lib/RegisterUserCompany.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/modules/yomerch.b24.usersync/lib/SyncEventHandlers.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.b24.usersync/lib/SyncEventHandlers.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local/modules/yomerch.b24.usersync/lib/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.b24.usersync/lib/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local/modules/yomerch.company/lib/Company.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.company/lib/Company.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/modules/yomerch.company/lib/Config/CompanyModuleConfig.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.company/lib/Config/CompanyModuleConfig.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/modules/yomerch.company/lib/Manager.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.company/lib/Manager.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tasks/subtasks/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/tasks/subtasks/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,26 +38,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "true",
-    "WebServerToolWindowPanel.toolwindow.highlight.mappings": "true",
-    "WebServerToolWindowPanel.toolwindow.highlight.symlinks": "true",
-    "WebServerToolWindowPanel.toolwindow.show.date": "false",
-    "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
-    "WebServerToolWindowPanel.toolwindow.show.size": "false",
-    "last_opened_file_path": "C:/Git_projects/eklektika-beget/local/docs",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.highlight.mappings&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.highlight.symlinks&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.show.date&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.show.permissions&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.show.size&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Git_projects/eklektika-beget/local/docs&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Git_projects\eklektika-beget\local\docs" />
@@ -260,7 +246,9 @@
       <workItem from="1777379410899" duration="623000" />
       <workItem from="1777412059416" duration="389000" />
       <workItem from="1777454667785" duration="6630000" />
-      <workItem from="1777464780626" duration="17454000" />
+      <workItem from="1777464780626" duration="18075000" />
+      <workItem from="1777550911710" duration="6608000" />
+      <workItem from="1777564572726" duration="1801000" />
     </task>
     <servers />
   </component>

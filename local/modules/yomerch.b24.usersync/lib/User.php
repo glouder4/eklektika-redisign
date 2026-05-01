@@ -4,9 +4,12 @@
     use OnlineService\B24\Request;
     use OnlineService\Site\Config\CompanyModuleConfig;
     class User extends Request{
+        private const INBOUND_SITE_USER_ID_UF = 'UF_CRM_3804624445748';
         public ?int $contactId = null;
         private ?string $lastUpdateFailReason = null;
         private ?string $lastDeleteFailReason = null;
+        /** @var array<string,mixed> */
+        private array $lastUpdateMeta = [];
 
         public int $userId;
         
@@ -504,17 +507,54 @@
          */
         public function update($fields){
             $this->lastUpdateFailReason = null;
-            // Проверяем обязательные поля
-            if (empty($fields['B24_ID'])) {
-                $this->lastUpdateFailReason = 'update_contact_missing_b24_id';
+            $legacyId = isset($fields['ID']) && \is_scalar($fields['ID']) ? (string)$fields['ID'] : '';
+            $siteUserInboundId = isset($fields[self::INBOUND_SITE_USER_ID_UF]) && \is_scalar($fields[self::INBOUND_SITE_USER_ID_UF])
+                ? \trim((string)$fields[self::INBOUND_SITE_USER_ID_UF])
+                : '';
+            $requestedCompanyB24Id = isset($fields['OS_COMPANY_B24_ID']) && \is_scalar($fields['OS_COMPANY_B24_ID'])
+                ? \trim((string)$fields['OS_COMPANY_B24_ID'])
+                : '';
+            $this->lastUpdateMeta = [
+                'lookup_b24_id' => null,
+                'legacy_id' => $legacyId,
+                'resolved_user_id' => null,
+                'resolution_source' => null,
+                'updated' => false,
+                'changed_fields_count' => 0,
+                'changed_fields' => [],
+                'diff_is_unknown' => false,
+                'no_effect_reason' => null,
+                'resolved_entities' => [
+                    'crm_contact_b24_id' => null,
+                    'legacy_request_id' => $legacyId,
+                    'site_user_request_id' => $siteUserInboundId !== '' ? $siteUserInboundId : null,
+                    'site_user_id' => null,
+                    'request_company_b24_id' => $requestedCompanyB24Id !== '' ? $requestedCompanyB24Id : null,
+                ],
+                'id_resolution' => [
+                    'source' => null,
+                    'status' => 'failed',
+                    'used_fallback' => false,
+                    'reason_code' => 'update_contact_missing_identifier',
+                ],
+            ];
+            $resolved = $this->resolveUpdateContactIdentity($fields);
+            $this->lastUpdateMeta['id_resolution'] = $resolved['id_resolution'];
+            $this->lastUpdateMeta['resolution_source'] = isset($resolved['id_resolution']['source']) && \is_string($resolved['id_resolution']['source'])
+                ? $resolved['id_resolution']['source']
+                : null;
+            $this->lastUpdateMeta['lookup_b24_id'] = $resolved['lookup_b24_id'];
+            $this->lastUpdateMeta['resolved_entities']['crm_contact_b24_id'] = $resolved['lookup_b24_id'];
+            // Убираем inbound-ID поля, чтобы не пытаться обновлять их как поля пользователя.
+            unset($fields['B24_ID'], $fields[self::INBOUND_SITE_USER_ID_UF]);
+            if (!$resolved['ok']) {
+                $this->lastUpdateFailReason = (string)($resolved['id_resolution']['reason_code'] ?? 'update_contact_user_not_found');
+                $this->lastUpdateMeta['resolved_user_id'] = null;
+                $this->lastUpdateMeta['updated'] = false;
+                $this->lastUpdateMeta['resolved_entities']['site_user_id'] = null;
                 return false;
             }
-
-            $b24ID = $fields['B24_ID'];
-            // Убираем ID из полей для обновления
-            unset($fields['B24_ID']);
-
-            $this->userId = $this->getUserIDByB24ID($b24ID);
+            $this->userId = (int)$resolved['site_user_id'];
             $this->applyInboundManagerMapping(
                 $fields,
                 UserSyncConfig::USER_PRIMARY_MANAGER_FIELD,
@@ -528,10 +568,8 @@
                 UserSyncConfig::CRM_SECONDARY_MANAGER_LEGACY_FIELD
             );
             
-            if (!$this->userId) {
-                $this->lastUpdateFailReason = 'update_contact_user_not_found';
-                return false;
-            }
+            $this->lastUpdateMeta['resolved_user_id'] = (int)$this->userId;
+            $this->lastUpdateMeta['resolved_entities']['site_user_id'] = (int)$this->userId;
 
             // Обновляем пользователя на сайте
             $user = new \CUser();
@@ -638,12 +676,44 @@
             // Внешний payload (B24 → ajax) не должен перезаписывать членство в группах напрямую.
             unset($fields['GROUP_ID'], $fields['GROUPS_ID']);
 
+            $currentUser = \CUser::GetByID((int)$this->userId)->Fetch();
+            $changedFields = [];
+            $diffIsUnknown = !\is_array($currentUser);
+            if (\is_array($currentUser)) {
+                foreach ($fields as $fieldKey => $newValue) {
+                    if (!$this->isUserFieldComparableForEffect((string)$fieldKey)) {
+                        continue;
+                    }
+                    $oldValue = $currentUser[$fieldKey] ?? null;
+                    if (!$this->isSameUserFieldValue($oldValue, $newValue)) {
+                        $changedFields[] = (string)$fieldKey;
+                    }
+                }
+            } else {
+                // Не удалось прочитать текущего пользователя: diff неизвестен, но update всё равно обязателен.
+                $this->lastUpdateMeta['diff_is_unknown'] = true;
+                $this->lastUpdateMeta['changed_fields_count'] = null;
+            }
+            $changedFields = \array_values(\array_unique($changedFields));
+            $this->lastUpdateMeta['changed_fields'] = $changedFields;
+            if (!$diffIsUnknown) {
+                $this->lastUpdateMeta['changed_fields_count'] = \count($changedFields);
+            }
+            if (!$diffIsUnknown && $this->lastUpdateMeta['changed_fields_count'] <= 0) {
+                $this->lastUpdateMeta['updated'] = false;
+                $this->lastUpdateMeta['no_effect_reason'] = 'update_contact_no_effect';
+                return true;
+            }
+
             $result = $user->Update($this->userId, $fields);
 
             if ($result) {
+                $this->lastUpdateMeta['updated'] = true;
+                $this->lastUpdateMeta['no_effect_reason'] = null;
                 return true;
             } else {
                 $this->lastUpdateFailReason = 'update_contact_cuser_update_failed';
+                $this->lastUpdateMeta['updated'] = false;
                 return false;
             }
         }
@@ -738,6 +808,182 @@
             }
         }
 
+        /**
+         * Returns CRM contact ID (UF_B24_USER_ID) for a site user.
+         */
+        private function getUserB24IdBySiteUserId(int $siteUserId): ?string
+        {
+            if ($siteUserId <= 0) {
+                return null;
+            }
+            $rsUser = \CUser::GetList(
+                [],
+                'asc',
+                ['ID' => $siteUserId],
+                ['SELECT' => ['ID', 'UF_B24_USER_ID']]
+            );
+            $userObject = $rsUser->Fetch();
+            if (!\is_array($userObject)) {
+                return null;
+            }
+            if (!isset($userObject['UF_B24_USER_ID'])) {
+                return null;
+            }
+            return \trim((string)$userObject['UF_B24_USER_ID']);
+        }
+
+        /**
+         * Deterministic inbound ID resolution chain:
+         * B24_ID -> UF_CRM_3804624445748 -> legacy ID.
+         *
+         * @param array<string,mixed> $fields
+         * @return array{
+         *   ok: bool,
+         *   site_user_id: int|null,
+         *   lookup_b24_id: string|null,
+         *   id_resolution: array{source:?string,status:string,used_fallback:bool,reason_code:string}
+         * }
+         */
+        private function resolveUpdateContactIdentity(array $fields): array
+        {
+            $b24Id = $this->normalizeInboundContactId($fields['B24_ID'] ?? null);
+            $siteUserUfId = $this->normalizeInboundPositiveInt($fields[self::INBOUND_SITE_USER_ID_UF] ?? null);
+            $legacySiteUserId = $this->normalizeInboundPositiveInt($fields['ID'] ?? null);
+
+            $baseResolution = [
+                'source' => null,
+                'status' => 'failed',
+                'used_fallback' => false,
+                'reason_code' => 'update_contact_missing_identifier',
+            ];
+
+            if ($b24Id !== null) {
+                $uid = (int)$this->getUserIDByB24ID($b24Id);
+                if ($uid > 0) {
+                    return [
+                        'ok' => true,
+                        'site_user_id' => $uid,
+                        'lookup_b24_id' => $b24Id,
+                        'id_resolution' => [
+                            'source' => 'b24_id',
+                            'status' => 'resolved',
+                            'used_fallback' => false,
+                            'reason_code' => 'update_contact_ok',
+                        ],
+                    ];
+                }
+            }
+
+            $fallbackCandidates = [];
+            if ($siteUserUfId !== null && $this->siteUserExists($siteUserUfId)) {
+                $fallbackCandidates['uf_crm_3804624445748'] = $siteUserUfId;
+            }
+            if ($legacySiteUserId !== null && $this->siteUserExists($legacySiteUserId)) {
+                $fallbackCandidates['legacy_id'] = $legacySiteUserId;
+            }
+
+            if (\count($fallbackCandidates) > 1) {
+                $uniqueSiteUsers = \array_values(\array_unique(\array_values($fallbackCandidates)));
+                if (\count($uniqueSiteUsers) > 1) {
+                    return [
+                        'ok' => false,
+                        'site_user_id' => null,
+                        'lookup_b24_id' => $b24Id,
+                        'id_resolution' => [
+                            'source' => null,
+                            'status' => 'ambiguous',
+                            'used_fallback' => true,
+                            'reason_code' => 'update_contact_ambiguous_fallback',
+                        ],
+                    ];
+                }
+            }
+
+            if (isset($fallbackCandidates['uf_crm_3804624445748'])) {
+                return [
+                    'ok' => true,
+                    'site_user_id' => $fallbackCandidates['uf_crm_3804624445748'],
+                    'lookup_b24_id' => $b24Id,
+                    'id_resolution' => [
+                        'source' => 'uf_crm_3804624445748',
+                        'status' => 'resolved',
+                        'used_fallback' => true,
+                        'reason_code' => 'update_contact_ok_site_user_fallback',
+                    ],
+                ];
+            }
+            if (isset($fallbackCandidates['legacy_id'])) {
+                return [
+                    'ok' => true,
+                    'site_user_id' => $fallbackCandidates['legacy_id'],
+                    'lookup_b24_id' => $b24Id,
+                    'id_resolution' => [
+                        'source' => 'legacy_id',
+                        'status' => 'resolved',
+                        'used_fallback' => true,
+                        'reason_code' => 'update_contact_ok_legacy_fallback',
+                    ],
+                ];
+            }
+
+            if ($b24Id !== null || $siteUserUfId !== null || $legacySiteUserId !== null) {
+                $baseResolution['reason_code'] = 'update_contact_user_not_found';
+            }
+
+            return [
+                'ok' => false,
+                'site_user_id' => null,
+                'lookup_b24_id' => $b24Id,
+                'id_resolution' => $baseResolution,
+            ];
+        }
+
+        /**
+         * @param mixed $value
+         */
+        private function normalizeInboundContactId($value): ?string
+        {
+            if (!\is_scalar($value)) {
+                return null;
+            }
+            $normalized = \trim((string)$value);
+            if ($normalized === '' || $normalized === '0') {
+                return null;
+            }
+
+            return $normalized;
+        }
+
+        /**
+         * @param mixed $value
+         */
+        private function normalizeInboundPositiveInt($value): ?int
+        {
+            if (!\is_scalar($value)) {
+                return null;
+            }
+            $normalized = \trim((string)$value);
+            if ($normalized === '' || $normalized === '0' || !\ctype_digit($normalized)) {
+                return null;
+            }
+            $id = (int)$normalized;
+            if ($id <= 0) {
+                return null;
+            }
+
+            return $id;
+        }
+
+        private function siteUserExists(int $siteUserId): bool
+        {
+            if ($siteUserId <= 0) {
+                return false;
+            }
+            $user = \CUser::GetByID($siteUserId)->Fetch();
+
+            return \is_array($user) && isset($user['ID']) && (int)$user['ID'] > 0;
+        }
+
         public function delete($fields){
             $this->lastDeleteFailReason = null;
 
@@ -808,6 +1054,14 @@
         public function getLastUpdateFailReason(): ?string
         {
             return $this->lastUpdateFailReason;
+        }
+
+        /**
+         * @return array<string,mixed>
+         */
+        public function getLastUpdateMeta(): array
+        {
+            return $this->lastUpdateMeta;
         }
 
         public function getLastDeleteFailReason(): ?string
@@ -969,6 +1223,41 @@
         private function isCrmDirectorFlagOn(mixed $v): bool
         {
             return $v === true || $v === 1 || $v === '1' || $v === 'Y' || $v === 'y' || $v === 'Да';
+        }
+
+        private function isUserFieldComparableForEffect(string $fieldName): bool
+        {
+            if ($fieldName === '') {
+                return false;
+            }
+
+            if (\in_array($fieldName, ['ACTION', 'ID', 'XML_ID', 'OS_COMPANY_B24_ID', 'OS_HEAD_COMPANY_B24_ID'], true)) {
+                return false;
+            }
+
+            return true;
+        }
+
+        private function isSameUserFieldValue(mixed $oldValue, mixed $newValue): bool
+        {
+            $normalize = static function (mixed $v): string {
+                if (\is_bool($v)) {
+                    return $v ? '1' : '0';
+                }
+                if (\is_int($v) || \is_float($v)) {
+                    return (string)$v;
+                }
+                if (\is_string($v)) {
+                    return \trim($v);
+                }
+                if ($v === null) {
+                    return '';
+                }
+
+                return \json_encode($v, \JSON_UNESCAPED_UNICODE | \JSON_INVALID_UTF8_SUBSTITUTE) ?: '';
+            };
+
+            return $normalize($oldValue) === $normalize($newValue);
         }
 
         /**

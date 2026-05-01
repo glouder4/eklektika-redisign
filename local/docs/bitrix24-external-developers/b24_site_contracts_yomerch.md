@@ -295,6 +295,11 @@ Response JSON: `{"success":1|0,"data":{"updated":bool}}`.
 - Регистрация юрлица/агента: при пустом ИНН -> `required_inn`.
 - Дубликат ИНН (локально/B24): `duplicate_inn`.
 - Недоступен транспорт проверки ИНН: `inn_check_unavailable`.
+- Строгая уникальность email (hotfix policy):
+  - email занят только на сайте -> `email_conflict_site`, `success=0`, создание запрещено;
+  - email занят только в CRM -> `email_conflict_crm`, `success=0`, создание запрещено;
+  - email занят на сайте и в CRM -> `email_conflict_both`, `success=0`, создание запрещено.
+- Для всех `email_conflict_*` обязательно fail-closed поведение: запрет create-side-effect (нет нового site user / CRM contact).
 
 ### 5.3 Transport-level (RestClient)
 - CURL error -> `{"success":0,"error":"CURL Error: ...","errno":...}`.

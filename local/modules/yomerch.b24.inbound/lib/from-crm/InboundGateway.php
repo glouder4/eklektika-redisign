@@ -43,12 +43,16 @@ class InboundGateway
     private const RC_UPDATE_BATCH_USERS_OK = 'update_batch_users_ok';
     private const RC_UPDATE_BATCH_USERS_FAILED = 'update_batch_users_failed';
     private const RC_UPDATE_CONTACT_OK = 'update_contact_ok';
+    private const RC_UPDATE_CONTACT_OK_SITE_USER_FALLBACK = 'update_contact_ok_site_user_fallback';
+    private const RC_UPDATE_CONTACT_OK_LEGACY_FALLBACK = 'update_contact_ok_legacy_fallback';
+    private const RC_UPDATE_CONTACT_NO_EFFECT = 'update_contact_no_effect';
     private const RC_UPDATE_CONTACT_FAILED = 'update_contact_failed';
     private const RC_DELETE_CONTACT_OK = 'delete_contact_ok';
     private const RC_DELETE_CONTACT_FAILED = 'delete_contact_failed';
     private const RC_DELETE_COMPANY_OK = 'delete_company_ok';
     private const RC_DELETE_COMPANY_FAILED = 'delete_company_failed';
-    private const RC_UPDATE_COMPANY_OK = 'update_company_ok';
+    private const RC_UPDATE_COMPANY_PROPAGATED = 'update_company_propagated';
+    private const RC_UPDATE_COMPANY_PARTIAL_PROPAGATION = 'update_company_partial_propagation';
     private const RC_UPDATE_COMPANY_FAILED = 'update_company_failed';
     private const RC_SYNC_COMPANY_CONTACTS_OK = 'sync_company_contacts_ok';
     private const RC_SYNC_COMPANY_CONTACTS_FAILED = 'sync_company_contacts_failed';
@@ -154,26 +158,89 @@ class InboundGateway
                     ]);
                     return;
                 }
+                CrmInboundUfMap::prepareUserUpdatePayload($request);
                 $ok = (bool)$user->update($request);
-                $reasonCode = $ok ? self::RC_UPDATE_CONTACT_OK : self::RC_UPDATE_CONTACT_FAILED;
+                $updateMeta = \method_exists($user, 'getLastUpdateMeta')
+                    ? (array)$user->getLastUpdateMeta()
+                    : [];
+                $changedFields = isset($updateMeta['changed_fields']) && \is_array($updateMeta['changed_fields'])
+                    ? \array_values($updateMeta['changed_fields'])
+                    : [];
+                $changedFieldsCountRaw = $updateMeta['changed_fields_count'] ?? null;
+                $changedFieldsCount = \is_int($changedFieldsCountRaw)
+                    ? $changedFieldsCountRaw
+                    : (\is_numeric($changedFieldsCountRaw) ? (int)$changedFieldsCountRaw : null);
+                $diffIsUnknown = (isset($updateMeta['diff_is_unknown']) && (bool)$updateMeta['diff_is_unknown'])
+                    || $changedFieldsCount === null;
+                if ($changedFieldsCount === null && !$diffIsUnknown) {
+                    $changedFieldsCount = \count($changedFields);
+                }
+                $noEffectReason = isset($updateMeta['no_effect_reason']) && \is_string($updateMeta['no_effect_reason'])
+                    ? \trim($updateMeta['no_effect_reason'])
+                    : '';
+                $updated = isset($updateMeta['updated']) ? (bool)$updateMeta['updated'] : $ok;
+                $isNoEffect = $ok && !$updated && !$diffIsUnknown;
+                $reasonCode = $ok ? ($isNoEffect ? self::RC_UPDATE_CONTACT_NO_EFFECT : self::RC_UPDATE_CONTACT_OK) : self::RC_UPDATE_CONTACT_FAILED;
+                if ($isNoEffect && $noEffectReason !== '') {
+                    $reasonCode = $noEffectReason;
+                }
+                $idResolution = isset($updateMeta['id_resolution']) && \is_array($updateMeta['id_resolution'])
+                    ? $updateMeta['id_resolution']
+                    : [];
+                $idResolutionReason = isset($idResolution['reason_code']) && \is_string($idResolution['reason_code'])
+                    ? \trim($idResolution['reason_code'])
+                    : '';
+                if ($ok && !$isNoEffect && $idResolutionReason !== '') {
+                    if (\in_array($idResolutionReason, [
+                        self::RC_UPDATE_CONTACT_OK,
+                        self::RC_UPDATE_CONTACT_OK_SITE_USER_FALLBACK,
+                        self::RC_UPDATE_CONTACT_OK_LEGACY_FALLBACK,
+                    ], true)) {
+                        $reasonCode = $idResolutionReason;
+                    }
+                }
                 if (!$ok) {
                     $lastFailReason = \method_exists($user, 'getLastUpdateFailReason')
                         ? $user->getLastUpdateFailReason()
                         : null;
                     if ($lastFailReason !== null && $lastFailReason !== '') {
                         $reasonCode = (string)$lastFailReason;
+                    } elseif ($idResolutionReason !== '') {
+                        $reasonCode = $idResolutionReason;
                     }
                     SyncTrace::add('UPDATE_CONTACT failed', [
                         'reason_code' => $reasonCode,
                         'B24_ID' => (string)($request['B24_ID'] ?? ''),
                         'legacy_ID_param' => (string)($request['ID'] ?? ''),
+                        'meta' => $updateMeta,
+                    ]);
+                } else {
+                    SyncTrace::add('UPDATE_CONTACT ok', [
+                        'B24_ID' => (string)($request['B24_ID'] ?? ''),
+                        'legacy_ID_param' => (string)($request['ID'] ?? ''),
+                        'updated' => $updated,
+                        'meta' => $updateMeta,
                     ]);
                 }
+                $effectSummary = [
+                    'changed_fields_count' => $changedFieldsCount,
+                    'changed_fields' => $changedFields,
+                    'diff_is_unknown' => $diffIsUnknown,
+                    'no_effect_reason' => $isNoEffect ? ($noEffectReason !== '' ? $noEffectReason : self::RC_UPDATE_CONTACT_NO_EFFECT) : null,
+                ];
+                $resolvedEntities = isset($updateMeta['resolved_entities']) && \is_array($updateMeta['resolved_entities'])
+                    ? $updateMeta['resolved_entities']
+                    : [];
                 self::respondJson(200, self::EVT_UPDATE_CONTACT_RESULT, [
                     'success' => $ok ? 1 : 0,
                     'reason_code' => $reasonCode,
                     'action' => $action,
-                    'data' => ['updated' => $ok],
+                    'effect_summary' => $effectSummary,
+                    'resolved_entities' => $resolvedEntities,
+                    'data' => [
+                        'updated' => $updated,
+                        'meta' => $updateMeta,
+                    ],
                 ]);
                 return;
             }
@@ -245,18 +312,40 @@ class InboundGateway
                     self::respondInvalidPayload($action, (string)$e->getMessage());
                     return;
                 }
+                $companyId = 0;
+                $reasonCode = self::RC_UPDATE_COMPANY_FAILED;
+                $evidence = ['resolved' => [], 'unresolved' => [], 'effective' => []];
+                if (\is_array($result)) {
+                    $companyId = isset($result['company_id']) ? (int)$result['company_id'] : 0;
+                    $reasonCode = isset($result['reason_code']) && \is_string($result['reason_code']) && $result['reason_code'] !== ''
+                        ? $result['reason_code']
+                        : ($companyId > 0 ? self::RC_UPDATE_COMPANY_PROPAGATED : self::RC_UPDATE_COMPANY_FAILED);
+                    if (isset($result['evidence']) && \is_array($result['evidence'])) {
+                        $evidence = [
+                            'resolved' => isset($result['evidence']['resolved']) && \is_array($result['evidence']['resolved']) ? $result['evidence']['resolved'] : [],
+                            'unresolved' => isset($result['evidence']['unresolved']) && \is_array($result['evidence']['unresolved']) ? $result['evidence']['unresolved'] : [],
+                            'effective' => isset($result['evidence']['effective']) && \is_array($result['evidence']['effective']) ? $result['evidence']['effective'] : [],
+                        ];
+                    }
+                } elseif ($result !== false) {
+                    $companyId = (int)$result;
+                    $reasonCode = $companyId > 0 ? self::RC_UPDATE_COMPANY_PROPAGATED : self::RC_UPDATE_COMPANY_FAILED;
+                }
                 SyncPrimitiveBreakpoint::hit('sync_bp_inbound_after_update_company', [
-                    'result' => $result === false ? 'false' : (string)(int)$result,
+                    'result' => $companyId > 0 ? (string)$companyId : 'false',
                 ]);
                 SyncTrace::add('UPDATE_COMPANY end', [
-                    'result' => $result === false ? 'false' : (string)(int)$result,
+                    'result' => $companyId > 0 ? (string)$companyId : 'false',
+                    'reason_code' => $reasonCode,
+                    'evidence' => $evidence,
                 ]);
-                self::respondJson(200, self::EVT_UPDATE_COMPANY_RESULT, [
-                    'success' => $result ? 1 : 0,
-                    'reason_code' => $result ? self::RC_UPDATE_COMPANY_OK : self::RC_UPDATE_COMPANY_FAILED,
-                    'action' => $action,
-                    'data' => ['company_id' => (int)$result],
-                ]);
+                self::respondJson(200, self::EVT_UPDATE_COMPANY_RESULT, self::buildUpdateCompanyResponsePayload(
+                    $companyId > 0 ? 1 : 0,
+                    $action,
+                    $reasonCode,
+                    $evidence,
+                    $companyId
+                ));
                 return;
             }
             $syncResult = (bool)$company->syncCompanyContacts($request);
@@ -361,7 +450,12 @@ class InboundGateway
     /**
      * Canonical action-to-contract map for internal/external handoff sync docs.
      *
-     * @return array<string, array{success_reason:string,failure_reason:string,event:string}>
+     * @return array<string, array{
+     *   success_reason:string,
+     *   failure_reason:string,
+     *   event:string,
+     *   allowed_reason_codes?:array<int, string>
+     * }>
      */
     public static function actionContractMap(): array
     {
@@ -392,9 +486,14 @@ class InboundGateway
                 'event' => self::EVT_DELETE_COMPANY_RESULT,
             ],
             'UPDATE_COMPANY' => [
-                'success_reason' => self::RC_UPDATE_COMPANY_OK,
+                'success_reason' => self::RC_UPDATE_COMPANY_PROPAGATED,
                 'failure_reason' => self::RC_UPDATE_COMPANY_FAILED,
                 'event' => self::EVT_UPDATE_COMPANY_RESULT,
+                'allowed_reason_codes' => [
+                    self::RC_UPDATE_COMPANY_PROPAGATED,
+                    self::RC_UPDATE_COMPANY_PARTIAL_PROPAGATION,
+                    self::RC_UPDATE_COMPANY_FAILED,
+                ],
             ],
             'SYNC_COMPANY_CONTACTS' => [
                 'success_reason' => self::RC_SYNC_COMPANY_CONTACTS_OK,
@@ -424,6 +523,34 @@ class InboundGateway
     }
 
     /**
+     * @param array<string, mixed> $evidence
+     * @return array<string, mixed>
+     */
+    private static function buildUpdateCompanyResponsePayload(
+        int $success,
+        string $action,
+        string $reasonCode,
+        array $evidence,
+        int $companyId
+    ): array {
+        $resolved = isset($evidence['resolved']) && \is_array($evidence['resolved']) ? $evidence['resolved'] : [];
+        $unresolved = isset($evidence['unresolved']) && \is_array($evidence['unresolved']) ? $evidence['unresolved'] : [];
+        $effective = isset($evidence['effective']) && \is_array($evidence['effective']) ? $evidence['effective'] : [];
+
+        return [
+            'success' => $success,
+            'reason_code' => $reasonCode,
+            'action' => $action,
+            'evidence' => [
+                'resolved' => $resolved,
+                'unresolved' => $unresolved,
+                'effective' => $effective,
+            ],
+            'data' => ['company_id' => $companyId],
+        ];
+    }
+
+    /**
      * @param array<string, mixed> $payload
      */
     private static function respondJson(int $statusCode, string $event, array $payload): void
@@ -439,6 +566,8 @@ class InboundGateway
             'error' => (string)($body['error'] ?? ''),
             'reason_code' => (string)($body['reason_code'] ?? ''),
             'action' => (string)($body['action'] ?? ''),
+            'effect_summary' => isset($body['effect_summary']) && \is_array($body['effect_summary']) ? $body['effect_summary'] : null,
+            'resolved_entities' => isset($body['resolved_entities']) && \is_array($body['resolved_entities']) ? $body['resolved_entities'] : null,
         ], \JSON_UNESCAPED_UNICODE | \JSON_INVALID_UTF8_SUBSTITUTE));
         echo \json_encode($body, JSON_UNESCAPED_UNICODE);
     }

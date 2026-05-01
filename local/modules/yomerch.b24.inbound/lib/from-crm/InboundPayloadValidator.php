@@ -18,7 +18,7 @@ final class InboundPayloadValidator
             case 'UPDATE_GROUP':
                 return self::validateUpdateGroup($request);
             case 'UPDATE_CONTACT':
-                return self::requireScalarFields($request, ['B24_ID'], 'update_contact');
+                return self::validateUpdateContact($request);
             case 'UPDATE_BATCH_USERS':
                 return self::validateUpdateBatchUsers($request);
             case 'DELETE_CONTACT':
@@ -34,6 +34,26 @@ final class InboundPayloadValidator
             default:
                 return ['valid' => true];
         }
+    }
+
+    /**
+     * @param array<string, mixed> $request
+     * @return array{valid: bool, reason_code?: string}
+     */
+    private static function validateUpdateContact(array $request): array
+    {
+        $b24Id = self::scalarValue($request['B24_ID'] ?? null);
+        $siteUserId = self::scalarValue($request['UF_CRM_3804624445748'] ?? null);
+        $legacyId = self::scalarValue($request['ID'] ?? null);
+
+        $isValidB24 = $b24Id !== '' && $b24Id !== '0';
+        $isValidSiteUserId = self::isPositiveInteger($siteUserId);
+        $isValidLegacyId = self::isPositiveInteger($legacyId);
+        if (!$isValidB24 && !$isValidSiteUserId && !$isValidLegacyId) {
+            return ['valid' => false, 'reason_code' => 'update_contact_missing_identifier'];
+        }
+
+        return ['valid' => true];
     }
 
     /**
@@ -167,5 +187,10 @@ final class InboundPayloadValidator
         }
 
         return \trim((string)$value);
+    }
+
+    private static function isPositiveInteger(string $value): bool
+    {
+        return $value !== '' && \preg_match('/^[1-9][0-9]*$/', $value) === 1;
     }
 }

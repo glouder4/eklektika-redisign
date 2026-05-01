@@ -1,15 +1,23 @@
 # Contract harness последний прогон (артефакт для SBT-03)
 
-date_utc: 2026-04-29 (генератор: CI/локально обновите при каждом прогоне)
-environment: Windows + WSL (PHP CLI внутри Linux-дистрибутива), PHP 8.2.x
+date_utc: 2026-05-01 (генератор: CI/локально обновите при каждом прогоне)
+environment: Windows PowerShell, PHP CLI
 
 command:
-  wsl bash -c "cd /mnt/c/Git_projects/eklektika-beget && php local/modules/yomerch.b24.inbound/tests/contract/contract_harness.php"
+  powershell -ExecutionPolicy Bypass -File "modules/yomerch.b24.inbound/tools/run_contract_harness.ps1"
 alternate:
-  pwsh local/modules/yomerch.b24.inbound/tools/run_contract_harness.ps1
+  php local/modules/yomerch.b24.inbound/tests/contract/contract_harness.php
 
 exit_code: 0
 
 stdout:
-passed=15 failed=0
+passed=62 failed=0
+
+runtime_evidence:
+  - UPDATE_COMPANY contract reason_code canonical: update_company_propagated|update_company_partial_propagation|update_company_failed
+  - UPDATE_COMPANY response payload contract includes:
+      reason_code
+      evidence.resolved
+      evidence.unresolved
+      evidence.effective
 

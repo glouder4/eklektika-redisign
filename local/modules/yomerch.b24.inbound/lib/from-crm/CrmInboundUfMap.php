@@ -18,6 +18,8 @@ final class CrmInboundUfMap
 
     /** «Рекламный агент» на контакте → на сайте хранится в UF пользователя (опечатка в коде сайта сохранена). */
     public const CONTACT_ADVERTISING_AGENT_UF = 'UF_CRM_1775034008956';
+    /** Legacy код того же флага «Рекламный агент» на контакте (используется на части порталов). */
+    public const CONTACT_ADVERTISING_AGENT_UF_LEGACY = 'UF_CRM_1698752707853';
 
     /** «Руководитель компании» (контакт CRM) → на сайте `b_user.UF_IS_DIRECTOR`. */
     public const CONTACT_IS_DIRECTOR_UF = 'UF_CRM_1777068292434';
@@ -114,6 +116,14 @@ final class CrmInboundUfMap
 
             return $v;
         }
+        if (\array_key_exists(self::CONTACT_ADVERTISING_AGENT_UF_LEGACY, $fields)) {
+            $v = $fields[self::CONTACT_ADVERTISING_AGENT_UF_LEGACY];
+            if (self::isMarketingPayloadAbsent($v)) {
+                return null;
+            }
+
+            return $v;
+        }
         if (\array_key_exists('UF_ADVERSTERING_AGENT', $fields)) {
             return $fields['UF_ADVERSTERING_AGENT'];
         }
@@ -197,6 +207,8 @@ final class CrmInboundUfMap
         }
 
         $request['ACTIVE'] = $on ? 'Y' : 'N';
+        // Для прямой employee-propagation в UPDATE_COMPANY.
+        $request['UF_ADVERSTERING_AGENT'] = $on ? 1 : 0;
         // Свойство списка (L): для CIBlockElement::Update — массив VALUE = ID enum (см. CompanyModuleConfig).
         $request['OS_IS_MARKETING_AGENT'] = $on
             ? ['VALUE' => CompanyModuleConfig::OS_IS_MARKETING_AGENT_ENUM_YES]
@@ -352,13 +364,17 @@ final class CrmInboundUfMap
     public static function prepareUserUpdatePayload(array &$fields): void
     {
         $crmAdv = self::CONTACT_ADVERTISING_AGENT_UF;
-        if (\array_key_exists($crmAdv, $fields)) {
-            $rawAdv = $fields[$crmAdv];
+        $crmAdvLegacy = self::CONTACT_ADVERTISING_AGENT_UF_LEGACY;
+        if (\array_key_exists($crmAdv, $fields) || \array_key_exists($crmAdvLegacy, $fields)) {
+            $rawAdv = \array_key_exists($crmAdv, $fields) ? $fields[$crmAdv] : $fields[$crmAdvLegacy];
+            if (self::isMarketingPayloadAbsent($rawAdv) && \array_key_exists($crmAdvLegacy, $fields) && !\array_key_exists($crmAdv, $fields)) {
+                $rawAdv = $fields[$crmAdvLegacy];
+            }
             if (self::isMarketingPayloadAbsent($rawAdv)) {
-                unset($fields[$crmAdv]);
+                unset($fields[$crmAdv], $fields[$crmAdvLegacy]);
             } else {
                 $fields['UF_ADVERSTERING_AGENT'] = self::toUserBoolInt($rawAdv);
-                unset($fields[$crmAdv]);
+                unset($fields[$crmAdv], $fields[$crmAdvLegacy]);
             }
         }
 
@@ -373,8 +389,21 @@ final class CrmInboundUfMap
             }
         }
 
+        $preservedUfCrmKeys = [
+            // Нужен в User::resolveUpdateContactIdentity() как fallback site user ID.
+            'UF_CRM_3804624445748',
+            // Нужен в User::applyInboundManagerMapping() для второго персонального менеджера.
+            'UF_CRM_1757682312',
+        ];
         foreach (\array_keys($fields) as $key) {
-            if (\is_string($key) && \str_starts_with($key, 'UF_CRM_')) {
+            if (
+                \is_string($key)
+                && \str_starts_with($key, 'UF_CRM_')
+                && !\in_array($key, $preservedUfCrmKeys, true)
+            ) {
+                unset($fields[$key]);
+            }
+            if (\is_string($key) && (\str_starts_with($key, '_SYNC_') || $key === 'sync_token')) {
                 unset($fields[$key]);
             }
         }

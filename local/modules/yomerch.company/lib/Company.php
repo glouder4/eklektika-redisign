@@ -279,17 +279,87 @@
         /**
          * Входящий UPDATE_COMPANY: `ACTIVE` элемента компании → тот же флаг у связанных пользователей (`OS_COMPANY_USERS`).
          */
-        private static function applyInboundCompanyActiveToSiteUser(int $userId, string $active): void
+        private static function applyInboundCompanyActiveToSiteUser(int $userId, string $active): bool
         {
             $userId = (int)$userId;
             if ($userId <= 1) {
-                return;
+                return false;
             }
             $active = strtoupper(trim($active));
             if ($active !== 'Y' && $active !== 'N') {
-                return;
+                return false;
             }
-            (new \CUser())->Update($userId, ['ACTIVE' => $active]);
+            $u = new \CUser();
+
+            return (bool)$u->Update($userId, ['ACTIVE' => $active]);
+        }
+
+        /**
+         * Входящий UPDATE_COMPANY: прямой прокид в b_user.UF_ADVERSTERING_AGENT для каждого сотрудника компании.
+         */
+        private static function applyInboundCompanyAdvertisingAgentToSiteUser(int $userId, array $params): bool
+        {
+            $userId = (int)$userId;
+            if ($userId <= 1) {
+                return false;
+            }
+            if (!\array_key_exists('UF_ADVERSTERING_AGENT', $params)) {
+                return false;
+            }
+
+            $raw = $params['UF_ADVERSTERING_AGENT'];
+            $value = null;
+            if (\is_int($raw)) {
+                $value = $raw !== 0 ? 1 : 0;
+            } elseif (\is_string($raw)) {
+                $trimmed = \trim($raw);
+                if ($trimmed !== '') {
+                    $value = ((int)$trimmed) !== 0 ? 1 : 0;
+                }
+            } elseif (\is_bool($raw)) {
+                $value = $raw ? 1 : 0;
+            }
+            if ($value === null) {
+                return false;
+            }
+
+            $u = new \CUser();
+
+            return (bool)$u->Update($userId, ['UF_ADVERSTERING_AGENT' => $value]);
+        }
+
+        /**
+         * Сформировать доказательства прямой employee-propagation по UPDATE_COMPANY.
+         *
+         * @param array<int, array<string, mixed>> $resolved
+         * @param array<int, array<string, mixed>> $unresolved
+         * @param array<int, array<string, mixed>> $effective
+         * @return array{
+         *   reason_code:string,
+         *   evidence:array{
+         *     resolved:array<int, array<string, mixed>>,
+         *     unresolved:array<int, array<string, mixed>>,
+         *     effective:array<int, array<string, mixed>>
+         *   }
+         * }
+         */
+        private static function buildUpdateCompanyPropagationMeta(array $resolved, array $unresolved, array $effective): array
+        {
+            $reasonCode = 'update_company_failed';
+            if ($effective !== [] && $unresolved === []) {
+                $reasonCode = 'update_company_propagated';
+            } elseif ($effective !== []) {
+                $reasonCode = 'update_company_partial_propagation';
+            }
+
+            return [
+                'reason_code' => $reasonCode,
+                'evidence' => [
+                    'resolved' => $resolved,
+                    'unresolved' => $unresolved,
+                    'effective' => $effective,
+                ],
+            ];
         }
 
         /**
@@ -570,10 +640,46 @@
                     'OS_COMPANY_IS_HEAD_OF_HOLDING' => $arPreviewHead['OS_COMPANY_IS_HEAD_OF_HOLDING'] ?? null,
                 ]);
 
-                if( $params['OS_COMPANY_USERS'] ){
-                    foreach ($params['OS_COMPANY_USERS'] as $key => $b24_id){
+                $propagationResolved = [];
+                $propagationUnresolved = [];
+                $propagationEffective = [];
+
+                $employeeRefs = [];
+                $existingCompanyUsers = $company['OS_COMPANY_USERS'] ?? [];
+                if (!\is_array($existingCompanyUsers)) {
+                    $existingCompanyUsers = ($existingCompanyUsers !== null && $existingCompanyUsers !== '' && $existingCompanyUsers !== false)
+                        ? [$existingCompanyUsers]
+                        : [];
+                }
+                foreach ($existingCompanyUsers as $existingRef) {
+                    if ($existingRef !== null && $existingRef !== '' && $existingRef !== false) {
+                        $employeeRefs[] = ['ref' => $existingRef, 'contact_fallback' => null, 'index' => null];
+                    }
+                }
+                if (!empty($params['OS_COMPANY_USERS']) && \is_array($params['OS_COMPANY_USERS'])) {
+                    foreach ($params['OS_COMPANY_USERS'] as $key => $incomingRef) {
+                        if ($incomingRef === null || $incomingRef === '' || $incomingRef === false) {
+                            continue;
+                        }
+                        $employeeRefs[] = [
+                            'ref' => $incomingRef,
+                            'contact_fallback' => $params['CONTACT_IDS'][$key] ?? null,
+                            'index' => $key,
+                        ];
+                    }
+                }
+                $seenEmployeeRefs = [];
+                foreach ($employeeRefs as $employeeRefRow){
+                    $b24_id = $employeeRefRow['ref'];
+                    $contactFallback = $employeeRefRow['contact_fallback'];
+                    $originalIndex = $employeeRefRow['index'];
+                    $uniqKey = (string)$b24_id . '|' . (string)$contactFallback;
+                    if (isset($seenEmployeeRefs[$uniqKey])) {
+                        continue;
+                    }
+                    $seenEmployeeRefs[$uniqKey] = true;
+
                         $user = new User();
-                        $contactFallback = $params['CONTACT_IDS'][$key] ?? null;
                         $userId = self::resolveInboundCompanyUserRefToSiteUserId($user, $b24_id, $contactFallback);
                         if (!$userId) {
                             error_log(
@@ -582,17 +688,43 @@
                                 . ', contact_fallback=' . json_encode($contactFallback, JSON_UNESCAPED_UNICODE)
                                 . ', company_element_id=' . $companyId
                             );
+                            $propagationUnresolved[] = [
+                                'ref' => $b24_id,
+                                'contact_fallback' => $contactFallback,
+                                'reason' => 'site_user_not_resolved',
+                            ];
                         }
 
                         if( $userId ){
-                            $params['OS_COMPANY_USERS'][$key] =  $userId;
+                            if ($originalIndex !== null) {
+                                $params['OS_COMPANY_USERS'][$originalIndex] = $userId;
+                            }
+                            $userId = (int)$userId;
+                            $propagationResolved[] = [
+                                'ref' => $b24_id,
+                                'site_user_id' => $userId,
+                            ];
 
-                            $discountMapped = self::resolveInboundDiscountMappedForUser((int)$userId, $params);
+                            $discountMapped = self::resolveInboundDiscountMappedForUser($userId, $params);
 
-                            self::applyB24CompanyGroupsToUser($user, (int)$userId, $params, $discountMapped);
-                            self::applyInboundCompanyActiveToSiteUser((int)$userId, (string)$params['ACTIVE']);
+                            self::applyB24CompanyGroupsToUser($user, $userId, $params, $discountMapped);
+                            $activeOk = self::applyInboundCompanyActiveToSiteUser($userId, (string)$params['ACTIVE']);
+                            $agentOk = self::applyInboundCompanyAdvertisingAgentToSiteUser($userId, $params);
+                            if ($activeOk && $agentOk) {
+                                $propagationEffective[] = [
+                                    'site_user_id' => $userId,
+                                    'ACTIVE' => (string)$params['ACTIVE'],
+                                    'UF_ADVERSTERING_AGENT' => (int)$params['UF_ADVERSTERING_AGENT'],
+                                ];
+                            } else {
+                                $propagationUnresolved[] = [
+                                    'site_user_id' => $userId,
+                                    'reason' => 'employee_fields_not_applied',
+                                    'active_applied' => $activeOk,
+                                    'uf_adverstering_agent_applied' => $agentOk,
+                                ];
+                            }
                         }
-                    }
                 }
 
                 if (!empty($params['CONTACT_IDS']) && \is_array($params['CONTACT_IDS'])) {
@@ -659,7 +791,17 @@
                         $this->clearOsHoldingOfOnChildrenWhenHeadDemoted((int)$companyId);
                     }
 
-                    return $companyId;
+                    $propagationMeta = self::buildUpdateCompanyPropagationMeta(
+                        $propagationResolved,
+                        $propagationUnresolved,
+                        $propagationEffective
+                    );
+
+                    return [
+                        'company_id' => (int)$companyId,
+                        'reason_code' => $propagationMeta['reason_code'],
+                        'evidence' => $propagationMeta['evidence'],
+                    ];
                 }
 
                 return false;
@@ -672,7 +814,15 @@
                 }
                 
                 // После создания компания уже содержит все данные
-                return $companyId;
+                return [
+                    'company_id' => (int)$companyId,
+                    'reason_code' => 'update_company_propagated',
+                    'evidence' => [
+                        'resolved' => [],
+                        'unresolved' => [],
+                        'effective' => [],
+                    ],
+                ];
             }
         }
 

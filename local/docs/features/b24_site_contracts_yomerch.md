@@ -182,7 +182,12 @@ Response JSON: `{"success":1|0,"data":{"deleted":bool}}`.
 | `OS_COMPANY_IS_HEAD_OF_HOLDING` | scalar | no | yes | Для логики скидок директора |
 | `OS_COMPANY_INN`,`OS_COMPANY_CITY`,`OS_COMPANY_WEB_SITE`,`OS_COMPANY_PHONE`,`OS_COMPANY_EMAIL` | string | no | yes | Поля карточки компании |
 
-Response JSON: `{"success":1|0,"data":{"company_id":int}}`.
+Response JSON: `{"success":1|0,"reason_code":"...","data":{"company_id":int,"evidence":{...}}}`.
+
+Для `UF_CRM_1675675211485` (через inbound mapping) действует employee-level контракт:
+- effective-флаг должен применяться ко всем резолвнутым пользователям из `OS_COMPANY_USERS`;
+- синхронизируются `b_user.ACTIVE` и `b_user.UF_ADVERSTERING_AGENT`;
+- partial-кейсы возвращаются с отдельным reason-кодом и evidence (`resolved_user_ids`, `unresolved_user_refs`).
 
 #### ACTION=`DELETE_COMPANY`
 | Поле | Тип | Required | Nullable | Примечание |
@@ -291,6 +296,11 @@ Response JSON: `{"success":1|0,"data":{"updated":bool}}`.
 - Регистрация юрлица/агента: при пустом ИНН -> `required_inn`.
 - Дубликат ИНН (локально/B24): `duplicate_inn`.
 - Недоступен транспорт проверки ИНН: `inn_check_unavailable`.
+- Строгая уникальность email (hotfix policy):
+  - email занят только на сайте -> `email_conflict_site`, `success=0`, создание запрещено;
+  - email занят только в CRM -> `email_conflict_crm`, `success=0`, создание запрещено;
+  - email занят на сайте и в CRM -> `email_conflict_both`, `success=0`, создание запрещено.
+- Для всех `email_conflict_*` обязательно fail-closed поведение: запрет create-side-effect (нет нового site user / CRM contact).
 
 ### 5.3 Transport-level (RestClient)
 - CURL error -> `{"success":0,"error":"CURL Error: ...","errno":...}`.
