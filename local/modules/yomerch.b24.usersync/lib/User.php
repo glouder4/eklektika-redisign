@@ -537,6 +537,7 @@
                     'used_fallback' => false,
                     'reason_code' => 'update_contact_missing_identifier',
                 ],
+                'cuser_last_error' => null,
             ];
             $resolved = $this->resolveUpdateContactIdentity($fields);
             $this->lastUpdateMeta['id_resolution'] = $resolved['id_resolution'];
@@ -676,6 +677,27 @@
             // Внешний payload (B24 → ajax) не должен перезаписывать членство в группах напрямую.
             unset($fields['GROUP_ID'], $fields['GROUPS_ID']);
 
+            // Bitrix constraint: EMAIL (и часто LOGIN) должен быть уникальным.
+            // Inbound UPDATE_CONTACT может пытаться поставить EMAIL, который уже закреплён за другим пользователем.
+            // В этом случае не валим весь апдейт (NAME / менеджеры / группы должны обновиться), а пропускаем EMAIL/LOGIN.
+            $emailConflict = false;
+            if (array_key_exists('EMAIL', $fields) && is_scalar($fields['EMAIL'])) {
+                $candidateEmail = trim((string)$fields['EMAIL']);
+                if ($candidateEmail !== '' && !$this->emailBelongsToUser($candidateEmail, (int)$this->userId)) {
+                    $emailConflict = true;
+                    unset($fields['EMAIL']);
+                }
+            }
+            if ($emailConflict) {
+                // На некоторых инсталляциях ядро связывает проверку уникальности email с LOGIN.
+                // Если CRM не присылает LOGIN — не трогаем; если присылает (в будущем) и он конфликтный — лучше тоже не обновлять.
+                if (array_key_exists('LOGIN', $fields)) {
+                    unset($fields['LOGIN']);
+                }
+                $this->lastUpdateMeta['email_conflict_skipped'] = true;
+                $this->lastUpdateMeta['no_effect_reason'] = null;
+            }
+
             $currentUser = \CUser::GetByID((int)$this->userId)->Fetch();
             $changedFields = [];
             $diffIsUnknown = !\is_array($currentUser);
@@ -702,6 +724,11 @@
             if (!$diffIsUnknown && $this->lastUpdateMeta['changed_fields_count'] <= 0) {
                 $this->lastUpdateMeta['updated'] = false;
                 $this->lastUpdateMeta['no_effect_reason'] = 'update_contact_no_effect';
+                // Даже если поля пользователя не изменились, inbound UPDATE_CONTACT должен синхронизировать скидочную группу
+                // на основании статуса компании (OS_COMPANY_STATUS).
+                if (($fields['ACTION'] ?? '') === 'UPDATE_CONTACT' && class_exists(\OnlineService\Site\Company::class)) {
+                    \OnlineService\Site\Company::applyCompanyStatusGroupToSiteUser((int)$this->userId);
+                }
                 return true;
             }
 
@@ -710,12 +737,45 @@
             if ($result) {
                 $this->lastUpdateMeta['updated'] = true;
                 $this->lastUpdateMeta['no_effect_reason'] = null;
+                if (($fields['ACTION'] ?? '') === 'UPDATE_CONTACT' && class_exists(\OnlineService\Site\Company::class)) {
+                    \OnlineService\Site\Company::applyCompanyStatusGroupToSiteUser((int)$this->userId);
+                }
                 return true;
             } else {
-                $this->lastUpdateFailReason = 'update_contact_cuser_update_failed';
+                $rawErr = property_exists($user, 'LAST_ERROR') ? (string)($user->LAST_ERROR ?? '') : '';
+                $err = trim($rawErr);
+                $this->lastUpdateMeta['cuser_last_error'] = $err !== '' ? $err : null;
+                $this->lastUpdateFailReason = $err !== ''
+                    ? ('update_contact_cuser_update_failed:' . $err)
+                    : 'update_contact_cuser_update_failed';
                 $this->lastUpdateMeta['updated'] = false;
                 return false;
             }
+        }
+
+        /**
+         * @return bool true если email свободен или принадлежит этому же пользователю.
+         */
+        private function emailBelongsToUser(string $email, int $userId): bool
+        {
+            $email = trim($email);
+            if ($email === '' || $userId <= 0) {
+                return true;
+            }
+            $rs = \CUser::GetList(
+                [],
+                'asc',
+                ['=EMAIL' => $email],
+                ['SELECT' => ['ID', 'EMAIL']]
+            );
+            while ($u = $rs->Fetch()) {
+                $id = (int)($u['ID'] ?? 0);
+                if ($id > 0 && $id !== $userId) {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         /**

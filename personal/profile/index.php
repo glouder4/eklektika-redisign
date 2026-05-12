@@ -8,7 +8,7 @@ $APPLICATION->SetTitle("Личный кабинет");
 CModule::IncludeModule("intec.eklectika");
 
 
-$GLOBALS["OS_BREADCRUMBS_ADD_CONTAINER"] = "N";
+$GLOBALS["OS_BREADCRUMBS_ADD_CONTAINER"] = "Y";
 $GLOBALS["OS_BREADCRUMBS"] = [
 	[
 		'ITEM' => "Личный кабинет",

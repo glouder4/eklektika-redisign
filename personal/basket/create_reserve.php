@@ -169,7 +169,16 @@ $order->doFinalAction(true);
 $result = $order->save();
 if ($result->isSuccess()) {
     // $orderId = $order->getId();
-    echo "ok";
+
+    if( isset($arProps["REQUEST_TO_RESERVE"]) && isset($arProps["REQUEST_TO_RESERVE"]['VALUE']) && $arProps["REQUEST_TO_RESERVE"]['VALUE'] == 'Y' ){
+        echo "/personal/profile/orders/?filter_date_from=&filter_status[]=R&filter_status[]=RO&filter_status[]=RC&show_all=Y";
+    }
+    elseif( isset($arProps["REQUEST_TO_SAMPLE"]) && isset($arProps["REQUEST_TO_SAMPLE"]['VALUE']) && $arProps["REQUEST_TO_SAMPLE"]['VALUE'] == 'Y' ){
+        echo "/personal/profile/orders/?filter_status[]=OB&filter_status[]=SC&filter_status[]=SO&filter_status[]=SS&filter_status[]=OG&show_all=Y";
+    }
+    else{
+        echo "ok";
+    }
 } else {
     $errors = $result->getErrorMessages();
     echo "Ошибка создания: " . implode(', ', $errors);

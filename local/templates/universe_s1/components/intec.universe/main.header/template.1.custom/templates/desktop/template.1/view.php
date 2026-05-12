@@ -292,7 +292,7 @@ if (!empty($arContacts)) {
                 <?php
                 $APPLICATION->IncludeComponent(
                         'bitrix:menu',
-                        'onlineservice.horizontal.1.custom',
+                        'onlineservice.horizontal.2.custom',
                         $arParametersCatalog,
                         $this->getComponent()
                 );

@@ -23,6 +23,7 @@
             'OS_IS_MARKETING_AGENT',
             "OS_IS_COMPANY_DISABLED",
             "OS_COMPANY_DISCOUNT_VALUE",
+            "OS_COMPANY_STATUS",
             'OS_REQUSITES_FILE'
         ];
 
@@ -237,6 +238,101 @@
             $mappedInt = (int)$mapped;
 
             return $mappedInt > 0 ? $mappedInt : null;
+        }
+
+        /**
+         * Вычисленное (после маппинга) значение ID скидочной группы для компании по inbound payload.
+         * Хранится в свойстве элемента компании `OS_COMPANY_STATUS` и затем используется при регистрации/UPDATE_CONTACT.
+         *
+         * @param array<string, mixed> $params параметры UPDATE_COMPANY
+         */
+        private static function resolveInboundCompanyStatusGroupId(array $params): ?int
+        {
+            if (!\array_key_exists('OS_COMPANY_DISCOUNT_VALUE', $params)) {
+                return null;
+            }
+            $raw = $params['OS_COMPANY_DISCOUNT_VALUE'];
+            if ($raw === false || $raw === null) {
+                return null;
+            }
+            if (\is_string($raw) && \trim($raw) === '') {
+                return null;
+            }
+            $mapped = self::mapCompanyStatusGroupId($raw);
+            $mappedInt = (int)$mapped;
+
+            return $mappedInt > 0 ? $mappedInt : null;
+        }
+
+        /**
+         * Применить скидочную группу пользователю на основании сохранённого статуса компании `OS_COMPANY_STATUS`.
+         * Снимает все скидочные группы компании и добавляет ровно одну, если она задана.
+         */
+        public static function applyCompanyStatusGroupToSiteUser(int $siteUserId, ?int $companyElementId = null): void
+        {
+            $siteUserId = (int)$siteUserId;
+            if ($siteUserId <= 0) {
+                return;
+            }
+            if (!\CModule::IncludeModule('iblock')) {
+                return;
+            }
+
+            $companyElementId = $companyElementId !== null ? (int)$companyElementId : 0;
+            if ($companyElementId <= 0) {
+                // Пользователь может быть сотрудником нескольких компаний; предпочтём головную компанию холдинга, если есть.
+                $rs = \CIBlockElement::GetList(
+                    [],
+                    [
+                        'IBLOCK_ID' => CompanyModuleConfig::COMPANY_IBLOCK_ID,
+                        'ACTIVE' => 'Y',
+                        'PROPERTY_OS_COMPANY_USERS' => $siteUserId,
+                    ],
+                    false,
+                    false,
+                    ['ID', 'PROPERTY_OS_COMPANY_IS_HEAD_OF_HOLDING']
+                );
+                $fallbackId = 0;
+                while ($row = $rs->Fetch()) {
+                    $id = (int)($row['ID'] ?? 0);
+                    if ($id <= 0) {
+                        continue;
+                    }
+                    if ($fallbackId <= 0) {
+                        $fallbackId = $id;
+                    }
+                    $headRaw = $row['PROPERTY_OS_COMPANY_IS_HEAD_OF_HOLDING_VALUE'] ?? null;
+                    if ($headRaw !== null && $headRaw !== '' && $headRaw !== false) {
+                        $companyElementId = $id;
+                        break;
+                    }
+                }
+                if ($companyElementId <= 0) {
+                    $companyElementId = $fallbackId;
+                }
+            }
+
+            if ($companyElementId <= 0) {
+                return;
+            }
+
+            $propRes = \CIBlockElement::GetProperty(
+                CompanyModuleConfig::COMPANY_IBLOCK_ID,
+                $companyElementId,
+                [],
+                ['CODE' => 'OS_COMPANY_STATUS']
+            );
+            $status = null;
+            if ($prop = $propRes->Fetch()) {
+                $status = $prop['VALUE'] ?? null;
+            }
+            $statusGroupId = $status !== null && $status !== '' && $status !== false ? (int)$status : 0;
+
+            $user = new \OnlineService\B24\User();
+            $user->removeUserFromGroupsByIds($siteUserId, self::getCompanyDiscountAssignedGroupIds(), true);
+            if ($statusGroupId > 0) {
+                $user->addUserToGroups($siteUserId, [$statusGroupId]);
+            }
         }
 
         /**
@@ -770,6 +866,12 @@
                     }
                 }
 
+                // UPDATE_COMPANY: если CRM прислала скидку — фиксируем вычисленную ID группы в OS_COMPANY_STATUS.
+                if (\array_key_exists('OS_COMPANY_DISCOUNT_VALUE', $params)) {
+                    $statusGroupId = self::resolveInboundCompanyStatusGroupId($params);
+                    $arProps['OS_COMPANY_STATUS'] = ($statusGroupId !== null && $statusGroupId > 0) ? $statusGroupId : false;
+                }
+
                 $willBeHead = self::isHeadOfHoldingFromCompanyParams($arProps);
 
                 // Головная компания холдинга: OS_HOLDING_OF не заполняем (только у дочерних).
@@ -891,6 +993,11 @@
                 if (isset($params[$code])) {
                     $arProps[$code] = $params[$code];
                 }
+            }
+
+            if (\array_key_exists('OS_COMPANY_DISCOUNT_VALUE', $params)) {
+                $statusGroupId = self::resolveInboundCompanyStatusGroupId($params);
+                $arProps['OS_COMPANY_STATUS'] = ($statusGroupId !== null && $statusGroupId > 0) ? $statusGroupId : false;
             }
 
             if (self::isHeadOfHoldingFromCompanyParams($params)) {

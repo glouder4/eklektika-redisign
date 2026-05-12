@@ -21,3 +21,4 @@
 
 - `2026-04-30-update-contact-observability` - расследование кейса `UPDATE_CONTACT success=1`, но визуально stale профиль.
 - `2026-05-01-personal-managers-block-regression` - P0 восстановление блока персональных менеджеров после hotfix ParseError без отката propagation-фиксов.
+- `2026-05-07-user-registration-crm-send` - документирование и верификация entrypoint: регистрация пользователя → outbound CRM sync (контакт/компания).

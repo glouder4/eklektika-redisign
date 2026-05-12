@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Функция для очистки всех hover классов
     function clearHoverClasses() {
         if (profileFieldsWrapper) {
-            profileFieldsWrapper.classList.remove('hover', 'profile-hover');
+            profileFieldsWrapper.classList.remove('hover', 'hover');
         }
     }
 
@@ -49,13 +49,13 @@ document.addEventListener("DOMContentLoaded", function () {
         profileBtn.addEventListener('mouseenter', function () {
             clearHoverClasses();
             if (profileFieldsWrapper) {
-                profileFieldsWrapper.classList.add('profile-hover');
+                profileFieldsWrapper.classList.add('hover');
             }
         });
 
         /*profileBtn.addEventListener('mouseleave', function() {
             if (profileFieldsWrapper) {
-                profileFieldsWrapper.classList.remove('profile-hover');
+                profileFieldsWrapper.classList.remove('hover');
             }
         });*/
     });

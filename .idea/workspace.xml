@@ -5,18 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a53d02d7-d404-452c-a903-dd81636134fa" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/docs/bitrix24-external-developers/b24_site_contracts_yomerch.md" beforeDir="false" afterPath="$PROJECT_DIR$/local/docs/bitrix24-external-developers/b24_site_contracts_yomerch.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/docs/features/b24_site_contracts_yomerch.md" beforeDir="false" afterPath="$PROJECT_DIR$/local/docs/features/b24_site_contracts_yomerch.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/modules/yomerch.b24.inbound/lib/from-crm/CrmInboundUfMap.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.b24.inbound/lib/from-crm/CrmInboundUfMap.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/modules/yomerch.b24.inbound/lib/from-crm/InboundGateway.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.b24.inbound/lib/from-crm/InboundGateway.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/modules/yomerch.b24.inbound/lib/from-crm/InboundPayloadValidator.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.b24.inbound/lib/from-crm/InboundPayloadValidator.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/modules/yomerch.b24.inbound/tests/contract/contract_harness.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.b24.inbound/tests/contract/contract_harness.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/local/modules/yomerch.b24.inbound/tests/contract/contract_harness_last_run.txt" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.b24.inbound/tests/contract/contract_harness_last_run.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/components/bitrix/sale.order.ajax/class.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/components/bitrix/sale.order.ajax/class.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local/modules/yomerch.b24.usersync/lib/RegisterUserCompany.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.b24.usersync/lib/RegisterUserCompany.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local/modules/yomerch.b24.usersync/lib/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.b24.usersync/lib/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local/modules/yomerch.company/lib/Company.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/modules/yomerch.company/lib/Company.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/parts/main.container.view.1/purchase.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/parts/main.container.view.1/purchase.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/parts/panel.mobile.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/catalog.element/catalog.default.5/parts/panel.mobile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/sale.basket.basket/template.1/parts/script.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/sale.basket.basket/template.1/parts/script.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/sale.order.ajax/simple.1/order_ajax.js" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/bitrix/sale.order.ajax/simple.1/order_ajax.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/components/intec.universe/main.header/template.1.custom/templates/desktop/template.1/view.php" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/components/intec.universe/main.header/template.1.custom/templates/desktop/template.1/view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local/templates/universe_s1/onlineservice_addons/scripts/template.js" beforeDir="false" afterPath="$PROJECT_DIR$/local/templates/universe_s1/onlineservice_addons/scripts/template.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/personal/basket/create_reserve.php" beforeDir="false" afterPath="$PROJECT_DIR$/personal/basket/create_reserve.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/personal/basket/order.php" beforeDir="false" afterPath="$PROJECT_DIR$/personal/basket/order.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/personal/profile/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/personal/profile/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tasks/subtasks/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/tasks/subtasks/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -249,6 +251,11 @@
       <workItem from="1777464780626" duration="18075000" />
       <workItem from="1777550911710" duration="6608000" />
       <workItem from="1777564572726" duration="1801000" />
+      <workItem from="1777892316564" duration="79000" />
+      <workItem from="1778082414487" duration="1313000" />
+      <workItem from="1778137295160" duration="3610000" />
+      <workItem from="1778237222176" duration="750000" />
+      <workItem from="1778590681079" duration="6212000" />
     </task>
     <servers />
   </component>

@@ -235,7 +235,7 @@ use Bitrix\Main\Localization\Loc;
                     url: "/personal/basket/create_reserve.php?STATUS_ID=R",
                 }).done(function() {
                     alert("Заявка на резерв оформлена");
-                    document.location.href = '/personal/profile/'
+                    document.location.href = '/personal/profile/orders/?filter_date_from=&filter_status[]=R&filter_status[]=RO&filter_status[]=RC&show_all=Y'
                 });
             }
         });
@@ -247,7 +247,7 @@ use Bitrix\Main\Localization\Loc;
                     url: "/personal/basket/create_reserve.php?STATUS_ID=OB",
                 }).done(function() {
                     alert("Заявка на образец оформлена");
-                    document.location.href = '/personal/profile/'
+                    document.location.href = '/personal/profile/orders/?filter_status[]=OB&filter_status[]=SC&filter_status[]=SO&filter_status[]=SS&filter_status[]=OG&show_all=Y'
                 });
             }
         });

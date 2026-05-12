@@ -81,7 +81,6 @@ BX.namespace('BX.Sale.OrderAjaxComponent');
 			this.initializePrimaryFields();
 
 			this.result = parameters.result || {};
-			console.log('init',this.result)
 			this.prepareLocations(parameters.locations);
 			this.params = parameters.params || {};
 			this.signedParamsString = parameters.signedParamsString || '';

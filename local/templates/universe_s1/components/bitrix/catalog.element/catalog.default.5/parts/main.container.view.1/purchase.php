@@ -45,7 +45,7 @@ use intec\core\helpers\Html;
                     include(__DIR__.'/../purchase/table.offer.php');
                 ?>
                 <?php if ($arVisual['PRICE']['SHOW'])
-                    include(__DIR__.'/../purchase/add.an.application.php');
+                    //include(__DIR__.'/../purchase/add.an.application.php');
                 ?>
                 <?php if ($arVisual['MEASURES']['USE'] && $arVisual['MEASURES']['POSITION'] === 'top')
                     include(__DIR__.'/../purchase/measures.php');
@@ -127,7 +127,7 @@ use intec\core\helpers\Html;
                                 </div>
                             <?php } ?>
                         </div>
-                        <div class="container-btn-order-sample">
+                        <!--<div class="container-btn-order-sample">
                             <div class="btn-order-sample">
                                 Заказать образец
                                 <span>
@@ -138,7 +138,7 @@ use intec\core\helpers\Html;
                                     </svg>
                                 </span>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                 <?php } ?>
             <?php } else { ?>

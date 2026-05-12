@@ -1204,6 +1204,12 @@ class RegisterUserCompany extends Request{
                 $user = new \CUser;
                 $user->Update($arFields["USER_ID"], ["ACTIVE" => "N","UF_B24_USER_ID" => $contactId]);
 
+                // После регистрации применяем скидочную группу из статуса компании (OS_COMPANY_STATUS),
+                // куда пользователь был добавлен как сотрудник при создании/связывании компании.
+                if (class_exists(\OnlineService\Site\Company::class)) {
+                    \OnlineService\Site\Company::applyCompanyStatusGroupToSiteUser((int)$arFields["USER_ID"]);
+                }
+
                 /*$event = new \CEvent;
                 $event->SendImmediate("NEW_USER", SITE_ID, $arFields);*/
 

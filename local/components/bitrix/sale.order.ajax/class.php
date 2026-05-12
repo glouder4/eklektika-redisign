@@ -5036,7 +5036,7 @@ class SaleOrderAjax extends \CBitrixComponent
 
 			if (empty($this->arResult["ERROR"]))
 			{
-				$arOrderRes["REDIRECT_URL"] = "/personal/profile/orders/".urlencode($this->arResult["ACCOUNT_NUMBER"]);
+				$arOrderRes["REDIRECT_URL"] = "/personal/profile/orders/?show_all=Y";
 				$arOrderRes["ID"] = $this->arResult["ACCOUNT_NUMBER"];
 			}
 			else
